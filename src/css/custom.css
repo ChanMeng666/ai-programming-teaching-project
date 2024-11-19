@@ -350,15 +350,42 @@ tbody tr:nth-child(even) {
   border: none;
   background: var(--color-light-gray);
   transition: all var(--animation-duration) var(--animation-timing);
+  padding: var(--space-md) var(--space-lg);
+  border-radius: 8px;
 }
 
+/* 导航按钮悬停效果 */
 .pagination-nav__link:hover {
   background: var(--ifm-color-primary);
-  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+/* 确保按钮悬停时所有文字变为白色 */
+.pagination-nav__link:hover .pagination-nav__label,
+.pagination-nav__link:hover .pagination-nav__sublabel {
+  color: white;
+  transition: color var(--animation-duration) var(--animation-timing);
+}
+
+/* 导航按钮标签和标题的默认样式 */
 .pagination-nav__sublabel {
   color: var(--color-secondary);
+}
+
+.pagination-nav__label {
+  color: var(--ifm-color-primary);
+}
+
+/* 黑暗模式下的样式保持不变 */
+[data-theme='dark'] .pagination-nav__link:hover {
+  background: var(--ifm-color-primary-darker);
+  border-color: var(--ifm-color-primary-darker);
+}
+
+[data-theme='dark'] .pagination-nav__link:hover .pagination-nav__label,
+[data-theme='dark'] .pagination-nav__link:hover .pagination-nav__sublabel {
+  color: white;
 }
 
 /* 代码块标题 */
@@ -399,4 +426,102 @@ tbody tr:nth-child(even) {
 [data-theme='dark'] .dropdown__link:hover {
   background-color: var(--ifm-color-primary-darker);
   color: white;
+}
+
+/* 右侧目录导航样式优化 */
+.table-of-contents {
+  padding: var(--space-md);
+  background: var(--color-light-gray);
+  border-radius: 8px;
+  margin-bottom: var(--space-lg);
+  transition: all var(--animation-duration) var(--animation-timing);
+}
+
+/* 黑暗模式下的目录样式 */
+[data-theme='dark'] .table-of-contents {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* 目录链接样式 */
+.table-of-contents__link {
+  transition: all var(--animation-duration) var(--animation-timing);
+  color: var(--ifm-color-primary);
+}
+
+/* 黑暗模式下的目录链接样式 */
+[data-theme='dark'] .table-of-contents__link {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* 目录链接悬停效果 */
+.table-of-contents__link:hover {
+  color: var(--color-accent);
+  text-decoration: none;
+  padding-left: var(--space-xs);
+}
+
+/* 黑暗模式下的目录链接悬停效果 */
+[data-theme='dark'] .table-of-contents__link:hover {
+  color: var(--ifm-color-primary-lighter);
+}
+
+/* 当前激活的目录项 */
+.table-of-contents__link--active {
+  color: var(--color-accent);
+  font-weight: bold;
+}
+
+/* 黑暗模式下当前激活的目录项 */
+[data-theme='dark'] .table-of-contents__link--active {
+  color: var(--ifm-color-primary-lighter);
+}
+
+/* 上一页/下一页导航按钮样式优化 */
+.pagination-nav__link {
+  border: none;
+  background: var(--color-light-gray);
+  transition: all var(--animation-duration) var(--animation-timing);
+  padding: var(--space-md) var(--space-lg);
+  border-radius: 8px;
+}
+
+/* 黑暗模式下的导航按钮样式 */
+[data-theme='dark'] .pagination-nav__link {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* 导航按钮悬停效果 */
+.pagination-nav__link:hover {
+  background: var(--ifm-color-primary);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* 黑暗模式下的导航按钮悬停效果 */
+[data-theme='dark'] .pagination-nav__link:hover {
+  background: var(--ifm-color-primary-darker);
+  border-color: var(--ifm-color-primary-darker);
+}
+
+/* 导航按钮标签样式 */
+.pagination-nav__sublabel {
+  color: var(--color-secondary);
+}
+
+/* 黑暗模式下的导航按钮标签样式 */
+[data-theme='dark'] .pagination-nav__sublabel {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* 导航按钮标题样式 */
+.pagination-nav__label {
+  color: var(--ifm-color-primary);
+}
+
+/* 黑暗模式下的导航按钮标题样式 */
+[data-theme='dark'] .pagination-nav__label {
+  color: rgba(255, 255, 255, 0.9);
 }

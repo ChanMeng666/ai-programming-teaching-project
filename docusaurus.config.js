@@ -10,7 +10,7 @@ import {themes as prismThemes} from 'prism-react-renderer';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'My Site',
+  title: 'AI Programming',
   tagline: 'Dinosaurs are cool',
   favicon: 'img/favicon.ico',
 
@@ -91,7 +91,7 @@ const config = {
           },
           {to: '/blog', label: '博客', position: 'left'},
           {
-            href: 'https://github.com/facebook/docusaurus',
+            href: 'https://github.com/ChanMeng666/ai-programming-teaching-project',
             label: 'GitHub',
             position: 'right',
           },
@@ -109,11 +109,11 @@ const config = {
               },
               {
                 label: '实践案例',
-                to: '/docs/tutorial-basics/create-a-document',
+                to: '/docs/practice/blog-planning',
               },
               {
                 label: '进阶主题',
-                to: '/docs/tutorial-extras/manage-docs-versions',
+                to: '/docs/customization/basic-config',
               },
             ],
           },
@@ -122,15 +122,15 @@ const config = {
             items: [
               {
                 label: '技术讨论',
-                href: 'https://github.com/discussions',
+                href: 'https://github.com/ChanMeng666',
               },
               {
                 label: '问题反馈',
-                href: 'https://github.com/issues',
+                href: 'https://github.com/ChanMeng666',
               },
               {
                 label: '加入我们',
-                href: 'https://github.com',
+                href: 'https://github.com/ChanMeng666',
               },
             ],
           },
@@ -143,7 +143,7 @@ const config = {
               },
               {
                 label: 'GitHub',
-                href: 'https://github.com',
+                href: 'https://github.com/ChanMeng666',
               },
             ],
           },
