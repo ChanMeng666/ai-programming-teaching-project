@@ -26,7 +26,7 @@
   --ifm-h1-font-size: 2.5rem;
   --ifm-h2-font-size: 2rem;
   --ifm-h3-font-size: 1.5rem;
-  
+
   /* 间距系统 */
   --space-xs: 0.25rem;
   --space-sm: 0.5rem;
@@ -543,11 +543,11 @@ h3:hover .hash-link {
   .navbar__items {
     gap: 0.5rem;
   }
-  
+
   .navbar__brand {
     font-size: 1.1rem;
   }
-  
+
   .navbar__logo {
     height: 1.75rem;
   }
@@ -887,4 +887,36 @@ html:not([data-theme='dark']) .clean-btn svg path {
 [data-theme='dark'] .navbar__toggle svg path,
 [data-theme='dark'] .clean-btn svg path {
   fill: rgba(255, 255, 255, 0.9);
+}
+
+
+/* Footer copyright section */
+.footer-copyright {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+  text-align: center;
+}
+
+/* Footer link styling */
+.footer-link {
+  color: var(--ifm-color-primary-lighter);
+  font-weight: 600;
+  transition: color var(--animation-duration) var(--animation-timing);
+  text-decoration: none;
+}
+
+.footer-link:hover {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+/* Dark mode adjustments */
+[data-theme='dark'] .footer-link {
+  color: #8693d4;
+}
+
+[data-theme='dark'] .footer-link:hover {
+  color: #ef5350;
 }

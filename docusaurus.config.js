@@ -148,7 +148,10 @@ const config = {
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} AI Programming Education. Built with Docusaurus.`,
+        copyright: `<div class="footer-copyright">
+            <div>Copyright © ${new Date().getFullYear()} AI Programming Education.</div>
+            <div>Code & Crafted with 💛 by <a class="footer-link" href="https://github.com/ChanMeng666/ai-programming-teaching-project">Chan Meng</a>.</div>
+            </div>`,
       },
       prism: {
         theme: prismThemes.github,
