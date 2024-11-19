@@ -1,0 +1,131 @@
+---
+sidebar_position: 4
+title: 配置开发环境
+description: 配置Node.js和包管理器等开发环境
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# 配置开发环境
+
+## 安装Node.js环境
+
+### 使用nvm安装Node.js
+
+<div className="installation-steps">
+
+#### 1. 安装nvm
+```bash
+# 输入以下命令并回车
+curl -o nvm-setup.exe https://github.com/coreybutler/nvm-windows/releases/download/1.1.11/nvm-setup.exe
+```
+
+1. 等待下载完成
+2. 找到下载的nvm-setup.exe（一般在下载文件夹）
+3. 双击运行安装程序
+4. 全部选择默认设置，一路点Next
+5. 安装完成后关闭Cursor
+6. 重新打开Cursor和终端
+
+#### 2. 安装Node.js
+```bash
+# 安装最新的稳定版Node.js
+nvm install --lts
+
+# 使用安装的版本
+nvm use --lts
+
+# 验证安装是否成功
+node --version
+```
+
+</div>
+
+## 安装包管理器
+
+### npm和yarn配置
+
+<div className="package-manager">
+
+#### 安装yarn
+```bash
+# 安装yarn
+npm install -g yarn
+
+# 安装npx工具
+npm install -g npx
+```
+
+#### 配置镜像源
+```bash
+# 设置npm镜像
+npm config set registry https://registry.npmmirror.com
+
+# 设置yarn镜像
+yarn config set registry https://registry.npmmirror.com
+```
+
+</div>
+
+## 常见问题解决
+
+<div className="troubleshooting">
+
+### 权限问题
+- 以管理员身份运行Cursor
+- 右键Cursor图标 → 选择"以管理员身份运行"
+
+### 网络问题
+1. 检查梯子工具是否正常工作
+2. 确认是否能访问GitHub网站
+3. 尝试清理缓存：
+```bash
+# 清理npm缓存
+npm cache clean --force
+
+# 清理yarn缓存
+yarn cache clean
+```
+
+### 环境验证
+```bash
+# 检查Node.js版本
+node --version
+
+# 检查npm版本
+npm --version
+
+# 检查yarn版本
+yarn --version
+
+# 检查Git版本
+git --version
+```
+
+</div>
+
+:::tip 注意事项
+- 每条命令输入完必须按回车才能执行
+- 命令执行过程中如果出现卡住，可以按`Ctrl+C`中断
+- 复制命令到终端可以使用`Ctrl+V`或右键点击"粘贴"
+- 路径中不要包含中文字符
+- 确保每条命令执行完毕后再输入下一条
+:::
+
+export const styles = {
+  installationSteps: {
+    backgroundColor: '#f6f8fa',
+    padding: '1rem',
+    borderRadius: '8px'
+  },
+  packageManager: {
+    borderLeft: '3px solid #1a73e8',
+    paddingLeft: '1rem'
+  },
+  troubleshooting: {
+    backgroundColor: '#f0f7ff',
+    padding: '1rem',
+    borderRadius: '8px'
+  }
+}; 
