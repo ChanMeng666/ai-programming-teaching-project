@@ -98,11 +98,63 @@
   backdrop-filter: blur(10px);
   background-color: rgba(255, 255, 255, 0.8);
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
-  transition: background-color var(--animation-duration) var(--animation-timing);
+  transition: all var(--animation-duration) var(--animation-timing);
 }
 
+/* 明亮模式下的导航栏文字颜色 */
+.navbar__title,
+.navbar__link,
+.navbar__brand,
+.navbar-sidebar__brand,
+.navbar__item,
+.navbar-sidebar__item {
+  color: var(--ifm-color-primary-darkest);
+}
+
+/* 明亮模式下的主题切换按钮 */
+.navbar__items .clean-btn {
+  color: var(--ifm-color-primary-darkest);
+}
+
+/* 黑暗模式下的导航栏样式 */
 [data-theme='dark'] .navbar {
   background-color: rgba(18, 18, 18, 0.8);
+}
+
+/* 黑暗模式下的导航栏文字颜色 */
+[data-theme='dark'] .navbar__title,
+[data-theme='dark'] .navbar__link,
+[data-theme='dark'] .navbar__brand,
+[data-theme='dark'] .navbar-sidebar__brand,
+[data-theme='dark'] .navbar__item,
+[data-theme='dark'] .navbar-sidebar__item {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* 黑暗模式下的主题切换按钮 */
+[data-theme='dark'] .navbar__items .clean-btn {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* 导航栏链接悬停效果 */
+.navbar__link:hover,
+.navbar__link--active {
+  position: relative;
+  color: var(--ifm-color-primary) !important;
+}
+
+[data-theme='dark'] .navbar__link:hover,
+[data-theme='dark'] .navbar__link--active {
+  color: var(--ifm-color-primary-lighter) !important;
+}
+
+/* 主题切换按钮悬停效果 */
+.navbar__items .clean-btn:hover {
+  color: var(--ifm-color-primary);
+}
+
+[data-theme='dark'] .navbar__items .clean-btn:hover {
+  color: var(--ifm-color-primary-lighter);
 }
 
 /* 滚动条样式 */
@@ -320,4 +372,31 @@ tbody tr:nth-child(even) {
   font-weight: bold;
   text-transform: uppercase;
   padding: var(--space-xs) var(--space-sm);
+}
+
+/* 黑暗模式下的导航栏链接悬停效果 */
+[data-theme='dark'] .navbar__link:hover,
+[data-theme='dark'] .navbar__link--active {
+  color: var(--ifm-color-primary-lighter) !important;
+  opacity: 1;
+}
+
+/* 黑暗模式下的搜索框和其他按钮 */
+[data-theme='dark'] .navbar__search-input,
+[data-theme='dark'] .navbar-sidebar__close {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* 黑暗模式下的导航栏下拉菜单 */
+[data-theme='dark'] .dropdown__menu {
+  background-color: rgba(18, 18, 18, 0.95);
+}
+
+[data-theme='dark'] .dropdown__link {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+[data-theme='dark'] .dropdown__link:hover {
+  background-color: var(--ifm-color-primary-darker);
+  color: white;
 }
