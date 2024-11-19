@@ -525,3 +525,120 @@ tbody tr:nth-child(even) {
 [data-theme='dark'] .pagination-nav__label {
   color: rgba(255, 255, 255, 0.9);
 }
+
+/* 修改移动端导航栏样式 */
+.navbar-sidebar {
+  position: fixed !important; /* 强制固定定位 */
+  top: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  width: 70% !important; /* 调整宽度占比 */
+  max-width: none !important; /* 移除最大宽度限制 */
+  height: 100vh !important; /* 确保全屏高度 */
+  background: var(--color-background);
+  z-index: 1500;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+  transform: translateX(-100%);
+  transition: transform var(--animation-duration) var(--animation-timing);
+  overflow-y: auto !important; /* 确保内容可滚动 */
+}
+
+.navbar-sidebar--show {
+  transform: translateX(0) !important;
+}
+
+.navbar-sidebar__backdrop {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1400;
+}
+
+.navbar-sidebar__brand {
+  display: flex !important;
+  align-items: center !important;
+  padding: var(--space-md) !important;
+  border-bottom: 1px solid var(--color-light-gray);
+  background: var(--color-background);
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 2;
+}
+
+.navbar-sidebar__items {
+  padding: var(--space-md) !important;
+  height: calc(100vh - 60px) !important; /* 减去顶部品牌区域的高度 */
+  overflow-y: auto !important;
+}
+
+.navbar-sidebar__item {
+  display: block !important;
+  padding: var(--space-md) var(--space-sm) !important;
+  color: var(--color-text);
+  font-weight: 500;
+  font-size: 1.1rem !important;
+  transition: color var(--animation-duration) var(--animation-timing);
+}
+
+.navbar-sidebar__item:hover {
+  color: var(--color-accent);
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+}
+
+/* 黑暗模式适配 */
+[data-theme='dark'] .navbar-sidebar {
+  background: var(--color-background);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+[data-theme='dark'] .navbar-sidebar__brand {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+[data-theme='dark'] .navbar-sidebar__item {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+[data-theme='dark'] .navbar-sidebar__item:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* 移动端导航栏内的下拉菜单样式 */
+.navbar-sidebar .dropdown {
+  width: 100% !important;
+}
+
+.navbar-sidebar .dropdown__menu {
+  position: static !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  padding-left: var(--space-md) !important;
+}
+
+.navbar-sidebar .dropdown__link {
+  padding: var(--space-sm) var(--space-md) !important;
+}
+
+/* 确保主内容区域不会被导航栏遮挡 */
+@media screen and (max-width: 996px) {
+  .navbar-sidebar .menu {
+    display: block !important;
+  }
+
+  .navbar-sidebar .menu__link {
+    padding: var(--space-sm) var(--space-md) !important;
+  }
+
+  .navbar-sidebar .menu__link--active {
+    background: rgba(0, 0, 0, 0.05) !important;
+  }
+
+  [data-theme='dark'] .navbar-sidebar .menu__link--active {
+    background: rgba(255, 255, 255, 0.05) !important;
+  }
+}
