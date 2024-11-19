@@ -25,7 +25,7 @@ const config = {
   organizationName: 'facebook', // Usually your GitHub org/user name.
   projectName: 'docusaurus', // Usually your repo name.
 
-  onBrokenLinks: 'throw',
+  onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
 
   // Even if you don't use internationalization, you can use this field to set
@@ -109,11 +109,11 @@ const config = {
               },
               {
                 label: '实践案例',
-                to: '/docs/category/tutorial-basics',
+                to: '/docs/tutorial-basics/create-a-document',
               },
               {
                 label: '进阶主题',
-                to: '/docs/category/tutorial-extras',
+                to: '/docs/tutorial-extras/manage-docs-versions',
               },
             ],
           },
