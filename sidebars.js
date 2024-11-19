@@ -1,7 +1,11 @@
 /** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
 const sidebars = {
   tutorialSidebar: [
-    'intro',
+    {
+      type: 'doc',
+      id: 'intro',
+      label: '课程介绍',
+    },
     {
       type: 'category',
       label: '基础知识',
@@ -41,6 +45,17 @@ const sidebars = {
         'setup/cursor-installation',
         'setup/account-registration',
         'setup/dev-environment',
+      ],
+    },
+    {
+      type: 'category',
+      label: '博客定制',
+      items: [
+        'customization/basic-config',
+        'customization/content-management',
+        'customization/version-control',
+        'customization/vercel-deployment',
+        'customization/maintenance',
       ],
     },
   ],

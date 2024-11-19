@@ -1,0 +1,120 @@
+---
+sidebar_position: 3
+title: 版本控制与代码提交
+description: 学习如何使用Git进行版本控制和代码管理
+---
+
+# 版本控制与代码提交
+
+## 创建GitHub仓库
+
+<div className="github-setup">
+
+### 仓库创建步骤
+
+1. 访问 https://github.com/new
+2. 填写仓库信息：
+   - Repository name: `你的博客名称`
+   - Description: 添加描述
+   - 选择 Public
+   - 不要勾选"Initialize this repository with a README"
+3. 点击"Create repository"
+
+:::tip 仓库设置建议
+- 选择有意义的仓库名
+- 写清楚项目描述
+- 考虑开源许可证
+:::
+
+</div>
+
+## 代码提交流程
+
+<div className="git-workflow">
+
+### 初始化仓库
+
+```bash
+# 确保在项目根目录
+git init
+
+# 添加远程仓库
+git remote add origin https://github.com/你的用户名/仓库名称.git
+```
+
+### 提交代码
+
+```bash
+# 查看待提交的文件
+git status
+
+# 添加所有文件到暂存区
+git add .
+
+# 创建首次提交
+git commit -m "Initial commit"
+
+# 推送到GitHub
+git push -u origin main
+```
+
+</div>
+
+## 配置Git忽略文件
+
+<div className="gitignore-setup">
+
+### .gitignore配置
+
+```plaintext
+# 依赖
+/node_modules
+
+# 生产环境构建文件
+/build
+
+# 生成的文件
+.docusaurus
+.cache-loader
+
+# 环境变量文件
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# 编辑器配置
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# 系统文件
+.DS_Store
+Thumbs.db
+```
+
+:::caution 注意事项
+- 及时更新.gitignore文件
+- 不要提交敏感信息
+- 注意大小写敏感性
+:::
+
+</div>
+
+export const styles = {
+  githubSetup: {
+    backgroundColor: '#f6f8fa',
+    padding: '1rem',
+    borderRadius: '8px'
+  },
+  gitWorkflow: {
+    borderLeft: '3px solid #1a73e8',
+    paddingLeft: '1rem'
+  },
+  gitignoreSetup: {
+    backgroundColor: '#f0f7ff',
+    padding: '1rem',
+    borderRadius: '8px'
+  }
+}; 
