@@ -1,0 +1,215 @@
+---
+sidebar_position: 3
+title: 高效AI沟通技巧
+description: 掌握与AI助手高效沟通的方法，提高开发效率
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# 高效AI沟通技巧
+
+## 清晰表达需求
+
+### 使用专业术语
+
+<Tabs>
+  <TabItem value="good" label="好的表达" default>
+    ```
+    我需要优化我的网站的用户界面（UI）和用户体验（UX），特别是在移动端的响应式设计方面。
+    ```
+  </TabItem>
+  <TabItem value="bad" label="不好的表达">
+    ```
+    我想让我的网站看起来更好看。
+    ```
+  </TabItem>
+</Tabs>
+
+:::tip 专业术语的重要性
+使用准确的专业术语可以:
+- 提高沟通效率
+- 减少歧义
+- 获得更专业的回答
+:::
+
+### 提供具体示例
+
+<div className="example-block">
+
+#### 🎯 示例需求
+```
+我想实现一个类似Medium.com的文章阅读进度条功能。具体来说：
+- 当用户滚动文章时，页面顶部应该出现一个进度条
+- 进度条颜色应该与网站主题色一致
+- 进度条应该平滑过渡
+- 在移动端也需要正常显示
+```
+
+</div>
+
+### 明确期望输出
+
+<div className="output-example">
+
+#### 📋 输出格式示例
+
+```
+请为我的博客文章生成一个HTML结构。我需要：
+
+1. 一个h1标题
+2. 一个带有'author'类的作者信息段落
+3. 一个带有'date'类的发布日期段落
+4. 3-5个段落的文章正文，每个段落用p标签包裹
+5. 一个带有'tags'类的无序列表，包含3个标签项
+
+请直接提供HTML代码，不需要CSS样式。
+```
+
+</div>
+
+## 迭代式对话
+
+### 分步骤请求
+
+<div className="step-process">
+
+1️⃣ **第一步：设计布局**
+```
+请设计一个简单的博客文章页面的布局结构。
+```
+
+2️⃣ **第二步：生成HTML**
+```
+基于你提供的布局，请生成相应的HTML结构代码。
+```
+
+3️⃣ **第三步：添加样式**
+```
+现在，请为这个HTML结构添加基本的CSS样式，注重排版和可读性。
+```
+
+4️⃣ **第四步：添加交互**
+```
+最后，请添加一些简单的JavaScript功能，比如点击标签时过滤文章列表。
+```
+
+</div>
+
+### 根据AI回复调整提问
+
+<div className="conversation-flow">
+
+#### 对话示例
+
+🗣️ **人类**: 请解释RESTful API的基本原则。
+
+🤖 **AI**: [提供RESTful API的基本解释]
+
+🗣️ **人类**: 基于这些原则，你能给出一个简单的博客应用的RESTful API设计示例吗？主要包括文章的CRUD操作。
+
+🤖 **AI**: [提供API设计示例]
+
+🗣️ **人类**: 这个设计很好。现在，你能详细解释一下如何实现其中的"获取特定文章"这个端点吗？包括路由设置和处理函数。
+
+</div>
+
+### 寻求澄清和改进
+
+:::info 有效的跟进问题
+- "能否提供一个具体的代码示例？"
+- "这个方案在性能方面有什么考虑吗？"
+- "有没有更简单的实现方式？"
+- "这个解决方案是否有潜在的安全风险？"
+:::
+
+## 利用AI的优势
+
+### 请求多个方案比较
+
+```markdown
+请提供三种不同的方法来实现博客文章的分页功能：
+
+1. 前端分页（使用JavaScript）
+2. 后端分页（使用数据库查询）
+3. 无限滚动加载
+
+对于每种方法，请说明：
+- 实现复杂度
+- 性能影响
+- 用户体验
+- 适用场景
+```
+
+### 寻求创意和灵感
+
+<div className="creative-block">
+
+#### 🎨 创意请求示例
+
+```
+我正在为我的技术博客设计一个新的主页。请提供5个创新的设计理念，每个理念都应该：
+
+1. 有一个独特的视觉元素
+2. 强调内容的可读性
+3. 包含一个吸引读者注意的互动元素
+
+对于每个理念，请提供：
+- 简要描述
+- 关键特性
+- 可能的实现方法
+```
+
+</div>
+
+### 代码解释和优化
+
+<Tabs>
+  <TabItem value="original" label="原始代码" default>
+    ```javascript
+    function fetchData(url, callback) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', url, true);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                callback(JSON.parse(xhr.responseText));
+            }
+        };
+        xhr.send();
+    }
+    ```
+  </TabItem>
+  <TabItem value="optimized" label="优化建议">
+    ```javascript
+    async function fetchData(url) {
+        try {
+            const response = await fetch(url);
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error('Error fetching data:', error);
+            throw error;
+        }
+    }
+    ```
+  </TabItem>
+</Tabs>
+
+export const styles = {
+  exampleBlock: {
+    backgroundColor: '#f8f9fa',
+    padding: '1rem',
+    borderRadius: '8px',
+    marginBottom: '1rem'
+  },
+  stepProcess: {
+    borderLeft: '3px solid #1a73e8',
+    paddingLeft: '1rem'
+  },
+  creativeBlock: {
+    backgroundColor: '#f0f7ff',
+    padding: '1rem',
+    borderRadius: '8px',
+    marginTop: '1rem'
+  }
+};

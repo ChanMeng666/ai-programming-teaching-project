@@ -1,0 +1,521 @@
+---
+sidebar_position: 5
+title: 博客维护和优化
+description: 学习如何持续改进和维护你的博客项目
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# 博客维护和优化
+
+## 持续集成/持续部署
+
+### 自动化测试
+
+<div className="testing">
+
+#### 单元测试
+```typescript
+// __tests__/components/PostList.test.tsx
+import { render, screen, fireEvent } from '@testing-library/react';
+import PostList from '@/components/PostList';
+
+describe('PostList Component', () => {
+  const mockPosts = [
+    {
+      id: '1',
+      title: 'Test Post',
+      excerpt: 'Test excerpt',
+      date: '2024-01-01'
+    }
+  ];
+
+  it('renders posts correctly', () => {
+    render(<PostList posts={mockPosts} />);
+    expect(screen.getByText('Test Post')).toBeInTheDocument();
+    expect(screen.getByText('Test excerpt')).toBeInTheDocument();
+  });
+
+  it('filters posts based on search', () => {
+    render(<PostList posts={mockPosts} />);
+    const searchInput = screen.getByPlaceholderText('搜索文章...');
+    fireEvent.change(searchInput, { target: { value: 'nonexistent' } });
+    expect(screen.queryByText('Test Post')).not.toBeInTheDocument();
+  });
+});
+```
+
+#### E2E测试
+```typescript
+// cypress/e2e/blog.cy.ts
+describe('Blog', () => {
+  beforeEach(() => {
+    cy.visit('/');
+  });
+
+  it('navigates to post detail', () => {
+    cy.get('article').first().click();
+    cy.url().should('include', '/posts/');
+    cy.get('h1').should('be.visible');
+  });
+
+  it('filters posts using search', () => {
+    cy.get('input[type="search"]').type('test');
+    cy.get('article').should('have.length.gt', 0);
+  });
+});
+```
+
+</div>
+
+### 部署流水线
+
+<div className="pipeline">
+
+#### GitHub Actions配置
+```yaml
+# .github/workflows/ci.yml
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Run linter
+        run: npm run lint
+      
+      - name: Run tests
+        run: npm test
+      
+      - name: Run E2E tests
+        run: npm run test:e2e
+        
+  deploy:
+    needs: test
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to Vercel
+        uses: amondnet/vercel-action@v20
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+```
+
+</div>
+
+## 性能优化
+
+### 图片优化
+
+<div className="image-optimization">
+
+#### 图片组件
+```typescript
+// components/OptimizedImage.tsx
+import Image from 'next/image';
+import { useState } from 'react';
+
+interface OptimizedImageProps {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+}
+
+export function OptimizedImage({ src, alt, width, height }: OptimizedImageProps) {
+  const [isLoading, setIsLoading] = useState(true);
+
+  return (
+    <div className="relative">
+      <Image
+        src={src}
+        alt={alt}
+        width={width}
+        height={height}
+        quality={75}
+        loading="lazy"
+        onLoadingComplete={() => setIsLoading(false)}
+        className={`
+          duration-700 ease-in-out
+          ${isLoading ? 'scale-110 blur-2xl grayscale' : 'scale-100 blur-0 grayscale-0'}
+        `}
+      />
+      {isLoading && (
+        <div className="absolute inset-0 bg-gray-200 animate-pulse" />
+      )}
+    </div>
+  );
+}
+```
+
+#### 图片处理工具
+```typescript
+// lib/imageUtils.ts
+import sharp from 'sharp';
+
+export async function optimizeImage(buffer: Buffer) {
+  return sharp(buffer)
+    .resize(800, null, {
+      withoutEnlargement: true,
+      fit: 'inside'
+    })
+    .webp({ quality: 80 })
+    .toBuffer();
+}
+```
+
+</div>
+
+### 代码优化
+
+<div className="code-optimization">
+
+#### 代码分割
+```typescript
+// pages/posts/[slug].tsx
+import dynamic from 'next/dynamic';
+
+const CommentSection = dynamic(() => import('@/components/CommentSection'), {
+  loading: () => <CommentSkeleton />,
+  ssr: false
+});
+
+const RelatedPosts = dynamic(() => import('@/components/RelatedPosts'), {
+  loading: () => <RelatedPostsSkeleton />
+});
+```
+
+#### 性能监控
+```typescript
+// lib/analytics.ts
+export function reportWebVitals(metric: any) {
+  const body = {
+    name: metric.name,
+    value: metric.value,
+    label: metric.label,
+    id: metric.id
+  };
+
+  if (process.env.NODE_ENV === 'production') {
+    fetch('/api/vitals', {
+      method: 'POST',
+      body: JSON.stringify(body)
+    });
+  }
+}
+```
+
+</div>
+
+## 内容管理
+
+### 文章管理系统
+
+<div className="content-management">
+
+#### 文章编辑器
+```typescript
+// components/MDXEditor.tsx
+import { MDXEditor, MDXEditorMethods } from '@mdxeditor/editor';
+import { useRef } from 'react';
+
+interface EditorProps {
+  initialContent: string;
+  onSave: (content: string) => void;
+}
+
+export function Editor({ initialContent, onSave }: EditorProps) {
+  const editorRef = useRef<MDXEditorMethods>(null);
+
+  const handleSave = () => {
+    const content = editorRef.current?.getMarkdown();
+    if (content) {
+      onSave(content);
+    }
+  };
+
+  return (
+    <div className="editor-container">
+      <MDXEditor
+        ref={editorRef}
+        markdown={initialContent}
+        onChange={handleSave}
+        plugins={[
+          // 添加所需插件
+        ]}
+      />
+    </div>
+  );
+}
+```
+
+#### 草稿系统
+```typescript
+// lib/drafts.ts
+import { prisma } from './prisma';
+
+export async function saveDraft(postId: string, content: string) {
+  return prisma.draft.upsert({
+    where: { postId },
+    update: { content },
+    create: {
+      postId,
+      content,
+      lastSaved: new Date()
+    }
+  });
+}
+
+export async function publishDraft(postId: string) {
+  const draft = await prisma.draft.findUnique({
+    where: { postId }
+  });
+
+  if (!draft) {
+    throw new Error('Draft not found');
+  }
+
+  await prisma.$transaction([
+    prisma.post.update({
+      where: { id: postId },
+      data: { content: draft.content }
+    }),
+    prisma.draft.delete({
+      where: { postId }
+    })
+  ]);
+}
+```
+
+</div>
+
+### SEO优化
+
+<div className="seo-optimization">
+
+#### Meta标签管理
+```typescript
+// components/SEO.tsx
+import { NextSeo } from 'next-seo';
+
+interface SEOProps {
+  title: string;
+  description: string;
+  canonical?: string;
+  openGraph?: {
+    title: string;
+    description: string;
+    images: Array<{ url: string; alt: string }>;
+  };
+}
+
+export function SEO({ title, description, canonical, openGraph }: SEOProps) {
+  return (
+    <NextSeo
+      title={title}
+      description={description}
+      canonical={canonical}
+      openGraph={{
+        title: openGraph?.title || title,
+        description: openGraph?.description || description,
+        images: openGraph?.images,
+        site_name: '我的技术博客'
+      }}
+      twitter={{
+        handle: '@yourhandle',
+        cardType: 'summary_large_image'
+      }}
+    />
+  );
+}
+```
+
+#### 站点地图生成
+```typescript
+// scripts/generate-sitemap.ts
+import { SitemapStream, streamToPromise } from 'sitemap';
+import { createWriteStream } from 'fs';
+import { getAllPosts } from '@/lib/posts';
+
+async function generateSitemap() {
+  const sitemap = new SitemapStream({
+    hostname: 'https://yourblog.com'
+  });
+
+  // 添加静态页面
+  sitemap.write({
+    url: '/',
+    changefreq: 'daily',
+    priority: 1
+  });
+
+  // 添加博客文章
+  const posts = await getAllPosts();
+  posts.forEach(post => {
+    sitemap.write({
+      url: `/posts/${post.slug}`,
+      changefreq: 'weekly',
+      priority: 0.7,
+      lastmod: post.updatedAt
+    });
+  });
+
+  sitemap.end();
+
+  const sitemapXML = await streamToPromise(sitemap);
+  createWriteStream('./public/sitemap.xml').write(sitemapXML);
+}
+```
+
+</div>
+
+## 安全维护
+
+### 安全更新
+
+<div className="security">
+
+#### 依赖检查
+```typescript
+// scripts/check-dependencies.ts
+import { exec } from 'child_process';
+import { promisify } from 'util';
+
+const execAsync = promisify(exec);
+
+async function checkDependencies() {
+  try {
+    // 检查npm包更新
+    const { stdout: npmOutput } = await execAsync('npm audit');
+    console.log('NPM Security Audit:', npmOutput);
+
+    // 使用Snyk检查漏洞
+    const { stdout: snykOutput } = await execAsync('snyk test');
+    console.log('Snyk Security Test:', snykOutput);
+  } catch (error) {
+    console.error('Security check failed:', error);
+    process.exit(1);
+  }
+}
+```
+
+#### 安全中间件
+```typescript
+// middleware/security.ts
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
+
+export function middleware(request: NextRequest) {
+  const response = NextResponse.next();
+
+  // 添加安全头部
+  response.headers.set(
+    'Strict-Transport-Security',
+    'max-age=31536000; includeSubDomains'
+  );
+  response.headers.set('X-Frame-Options', 'DENY');
+  response.headers.set('X-Content-Type-Options', 'nosniff');
+  response.headers.set(
+    'Content-Security-Policy',
+    "default-src 'self'; img-src 'self' data: https:; script-src 'self' 'unsafe-inline' 'unsafe-eval';"
+  );
+
+  return response;
+}
+```
+
+</div>
+
+### 备份策略
+
+<div className="backup">
+
+#### 数据备份
+```typescript
+// scripts/backup.ts
+import { exec } from 'child_process';
+import { uploadToS3 } from './s3';
+
+async function backupDatabase() {
+  const timestamp = new Date().toISOString();
+  const filename = `backup-${timestamp}.sql`;
+
+  try {
+    // 导出数据库
+    await exec(`pg_dump ${process.env.DATABASE_URL} > ${filename}`);
+
+    // 上传到S3
+    await uploadToS3(filename, `backups/${filename}`);
+
+    // 清理本地文件
+    await exec(`rm ${filename}`);
+
+    console.log(`Backup completed: ${filename}`);
+  } catch (error) {
+    console.error('Backup failed:', error);
+  }
+}
+```
+
+#### 自动备份配置
+```yaml
+# .github/workflows/backup.yml
+name: Database Backup
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # 每天运行
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          
+      - name: Run backup script
+        run: npm run backup
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+```
+
+</div>
+
+export const styles = {
+  testing: {
+    backgroundColor: '#f6f8fa',
+    padding: '1rem',
+    borderRadius: '8px',
+    marginBottom: '1rem'
+  },
+  pipeline: {
+    borderLeft: '3px solid #1a73e8',
+    paddingLeft: '1rem'
+  },
+  security: {
+    backgroundColor: '#f0f7ff',
+    padding: '1rem',
+    borderRadius: '8px'
+  }
+};

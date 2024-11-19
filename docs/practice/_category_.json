@@ -1,0 +1,9 @@
+{
+  "label": "实战项目",
+  "position": 3,
+  "link": {
+    "type": "generated-index",
+    "description": "通过实际项目学习如何运用AI工具开发个人博客，从项目规划到部署维护的完整实践。",
+    "slug": "/category/practice"
+  }
+} 

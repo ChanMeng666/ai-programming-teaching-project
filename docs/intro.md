@@ -2,46 +2,58 @@
 sidebar_position: 1
 ---
 
-# Tutorial Intro
+# 课程介绍
 
-Let's discover **Docusaurus in less than 5 minutes**.
+欢迎来到AI辅助开发教程！在这个系列课程中，你将学习如何利用现代AI工具提升开发效率。
 
-## Getting Started
+## 课程概述
 
-Get started by **creating a new site**.
+本课程分为三个主要部分：
 
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
+### 1. 基础知识
+- 提示词工程基础
+- Markdown格式介绍
+- 高效AI沟通技巧
 
-### What you'll need
+### 2. 开发工具
+- Cursor编辑器使用指南
+- v0平台介绍
+- Vercel部署指南
+- 工作流集成
 
-- [Node.js](https://nodejs.org/en/download/) version 18.0 or above:
-  - When installing Node.js, you are recommended to check all checkboxes related to dependencies.
+### 3. 实战项目
+- 博客项目规划
+- 使用Cursor开发
+- 在v0上继续开发
+- Vercel部署实践
+- 博客维护和优化
+- 总结和进阶建议
 
-## Generate a new site
+## 学习目标
 
-Generate a new Docusaurus site using the **classic template**.
+完成本课程后，你将能够：
 
-The classic template will automatically be added to your project after you run the command:
+- 掌握与AI助手高效沟通的技巧
+- 熟练使用现代开发工具提升效率
+- 独立完成一个完整的博客项目
+- 建立适合自己的AI辅助开发工作流
 
-```bash
-npm init docusaurus@latest my-website classic
-```
+## 适合人群
 
-You can type this command into Command Prompt, Powershell, Terminal, or any other integrated terminal of your code editor.
+本课程适合：
 
-The command also installs all necessary dependencies you need to run Docusaurus.
+- 想要提高开发效率的程序员
+- 对AI辅助开发感兴趣的开发者
+- 希望学习现代开发工具的学习者
+- 想要建立个人博客的技术爱好者
 
-## Start your site
+## 准备工作
 
-Run the development server:
+开始学习前，你需要：
 
-```bash
-cd my-website
-npm run start
-```
+- 基本的编程知识
+- 一台可以上网的电脑
+- GitHub账号
+- 安装Node.js环境
 
-The `cd` command changes the directory you're working with. In order to work with your newly created Docusaurus site, you'll need to navigate the terminal there.
-
-The `npm run start` command builds your website locally and serves it through a development server, ready for you to view at http://localhost:3000/.
-
-Open `docs/intro.md` (this page) and edit some lines: the site **reloads automatically** and displays your changes.
+让我们开始学习吧！

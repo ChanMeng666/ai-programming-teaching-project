@@ -1,0 +1,245 @@
+---
+sidebar_position: 1
+title: Cursor使用指南
+description: 学习如何使用Cursor编辑器进行AI辅助开发
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Cursor使用指南
+
+## Cursor简介
+
+Cursor是一款革新性的代码编辑器，它集成了强大的AI功能，旨在提高开发者的工作效率。
+
+<div className="feature-grid">
+
+### 🤖 AI辅助编码
+- 实时代码补全
+- 错误检测和修复建议
+- 智能代码生成
+
+### 🔄 代码解释和重构
+- 解释复杂代码
+- 提供重构建议
+- 代码优化建议
+
+### 🌐 多语言支持
+- 支持主流编程语言
+- 框架智能提示
+- 语法高亮
+
+### ⚡ 集成开发环境
+- 内置终端
+- Git集成
+- 调试工具
+
+</div>
+
+## 安装和设置
+
+### 下载和安装步骤
+
+<div className="step-by-step">
+
+#### 1. 下载安装包
+
+访问 [Cursor官网](https://cursor.sh/) 并点击"Download"按钮。
+
+#### 2. 运行安装程序
+
+根据你的操作系统选择合适的版本：
+
+<Tabs>
+  <TabItem value="windows" label="Windows" default>
+    ```bash
+    # 运行下载的.exe文件
+    cursor-setup.exe
+    ```
+  </TabItem>
+  <TabItem value="mac" label="macOS">
+    ```bash
+    # 打开.dmg文件并拖动到Applications文件夹
+    # 或使用Homebrew安装
+    brew install --cask cursor
+    ```
+  </TabItem>
+  <TabItem value="linux" label="Linux">
+    ```bash
+    # 下载.AppImage文件
+    chmod +x cursor.AppImage
+    ./cursor.AppImage
+    ```
+  </TabItem>
+</Tabs>
+
+#### 3. 初始配置
+
+1. 首次运行时登录或创建账号
+2. 选择你喜欢的主题和字体
+3. 配置常用编程语言
+4. 设置AI功能（可能需要API密钥）
+
+</div>
+
+## 常用快捷键
+
+:::tip 提高效率的关键
+掌握这些快捷键可以显著提升你的开发效率。建议打印出来放在手边，直到完全熟悉为止。
+:::
+
+### 文件操作快捷键
+
+<div className="shortcut-table">
+
+| 操作 | Windows/Linux | macOS |
+|------|--------------|-------|
+| 新建文件 | `Ctrl + N` | `Cmd + N` |
+| 打开文件 | `Ctrl + O` | `Cmd + O` |
+| 保存文件 | `Ctrl + S` | `Cmd + S` |
+| 关闭文件 | `Ctrl + W` | `Cmd + W` |
+
+</div>
+
+### 编辑操作快捷键
+
+<div className="shortcut-table">
+
+| 操作 | Windows/Linux | macOS |
+|------|--------------|-------|
+| 复制 | `Ctrl + C` | `Cmd + C` |
+| 剪切 | `Ctrl + X` | `Cmd + X` |
+| 粘贴 | `Ctrl + V` | `Cmd + V` |
+| 撤销 | `Ctrl + Z` | `Cmd + Z` |
+| 重做 | `Ctrl + Y` | `Cmd + Shift + Z` |
+| 查找 | `Ctrl + F` | `Cmd + F` |
+| 替换 | `Ctrl + H` | `Cmd + H` |
+
+</div>
+
+### AI辅助功能快捷键
+
+<div className="shortcut-table">
+
+| 操作 | Windows/Linux | macOS |
+|------|--------------|-------|
+| 激活AI助手 | `Ctrl + K` | `Cmd + K` |
+| AI代码注释 | `Ctrl + /` | `Cmd + /` |
+| AI代码解释 | `Alt + [` | `Option + [` |
+| AI优化建议 | `Alt + ]` | `Option + ]` |
+
+</div>
+
+## 与AI协作开发
+
+### 代码补全和建议
+
+<div className="code-example">
+
+#### 自动代码补全示例
+
+```python
+def calculate_average(numbers):
+    # 开始输入'return'，AI会提供完整的平均值计算代码
+    return sum(numbers) / len(numbers)
+```
+
+:::note 使用技巧
+- 使用Tab键或Enter键接受建议
+- 使用上下箭头键在多个建议间切换
+- 按Esc键取消建议
+:::
+
+</div>
+
+### 代码解释和重构
+
+<Tabs>
+  <TabItem value="original" label="原始代码">
+    ```python
+    def fibonacci(n):
+        if n <= 1:
+            return n
+        else:
+            return fibonacci(n-1) + fibonacci(n-2)
+    ```
+  </TabItem>
+  <TabItem value="explanation" label="AI解释">
+    ```
+    这是一个递归实现的斐波那契数列函数：
+    1. 基本情况：当n<=1时直接返回n
+    2. 递归情况：返回前两个数的和
+    3. 注意：这种实现方式时间复杂度为O(2^n)
+    ```
+  </TabItem>
+  <TabItem value="optimized" label="AI优化建议">
+    ```python
+    def fibonacci(n):
+        if n <= 1:
+            return n
+        a, b = 0, 1
+        for _ in range(n):
+            a, b = b, a + b
+        return a
+    ```
+  </TabItem>
+</Tabs>
+
+### 错误诊断和修复
+
+<div className="error-example">
+
+#### 示例：语法错误修复
+
+```python
+# 有语法错误的代码
+def greet(name)
+    print("Hello, " + name + "!")
+
+# Cursor会检测到缺少冒号，并提供修复建议：
+def greet(name):
+    print("Hello, " + name + "!")
+```
+
+</div>
+
+### 使用自然语言生成代码
+
+<div className="nlp-example">
+
+#### 示例：通过注释生成代码
+
+```python
+# 创建一个函数，接受一个字符串列表，返回所有长度大于5的字符串
+```
+
+按下 `Ctrl + K`，AI会生成：
+
+```python
+def filter_long_strings(string_list):
+    return [s for s in string_list if len(s) > 5]
+```
+
+</div>
+
+export const styles = {
+  featureGrid: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+    gap: '1rem',
+    marginBottom: '2rem'
+  },
+  stepByStep: {
+    borderLeft: '3px solid #1a73e8',
+    paddingLeft: '1rem'
+  },
+  shortcutTable: {
+    marginBottom: '1.5rem'
+  },
+  codeExample: {
+    backgroundColor: '#f6f8fa',
+    padding: '1rem',
+    borderRadius: '8px'
+  }
+};

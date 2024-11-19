@@ -1,0 +1,295 @@
+---
+sidebar_position: 3
+title: Vercel部署指南
+description: 学习如何使用Vercel部署和托管你的Web应用
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Vercel部署指南
+
+## Vercel简介
+
+Vercel是一个面向前端开发者的云平台，专注于提供静态和服务器端渲染的部署解决方案。
+
+<div className="feature-cards">
+
+### ⚡ 零配置部署
+- 自动检测项目类型
+- 智能构建设置
+- 即时部署预览
+
+### 🌍 全球CDN
+- 边缘网络分发
+- 自动SSL证书
+- 智能路由
+
+### 🔄 持续部署
+- Git集成
+- 自动构建
+- 版本控制
+
+### 🛠️ 开发工具
+- 实时预览
+- 性能分析
+- 环境变量管理
+
+</div>
+
+## 部署项目
+
+### 准备工作
+
+<div className="prerequisites">
+
+#### 必要条件
+- Git仓库（GitHub、GitLab或Bitbucket）
+- 项目的package.json文件
+- Node.js环境
+
+#### 推荐配置
+```json
+{
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  }
+}
+```
+
+</div>
+
+### 导入项目
+
+<div className="step-guide">
+
+#### 1. 连接Git平台
+
+<Tabs>
+  <TabItem value="github" label="GitHub" default>
+    1. 访问 [Vercel控制台](https://vercel.com/dashboard)
+    2. 点击 "New Project"
+    3. 选择 "Import Git Repository"
+    4. 授权GitHub访问
+  </TabItem>
+  <TabItem value="gitlab" label="GitLab">
+    1. 访问 Vercel控制台
+    2. 点击 "Add GitLab Account"
+    3. 完成GitLab授权
+    4. 选择要导入的仓库
+  </TabItem>
+</Tabs>
+
+#### 2. 配置项目
+
+```yaml
+# vercel.json 配置示例
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/next"
+    }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "/" }
+  ]
+}
+```
+
+#### 3. 部署设置
+
+- 选择项目框架（通常自动检测）
+- 配置构建命令和输出目录
+- 设置环境变量（如需要）
+
+</div>
+
+## 高级功能配置
+
+### 自定义域名
+
+<div className="domain-setup">
+
+#### 添加域名
+1. 在项目设置中找到 "Domains"
+2. 点击 "Add Domain"
+3. 输入你的域名
+
+#### DNS配置
+```bash
+# A记录配置
+Type: A
+Name: @
+Value: 76.76.21.21
+
+# CNAME配置
+Type: CNAME
+Name: www
+Value: cname.vercel-dns.com
+```
+
+</div>
+
+### 环境变量管理
+
+<div className="env-management">
+
+#### 在Vercel控制台设置
+1. 项目设置 > Environment Variables
+2. 添加键值对
+3. 选择环境（Production/Preview/Development）
+
+#### 使用.env文件
+```bash
+# .env.local
+DATABASE_URL=xxx
+API_KEY=xxx
+
+# .env.production
+NODE_ENV=production
+API_ENDPOINT=https://api.example.com
+```
+
+:::caution 注意
+不要将包含敏感信息的.env文件提交到Git仓库！
+:::
+
+</div>
+
+### 性能监控
+
+<div className="monitoring">
+
+#### 核心Web指标监控
+```javascript
+// pages/_app.js
+export function reportWebVitals(metric) {
+  if (metric.label === 'web-vital') {
+    console.log(metric); // 发送到分析服务
+  }
+}
+```
+
+#### 设置性能预算
+```json
+{
+  "performance": {
+    "budget": {
+      "firstContentfulPaint": 1500,
+      "interactive": 3000,
+      "firstMeaningfulPaint": 2000
+    }
+  }
+}
+```
+
+</div>
+
+### 团队协作
+
+<div className="collaboration">
+
+#### 团队设置
+1. 创建团队
+2. 邀请成员
+3. 设置权限
+
+#### 部署评论
+```javascript
+// 在PR中添加部署评论
+async function commentOnDeploy(deployment) {
+  const comment = `
+    🚀 Preview deployed at: ${deployment.url}
+    Build: ${deployment.meta.buildId}
+    Status: ${deployment.state}
+  `;
+  await github.createComment(comment);
+}
+```
+
+</div>
+
+## 最佳实践
+
+### 优化构建过程
+
+<div className="optimization-tips">
+
+#### 缓存策略
+```json
+{
+  "build": {
+    "env": {
+      "NEXT_PUBLIC_BUILD_TIME": "@now"
+    }
+  },
+  "headers": [
+    {
+      "source": "/static/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ]
+}
+```
+
+#### 构建优化
+- 使用依赖缓存
+- 优化构建命令
+- 合理设置输出目录
+
+</div>
+
+### 监控和告警
+
+<div className="monitoring-setup">
+
+#### 设置告警规则
+```javascript
+// 示例：性能告警配置
+{
+  "alerts": [
+    {
+      "metric": "firstContentfulPaint",
+      "threshold": 2000,
+      "notification": {
+        "type": "email",
+        "recipients": ["team@example.com"]
+      }
+    }
+  ]
+}
+```
+
+#### 日志管理
+- 集成日志服务
+- 设置错误追踪
+- 配置性能监控
+
+</div>
+
+export const styles = {
+  featureCards: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+    gap: '1rem',
+    marginBottom: '2rem'
+  },
+  stepGuide: {
+    borderLeft: '3px solid #1a73e8',
+    paddingLeft: '1rem'
+  },
+  optimizationTips: {
+    backgroundColor: '#f6f8fa',
+    padding: '1rem',
+    borderRadius: '8px'
+  }
+};

@@ -1,0 +1,406 @@
+---
+sidebar_position: 2
+title: 使用Cursor开发
+description: 学习如何使用Cursor和AI助手进行博客开发
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# 使用Cursor开发博客
+
+## 项目初始化
+
+### 创建Next.js项目
+
+<div className="setup-steps">
+
+#### 1. 使用create-next-app
+
+```bash
+npx create-next-app@latest my-blog --typescript --tailwind --eslint
+cd my-blog
+```
+
+#### 2. 安装依赖
+
+```bash
+npm install @headlessui/react @heroicons/react
+npm install @mdx-js/react @mdx-js/loader
+npm install gray-matter next-mdx-remote
+npm install date-fns
+```
+
+#### 3. 配置项目结构
+
+```bash
+mkdir -p src/{components,layouts,lib,styles,types}
+mkdir -p content/{posts,pages}
+```
+
+</div>
+
+## 基础组件开发
+
+### 布局组件
+
+<div className="component-development">
+
+#### Layout组件
+```tsx
+// src/components/Layout.tsx
+import { ReactNode } from 'react';
+import Header from './Header';
+import Footer from './Footer';
+
+interface LayoutProps {
+  children: ReactNode;
+  title?: string;
+  description?: string;
+}
+
+export default function Layout({ children, title, description }: LayoutProps) {
+  return (
+    <div className="min-h-screen flex flex-col">
+      <Header />
+      <main className="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {children}
+      </main>
+      <Footer />
+    </div>
+  );
+}
+```
+
+#### 使用AI优化样式
+
+:::tip AI提示
+使用以下提示让AI帮助优化样式：
+```
+为这个Layout组件添加响应式样式，包括：
+1. 合适的内容最大宽度
+2. 良好的间距和边距
+3. 移动端适配
+4. 深色模式支持
+```
+:::
+
+</div>
+
+### 文章列表组件
+
+<div className="post-list">
+
+#### PostList组件
+```tsx
+// src/components/PostList.tsx
+import { useState } from 'react';
+import Link from 'next/link';
+import { Post } from '@/types';
+
+interface PostListProps {
+  posts: Post[];
+}
+
+export default function PostList({ posts }: PostListProps) {
+  const [searchTerm, setSearchTerm] = useState('');
+  
+  const filteredPosts = posts.filter(post =>
+    post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    post.excerpt.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  return (
+    <div className="space-y-8">
+      <div className="relative">
+        <input
+          type="search"
+          placeholder="搜索文章..."
+          className="w-full px-4 py-2 border rounded-lg"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </div>
+      
+      <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        {filteredPosts.map(post => (
+          <article key={post.slug} className="border rounded-lg p-6 hover:shadow-lg transition">
+            <Link href={`/posts/${post.slug}`}>
+              <h2 className="text-xl font-bold mb-2">{post.title}</h2>
+              <p className="text-gray-600 mb-4">{post.excerpt}</p>
+              <div className="flex items-center text-sm text-gray-500">
+                <time>{post.date}</time>
+                <span className="mx-2">·</span>
+                <span>{post.readingTime} min read</span>
+              </div>
+            </Link>
+          </article>
+        ))}
+      </div>
+    </div>
+  );
+}
+```
+
+</div>
+
+### 文章详情组件
+
+<div className="post-detail">
+
+#### PostDetail组件
+```tsx
+// src/components/PostDetail.tsx
+import { MDXRemote } from 'next-mdx-remote';
+import Image from 'next/image';
+import { Post } from '@/types';
+
+interface PostDetailProps {
+  post: Post;
+}
+
+const components = {
+  img: (props: any) => (
+    <div className="relative h-64 my-8">
+      <Image
+        {...props}
+        layout="fill"
+        objectFit="cover"
+        className="rounded-lg"
+      />
+    </div>
+  ),
+  // 添加其他自定义组件
+};
+
+export default function PostDetail({ post }: PostDetailProps) {
+  return (
+    <article className="prose prose-lg mx-auto">
+      <h1>{post.title}</h1>
+      
+      <div className="flex items-center space-x-4 mb-8">
+        <div className="flex items-center">
+          <Image
+            src={post.author.avatar}
+            alt={post.author.name}
+            width={40}
+            height={40}
+            className="rounded-full"
+          />
+          <span className="ml-2">{post.author.name}</span>
+        </div>
+        <time className="text-gray-500">{post.date}</time>
+      </div>
+
+      <MDXRemote {...post.content} components={components} />
+      
+      <div className="mt-8 flex flex-wrap gap-2">
+        {post.tags.map(tag => (
+          <span
+            key={tag}
+            className="px-3 py-1 bg-gray-100 rounded-full text-sm"
+          >
+            {tag}
+          </span>
+        ))}
+      </div>
+    </article>
+  );
+}
+```
+
+</div>
+
+## 数据处理
+
+### Markdown解析
+
+<div className="markdown-processing">
+
+#### 解析工具函数
+```typescript
+// src/lib/mdx.ts
+import fs from 'fs';
+import path from 'path';
+import matter from 'gray-matter';
+import { serialize } from 'next-mdx-remote/serialize';
+
+const postsDirectory = path.join(process.cwd(), 'content/posts');
+
+export async function getPostBySlug(slug: string) {
+  const realSlug = slug.replace(/\.mdx$/, '');
+  const fullPath = path.join(postsDirectory, `${realSlug}.mdx`);
+  const fileContents = fs.readFileSync(fullPath, 'utf8');
+  
+  const { data, content } = matter(fileContents);
+  const mdxSource = await serialize(content, {
+    mdxOptions: {
+      remarkPlugins: [],
+      rehypePlugins: [],
+    },
+    scope: data,
+  });
+
+  return {
+    slug: realSlug,
+    frontMatter: data,
+    content: mdxSource,
+  };
+}
+
+export function getAllPosts() {
+  const slugs = fs.readdirSync(postsDirectory);
+  const posts = slugs
+    .map((slug) => getPostBySlug(slug))
+    .sort((post1, post2) => (post1.frontMatter.date > post2.frontMatter.date ? -1 : 1));
+  
+  return posts;
+}
+```
+
+</div>
+
+### API路由
+
+<div className="api-routes">
+
+#### 文章API
+```typescript
+// pages/api/posts/[slug].ts
+import type { NextApiRequest, NextApiResponse } from 'next';
+import { getPostBySlug } from '@/lib/mdx';
+
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
+  const { slug } = req.query;
+
+  try {
+    const post = await getPostBySlug(slug as string);
+    res.status(200).json(post);
+  } catch (error) {
+    res.status(404).json({ message: 'Post not found' });
+  }
+}
+```
+
+#### 搜索API
+```typescript
+// pages/api/search.ts
+import type { NextApiRequest, NextApiResponse } from 'next';
+import { getAllPosts } from '@/lib/mdx';
+
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
+  const { q } = req.query;
+  const posts = await getAllPosts();
+  
+  const results = posts.filter(post => 
+    post.frontMatter.title.toLowerCase().includes((q as string).toLowerCase()) ||
+    post.frontMatter.excerpt.toLowerCase().includes((q as string).toLowerCase())
+  );
+
+  res.status(200).json(results);
+}
+```
+
+</div>
+
+## 使用AI优化代码
+
+### 性能优化
+
+<div className="performance-optimization">
+
+#### 使用AI分析性能
+:::tip AI提示
+```
+分析这段代码的性能，并提供优化建议：
+1. 减少不必要的重渲染
+2. 优化数据获取
+3. 改进搜索逻辑
+4. 添加缓存机制
+```
+:::
+
+#### 优化示例
+```typescript
+// 使用记忆化避免不必要的重渲染
+const MemoizedPostList = memo(PostList);
+
+// 使用SWR进行数据获取和缓存
+const { data: posts, error } = useSWR('/api/posts', fetcher);
+
+// 使用防抖优化搜索
+const debouncedSearch = useCallback(
+  debounce((term: string) => {
+    // 执行搜索逻辑
+  }, 300),
+  []
+);
+```
+
+</div>
+
+### 代码重构
+
+<div className="code-refactoring">
+
+#### 使用AI重构建议
+:::tip AI提示
+```
+请帮我重构这段代码，重点关注：
+1. 组件职责划分
+2. 代码复用
+3. 类型安全
+4. 错误处理
+```
+:::
+
+#### 重构示例
+```typescript
+// 提取可复用的hooks
+function useDebounceSearch(initialTerm = '') {
+  const [searchTerm, setSearchTerm] = useState(initialTerm);
+  const [debouncedTerm, setDebouncedTerm] = useState(initialTerm);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setDebouncedTerm(searchTerm), 300);
+    return () => clearTimeout(timer);
+  }, [searchTerm]);
+
+  return {
+    searchTerm,
+    setSearchTerm,
+    debouncedTerm,
+  };
+}
+
+// 提取错误边界组件
+class ErrorBoundary extends React.Component {
+  // ... 错误处理逻辑
+}
+```
+
+</div>
+
+export const styles = {
+  setupSteps: {
+    borderLeft: '3px solid #1a73e8',
+    paddingLeft: '1rem'
+  },
+  componentDevelopment: {
+    backgroundColor: '#f6f8fa',
+    padding: '1rem',
+    borderRadius: '8px'
+  },
+  markdownProcessing: {
+    marginTop: '1rem',
+    padding: '1rem',
+    border: '1px solid #e1e4e8',
+    borderRadius: '8px'
+  }
+};

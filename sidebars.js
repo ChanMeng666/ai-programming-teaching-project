@@ -1,43 +1,51 @@
-// @ts-check
-
-// This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
-
-/**
- * Creating a sidebar enables you to:
- - create an ordered group of docs
- - render a sidebar for each doc of that group
- - provide next/previous navigation
-
- The sidebars can be generated from the filesystem, or explicitly defined here.
-
- Create as many sidebars as you want.
-
- @type {import('@docusaurus/plugin-content-docs').SidebarsConfig}
- */
+/** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
 const sidebars = {
-  tutorialSidebar: [
+  docs: [
     'intro',
     {
       type: 'category',
-      label: '基础教程',
+      label: '基础知识',
+      link: {
+        type: 'generated-index',
+        description: '学习AI辅助开发的基础知识'
+      },
       items: [
-        'tutorial-basics/create-a-document',
-        'tutorial-basics/create-a-page',
-        'tutorial-basics/create-a-blog-post',
-        'tutorial-basics/markdown-features',
-        'tutorial-basics/deploy-your-site',
-        'tutorial-basics/congratulations',
-      ],
+        'basics/prompt-engineering',
+        'basics/markdown-syntax',
+        'basics/ai-communication'
+      ]
     },
     {
       type: 'category',
-      label: '进阶主题',
+      label: '开发工具',
+      link: {
+        type: 'generated-index',
+        description: '掌握现代开发工具的使用方法'
+      },
       items: [
-        'tutorial-extras/manage-docs-versions',
-        'tutorial-extras/translate-your-site',
-      ],
+        'tools/cursor-guide',
+        'tools/v0-platform',
+        'tools/vercel-deploy',
+        'tools/workflow-integration'
+      ]
     },
-  ],
+    {
+      type: 'category',
+      label: '实战项目',
+      link: {
+        type: 'generated-index',
+        description: '通过实际项目学习AI辅助开发'
+      },
+      items: [
+        'practice/blog-planning',
+        'practice/cursor-development',
+        'practice/v0-development',
+        'practice/vercel-deployment',
+        'practice/maintenance',
+        'practice/summary'
+      ]
+    }
+  ]
 };
 
-export default sidebars;
+module.exports = sidebars;

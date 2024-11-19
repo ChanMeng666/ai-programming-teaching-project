@@ -1,0 +1,447 @@
+---
+sidebar_position: 3
+title: 在v0上继续开发
+description: 学习如何使用v0平台进行团队协作开发
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# 在v0上继续开发
+
+## 导入Cursor项目
+
+### 准备工作
+
+<div className="preparation">
+
+#### 1. 提交本地更改
+```bash
+# 确保所有更改已提交
+git add .
+git commit -m "Complete initial development in Cursor"
+git push origin main
+```
+
+#### 2. 项目清理
+- 删除不必要的临时文件
+- 整理项目结构
+- 更新.gitignore文件
+
+#### 3. 检查依赖
+```bash
+# 确保package.json中的依赖是最新的
+npm outdated
+npm update
+```
+
+</div>
+
+## 在v0上开发新功能
+
+### 评论系统实现
+
+<div className="comment-system">
+
+#### 评论组件
+```tsx
+// components/Comments.tsx
+import { useState } from 'react';
+import { useSession } from 'next-auth/react';
+
+interface Comment {
+  id: string;
+  content: string;
+  author: {
+    name: string;
+    avatar: string;
+  };
+  createdAt: string;
+}
+
+export function Comments({ postId }: { postId: string }) {
+  const { data: session } = useSession();
+  const [comments, setComments] = useState<Comment[]>([]);
+  const [newComment, setNewComment] = useState('');
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!session) return;
+
+    try {
+      const response = await fetch('/api/comments', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          postId,
+          content: newComment,
+        }),
+      });
+
+      if (response.ok) {
+        const comment = await response.json();
+        setComments([...comments, comment]);
+        setNewComment('');
+      }
+    } catch (error) {
+      console.error('Error posting comment:', error);
+    }
+  };
+
+  return (
+    <div className="space-y-6">
+      <h3 className="text-xl font-bold">评论</h3>
+      
+      {session ? (
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <textarea
+            value={newComment}
+            onChange={(e) => setNewComment(e.target.value)}
+            className="w-full p-2 border rounded-lg"
+            placeholder="写下你的评论..."
+            rows={4}
+          />
+          <button
+            type="submit"
+            className="px-4 py-2 bg-blue-500 text-white rounded-lg"
+          >
+            发表评论
+          </button>
+        </form>
+      ) : (
+        <p>请登录后发表评论</p>
+      )}
+
+      <div className="space-y-4">
+        {comments.map((comment) => (
+          <div key={comment.id} className="border p-4 rounded-lg">
+            <div className="flex items-center space-x-2 mb-2">
+              <img
+                src={comment.author.avatar}
+                alt={comment.author.name}
+                className="w-8 h-8 rounded-full"
+              />
+              <span className="font-medium">{comment.author.name}</span>
+              <span className="text-gray-500">{comment.createdAt}</span>
+            </div>
+            <p>{comment.content}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+```
+
+#### API路由
+```typescript
+// pages/api/comments.ts
+import { NextApiRequest, NextApiResponse } from 'next';
+import { getSession } from 'next-auth/react';
+import { prisma } from '@/lib/prisma';
+
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
+  const session = await getSession({ req });
+  
+  if (!session) {
+    return res.status(401).json({ message: 'Unauthorized' });
+  }
+
+  if (req.method === 'POST') {
+    const { postId, content } = req.body;
+
+    try {
+      const comment = await prisma.comment.create({
+        data: {
+          content,
+          post: { connect: { id: postId } },
+          author: { connect: { email: session.user.email } },
+        },
+        include: {
+          author: {
+            select: {
+              name: true,
+              image: true,
+            },
+          },
+        },
+      });
+
+      res.status(201).json(comment);
+    } catch (error) {
+      res.status(500).json({ message: 'Error creating comment' });
+    }
+  } else {
+    res.setHeader('Allow', ['POST']);
+    res.status(405).end(`Method ${req.method} Not Allowed`);
+  }
+}
+```
+
+</div>
+
+### 标签系统优化
+
+<div className="tag-system">
+
+#### 标签组件
+```tsx
+// components/TagCloud.tsx
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
+
+interface Tag {
+  name: string;
+  count: number;
+}
+
+export function TagCloud() {
+  const [tags, setTags] = useState<Tag[]>([]);
+  const [selectedTag, setSelectedTag] = useState<string | null>(null);
+
+  useEffect(() => {
+    fetch('/api/tags')
+      .then(res => res.json())
+      .then(data => setTags(data))
+      .catch(error => console.error('Error fetching tags:', error));
+  }, []);
+
+  return (
+    <div className="p-4 bg-gray-50 rounded-lg">
+      <h3 className="text-lg font-semibold mb-4">标签云</h3>
+      <div className="flex flex-wrap gap-2">
+        {tags.map(tag => (
+          <Link
+            key={tag.name}
+            href={`/tags/${tag.name}`}
+            className={`px-3 py-1 rounded-full text-sm ${
+              selectedTag === tag.name
+                ? 'bg-blue-500 text-white'
+                : 'bg-white hover:bg-blue-100'
+            }`}
+            onClick={() => setSelectedTag(tag.name)}
+          >
+            {tag.name} ({tag.count})
+          </Link>
+        ))}
+      </div>
+    </div>
+  );
+}
+```
+
+#### 标签API
+```typescript
+// pages/api/tags.ts
+import { NextApiRequest, NextApiResponse } from 'next';
+import { prisma } from '@/lib/prisma';
+
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
+  if (req.method === 'GET') {
+    try {
+      const tags = await prisma.tag.findMany({
+        include: {
+          _count: {
+            select: { posts: true }
+          }
+        }
+      });
+
+      const formattedTags = tags.map(tag => ({
+        name: tag.name,
+        count: tag._count.posts
+      }));
+
+      res.status(200).json(formattedTags);
+    } catch (error) {
+      res.status(500).json({ message: 'Error fetching tags' });
+    }
+  } else {
+    res.setHeader('Allow', ['GET']);
+    res.status(405).end(`Method ${req.method} Not Allowed`);
+  }
+}
+```
+
+</div>
+
+## 团队协作
+
+### 代码审查
+
+<div className="code-review">
+
+#### 创建Pull Request
+```bash
+# 创建功能分支
+git checkout -b feature/comment-system
+
+# 提交更改
+git add .
+git commit -m "feat: add comment system
+- Add comment component
+- Implement comment API
+- Add authentication check
+- Style comment section"
+
+# 推送到远程
+git push origin feature/comment-system
+```
+
+#### 审查清单
+:::tip 代码审查要点
+1. 代码质量
+   - 遵循项目代码规范
+   - 适当的错误处理
+   - 性能考虑
+
+2. 功能完整性
+   - 所有功能正常工作
+   - 边缘情况处理
+   - 用户体验考虑
+
+3. 安全性
+   - 输入验证
+   - 权限检查
+   - 数据安全
+:::
+
+</div>
+
+### 实时协作
+
+<div className="collaboration">
+
+#### 使用v0的实时编辑功能
+- 同时编辑同一文件
+- 实时查看队友的更改
+- 解决冲突
+
+#### 团队沟通
+```typescript
+// 在代码中添加协作注释
+/**
+ * @todo: 需要添加评论分页功能
+ * @author: Alice
+ * @assignee: Bob
+ * @priority: high
+ */
+```
+
+</div>
+
+## 性能优化
+
+### 代码分割
+
+<div className="code-splitting">
+
+#### 动态导入
+```typescript
+// 动态导入评论组件
+const CommentSection = dynamic(() => import('@/components/Comments'), {
+  loading: () => <CommentSkeleton />,
+  ssr: false
+});
+
+// 动态导��标签云组件
+const TagCloud = dynamic(() => import('@/components/TagCloud'), {
+  loading: () => <TagCloudSkeleton />,
+  ssr: true
+});
+```
+
+#### 路由分割
+```typescript
+// 页面级代码分割
+export default function BlogPost() {
+  const [showComments, setShowComments] = useState(false);
+
+  return (
+    <article>
+      {/* 文章内容 */}
+      <button onClick={() => setShowComments(true)}>
+        显示评论
+      </button>
+      {showComments && <CommentSection />}
+    </article>
+  );
+}
+```
+
+</div>
+
+### 缓存优化
+
+<div className="caching">
+
+#### API缓存
+```typescript
+// lib/cache.ts
+import { Redis } from '@upstash/redis';
+
+const redis = new Redis({
+  url: process.env.REDIS_URL,
+  token: process.env.REDIS_TOKEN,
+});
+
+export async function getCachedData(key: string) {
+  const cached = await redis.get(key);
+  if (cached) return JSON.parse(cached);
+  return null;
+}
+
+export async function setCachedData(key: string, data: any, ttl = 3600) {
+  await redis.setex(key, ttl, JSON.stringify(data));
+}
+```
+
+#### 使用SWR
+```typescript
+// hooks/useComments.ts
+import useSWR from 'swr';
+
+export function useComments(postId: string) {
+  const { data, error, mutate } = useSWR(
+    `/api/comments?postId=${postId}`,
+    fetcher,
+    {
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+    }
+  );
+
+  return {
+    comments: data,
+    isLoading: !error && !data,
+    isError: error,
+    refresh: mutate,
+  };
+}
+```
+
+</div>
+
+export const styles = {
+  preparation: {
+    backgroundColor: '#f6f8fa',
+    padding: '1rem',
+    borderRadius: '8px',
+    marginBottom: '1rem'
+  },
+  codeReview: {
+    borderLeft: '3px solid #1a73e8',
+    paddingLeft: '1rem'
+  },
+  collaboration: {
+    backgroundColor: '#f0f7ff',
+    padding: '1rem',
+    borderRadius: '8px'
+  }
+};
