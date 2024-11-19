@@ -81,6 +81,7 @@ const config = {
           alt: 'AI Programming Logo',
           src: 'img/logo.svg',
         },
+        style: 'dark',
         items: [
           {
             type: 'docSidebar',
@@ -95,7 +96,6 @@ const config = {
             position: 'right',
           },
         ],
-        style: 'dark',
       },
       footer: {
         style: 'dark',
