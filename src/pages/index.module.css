@@ -8,11 +8,20 @@
   text-align: center;
   position: relative;
   overflow: hidden;
+  background: linear-gradient(135deg, var(--ifm-color-primary) 0%, var(--color-secondary) 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  color: var(--color-background);
+  animation: gradientFlow 10s ease infinite;
+  background-size: 200% 200%;
 }
 
 @media screen and (max-width: 996px) {
   .heroBanner {
     padding: 2rem;
+    min-height: 60vh;
   }
 }
 
@@ -20,4 +29,41 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: var(--space-md);
+  margin-top: var(--space-xl);
+  animation: fadeInDown 0.8s var(--animation-timing) 0.4s backwards;
+}
+
+@keyframes gradientFlow {
+  0% {
+    background-position: 0% 50%;
+    background-size: 100% 100%;
+  }
+  50% {
+    background-position: 100% 50%;
+    background-size: 120% 120%;
+  }
+  100% {
+    background-position: 0% 50%;
+    background-size: 100% 100%;
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.heroBanner .hero__title {
+  animation: fadeInDown 0.8s var(--animation-timing) backwards;
+}
+
+.heroBanner .hero__subtitle {
+  animation: fadeInDown 0.8s var(--animation-timing) 0.2s backwards;
 }

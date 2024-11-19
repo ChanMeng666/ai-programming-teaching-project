@@ -76,9 +76,9 @@ const config = {
       // Replace with your project's social card
       image: 'img/docusaurus-social-card.jpg',
       navbar: {
-        title: 'My Site',
+        title: 'AI Programming',
         logo: {
-          alt: 'My Site Logo',
+          alt: 'AI Programming Logo',
           src: 'img/logo.svg',
         },
         items: [
@@ -86,60 +86,69 @@ const config = {
             type: 'docSidebar',
             sidebarId: 'tutorialSidebar',
             position: 'left',
-            label: 'Tutorial',
+            label: '教程',
           },
-          {to: '/blog', label: 'Blog', position: 'left'},
+          {to: '/blog', label: '博客', position: 'left'},
           {
             href: 'https://github.com/facebook/docusaurus',
             label: 'GitHub',
             position: 'right',
           },
         ],
+        style: 'dark',
       },
       footer: {
         style: 'dark',
         links: [
           {
-            title: 'Docs',
+            title: '学习资源',
             items: [
               {
-                label: 'Tutorial',
+                label: '入门教程',
                 to: '/docs/intro',
               },
-            ],
-          },
-          {
-            title: 'Community',
-            items: [
               {
-                label: 'Stack Overflow',
-                href: 'https://stackoverflow.com/questions/tagged/docusaurus',
+                label: '实践案例',
+                to: '/docs/category/tutorial-basics',
               },
               {
-                label: 'Discord',
-                href: 'https://discordapp.com/invite/docusaurus',
-              },
-              {
-                label: 'X',
-                href: 'https://x.com/docusaurus',
+                label: '进阶主题',
+                to: '/docs/category/tutorial-extras',
               },
             ],
           },
           {
-            title: 'More',
+            title: '社区',
             items: [
               {
-                label: 'Blog',
+                label: '技术讨论',
+                href: 'https://github.com/discussions',
+              },
+              {
+                label: '问题反馈',
+                href: 'https://github.com/issues',
+              },
+              {
+                label: '加入我们',
+                href: 'https://github.com',
+              },
+            ],
+          },
+          {
+            title: '更多',
+            items: [
+              {
+                label: '博客',
                 to: '/blog',
               },
               {
                 label: 'GitHub',
-                href: 'https://github.com/facebook/docusaurus',
+                href: 'https://github.com',
               },
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+        copyright: `Copyright © ${new Date().getFullYear()} AI Programming Education. Built with Docusaurus.`,
       },
       prism: {
         theme: prismThemes.github,

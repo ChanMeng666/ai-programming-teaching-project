@@ -1,30 +1,323 @@
 /**
- * Any CSS included here will be global. The classic template
- * bundles Infima by default. Infima is a CSS framework designed to
- * work well for content-centric websites.
+ * 基础样式系统实现
  */
-
-/* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #2e8555;
-  --ifm-color-primary-dark: #29784c;
-  --ifm-color-primary-darker: #277148;
-  --ifm-color-primary-darkest: #205d3b;
-  --ifm-color-primary-light: #33925d;
-  --ifm-color-primary-lighter: #359962;
-  --ifm-color-primary-lightest: #3cad6e;
-  --ifm-code-font-size: 95%;
+  /* 主色系 */
+  --ifm-color-primary: #1a237e;
+  --ifm-color-primary-dark: #172069;
+  --ifm-color-primary-darker: #151e63;
+  --ifm-color-primary-darkest: #111851;
+  --ifm-color-primary-light: #1d2893;
+  --ifm-color-primary-lighter: #1f2a99;
+  --ifm-color-primary-lightest: #232fab;
+
+  /* 次要颜色 */
+  --color-secondary: #4a5fc1;
+  --color-background: #ffffff;
+  --color-text: #121212;
+  --color-light-gray: #f5f6f7;
+  --color-accent: #ef5350;
+
+  /* 字体系统 */
+  --ifm-font-family-base: 'Space Grotesk', system-ui, -apple-system;
+  --ifm-font-family-monospace: 'JetBrains Mono', SFMono-Regular, Monaco;
+  --ifm-font-size-base: 16px;
+  --ifm-heading-font-weight: 600;
+  --ifm-h1-font-size: 2.5rem;
+  --ifm-h2-font-size: 2rem;
+  --ifm-h3-font-size: 1.5rem;
+  
+  /* 间距系统 */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+
+  /* 其他全局变量 */
+  --ifm-code-font-size: 0.9375rem;
+  --ifm-line-height-base: 1.5;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+
+  /* 添加动画变量 */
+  --animation-duration: 0.2s;
+  --animation-timing: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* For readability concerns, you should choose a lighter palette in dark mode. */
+/* 深色模式变量 */
 [data-theme='dark'] {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  --ifm-color-primary: #4a5fc1;
+  --ifm-color-primary-dark: #4255ad;
+  --ifm-color-primary-darker: #3e51a3;
+  --ifm-color-primary-darkest: #334286;
+  --ifm-color-primary-light: #5f71c7;
+  --ifm-color-primary-lighter: #697ac9;
+  --ifm-color-primary-lightest: #8693d4;
+  --color-background: #121212;
+  --color-text: #ffffff;
+  --docusaurus-highlighted-code-line-bg: rgba(255, 255, 255, 0.1);
+}
+
+/* 基础网格系统 */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+}
+
+/* 响应式断点 */
+@media screen and (max-width: 768px) {
+  :root {
+    --ifm-font-size-base: 14px;
+    --ifm-h1-font-size: 2rem;
+    --ifm-h2-font-size: 1.5rem;
+    --ifm-h3-font-size: 1.25rem;
+  }
+}
+
+/* 按钮样式优化 */
+.button {
+  transition: all var(--animation-duration) var(--animation-timing);
+  position: relative;
+  overflow: hidden;
+}
+
+.button--primary {
+  background: var(--ifm-color-primary);
+  border: 2px solid transparent;
+}
+
+.button--primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  background: var(--ifm-color-primary-darker);
+}
+
+/* 导航栏样式优化 */
+.navbar {
+  backdrop-filter: blur(10px);
+  background-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+  transition: background-color var(--animation-duration) var(--animation-timing);
+}
+
+[data-theme='dark'] .navbar {
+  background-color: rgba(18, 18, 18, 0.8);
+}
+
+/* 滚动条样式 */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-light-gray);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-secondary);
+  border-radius: 3px;
+}
+
+/* 页面滚动动画 */
+html {
+  scroll-behavior: smooth;
+}
+
+/* 页脚样式优化 */
+.footer {
+  position: relative;
+  background: var(--ifm-color-primary-darkest);
+  padding-top: var(--space-xl);
+}
+
+.footer::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-accent), var(--color-secondary));
+}
+
+.footer__link-item {
+  transition: color var(--animation-duration) var(--animation-timing);
+}
+
+.footer__link-item:hover {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+/* 文档页面优化 */
+.markdown {
+  --ifm-heading-margin-bottom: var(--space-md);
+}
+
+.markdown h1, .markdown h2, .markdown h3 {
+  color: var(--ifm-color-primary);
+}
+
+.markdown > h2 {
+  border-bottom: 2px solid var(--color-light-gray);
+  padding-bottom: var(--space-sm);
+  margin-top: var(--space-xl);
+}
+
+/* 代码块优化 */
+.prism-code {
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: var(--space-md) 0;
+}
+
+/* 页面过渡动画 */
+.main-wrapper {
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 链接样式优化 */
+.navbar__link:hover,
+.navbar__link--active {
+  position: relative;
+  color: var(--ifm-color-primary);
+}
+
+.navbar__link:hover::after,
+.navbar__link--active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--color-accent);
+  animation: linkUnderline 0.3s var(--animation-timing);
+}
+
+@keyframes linkUnderline {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* 表格样式优化 */
+table {
+  display: table;
+  width: 100%;
+  margin: var(--space-lg) 0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+thead tr {
+  background: var(--ifm-color-primary);
+  color: var(--color-background);
+}
+
+tbody tr:nth-child(even) {
+  background: var(--color-light-gray);
+}
+
+/* 搜索框样式优化 */
+.navbar__search-input {
+  border-radius: 20px;
+  padding: var(--space-xs) var(--space-md);
+  transition: all var(--animation-duration) var(--animation-timing);
+}
+
+.navbar__search-input:focus {
+  box-shadow: 0 0 0 2px var(--color-accent);
+}
+
+/* 移动端优化 */
+@media screen and (max-width: 768px) {
+  .navbar__search-input {
+    width: 100%;
+  }
+  
+  .footer {
+    padding-top: var(--space-lg);
+  }
+  
+  .footer__col {
+    margin-bottom: var(--space-lg);
+  }
+}
+
+/* 文档导航优化 */
+.table-of-contents {
+  padding: var(--space-md);
+  background: var(--color-light-gray);
+  border-radius: 8px;
+  margin-bottom: var(--space-lg);
+}
+
+.table-of-contents:before {
+  content: '目录';
+  display: block;
+  font-weight: bold;
+  margin-bottom: var(--space-sm);
+  color: var(--ifm-color-primary);
+}
+
+.table-of-contents__link {
+  transition: all var(--animation-duration) var(--animation-timing);
+}
+
+.table-of-contents__link:hover {
+  color: var(--color-accent);
+  text-decoration: none;
+  padding-left: var(--space-xs);
+}
+
+.table-of-contents__link--active {
+  color: var(--color-accent);
+  font-weight: bold;
+}
+
+/* 文档页面导航按钮 */
+.pagination-nav__link {
+  border: none;
+  background: var(--color-light-gray);
+  transition: all var(--animation-duration) var(--animation-timing);
+}
+
+.pagination-nav__link:hover {
+  background: var(--ifm-color-primary);
+  color: white;
+}
+
+.pagination-nav__sublabel {
+  color: var(--color-secondary);
+}
+
+/* 代码块标题 */
+.prism-code::before {
+  content: attr(data-language);
+  position: absolute;
+  top: 0;
+  right: var(--space-md);
+  color: var(--color-secondary);
+  font-size: 0.8em;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: var(--space-xs) var(--space-sm);
 }

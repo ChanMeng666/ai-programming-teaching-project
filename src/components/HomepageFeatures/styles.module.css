@@ -1,11 +1,86 @@
 .features {
   display: flex;
   align-items: center;
-  padding: 2rem 0;
+  padding: var(--space-xl) 0;
   width: 100%;
+  background: var(--color-light-gray);
+}
+
+.featureCard {
+  height: 100%;
+  padding: var(--space-lg);
+  border-radius: 8px;
+  background: var(--color-background);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+  margin: var(--space-md);
+  animation: fadeInUp 0.6s var(--animation-timing) backwards;
+}
+
+.featureCard:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.featureImage {
+  text-align: center;
+  padding: var(--space-md) 0;
 }
 
 .featureSvg {
   height: 200px;
   width: 200px;
+  transition: transform 0.3s var(--animation-timing);
+}
+
+.featureCard:hover .featureSvg {
+  transform: scale(1.1);
+}
+
+.featureContent {
+  text-align: center;
+  padding: var(--space-md);
+}
+
+.featureContent h3 {
+  margin-bottom: var(--space-md);
+  color: var(--ifm-color-primary);
+}
+
+/* 响应式调整 */
+@media screen and (max-width: 768px) {
+  .featureSvg {
+    height: 150px;
+    width: 150px;
+  }
+  
+  .featureCard {
+    margin: var(--space-sm);
+    padding: var(--space-md);
+  }
+}
+
+/* 添加入场动画 */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 为每个卡片设置不同的动画延迟 */
+.features .row > div:nth-child(1) .featureCard {
+  animation-delay: 0.1s;
+}
+
+.features .row > div:nth-child(2) .featureCard {
+  animation-delay: 0.2s;
+}
+
+.features .row > div:nth-child(3) .featureCard {
+  animation-delay: 0.3s;
 }

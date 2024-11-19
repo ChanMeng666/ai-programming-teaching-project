@@ -1,0 +1,227 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.95);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  transition: all var(--animation-duration) var(--animation-timing);
+  z-index: 1000;
+}
+
+.navbarScrolled {
+  height: 56px;
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme='dark'] .navbar {
+  background: rgba(18, 18, 18, 0.95);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+[data-theme='dark'] .navbarScrolled {
+  background: rgba(18, 18, 18, 0.98);
+}
+
+.navbarInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.navbarLeft {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.navbarLogo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.navbarLogo img {
+  height: 32px;
+  width: auto;
+}
+
+.navbarCenter {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.navbarItems {
+  display: flex;
+  gap: var(--space-lg);
+}
+
+.navbarItem {
+  position: relative;
+  padding: var(--space-sm) var(--space-md);
+  color: var(--color-text);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--animation-duration) var(--animation-timing);
+}
+
+.navbarItem:hover {
+  color: var(--color-accent);
+}
+
+.navbarDropdown {
+  position: relative;
+}
+
+.dropdownContent {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(8px);
+  background: var(--color-background);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: var(--space-sm) 0;
+  min-width: 180px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s var(--animation-timing);
+}
+
+.navbarDropdown:hover .dropdownContent {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+.dropdownContent a {
+  display: block;
+  padding: var(--space-sm) var(--space-lg);
+  color: var(--color-text);
+  font-weight: 500;
+  transition: all var(--animation-duration) var(--animation-timing);
+}
+
+.dropdownContent a:hover {
+  background: var(--color-light-gray);
+  color: var(--color-accent);
+}
+
+.navbarRight {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.navbarSearch {
+  position: relative;
+}
+
+.navbarSearch input {
+  padding: var(--space-xs) var(--space-xl) var(--space-xs) var(--space-md);
+  border: 1px solid var(--color-light-gray);
+  border-radius: 20px;
+  background: transparent;
+  width: 200px;
+  transition: all var(--animation-duration) var(--animation-timing);
+  color: var(--color-text);
+  font-weight: 500;
+}
+
+.navbarSearch input:focus {
+  width: 300px;
+  border-color: var(--color-accent);
+  outline: none;
+}
+
+.searchIcon {
+  position: absolute;
+  right: var(--space-sm);
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  fill: var(--color-secondary);
+}
+
+.githubLink {
+  display: flex;
+  align-items: center;
+  padding: var(--space-xs);
+  border-radius: 50%;
+  transition: all var(--animation-duration) var(--animation-timing);
+}
+
+.githubLink svg {
+  width: 24px;
+  height: 24px;
+  fill: var(--color-text);
+}
+
+.githubLink:hover {
+  background: var(--color-light-gray);
+  transform: translateY(-2px);
+}
+
+.navbarBurger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 24px;
+  height: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.navbarBurger span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: var(--color-text);
+  transition: all 0.3s var(--animation-timing);
+}
+
+.navbarBurgerActive span:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+}
+
+.navbarBurgerActive span:nth-child(2) {
+  opacity: 0;
+}
+
+.navbarBurgerActive span:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
+}
+
+@media screen and (max-width: 996px) {
+  .navbarCenter {
+    display: none;
+  }
+  
+  .navbarSearch input {
+    width: 150px;
+  }
+  
+  .navbarSearch input:focus {
+    width: 200px;
+  }
+  
+  .navbarBurger {
+    display: flex;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .navbarSearch {
+    display: none;
+  }
+} 
