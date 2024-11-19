@@ -1,0 +1,243 @@
+---
+slug: design-system-guide
+title: 设计系统：AI编程教育平台指南
+authors: [chanmeng]
+tags: [design, UI-UX, documentation]
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+{/* 创意样式块 */}
+export const ColorBox = ({color, name}) => (
+  <div style={{
+    backgroundColor: color,
+    width: '100px',
+    height: '100px',
+    display: 'inline-block',
+    margin: '10px',
+    borderRadius: '4px',
+    textAlign: 'center',
+    color: ['#ffffff', '#f5f6f7'].includes(color) ? '#121212' : 'white',
+    padding: '8px'
+  }}>
+    <div>{name}</div>
+    <div>{color}</div>
+  </div>
+);
+
+# 设计系统：AI编程教育平台
+
+## 设计理念
+受极简几何艺术家的启发，我们的设计系统强调：
+- 清晰的线条和基本几何形状（方形、圆形、三角形）
+- 有限但对比鲜明的配色方案
+- 基于网格的布局
+- 将负空间作为设计元素
+- 视觉元素的系统性重复
+- 注重功能性和可读性
+
+{/* truncate */}
+
+## 色彩系统
+
+### 主色
+<div style={{display: 'flex', flexWrap: 'wrap', gap: '10px'}}>
+  <ColorBox color="#1a237e" name="深海军蓝" />
+  <ColorBox color="#ffffff" name="纯白" />
+  <ColorBox color="#121212" name="几何黑" />
+</div>
+
+### 辅助色
+<div style={{display: 'flex', flexWrap: 'wrap', gap: '10px'}}>
+  <ColorBox color="#4a5fc1" name="柔和蓝" />
+  <ColorBox color="#f5f6f7" name="浅灰" />
+  <ColorBox color="#ef5350" name="强调红" />
+</div>
+
+## 字体系统
+
+<Tabs>
+  <TabItem value="base" label="基础字体">
+    ```css
+    --ifm-font-family-base: 'Space Grotesk', system-ui, -apple-system;
+    ```
+  </TabItem>
+  <TabItem value="mono" label="等宽字体">
+    ```css
+    --ifm-font-family-monospace: 'JetBrains Mono', SFMono-Regular, Monaco;
+    ```
+  </TabItem>
+</Tabs>
+
+### 字体大小
+- 标题:
+  - h1: 2.5rem (40px)
+  - h2: 2rem (32px)
+  - h3: 1.5rem (24px)
+- 正文: 1rem (16px)
+- 代码: 0.9375rem (15px)
+
+## 布局指南
+
+### 网格系统
+- 12列网格
+- 槽宽: 24px
+- 最大内容宽度: 1200px
+- 响应式断点:
+  - 移动端: 320px
+  - 平板: 768px
+  - 桌面: 1024px
+
+### 间距比例
+```css
+--space-xs: 0.25rem;  /* 4px */
+--space-sm: 0.5rem;   /* 8px */
+--space-md: 1rem;     /* 16px */
+--space-lg: 1.5rem;   /* 24px */
+--space-xl: 2rem;     /* 32px */
+```
+
+## 组件设计
+
+### 导航栏
+- 固定头部与几何logo
+- 桌面端水平菜单
+- 移动端汉堡菜单
+- 使用几何形状作为激活状态指示器
+
+### Hero区块
+```css
+.hero {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+  min-height: 80vh;
+}
+```
+
+### 代码块
+- 深色背景: `#1e1e1e`
+- 受几何图案启发的语法高亮
+- 圆角: 4px
+- 内边距: 1.5rem
+
+### 卡片
+```css
+.card {
+  border: none;
+  border-radius: 4px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+```
+
+## 实现指南
+
+### 1. 更新 docusaurus.config.js
+```javascript
+module.exports = {
+  themeConfig: {
+    navbar: {
+      style: 'dark',
+      logo: {
+        alt: 'Site Logo',
+        src: 'img/logo.svg',
+      },
+      items: [
+        // 导航项
+      ],
+    },
+    prism: {
+      theme: require('prism-react-renderer/themes/nightOwl'),
+    },
+  },
+};
+```
+
+### 2. 自定义CSS变量
+在 `src/css/custom.css` 中:
+```css
+:root {
+  --ifm-color-primary: #1a237e;
+  --ifm-color-primary-dark: #172069;
+  --ifm-color-primary-darker: #151e63;
+  --ifm-color-primary-darkest: #111851;
+  --ifm-color-primary-light: #1d2893;
+  --ifm-color-primary-lighter: #1f2a99;
+  --ifm-color-primary-lightest: #232fab;
+  
+  --ifm-code-font-size: 0.9375rem;
+  --ifm-font-size-base: 16px;
+  --ifm-line-height-base: 1.5;
+  --ifm-spacing-horizontal: var(--space-md);
+}
+```
+
+### 3. 首页结构
+在 `src/pages/index.js` 中:
+```javascript
+import React from 'react';
+import Layout from '@theme/Layout';
+import Link from '@docusaurus/Link';
+
+export default function Home() {
+  return (
+    <Layout
+      title="AI Programming Education"
+      description="Learn AI programming through collaborative examples">
+      <header className="hero">
+        <div className="container">
+          <h1 className="hero__title">Master AI Programming</h1>
+          <p className="hero__subtitle">
+            Through collaborative learning and practical examples
+          </p>
+          <div className="buttons">
+            <Link className="button button--primary button--lg">
+              Get Started
+            </Link>
+          </div>
+        </div>
+      </header>
+      
+      {/* 特性部分 */}
+      <main>
+        <section className="features">
+          <div className="container">
+            {/* 特性卡片 */}
+          </div>
+        </section>
+      </main>
+    </Layout>
+  );
+}
+```
+
+## 动画指南
+- 使用细微的过渡效果 (0.2-0.3s)
+- 倾向于使用transform而非opacity变化
+- 实现几何展示动画
+- 保持交互流畅且有目的性
+
+## 响应式设计
+- 移动优先方法
+- 流式排版
+- 可维护的网格系统
+- 在断点处进行自适应布局更改
+
+## 无障碍设计
+- 符合WCAG 2.1 AA标准
+- 高对比度
+- 清晰的焦点状态
+- 语义化HTML结构
+- 适配屏幕阅读器
+
+## 性能优化
+- 图片优化
+- 实现懒加载
+- 最小化CSS/JS包
+- 尽可能使用系统字体
+- 缓存静态资源 

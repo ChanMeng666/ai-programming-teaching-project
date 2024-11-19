@@ -17,3 +17,18 @@ hola:
   label: Hola
   permalink: /hola
   description: Hola tag description
+
+design:
+  label: 设计
+  permalink: /tags/design
+  description: 用户界面和用户体验设计相关的文章
+  
+UI-UX:
+  label: UI/UX
+  permalink: /tags/ui-ux
+  description: 用户界面和用户体验设计的最佳实践和指南
+  
+documentation:
+  label: 文档
+  permalink: /tags/documentation
+  description: 技术文档、设计规范和指南文档
