@@ -610,13 +610,31 @@ h3:hover .hash-link {
 
 /* 作者头像样式 */
 .avatar {
-  border-radius: 50%;
-  overflow: hidden;
+  border-radius: 0;
+  overflow: visible;
   transition: transform var(--animation-duration) var(--animation-timing);
 }
 
+.avatar__photo {
+  border-radius: 0;
+}
+
 .avatar:hover {
-  transform: scale(1.1);
+  transform: scale(1.05);
+}
+
+/* 作者信息容器样式优化 */
+.avatar__intro {
+  padding-left: var(--space-sm);
+}
+
+.avatar__name {
+  font-weight: 600;
+  color: var(--ifm-color-primary);
+}
+
+[data-theme='dark'] .avatar__name {
+  color: var(--ifm-color-primary-lighter);
 }
 
 /* 代码块复制按钮样式 */
