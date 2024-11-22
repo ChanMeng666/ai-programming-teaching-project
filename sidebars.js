@@ -31,6 +31,17 @@ const sidebars = {
     },
     {
       type: 'category',
+      label: '教程指南',
+      link: {
+        type: 'doc',
+        id: 'tutorials/index'
+      },
+      items: [
+        'tutorials/docusaurus-tutorial',
+      ],
+    },
+    {
+      type: 'category',
       label: '开发工具',
       link: {
         type: 'doc',

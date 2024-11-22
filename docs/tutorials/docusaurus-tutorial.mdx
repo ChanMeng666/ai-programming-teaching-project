@@ -1,0 +1,209 @@
+---
+sidebar_position: 2
+title: Docusaurus网站开发教程
+description: 使用Cursor和AI助手开发Docusaurus文档网站，并部署到Vercel
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import ThemedImage from '@theme/ThemedImage';
+
+:::tip 🎯 教程目标
+通过这份教程，你将学会：
+- 使用Cursor IDE搭建Docusaurus项目
+- 利用AI助手进行开发
+- 将项目部署到Vercel平台
+:::
+
+## 🎬 准备工作
+
+在开始之前，请确保你已经安装好以下工具：
+
+<div className="tool-grid">
+
+- [x] [Cursor IDE](https://cursor.sh)
+- [x] [GitHub Desktop](https://desktop.github.com)
+- [x] [Node.js](https://nodejs.org) (版本 >= 14)
+- [x] 一个 [GitHub](https://github.com) 账号
+- [x] 一个 [Vercel](https://vercel.com) 账号
+
+</div>
+
+## 🌟 第一步：创建Docusaurus项目
+
+<Tabs>
+  <TabItem value="step1" label="打开Cursor" default>
+    ```bash
+    # 1. 打开你想要创建项目的父级目录
+    # 2. 使用快捷键打开终端
+    Ctrl + Shift + ~
+    ```
+  </TabItem>
+  <TabItem value="step2" label="创建项目">
+    ```bash
+    # 执行创建命令
+    npx create-docusaurus@latest my-website classic
+    ```
+  </TabItem>
+  <TabItem value="step3" label="打开项目">
+    ```bash
+    # 进入项目目录
+    cd my-website
+    
+    # 启动开发服务器
+    npm start
+    ```
+  </TabItem>
+</Tabs>
+
+:::info 💡 小贴士
+创建过程中，如果遇到选项询问，可以直接按回车选择默认值。
+:::
+
+## 🔗 第二步：GitHub仓库配置
+
+1. 打开 GitHub Desktop
+2. 点击 `File -> New Repository`
+3. 填写仓库信息：
+   ```yaml
+   Name: my-website
+   Description: My Docusaurus Documentation Site
+   Local Path: [选择你的项目目录]
+   ```
+4. 点击 "Create Repository"
+5. 完成首次提交：
+   ```markdown
+   Commit Title: Initial commit
+   Description: Initialize Docusaurus project
+   ```
+
+## 🚀 第三步：部署到Vercel
+
+1. 登录 [Vercel](https://vercel.com)
+2. 点击 "New Project"
+3. 导入你刚创建的GitHub仓库
+4. 保持默认配置，点击 "Deploy"
+
+:::success 🎉 部署成功
+现在你的网站已经上线了！Vercel会自动为你生成一个域名，格式如：
+`https://my-website-xxx.vercel.app`
+:::
+
+## 🤖 第四步：使用Cursor的AI助手
+
+<div className="command-box">
+
+### 打开AI助手
+按 `Ctrl + I` 呼出Composer面板
+
+### 常用提示语
+```markdown
+- "帮我优化这段代码"
+- "如何实现XXX功能"
+- "解释这段代码的作用"
+```
+
+</div>
+
+## 📝 开发工作流
+
+```mermaid
+graph LR
+    A[编写代码] --> B[本地测试]
+    B --> C[提交到GitHub]
+    C --> D[Vercel自动部署]
+    D --> A
+```
+
+## 🎯 最佳实践
+
+1. **频繁提交代码**
+   ```bash
+   # 每完成一个功能就提交
+   git add .
+   git commit -m "feature: add new functionality"
+   git push
+   ```
+
+2. **实时检查部署状态**
+   - 在Vercel面板中监控部署进度
+   - 检查部署日志排查问题
+
+3. **善用AI助手**
+   ```javascript
+   // 示例：让AI助手帮你优化代码
+   // 原代码
+   function hello() {
+     console.log("Hello");
+   }
+   
+   // AI优化后
+   const hello = () => {
+     console.log("Hello, World! 👋");
+   };
+   ```
+
+## 🛠️ 常见问题解决
+
+<details>
+<summary>❓ 部署失败怎么办？</summary>
+
+1. 检查 `package.json` 中的脚本配置
+2. 查看Vercel的构建日志
+3. 确保所有依赖都已正确安装
+
+</details>
+
+<details>
+<summary>❓ 如何自定义域名？</summary>
+
+1. 在Vercel项目设置中添加域名
+2. 配置DNS记录
+3. 等待DNS生效
+
+</details>
+
+:::warning ⚠️ 注意事项
+- 确保 Node.js 版本兼容
+- 定期更新依赖包
+- 保持代码规范统一
+:::
+
+## 🎉 结语
+
+恭喜你！现在你已经掌握了使用Cursor开发Docusaurus网站并部署到Vercel的完整流程。希望这个教程对你有帮助！
+
+<div className="ending-message">
+  
+### 🌈 接下来可以...
+
+- 自定义网站主题
+- 添加更多内容
+- 优化SEO设置
+- 分享你的作品！
+
+</div>
+
+export const styles = `
+.tool-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.command-box {
+  background: #f6f8fa;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 2rem 0;
+}
+
+.ending-message {
+  background: linear-gradient(to right, #00b4db, #0083b0);
+  color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  margin-top: 3rem;
+}
+`; 
