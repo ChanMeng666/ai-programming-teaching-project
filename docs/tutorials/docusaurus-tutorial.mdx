@@ -34,7 +34,7 @@ import ThemedImage from '@theme/ThemedImage';
 <Tabs>
   <TabItem value="step1" label="打开Cursor" default>
     ```bash
-    # 1. 打开你想要创建项目的父级目录
+    # 1. 打开你想要创建项目的母级目录
     # 2. 使用快捷键打开终端
     Ctrl + Shift + ~
     ```
@@ -108,7 +108,10 @@ import ThemedImage from '@theme/ThemedImage';
 ## 📝 开发工作流
 
 ```mermaid
-graph LR
+---
+title: 开发工作流程
+---
+flowchart LR
     A[编写代码] --> B[本地测试]
     B --> C[提交到GitHub]
     C --> D[Vercel自动部署]
