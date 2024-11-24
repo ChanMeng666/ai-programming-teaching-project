@@ -7,6 +7,7 @@ description: 使用Cursor和AI助手开发Docusaurus文档网站，并部署到V
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import ThemedImage from '@theme/ThemedImage';
+import ReactPlayer from 'react-player';
 
 :::tip 🎯 教程目标
 通过这份教程，你将学会：
@@ -14,6 +15,85 @@ import ThemedImage from '@theme/ThemedImage';
 - 利用AI助手进行开发
 - 将项目部署到Vercel平台
 :::
+
+## 📺 教学视频系列
+
+<div className="video-description">
+  <h3>🎥 观看完整教程视频</h3>
+  <p>这个系列视频将分步骤指导你完成从项目创建到部署的整个过程。建议按顺序观看。</p>
+</div>
+
+<div className="video-grid">
+  <div className="video-card">
+    <h4>第一部分：项目初始化</h4>
+    <div className="video-wrapper">
+      <ReactPlayer
+        url="/20241123_meeting_video/meeting_video1.mp4"
+        controls={true}
+        width="100%"
+        height="100%"
+        style={{ aspectRatio: '16/9' }}
+      />
+    </div>
+    <p className="video-caption">创建项目并进行基础配置</p>
+  </div>
+
+  <div className="video-card">
+    <h4>第二部分：内容编写</h4>
+    <div className="video-wrapper">
+      <ReactPlayer
+        url="/20241123_meeting_video/meeting_video2.mp4"
+        controls={true}
+        width="100%"
+        height="100%"
+        style={{ aspectRatio: '16/9' }}
+      />
+    </div>
+    <p className="video-caption">学习如何编写和组织文档内容</p>
+  </div>
+
+  <div className="video-card">
+    <h4>第三部分：主题定制</h4>
+    <div className="video-wrapper">
+      <ReactPlayer
+        url="/20241123_meeting_video/meeting_video3.mp4"
+        controls={true}
+        width="100%"
+        height="100%"
+        style={{ aspectRatio: '16/9' }}
+      />
+    </div>
+    <p className="video-caption">自定义网站主题和样式</p>
+  </div>
+
+  <div className="video-card">
+    <h4>第四部分（上）：部署准备</h4>
+    <div className="video-wrapper">
+      <ReactPlayer
+        url="/20241123_meeting_video/meeting_video4_1.mp4"
+        controls={true}
+        width="100%"
+        height="100%"
+        style={{ aspectRatio: '16/9' }}
+      />
+    </div>
+    <p className="video-caption">部署前的准备工作和配置</p>
+  </div>
+
+  <div className="video-card">
+    <h4>第四部分（下）：Vercel部署</h4>
+    <div className="video-wrapper">
+      <ReactPlayer
+        url="/20241123_meeting_video/meeting_video4_2_compressed.mp4"
+        controls={true}
+        width="100%"
+        height="100%"
+        style={{ aspectRatio: '16/9' }}
+      />
+    </div>
+    <p className="video-caption">在 Vercel 平台上完成部署</p>
+  </div>
+</div>
 
 ## 🎬 准备工作
 
@@ -208,5 +288,69 @@ export const styles = `
   padding: 2rem;
   border-radius: 8px;
   margin-top: 3rem;
+}
+
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.video-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.video-card:hover {
+  transform: translateY(-5px);
+}
+
+.video-card h4 {
+  margin: 0 0 1rem 0;
+  color: #2e8555;
+  font-size: 1.2rem;
+}
+
+.video-wrapper {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.video-caption {
+  margin: 0.5rem 0 0 0;
+  color: #666;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.video-description {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  border-left: 4px solid #2e8555;
+}
+
+.video-description h3 {
+  margin: 0 0 0.5rem 0;
+  color: #2e8555;
+}
+
+.video-description p {
+  margin: 0;
+  color: #666;
+}
+
+@media (max-width: 768px) {
+  .video-grid {
+    grid-template-columns: 1fr;
+  }
 }
 `; 

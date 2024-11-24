@@ -1,0 +1,205 @@
+---
+slug: tencent-meeting-recording-download
+title: 腾讯会议录屏下载完整指南
+authors: [chanmeng]
+tags: [教程, 腾讯会议, 视频下载]
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# 腾讯会议录屏下载教程
+
+:::tip 📝 前言
+这份教程将教你如何下载腾讯会议的录屏视频。整个过程不需要编程知识，只需要按照步骤操作即可。
+:::
+
+{/* truncate */}
+
+## 🔧 准备工作
+
+<div className="prerequisite-box">
+
+你需要准备：
+- 💻 电脑（Windows系统）
+- 🌐 谷歌浏览器（Chrome）
+- ⚙️ Git Bash 软件（后面会教你安装）
+
+</div>
+
+## 📝 详细步骤
+
+### 第一步：安装必要软件
+
+<div className="step-box">
+
+1. 如果你还没有安装 Git Bash：
+   - 访问官网：[Git 下载页面](https://git-scm.com/downloads)
+   - 点击 "Download for Windows"
+   - 下载完成后双击安装包
+   - 一路点击"下一步"使用默认设置完成安装
+
+</div>
+
+### 第二步：获取视频下载信息
+
+<div className="steps-container">
+
+1. 用谷歌浏览器打开腾讯会议录屏链接
+2. 点击播放视频，等待视频开始播放
+3. 在键盘上按 `F12` 键（某些笔记本可能需要同时按 `Fn + F12`）
+4. 在开发者工具窗口顶部找到并点击 "Network"（网络）标签
+5. 在 Network 下面找到并点击 "Media"（媒体）选项
+6. 刷新网页，重新开始播放视频
+7. 等待几秒，找到以 `.mp4` 结尾的文件
+8. 右键点击这个 `.mp4` 文件
+9. 选择 "Copy" → "Copy as cURL(bash)"
+
+</div>
+
+### 第三步：修改下载命令
+
+<Tabs>
+  <TabItem value="before" label="修改前" default>
+    ```bash
+    curl 'https://example.com/video.mp4' \
+    -H 'range: bytes=14200808-314114094' \
+    -H 'if-range: "17c5ccf6d75f9bccce2a71f5a32dbea4-3"' \
+    -H 'accept: */*' \
+    ```
+  </TabItem>
+  <TabItem value="after" label="修改后">
+    ```bash
+    curl 'https://example.com/video.mp4' \
+    -H 'accept: */*' \
+    --output /d/meeting_video.mp4
+    ```
+  </TabItem>
+</Tabs>
+
+:::warning 重要提示
+必须删除包含 `range:` 和 `if-range:` 的行，这是确保下载完整视频的关键步骤！
+:::
+
+### 第四步：下载视频
+
+1. 打开 Git Bash（从开始菜单找到）
+2. 粘贴修改好的命令
+3. 按回车键执行
+4. 等待下载完成
+
+## ❓ 常见问题解答
+
+<details>
+<summary>1. 为什么我下载的视频不完整？</summary>
+
+- 最可能的原因是没有删除 range 字段
+- 请回到第三步，确保删除了所有 range 相关的行
+- 重新获取下载命令，从头操作一遍
+
+</details>
+
+<details>
+<summary>2. 找不到 range 字段怎么办？</summary>
+
+- 仔细查看复制的命令中是否包含 `range:` 或 `if-range:`
+- 如果确实找不到，说明可能不需要删除，直接添加保存路径即可
+- 如果不确定，可以把命令发给懂技术的朋友帮忙检查
+
+</details>
+
+<details>
+<summary>3. 想更改保存位置怎么办？</summary>
+
+可以修改 `--output` 参数：
+```bash
+# D盘根目录
+--output /d/视频名称.mp4
+
+# D盘的 Videos 文件夹
+--output /d/Videos/视频名称.mp4
+
+# 桌面
+--output /c/Users/你的用户名/Desktop/视频名称.mp4
+```
+
+</details>
+
+## ⚠️ 注意事项
+
+<div className="notice-box">
+
+- 确保有足够的磁盘空间
+- 下载过程中不要关闭 Git Bash
+- 保持网络连接稳定
+- 下载完成前不要关机或休眠
+- 如果下载速度很慢，可以尝试重新获取下载命令
+
+</div>
+
+## 🎯 进阶提示
+
+<div className="tips-grid">
+
+- 📁 创建专门的文件夹存放下载的视频
+- 📝 给视频文件起一个有意义的名字
+- ✅ 下载完成后确认视频是否可以正常播放
+- 💾 及时备份重要的视频文件
+
+</div>
+
+## 📌 最后提醒
+
+:::caution 重要
+1. 请尊重视频版权，不要随意传播下载的视频
+2. 下载的视频仅供个人学习使用
+3. 重要的视频建议及时备份
+4. 如果遇到问题，可以从第一步重新操作
+5. 特别强调：别忘了删除 range 字段，这是最关键的一步！
+:::
+
+export const styles = `
+.prerequisite-box {
+  background: #f8f9fa;
+  padding: 1rem;
+  border-radius: 8px;
+  margin: 1rem 0;
+  border-left: 4px solid #0366d6;
+}
+
+.step-box {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin: 1rem 0;
+}
+
+.steps-container {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin: 1rem 0;
+}
+
+.notice-box {
+  background: #fff3cd;
+  padding: 1rem;
+  border-radius: 8px;
+  margin: 1rem 0;
+  border-left: 4px solid #ffc107;
+}
+
+.tips-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.tips-grid > * {
+  background: #e9ecef;
+  padding: 1rem;
+  border-radius: 8px;
+}
+`; 

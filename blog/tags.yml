@@ -32,3 +32,18 @@ documentation:
   label: 文档
   permalink: /tags/documentation
   description: 技术文档、设计规范和指南文档
+
+教程:
+  label: 教程
+  permalink: /tags/tutorial
+  description: 各类实用教程和指南
+
+腾讯会议:
+  label: 腾讯会议
+  permalink: /tags/tencent-meeting
+  description: 关于腾讯会议的使用技巧和教程
+
+视频下载:
+  label: 视频下载
+  permalink: /tags/video-download
+  description: 视频下载相关的教程和工具使用指南
