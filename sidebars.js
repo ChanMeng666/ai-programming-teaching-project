@@ -38,6 +38,8 @@ const sidebars = {
       },
       items: [
         'tutorials/docusaurus-tutorial',
+        'tutorials/sasa-project',
+        'tutorials/stella-project',
       ],
     },
     {
