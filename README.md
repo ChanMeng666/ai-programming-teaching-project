@@ -83,3 +83,10 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## Acknowledgments
 
 Built with [Docusaurus](https://docusaurus.io/) and deployed on [Vercel](https://vercel.com/)
+
+## Author
+
+**Chan Meng**
+
+- LinkedIn: [chanmeng666](https://www.linkedin.com/in/chanmeng666/)
+- GitHub: [ChanMeng666](https://github.com/ChanMeng666)
