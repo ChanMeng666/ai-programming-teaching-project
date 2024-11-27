@@ -8,8 +8,6 @@
   text-align: center;
   position: relative;
   overflow: hidden;
-  background: linear-gradient(135deg, var(--ifm-color-primary) 0%, var(--color-secondary) 100%);
-  clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
   min-height: 80vh;
   display: flex;
   align-items: center;

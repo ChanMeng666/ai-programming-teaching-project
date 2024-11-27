@@ -920,3 +920,83 @@ html:not([data-theme='dark']) .clean-btn svg path {
 [data-theme='dark'] .footer-link:hover {
   color: #ef5350;
 }
+
+
+/* 波浪效果样式 */
+.waves {
+  position: absolute;
+  width: 100%;
+  height: 15vh;
+  bottom: 0;
+  left: 0;
+  min-height: 100px;
+  max-height: 150px;
+}
+
+header.hero {
+  padding: 4rem 0 16vh 0;
+  background: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
+}
+
+[data-theme='dark'] header.hero {
+  background: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
+}
+
+header.hero .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* 波浪动画 */
+.parallax > use {
+  animation: move-forever 25s cubic-bezier(.55,.5,.45,.5) infinite;
+}
+
+.parallax > use:nth-child(1) {
+  animation-delay: -2s;
+  animation-duration: 7s;
+  fill: rgba(255, 255, 255, 0.7);
+}
+
+[data-theme='dark'] .parallax > use:nth-child(1) {
+  fill: rgba(20, 20, 24, 0.7);
+}
+
+.parallax > use:nth-child(2) {
+  animation-delay: -3s;
+  animation-duration: 10s;
+  fill: rgba(255, 255, 255, 0.5);
+}
+
+[data-theme='dark'] .parallax > use:nth-child(2) {
+  fill: rgba(20, 20, 24, 0.5);
+}
+
+.parallax > use:nth-child(3) {
+  animation-delay: -4s;
+  animation-duration: 13s;
+  fill: rgba(255, 255, 255, 0.3);
+}
+
+[data-theme='dark'] .parallax > use:nth-child(3) {
+  fill: rgba(20, 20, 24, 0.3);
+}
+
+.parallax > use:nth-child(4) {
+  animation-delay: -5s;
+  animation-duration: 20s;
+  fill: rgba(255, 255, 255, 1.0);
+}
+
+[data-theme='dark'] .parallax > use:nth-child(4) {
+  fill: rgba(20, 20, 24, 1.0);
+}
+
+@keyframes move-forever {
+  0% {
+    transform: translate3d(-90px,0,0);
+  }
+  100% { 
+    transform: translate3d(85px,0,0);
+  }
+}
