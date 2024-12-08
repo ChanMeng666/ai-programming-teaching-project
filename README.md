@@ -1,29 +1,44 @@
-# AI Programming Teaching Project
+<div align="center">
+ <h1>🤖 AI Programming Education Platform</h1>
+ <a href="https://chanmeng.live"><img src="https://img.shields.io/badge/website-chanmeng.live-blue?style=flat" alt="Website" /></a>
+ <img src="https://img.shields.io/badge/docusaurus-v3.6.1-blue?style=flat" />
+ <img src="https://img.shields.io/badge/react-%5E18.0.0-blue?style=flat" />
+ <img src="https://img.shields.io/badge/license-MIT-green?style=flat" />
+ <img src="https://img.shields.io/badge/PRs-welcome-brightgreen?style=flat" />
+</div>
 
-A modern educational platform built with Docusaurus to teach AI-assisted programming and development practices. This project aims to help developers learn how to effectively use AI tools and improve their development workflow.
+A modern educational platform that teaches AI-assisted programming through comprehensive tutorials, hands-on projects, and best practices. Built with Docusaurus and designed to help developers effectively use AI tools to enhance their development workflow.
 
-## Features
+![Screenshot of the platform]
 
-- 📚 Comprehensive learning modules covering basics to advanced topics
-- 🛠️ Practical guides for modern development tools (Cursor, v0, Vercel)
-- 💻 Hands-on project examples and exercises
-- 🌐 Bilingual support (English and Chinese)
-- 🎨 Modern, responsive UI with dark mode support
-- ⚡ Fast, optimized performance
+# ✨ Features
 
-## Core Topics
+### 📚 Comprehensive Learning Path
+- Step-by-step tutorials from basics to advanced topics
+- Hands-on exercises and real-world projects
+- Best practices for AI-assisted development
 
-- AI Communication and Prompt Engineering
-- Markdown and Documentation Best Practices
-- Development Tools and Workflows
-- Project Planning and Implementation
-- Deployment and Maintenance
+### 🛠️ Modern Development Tools
+- Integration guides for Cursor, v0, and Vercel
+- Workflow optimization techniques
+- Project planning and implementation strategies
 
-## Getting Started
+### 💻 Interactive Learning Experience
+- Bilingual support (English & Chinese)
+- Modern, responsive UI with dark mode
+- Rich multimedia content and examples
+
+### 🌟 Key Topics Covered
+- AI Communication & Prompt Engineering
+- Markdown & Documentation Best Practices
+- Development Tools & Workflows
+- Project Planning & Implementation
+- Deployment & Maintenance
+
+## 🚀 Getting Started
 
 ### Prerequisites
-
-- Node.js >=18.0
+- Node.js ≥ 18.0
 - Git
 - GitHub account
 
@@ -48,13 +63,19 @@ npm start
 The site will be available at `http://localhost:3000`
 
 ### Building for Production
-
 ```bash
 npm run build
 ```
 
-## Project Structure
+## 🔧 Tech Stack
 
+![Docusaurus](https://img.shields.io/badge/Docusaurus-3.6.1-blue?style=for-the-badge&logo=docusaurus)
+![React](https://img.shields.io/badge/React-18.0.0-blue?style=for-the-badge&logo=react)
+![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-yellow?style=for-the-badge&logo=javascript)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3)
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+
+## 📁 Project Structure
 ```
 project-root/
 ├── docs/             # Documentation content
@@ -67,26 +88,23 @@ project-root/
 └── docusaurus.config.js  # Main configuration
 ```
 
-## Contributing
+## 🤝 Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
 
-## License
+Please make sure to update tests as appropriate.
+
+## 📝 License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-## Contact
-
-- GitHub: [@ChanMeng666](https://github.com/ChanMeng666)
-- Website: [chanmeng.live](https://chanmeng.live)
-
-## Acknowledgments
-
-Built with [Docusaurus](https://docusaurus.io/) and deployed on [Vercel](https://vercel.com/)
-
-## Author
+## 📧 Contact
 
 **Chan Meng**
+- Website: [chanmeng.live](https://chanmeng.live)
+- GitHub: [@ChanMeng666](https://github.com/ChanMeng666)
+- LinkedIn: [chanmeng666](https://www.linkedin.com/in/chanmeng666)
 
-- LinkedIn: [chanmeng666](https://www.linkedin.com/in/chanmeng666/)
-- GitHub: [ChanMeng666](https://github.com/ChanMeng666)
+## 🙏 Acknowledgments
+
+Built with [Docusaurus](https://docusaurus.io/) and deployed on [Vercel](https://vercel.com)
