@@ -12,7 +12,11 @@
 
 A modern educational platform that teaches AI-assisted programming through comprehensive tutorials, hands-on projects, and best practices. Built with Docusaurus and designed to help developers effectively use AI tools to enhance their development workflow.
 
-![Screenshot of the platform]
+![screencapture-ai-programming-teaching-project-vercel-app-2024-12-08-17_57_21](https://github.com/user-attachments/assets/1016e556-6990-476c-9c34-e57677db97ca)
+
+![screencapture-ai-programming-teaching-project-vercel-app-docs-tutorials-docusaurus-tutorial-2024-12-08-17_57_54](https://github.com/user-attachments/assets/d4728ea6-d372-4305-b431-7e07ac476159)
+
+![screencapture-ai-programming-teaching-project-vercel-app-blog-2024-12-08-17_58_15](https://github.com/user-attachments/assets/c7bf0ec3-af13-40f1-8e66-69808696a24c)
 
 # ✨ Features
 
