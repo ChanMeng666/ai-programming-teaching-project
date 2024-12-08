@@ -1,5 +1,8 @@
 <div align="center">
- <h1>🤖 AI Programming Education Platform</h1>
+  <h1>
+    <img src="/static/img/logo.svg" alt="AI Programming Education Platform Logo" width="80px"><br/>
+    AI Programming Education Platform
+  </h1>
  <a href="https://chanmeng.live"><img src="https://img.shields.io/badge/website-chanmeng.live-blue?style=flat" alt="Website" /></a>
  <img src="https://img.shields.io/badge/docusaurus-v3.6.1-blue?style=flat" />
  <img src="https://img.shields.io/badge/react-%5E18.0.0-blue?style=flat" />
