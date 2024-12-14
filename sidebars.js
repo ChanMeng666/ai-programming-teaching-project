@@ -31,7 +31,7 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: '教程指南',
+      label: '教程',
       link: {
         type: 'doc',
         id: 'tutorials/index'
@@ -40,6 +40,21 @@ const sidebars = {
         'tutorials/docusaurus-tutorial',
         'tutorials/sasa-project',
         'tutorials/stella-project',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'AI对话系统',
+      link: {
+        type: 'doc',
+        id: 'ai-chat/index'
+      },
+      items: [
+        'ai-chat/environment',
+        'ai-chat/project-setup',
+        'ai-chat/development',
+        'ai-chat/testing-deployment',
+        'ai-chat/best-practices',
       ],
     },
     {

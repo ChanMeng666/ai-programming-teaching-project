@@ -1,0 +1,194 @@
+---
+sidebar_position: 2
+title: 环境准备
+description: 配置开发所需的账号和环境
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# 环境准备
+
+## 账号配置
+
+### Hugging Face账号
+
+<div className="account-setup">
+
+#### 1. 注册账号
+1. 访问 [Hugging Face](https://huggingface.co/join)
+2. 填写必要信息完成注册
+3. 验证邮箱
+
+#### 2. 生成访问令牌
+1. 访问 [Token设置页面](https://huggingface.co/settings/tokens)
+2. 点击 "New token"
+3. 选择 "Write" 权限
+4. 生成令牌并保存
+
+:::caution 重要提示
+令牌非常重要，请妥善保存，关闭页面后将无法再次查看完整令牌
+:::
+
+</div>
+
+## 开发环境配置
+
+### 必要软件安装
+
+<div className="software-installation">
+
+<Tabs>
+  <TabItem value="required" label="必需软件" default>
+    1. Python 3.8+
+       ```bash
+       # 检查Python版本
+       python --version
+       ```
+    
+    2. Git
+       ```bash
+       # 检查Git版本
+       git --version
+       ```
+    
+    3. Cursor编辑器
+       - 从[官网](https://cursor.sh)下载
+       - 完成安装和初始配置
+  </TabItem>
+  <TabItem value="optional" label="可选软件">
+    1. GitHub Desktop
+       - 图形化Git管理工具
+       - 适合Git命令不熟悉的用户
+    
+    2. Visual Studio Code
+       - 备用编辑器
+       - 丰富的插件生态
+  </TabItem>
+</Tabs>
+
+</div>
+
+### 项目依赖安装
+
+<div className="dependency-setup">
+
+#### 1. 创建虚拟环境
+```bash
+# 创建虚拟环境
+python -m venv venv
+
+# 激活虚拟环境
+# Windows:
+venv\Scripts\activate
+# Linux/Mac:
+source venv/bin/activate
+```
+
+#### 2. 安装核心依赖
+```bash
+# 安装基础依赖
+pip install gradio
+pip install huggingface_hub
+
+# 检查安装
+pip list
+```
+
+#### 3. 配置开发工具
+```bash
+# 配置Git用户信息
+git config --global user.name "你的名字"
+git config --global user.email "你的邮箱"
+
+# 配置Python解释器
+# 在Cursor中选择虚拟环境的Python解释器
+```
+
+</div>
+
+## 环境验证
+
+### 功能测试
+
+<div className="environment-check">
+
+#### 1. Python环境测试
+```python
+# test_env.py
+import gradio as gr
+import huggingface_hub
+
+def hello():
+    return "环境配置成功！"
+
+demo = gr.Interface(fn=hello, inputs=None, outputs="text")
+demo.launch()
+```
+
+#### 2. Git配置测试
+```bash
+# 创建测试仓库
+mkdir test-repo
+cd test-repo
+git init
+
+# 测试提交
+echo "test" > test.txt
+git add test.txt
+git commit -m "测试提交"
+```
+
+:::tip 验证建议
+- 运行测试脚本确认依赖安装正确
+- 检查Git提交是否成功
+- 确认Hugging Face令牌可用
+:::
+
+</div>
+
+### 常见问题
+
+<div className="troubleshooting">
+
+#### 依赖安装问题
+```bash
+# 如果安装失败，尝试使用镜像源
+pip install -i https://pypi.tuna.tsinghua.edu.cn/simple gradio
+pip install -i https://pypi.tuna.tsinghua.edu.cn/simple huggingface_hub
+```
+
+#### 环境变量配置
+```bash
+# 设置Hugging Face令牌
+# Windows:
+set HUGGINGFACE_TOKEN=你的令牌
+# Linux/Mac:
+export HUGGINGFACE_TOKEN=你的令牌
+```
+
+:::note 注意事项
+- 确保Python版本兼容
+- 注意虚拟环境的激活状态
+- 妥善保存访问令牌
+- 定期更新依赖包
+:::
+
+</div>
+
+export const styles = {
+  accountSetup: {
+    backgroundColor: '#f6f8fa',
+    padding: '1rem',
+    borderRadius: '8px'
+  },
+  softwareInstallation: {
+    borderLeft: '3px solid #1a73e8',
+    paddingLeft: '1rem'
+  },
+  environmentCheck: {
+    backgroundColor: '#f0f7ff',
+    padding: '1rem',
+    borderRadius: '8px'
+  }
+}; 

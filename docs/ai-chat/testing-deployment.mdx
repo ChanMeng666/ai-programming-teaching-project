@@ -1,0 +1,238 @@
+---
+sidebar_position: 5
+title: 测试部署
+description: AI对话系统的测试规范和部署维护
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# 测试部署
+
+## 测试规范
+
+### 单元测试
+
+<div className="unit-testing">
+
+#### 测试用例编写
+```python
+# tests/test_dialogue.py
+import pytest
+from dialogue_system import DialogueSystem
+
+def test_dialogue_initialization():
+    system = DialogueSystem()
+    assert system.history == []
+    assert system.current_character is None
+
+@pytest.mark.asyncio
+async def test_message_processing():
+    system = DialogueSystem()
+    system.current_character = Character("测试角色", {})
+    
+    response = await system.process_message("你好")
+    assert isinstance(response, str)
+    assert len(system.history) == 2
+```
+
+#### 测试覆盖率检查
+```bash
+# 运行测试并生成覆盖率报告
+pytest --cov=. tests/
+coverage report
+coverage html  # 生成HTML报告
+```
+
+</div>
+
+### 集成测试
+
+<div className="integration-testing">
+
+#### API测试
+```python
+# tests/test_api.py
+async def test_complete_dialogue_flow():
+    """测试完整对话流程"""
+    client = TestClient(app)
+    
+    # 1. 选择角色
+    response = client.post("/api/character/select", json={"name": "测试角色"})
+    assert response.status_code == 200
+    
+    # 2. 发送消息
+    response = client.post("/api/chat", json={"message": "你好"})
+    assert response.status_code == 200
+    assert "content" in response.json()
+```
+
+#### 性能测试
+```python
+# tests/test_performance.py
+def test_response_time():
+    """测试响应时间"""
+    start_time = time.time()
+    response = system.process_message("测试消息")
+    end_time = time.time()
+    
+    assert end_time - start_time < 2.0  # 响应时间应小于2秒
+```
+
+</div>
+
+## 部署流程
+
+### 环境准备
+
+<div className="deployment-prep">
+
+#### 生产环境配置
+```bash
+# 创建生产环境配置文件
+cat > .env.production << EOL
+HUGGINGFACE_TOKEN=your_production_token
+MODEL_PATH=production_model_path
+LOG_LEVEL=WARNING
+ENABLE_MONITORING=true
+EOL
+```
+
+#### 依赖检查
+```bash
+# 检查依赖更新
+pip list --outdated
+pip install -U -r requirements.txt
+
+# 生成依赖锁文件
+pip freeze > requirements.lock
+```
+
+</div>
+
+### 部署步骤
+
+<div className="deployment-steps">
+
+<Tabs>
+  <TabItem value="huggingface" label="Hugging Face" default>
+    ```bash
+    # 1. 提交代码
+    git add .
+    git commit -m "Ready for deployment"
+    git push
+    
+    # 2. 检查部署状态
+    huggingface-cli space status role-play-chat
+    ```
+  </TabItem>
+  <TabItem value="docker" label="Docker部署">
+    ```dockerfile
+    # Dockerfile
+    FROM python:3.8-slim
+    
+    WORKDIR /app
+    COPY requirements.txt .
+    RUN pip install -r requirements.txt
+    
+    COPY . .
+    CMD ["python", "main.py"]
+    ```
+  </TabItem>
+</Tabs>
+
+</div>
+
+## 监控维护
+
+### 系统监控
+
+<div className="monitoring">
+
+#### 日志配置
+```python
+# utils/logging.py
+import logging
+
+def setup_logging():
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+        handlers=[
+            logging.FileHandler('app.log'),
+            logging.StreamHandler()
+        ]
+    )
+```
+
+#### 性能监控
+```python
+# utils/monitoring.py
+from prometheus_client import Counter, Histogram
+
+requests_total = Counter(
+    'requests_total', 
+    'Total number of requests'
+)
+
+response_time = Histogram(
+    'response_time_seconds',
+    'Response time in seconds'
+)
+```
+
+</div>
+
+### 错误处理
+
+<div className="error-handling">
+
+#### 错误日志记录
+```python
+# utils/error_handler.py
+def log_error(error: Exception, context: dict = None):
+    """记录错误信息"""
+    logger.error(f"Error occurred: {str(error)}", extra={
+        'error_type': type(error).__name__,
+        'context': context or {},
+        'timestamp': datetime.now().isoformat()
+    })
+```
+
+#### 自动恢复机制
+```python
+def auto_recovery(max_retries: int = 3):
+    """自动恢复装饰器"""
+    def decorator(func):
+        @wraps(func)
+        async def wrapper(*args, **kwargs):
+            for attempt in range(max_retries):
+                try:
+                    return await func(*args, **kwargs)
+                except Exception as e:
+                    if attempt == max_retries - 1:
+                        raise
+                    log_error(e, {'attempt': attempt + 1})
+                    await asyncio.sleep(2 ** attempt)  # 指数退避
+        return wrapper
+    return decorator
+```
+
+</div>
+
+export const styles = {
+  unitTesting: {
+    backgroundColor: '#f6f8fa',
+    padding: '1rem',
+    borderRadius: '8px'
+  },
+  deploymentSteps: {
+    borderLeft: '3px solid #1a73e8',
+    paddingLeft: '1rem'
+  },
+  monitoring: {
+    backgroundColor: '#f0f7ff',
+    padding: '1rem',
+    borderRadius: '8px'
+  }
+}; 
