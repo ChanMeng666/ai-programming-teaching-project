@@ -47,3 +47,20 @@ documentation:
   label: 视频下载
   permalink: /tags/video-download
   description: 视频下载相关的教程和工具使用指南
+
+
+留学:
+  label: 留学
+  permalink: /tags/留学
+  description: 留学相关的教程和指南
+
+职业规划:
+  label: 职业规划
+  permalink: /tags/职业规划
+  description: 职业规划相关的教程和指南
+
+海外发展:
+  label: 海外发展
+  permalink: /tags/海外发展
+  description: 海外发展相关的教程和指南
+
