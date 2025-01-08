@@ -12,6 +12,12 @@
 
 A modern educational platform that teaches AI-assisted programming through comprehensive tutorials, hands-on projects, and best practices. Built with Docusaurus and designed to help developers effectively use AI tools to enhance their development workflow.
 
+<br/>
+
+[![Explore GitHub Profile README Generator](https://gradient-svg-generator.vercel.app/?text=👉+Try+It+Now!+👈&height=40&template=pride-rainbow)](https://ai-programming-teaching-project.vercel.app/)
+
+<br/>
+
 
 https://github.com/user-attachments/assets/7f452170-ee23-44ad-ac87-7ad41161cd3b
 
