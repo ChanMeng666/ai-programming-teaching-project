@@ -1,0 +1,9 @@
+{
+  "label": "AI绘图教程",
+  "position": 9,
+  "link": {
+    "type": "generated-index",
+    "description": "学习如何使用AI工具（哩布哩布AI、Recraft、Hugging Face等）进行图像设计和3D模型生成。",
+    "slug": "/category/ai-drawing"
+  }
+} 

@@ -102,6 +102,20 @@ const sidebars = {
         'customization/maintenance',
       ],
     },
+    {
+      type: 'category',
+      label: 'AI绘图教程',
+      link: {
+        type: 'doc',
+        id: 'ai-drawing/index'
+      },
+      items: [
+        'ai-drawing/logo-design',
+        'ai-drawing/image-generation',
+        'ai-drawing/3d-modeling',
+        'ai-drawing/practical-exercise',
+      ],
+    },
   ],
 };
 
