@@ -1,0 +1,59 @@
+---
+sidebar_position: 3
+title: 网页抓取配置
+description: 配置Browse节点实现网页内容的自动获取
+---
+
+# 网页抓取配置
+
+## Browse节点概述
+
+Browse节点负责获取网页内容，是工作流的第一个处理环节。它能够：
+- 访问指定URL
+- 提取网页内容
+- 处理不同类型的网页
+
+## 节点配置
+
+### 基本设置
+1. 添加Browse节点
+2. 连接到Start节点
+
+### 参数配置
+1. url参数：
+```typescript
+// 使用变量引用输入
+{{input}}
+```
+
+2. enforce_crawl参数：
+```typescript
+// 设置为true以确保完整抓取
+true
+```
+
+### 输出说明
+Browse节点会输出以下字段：
+- code：状态码
+- message：状态信息
+- plugin_observation：网页内容
+  - observation：实际内容
+  - natural_language_desc：描述信息
+
+## 调试技巧
+
+### 常见问题
+1. URL无法访问
+   - 检查URL格式
+   - 确认网页可访问性
+
+2. 内容获取不完整
+   - 检查enforce_crawl设置
+   - 调整等待时间
+
+### 测试方法
+1. 使用简单的测试URL
+2. 检查输出内容完整性
+3. 验证字段格式
+
+下一步，我们将配置LLM节点，对获取的内容进行处理。

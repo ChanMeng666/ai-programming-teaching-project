@@ -116,6 +116,21 @@ const sidebars = {
         'ai-drawing/practical-exercise',
       ],
     },
+    {
+      type: 'category',
+      label: 'Coze教程',
+      link: {
+        type: 'doc',
+        id: 'coze/index'
+      },
+      items: [
+        'coze/environment-setup',
+        'coze/browse-node-setup',
+        'coze/llm-node-setup',
+        'coze/text-processing-setup',
+        'coze/testing-optimization',
+      ],
+    },
   ],
 };
 

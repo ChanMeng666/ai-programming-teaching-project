@@ -1,0 +1,54 @@
+---
+sidebar_position: 2
+title: 环境准备
+description: 配置Coze工作流开发所需的环境和服务
+---
+
+# 环境准备
+
+## Notion配置
+
+### 创建集成
+1. 访问 [Notion Developers](https://developers.notion.com/)
+2. 点击"Create new integration"
+3. 填写集成名称（如"Article Summary"）
+4. 选择关联的工作区
+5. 获取Integration Token并保存
+
+### 页面授权
+1. 在Notion中创建新页面
+2. 点击右上角"Share"按钮
+3. 在弹出菜单中选择"Invite"
+4. 找到并选择你创建的集成
+5. 点击"Invite"确认
+
+### 获取Page ID
+1. 打开目标Notion页面
+2. 从浏览器地址栏复制URL
+3. 提取32位字符串格式的page_id
+
+## Coze配置
+
+### 创建项目
+1. 登录Coze平台
+2. 创建新的工作流项目
+3. 设置基本项目信息
+
+### 节点准备
+1. 添加必要的节点：
+   - Browse节点：用于网页抓取
+   - LLM节点：用于生成摘要
+   - Text Processing节点：用于文本处理
+   - Write Page节点：用于Notion集成
+
+## 验证配置
+
+### 检查清单
+- [ ] Notion集成已创建
+- [ ] Integration Token已保存
+- [ ] 目标页面已授权
+- [ ] Page ID已获取
+- [ ] Coze项目已创建
+- [ ] 必要节点已添加
+
+准备工作完成后，我们就可以开始配置具体的节点了。

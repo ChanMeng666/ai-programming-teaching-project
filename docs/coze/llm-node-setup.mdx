@@ -1,0 +1,73 @@
+---
+sidebar_position: 4
+title: AI摘要生成
+description: 配置LLM节点实现智能文章摘要
+---
+
+# AI摘要生成
+
+## LLM节点配置
+
+### 基本设置
+1. 添加LLM节点
+2. 连接到Browse节点
+
+### 输入配置
+```typescript
+// 设置输入参数
+input: {{browse.plugin_observation.observation}}
+```
+
+### System Prompt
+```text
+You are a professional article summarizer. Your task is to read the provided article and create a CONCISE summary that:
+- Captures only the most essential points (max 2-3 key points)
+- Uses very concise language
+- Keeps the total output under 1500 characters
+- Maintains clarity while being brief
+- Includes a short title
+
+Format your response as:
+Title: [Short Article Title]
+Summary: [Your concise summary in 1-2 paragraphs]
+Key Points:
+- [Point 1]
+- [Point 2]
+- [Point 3]
+```
+
+### User Prompt
+```text
+Please provide a summary of the following article:
+{{input}}
+```
+
+## 优化策略
+
+### 提示词调优
+1. 控制输出长度
+   - 设定字符限制
+   - 指定段落数量
+
+2. 调整输出结构
+   - 明确标题要求
+   - 规范关键点格式
+
+### 质量控制
+1. 增加相关性要求
+2. 保持客观性
+3. 确保完整性
+
+## 测试验证
+
+### 测试用例
+1. 使用不同类型的文章
+2. 检查输出格式
+3. 验证字符数限制
+
+### 优化方向
+1. 根据测试结果调整prompt
+2. 优化输出结构
+3. 提升摘要质量
+
+下一步，我们将配置Text Processing节点，对AI生成的摘要进行格式化处理。
