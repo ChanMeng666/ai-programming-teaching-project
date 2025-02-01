@@ -4,51 +4,165 @@ title: 环境准备
 description: 配置Coze工作流开发所需的环境和服务
 ---
 
-# 环境准备
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import Admonition from '@theme/Admonition';
 
-## Notion配置
+# 🛠️ 环境准备
 
-### 创建集成
-1. 访问 [Notion Developers](https://developers.notion.com/)
-2. 点击"Create new integration"
-3. 填写集成名称（如"Article Summary"）
-4. 选择关联的工作区
-5. 获取Integration Token并保存
+<div className="hero shadow--md">
+  <div className="container">
+    <p>
+      在开始构建工作流之前，我们需要完成必要的环境配置。本章将指导你完成所有准备工作。
+    </p>
+  </div>
+</div>
 
-### 页面授权
-1. 在Notion中创建新页面
-2. 点击右上角"Share"按钮
-3. 在弹出菜单中选择"Invite"
-4. 找到并选择你创建的集成
-5. 点击"Invite"确认
+## 📘 Notion配置
 
-### 获取Page ID
-1. 打开目标Notion页面
-2. 从浏览器地址栏复制URL
-3. 提取32位字符串格式的page_id
+<div className="setup-steps">
 
-## Coze配置
+<Tabs>
+  <TabItem value="integration" label="创建集成" default>
+    <div className="step-content">
+      <h3>1️⃣ 创建Notion集成</h3>
+      <ol>
+        <li>访问 <a href="https://developers.notion.com/" target="_blank">Notion Developers</a></li>
+        <li>点击 "Create new integration"</li>
+        <li>
+          填写集成信息：
+          <ul>
+            <li>Name: Article Summary</li>
+            <li>Associated workspace: 选择你的工作区</li>
+          </ul>
+        </li>
+        <li>保存生成的Integration Token</li>
+      </ol>
+    </div>
+  </TabItem>
+  <TabItem value="auth" label="页面授权">
+    <div className="step-content">
+      <h3>2️⃣ 授权访问</h3>
+      <div className="steps-container">
+        <div className="step">
+          <span className="step-number">1</span>
+          <p>创建新的Notion页面</p>
+        </div>
+        <div className="step">
+          <span className="step-number">2</span>
+          <p>点击右上角Share按钮</p>
+        </div>
+        <div className="step">
+          <span className="step-number">3</span>
+          <p>选择并添加你的集成</p>
+        </div>
+      </div>
+    </div>
+  </TabItem>
+  <TabItem value="pageid" label="获取Page ID">
+    <div className="step-content">
+      <h3>3️⃣ 获取页面ID</h3>
+      ```typescript
+      // Notion页面URL格式
+      https://notion.so/workspace/page-title-32-character-string
+      
+      // 提取32位字符串作为page_id
+      const pageId = url.match(/[a-f\d]{32}/)[0];
+      ```
+    </div>
+  </TabItem>
+</Tabs>
+
+</div>
+
+## 🤖 Coze配置
+
+<div className="coze-setup">
 
 ### 创建项目
-1. 登录Coze平台
-2. 创建新的工作流项目
-3. 设置基本项目信息
+
+<div className="setup-grid">
+  <div className="setup-card">
+    <h4>1. 登录平台</h4>
+    <p>访问Coze官网并登录你的账号</p>
+  </div>
+  <div className="setup-card">
+    <h4>2. 新建项目</h4>
+    <p>创建新的工作流项目</p>
+  </div>
+  <div className="setup-card">
+    <h4>3. 基础设置</h4>
+    <p>配置项目基本信息</p>
+  </div>
+</div>
 
 ### 节点准备
-1. 添加必要的节点：
-   - Browse节点：用于网页抓取
-   - LLM节点：用于生成摘要
-   - Text Processing节点：用于文本处理
-   - Write Page节点：用于Notion集成
 
-## 验证配置
+<div className="node-list">
+  <Admonition type="info" title="必要节点">
+    <ul>
+      <li>🌐 Browse节点 - 网页抓取</li>
+      <li>🤖 LLM节点 - 生成摘要</li>
+      <li>📝 Text Processing节点 - 文本处理</li>
+      <li>💾 Write Page节点 - Notion集成</li>
+    </ul>
+  </Admonition>
+</div>
 
-### 检查清单
-- [ ] Notion集成已创建
-- [ ] Integration Token已保存
-- [ ] 目标页面已授权
-- [ ] Page ID已获取
-- [ ] Coze项目已创建
-- [ ] 必要节点已添加
+</div>
 
-准备工作完成后，我们就可以开始配置具体的节点了。
+## ✅ 配置检查清单
+
+<div className="checklist-container">
+  <div className="checklist">
+    <div className="checklist-item">
+      <input type="checkbox" id="check1" />
+      <label htmlFor="check1">Notion集成已创建</label>
+    </div>
+    <div className="checklist-item">
+      <input type="checkbox" id="check2" />
+      <label htmlFor="check2">Integration Token已保存</label>
+    </div>
+    <div className="checklist-item">
+      <input type="checkbox" id="check3" />
+      <label htmlFor="check3">目标页面已授权</label>
+    </div>
+    <div className="checklist-item">
+      <input type="checkbox" id="check4" />
+      <label htmlFor="check4">Page ID已获取</label>
+    </div>
+    <div className="checklist-item">
+      <input type="checkbox" id="check5" />
+      <label htmlFor="check5">Coze项目已创建</label>
+    </div>
+    <div className="checklist-item">
+      <input type="checkbox" id="check6" />
+      <label htmlFor="check6">必要节点已添加</label>
+    </div>
+  </div>
+</div>
+
+<div className="alert alert--success" role="alert">
+  <h4>🎉 准备就绪！</h4>
+  <p>
+    环境配置已完成，现在可以开始<a href="./browse-node-setup"><b>配置Browse节点</b></a>了。
+  </p>
+</div>
+
+export const styles = {
+  setupSteps: {
+    marginBottom: '2rem',
+  },
+  stepContent: {
+    padding: '1rem',
+    backgroundColor: 'var(--ifm-background-surface-color)',
+    borderRadius: '8px',
+  },
+  nodeList: {
+    marginTop: '1rem',
+  },
+  checklistContainer: {
+    maxWidth: '500px',
+    margin: '2rem auto',
+  },
+};
