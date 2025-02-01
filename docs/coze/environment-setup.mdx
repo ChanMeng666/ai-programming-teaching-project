@@ -7,6 +7,7 @@ description: 配置Coze工作流开发所需的环境和服务
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import Admonition from '@theme/Admonition';
+import ReactPlayer from 'react-player';
 
 # 🛠️ 环境准备
 
@@ -15,6 +16,54 @@ import Admonition from '@theme/Admonition';
     <p>
       在开始构建工作流之前，我们需要完成必要的环境配置。本章将指导你完成所有准备工作。
     </p>
+  </div>
+</div>
+
+<div className="video-description">
+  <h3>🎥 教程视频 1</h3>
+</div>
+
+<div className="video-container">
+  <div className="video-wrapper">
+    <ReactPlayer
+      url="https://www.youtube.com/embed/ANmv1dMY7fY"
+      controls={true}
+      width="100%"
+      height="100%"
+      style={{ aspectRatio: '16/9' }}
+    />
+  </div>
+</div>
+
+<div className="video-description">
+  <h3>🎥 教程视频 2</h3>
+</div>
+
+<div className="video-container">
+  <div className="video-wrapper">
+    <ReactPlayer
+      url="https://www.youtube.com/embed/85Z324xsD-w"
+      controls={true}
+      width="100%"
+      height="100%"
+      style={{ aspectRatio: '16/9' }}
+    />
+  </div>
+</div>
+
+<div className="video-description">
+  <h3>🎥 教程视频 3</h3>
+</div>
+
+<div className="video-container">
+  <div className="video-wrapper">
+    <ReactPlayer
+      url="https://www.youtube.com/embed/4VVJv9SfJqc"
+      controls={true}
+      width="100%"
+      height="100%"
+      style={{ aspectRatio: '16/9' }}
+    />
   </div>
 </div>
 
@@ -164,5 +213,17 @@ export const styles = {
   checklistContainer: {
     maxWidth: '500px',
     margin: '2rem auto',
+  },
+  videoContainer: {
+    position: 'relative',
+    paddingTop: '56.25%', /* 16:9 宽高比 */
+    marginBottom: '2rem',
+  },
+  videoWrapper: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
   },
 };
