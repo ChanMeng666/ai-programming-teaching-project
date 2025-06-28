@@ -2,7 +2,7 @@
 
 [![Project Banner](./static/img/logo.svg)](#)
 
-# 🚀 AI Programming Education Platform<br/><small>Master AI-Assisted Development Through Interactive Learning</small>
+# 🚀 AI Programming Education Platform<br/><h3>Master AI-Assisted Development Through Interactive Learning</h3>
 
 A comprehensive educational platform that teaches AI-assisted programming through hands-on tutorials, practical projects, and best practices.<br/>
 Features interactive learning modules, modern development workflows, and real-world project implementations.<br/>
