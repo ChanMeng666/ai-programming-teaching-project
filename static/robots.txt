@@ -1,6 +1,6 @@
 User-agent: *
 Allow: /
 
-# Algolia-Crawler-Verif: 24E3EF4EBEC4CC2E
+# Algolia-Crawler-Verif: A2AE254F59B4E42C
 
-Sitemap: https://ai-programming-teaching-project.vercel.app/sitemap.xml 
+Sitemap: https://ai-programming-teaching-project.vercel.app/sitemap.xml
