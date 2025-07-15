@@ -59,10 +59,9 @@ const config = {
       ({
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
+          // Edit this page links to your repository
           editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+            'https://github.com/ChanMeng666/ai-programming-teaching-project/tree/main/',
         },
         blog: {
           showReadingTime: true,
@@ -70,10 +69,9 @@ const config = {
             type: ['rss', 'atom'],
             xslt: true,
           },
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
+          // Edit this page links to your repository
           editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+            'https://github.com/ChanMeng666/ai-programming-teaching-project/tree/main/',
           // Useful options to enforce blogging best practices
           onInlineTags: 'warn',
           onInlineAuthors: 'warn',
@@ -91,6 +89,19 @@ const config = {
     ({
       // Replace with your project's social card
       image: 'img/docusaurus-social-card.jpg',
+      // 文档侧边栏配置
+      docs: {
+        sidebar: {
+          hideable: true,              // 允许隐藏侧边栏
+          autoCollapseCategories: true, // 自动折叠未选中的类别
+        },
+      },
+      // 颜色模式配置
+      colorMode: {
+        defaultMode: 'light',
+        disableSwitch: false,
+        respectPrefersColorScheme: true,
+      },
       navbar: {
         title: 'AI Programming',
         logo: {
@@ -98,6 +109,7 @@ const config = {
           src: 'img/logo.svg',
         },
         style: 'dark',
+        hideOnScroll: true,  // 滚动时隐藏导航栏
         items: [
           {
             type: 'docSidebar',
