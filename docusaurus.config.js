@@ -116,7 +116,7 @@ const config = {
         indexName: 'ai_programming_teaching_project_vercel_app_8vhxtp609d_pages',
 
         // Optional: see doc section below
-        contextualSearch: true,
+        contextualSearch: false,
 
         // Optional: Specify domains where the navigation should occur through window.location instead on history.push. Useful when our Algolia config crawls multiple documentation sites and we want to navigate with window.location.href to them.
         externalUrlRegex: 'external\\.com|domain\\.com',
@@ -136,6 +136,12 @@ const config = {
           hitsPerPage: 20,
           // 可以添加其他搜索参数
           facetFilters: [],
+          // 添加中文搜索支持
+          queryLanguages: ['zh', 'en'],
+          // 启用部分匹配
+          queryType: 'prefixLast',
+          // 移除停用词
+          removeStopWords: true,
         },
 
         // Optional: path for search page that enabled by default (`false` to disable it)
@@ -149,6 +155,16 @@ const config = {
 
         // Optional: 自定义搜索模式
         searchMode: 'search',
+
+        // Optional: 自定义搜索字段
+        searchableAttributes: [
+          'title',
+          'description', 
+          'content',
+          'headers',
+          'unordered(content)',
+          'unordered(title)',
+        ],
 
         //... other Algolia params
       },
