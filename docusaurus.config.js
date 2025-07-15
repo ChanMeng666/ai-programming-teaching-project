@@ -16,7 +16,7 @@ const config = {
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
-  url: 'https://your-docusaurus-site.example.com',
+  url: 'https://ai-programming-teaching-project.vercel.app',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
@@ -104,6 +104,23 @@ const config = {
     ({
       // Replace with your project's social card
       image: 'img/docusaurus-social-card.jpg',
+      // Algolia DocSearch 配置
+      algolia: {
+        // Algolia 提供的应用 ID
+        appId: 'NC7L0R4G5R',
+        // 公开的搜索 API 密钥（可以安全地提交到代码库）
+        apiKey: 'a77981e4aa29b145522c6c0c059a3860',
+        // 索引名称
+        indexName: 'ai-programming-docs',
+        // 可选：启用上下文搜索
+        contextualSearch: true,
+        // 可选：搜索页面路径
+        searchPagePath: 'search',
+        // 可选：Algolia 搜索参数
+        searchParameters: {},
+        // 可选：是否启用 insights 功能
+        insights: false,
+      },
       // 文档侧边栏配置
       docs: {
         sidebar: {
