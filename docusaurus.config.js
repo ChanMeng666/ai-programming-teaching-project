@@ -110,31 +110,63 @@ const config = {
         // Public API key: it is safe to commit it
         apiKey: 'f70da822145b6159e198fc85147e0564',
 
-        // 使用主索引名称，不使用子索引
+        // 使用主索引名称
         indexName: 'ai-programming-crawler',
 
-        // Optional: see doc section below
-        contextualSearch: true,
+        // 禁用 contextual search，避免版本过滤问题
+        contextualSearch: false,
 
         // Optional: Algolia search parameters
         searchParameters: {
-          hitsPerPage: 20,
-          // 中文搜索优化
-          queryLanguages: ['zh-Hans', 'zh', 'en'],
-          // 启用部分匹配
-          queryType: 'prefixLast',
-          // 移除停用词
-          removeStopWords: ['zh'],
-          // 容错设置
-          typoTolerance: 'min',
-          // 启用高级语法
-          advancedSyntax: true,
+          // 确保搜索所有语言内容
+          facetFilters: [],
         },
 
         // Optional: path for search page that enabled by default (`false` to disable it)
         searchPagePath: 'search',
 
-        //... other Algolia params
+        // 搜索占位符文本
+        placeholder: '搜索文档...',
+        
+        // 搜索结果翻译
+        translations: {
+          button: {
+            buttonText: '搜索',
+            buttonAriaLabel: '搜索',
+          },
+          modal: {
+            searchBox: {
+              resetButtonTitle: '清除查询',
+              resetButtonAriaLabel: '清除查询',
+              cancelButtonText: '取消',
+              cancelButtonAriaLabel: '取消',
+            },
+            startScreen: {
+              recentSearchesTitle: '最近搜索',
+              noRecentSearchesText: '没有最近搜索',
+              saveRecentSearchButtonTitle: '保存此搜索',
+              removeRecentSearchButtonTitle: '从历史中删除此搜索',
+              favoriteSearchesTitle: '收藏',
+              removeFavoriteSearchButtonTitle: '从收藏中删除',
+            },
+            errorScreen: {
+              titleText: '无法获取结果',
+              helpText: '您可能需要检查您的网络连接',
+            },
+            footer: {
+              selectText: '选择',
+              navigateText: '导航',
+              closeText: '关闭',
+              searchByText: '搜索由',
+            },
+            noResultsScreen: {
+              noResultsText: '无法找到相关结果',
+              suggestedQueryText: '您可以尝试查询',
+              reportMissingResultsText: '您认为这个查询应该有结果吗？',
+              reportMissingResultsLinkText: '点击反馈',
+            },
+          },
+        },
       },
       // 文档侧边栏配置
       docs: {
