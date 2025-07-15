@@ -25,9 +25,10 @@
   /* 主要配色 */
   --color-primary: var(--color-teal);
   --color-secondary: var(--color-coral);
-  --color-accent: var(--color-bright-yellow);
+  --color-accent: var(--color-teal); /* 改为深色青色，提高对比度 */
+  --color-accent-hover: #0a5456; /* 悬停时的更深色调 */
   --color-success: #10b981;
-  --color-warning: var(--color-bright-yellow);
+  --color-warning: #f59e0b; /* 改为橙色，更好的可读性 */
   --color-error: var(--color-coral);
   
   /* 背景色系 */
@@ -141,9 +142,10 @@
   --ifm-color-primary-lightest: #23eff1;
   
   --color-secondary: #ff7a7b;
-  --color-accent: #fbfb0a;
+  --color-accent: #1dc5c7; /* 深色模式下使用亮一点的青色 */
+  --color-accent-hover: #23eff1; /* 深色模式下悬停更亮 */
   --color-success: #34d399;
-  --color-warning: #fbfb0a;
+  --color-warning: #f59e0b; /* 保持与白天模式一致 */
   --color-error: #ff7a7b;
   
   --color-background: var(--color-dark-gray);
@@ -485,7 +487,7 @@ html {
 }
 
 .dropdown__link {
-  color: var(--color-text);
+  color: #333 !important; /* 白天模式下使用深色文字 */
   transition: all var(--animation-duration) var(--animation-timing);
 }
 
@@ -500,7 +502,7 @@ html {
 }
 
 [data-theme='dark'] .dropdown__link {
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(255, 255, 255, 0.9) !important; /* 深色模式下使用亮色文字 */
 }
 
 [data-theme='dark'] .dropdown__link:hover {
