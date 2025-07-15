@@ -20,3 +20,11 @@ yarn-debug.log*
 yarn-error.log*
 /docusaurus-docs
 docusaurus-docusaurus.config.ts
+
+# Temporary test applications and folders
+*-test-app/
+*-demo-app/
+instantsearch-app/
+test-*/
+demo-*/
+temp-*/
