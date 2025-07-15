@@ -109,7 +109,7 @@ const config = {
         // Algolia 提供的应用 ID
         appId: 'NC7L0R4G5R',
         // 公开的搜索 API 密钥（可以安全地提交到代码库）
-        apiKey: 'a77981e4aa29b145522c6c0c059a3860',
+        apiKey: '31aed2f3ba78bd4f5708be8060ca70fe',
         // 索引名称
         indexName: 'ai-programming-teaching-project-vercel',
         // 可选：启用上下文搜索
