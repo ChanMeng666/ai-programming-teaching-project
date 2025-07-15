@@ -110,8 +110,8 @@ const config = {
         appId: '2P2Y1NV01R',
         // 公开的搜索 API 密钥（可以安全地提交到代码库）
         apiKey: '306642f4b4f3e192ba8b94966c3eef14',
-        // 索引名称
-        indexName: 'ai_programming_teaching_project_vercel_app_2p2y1nv01r_pages',
+        // 索引名称（使用主索引名称以搜索所有相关索引）
+        indexName: 'ai_programming_teaching_project_vercel_app_2p2y1nv01r',
         // 可选：启用上下文搜索
         contextualSearch: true,
         // 可选：搜索页面路径
