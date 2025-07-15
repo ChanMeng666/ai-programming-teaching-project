@@ -113,7 +113,7 @@ const config = {
         apiKey: 'f70da822145b6159e198fc85147e0564',
 
         // Crawler Name
-        indexName: 'ai-programming-crawler',
+        indexName: 'ai_programming_teaching_project_vercel_app_8vhxtp609d_pages',
 
         // Optional: see doc section below
         contextualSearch: true,
