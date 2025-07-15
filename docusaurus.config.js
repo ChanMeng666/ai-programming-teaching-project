@@ -107,10 +107,10 @@ const config = {
       // Algolia DocSearch 配置
       algolia: {
         // The application ID provided by Algolia - Application ID
-        appId: 'NC7L0R4G5R',
+        appId: '8VHXTP609D',
 
         // Public API key: it is safe to commit it - Search API Key
-        apiKey: 'c738c2f5636117aa4bfb0fe2f952fc70',
+        apiKey: 'f70da822145b6159e198fc85147e0564',
 
         // Crawler Name
         indexName: 'ai-programming-crawler',
