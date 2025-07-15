@@ -112,8 +112,8 @@ const config = {
         // Public API key: it is safe to commit it - Search API Key
         apiKey: 'f70da822145b6159e198fc85147e0564',
 
-        // Crawler Name (使用主索引名称以搜索所有相关索引)
-        indexName: 'ai_programming_teaching_project_vercel_app_8vhxtp609d',
+        // Crawler Name (使用pages索引作为主索引)
+        indexName: 'ai_programming_teaching_project_vercel_app_8vhxtp609d_pages',
 
         // Optional: see doc section below
         contextualSearch: true,
