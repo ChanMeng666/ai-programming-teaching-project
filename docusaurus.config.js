@@ -131,6 +131,9 @@ const config = {
 
         // Optional: Algolia search parameters
         searchParameters: {
+          // 启用模糊搜索和前缀搜索
+          typoTolerance: true,
+          hitsPerPage: 20,
           // 可以添加其他搜索参数
           facetFilters: [],
         },
@@ -140,6 +143,12 @@ const config = {
 
         // Optional: whether the insights feature is enabled or not on Docsearch (`false` by default)
         insights: false,
+
+        // Optional: 启用调试模式
+        debug: false,
+
+        // Optional: 自定义搜索模式
+        searchMode: 'search',
 
         //... other Algolia params
       },
