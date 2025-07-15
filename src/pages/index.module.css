@@ -23,20 +23,21 @@
   padding: var(--space-40) 0 var(--space-40);
   background: var(--color-background-secondary);
   overflow: hidden;
-  min-height: 80vh;
+  min-height: 85vh;
   display: flex;
   align-items: center;
 }
 
 .heroContent {
-  max-width: 1200px;
+  max-width: 1280px;
   margin: 0 auto;
   padding: 0 var(--space-8);
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-20);
+  grid-template-columns: 1fr;
+  gap: var(--space-16);
   align-items: center;
   width: 100%;
+  text-align: center;
 }
 
 @media (max-width: 968px) {
@@ -46,15 +47,42 @@
   }
   
   .heroContent {
-    grid-template-columns: 1fr;
     gap: var(--space-16);
-    text-align: center;
     padding: 0 var(--space-6);
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    min-height: 60vh;
+    padding: var(--space-24) 0;
+  }
+  
+  .heroContent {
+    gap: var(--space-12);
+    padding: 0 var(--space-4);
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    min-height: 50vh;
+    padding: var(--space-16) 0;
+  }
+  
+  .heroContent {
+    gap: var(--space-8);
+    padding: 0 var(--space-4);
+    justify-items: center;
   }
 }
 
 .heroText {
   z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
 .heroTitle {
@@ -63,7 +91,7 @@
 }
 
 .mainTitle {
-  font-size: 3.5rem;
+  font-size: 4rem;
   font-weight: var(--ifm-font-weight-bold);
   line-height: 1.1;
   color: var(--color-text-primary);
@@ -73,6 +101,7 @@
   -webkit-text-fill-color: transparent;
   background-clip: text;
   animation: fadeInUp var(--animation-duration-slow) var(--animation-timing-ease-out);
+  letter-spacing: -0.02em;
 }
 
 @media (max-width: 968px) {
@@ -81,16 +110,35 @@
   }
 }
 
+@media (max-width: 768px) {
+  .mainTitle {
+    font-size: 2.4rem;
+    line-height: 1.2;
+  }
+}
+
 @media (max-width: 480px) {
   .mainTitle {
-    font-size: 2.2rem;
+    font-size: 2rem;
+    line-height: 1.3;
+  }
+  
+  .heroDescription {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: var(--space-8);
+  }
+  
+  .heroDescription br {
+    display: none;
   }
 }
 
 .titleAccent {
   position: absolute;
   bottom: -var(--space-2);
-  left: 0;
+  left: 50%;
+  transform: translateX(-50%);
   width: 60px;
   height: 4px;
   background: linear-gradient(90deg, var(--color-coral), var(--color-teal));
@@ -98,20 +146,16 @@
   animation: slideInLeft var(--animation-duration-slow) var(--animation-timing-ease-out) 0.2s both;
 }
 
-@media (max-width: 968px) {
-  .titleAccent {
-    left: 50%;
-    transform: translateX(-50%);
-  }
-}
+/* titleAccent样式已在桌面端设置为居中，移动端无需重复设置 */
 
 .heroDescription {
-  font-size: 1.25rem;
-  line-height: 1.7;
+  font-size: 1.375rem;
+  line-height: 1.8;
   color: var(--color-text-secondary);
-  margin-bottom: var(--space-10);
-  max-width: 500px;
+  margin-bottom: var(--space-12);
+  max-width: 600px;
   animation: fadeInUp var(--animation-duration-slow) var(--animation-timing-ease-out) 0.1s both;
+  font-weight: 400;
 }
 
 @media (max-width: 968px) {
@@ -122,16 +166,63 @@
   }
 }
 
+@media (max-width: 480px) {
+  .heroDescription {
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+}
+
 .heroActions {
   display: flex;
   gap: var(--space-5);
   animation: fadeInUp var(--animation-duration-slow) var(--animation-timing-ease-out) 0.2s both;
 }
 
+@media (max-width: 768px) {
+  .heroActions {
+    gap: var(--space-4);
+    justify-content: center;
+  }
+  
+  .primaryButton,
+  .secondaryButton {
+    min-width: 160px;
+    padding: var(--space-4) var(--space-8);
+    font-size: 1rem;
+    border-radius: var(--radius-lg);
+    touch-action: manipulation;
+  }
+}
+
 @media (max-width: 480px) {
   .heroActions {
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    gap: var(--space-3);
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+  
+  .primaryButton,
+  .secondaryButton {
+    width: 100%;
+    max-width: 280px;
+    min-width: unset;
+    padding: var(--space-4) var(--space-6);
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: var(--radius-lg);
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
   }
 }
 
@@ -139,21 +230,21 @@
   background: linear-gradient(135deg, var(--color-teal) 0%, var(--color-coral) 100%);
   color: white;
   border: none;
-  padding: var(--space-4) var(--space-8);
+  padding: var(--space-5) var(--space-10);
   border-radius: var(--radius-lg);
   font-weight: var(--ifm-font-weight-semibold);
-  font-size: 1.1rem;
+  font-size: 1.125rem;
   text-decoration: none;
   transition: all var(--animation-duration-normal) var(--animation-timing-ease);
   box-shadow: var(--shadow-md);
   position: relative;
   overflow: hidden;
-  min-width: 140px;
+  min-width: 160px;
 }
 
 .primaryButton:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-xl);
   text-decoration: none;
   color: white;
   background: linear-gradient(135deg, var(--color-coral) 0%, var(--color-teal) 100%);
@@ -178,21 +269,21 @@
   background: var(--color-surface);
   color: var(--color-text-primary);
   border: 2px solid var(--color-border);
-  padding: var(--space-4) var(--space-8);
+  padding: var(--space-5) var(--space-10);
   border-radius: var(--radius-lg);
   font-weight: var(--ifm-font-weight-semibold);
-  font-size: 1.1rem;
+  font-size: 1.125rem;
   text-decoration: none;
   transition: all var(--animation-duration-normal) var(--animation-timing-ease);
   box-shadow: var(--shadow-sm);
-  min-width: 140px;
+  min-width: 160px;
 }
 
 .secondaryButton:hover {
   background: var(--color-surface-hover);
-  border-color: var(--color-secondary);
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-md);
+  border-color: var(--color-teal);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
   text-decoration: none;
   color: var(--color-text-primary);
 }
@@ -212,13 +303,55 @@
   box-shadow: var(--shadow-xl);
   overflow: hidden;
   width: 100%;
-  max-width: 450px;
+  max-width: 600px;
   transition: transform var(--animation-duration-slow) var(--animation-timing-ease);
   margin: 0 auto;
+  position: relative;
+}
+
+.heroCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-teal), var(--color-coral));
+  opacity: 0;
+  transition: opacity var(--animation-duration-normal) var(--animation-timing-ease);
 }
 
 .heroCard:hover {
-  transform: translateY(-4px) scale(1.02);
+  transform: translateY(-6px) scale(1.03);
+}
+
+.heroCard:hover::before {
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .heroCard {
+    max-width: 100%;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+  }
+  
+  .heroCard:hover {
+    transform: translateY(-2px) scale(1.01);
+  }
+}
+
+@media (max-width: 480px) {
+  .heroCard {
+    max-width: 100%;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    margin: 0 var(--space-2);
+  }
+  
+  .heroCard:hover {
+    transform: translateY(-1px);
+  }
 }
 
 .cardHeader {
@@ -261,13 +394,55 @@
 }
 
 .cardContent {
-  padding: var(--space-8);
+  padding: var(--space-10);
 }
 
 .codeLines {
   font-family: var(--ifm-font-family-monospace);
-  font-size: 0.875rem;
-  line-height: 1.6;
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+@media (max-width: 768px) {
+  .cardHeader {
+    padding: var(--space-3) var(--space-6);
+  }
+  
+  .cardContent {
+    padding: var(--space-6);
+  }
+  
+  .codeLines {
+    font-size: 0.8rem;
+  }
+  
+  .cardTitle {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .cardHeader {
+    padding: var(--space-3) var(--space-4);
+  }
+  
+  .cardContent {
+    padding: var(--space-4);
+  }
+  
+  .codeLines {
+    font-size: 0.75rem;
+    line-height: 1.5;
+  }
+  
+  .cardTitle {
+    font-size: 0.75rem;
+  }
+  
+  .cardDots span {
+    width: 10px;
+    height: 10px;
+  }
 }
 
 .codeLine {
@@ -354,20 +529,123 @@
   }
 }
 
-/* 响应式设计 */
-@media (max-width: 768px) {
-  .hero {
-    padding: var(--space-24) 0 var(--space-16);
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(var(--color-teal-rgb), 0.4);
+  }
+  50% {
+    box-shadow: 0 0 20px 5px rgba(var(--color-teal-rgb), 0.2);
+  }
+}
+
+/* 桌面端增强动画效果 */
+@media (min-width: 969px) {
+  .primaryButton:hover {
+    animation: pulse 2s infinite;
+  }
+  
+  .heroCard:hover {
+    animation: glow 2s infinite;
   }
   
   .mainTitle {
-    font-size: 2.5rem;
+    transition: all 0.3s ease;
   }
   
   .heroDescription {
-    font-size: 1.125rem;
+    transition: all 0.3s ease;
+  }
+}
+
+/* 移动端特定优化 */
+@media (max-width: 480px) {
+  /* 防止内容溢出 */
+  .main {
+    overflow-x: hidden;
   }
   
-
+  /* 触摸优化 */
+  .primaryButton:active,
+  .secondaryButton:active {
+    transform: scale(0.98);
+  }
+  
+  /* 减少动画复杂度以提高性能 */
+  .heroCard:hover,
+  .codeLine {
+    animation: none;
+  }
+  
+  /* 简化视觉效果 */
+  .heroCard {
+    box-shadow: var(--shadow-sm);
+  }
+  
+  .primaryButton,
+  .secondaryButton {
+    box-shadow: var(--shadow-sm);
+  }
+  
+  .primaryButton:hover,
+  .secondaryButton:hover {
+    box-shadow: var(--shadow-md);
+  }
 }
+
+/* 大屏幕优化 */
+@media (min-width: 1400px) {
+  .heroContent {
+    max-width: 1400px;
+    gap: var(--space-20);
+  }
+  
+  .mainTitle {
+    font-size: 4.5rem;
+    line-height: 1.05;
+  }
+  
+  .heroDescription {
+    font-size: 1.5rem;
+    line-height: 1.8;
+    margin-bottom: var(--space-16);
+  }
+  
+  .primaryButton,
+  .secondaryButton {
+    padding: var(--space-6) var(--space-12);
+    font-size: 1.25rem;
+    min-width: 180px;
+  }
+  
+  .heroCard {
+    max-width: 700px;
+  }
+  
+  .cardContent {
+    padding: var(--space-12);
+  }
+  
+  .codeLines {
+    font-size: 1rem;
+    line-height: 1.8;
+  }
+}
+
+/* 高分辨率屏幕优化 */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 2dppx) {
+  .heroCard {
+    border-width: 0.5px;
+  }
+}
+
+/* 响应式设计 - 已整合到上述对应样式中 */
 

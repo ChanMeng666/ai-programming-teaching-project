@@ -1258,3 +1258,25 @@ header.hero .container {
     transform: translate3d(85px,0,0);
   }
 }
+
+/* 确保特性卡片间距在移动端正确显示 */
+@media (max-width: 480px) {
+  /* 覆盖任何可能的全局样式 */
+  .features .featuresGrid {
+    gap: 3.5rem !important;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+  }
+  
+  .features .featureItem {
+    margin: 0 !important;
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .features .featuresGrid {
+    gap: 2.5rem !important;
+    grid-template-columns: 1fr !important;
+  }
+}

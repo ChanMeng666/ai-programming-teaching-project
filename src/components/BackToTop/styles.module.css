@@ -39,10 +39,20 @@
 
 @media (max-width: 768px) {
   .backToTop {
-    bottom: 15px;
-    right: 15px;
-    width: 35px;
-    height: 35px;
+    bottom: 20px;
+    right: 20px;
+    width: 44px;
+    height: 44px;
     font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .backToTop {
+    bottom: 16px;
+    right: 16px;
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
   }
 } 
