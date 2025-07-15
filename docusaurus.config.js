@@ -12,7 +12,7 @@ import { Analytics } from '@vercel/analytics/react';
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'AI Programming',
-  tagline: 'Dinosaurs are cool',
+  tagline: '通过实践案例学习人工智能开发',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
@@ -44,12 +44,10 @@ const config = {
     },
   },
 
-  // Even if you don't use internationalization, you can use this field to set
-  // useful metadata like html lang. For example, if your site is Chinese, you
-  // may want to replace "en" with "zh-Hans".
+  // 国际化配置 - 设置为中文
   i18n: {
-    defaultLocale: 'en',
-    locales: ['en'],
+    defaultLocale: 'zh-Hans',
+    locales: ['zh-Hans'],
   },
 
   presets: [
@@ -121,6 +119,16 @@ const config = {
         // Optional: Algolia search parameters
         searchParameters: {
           hitsPerPage: 20,
+          // 中文搜索优化
+          queryLanguages: ['zh-Hans', 'zh', 'en'],
+          // 启用部分匹配
+          queryType: 'prefixLast',
+          // 移除停用词
+          removeStopWords: ['zh'],
+          // 容错设置
+          typoTolerance: 'min',
+          // 启用高级语法
+          advancedSyntax: true,
         },
 
         // Optional: path for search page that enabled by default (`false` to disable it)
