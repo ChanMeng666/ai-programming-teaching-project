@@ -1,6 +1,6 @@
 User-agent: *
 Allow: /
 
-# Algolia-Crawler-Verif: 5B22D713677B41A1
+# Algolia-Crawler-Verif: 24E3EF4EBEC4CC2E
 
 Sitemap: https://ai-programming-teaching-project.vercel.app/sitemap.xml 
