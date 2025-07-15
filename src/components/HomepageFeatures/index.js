@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import Heading from '@theme/Heading';
+import WaveAnimation from '@site/src/components/WaveAnimation';
 import styles from './styles.module.css';
 
 const FeatureList = [
@@ -54,6 +55,12 @@ function Feature({Svg, title, description}) {
 export default function HomepageFeatures() {
   return (
     <section className={styles.features}>
+      <WaveAnimation 
+        direction="up" 
+        color="hero-gradient" 
+        height="60px"
+        className={styles.featuresWave}
+      />
       <div className="container">
         <div className="row">
           {FeatureList.map((props, idx) => (

@@ -1,57 +1,318 @@
-/**
- * CSS files with the .module.css suffix will be treated as CSS modules
- * and scoped locally.
- */
+/* 主页面容器 */
+.main {
+  background: var(--color-background);
+  overflow-x: hidden;
+}
 
-.heroBanner {
-  padding: 4rem 0;
-  text-align: center;
+/* 通用容器 */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-6);
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 var(--space-4);
+  }
+}
+
+/* Hero 区域 */
+.hero {
   position: relative;
+  padding: var(--space-40) 0 var(--space-40);
+  background: var(--color-background-secondary);
   overflow: hidden;
   min-height: 80vh;
   display: flex;
   align-items: center;
-  color: var(--color-background);
-  animation: gradientFlow 10s ease infinite;
-  background-size: 200% 200%;
 }
 
-@media screen and (max-width: 996px) {
-  .heroBanner {
-    padding: 2rem;
-    min-height: 60vh;
-    padding-top: calc(var(--ifm-navbar-height) + 2rem);
+.heroContent {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-8);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-20);
+  align-items: center;
+  width: 100%;
+}
+
+@media (max-width: 968px) {
+  .hero {
+    min-height: 70vh;
+    padding: var(--space-32) 0;
+  }
+  
+  .heroContent {
+    grid-template-columns: 1fr;
+    gap: var(--space-16);
+    text-align: center;
+    padding: 0 var(--space-6);
   }
 }
 
-.buttons {
+.heroText {
+  z-index: 1;
+}
+
+.heroTitle {
+  position: relative;
+  margin-bottom: var(--space-8);
+}
+
+.mainTitle {
+  font-size: 3.5rem;
+  font-weight: var(--ifm-font-weight-bold);
+  line-height: 1.1;
+  color: var(--color-text-primary);
+  margin: 0;
+  background: linear-gradient(135deg, var(--color-teal) 0%, var(--color-coral) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: fadeInUp var(--animation-duration-slow) var(--animation-timing-ease-out);
+}
+
+@media (max-width: 968px) {
+  .mainTitle {
+    font-size: 2.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .mainTitle {
+    font-size: 2.2rem;
+  }
+}
+
+.titleAccent {
+  position: absolute;
+  bottom: -var(--space-2);
+  left: 0;
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--color-coral), var(--color-teal));
+  border-radius: var(--radius-full);
+  animation: slideInLeft var(--animation-duration-slow) var(--animation-timing-ease-out) 0.2s both;
+}
+
+@media (max-width: 968px) {
+  .titleAccent {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+.heroDescription {
+  font-size: 1.25rem;
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-10);
+  max-width: 500px;
+  animation: fadeInUp var(--animation-duration-slow) var(--animation-timing-ease-out) 0.1s both;
+}
+
+@media (max-width: 968px) {
+  .heroDescription {
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.heroActions {
+  display: flex;
+  gap: var(--space-5);
+  animation: fadeInUp var(--animation-duration-slow) var(--animation-timing-ease-out) 0.2s both;
+}
+
+@media (max-width: 480px) {
+  .heroActions {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.primaryButton {
+  background: linear-gradient(135deg, var(--color-teal) 0%, var(--color-coral) 100%);
+  color: white;
+  border: none;
+  padding: var(--space-4) var(--space-8);
+  border-radius: var(--radius-lg);
+  font-weight: var(--ifm-font-weight-semibold);
+  font-size: 1.1rem;
+  text-decoration: none;
+  transition: all var(--animation-duration-normal) var(--animation-timing-ease);
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+  min-width: 140px;
+}
+
+.primaryButton:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  text-decoration: none;
+  color: white;
+  background: linear-gradient(135deg, var(--color-coral) 0%, var(--color-teal) 100%);
+}
+
+.primaryButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left var(--animation-duration-slow) var(--animation-timing-ease);
+}
+
+.primaryButton:hover::before {
+  left: 100%;
+}
+
+.secondaryButton {
+  background: var(--color-surface);
+  color: var(--color-text-primary);
+  border: 2px solid var(--color-border);
+  padding: var(--space-4) var(--space-8);
+  border-radius: var(--radius-lg);
+  font-weight: var(--ifm-font-weight-semibold);
+  font-size: 1.1rem;
+  text-decoration: none;
+  transition: all var(--animation-duration-normal) var(--animation-timing-ease);
+  box-shadow: var(--shadow-sm);
+  min-width: 140px;
+}
+
+.secondaryButton:hover {
+  background: var(--color-surface-hover);
+  border-color: var(--color-secondary);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+  text-decoration: none;
+  color: var(--color-text-primary);
+}
+
+/* Hero 视觉元素 */
+.heroVisual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeInUp var(--animation-duration-slow) var(--animation-timing-ease-out) 0.3s both;
+}
+
+.heroCard {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xl);
+  overflow: hidden;
+  width: 100%;
+  max-width: 450px;
+  transition: transform var(--animation-duration-slow) var(--animation-timing-ease);
+  margin: 0 auto;
+}
+
+.heroCard:hover {
+  transform: translateY(-4px) scale(1.02);
+}
+
+.cardHeader {
+  background: var(--color-background-secondary);
+  padding: var(--space-4) var(--space-6);
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: var(--space-md);
-  margin-top: var(--space-xl);
-  animation: fadeInDown 0.8s var(--animation-timing) 0.4s backwards;
+  gap: var(--space-4);
+  border-bottom: 1px solid var(--color-border);
 }
 
-@keyframes gradientFlow {
-  0% {
-    background-position: 0% 50%;
-    background-size: 100% 100%;
-  }
-  50% {
-    background-position: 100% 50%;
-    background-size: 120% 120%;
-  }
-  100% {
-    background-position: 0% 50%;
-    background-size: 100% 100%;
-  }
+.cardDots {
+  display: flex;
+  gap: var(--space-2);
 }
 
-@keyframes fadeInDown {
+.cardDots span {
+  width: 12px;
+  height: 12px;
+  border-radius: var(--radius-full);
+  background: var(--color-text-muted);
+}
+
+.cardDots span:nth-child(1) {
+  background: #ff5f57;
+}
+
+.cardDots span:nth-child(2) {
+  background: #ffbd2e;
+}
+
+.cardDots span:nth-child(3) {
+  background: #28ca42;
+}
+
+.cardTitle {
+  font-size: 0.875rem;
+  font-weight: var(--ifm-font-weight-medium);
+  color: var(--color-text-secondary);
+}
+
+.cardContent {
+  padding: var(--space-8);
+}
+
+.codeLines {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.codeLine {
+  margin-bottom: var(--space-2);
+  animation: typewriter 0.5s steps(20) both;
+}
+
+.codeLine:nth-child(1) { animation-delay: 0.5s; }
+.codeLine:nth-child(2) { animation-delay: 0.7s; }
+.codeLine:nth-child(3) { animation-delay: 0.9s; }
+.codeLine:nth-child(4) { animation-delay: 1.1s; }
+
+.codeKeyword {
+  color: var(--color-teal);
+  font-weight: var(--ifm-font-weight-semibold);
+}
+
+.codeString {
+  color: var(--color-success);
+}
+
+.codeFunction {
+  color: var(--color-coral);
+}
+
+.codeComment {
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+.codeIndent {
+  color: var(--color-text-tertiary);
+}
+
+
+
+
+
+
+
+/* 动画 */
+@keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(-20px);
+    transform: translateY(30px);
   }
   to {
     opacity: 1;
@@ -59,10 +320,54 @@
   }
 }
 
-.heroBanner .hero__title {
-  animation: fadeInDown 0.8s var(--animation-timing) backwards;
+@keyframes slideInLeft {
+  from {
+    width: 0;
+    opacity: 0;
+  }
+  to {
+    width: 60px;
+    opacity: 1;
+  }
 }
 
-.heroBanner .hero__subtitle {
-  animation: fadeInDown 0.8s var(--animation-timing) 0.2s backwards;
+@keyframes typewriter {
+  from {
+    width: 0;
+    opacity: 0;
+  }
+  to {
+    width: 100%;
+    opacity: 1;
+  }
 }
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .hero {
+    padding: var(--space-24) 0 var(--space-16);
+  }
+  
+  .mainTitle {
+    font-size: 2.5rem;
+  }
+  
+  .heroDescription {
+    font-size: 1.125rem;
+  }
+  
+
+}
+

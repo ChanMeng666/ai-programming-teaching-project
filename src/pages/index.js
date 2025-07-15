@@ -3,83 +3,92 @@ import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
+import WaveAnimation from '@site/src/components/WaveAnimation';
 import Heading from '@theme/Heading';
 import styles from './index.module.css';
 import { Analytics } from '@vercel/analytics/react';
 
-// function HomepageHeader() {
-//   const {siteConfig} = useDocusaurusContext();
-//   return (
-//     <header className={clsx('hero', styles.heroBanner)}>
-//       <div className="container">
-//         <Heading as="h1" className="hero__title">
-//           掌握AI编程
-//         </Heading>
-//         <p className="hero__subtitle">
-//           通过实践案例学习人工智能开发
-//         </p>
-//         <div className={styles.buttons}>
-//           <Link
-//             className="button button--primary button--lg"
-//             to="/docs/intro">
-//             开始学习
-//           </Link>
-//         </div>
-//       </div>
-//     </header>
-//   );
-// }
-
-function HomepageHeader() {
+function HeroSection() {
   const {siteConfig} = useDocusaurusContext();
   return (
-    <header className={clsx('hero hero--primary', styles.heroBanner)}>
-      <svg 
-        className="waves"
-        xmlns="http://www.w3.org/2000/svg"
-        xmlnsXlink="http://www.w3.org/1999/xlink"
-        viewBox="0 24 150 28"
-        preserveAspectRatio="none"
-        shapeRendering="auto"
-      >
-        <defs>
-          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
-        </defs>
-        <g className="parallax">
-          <use xlinkHref="#gentle-wave" x="48" y="0" />
-          <use xlinkHref="#gentle-wave" x="48" y="3" />
-          <use xlinkHref="#gentle-wave" x="48" y="5" />
-          <use xlinkHref="#gentle-wave" x="48" y="7" />
-        </g>
-      </svg>
-      
-      <div className="container">
-        <Heading as="h1" className="hero__title">
-          掌握AI编程
-        </Heading>
-        <p className="hero__subtitle">
-          通过实践案例学习人工智能开发
-        </p>
-        <div className={styles.buttons}>
-          <Link
-            className="button button--secondary button--lg"
-            to="/docs/intro">
-            开始学习
-          </Link>
+    <section className={styles.hero}>
+      <div className={styles.heroContent}>
+        <div className={styles.heroText}>
+          <div className={styles.heroTitle}>
+            <Heading as="h1" className={styles.mainTitle}>
+              掌握AI编程
+            </Heading>
+            <div className={styles.titleAccent}></div>
+          </div>
+          <p className={styles.heroDescription}>
+            通过实践案例学习人工智能开发，从基础到进阶，
+            <br />
+            打造完整的AI编程技能体系
+          </p>
+          <div className={styles.heroActions}>
+            <Link
+              className={clsx('button', styles.primaryButton)}
+              to="/docs/intro">
+              开始学习
+            </Link>
+            <Link
+              className={clsx('button', styles.secondaryButton)}
+              to="/blog">
+              阅读博客
+            </Link>
+          </div>
+        </div>
+        <div className={styles.heroVisual}>
+          <div className={styles.heroCard}>
+            <div className={styles.cardHeader}>
+              <div className={styles.cardDots}>
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+              <span className={styles.cardTitle}>AI Programming</span>
+            </div>
+            <div className={styles.cardContent}>
+              <div className={styles.codeLines}>
+                <div className={styles.codeLine}>
+                  <span className={styles.codeKeyword}>import</span>
+                  <span className={styles.codeString}> ai_tools</span>
+                </div>
+                <div className={styles.codeLine}>
+                  <span className={styles.codeKeyword}>def</span>
+                  <span className={styles.codeFunction}> create_app</span>():
+                </div>
+                <div className={styles.codeLine}>
+                  <span className={styles.codeIndent}>  </span>
+                  <span className={styles.codeComment}># 构建AI应用</span>
+                </div>
+                <div className={styles.codeLine}>
+                  <span className={styles.codeIndent}>  </span>
+                  <span className={styles.codeKeyword}>return</span>
+                  <span className={styles.codeString}> "Hello AI"</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </header>
+
+    </section>
   );
 }
+
+
+
+
 
 export default function Home() {
   const {siteConfig} = useDocusaurusContext();
   return (
     <Layout
       title="AI编程学习平台"
-      description="通过实践案例学习AI编程">
-      <HomepageHeader />
-      <main>
+      description="通过实践案例学习AI编程，掌握现代人工智能开发技能">
+      <main className={styles.main}>
+        <HeroSection />
         <HomepageFeatures />
       </main>
       <Analytics />

@@ -1,0 +1,134 @@
+/* 波浪容器 */
+.wave {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.waveSvg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* 波浪动画 */
+.parallax > use {
+  animation: moveForever 25s cubic-bezier(.55,.5,.45,.5) infinite;
+}
+
+.parallax > use:nth-child(1) {
+  animation-delay: -2s;
+  animation-duration: 7s;
+  fill: currentColor;
+  opacity: 0.7;
+}
+
+.parallax > use:nth-child(2) {
+  animation-delay: -3s;
+  animation-duration: 10s;
+  fill: currentColor;
+  opacity: 0.5;
+}
+
+.parallax > use:nth-child(3) {
+  animation-delay: -4s;
+  animation-duration: 13s;
+  fill: currentColor;
+  opacity: 0.3;
+}
+
+.parallax > use:nth-child(4) {
+  animation-delay: -5s;
+  animation-duration: 20s;
+  fill: currentColor;
+  opacity: 0.7;
+}
+
+/* 波浪方向 */
+.wave--down {
+  transform: rotate(0deg);
+}
+
+.wave--up {
+  transform: rotate(180deg);
+}
+
+/* 波浪颜色变体 */
+.wave--primary {
+  color: var(--color-primary);
+}
+
+.wave--secondary {
+  color: var(--color-secondary);
+}
+
+.wave--accent {
+  color: var(--color-accent);
+}
+
+.wave--teal {
+  color: var(--color-teal);
+}
+
+.wave--coral {
+  color: var(--color-coral);
+}
+
+.wave--light {
+  color: var(--color-light-gray);
+}
+
+.wave--dark {
+  color: var(--color-dark-gray);
+}
+
+.wave--white {
+  color: #ffffff;
+}
+
+.wave--hero-gradient {
+  background: transparent;
+}
+
+.wave--hero-gradient .parallax > use {
+  fill: var(--color-background-secondary);
+}
+
+.wave--hero-gradient .parallax > use:nth-child(1) {
+  fill: var(--color-background-secondary);
+  opacity: 0.9;
+}
+
+.wave--hero-gradient .parallax > use:nth-child(2) {
+  fill: var(--color-background-secondary);
+  opacity: 0.7;
+}
+
+.wave--hero-gradient .parallax > use:nth-child(3) {
+  fill: var(--color-background-secondary);
+  opacity: 0.5;
+}
+
+.wave--hero-gradient .parallax > use:nth-child(4) {
+  fill: var(--color-background-secondary);
+  opacity: 0.8;
+}
+
+/* 波浪动画关键帧 */
+@keyframes moveForever {
+  0% {
+    transform: translate3d(-90px, 0, 0);
+  }
+  100% {
+    transform: translate3d(85px, 0, 0);
+  }
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .wave {
+    height: 40px !important;
+  }
+} 

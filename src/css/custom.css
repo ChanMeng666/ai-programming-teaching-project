@@ -1,60 +1,166 @@
 /**
  * 基础样式系统实现
  */
-:root {
-  /* 主色系 */
-  --ifm-color-primary: #1a237e;
-  --ifm-color-primary-dark: #172069;
-  --ifm-color-primary-darker: #151e63;
-  --ifm-color-primary-darkest: #111851;
-  --ifm-color-primary-light: #1d2893;
-  --ifm-color-primary-lighter: #1f2a99;
-  --ifm-color-primary-lightest: #232fab;
 
-  /* 次要颜色 */
-  --color-secondary: #4a5fc1;
+/* 字体导入 */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  /* 新的配色方案 */
+  --ifm-color-primary: #0f7173;
+  --ifm-color-primary-dark: #0c5c5e;
+  --ifm-color-primary-darker: #0a4d4f;
+  --ifm-color-primary-darkest: #073d3f;
+  --ifm-color-primary-light: #128688;
+  --ifm-color-primary-lighter: #159b9d;
+  --ifm-color-primary-lightest: #1ab0b2;
+
+  /* 新的配色方案 */
+  --color-coral: #f05d5e;
+  --color-teal: #0f7173;
+  --color-light-gray: #e7ecef;
+  --color-dark-gray: #272932;
+  --color-bright-yellow: #f8f908;
+  
+  /* 主要配色 */
+  --color-primary: var(--color-teal);
+  --color-secondary: var(--color-coral);
+  --color-accent: var(--color-bright-yellow);
+  --color-success: #10b981;
+  --color-warning: var(--color-bright-yellow);
+  --color-error: var(--color-coral);
+  
+  /* 背景色系 */
   --color-background: #ffffff;
-  --color-text: #121212;
-  --color-light-gray: #f5f6f7;
-  --color-accent: #ef5350;
+  --color-background-secondary: var(--color-light-gray);
+  --color-background-tertiary: #f5f7f8;
+  --color-surface: #ffffff;
+  --color-surface-hover: var(--color-light-gray);
+  
+  /* 文本色系 */
+  --color-text-primary: var(--color-dark-gray);
+  --color-text-secondary: #4a5568;
+  --color-text-tertiary: #718096;
+  --color-text-muted: #a0aec0;
+  
+  /* 边框色系 */
+  --color-border: #e2e8f0;
+  --color-border-light: var(--color-light-gray);
+  --color-border-dark: #cbd5e1;
 
   /* 字体系统 */
-  --ifm-font-family-base: 'Space Grotesk', system-ui, -apple-system;
-  --ifm-font-family-monospace: 'JetBrains Mono', SFMono-Regular, Monaco;
+  --ifm-font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --ifm-font-family-monospace: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
   --ifm-font-size-base: 16px;
-  --ifm-heading-font-weight: 600;
-  --ifm-h1-font-size: 2.5rem;
-  --ifm-h2-font-size: 2rem;
-  --ifm-h3-font-size: 1.5rem;
+  --ifm-line-height-base: 1.6;
+  --ifm-heading-font-weight: 700;
+  --ifm-font-weight-base: 400;
+  --ifm-font-weight-medium: 500;
+  --ifm-font-weight-semibold: 600;
+  --ifm-font-weight-bold: 700;
+  
+  /* 字体大小系统 */
+  --ifm-h1-font-size: 3.5rem;
+  --ifm-h2-font-size: 2.5rem;
+  --ifm-h3-font-size: 1.875rem;
+  --ifm-h4-font-size: 1.5rem;
+  --ifm-h5-font-size: 1.25rem;
+  --ifm-h6-font-size: 1.125rem;
+  
+  /* 间距系统 - 8px基础单位 */
+  --space-1: 0.125rem;  /* 2px */
+  --space-2: 0.25rem;   /* 4px */
+  --space-3: 0.375rem;  /* 6px */
+  --space-4: 0.5rem;    /* 8px */
+  --space-6: 0.75rem;   /* 12px */
+  --space-8: 1rem;      /* 16px */
+  --space-10: 1.25rem;  /* 20px */
+  --space-12: 1.5rem;   /* 24px */
+  --space-16: 2rem;     /* 32px */
+  --space-20: 2.5rem;   /* 40px */
+  --space-24: 3rem;     /* 48px */
+  --space-32: 4rem;     /* 64px */
+  --space-40: 5rem;     /* 80px */
+  --space-48: 6rem;     /* 96px */
+  --space-64: 8rem;     /* 128px */
+  
+  /* 兼容性别名 */
+  --space-xs: var(--space-2);
+  --space-sm: var(--space-4);
+  --space-md: var(--space-8);
+  --space-lg: var(--space-12);
+  --space-xl: var(--space-16);
+  --space-2xl: var(--space-24);
+  --space-3xl: var(--space-32);
 
-  /* 间距系统 */
-  --space-xs: 0.25rem;
-  --space-sm: 0.5rem;
-  --space-md: 1rem;
-  --space-lg: 1.5rem;
-  --space-xl: 2rem;
-
+  /* 阴影系统 */
+  --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+  
+  /* 边框半径系统 */
+  --radius-none: 0;
+  --radius-sm: 0.125rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1rem;
+  --radius-3xl: 1.5rem;
+  --radius-full: 9999px;
+  
+  /* 动画系统 */
+  --animation-duration-fast: 0.15s;
+  --animation-duration-normal: 0.3s;
+  --animation-duration-slow: 0.5s;
+  --animation-timing-ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --animation-timing-ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --animation-timing-ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --animation-timing-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  
   /* 其他全局变量 */
   --ifm-code-font-size: 0.9375rem;
-  --ifm-line-height-base: 1.5;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
 
-  /* 添加动画变量 */
-  --animation-duration: 0.2s;
-  --animation-timing: cubic-bezier(0.4, 0, 0.2, 1);
+  /* 兼容性别名 */
+  --animation-duration: var(--animation-duration-normal);
+  --animation-timing: var(--animation-timing-ease);
 }
 
 /* 深色模式变量 */
 [data-theme='dark'] {
-  --ifm-color-primary: #4a5fc1;
-  --ifm-color-primary-dark: #4255ad;
-  --ifm-color-primary-darker: #3e51a3;
-  --ifm-color-primary-darkest: #334286;
-  --ifm-color-primary-light: #5f71c7;
-  --ifm-color-primary-lighter: #697ac9;
-  --ifm-color-primary-lightest: #8693d4;
-  --color-background: #121212;
-  --color-text: #ffffff;
+  --ifm-color-primary: #1ab0b2;
+  --ifm-color-primary-dark: #159b9d;
+  --ifm-color-primary-darker: #128688;
+  --ifm-color-primary-darkest: #0f7173;
+  --ifm-color-primary-light: #1dc5c7;
+  --ifm-color-primary-lighter: #20dadc;
+  --ifm-color-primary-lightest: #23eff1;
+  
+  --color-secondary: #ff7a7b;
+  --color-accent: #fbfb0a;
+  --color-success: #34d399;
+  --color-warning: #fbfb0a;
+  --color-error: #ff7a7b;
+  
+  --color-background: var(--color-dark-gray);
+  --color-background-secondary: #1e1f26;
+  --color-background-tertiary: #2a2b33;
+  --color-surface: #1e1f26;
+  --color-surface-hover: #2a2b33;
+  
+  --color-text-primary: #f8fafc;
+  --color-text-secondary: #cbd5e1;
+  --color-text-tertiary: #94a3b8;
+  --color-text-muted: #64748b;
+  
+  --color-border: #3a3b43;
+  --color-border-light: #4a4b53;
+  --color-border-dark: #2a2b33;
+  
   --docusaurus-highlighted-code-line-bg: rgba(255, 255, 255, 0.1);
 }
 
@@ -62,7 +168,49 @@
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 var(--space-md);
+  padding: 0 var(--space-6);
+}
+
+/* 全局基础样式 */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--ifm-font-family-base);
+  font-weight: var(--ifm-font-weight-base);
+  line-height: var(--ifm-line-height-base);
+  color: var(--color-text-primary);
+  background-color: var(--color-background);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 改进标题样式 */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: var(--ifm-heading-font-weight);
+  line-height: 1.2;
+  margin-bottom: var(--space-4);
+  color: var(--color-text-primary);
+}
+
+/* 改进段落样式 */
+p {
+  margin-bottom: var(--space-4);
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+/* 改进链接样式 */
+a {
+  color: var(--color-secondary);
+  text-decoration: none;
+  transition: color var(--animation-duration-normal) var(--animation-timing-ease);
+}
+
+a:hover {
+  color: var(--color-accent);
+  text-decoration: underline;
 }
 
 /* 导航栏基础样式 */
