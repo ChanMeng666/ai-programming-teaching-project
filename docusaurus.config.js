@@ -106,65 +106,25 @@ const config = {
       image: 'img/docusaurus-social-card.jpg',
       // Algolia DocSearch 配置
       algolia: {
-        // The application ID provided by Algolia - Application ID
+        // The application ID provided by Algolia
         appId: '8VHXTP609D',
 
-        // Public API key: it is safe to commit it - Search API Key
+        // Public API key: it is safe to commit it
         apiKey: 'f70da822145b6159e198fc85147e0564',
 
-        // Crawler Name (尝试使用主索引名称)
-        indexName: 'ai_programming_teaching_project_vercel_app_8vhxtp609d',
+        // Use the pages index which contains the main content
+        indexName: 'ai_programming_teaching_project_vercel_app_8vhxtp609d_pages',
 
         // Optional: see doc section below
-        contextualSearch: false,
-
-        // Optional: Specify domains where the navigation should occur through window.location instead on history.push. Useful when our Algolia config crawls multiple documentation sites and we want to navigate with window.location.href to them.
-        externalUrlRegex: 'external\\.com|domain\\.com',
-
-        // Comment out or adjust this section to fix URL mapping issues
-        /*
-        replaceSearchResultPathname: {
-          from: '/docs/', // or as RegExp: /\/docs\//
-          to: '/',
-        },
-        */
+        contextualSearch: true,
 
         // Optional: Algolia search parameters
         searchParameters: {
-          // 启用模糊搜索和前缀搜索
-          typoTolerance: true,
           hitsPerPage: 20,
-          // 可以添加其他搜索参数
-          facetFilters: [],
-          // 添加中文搜索支持
-          queryLanguages: ['zh', 'en'],
-          // 启用部分匹配
-          queryType: 'prefixLast',
-          // 移除停用词
-          removeStopWords: true,
         },
 
         // Optional: path for search page that enabled by default (`false` to disable it)
         searchPagePath: 'search',
-
-        // Optional: whether the insights feature is enabled or not on Docsearch (`false` by default)
-        insights: false,
-
-        // Optional: 启用调试模式
-        debug: true,
-
-        // Optional: 自定义搜索模式
-        searchMode: 'search',
-
-        // Optional: 自定义搜索字段
-        searchableAttributes: [
-          'title',
-          'description', 
-          'content',
-          'headers',
-          'unordered(content)',
-          'unordered(title)',
-        ],
 
         //... other Algolia params
       },
