@@ -112,8 +112,8 @@ const config = {
         // Public API key: it is safe to commit it
         apiKey: 'f70da822145b6159e198fc85147e0564',
 
-        // Use the pages index which contains the main content
-        indexName: 'ai_programming_teaching_project_vercel_app_8vhxtp609d_pages',
+        // 使用主索引名称，不使用子索引
+        indexName: 'ai-programming-crawler',
 
         // Optional: see doc section below
         contextualSearch: true,
