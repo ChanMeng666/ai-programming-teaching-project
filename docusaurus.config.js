@@ -145,7 +145,7 @@ const config = {
         insights: false,
 
         // Optional: 启用调试模式
-        debug: false,
+        debug: true,
 
         // Optional: 自定义搜索模式
         searchMode: 'search',
