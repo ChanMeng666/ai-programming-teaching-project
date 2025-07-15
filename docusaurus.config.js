@@ -113,7 +113,7 @@ const config = {
         apiKey: 'f70da822145b6159e198fc85147e0564',
 
         // Use the pages index which contains the main content
-        indexName: 'ai_programming_teaching_project_vercel_app_8vhxtp609d_pages',
+        indexName: 'ai-programming-teaching-project.vercel.app_8VHXTP609D',
 
         // Optional: see doc section below
         contextualSearch: true,
