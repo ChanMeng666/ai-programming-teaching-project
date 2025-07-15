@@ -106,20 +106,39 @@ const config = {
       image: 'img/docusaurus-social-card.jpg',
       // Algolia DocSearch 配置
       algolia: {
-        // Algolia 提供的应用 ID
+        // The application ID provided by Algolia - Application ID
         appId: 'NC7L0R4G5R',
-        // 公开的搜索 API 密钥（可以安全地提交到代码库）
+
+        // Public API key: it is safe to commit it - Search API Key
         apiKey: 'c738c2f5636117aa4bfb0fe2f952fc70',
-        // Crawler名称（使用主索引名称以搜索所有相关索引）
+
+        // Crawler Name
         indexName: 'ai-programming-crawler',
-        // 可选：启用上下文搜索
+
+        // Optional: see doc section below
         contextualSearch: true,
-        // 可选：搜索页面路径
-        searchPagePath: 'search',
-        // 可选：Algolia 搜索参数
+
+        // Optional: Specify domains where the navigation should occur through window.location instead on history.push. Useful when our Algolia config crawls multiple documentation sites and we want to navigate with window.location.href to them.
+        externalUrlRegex: 'external\\.com|domain\\.com',
+
+        // Comment out or adjust this section to fix URL mapping issues
+        /*
+        replaceSearchResultPathname: {
+          from: '/docs/', // or as RegExp: /\/docs\//
+          to: '/',
+        },
+        */
+
+        // Optional: Algolia search parameters
         searchParameters: {},
-        // 可选：是否启用 insights 功能
+
+        // Optional: path for search page that enabled by default (`false` to disable it)
+        searchPagePath: 'search',
+
+        // Optional: whether the insights feature is enabled or not on Docsearch (`false` by default)
         insights: false,
+
+        //... other Algolia params
       },
       // 文档侧边栏配置
       docs: {
