@@ -111,7 +111,7 @@ const config = {
         // 公开的搜索 API 密钥（可以安全地提交到代码库）
         apiKey: 'a77981e4aa29b145522c6c0c059a3860',
         // 索引名称
-        indexName: 'ai-programming-docs',
+        indexName: 'ai-programming-teaching-project.vercel.app_NC7L0R4G5R',
         // 可选：启用上下文搜索
         contextualSearch: true,
         // 可选：搜索页面路径
