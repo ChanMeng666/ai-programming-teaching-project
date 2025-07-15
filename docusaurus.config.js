@@ -29,6 +29,21 @@ const config = {
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
 
+  // Future flags for Docusaurus v4 preparation and performance optimizations
+  future: {
+    // Enable all v4 future flags for easier migration
+    v4: {
+      useCssCascadeLayers: true,
+      removeLegacyPostBuildHeadAttribute: true,
+    },
+    // Enable Docusaurus Faster experimental features
+    experimental_faster: {
+      rspackBundler: true,
+      rspackPersistentCache: true,
+      ssgWorkerThreads: true,
+    },
+  },
+
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
   // may want to replace "en" with "zh-Hans".
