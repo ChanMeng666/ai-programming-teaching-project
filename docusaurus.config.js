@@ -107,11 +107,11 @@ const config = {
       // Algolia DocSearch 配置
       algolia: {
         // Algolia 提供的应用 ID
-        appId: '2P2Y1NV01R',
+        appId: 'NC7L0R4G5R',
         // 公开的搜索 API 密钥（可以安全地提交到代码库）
-        apiKey: '306642f4b4f3e192ba8b94966c3eef14',
+        apiKey: 'c738c2f5636117aa4bfb0fe2f952fc70',
         // Crawler名称（使用主索引名称以搜索所有相关索引）
-        indexName: 'ai-programming-teaching-project.vercel.app_2P2Y1NV01R',
+        indexName: 'ai-programming-crawler',
         // 可选：启用上下文搜索
         contextualSearch: true,
         // 可选：搜索页面路径
