@@ -1,9 +1,0 @@
-{
-  "label": "博客定制",
-  "position": 8,
-  "link": {
-    "type": "generated-index",
-    "description": "学习如何定制和部署你的博客，包括基础配置、内容管理、版本控制和部署维护等内容。",
-    "slug": "/category/customization"
-  }
-} 

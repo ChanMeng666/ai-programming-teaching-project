@@ -1,9 +1,0 @@
-{
-  "label": "AI对话系统",
-  "position": 5,
-  "link": {
-    "type": "generated-index", 
-    "description": "学习如何开发中国艺人AI对话系统，包括环境配置、项目开发和部署维护等完整流程。",
-    "slug": "/category/ai-chat"
-  }
-} 

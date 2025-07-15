@@ -1,0 +1,9 @@
+{
+  "label": "优秀案例",
+  "position": 2,
+  "link": {
+    "type": "generated-index",
+    "description": "展示优秀学员的作品案例，提供实际项目参考和学习灵感。",
+    "slug": "/category/cases"
+  }
+} 

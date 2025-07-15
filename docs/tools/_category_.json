@@ -1,9 +1,9 @@
 {
   "label": "开发工具",
-  "position": 6,
+  "position": 4,
   "link": {
     "type": "generated-index",
-    "description": "掌握Cursor、v0和Vercel等现代开发工具的使用方法，提高开发效率。",
+    "description": "掌握Cursor、v0、Vercel和Coze等现代开发工具的使用方法，提高开发效率。",
     "slug": "/category/tools"
   }
 } 

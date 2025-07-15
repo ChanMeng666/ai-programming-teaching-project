@@ -31,34 +31,6 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: '教程',
-      link: {
-        type: 'doc',
-        id: 'tutorials/index'
-      },
-      items: [
-        'tutorials/docusaurus-tutorial',
-        'tutorials/sasa-project',
-        'tutorials/stella-project',
-      ],
-    },
-    {
-      type: 'category',
-      label: 'AI对话系统',
-      link: {
-        type: 'doc',
-        id: 'ai-chat/index'
-      },
-      items: [
-        'ai-chat/environment',
-        'ai-chat/project-setup',
-        'ai-chat/development',
-        'ai-chat/testing-deployment',
-        'ai-chat/best-practices',
-      ],
-    },
-    {
-      type: 'category',
       label: '开发工具',
       link: {
         type: 'doc',
@@ -69,6 +41,18 @@ const sidebars = {
         'tools/v0-platform',
         'tools/vercel-deploy',
         'tools/workflow-integration',
+        'tools/coze-tutorial',
+      ],
+    },
+    {
+      type: 'category',
+      label: '基础教程',
+      link: {
+        type: 'doc',
+        id: 'tutorials/index'
+      },
+      items: [
+        'tutorials/docusaurus-tutorial',
       ],
     },
     {
@@ -82,53 +66,42 @@ const sidebars = {
         'practice/blog-planning',
         'practice/cursor-development',
         'practice/v0-development',
-        'practice/vercel-deployment',
         'practice/maintenance',
         'practice/summary',
       ],
     },
     {
       type: 'category',
-      label: '博客定制',
+      label: '进阶应用',
       link: {
         type: 'doc',
-        id: 'customization/index'
+        id: 'advanced/index'
       },
       items: [
-        'customization/basic-config',
-        'customization/content-management',
-        'customization/version-control',
-        'customization/vercel-deployment',
-        'customization/maintenance',
-      ],
-    },
-    {
-      type: 'category',
-      label: 'AI绘图教程',
-      link: {
-        type: 'doc',
-        id: 'ai-drawing/index'
-      },
-      items: [
-        'ai-drawing/logo-design',
-        'ai-drawing/image-generation',
-        'ai-drawing/3d-modeling',
-        'ai-drawing/practical-exercise',
-      ],
-    },
-    {
-      type: 'category',
-      label: 'Coze教程',
-      link: {
-        type: 'doc',
-        id: 'coze/index'
-      },
-      items: [
-        'coze/environment-setup',
-        'coze/browse-node-setup',
-        'coze/llm-node-setup',
-        'coze/text-processing-setup',
-        'coze/testing-optimization',
+        {
+          type: 'category',
+          label: 'AI系统开发',
+          link: {
+            type: 'doc',
+            id: 'advanced/ai-systems/index'
+          },
+          items: [
+            'advanced/ai-systems/ai-chat',
+            'advanced/ai-systems/ai-drawing',
+          ],
+        },
+        {
+          type: 'category',
+          label: '优秀案例',
+          link: {
+            type: 'doc',
+            id: 'advanced/cases/index'
+          },
+          items: [
+            'advanced/cases/sasa-project',
+            'advanced/cases/stella-project',
+          ],
+        },
       ],
     },
   ],

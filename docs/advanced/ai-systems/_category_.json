@@ -1,0 +1,9 @@
+{
+  "label": "AI系统开发",
+  "position": 1,
+  "link": {
+    "type": "generated-index",
+    "description": "学习如何开发各类AI系统，包括对话系统和图像生成应用。",
+    "slug": "/category/ai-systems"
+  }
+} 

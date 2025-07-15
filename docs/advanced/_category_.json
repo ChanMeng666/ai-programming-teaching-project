@@ -1,0 +1,9 @@
+{
+  "label": "进阶应用",
+  "position": 7,
+  "link": {
+    "type": "generated-index",
+    "description": "深入学习AI在特定领域的应用，包括对话系统、图像生成等高级主题以及优秀案例展示。",
+    "slug": "/category/advanced"
+  }
+} 

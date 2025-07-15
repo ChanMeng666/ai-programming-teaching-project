@@ -128,8 +128,8 @@ const config = {
                 to: '/docs/practice/blog-planning',
               },
               {
-                label: '进阶主题',
-                to: '/docs/customization/basic-config',
+                label: '进阶应用',
+                to: '/docs/advanced/',
               },
             ],
           },
