@@ -1,0 +1,35 @@
+{
+  "tutorialSidebar": [
+    {
+      "type": "doc",
+      "id": "intro",
+      "label": "🌟 活动介绍"
+    },
+    {
+      "type": "category",
+      "label": "📚 基础教程",
+      "collapsible": true,
+      "collapsed": false,
+      "items": [
+        {
+          "type": "doc",
+          "id": "basics/index",
+          "label": "概览"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "🚀 实践项目",
+      "collapsible": true,
+      "collapsed": false,
+      "items": [
+        {
+          "type": "doc",
+          "id": "practice/index",
+          "label": "项目概览"
+        }
+      ]
+    }
+  ]
+}

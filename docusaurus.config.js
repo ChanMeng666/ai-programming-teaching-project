@@ -62,6 +62,21 @@ const config = {
           // Edit this page links to your repository
           editUrl:
             'https://github.com/ChanMeng666/ai-programming-teaching-project/tree/main/',
+          // 版本控制配置
+          lastVersion: '2025-summer',  // 设置2025-summer为默认版本
+          includeCurrentVersion: false,  // 不包含current版本
+          versions: {
+            '2025-summer': {
+              label: '2025年夏季她行活动',
+              path: '/',  // 设置为根路径，这样用户访问网站时默认看到这个版本
+              banner: 'none',
+            },
+            '2024-winter': {
+              label: '2024年冬季她行活动',
+              path: '2024-winter',
+              banner: 'none',
+            },
+          },
         },
         blog: {
           showReadingTime: true,
@@ -118,6 +133,15 @@ const config = {
             label: '教程',
           },
           {to: '/blog', label: '博客', position: 'left'},
+          {
+            type: 'docsVersionDropdown',
+            position: 'left',
+            dropdownActiveClassDisabled: true,
+            versions: {
+              '2025-summer': {label: '2025年夏季她行活动'},
+              '2024-winter': {label: '2024年冬季她行活动'},
+            },
+          },
           {
             href: 'https://github.com/ChanMeng666/ai-programming-teaching-project',
             label: 'GitHub',
