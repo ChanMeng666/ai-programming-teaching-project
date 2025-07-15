@@ -17,14 +17,14 @@ import TabItem from '@theme/TabItem';
 
 #### 1. 使用create-next-app
 
-```bash
+```bash title="终端命令"
 npx create-next-app@latest my-blog --typescript --tailwind --eslint
 cd my-blog
 ```
 
 #### 2. 安装依赖
 
-```bash
+```bash title="安装核心依赖" showLineNumbers
 npm install @headlessui/react @heroicons/react
 npm install @mdx-js/react @mdx-js/loader
 npm install gray-matter next-mdx-remote
@@ -33,7 +33,7 @@ npm install date-fns
 
 #### 3. 配置项目结构
 
-```bash
+```bash title="创建项目目录结构"
 mkdir -p src/{components,layouts,lib,styles,types}
 mkdir -p content/{posts,pages}
 ```
@@ -47,7 +47,8 @@ mkdir -p content/{posts,pages}
 <div className="component-development">
 
 #### Layout组件
-```tsx
+
+```tsx title="src/components/Layout.tsx" showLineNumbers {3,9-11,17-19}
 // src/components/Layout.tsx
 import { ReactNode } from 'react';
 import Header from './Header';
@@ -62,19 +63,102 @@ interface LayoutProps {
 export default function Layout({ children, title, description }: LayoutProps) {
   return (
     <div className="min-h-screen flex flex-col">
+      {/* 顶部导航 */}
       <Header />
+      
+      {/* 主要内容区域 */}
       <main className="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {children}
       </main>
+      
+      {/* 底部信息 */}
       <Footer />
     </div>
   );
 }
 ```
 
+#### Header组件
+
+```tsx title="src/components/Header.tsx" showLineNumbers {12-14,20-22}
+import Link from 'next/link';
+import { useState } from 'react';
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+
+export default function Header() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const navigation = [
+    { name: '首页', href: '/' },
+    { name: '文章', href: '/posts' },
+    { name: '关于', href: '/about' },
+    { name: '联系', href: '/contact' },
+  ];
+
+  return (
+    <header className="bg-white shadow-sm">
+      <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between h-16">
+          <div className="flex items-center">
+            <Link href="/" className="text-xl font-bold text-gray-900">
+              我的博客
+            </Link>
+          </div>
+          
+          {/* 桌面端导航 */}
+          <div className="hidden sm:flex sm:items-center sm:space-x-8">
+            {navigation.map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                className="text-gray-500 hover:text-gray-900 px-3 py-2 text-sm font-medium"
+              >
+                {item.name}
+              </Link>
+            ))}
+          </div>
+
+          {/* 移动端菜单按钮 */}
+          <div className="sm:hidden">
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100"
+            >
+              {isMenuOpen ? (
+                <XMarkIcon className="h-6 w-6" />
+              ) : (
+                <Bars3Icon className="h-6 w-6" />
+              )}
+            </button>
+          </div>
+        </div>
+
+        {/* 移动端菜单 */}
+        {isMenuOpen && (
+          <div className="sm:hidden">
+            <div className="pt-2 pb-3 space-y-1">
+              {navigation.map((item) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className="block px-3 py-2 text-base font-medium text-gray-500 hover:text-gray-900"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {item.name}
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
+      </nav>
+    </header>
+  );
+}
+```
+
 #### 使用AI优化样式
 
-:::tip AI提示
+:::tip[AI提示]
 使用以下提示让AI帮助优化样式：
 ```
 为这个Layout组件添加响应式样式，包括：
@@ -92,315 +176,608 @@ export default function Layout({ children, title, description }: LayoutProps) {
 <div className="post-list">
 
 #### PostList组件
-```tsx
-// src/components/PostList.tsx
+
+```tsx title="src/components/PostList.tsx" showLineNumbers {5-7,15-17,25-27}
 import { useState } from 'react';
 import Link from 'next/link';
 import { Post } from '@/types';
 
 interface PostListProps {
   posts: Post[];
+  showExcerpt?: boolean;
 }
 
-export default function PostList({ posts }: PostListProps) {
+export default function PostList({ posts, showExcerpt = true }: PostListProps) {
   const [searchTerm, setSearchTerm] = useState('');
-  
+
   const filteredPosts = posts.filter(post =>
     post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
     post.excerpt.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
+      {/* 搜索框 */}
       <div className="relative">
         <input
-          type="search"
+          type="text"
           placeholder="搜索文章..."
-          className="w-full px-4 py-2 border rounded-lg"
+          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
       </div>
-      
-      <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-        {filteredPosts.map(post => (
-          <article key={post.slug} className="border rounded-lg p-6 hover:shadow-lg transition">
-            <Link href={`/posts/${post.slug}`}>
-              <h2 className="text-xl font-bold mb-2">{post.title}</h2>
-              <p className="text-gray-600 mb-4">{post.excerpt}</p>
-              <div className="flex items-center text-sm text-gray-500">
-                <time>{post.date}</time>
-                <span className="mx-2">·</span>
-                <span>{post.readingTime} min read</span>
+
+      {/* 文章列表 */}
+      <div className="space-y-4">
+        {filteredPosts.map((post) => (
+          <article key={post.slug} className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200">
+            <div className="p-6">
+              <div className="flex items-center justify-between mb-2">
+                <time className="text-sm text-gray-500">
+                  {new Date(post.date).toLocaleDateString()}
+                </time>
+                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                  {post.category}
+                </span>
               </div>
-            </Link>
+              
+              <h2 className="text-xl font-semibold text-gray-900 mb-2">
+                <Link href={`/posts/${post.slug}`} className="hover:text-blue-600">
+                  {post.title}
+                </Link>
+              </h2>
+              
+              {showExcerpt && (
+                <p className="text-gray-600 mb-4 line-clamp-3">
+                  {post.excerpt}
+                </p>
+              )}
+              
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-4">
+                  <span className="text-sm text-gray-500">
+                    阅读时间: {post.readTime}分钟
+                  </span>
+                  <span className="text-sm text-gray-500">
+                    {post.views} 次浏览
+                  </span>
+                </div>
+                
+                <Link
+                  href={`/posts/${post.slug}`}
+                  className="text-blue-600 hover:text-blue-800 text-sm font-medium"
+                >
+                  阅读更多 →
+                </Link>
+              </div>
+            </div>
           </article>
         ))}
       </div>
+      
+      {filteredPosts.length === 0 && (
+        <div className="text-center py-12">
+          <p className="text-gray-500">没有找到匹配的文章</p>
+        </div>
+      )}
     </div>
   );
 }
 ```
 
+#### 类型定义
+
+```typescript title="src/types/index.ts" showLineNumbers
+export interface Post {
+  slug: string;
+  title: string;
+  excerpt: string;
+  content: string;
+  date: string;
+  category: string;
+  tags: string[];
+  readTime: number;
+  views: number;
+  featured?: boolean;
+}
+
+export interface Category {
+  name: string;
+  slug: string;
+  count: number;
+}
+
+export interface Tag {
+  name: string;
+  slug: string;
+  count: number;
+}
+```
+
 </div>
 
-### 文章详情组件
+## 页面组件开发
 
-<div className="post-detail">
+### 首页组件
 
-#### PostDetail组件
-```tsx
-// src/components/PostDetail.tsx
-import { MDXRemote } from 'next-mdx-remote';
-import Image from 'next/image';
+```tsx title="src/pages/index.tsx" showLineNumbers {10-12,20-22,35-37}
+import { GetStaticProps } from 'next';
+import Layout from '@/components/Layout';
+import PostList from '@/components/PostList';
 import { Post } from '@/types';
+import { getAllPosts } from '@/lib/posts';
 
-interface PostDetailProps {
+interface HomeProps {
+  posts: Post[];
+  featuredPosts: Post[];
+}
+
+export default function Home({ posts, featuredPosts }: HomeProps) {
+  return (
+    <Layout title="首页" description="我的技术博客">
+      <div className="space-y-12">
+        {/* 欢迎区域 */}
+        <section className="text-center py-12">
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+            欢迎来到我的博客
+          </h1>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            分享前端开发、技术思考和个人成长的故事
+          </p>
+        </section>
+
+        {/* 精选文章 */}
+        {featuredPosts.length > 0 && (
+          <section>
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">精选文章</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {featuredPosts.map((post) => (
+                <article key={post.slug} className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200">
+                  <div className="p-6">
+                    <div className="flex items-center justify-between mb-2">
+                      <time className="text-sm text-gray-500">
+                        {new Date(post.date).toLocaleDateString()}
+                      </time>
+                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                        精选
+                      </span>
+                    </div>
+                    
+                    <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                      <Link href={`/posts/${post.slug}`} className="hover:text-blue-600">
+                        {post.title}
+                      </Link>
+                    </h3>
+                    
+                    <p className="text-gray-600 text-sm line-clamp-3 mb-4">
+                      {post.excerpt}
+                    </p>
+                    
+                    <Link
+                      href={`/posts/${post.slug}`}
+                      className="text-blue-600 hover:text-blue-800 text-sm font-medium"
+                    >
+                      阅读更多 →
+                    </Link>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* 最新文章 */}
+        <section>
+          <h2 className="text-2xl font-bold text-gray-900 mb-6">最新文章</h2>
+          <PostList posts={posts.slice(0, 6)} />
+        </section>
+      </div>
+    </Layout>
+  );
+}
+
+export const getStaticProps: GetStaticProps = async () => {
+  const posts = getAllPosts();
+  const featuredPosts = posts.filter(post => post.featured);
+
+  return {
+    props: {
+      posts,
+      featuredPosts,
+    },
+  };
+};
+```
+
+### 文章详情页
+
+```tsx title="src/pages/posts/[slug].tsx" showLineNumbers {15-17,25-27,40-42}
+import { GetStaticPaths, GetStaticProps } from 'next';
+import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
+import { serialize } from 'next-mdx-remote/serialize';
+import Layout from '@/components/Layout';
+import { Post } from '@/types';
+import { getPostBySlug, getAllPosts } from '@/lib/posts';
+
+interface PostPageProps {
   post: Post;
+  source: MDXRemoteSerializeResult;
 }
 
 const components = {
-  img: (props: any) => (
-    <div className="relative h-64 my-8">
-      <Image
-        {...props}
-        layout="fill"
-        objectFit="cover"
-        className="rounded-lg"
-      />
-    </div>
+  h1: (props: any) => <h1 className="text-3xl font-bold mb-4" {...props} />,
+  h2: (props: any) => <h2 className="text-2xl font-semibold mb-3 mt-8" {...props} />,
+  h3: (props: any) => <h3 className="text-xl font-medium mb-2 mt-6" {...props} />,
+  p: (props: any) => <p className="mb-4 leading-relaxed" {...props} />,
+  ul: (props: any) => <ul className="list-disc list-inside mb-4" {...props} />,
+  ol: (props: any) => <ol className="list-decimal list-inside mb-4" {...props} />,
+  li: (props: any) => <li className="mb-1" {...props} />,
+  code: (props: any) => (
+    <code className="bg-gray-100 px-2 py-1 rounded text-sm" {...props} />
   ),
-  // 添加其他自定义组件
+  pre: (props: any) => (
+    <pre className="bg-gray-900 text-white p-4 rounded-lg overflow-x-auto mb-4" {...props} />
+  ),
+  blockquote: (props: any) => (
+    <blockquote className="border-l-4 border-blue-500 pl-4 italic mb-4" {...props} />
+  ),
 };
 
-export default function PostDetail({ post }: PostDetailProps) {
+export default function PostPage({ post, source }: PostPageProps) {
   return (
-    <article className="prose prose-lg mx-auto">
-      <h1>{post.title}</h1>
-      
-      <div className="flex items-center space-x-4 mb-8">
-        <div className="flex items-center">
-          <Image
-            src={post.author.avatar}
-            alt={post.author.name}
-            width={40}
-            height={40}
-            className="rounded-full"
-          />
-          <span className="ml-2">{post.author.name}</span>
-        </div>
-        <time className="text-gray-500">{post.date}</time>
-      </div>
+    <Layout title={post.title} description={post.excerpt}>
+      <article className="max-w-4xl mx-auto">
+        {/* 文章头部 */}
+        <header className="mb-8">
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+            {post.title}
+          </h1>
+          
+          <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
+            <div className="flex items-center space-x-4">
+              <time>{new Date(post.date).toLocaleDateString()}</time>
+              <span>阅读时间: {post.readTime}分钟</span>
+              <span>{post.views} 次浏览</span>
+            </div>
+            
+            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+              {post.category}
+            </span>
+          </div>
+          
+          <div className="flex flex-wrap gap-2">
+            {post.tags.map((tag) => (
+              <span
+                key={tag}
+                className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800"
+              >
+                #{tag}
+              </span>
+            ))}
+          </div>
+        </header>
 
-      <MDXRemote {...post.content} components={components} />
-      
-      <div className="mt-8 flex flex-wrap gap-2">
-        {post.tags.map(tag => (
-          <span
-            key={tag}
-            className="px-3 py-1 bg-gray-100 rounded-full text-sm"
-          >
-            {tag}
-          </span>
-        ))}
-      </div>
-    </article>
+        {/* 文章内容 */}
+        <div className="prose prose-lg max-w-none">
+          <MDXRemote {...source} components={components} />
+        </div>
+      </article>
+    </Layout>
   );
 }
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const posts = getAllPosts();
+  const paths = posts.map((post) => ({
+    params: { slug: post.slug },
+  }));
+
+  return {
+    paths,
+    fallback: false,
+  };
+};
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const post = getPostBySlug(params?.slug as string);
+  const source = await serialize(post.content);
+
+  return {
+    props: {
+      post,
+      source,
+    },
+  };
+};
 ```
 
-</div>
+## 工具函数开发
 
-## 数据处理
+### 文章处理工具
 
-### Markdown解析
-
-<div className="markdown-processing">
-
-#### 解析工具函数
-```typescript
-// src/lib/mdx.ts
+```typescript title="src/lib/posts.ts" showLineNumbers {8-10,20-22,35-37}
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
-import { serialize } from 'next-mdx-remote/serialize';
+import { Post } from '@/types';
 
 const postsDirectory = path.join(process.cwd(), 'content/posts');
 
-export async function getPostBySlug(slug: string) {
-  const realSlug = slug.replace(/\.mdx$/, '');
-  const fullPath = path.join(postsDirectory, `${realSlug}.mdx`);
-  const fileContents = fs.readFileSync(fullPath, 'utf8');
-  
-  const { data, content } = matter(fileContents);
-  const mdxSource = await serialize(content, {
-    mdxOptions: {
-      remarkPlugins: [],
-      rehypePlugins: [],
-    },
-    scope: data,
-  });
+export function getAllPosts(): Post[] {
+  const fileNames = fs.readdirSync(postsDirectory);
+  const allPostsData = fileNames
+    .filter((name) => name.endsWith('.md'))
+    .map((name) => {
+      const slug = name.replace(/\.md$/, '');
+      const fullPath = path.join(postsDirectory, name);
+      const fileContents = fs.readFileSync(fullPath, 'utf8');
+      const { data, content } = matter(fileContents);
 
-  return {
-    slug: realSlug,
-    frontMatter: data,
-    content: mdxSource,
-  };
+      return {
+        slug,
+        content,
+        title: data.title || '',
+        excerpt: data.excerpt || '',
+        date: data.date || '',
+        category: data.category || '未分类',
+        tags: data.tags || [],
+        readTime: calculateReadTime(content),
+        views: data.views || 0,
+        featured: data.featured || false,
+      } as Post;
+    });
+
+  return allPostsData.sort((a, b) => (a.date < b.date ? 1 : -1));
 }
 
-export function getAllPosts() {
-  const slugs = fs.readdirSync(postsDirectory);
-  const posts = slugs
-    .map((slug) => getPostBySlug(slug))
-    .sort((post1, post2) => (post1.frontMatter.date > post2.frontMatter.date ? -1 : 1));
-  
-  return posts;
+export function getPostBySlug(slug: string): Post {
+  const fullPath = path.join(postsDirectory, `${slug}.md`);
+  const fileContents = fs.readFileSync(fullPath, 'utf8');
+  const { data, content } = matter(fileContents);
+
+  return {
+    slug,
+    content,
+    title: data.title || '',
+    excerpt: data.excerpt || '',
+    date: data.date || '',
+    category: data.category || '未分类',
+    tags: data.tags || [],
+    readTime: calculateReadTime(content),
+    views: data.views || 0,
+    featured: data.featured || false,
+  } as Post;
+}
+
+function calculateReadTime(content: string): number {
+  const wordsPerMinute = 200;
+  const words = content.split(/\s+/).length;
+  return Math.ceil(words / wordsPerMinute);
+}
+
+export function getCategories(): { name: string; count: number }[] {
+  const posts = getAllPosts();
+  const categoryCount: { [key: string]: number } = {};
+
+  posts.forEach((post) => {
+    categoryCount[post.category] = (categoryCount[post.category] || 0) + 1;
+  });
+
+  return Object.entries(categoryCount).map(([name, count]) => ({
+    name,
+    count,
+  }));
+}
+
+export function getTags(): { name: string; count: number }[] {
+  const posts = getAllPosts();
+  const tagCount: { [key: string]: number } = {};
+
+  posts.forEach((post) => {
+    post.tags.forEach((tag) => {
+      tagCount[tag] = (tagCount[tag] || 0) + 1;
+    });
+  });
+
+  return Object.entries(tagCount).map(([name, count]) => ({
+    name,
+    count,
+  }));
 }
 ```
 
-</div>
+### 样式工具
 
-### API路由
+```css title="src/styles/globals.css" showLineNumbers {5-7,15-17,25-27}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-<div className="api-routes">
+/* 自定义样式 */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-gray-50 text-gray-900;
+  }
+}
 
-#### 文章API
-```typescript
-// pages/api/posts/[slug].ts
-import type { NextApiRequest, NextApiResponse } from 'next';
-import { getPostBySlug } from '@/lib/mdx';
+@layer components {
+  .prose {
+    @apply text-gray-700 leading-relaxed;
+  }
+  
+  .prose h1 {
+    @apply text-3xl font-bold mb-4 text-gray-900;
+  }
+  
+  .prose h2 {
+    @apply text-2xl font-semibold mb-3 mt-8 text-gray-900;
+  }
+  
+  .prose h3 {
+    @apply text-xl font-medium mb-2 mt-6 text-gray-900;
+  }
+  
+  .prose p {
+    @apply mb-4;
+  }
+  
+  .prose ul {
+    @apply list-disc list-inside mb-4;
+  }
+  
+  .prose ol {
+    @apply list-decimal list-inside mb-4;
+  }
+  
+  .prose li {
+    @apply mb-1;
+  }
+  
+  .prose code {
+    @apply bg-gray-100 px-2 py-1 rounded text-sm font-mono;
+  }
+  
+  .prose pre {
+    @apply bg-gray-900 text-white p-4 rounded-lg overflow-x-auto mb-4;
+  }
+  
+  .prose blockquote {
+    @apply border-l-4 border-blue-500 pl-4 italic mb-4 text-gray-600;
+  }
+}
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
-  const { slug } = req.query;
-
-  try {
-    const post = await getPostBySlug(slug as string);
-    res.status(200).json(post);
-  } catch (error) {
-    res.status(404).json({ message: 'Post not found' });
+@layer utilities {
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 }
 ```
 
-#### 搜索API
-```typescript
-// pages/api/search.ts
-import type { NextApiRequest, NextApiResponse } from 'next';
-import { getAllPosts } from '@/lib/mdx';
+:::tip[AI提示]
+使用以下提示让AI帮助优化代码：
+```
+请审查这些代码，提供以下方面的改进建议：
+1. 性能优化
+2. 代码结构
+3. 错误处理
+4. 可访问性
+5. SEO优化
+```
+:::
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
-  const { q } = req.query;
-  const posts = await getAllPosts();
+## 配置文件
+
+### Next.js配置
+
+```javascript title="next.config.js" showLineNumbers {5-7,15-17}
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  reactStrictMode: true,
+  swcMinify: true,
   
-  const results = posts.filter(post => 
-    post.frontMatter.title.toLowerCase().includes((q as string).toLowerCase()) ||
-    post.frontMatter.excerpt.toLowerCase().includes((q as string).toLowerCase())
-  );
+  // 图片优化配置
+  images: {
+    domains: ['example.com'],
+    formats: ['image/webp', 'image/avif'],
+  },
+  
+  // 实验性功能
+  experimental: {
+    appDir: false,
+  },
+  
+  // 自定义Webpack配置
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+      };
+    }
+    return config;
+  },
+};
 
-  res.status(200).json(results);
-}
+module.exports = nextConfig;
 ```
 
-</div>
+### Tailwind配置
 
-## 使用AI优化代码
-
-### 性能优化
-
-<div className="performance-optimization">
-
-#### 使用AI分析性能
-:::tip AI提示
+```javascript title="tailwind.config.js" showLineNumbers {8-10,20-22}
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+  ],
+  theme: {
+    extend: {
+      fontFamily: {
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+        mono: ['Fira Code', 'monospace'],
+      },
+      colors: {
+        primary: {
+          50: '#eff6ff',
+          500: '#3b82f6',
+          900: '#1e3a8a',
+        },
+      },
+      typography: {
+        DEFAULT: {
+          css: {
+            maxWidth: 'none',
+            color: '#374151',
+            lineHeight: '1.75',
+          },
+        },
+      },
+    },
+  },
+  plugins: [
+    require('@tailwindcss/typography'),
+    require('@tailwindcss/forms'),
+  ],
+};
 ```
-分析这段代码的性能，并提供优化建议：
-1. 减少不必要的重渲染
-2. 优化数据获取
-3. 改进搜索逻辑
-4. 添加缓存机制
+
+:::tip[AI提示]
+使用以下提示让AI帮助优化部署：
+```
+请提供这个Next.js博客应用的部署指南，包括：
+1. Vercel部署配置
+2. 环境变量设置
+3. 构建优化
+4. 性能监控
 ```
 :::
-
-#### 优化示例
-```typescript
-// 使用记忆化避免不必要的重渲染
-const MemoizedPostList = memo(PostList);
-
-// 使用SWR进行数据获取和缓存
-const { data: posts, error } = useSWR('/api/posts', fetcher);
-
-// 使用防抖优化搜索
-const debouncedSearch = useCallback(
-  debounce((term: string) => {
-    // 执行搜索逻辑
-  }, 300),
-  []
-);
-```
-
-</div>
-
-### 代码重构
-
-<div className="code-refactoring">
-
-#### 使用AI重构建议
-:::tip AI提示
-```
-请帮我重构这段代码，重点关注：
-1. 组件职责划分
-2. 代码复用
-3. 类型安全
-4. 错误处理
-```
-:::
-
-#### 重构示例
-```typescript
-// 提取可复用的hooks
-function useDebounceSearch(initialTerm = '') {
-  const [searchTerm, setSearchTerm] = useState(initialTerm);
-  const [debouncedTerm, setDebouncedTerm] = useState(initialTerm);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setDebouncedTerm(searchTerm), 300);
-    return () => clearTimeout(timer);
-  }, [searchTerm]);
-
-  return {
-    searchTerm,
-    setSearchTerm,
-    debouncedTerm,
-  };
-}
-
-// 提取错误边界组件
-class ErrorBoundary extends React.Component {
-  // ... 错误处理逻辑
-}
-```
-
-</div>
 
 export const styles = {
   setupSteps: {
-    borderLeft: '3px solid #1a73e8',
-    paddingLeft: '1rem'
+    backgroundColor: '#f8f9fa',
+    padding: '20px',
+    borderRadius: '8px',
+    marginBottom: '20px'
   },
   componentDevelopment: {
-    backgroundColor: '#f6f8fa',
-    padding: '1rem',
-    borderRadius: '8px'
+    backgroundColor: '#f0f7ff',
+    padding: '20px',
+    borderRadius: '8px',
+    marginBottom: '20px'
   },
-  markdownProcessing: {
-    marginTop: '1rem',
-    padding: '1rem',
-    border: '1px solid #e1e4e8',
-    borderRadius: '8px'
+  postList: {
+    backgroundColor: '#fff9f0',
+    padding: '20px',
+    borderRadius: '8px',
+    marginBottom: '20px'
   }
 };
