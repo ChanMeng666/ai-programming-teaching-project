@@ -10,7 +10,7 @@
 
 .featuresWave {
   position: absolute;
-  top: 0;
+  top: -1px; /* 稍微向上偏移，确保完全覆盖可能的间隙 */
   left: 0;
   right: 0;
   z-index: 1;
@@ -81,7 +81,11 @@
 @media (max-width: 480px) {
   .features {
     padding: var(--space-24) 0;
-    margin-top: var(--space-6); /* 在移动端增加上边距，改善与hero区域的间隔 */
+    margin-top: -3px; /* 在移动端进一步消除空隙 */
+  }
+  
+  .featuresWave {
+    top: -2px; /* 移动端波浪向上偏移更多 */
   }
   
   .featuresContainer {
