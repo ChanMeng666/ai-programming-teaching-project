@@ -208,7 +208,14 @@ const config = {
           },
           {
             href: 'https://github.com/ChanMeng666/ai-programming-teaching-project',
-            label: 'GitHub',
+            className: 'header-github-link',
+            'aria-label': 'GitHub repository',
+            position: 'right',
+          },
+          {
+            href: 'https://discord.gg/T3NJG5n98a',
+            className: 'header-discord-link',
+            'aria-label': 'Discord community',
             position: 'right',
           },
         ],
