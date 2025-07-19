@@ -1,0 +1,866 @@
+---
+title: 实践项目
+sidebar_position: 1
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import CodeBlock from '@theme/CodeBlock';
+import Admonition from '@theme/Admonition';
+
+# 实践项目：用 Gemini CLI 管理开发环境
+
+:::success 项目目标
+通过本章的实践项目，您将：
+- 🧹 清理冗余依赖，释放磁盘空间
+- 🔧 优化系统 PATH 配置
+- 🚀 建立高效的 AI 辅助工作流
+- 📊 学会管理多个开发项目的环境
+:::
+
+## 🎯 项目一：智能环境清理
+
+许多开发者的电脑上都积累了大量不再使用的依赖和工具。让我们用 Gemini CLI 来一次彻底的清理。
+
+### 项目背景
+
+<div className="story-card">
+  <h4>💭 真实案例</h4>
+  <p>一位开发者使用 Gemini CLI 后，成功清理了 <strong>50GB</strong> 的冗余文件！包括：</p>
+  <ul>
+    <li>过时的 node_modules 文件夹</li>
+    <li>重复的全局 npm 包</li>
+    <li>废弃的开发工具</li>
+    <li>临时构建文件</li>
+  </ul>
+</div>
+
+### 实践步骤
+
+<Tabs>
+  <TabItem value="step1" label="步骤 1：环境扫描" default>
+
+#### 全面扫描本地环境
+
+<CodeBlock language="text">
+{`gemini chat
+
+您：请帮我扫描本地所有的开发环境、依赖和库，列出详细清单
+
+Gemini：开始扫描您的开发环境...
+
+📊 扫描结果：
+
+1. Node.js 环境：
+   - 版本：v18.17.0, v16.20.0, v14.21.0
+   - 全局包：87 个（占用 2.3GB）
+   
+2. Python 环境：
+   - 版本：3.9.7, 3.8.10, 2.7.18
+   - pip 包：156 个（占用 4.1GB）
+   
+3. 项目文件夹：
+   - 检测到 23 个项目
+   - node_modules 总计：18.7GB
+   - 未使用超过 6 个月的：12 个
+   
+4. 开发工具：
+   - Docker 镜像：34 个（占用 12.3GB）
+   - VS Code 扩展：48 个
+   
+需要我详细分析哪个部分？`}
+</CodeBlock>
+
+  </TabItem>
+  <TabItem value="step2" label="步骤 2：识别冗余">
+
+#### 智能识别可清理项目
+
+<CodeBlock language="text">
+{`您：分析哪些是可以安全删除的冗余内容
+
+Gemini：基于分析，以下内容可以安全删除：
+
+🗑️ 可清理项目（预计释放 32.4GB）：
+
+1. 过时的 Node.js 版本：
+   ❌ v14.21.0 - 已终止维护
+   ✅ 保留 v18.17.0（LTS）
+
+2. 重复的全局 npm 包：
+   ❌ create-react-app@4.0.3 - 使用 npx 代替
+   ❌ webpack@4.46.0 - 项目级安装更好
+   ❌ gulp-cli@2.3.0 - 很久未使用
+   
+3. 废弃项目的 node_modules：
+   ❌ ~/projects/old-todo-app (1.2GB)
+   ❌ ~/projects/test-project-2022 (2.1GB)
+   ❌ ~/experiments/abandoned-blog (1.8GB)
+
+4. Docker 清理：
+   ❌ 12 个悬空镜像 (4.2GB)
+   ❌ 8 个停止的容器 (1.1GB)
+
+⚠️ 建议保留：
+   ✅ 最近 3 个月内使用的项目
+   ✅ 生产环境相关工具
+   ✅ 个人配置文件
+
+要开始清理吗？`}
+</CodeBlock>
+
+  </TabItem>
+  <TabItem value="step3" label="步骤 3：执行清理">
+
+#### 安全地执行清理操作
+
+<CodeBlock language="text">
+{`您：好的，请帮我执行清理，但要先备份重要配置
+
+Gemini：明智的选择！我会先备份重要配置再清理。
+
+📦 备份阶段：
+✓ 创建备份目录 ~/gemini-backup-2025-01-20
+✓ 备份 .npmrc, .gitconfig
+✓ 备份 VS Code 设置
+✓ 导出已安装包列表
+
+🧹 开始清理：
+
+[1/5] 卸载过时 Node.js 版本...
+✓ 已移除 v14.21.0
+
+[2/5] 清理全局 npm 包...
+✓ 卸载 create-react-app
+✓ 卸载 webpack@4.46.0
+✓ 卸载 gulp-cli
+已释放：856MB
+
+[3/5] 删除废弃项目...
+✓ 删除 old-todo-app/node_modules
+✓ 删除 test-project-2022/node_modules
+✓ 删除 abandoned-blog/node_modules
+已释放：5.1GB
+
+[4/5] Docker 清理...
+✓ 删除悬空镜像
+✓ 删除停止的容器
+已释放：5.3GB
+
+[5/5] 清理系统缓存...
+✓ npm 缓存已清理
+✓ pip 缓存已清理
+已释放：1.2GB
+
+🎉 清理完成！
+总计释放空间：32.4GB
+备份位置：~/gemini-backup-2025-01-20`}
+</CodeBlock>
+
+  </TabItem>
+</Tabs>
+
+### 项目成果
+
+<div className="result-showcase">
+  <div className="result-card">
+    <h4>💾 空间释放</h4>
+    <div className="progress-bar">
+      <div className="progress-fill" style={{width: '65%'}}></div>
+    </div>
+    <p>32.4GB / 50GB 已清理</p>
+  </div>
+  <div className="result-card">
+    <h4>⚡ 性能提升</h4>
+    <ul>
+      <li>npm 命令响应速度提升 40%</li>
+      <li>系统启动时间减少 15 秒</li>
+      <li>开发工具运行更流畅</li>
+    </ul>
+  </div>
+</div>
+
+## 🛤️ 项目二：PATH 环境优化
+
+混乱的 PATH 配置会导致命令冲突和性能问题。让我们用 AI 来优化它。
+
+### 常见 PATH 问题
+
+<div className="problem-grid">
+  <div className="problem-card">
+    <h4>🔄 重复路径</h4>
+    <p>同一路径被多次添加，影响查找效率</p>
+  </div>
+  <div className="problem-card">
+    <h4>❌ 无效路径</h4>
+    <p>指向不存在的目录，导致命令查找失败</p>
+  </div>
+  <div className="problem-card">
+    <h4>🎭 顺序混乱</h4>
+    <p>优先级设置不当，可能使用错误版本的工具</p>
+  </div>
+</div>
+
+### 优化实践
+
+<Tabs>
+  <TabItem value="analyze" label="分析 PATH" default>
+
+<CodeBlock language="text">
+{`您：帮我分析系统 PATH，找出所有问题
+
+Gemini：正在分析您的 PATH 配置...
+
+🔍 PATH 分析报告：
+
+当前 PATH 条目（按顺序）：
+1. /usr/local/bin ⚠️
+2. /opt/homebrew/bin ✅
+3. /usr/local/bin ⚠️ [重复]
+4. ~/.npm-global/bin ✅
+5. /usr/bin ✅
+6. /opt/old-tools/bin ❌ [不存在]
+7. ~/.npm-global/bin ⚠️ [重复]
+8. /usr/local/go/bin ✅
+9. /Applications/Docker.app/Contents/Resources/bin ❌ [Docker未安装]
+10. /usr/local/bin ⚠️ [第3次重复]
+
+📊 问题汇总：
+- 3 个重复条目
+- 2 个无效路径
+- 建议调整优先级顺序
+
+🎯 优化建议：
+1. 用户级工具应优先于系统级
+2. 常用工具路径应该靠前
+3. 删除所有重复和无效条目`}
+</CodeBlock>
+
+  </TabItem>
+  <TabItem value="optimize" label="执行优化">
+
+<CodeBlock language="text">
+{`您：请帮我优化 PATH 配置
+
+Gemini：我来帮您优化 PATH 配置。
+
+📝 优化方案：
+
+新的 PATH 顺序（从高到低优先级）：
+1. ~/.local/bin          # 用户自定义脚本
+2. /opt/homebrew/bin     # Homebrew（macOS）
+3. ~/.npm-global/bin     # npm 全局包
+4. /usr/local/go/bin     # Go 语言
+5. /usr/local/bin        # 本地安装
+6. /usr/bin              # 系统命令
+
+🔧 正在应用更改...
+
+检测到您使用的是 zsh，更新 ~/.zshrc：
+
+✓ 备份原始 .zshrc 到 .zshrc.backup
+✓ 清理重复的 export PATH 语句
+✓ 添加优化后的 PATH 配置
+✓ 添加注释说明每个路径的用途
+
+# 优化后的配置
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="/opt/homebrew/bin:$PATH"
+export PATH="$HOME/.npm-global/bin:$PATH"
+export PATH="/usr/local/go/bin:$PATH"
+
+🎉 优化完成！
+
+执行以下命令使更改生效：
+source ~/.zshrc
+
+或重新打开终端窗口。`}
+</CodeBlock>
+
+  </TabItem>
+  <TabItem value="verify" label="验证结果">
+
+<CodeBlock language="text">
+{`您：验证 PATH 优化结果
+
+Gemini：让我验证优化后的 PATH 配置...
+
+✅ 验证结果：
+
+1. 重复检查：
+   ✓ 无重复路径
+
+2. 有效性检查：
+   ✓ 所有路径均存在且可访问
+
+3. 命令可用性测试：
+   ✓ node: /opt/homebrew/bin/node (v18.17.0)
+   ✓ npm: /opt/homebrew/bin/npm (v9.8.1)
+   ✓ git: /usr/bin/git (v2.39.3)
+   ✓ python: /usr/bin/python3 (v3.11.6)
+   ✓ go: /usr/local/go/bin/go (v1.21.5)
+
+4. 性能测试：
+   命令查找时间：
+   优化前：平均 23ms
+   优化后：平均 8ms
+   ⚡ 提升 65%！
+
+5. 潜在冲突检查：
+   ✓ 未发现命令版本冲突
+
+🎊 PATH 优化成功！您的开发环境现在更加高效。`}
+</CodeBlock>
+
+  </TabItem>
+</Tabs>
+
+## 🚀 项目三：Git 工作流自动化
+
+告别繁琐的 Git 命令，让 AI 处理所有版本控制操作。
+
+### 场景实践
+
+<Tabs>
+  <TabItem value="daily" label="日常开发" default>
+
+#### 场景：早晨开始工作
+
+<CodeBlock language="text">
+{`您：早上好，我要继续昨天的功能开发
+
+Gemini：早上好！让我帮您准备开发环境。
+
+🔍 检查项目状态...
+
+📊 项目：awesome-web-app
+📍 当前分支：feature/user-auth
+📝 未提交更改：3 个文件
+
+昨日工作总结：
+- 完成了登录表单 UI
+- 添加了表单验证逻辑
+- TODO: 连接后端 API
+
+今日建议：
+1. 先提交昨天的更改
+2. 拉取主分支最新代码
+3. 继续 API 集成工作
+
+要我帮您执行这些操作吗？
+
+您：好的，先提交昨天的更改
+
+Gemini：正在提交您的更改...
+
+查看更改内容：
+- src/components/LoginForm.jsx (新增)
+- src/utils/validation.js (新增)  
+- src/styles/auth.css (新增)
+
+生成提交信息：
+"feat: 实现用户登录表单UI和验证逻辑
+
+- 创建响应式登录表单组件
+- 添加邮箱和密码验证规则
+- 应用自定义样式主题"
+
+✓ 更改已提交
+✓ 推送到远程仓库
+
+现在拉取最新代码...
+✓ 主分支已更新，无冲突
+
+您可以开始今天的开发了！`}
+</CodeBlock>
+
+  </TabItem>
+  <TabItem value="conflict" label="解决冲突">
+
+#### 场景：处理合并冲突
+
+<CodeBlock language="text">
+{`您：拉取主分支代码并合并
+
+Gemini：正在执行合并操作...
+
+⚠️ 检测到合并冲突！
+
+冲突文件：
+1. src/config/api.js
+2. package.json
+
+让我帮您分析冲突：
+
+📄 src/config/api.js 的冲突：
+<<<<<<< HEAD (您的更改)
+const API_BASE = 'http://localhost:3000/api'
+const AUTH_ENDPOINT = '/auth/login'
+=======
+const API_BASE = 'https://api.example.com'
+const AUTH_ENDPOINT = '/v2/auth/signin'
+>>>>>>> main
+
+分析：看起来主分支更新了 API 地址到生产环境。
+
+建议解决方案：
+const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:3000/api'
+const AUTH_ENDPOINT = '/v2/auth/signin'
+
+这样可以同时支持开发和生产环境。
+
+要应用这个解决方案吗？
+
+您：应用建议的解决方案
+
+Gemini：正在解决冲突...
+
+✓ 已更新 src/config/api.js
+✓ 已解决 package.json（保留两边的新依赖）
+
+冲突解决完成！现在提交合并结果...
+
+✓ 合并提交完成
+✓ 推送到远程仓库
+
+您的分支现在与主分支保持同步！`}
+</CodeBlock>
+
+  </TabItem>
+  <TabItem value="review" label="代码审查">
+
+#### 场景：准备代码审查
+
+<CodeBlock language="text">
+{`您：我完成了用户认证功能，帮我准备代码审查
+
+Gemini：好的，我来帮您准备代码审查。
+
+📋 功能开发总结：
+
+分支：feature/user-auth
+提交数：8 个
+修改文件：15 个
+新增代码：+542 行
+删除代码：-87 行
+
+🔍 代码质量检查：
+
+1. 代码规范：
+   ✓ ESLint 检查通过
+   ✓ 格式化符合标准
+
+2. 测试覆盖：
+   ⚠️ 当前覆盖率：72%
+   建议：添加错误处理的测试用例
+
+3. 安全检查：
+   ✓ 未发现硬编码密钥
+   ✓ API 调用使用 HTTPS
+   ⚠️ 建议：添加请求速率限制
+
+4. 性能考虑：
+   ✓ 组件使用 React.memo 优化
+   ✓ API 请求有适当的缓存
+
+📝 生成 PR 描述：
+
+## 概述
+实现了完整的用户认证功能，包括登录、注册和会话管理。
+
+## 更改内容
+- ✨ 新增登录/注册表单组件
+- 🔒 实现 JWT token 管理
+- 🎨 添加认证相关 UI 样式
+- ⚡ 优化 API 请求性能
+
+## 测试
+- 单元测试覆盖率 72%
+- 手动测试各种边界情况
+- 兼容性测试通过
+
+## 截图
+[自动生成的功能截图]
+
+要创建 Pull Request 吗？`}
+</CodeBlock>
+
+  </TabItem>
+</Tabs>
+
+## 🏆 项目四：构建个人工作流
+
+每个开发者都有独特的工作习惯。让我们用 Gemini CLI 打造专属的自动化工作流。
+
+### 自定义命令集
+
+<div className="workflow-examples">
+
+#### 示例 1：项目初始化助手
+
+<CodeBlock language="text">
+{`您：创建一个新的 React 项目，使用 TypeScript，包含我常用的配置
+
+Gemini：了解！我来创建一个符合您偏好的 React TypeScript 项目。
+
+🚀 初始化项目...
+
+执行步骤：
+1. 创建 React TypeScript 应用
+2. 安装您常用的依赖包
+3. 配置代码规范工具
+4. 设置 Git 仓库
+
+npx create-react-app my-app --template typescript
+cd my-app
+
+📦 安装额外依赖...
+- axios (HTTP 请求)
+- react-router-dom (路由)
+- @mui/material (UI 组件)
+- react-hook-form (表单处理)
+
+⚙️ 配置开发工具...
+✓ 添加 .prettierrc
+✓ 配置 ESLint 规则
+✓ 创建 .vscode/settings.json
+✓ 设置 Git hooks (husky)
+
+📁 创建项目结构...
+src/
+├── components/
+├── pages/
+├── services/
+├── hooks/
+├── utils/
+├── types/
+└── styles/
+
+✓ 项目创建完成！
+
+已为您配置好所有常用设置。
+运行 'npm start' 开始开发！`}
+</CodeBlock>
+
+#### 示例 2：部署助手
+
+<CodeBlock language="text">
+{`您：部署这个项目到 Vercel
+
+Gemini：我来帮您部署到 Vercel！
+
+🔍 检查项目配置...
+✓ 检测到 React 应用
+✓ build 命令：npm run build
+✓ 输出目录：build/
+
+📝 创建 Vercel 配置...
+生成 vercel.json：
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "build",
+  "framework": "create-react-app"
+}
+
+🚀 开始部署...
+
+1. 连接 Git 仓库
+2. 触发 Vercel 构建
+3. 分配域名
+
+构建日志：
+[10:23:15] 克隆仓库...
+[10:23:18] 安装依赖...
+[10:23:45] 构建项目...
+[10:24:12] 优化资源...
+[10:24:20] 部署完成！
+
+✅ 部署成功！
+
+🌐 访问地址：
+- 生产环境：https://my-app.vercel.app
+- 预览环境：https://my-app-git-main.vercel.app
+
+📊 部署信息：
+- 构建时间：65秒
+- 部署区域：全球 CDN
+- SSL 证书：已自动配置
+
+要配置自定义域名吗？`}
+</CodeBlock>
+
+</div>
+
+### 效率提升数据
+
+<div className="metrics-dashboard">
+  <div className="metric-card">
+    <div className="metric-value">75%</div>
+    <div className="metric-label">减少命令输入</div>
+  </div>
+  <div className="metric-card">
+    <div className="metric-value">90%</div>
+    <div className="metric-label">降低配置错误</div>
+  </div>
+  <div className="metric-card">
+    <div className="metric-value">3x</div>
+    <div className="metric-label">提升部署速度</div>
+  </div>
+  <div className="metric-card">
+    <div className="metric-value">50%</div>
+    <div className="metric-label">节省调试时间</div>
+  </div>
+</div>
+
+## 💡 高级技巧
+
+### 批量操作
+
+<CodeBlock language="text">
+{`您：检查我所有项目的依赖更新情况
+
+Gemini：扫描您的所有项目...
+
+找到 12 个项目，开始检查依赖更新：
+
+📦 project-1: awesome-web-app
+  ⚠️ 3 个主要更新可用
+  - react: 18.2.0 → 18.3.0
+  - typescript: 5.0.4 → 5.3.3
+  - vite: 4.4.9 → 5.0.11
+
+📦 project-2: api-server
+  ✅ 所有依赖都是最新的
+
+📦 project-3: mobile-app
+  ⚠️ 5 个更新可用
+  [详细列表...]
+
+汇总：
+- 8 个项目有可用更新
+- 4 个项目依赖是最新的
+- 预计更新时间：约 15 分钟
+
+要我批量更新所有项目吗？（会先运行测试确保兼容性）`}
+</CodeBlock>
+
+### 智能调试
+
+<CodeBlock language="text">
+{`您：我的应用启动失败了，帮我诊断
+
+Gemini：我来帮您诊断问题。
+
+🔍 收集错误信息...
+
+发现错误：
+Error: Cannot find module '@/components/Header'
+
+🔧 诊断结果：
+
+问题：模块路径别名配置错误
+原因：TypeScript 和 Webpack 的路径别名不一致
+
+解决方案：
+1. 更新 tsconfig.json：
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  }
+}
+
+2. 确保 webpack.config.js 同步配置：
+resolve: {
+  alias: {
+    '@': path.resolve(__dirname, 'src')
+  }
+}
+
+要我自动修复这个问题吗？`}
+</CodeBlock>
+
+## 🎓 课程总结
+
+### 您已经掌握的技能
+
+<div className="skill-grid">
+  <div className="skill-card completed">
+    <span className="checkmark">✓</span>
+    <h4>环境管理</h4>
+    <p>智能清理和优化开发环境</p>
+  </div>
+  <div className="skill-card completed">
+    <span className="checkmark">✓</span>
+    <h4>Git 自动化</h4>
+    <p>用自然语言完成版本控制</p>
+  </div>
+  <div className="skill-card completed">
+    <span className="checkmark">✓</span>
+    <h4>工作流优化</h4>
+    <p>打造个人高效工作流程</p>
+  </div>
+  <div className="skill-card completed">
+    <span className="checkmark">✓</span>
+    <h4>问题诊断</h4>
+    <p>快速定位和解决开发问题</p>
+  </div>
+</div>
+
+### 下一步建议
+
+1. **持续优化**：根据日常使用不断调整 AI 助手的行为
+2. **分享经验**：将您的最佳实践分享给社区
+3. **探索更多**：尝试将 Gemini CLI 应用到更多场景
+
+<style>{`
+.story-card {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 2rem;
+  border-radius: 12px;
+  margin: 2rem 0;
+}
+
+.problem-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.problem-card {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border-left: 4px solid #e74c3c;
+}
+
+.result-showcase {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.result-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.progress-bar {
+  background: #e0e0e0;
+  height: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 1rem 0;
+}
+
+.progress-fill {
+  background: linear-gradient(90deg, #4CAF50 0%, #8BC34A 100%);
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+.workflow-examples {
+  margin: 2rem 0;
+}
+
+.metrics-dashboard {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.metric-card {
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  padding: 2rem 1rem;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.metric-value {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #2d3748;
+}
+
+.metric-label {
+  font-size: 0.9rem;
+  color: #4a5568;
+  margin-top: 0.5rem;
+}
+
+.skill-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.skill-card {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 8px;
+  position: relative;
+  padding-left: 3rem;
+}
+
+.skill-card.completed {
+  background: #d4edda;
+  border: 1px solid #c3e6cb;
+}
+
+.skill-card .checkmark {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #28a745;
+  font-size: 1.5rem;
+}
+`}</style>
+
+## 🚀 恭喜完成课程！
+
+您已经成功掌握了使用 Gemini CLI 进行本地开发环境管理的所有核心技能。现在，您可以：
+
+- 高效管理和优化开发环境
+- 用 AI 自动化日常开发任务
+- 构建适合自己的工作流程
+- 快速解决开发中的问题
+
+<div style={{textAlign: 'center', marginTop: '3rem'}}>
+  <div className="congratulations-box">
+    <h2>🎉 课程完成！</h2>
+    <p>感谢您参加 Chan Meng 的 AI 编程公开课</p>
+    <p>期待看到您使用这些技能创造出色的作品！</p>
+  </div>
+</div>
+
+<style>{`
+.congratulations-box {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 3rem;
+  border-radius: 16px;
+  margin: 2rem auto;
+  max-width: 600px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.congratulations-box h2 {
+  color: white;
+  margin-bottom: 1rem;
+}
+
+.congratulations-box p {
+  color: rgba(255,255,255,0.9);
+  font-size: 1.1rem;
+}
+`}</style>
