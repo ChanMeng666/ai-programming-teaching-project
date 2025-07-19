@@ -165,10 +165,8 @@ Gemini：明智的选择！我会先备份重要配置再清理。
 <div className="result-showcase">
   <div className="result-card">
     <h4>💾 空间释放</h4>
-    <div className="progress-bar">
-      <div className="progress-fill" style={{width: '65%'}}></div>
-    </div>
-    <p>32.4GB / 50GB 已清理</p>
+    <p className="space-amount">32.4GB / 50GB</p>
+    <p className="space-desc">成功清理冗余文件</p>
   </div>
   <div className="result-card">
     <h4>⚡ 性能提升</h4>
@@ -752,18 +750,16 @@ resolve: {
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
-.progress-bar {
-  background: #e0e0e0;
-  height: 20px;
-  border-radius: 10px;
-  overflow: hidden;
-  margin: 1rem 0;
+.space-amount {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #10b981;
+  margin: 1rem 0 0.5rem 0;
 }
 
-.progress-fill {
-  background: linear-gradient(90deg, #4CAF50 0%, #8BC34A 100%);
-  height: 100%;
-  transition: width 0.3s ease;
+.space-desc {
+  color: #6b7280;
+  font-size: 0.9rem;
 }
 
 .workflow-examples {
