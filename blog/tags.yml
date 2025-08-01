@@ -64,3 +64,33 @@ documentation:
   permalink: /tags/海外发展
   description: 海外发展相关的教程和指南
 
+视频资源:
+  label: 视频资源
+  permalink: /tags/视频资源
+  description: 各类教学和演讲视频资源
+
+她行活动:
+  label: 她行活动
+  permalink: /tags/她行活动
+  description: 她行活动相关内容和分享
+
+导师答疑:
+  label: 导师答疑
+  permalink: /tags/导师答疑
+  description: 导师答疑会议内容和总结
+
+身份认知:
+  label: 身份认知
+  permalink: /tags/身份认知
+  description: 关于身份认同和社会认知的讨论
+
+社会认同理论:
+  label: 社会认同理论
+  permalink: /tags/社会认同理论
+  description: 社会认同理论相关的学术内容
+
+交叉性:
+  label: 交叉性
+  permalink: /tags/交叉性
+  description: 交叉性理论和多重身份研究
+
