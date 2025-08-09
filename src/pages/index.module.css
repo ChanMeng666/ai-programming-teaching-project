@@ -33,11 +33,10 @@
   margin: 0 auto;
   padding: 0 var(--space-8);
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: var(--space-16);
   align-items: center;
   width: 100%;
-  text-align: center;
 }
 
 @media (max-width: 968px) {
@@ -47,6 +46,7 @@
   }
   
   .heroContent {
+    grid-template-columns: 1fr;
     gap: var(--space-16);
     padding: 0 var(--space-6);
   }
@@ -59,8 +59,19 @@
   }
   
   .heroContent {
+    grid-template-columns: 1fr;
     gap: var(--space-12);
     padding: 0 var(--space-4);
+  }
+  
+  .heroText {
+    align-items: center;
+    text-align: center;
+  }
+  
+  .titleAccent {
+    left: 50%;
+    transform: translateX(-50%);
   }
 }
 
@@ -71,6 +82,7 @@
   }
   
   .heroContent {
+    grid-template-columns: 1fr;
     gap: var(--space-8);
     padding: 0 var(--space-4) var(--space-16) var(--space-4); /* 将padding移到content层 */
     justify-items: center;
@@ -81,8 +93,8 @@
   z-index: 1;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
+  align-items: flex-start;
+  text-align: left;
 }
 
 .heroTitle {
@@ -137,8 +149,7 @@
 .titleAccent {
   position: absolute;
   bottom: -var(--space-2);
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
   width: 60px;
   height: 4px;
   background: linear-gradient(90deg, var(--color-coral), var(--color-teal));
@@ -179,6 +190,7 @@
   display: flex;
   gap: var(--space-5);
   animation: fadeInUp var(--animation-duration-slow) var(--animation-timing-ease-out) 0.2s both;
+  justify-content: flex-start;
 }
 
 @media (max-width: 768px) {
@@ -395,12 +407,15 @@
 
 .cardContent {
   padding: var(--space-10);
+  text-align: left;
 }
 
 .codeLines {
   font-family: var(--ifm-font-family-monospace);
   font-size: 0.9rem;
   line-height: 1.7;
+  text-align: left;
+  white-space: pre;
 }
 
 @media (max-width: 768px) {
@@ -448,6 +463,8 @@
 .codeLine {
   margin-bottom: var(--space-2);
   animation: typewriter 0.5s steps(20) both;
+  display: block;
+  text-align: left;
 }
 
 .codeLine:nth-child(1) { animation-delay: 0.5s; }
@@ -606,6 +623,7 @@
   .heroContent {
     max-width: 1400px;
     gap: var(--space-20);
+    grid-template-columns: 1fr 1fr;
   }
   
   .mainTitle {
