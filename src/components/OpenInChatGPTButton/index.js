@@ -94,15 +94,38 @@ export default function OpenInChatGPTButton() {
         }
       }
       // Handle versioned docs
-      else if (pagePath.includes('/docs/version-')) {
-        // Versioned docs: /docs/version-2024-winter/intro -> versioned_docs/version-2024-winter/intro.mdx
+      else if (pagePath.includes('/docs/2024-winter/')) {
+        // Explicit version in URL: /docs/2024-winter/setup/account-registration
+        // -> versioned_docs/version-2024-winter/setup/account-registration.mdx
+        rawPath = pagePath.replace('/docs/2024-winter/', 'versioned_docs/version-2024-winter/');
+      } else if (pagePath.includes('/docs/2025-summer/')) {
+        // Explicit version in URL: /docs/2025-summer/diagrams/drawio
+        // -> versioned_docs/version-2025-summer/diagrams/drawio.mdx
+        rawPath = pagePath.replace('/docs/2025-summer/', 'versioned_docs/version-2025-summer/');
+      } else if (pagePath.includes('/docs/version-')) {
+        // Other versioned docs format: /docs/version-xxx/...
         rawPath = pagePath.replace('/docs/', 'versioned_docs/');
       } else if (pagePath.startsWith('/docs/')) {
-        // Current version docs: /docs/intro -> docs/intro.mdx
-        rawPath = pagePath.replace('/docs/', 'docs/');
+        // Check if this is actually the default version (2025-summer)
+        // The default version shows as /docs/... but files are in versioned_docs/version-2025-summer/...
+        const docPath = pagePath.replace('/docs/', '');
+        
+        // Check if this path exists in the current (non-versioned) docs folder
+        // These are the only files in the current docs folder:
+        const currentDocsPaths = ['intro', 'basics', 'practice', 'website'];
+        const firstSegment = docPath.split('/')[0];
+        
+        if (currentDocsPaths.includes(firstSegment)) {
+          // This is in the current docs folder
+          rawPath = 'docs/' + docPath;
+        } else {
+          // This is likely a versioned doc (default version 2025-summer)
+          // Pages like /docs/diagrams/... are actually in versioned_docs/version-2025-summer/diagrams/...
+          rawPath = 'versioned_docs/version-2025-summer/' + docPath;
+        }
       } else if (pagePath === '/docs' || pagePath === '/docs/') {
-        // Root docs page
-        rawPath = 'docs/intro.mdx';
+        // Root docs page - check if intro.mdx exists in docs/ or in versioned_docs/
+        rawPath = 'versioned_docs/version-2025-summer/intro.mdx';
       } else {
         // Fallback: use the path as is
         rawPath = pagePath;
@@ -113,16 +136,32 @@ export default function OpenInChatGPTButton() {
       
       // Handle special cases for docs structure
       if (rawPath === 'docs') {
-        rawPath = 'docs/intro.mdx';
+        rawPath = 'versioned_docs/version-2025-summer/intro.mdx';
       } else if (!rawPath.endsWith('.mdx') && !rawPath.endsWith('.md')) {
         // Add file extension if not present (for docs only, blog already handled)
         if (!rawPath.startsWith('blog/')) {
-          if (rawPath.endsWith('/index')) {
-            // Index pages: docs/basics/index -> docs/basics/index.mdx
+          // Check if this looks like a category/directory path
+          // For paths like "docs/basics", "docs/practice", etc.
+          const pathParts = rawPath.split('/');
+          const lastPart = pathParts[pathParts.length - 1];
+          
+          // Common category names that should map to index.mdx
+          const categoryNames = ['basics', 'practice', 'website', 'advanced', 'setup', 'tools', 'tutorials', 'diagrams', 'ai-systems', 'cases'];
+          
+          if (categoryNames.includes(lastPart) || rawPath.endsWith('/index')) {
+            // Category pages: docs/basics -> docs/basics/index.mdx
+            if (!rawPath.endsWith('/index')) {
+              rawPath += '/index';
+            }
             rawPath += '.mdx';
           } else if (rawPath.includes('/')) {
             // Regular pages: docs/intro -> docs/intro.mdx
-            rawPath += '.mdx';
+            // Check for .md files in version-2024-winter (only intro.md)
+            if (rawPath === 'versioned_docs/version-2024-winter/intro') {
+              rawPath += '.md';
+            } else {
+              rawPath += '.mdx';
+            }
           } else {
             // Single word: intro -> intro.mdx
             rawPath += '.mdx';
@@ -162,6 +201,14 @@ export default function OpenInChatGPTButton() {
   };
 
   if (!isClient) {
+    return null;
+  }
+
+  // Don't show button on blog list page or pages without specific content
+  const isBlogListPage = location.pathname === '/blog' || location.pathname === '/blog/';
+  const isPageWithoutContent = !doc && !blogPost && (isBlogListPage || location.pathname === '/blog/tags' || location.pathname === '/blog/archive');
+  
+  if (isPageWithoutContent) {
     return null;
   }
 
