@@ -29,6 +29,37 @@ const config = {
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
 
+  // RSS 自动发现
+  headTags: [
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'alternate',
+        type: 'application/rss+xml',
+        title: 'AI Programming 教学博客 - RSS 2.0',
+        href: '/blog/rss.xml',
+      },
+    },
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'alternate',
+        type: 'application/atom+xml',
+        title: 'AI Programming 教学博客 - Atom',
+        href: '/blog/atom.xml',
+      },
+    },
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'alternate',
+        type: 'application/feed+json',
+        title: 'AI Programming 教学博客 - JSON Feed',
+        href: '/blog/feed.json',
+      },
+    },
+  ],
+
   // Future flags for Docusaurus v4 preparation and performance optimizations
   future: {
     // Enable all v4 future flags for easier migration
@@ -79,8 +110,13 @@ const config = {
         blog: {
           showReadingTime: true,
           feedOptions: {
-            type: ['rss', 'atom'],
+            type: 'all', // 生成所有格式：RSS, Atom, JSON
             xslt: true,
+            title: 'AI Programming 教学博客',
+            description: '通过实践案例学习人工智能开发 - AI编程教育平台的最新文章和教程',
+            copyright: `Copyright © ${new Date().getFullYear()} AI Programming Education. All rights reserved.`,
+            language: 'zh-CN',
+            limit: 20, // 限制feed中的文章数量
           },
           // Edit this page links to your repository
           editUrl:
@@ -218,6 +254,12 @@ const config = {
             'aria-label': 'Discord community',
             position: 'right',
           },
+          {
+            href: '/feeds',
+            className: 'header-rss-link',
+            'aria-label': 'RSS 订阅',
+            position: 'right',
+          },
         ],
       },
       footer: {
@@ -263,6 +305,10 @@ const config = {
               {
                 label: '博客',
                 to: '/blog',
+              },
+              {
+                label: 'RSS 订阅',
+                to: '/feeds',
               },
               {
                 label: 'GitHub',

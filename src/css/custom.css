@@ -275,6 +275,25 @@ a:hover {
     no-repeat;
 }
 
+/* RSS 图标样式 */
+.header-rss-link:hover {
+  opacity: 0.6;
+}
+
+.header-rss-link::before {
+  content: '';
+  width: 24px;
+  height: 24px;
+  display: flex;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3.429 5.714v2.286c5.229 0 9.428 4.2 9.428 9.429h2.286c0-6.472-5.243-11.715-11.714-11.715zm0 4.572v2.285c1.893 0 3.429 1.536 3.429 3.429h2.285c0-3.143-2.571-5.714-5.714-5.714zM6 15.429a1.714 1.714 0 11-3.428 0 1.714 1.714 0 013.428 0z'/%3E%3C/svg%3E")
+    no-repeat;
+}
+
+[data-theme='dark'] .header-rss-link::before {
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='white' d='M3.429 5.714v2.286c5.229 0 9.428 4.2 9.428 9.429h2.286c0-6.472-5.243-11.715-11.714-11.715zm0 4.572v2.285c1.893 0 3.429 1.536 3.429 3.429h2.285c0-3.143-2.571-5.714-5.714-5.714zM6 15.429a1.714 1.714 0 11-3.428 0 1.714 1.714 0 013.428 0z'/%3E%3C/svg%3E")
+    no-repeat;
+}
+
 /* 页面滚动动画 */
 html {
   scroll-behavior: smooth;
