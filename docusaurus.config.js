@@ -266,52 +266,85 @@ const config = {
         style: 'dark',
         links: [
           {
-            title: '学习资源',
+            title: '课程内容',
             items: [
               {
-                label: '入门教程',
+                label: '2025年夏季课程',
                 to: '/docs/intro',
               },
               {
-                label: '实践案例',
-                to: '/docs/practice/blog-planning',
+                label: 'Gemini CLI 环境管理',
+                to: '/docs/basics/',
               },
               {
-                label: '进阶应用',
-                to: '/docs/advanced/',
+                label: '个人网站开发部署',
+                to: '/docs/website/',
+              },
+              {
+                label: '2024年冬季课程',
+                to: '/docs/2024-winter/intro',
               },
             ],
           },
           {
-            title: '社区',
+            title: '学习资源',
             items: [
               {
-                label: '技术讨论',
-                href: 'https://github.com/ChanMeng666',
+                label: '博客文章',
+                to: '/blog',
+              },
+              {
+                label: 'AI 编程基础',
+                to: '/docs/2024-winter/basics/',
+              },
+              {
+                label: '实践项目案例',
+                to: '/docs/2024-winter/practice/',
+              },
+              {
+                label: '进阶开发教程',
+                to: '/docs/2024-winter/advanced/',
+              },
+            ],
+          },
+          {
+            title: '社区互动',
+            items: [
+              {
+                label: 'Discord 社区',
+                href: 'https://discord.gg/T3NJG5n98a',
+              },
+              {
+                label: 'GitHub 讨论',
+                href: 'https://github.com/ChanMeng666/ai-programming-teaching-project/discussions',
               },
               {
                 label: '问题反馈',
-                href: 'https://github.com/ChanMeng666',
-              },
-              {
-                label: '加入我们',
-                href: 'https://github.com/ChanMeng666',
-              },
-            ],
-          },
-          {
-            title: '更多',
-            items: [
-              {
-                label: '博客',
-                to: '/blog',
+                href: 'https://github.com/ChanMeng666/ai-programming-teaching-project/issues',
               },
               {
                 label: 'RSS 订阅',
                 to: '/feeds',
               },
+            ],
+          },
+          {
+            title: '关于项目',
+            items: [
               {
-                label: 'GitHub',
+                label: 'GitHub 仓库',
+                href: 'https://github.com/ChanMeng666/ai-programming-teaching-project',
+              },
+              {
+                label: '贡献指南',
+                href: 'https://github.com/ChanMeng666/ai-programming-teaching-project/blob/main/CONTRIBUTING.md',
+              },
+              {
+                label: '版本历史',
+                href: 'https://github.com/ChanMeng666/ai-programming-teaching-project/releases',
+              },
+              {
+                label: '作者主页',
                 href: 'https://github.com/ChanMeng666',
               },
             ],
