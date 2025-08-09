@@ -35,6 +35,49 @@
           "label": "完整教程"
         }
       ]
+    },
+    {
+      "type": "category",
+      "label": "📊 课程三：绘制专业图表",
+      "collapsible": true,
+      "collapsed": false,
+      "items": [
+        {
+          "type": "doc",
+          "id": "diagrams/index",
+          "label": "课程概览"
+        },
+        {
+          "type": "doc",
+          "id": "diagrams/mermaid-basics",
+          "label": "Mermaid 基础"
+        },
+        {
+          "type": "doc",
+          "id": "diagrams/mermaid-advanced",
+          "label": "Mermaid 高级"
+        },
+        {
+          "type": "doc",
+          "id": "diagrams/drawio",
+          "label": "Draw.io 设计"
+        },
+        {
+          "type": "doc",
+          "id": "diagrams/use-cases",
+          "label": "场景应用"
+        },
+        {
+          "type": "doc",
+          "id": "diagrams/ai-assistance",
+          "label": "AI 辅助创作"
+        },
+        {
+          "type": "doc",
+          "id": "diagrams/projects",
+          "label": "实战项目"
+        }
+      ]
     }
   ]
 }
