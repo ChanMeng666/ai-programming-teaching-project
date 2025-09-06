@@ -59,6 +59,9 @@ One-click **FREE** deployment of your personalized learning environment.
   <p><em><strong>Version 2 Interface Showcase</strong> - Mobile responsive and feature highlights</em></p>
 </div>
 
+<details>
+<summary><kbd>📱 Previous Version (Version 1) & Version Comparison</kbd></summary>
+
 ### 📱 Previous Version (Version 1) - Original Design
 
 <div align="center">
@@ -72,19 +75,16 @@ One-click **FREE** deployment of your personalized learning environment.
   <p><em><strong>Version 1 Tutorials & Blog</strong> - Original interactive content sections</em></p>
 </div>
 
-<details>
-<summary><kbd>🔄 Version Comparison & More Screenshots</kbd></summary>
-
-#### Version Evolution Highlights:
-- ✨ **Enhanced Visual Design**: Modern color scheme and typography
-- 🎨 **Improved UI Components**: Better buttons, cards, and interactive elements
-- 📱 **Mobile Optimization**: Superior responsive design across all devices
-- 🚀 **Performance Improvements**: Faster loading and smoother interactions
-
 <div align="center">
   <img src="./static/screenshot/screencapture-my-website-iota-coral-vercel-app-2024-11-24-23_08_16.png" alt="Original Mobile View" width="300"/>
   <p><em><strong>Version 1 Mobile View</strong> - Original responsive design foundation</em></p>
 </div>
+
+#### 🔄 Version Evolution Highlights:
+- ✨ **Enhanced Visual Design**: Modern color scheme and typography
+- 🎨 **Improved UI Components**: Better buttons, cards, and interactive elements
+- 📱 **Mobile Optimization**: Superior responsive design across all devices
+- 🚀 **Performance Improvements**: Faster loading and smoother interactions
 
 </details>
 
