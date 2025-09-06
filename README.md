@@ -38,25 +38,52 @@ One-click **FREE** deployment of your personalized learning environment.
 ## 📸 Project Screenshots
 
 > [!TIP]
-> Explore our interactive learning platform designed for modern developers.
+> Explore our interactive learning platform designed for modern developers. See the evolution from Version 1 to the latest Version 2 with enhanced UI/UX.
+
+### 🌟 Latest Version (Version 2) - Enhanced UI/UX
 
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/1016e556-6990-476c-9c34-e57677db97ca" alt="Main Dashboard" width="800"/>
-  <p><em>Main Dashboard - Comprehensive learning modules and navigation</em></p>
+  <img src="./static/readme-screenshots/screencapture-programming-chanmeng-org-2025-09-06-13_57_30.png" alt="Main Dashboard V2" width="800"/>
+  <p><em><strong>Version 2 Main Dashboard</strong> - Redesigned with modern aesthetics and improved navigation</em></p>
 </div>
 
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/d4728ea6-d372-4305-b431-7e07ac476159" alt="Tutorial Page" width="400"/>
-  <img src="https://github.com/user-attachments/assets/c7bf0ec3-af13-40f1-8e66-69808696a24c" alt="Blog Section" width="400"/>
-  <p><em>Interactive Tutorials and Learning Blog</em></p>
+  <img src="./static/readme-screenshots/screencapture-programming-chanmeng-org-docs-intro-2025-09-06-13_57_51.png" alt="Documentation Page V2" width="600"/>
+  <p><em><strong>Version 2 Documentation</strong> - Enhanced reading experience with better typography</em></p>
+</div>
+
+<div align="center">
+  <img src="./static/readme-screenshots/屏幕截图 2025-09-06 135828.png" alt="Mobile View V2" width="300"/>
+  <img src="./static/readme-screenshots/屏幕截图 2025-09-06 135902.png" alt="Features V2" width="300"/>
+  <img src="./static/readme-screenshots/屏幕截图 2025-09-06 135936.png" alt="Interface V2" width="300"/>
+  <p><em><strong>Version 2 Interface Showcase</strong> - Mobile responsive and feature highlights</em></p>
+</div>
+
+### 📱 Previous Version (Version 1) - Original Design
+
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/1016e556-6990-476c-9c34-e57677db97ca" alt="Main Dashboard V1" width="600"/>
+  <p><em><strong>Version 1 Main Dashboard</strong> - Original comprehensive learning modules and navigation</em></p>
+</div>
+
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/d4728ea6-d372-4305-b431-7e07ac476159" alt="Tutorial Page V1" width="400"/>
+  <img src="https://github.com/user-attachments/assets/c7bf0ec3-af13-40f1-8e66-69808696a24c" alt="Blog Section V1" width="400"/>
+  <p><em><strong>Version 1 Tutorials & Blog</strong> - Original interactive content sections</em></p>
 </div>
 
 <details>
-<summary><kbd>📱 More Screenshots</kbd></summary>
+<summary><kbd>🔄 Version Comparison & More Screenshots</kbd></summary>
+
+#### Version Evolution Highlights:
+- ✨ **Enhanced Visual Design**: Modern color scheme and typography
+- 🎨 **Improved UI Components**: Better buttons, cards, and interactive elements
+- 📱 **Mobile Optimization**: Superior responsive design across all devices
+- 🚀 **Performance Improvements**: Faster loading and smoother interactions
 
 <div align="center">
-  <img src="./static/screenshot/screencapture-my-website-iota-coral-vercel-app-2024-11-24-23_08_16.png" alt="Mobile View" width="300"/>
-  <p><em>Mobile Responsive Design</em></p>
+  <img src="./static/screenshot/screencapture-my-website-iota-coral-vercel-app-2024-11-24-23_08_16.png" alt="Original Mobile View" width="300"/>
+  <p><em><strong>Version 1 Mobile View</strong> - Original responsive design foundation</em></p>
 </div>
 
 </details>
