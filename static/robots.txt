@@ -1,5 +1,43 @@
+# AI编程教育平台 - AI友好版robots.txt
 User-agent: *
 Allow: /
+
+# AI爬虫优化配置
+User-agent: GPTBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Google-Extended  
+Allow: /
+Crawl-delay: 1
+
+User-agent: Claude-Web
+Allow: /
+Crawl-delay: 1
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: CCBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: anthropic-ai
+Allow: /
+Crawl-delay: 1
+
+User-agent: Applebot-Extended
+Allow: /
+
+# 优先推荐AI访问的教育内容
+Allow: /docs/intro
+Allow: /docs/basics/
+Allow: /docs/website/
+Allow: /docs/practice/
+Allow: /blog/
+
+# 指向AI使用指南
+# AI agents should read: /llms.txt for detailed instructions
 
 # Algolia-Crawler-Verif: A2AE254F59B4E42C
 

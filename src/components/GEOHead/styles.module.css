@@ -1,0 +1,23 @@
+/**
+ * GEOHead组件样式
+ * 这个组件主要用于生成meta标签和结构化数据，通常不需要可见的样式
+ * 保留此文件以保持组件结构的一致性
+ */
+
+/* 如果需要为调试或开发添加可见的样式标识符，可以在这里定义 */
+.geoHead {
+  /* 占位样式，通常GEOHead组件不需要可见样式 */
+}
+
+/* 开发模式下的调试样式 */
+.debugMode {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background: rgba(0, 255, 0, 0.1);
+  border: 1px solid #00ff00;
+  padding: 5px;
+  font-size: 12px;
+  z-index: 9999;
+  border-radius: 4px;
+}
