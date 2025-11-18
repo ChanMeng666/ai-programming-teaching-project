@@ -1,0 +1,153 @@
+---
+title: RSS Subscription
+description: Subscribe to AI Programming teaching blog for the latest tutorials and article updates
+---
+
+import styles from '@site/src/pages/feeds.module.css';
+
+<div className={styles.feedsContainer}>
+  <div className={styles.heroSection}>
+    <h1 className={styles.title}>📡 RSS Subscription</h1>
+    <p className={styles.subtitle}>
+      Subscribe to our blog to get the latest AI programming tutorials, project cases, and technical insights
+    </p>
+  </div>
+
+  <section className={styles.contentSection}>
+    <h2>🎯 Subscription Feeds</h2>
+    <p>We provide subscription feeds in multiple formats. Choose the appropriate format based on your RSS reader:</p>
+
+    <div className={styles.subscriptionTable}>
+      <table>
+        <thead>
+          <tr>
+            <th>Content</th>
+            <th>RSS 2.0</th>
+            <th>Atom 1.0</th>
+            <th>JSON Feed 1.0</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>All Blog Posts</strong></td>
+            <td><a href="/blog/rss.xml" target="_blank" rel="noopener noreferrer" className={styles.feedLink}>📰 RSS</a></td>
+            <td><a href="/blog/atom.xml" target="_blank" rel="noopener noreferrer" className={styles.feedLink}>⚛️ Atom</a></td>
+            <td><a href="/blog/feed.json" target="_blank" rel="noopener noreferrer" className={styles.feedLink}>📋 JSON</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section className={styles.contentSection}>
+    <h2>📖 What is RSS?</h2>
+    <p>RSS (Really Simple Syndication) is a web content aggregation format. By subscribing to RSS feeds, you can:</p>
+    <ul className={styles.benefitsList}>
+      <li>✅ Read updates from multiple websites in one place</li>
+      <li>✅ Get the latest content without frequently visiting websites</li>
+      <li>✅ Read articles at your own pace</li>
+      <li>✅ Never miss important updates</li>
+    </ul>
+  </section>
+
+  <section className={styles.contentSection}>
+    <h2>🛠️ How to Use RSS?</h2>
+
+    <div className={styles.stepSection}>
+      <h3>Step 1: Choose an RSS Reader</h3>
+
+      <div className={styles.readerGrid}>
+        <div className={styles.readerCategory}>
+          <h4>Desktop Recommendations</h4>
+          <ul>
+            <li><a href="https://netnewswire.com/" target="_blank" rel="noopener noreferrer">NetNewsWire</a> (macOS/iOS) - Free & open source, clean interface</li>
+            <li><a href="https://feedly.com/" target="_blank" rel="noopener noreferrer">Feedly</a> - Cross-platform, feature-rich</li>
+            <li><a href="https://www.inoreader.com/" target="_blank" rel="noopener noreferrer">Inoreader</a> - Supports advanced filtering and rules</li>
+            <li><a href="https://newsblur.com/" target="_blank" rel="noopener noreferrer">NewsBlur</a> - Open source, supports social features</li>
+          </ul>
+        </div>
+
+        <div className={styles.readerCategory}>
+          <h4>Mobile Recommendations</h4>
+          <ul>
+            <li><a href="https://reederapp.com/" target="_blank" rel="noopener noreferrer">Reeder</a> (iOS/macOS) - Beautiful design</li>
+            <li><a href="https://play.google.com/store/apps/details?id=com.seazon.feedme" target="_blank" rel="noopener noreferrer">FeedMe</a> (Android) - Full-featured</li>
+            <li><a href="https://github.com/Ashinch/ReadYou" target="_blank" rel="noopener noreferrer">Read You</a> (Android) - Open source & free</li>
+          </ul>
+        </div>
+
+        <div className={styles.readerCategory}>
+          <h4>Browser Extensions</h4>
+          <ul>
+            <li><a href="https://nodetics.com/feedbro/" target="_blank" rel="noopener noreferrer">Feedbro</a> - Firefox/Chrome</li>
+            <li><a href="https://chrome.google.com/webstore/detail/rss-feed-reader/pnjaodmkngahhkoihejjehlcdlnohgmp" target="_blank" rel="noopener noreferrer">RSS Feed Reader</a> - Chrome</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div className={styles.stepSection}>
+      <h3>Step 2: Add Subscription Feed</h3>
+      <ol className={styles.stepsList}>
+        <li>Copy the subscription link from the table above</li>
+        <li>Select "Add Subscription" or "Add Feed" in your RSS reader</li>
+        <li>Paste the link and confirm</li>
+        <li>Start reading!</li>
+      </ol>
+    </div>
+  </section>
+
+  <section className={styles.contentSection}>
+    <h2>💡 Tips</h2>
+    <div className={styles.infoBox}>
+      <strong>Subscription Format Selection Guide:</strong>
+      <ul>
+        <li><strong>RSS 2.0</strong> - Most widely supported, suitable for most readers</li>
+        <li><strong>Atom 1.0</strong> - More standardized, supports more metadata</li>
+        <li><strong>JSON Feed</strong> - Latest format, suitable for modern applications</li>
+      </ul>
+    </div>
+  </section>
+
+  <section className={styles.contentSection}>
+    <h2>🔔 Other Ways to Follow</h2>
+    <p>Besides RSS, you can also follow us through:</p>
+    <div className={styles.socialLinks}>
+      <a href="https://github.com/ChanMeng666/ai-programming-teaching-project" target="_blank" rel="noopener noreferrer" className={styles.socialLink}>
+        🌟 GitHub - Star our project
+      </a>
+      <a href="https://discord.gg/T3NJG5n98a" target="_blank" rel="noopener noreferrer" className={styles.socialLink}>
+        💬 Discord - Join community discussions
+      </a>
+      <span className={styles.socialLink}>
+        🔖 Browser Bookmark - Save our website
+      </span>
+    </div>
+  </section>
+
+  <section className={styles.contentSection}>
+    <h2>❓ Frequently Asked Questions</h2>
+
+    <div className={styles.faqItem}>
+      <h3>Do RSS readers cost money?</h3>
+      <p>Most RSS readers offer free versions with features sufficient for daily use. Paid versions typically provide advanced features like full-text search and automation rules.</p>
+    </div>
+
+    <div className={styles.faqItem}>
+      <h3>How often is the feed updated?</h3>
+      <p>The subscription feed updates automatically when we publish new articles. Most RSS readers check for updates every 15-60 minutes.</p>
+    </div>
+
+    <div className={styles.faqItem}>
+      <h3>Can I subscribe to specific topics only?</h3>
+      <p>Currently, we provide a subscription for all blog posts. If you're interested in specific topics, you can use filtering features in your RSS reader.</p>
+    </div>
+  </section>
+
+  <div className={styles.footer}>
+    <p>
+      <strong>Thank you for your interest!</strong><br/>
+      We will continue to update with high-quality AI programming content
+    </p>
+  </div>
+</div>
