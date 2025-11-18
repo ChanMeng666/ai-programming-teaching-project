@@ -249,10 +249,6 @@ const config = {
             type: 'docsVersionDropdown',
             position: 'left',
             dropdownActiveClassDisabled: true,
-            versions: {
-              '2025-summer': {label: '2025年夏季她行活动'},
-              '2024-winter': {label: '2024年冬季她行活动'},
-            },
           },
           {
             type: 'localeDropdown',
