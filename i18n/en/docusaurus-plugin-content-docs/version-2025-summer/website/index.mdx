@@ -1,5 +1,5 @@
 ---
-title: 开发并部署个人网站
+title: Develop and Deploy Personal Website
 sidebar_position: 1
 ---
 
@@ -8,71 +8,71 @@ import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
 import Admonition from '@theme/Admonition';
 
-# 开发并部署个人网站
+# Develop and Deploy Personal Website
 
-:::info 课程简介
-在本课程中，您将学习如何使用 Gemini CLI 快速开发和部署一个专业的个人网站。从环境配置到网站上线，全程使用 AI 辅助，让网站开发变得简单高效。
+:::info Course Introduction
+In this course, you will learn how to use Gemini CLI to quickly develop and deploy a professional personal website. From environment setup to website launch, with AI assistance throughout, making website development simple and efficient.
 :::
 
-## 🎯 学习目标
+## 🎯 Learning Objectives
 
-完成本课程后，您将能够：
+After completing this course, you will be able to:
 
 <div className="goal-grid">
   <div className="goal-card">
     <div className="goal-icon">🏗️</div>
-    <h3>项目搭建</h3>
-    <p>使用 Vercel 模板快速启动项目，通过 Gemini CLI 配置开发环境</p>
+    <h3>Project Setup</h3>
+    <p>Quickly launch projects using Vercel templates and configure development environment through Gemini CLI</p>
   </div>
   <div className="goal-card">
     <div className="goal-icon">🎨</div>
-    <h3>内容定制</h3>
-    <p>利用 AI 进行设计优化，打造独特的个人品牌展示</p>
+    <h3>Content Customization</h3>
+    <p>Use AI for design optimization and create unique personal brand showcase</p>
   </div>
   <div className="goal-card">
     <div className="goal-icon">🚀</div>
-    <h3>一键部署</h3>
-    <p>掌握现代化的部署流程，让网站快速上线</p>
+    <h3>One-Click Deployment</h3>
+    <p>Master modern deployment processes to get your website online quickly</p>
   </div>
   <div className="goal-card">
     <div className="goal-icon">📈</div>
-    <h3>持续优化</h3>
-    <p>学会使用 AI 持续改进网站性能和用户体验</p>
+    <h3>Continuous Optimization</h3>
+    <p>Learn to use AI to continuously improve website performance and user experience</p>
   </div>
 </div>
 
-## 💼 为什么需要个人网站？
+## 💼 Why Do You Need a Personal Website?
 
 <div className="benefits-section">
   <div className="benefit-item">
-    <h4>🌟 专业形象展示</h4>
-    <p>一个精心设计的个人网站是您专业能力的最佳证明，让您在求职和商务合作中脱颖而出。</p>
+    <h4>🌟 Professional Image Display</h4>
+    <p>A well-designed personal website is the best proof of your professional capabilities, making you stand out in job hunting and business cooperation.</p>
   </div>
   <div className="benefit-item">
-    <h4>🎯 个人品牌建设</h4>
-    <p>通过网站展示您的独特价值，建立可识别的个人品牌，增强行业影响力。</p>
+    <h4>🎯 Personal Brand Building</h4>
+    <p>Showcase your unique value through your website, establish a recognizable personal brand, and enhance industry influence.</p>
   </div>
   <div className="benefit-item">
-    <h4>📚 作品集中展示</h4>
-    <p>将您的项目、文章、成就集中展示，方便他人快速了解您的能力和经历。</p>
+    <h4>📚 Centralized Portfolio Display</h4>
+    <p>Centrally display your projects, articles, and achievements, making it easy for others to quickly understand your abilities and experiences.</p>
   </div>
   <div className="benefit-item">
-    <h4>🔗 网络连接中心</h4>
-    <p>整合所有社交媒体和专业平台链接，成为您在线身份的统一入口。</p>
+    <h4>🔗 Network Connection Hub</h4>
+    <p>Integrate all social media and professional platform links to become a unified entrance for your online identity.</p>
   </div>
 </div>
 
-## 🛠️ 项目开发环境配置
+## 🛠️ Project Development Environment Configuration
 
-### 智能环境检测与配置
+### Intelligent Environment Detection and Configuration
 
-使用 Gemini CLI 可以智能分析项目需求，自动配置最适合的开发环境。
+Using Gemini CLI can intelligently analyze project requirements and automatically configure the most suitable development environment.
 
 <Tabs>
-  <TabItem value="web" label="Web 项目" default>
+  <TabItem value="web" label="Web Project" default>
 
 <CodeBlock language="text">
-{`您：我要开发一个 Next.js 个人网站项目，这是我的 package.json：
+{`You: I want to develop a Next.js personal website project, here is my package.json:
 {
   "name": "personal-portfolio",
   "version": "0.1.0",
@@ -84,279 +84,279 @@ import Admonition from '@theme/Admonition';
     "framer-motion": "^10.16.0"
   }
 }
-请帮我配置开发环境。
+Please help me configure the development environment.
 
-Gemini：我来帮您配置 Next.js 项目的开发环境。
+Gemini: I'll help you configure the Next.js project development environment.
 
-🔍 分析项目需求...
-- 框架：Next.js 14
-- UI：React 18 + Tailwind CSS
-- 动画：Framer Motion
+🔍 Analyzing project requirements...
+- Framework: Next.js 14
+- UI: React 18 + Tailwind CSS
+- Animation: Framer Motion
 
-📦 需要安装的工具：
+📦 Tools to install:
 
-全局安装（系统级）：
-✓ Node.js 18+ LTS - JavaScript 运行环境
-✓ npm/yarn/pnpm - 包管理器
-✓ Git - 版本控制
+Global installation (system-level):
+✓ Node.js 18+ LTS - JavaScript runtime environment
+✓ npm/yarn/pnpm - Package manager
+✓ Git - Version control
 
-项目级安装（已在 package.json 中）：
-✓ 所有依赖都是项目级的，很好！
+Project-level installation (already in package.json):
+✓ All dependencies are project-level, great!
 
-🛠️ 开始配置...
+🛠️ Starting configuration...
 
-1. 检查 Node.js 版本
-   当前版本：v18.17.0 ✓
+1. Check Node.js version
+   Current version: v18.17.0 ✓
 
-2. 安装项目依赖
-   执行: npm install
-   
-3. 配置开发工具
-   - 创建 .prettierrc
-   - 配置 ESLint
-   - 设置 VS Code 工作区
+2. Install project dependencies
+   Execute: npm install
 
-✓ 环境配置完成！运行 npm run dev 启动开发服务器。`}
+3. Configure development tools
+   - Create .prettierrc
+   - Configure ESLint
+   - Set up VS Code workspace
+
+✓ Environment configuration complete! Run npm run dev to start development server.`}
 </CodeBlock>
 
   </TabItem>
-  <TabItem value="python" label="Python 项目">
+  <TabItem value="python" label="Python Project">
 
 <CodeBlock language="text">
-{`您：我有一个 Python Flask 网站项目，requirements.txt 如下：
+{`You: I have a Python Flask website project, requirements.txt is as follows:
 Flask==3.0.0
 gunicorn==21.2.0
 Jinja2==3.1.2
 python-dotenv==1.0.0
 
-Gemini：我来帮您配置 Python Flask 项目环境。
+Gemini: I'll help you configure the Python Flask project environment.
 
-🔍 项目分析...
-- 框架：Flask 3.0
-- 服务器：Gunicorn
-- 模板引擎：Jinja2
+🔍 Project analysis...
+- Framework: Flask 3.0
+- Server: Gunicorn
+- Template engine: Jinja2
 
-📦 环境配置方案：
+📦 Environment configuration plan:
 
-全局安装：
-✓ Python 3.9+ - 推荐使用系统 Python
-✓ pip - Python 包管理器
+Global installation:
+✓ Python 3.9+ - Recommended to use system Python
+✓ pip - Python package manager
 
-项目级配置（推荐）：
-1. 创建虚拟环境
+Project-level configuration (recommended):
+1. Create virtual environment
    python -m venv venv
-   
-2. 激活虚拟环境
-   source venv/bin/activate  # Linux/Mac
-   
-3. 安装依赖
-   pip install -r requirements.txt
-   
-4. 环境变量配置
-   创建 .env 文件存储敏感信息
 
-✓ 配置完成！使用 flask run 启动开发服务器。`}
+2. Activate virtual environment
+   source venv/bin/activate  # Linux/Mac
+
+3. Install dependencies
+   pip install -r requirements.txt
+
+4. Environment variable configuration
+   Create .env file to store sensitive information
+
+✓ Configuration complete! Use flask run to start development server.`}
 </CodeBlock>
 
   </TabItem>
 </Tabs>
 
-<Admonition type="tip" title="最佳实践">
-**全局 vs 项目级安装原则**：
-- **全局安装**：系统工具、CLI 工具（如 Node.js、Git、Python）
-- **项目级安装**：所有项目依赖、库、框架
-- **使用虚拟环境**：Python 项目务必使用 venv，Node.js 项目依赖自动隔离
+<Admonition type="tip" title="Best Practices">
+**Global vs Project-level Installation Principles**:
+- **Global installation**: System tools, CLI tools (such as Node.js, Git, Python)
+- **Project-level installation**: All project dependencies, libraries, frameworks
+- **Use virtual environments**: Python projects must use venv, Node.js project dependencies are automatically isolated
 </Admonition>
 
-## 📁 网站静态资料准备
+## 📁 Website Static Materials Preparation
 
-在开始开发之前，准备好所有需要展示的内容至关重要。
+Before starting development, preparing all content to be displayed is crucial.
 
 <div className="content-preparation">
-  <h3>📋 内容清单</h3>
-  
+  <h3>📋 Content Checklist</h3>
+
   <div className="checklist-grid">
     <div className="checklist-item">
-      <h4>📄 求职简历</h4>
+      <h4>📄 Resume</h4>
       <ul>
-        <li>最新的 PDF 版本</li>
-        <li>结构化的文本内容</li>
-        <li>关键成就和技能点</li>
+        <li>Latest PDF version</li>
+        <li>Structured text content</li>
+        <li>Key achievements and skills</li>
       </ul>
     </div>
-    
+
     <div className="checklist-item">
-      <h4>✍️ 过往文章</h4>
+      <h4>✍️ Past Articles</h4>
       <ul>
-        <li>技术博客文章</li>
-        <li>项目案例分析</li>
-        <li>行业见解分享</li>
+        <li>Technical blog articles</li>
+        <li>Project case studies</li>
+        <li>Industry insight sharing</li>
       </ul>
     </div>
-    
+
     <div className="checklist-item">
-      <h4>🔗 社交媒体</h4>
+      <h4>🔗 Social Media</h4>
       <ul>
-        <li>LinkedIn 个人主页</li>
-        <li>GitHub 仓库链接</li>
-        <li>Twitter/X 账号</li>
+        <li>LinkedIn profile</li>
+        <li>GitHub repository links</li>
+        <li>Twitter/X account</li>
       </ul>
     </div>
-    
+
     <div className="checklist-item">
-      <h4>🎨 作品集资料</h4>
+      <h4>🎨 Portfolio Materials</h4>
       <ul>
-        <li>项目截图和演示</li>
-        <li>设计作品展示</li>
-        <li>代码示例片段</li>
+        <li>Project screenshots and demos</li>
+        <li>Design work showcase</li>
+        <li>Code sample snippets</li>
       </ul>
     </div>
-    
+
     <div className="checklist-item">
-      <h4>📸 多媒体素材</h4>
+      <h4>📸 Multimedia Materials</h4>
       <ul>
-        <li>专业头像照片</li>
-        <li>项目演示视频</li>
-        <li>活动现场照片</li>
+        <li>Professional headshot photos</li>
+        <li>Project demo videos</li>
+        <li>Event photos</li>
       </ul>
     </div>
-    
+
     <div className="checklist-item">
-      <h4>🌟 特色内容</h4>
+      <h4>🌟 Featured Content</h4>
       <ul>
-        <li>获奖证书</li>
-        <li>推荐信</li>
-        <li>个人故事</li>
+        <li>Award certificates</li>
+        <li>Recommendation letters</li>
+        <li>Personal stories</li>
       </ul>
     </div>
   </div>
 </div>
 
-<Admonition type="info" title="内容准备技巧">
-- **高质量优于数量**：精选最能代表您能力的内容
-- **保持更新**：定期更新简历和作品集
-- **优化格式**：图片使用 WebP 格式，视频考虑压缩
-- **隐私保护**：避免展示敏感个人信息
+<Admonition type="info" title="Content Preparation Tips">
+- **Quality over quantity**: Select content that best represents your abilities
+- **Keep updated**: Regularly update your resume and portfolio
+- **Optimize formats**: Use WebP format for images, consider compressing videos
+- **Privacy protection**: Avoid displaying sensitive personal information
 </Admonition>
 
-## 🎨 选择心仪模板
+## 🎨 Choose Your Favorite Template
 
-### Vercel 模板库探索
+### Explore Vercel Template Library
 
 <div className="template-showcase">
   <div className="showcase-header">
-    <h3>🌐 访问 Vercel 模板库</h3>
-    <p>前往 <a href="https://vercel.com/templates" target="_blank">https://vercel.com/templates</a> 探索丰富的模板选择</p>
+    <h3>🌐 Visit Vercel Template Library</h3>
+    <p>Go to <a href="https://vercel.com/templates" target="_blank">https://vercel.com/templates</a> to explore a rich selection of templates</p>
   </div>
-  
+
   <div className="template-categories">
     <div className="category-card">
-      <h4>💼 Portfolio 作品集</h4>
-      <p>专为展示个人作品设计，适合设计师、开发者</p>
+      <h4>💼 Portfolio</h4>
+      <p>Designed specifically for showcasing personal work, suitable for designers and developers</p>
     </div>
     <div className="category-card">
-      <h4>📝 Blog 博客</h4>
-      <p>内容为主的模板，适合写作者和思想分享者</p>
+      <h4>📝 Blog</h4>
+      <p>Content-focused templates, suitable for writers and thought leaders</p>
     </div>
     <div className="category-card">
       <h4>🚀 Landing Page</h4>
-      <p>单页面展示，适合产品推广或个人介绍</p>
+      <p>Single-page display, suitable for product promotion or personal introduction</p>
     </div>
     <div className="category-card">
-      <h4>🏢 Business 商务</h4>
-      <p>专业商务风格，适合咨询顾问或自由职业者</p>
+      <h4>🏢 Business</h4>
+      <p>Professional business style, suitable for consultants or freelancers</p>
     </div>
   </div>
 </div>
 
-### 推荐模板：Magic Portfolio
+### Recommended Template: Magic Portfolio
 
 <div className="template-highlight">
   <h3>✨ Magic Portfolio for Next.js</h3>
   <div className="template-features">
     <div className="feature">
-      <strong>🎯 特点</strong>
+      <strong>🎯 Features</strong>
       <ul>
-        <li>现代化设计，响应式布局</li>
-        <li>流畅的动画效果</li>
-        <li>SEO 优化</li>
-        <li>易于定制</li>
+        <li>Modern design, responsive layout</li>
+        <li>Smooth animation effects</li>
+        <li>SEO optimized</li>
+        <li>Easy to customize</li>
       </ul>
     </div>
     <div className="feature">
-      <strong>🛠️ 技术栈</strong>
+      <strong>🛠️ Tech Stack</strong>
       <ul>
         <li>Next.js 14</li>
         <li>Tailwind CSS</li>
         <li>Framer Motion</li>
-        <li>TypeScript 支持</li>
+        <li>TypeScript support</li>
       </ul>
     </div>
   </div>
-  
+
   <div className="action-box">
-    <p>访问模板页面：<a href="https://vercel.com/templates/portfolio/magic-portfolio-for-next-js" target="_blank">Magic Portfolio 模板</a></p>
-    <p className="action-tip">👉 在页面中点击 <strong>"Deploy"</strong> 按钮开始部署</p>
+    <p>Visit template page: <a href="https://vercel.com/templates/portfolio/magic-portfolio-for-next-js" target="_blank">Magic Portfolio Template</a></p>
+    <p className="action-tip">👉 Click the <strong>"Deploy"</strong> button on the page to start deployment</p>
   </div>
 </div>
 
-## 🚀 项目部署流程
+## 🚀 Project Deployment Process
 
-### 步骤 1：部署到 Vercel
+### Step 1: Deploy to Vercel
 
 <div className="deployment-steps">
   <div className="step">
     <div className="step-number">1</div>
     <div className="step-content">
-      <h4>点击 Deploy 按钮</h4>
-      <p>在模板页面点击部署按钮，开始创建您的项目</p>
+      <h4>Click the Deploy Button</h4>
+      <p>Click the deploy button on the template page to start creating your project</p>
     </div>
   </div>
-  
+
   <div className="step">
     <div className="step-number">2</div>
     <div className="step-content">
-      <h4>命名您的仓库</h4>
-      <p>使用您的名字命名，如 <code>chanmeng-portfolio</code>，这样域名会更个性化</p>
+      <h4>Name Your Repository</h4>
+      <p>Use your name for naming, such as <code>chanmeng-portfolio</code>, this makes the domain name more personalized</p>
     </div>
   </div>
-  
+
   <div className="step">
     <div className="step-number">3</div>
     <div className="step-content">
-      <h4>等待初始部署</h4>
-      <p>Vercel 会自动构建并部署您的网站，通常只需 1-2 分钟</p>
+      <h4>Wait for Initial Deployment</h4>
+      <p>Vercel will automatically build and deploy your website, usually takes only 1-2 minutes</p>
     </div>
   </div>
 </div>
 
-### 步骤 2：本地开发设置
+### Step 2: Local Development Setup
 
 <Tabs>
-  <TabItem value="gemini" label="使用 Gemini CLI" default>
+  <TabItem value="gemini" label="Using Gemini CLI" default>
 
 <CodeBlock language="text">
-{`您：请帮我从 GitHub 克隆这个项目到本地：
+{`You: Please help me clone this project from GitHub locally:
 https://github.com/ChanMeng666/magic-portfolio-for-next-js.git
 
-Gemini：我来帮您克隆项目到本地。
+Gemini: I'll help you clone the project locally.
 
-🔍 检查 Git 配置...
-✓ Git 已安装
-✓ GitHub CLI 可用
+🔍 Checking Git configuration...
+✓ Git installed
+✓ GitHub CLI available
 
-📥 克隆项目：
+📥 Cloning project:
 
-方式 1 - 使用 HTTPS：
+Method 1 - Using HTTPS:
 git clone https://github.com/ChanMeng666/magic-portfolio-for-next-js.git
 
-方式 2 - 使用 GitHub CLI（推荐）：
+Method 2 - Using GitHub CLI (recommended):
 gh repo clone ChanMeng666/magic-portfolio-for-next-js
 
-执行中...
-✓ 克隆成功！
+Executing...
+✓ Clone successful!
 
-📂 项目结构：
+📂 Project structure:
 magic-portfolio-for-next-js/
 ├── components/
 ├── pages/
@@ -365,46 +365,46 @@ magic-portfolio-for-next-js/
 ├── package.json
 └── README.md
 
-下一步要安装依赖吗？`}
+Shall I install dependencies next?`}
 </CodeBlock>
 
   </TabItem>
-  <TabItem value="manual" label="手动克隆">
+  <TabItem value="manual" label="Manual Clone">
 
 <CodeBlock language="bash">
-{`# 使用 Git 克隆
+{`# Clone using Git
 git clone https://github.com/YourUsername/your-portfolio.git
 
-# 进入项目目录
+# Enter project directory
 cd your-portfolio
 
-# 查看项目结构
+# View project structure
 ls -la`}
 </CodeBlock>
 
   </TabItem>
 </Tabs>
 
-### 步骤 3：安装依赖并运行
+### Step 3: Install Dependencies and Run
 
 <CodeBlock language="text">
-{`您：请帮我安装项目依赖并运行开发服务器
+{`You: Please help me install project dependencies and run the development server
 
-Gemini：好的，我来帮您设置项目环境。
+Gemini: Okay, I'll help you set up the project environment.
 
-📦 安装项目依赖...
+📦 Installing project dependencies...
 
-检测到 package-lock.json
-使用 npm 安装依赖：
+Detected package-lock.json
+Using npm to install dependencies:
 
 npm install
 
-安装进度：
+Installation progress:
 ⠋ idealTree: timing idealTree Completed in 245ms
 ⠙ reify: timing reifyNode Completed in 3251ms
 ✓ added 387 packages in 15s
 
-🚀 启动开发服务器...
+🚀 Starting development server...
 
 npm run dev
 
@@ -415,300 +415,300 @@ npm run dev
 - event compiled client and server successfully
 - wait compiling...
 
-✅ 开发服务器已启动！
+✅ Development server started!
 
-🌐 访问地址：
-- 本地：http://localhost:3000
-- 网络：http://192.168.1.100:3000
+🌐 Access URLs:
+- Local: http://localhost:3000
+- Network: http://192.168.1.100:3000
 
-按 Ctrl+C 停止服务器`}
+Press Ctrl+C to stop the server`}
 </CodeBlock>
 
-## 🎨 使用 AI 进行网站定制
+## 🎨 Using AI for Website Customization
 
-### 智能内容替换
+### Intelligent Content Replacement
 
 <div className="customization-guide">
-  <h3>📝 将您的资料融入网站</h3>
-  
+  <h3>📝 Integrate Your Materials into the Website</h3>
+
   <Tabs>
-    <TabItem value="content" label="内容更新" default>
+    <TabItem value="content" label="Content Update" default>
 
 <CodeBlock language="text">
-{`您：我已经把我的简历、照片和作品集资料放在项目的 assets 文件夹中了，
-请帮我更新网站内容，让它展示我的信息。
+{`You: I've put my resume, photos, and portfolio materials in the project's assets folder,
+please help me update the website content to display my information.
 
-我的信息：
-- 姓名：Chan Meng
-- 职位：全栈开发工程师
-- 专长：React, Node.js, AI 应用开发
-- 座右铭：用技术改变世界
+My information:
+- Name: Chan Meng
+- Position: Full Stack Development Engineer
+- Expertise: React, Node.js, AI Application Development
+- Motto: Change the world with technology
 
-Gemini：我来帮您更新网站内容，展示您的个人信息。
+Gemini: I'll help you update the website content to display your personal information.
 
-🔍 扫描项目结构...
+🔍 Scanning project structure...
 
-找到需要更新的文件：
-1. components/Hero.jsx - 主页横幅
-2. components/About.jsx - 关于我
-3. data/projects.js - 项目数据
-4. public/resume.pdf - 简历文件
+Found files that need updating:
+1. components/Hero.jsx - Home page banner
+2. components/About.jsx - About me
+3. data/projects.js - Project data
+4. public/resume.pdf - Resume file
 
-📝 更新内容...
+📝 Updating content...
 
-1. 更新 Hero 组件：
-✓ 替换姓名为 "Chan Meng"
-✓ 更新职位描述
-✓ 添加座右铭
-✓ 替换头像图片路径
+1. Update Hero component:
+✓ Replace name with "Chan Meng"
+✓ Update position description
+✓ Add motto
+✓ Replace avatar image path
 
-2. 更新 About 部分：
-✓ 更新个人介绍
-✓ 添加技能列表
-✓ 更新工作经历
+2. Update About section:
+✓ Update personal introduction
+✓ Add skills list
+✓ Update work experience
 
-3. 配置项目展示：
-✓ 导入您的项目截图
-✓ 更新项目描述
-✓ 添加 GitHub 链接
+3. Configure project showcase:
+✓ Import your project screenshots
+✓ Update project descriptions
+✓ Add GitHub links
 
-4. 替换简历文件：
-✓ 删除模板简历
-✓ 添加您的简历
+4. Replace resume file:
+✓ Delete template resume
+✓ Add your resume
 
-✅ 内容更新完成！刷新页面查看效果。`}
+✅ Content update complete! Refresh the page to see the effect.`}
 </CodeBlock>
 
     </TabItem>
-    <TabItem value="design" label="设计优化">
+    <TabItem value="design" label="Design Optimization">
 
 <CodeBlock language="text">
-{`您：我想让网站的配色更专业一些，使用深蓝色和灰色的主题
+{`You: I want to make the website's color scheme more professional, using dark blue and gray theme
 
-Gemini：我来帮您调整网站的配色方案，打造专业的视觉效果。
+Gemini: I'll help you adjust the website's color scheme to create a professional visual effect.
 
-🎨 配色方案设计：
+🎨 Color Scheme Design:
 
-主色调：
-- 主色：深蓝色 #1e3a8a
-- 次要色：天蓝色 #3b82f6
-- 强调色：青色 #06b6d4
+Main colors:
+- Primary: Dark blue #1e3a8a
+- Secondary: Sky blue #3b82f6
+- Accent: Cyan #06b6d4
 
-中性色：
-- 背景：#f8fafc
-- 文字：#1e293b
-- 边框：#e2e8f0
+Neutral colors:
+- Background: #f8fafc
+- Text: #1e293b
+- Border: #e2e8f0
 
-📝 更新样式文件...
+📝 Updating style files...
 
-1. 更新 tailwind.config.js：
-✓ 自定义颜色主题
-✓ 更新默认配色
+1. Update tailwind.config.js:
+✓ Custom color theme
+✓ Update default color scheme
 
-2. 更新全局样式：
-✓ 修改 styles/globals.css
-✓ 调整组件样式
+2. Update global styles:
+✓ Modify styles/globals.css
+✓ Adjust component styles
 
-3. 更新组件配色：
-✓ 按钮使用主色调
-✓ 背景使用中性色
-✓ 文字对比度优化
+3. Update component colors:
+✓ Buttons use primary color
+✓ Background uses neutral colors
+✓ Text contrast optimized
 
-✅ 配色更新完成！
+✅ Color scheme update complete!
 
-效果预览：
-- 导航栏：深蓝色背景，白色文字
-- 按钮：蓝色渐变，悬停效果
-- 卡片：白色背景，细微阴影`}
+Effect preview:
+- Navigation bar: Dark blue background, white text
+- Buttons: Blue gradient, hover effect
+- Cards: White background, subtle shadow`}
 </CodeBlock>
 
     </TabItem>
-    <TabItem value="layout" label="布局调整">
+    <TabItem value="layout" label="Layout Adjustment">
 
 <CodeBlock language="text">
-{`您：我想调整首页布局，把作品集放在更显眼的位置
+{`You: I want to adjust the homepage layout to put the portfolio in a more prominent position
 
-Gemini：我来帮您重新组织首页布局，突出展示您的作品集。
+Gemini: I'll help you reorganize the homepage layout to highlight your portfolio.
 
-📐 分析当前布局...
+📐 Analyzing current layout...
 
-当前顺序：
-1. Hero 横幅
-2. About 关于
-3. Services 服务
-4. Portfolio 作品集
-5. Contact 联系
+Current order:
+1. Hero banner
+2. About
+3. Services
+4. Portfolio
+5. Contact
 
-🔄 优化布局方案：
+🔄 Optimization plan:
 
-新布局顺序：
-1. Hero 横幅（保持）
-2. Portfolio 作品集（提前）
-3. About 关于
-4. Services 服务
-5. Contact 联系
+New layout order:
+1. Hero banner (keep)
+2. Portfolio (move forward)
+3. About
+4. Services
+5. Contact
 
-📝 执行调整...
+📝 Executing adjustments...
 
-1. 修改 pages/index.js：
-✓ 调整组件导入顺序
-✓ 重新排列组件渲染
+1. Modify pages/index.js:
+✓ Adjust component import order
+✓ Rearrange component rendering
 
-2. 优化作品集展示：
-✓ 增大作品卡片尺寸
-✓ 添加悬停动画效果
-✓ 优化响应式布局
+2. Optimize portfolio display:
+✓ Increase portfolio card size
+✓ Add hover animation effects
+✓ Optimize responsive layout
 
-3. 添加视觉引导：
-✓ Hero 添加向下箭头
-✓ 作品集添加标题强调
+3. Add visual guidance:
+✓ Add down arrow to Hero
+✓ Add title emphasis to portfolio
 
-✅ 布局调整完成！
+✅ Layout adjustment complete!
 
-优化效果：
-- 访客第一眼就能看到作品
-- 作品展示更加醒目
-- 页面流程更加自然`}
+Optimization effects:
+- Visitors can see work at first glance
+- Portfolio display is more prominent
+- Page flow is more natural`}
 </CodeBlock>
 
     </TabItem>
   </Tabs>
 </div>
 
-### 性能优化建议
+### Performance Optimization Suggestions
 
 <div className="optimization-tips">
-  <h3>⚡ AI 驱动的性能优化</h3>
-  
+  <h3>⚡ AI-Driven Performance Optimization</h3>
+
   <div className="tip-grid">
     <div className="tip-card">
-      <h4>🖼️ 图片优化</h4>
-      <p>让 Gemini 帮您：</p>
+      <h4>🖼️ Image Optimization</h4>
+      <p>Let Gemini help you:</p>
       <ul>
-        <li>转换图片为 WebP 格式</li>
-        <li>实现懒加载</li>
-        <li>生成不同尺寸的响应式图片</li>
+        <li>Convert images to WebP format</li>
+        <li>Implement lazy loading</li>
+        <li>Generate responsive images in different sizes</li>
       </ul>
     </div>
-    
+
     <div className="tip-card">
-      <h4>📦 代码优化</h4>
-      <p>AI 可以协助：</p>
+      <h4>📦 Code Optimization</h4>
+      <p>AI can assist with:</p>
       <ul>
-        <li>识别未使用的依赖</li>
-        <li>代码分割建议</li>
-        <li>性能瓶颈分析</li>
+        <li>Identify unused dependencies</li>
+        <li>Code splitting recommendations</li>
+        <li>Performance bottleneck analysis</li>
       </ul>
     </div>
-    
+
     <div className="tip-card">
-      <h4>🌐 SEO 优化</h4>
-      <p>Gemini 能够：</p>
+      <h4>🌐 SEO Optimization</h4>
+      <p>Gemini can:</p>
       <ul>
-        <li>生成 meta 标签</li>
-        <li>优化页面描述</li>
-        <li>创建 sitemap</li>
+        <li>Generate meta tags</li>
+        <li>Optimize page descriptions</li>
+        <li>Create sitemap</li>
       </ul>
     </div>
   </div>
 </div>
 
-## 🔄 网站优化迭代
+## 🔄 Website Optimization Iteration
 
-### 已有网站的 AI 优化
+### AI Optimization for Existing Websites
 
-如果您已经有了个人网站，同样可以使用 Gemini CLI 进行优化升级。
+If you already have a personal website, you can also use Gemini CLI for optimization and upgrades.
 
 <CodeBlock language="text">
-{`您：我有一个现有的个人网站项目，想要进行全面优化，
-项目使用 React + Gatsby，已经运行了 2 年
+{`You: I have an existing personal website project that I want to comprehensively optimize,
+the project uses React + Gatsby and has been running for 2 years
 
-Gemini：我来帮您分析并优化现有网站。
+Gemini: I'll help you analyze and optimize your existing website.
 
-🔍 项目健康检查...
+🔍 Project health check...
 
-1. 依赖分析：
-⚠️ 发现 23 个过时依赖
-⚠️ 3 个高危安全漏洞
-📊 Bundle 大小：2.3MB（偏大）
+1. Dependency analysis:
+⚠️ Found 23 outdated dependencies
+⚠️ 3 high-risk security vulnerabilities
+📊 Bundle size: 2.3MB (large)
 
-2. 性能评分：
-- Lighthouse 评分：72/100
-- 首次加载：4.2s
-- 交互时间：5.8s
+2. Performance score:
+- Lighthouse score: 72/100
+- First load: 4.2s
+- Time to interactive: 5.8s
 
-🛠️ 优化方案：
+🛠️ Optimization Plan:
 
-阶段 1 - 依赖更新：
-✓ 安全更新所有依赖
-✓ 移除未使用的包
-✓ 升级到 Gatsby v5
+Phase 1 - Dependency Update:
+✓ Security update all dependencies
+✓ Remove unused packages
+✓ Upgrade to Gatsby v5
 
-阶段 2 - 性能优化：
-✓ 实施图片懒加载
-✓ 启用代码分割
-✓ 优化字体加载
+Phase 2 - Performance Optimization:
+✓ Implement image lazy loading
+✓ Enable code splitting
+✓ Optimize font loading
 
-阶段 3 - 现代化改造：
-✓ 迁移到 TypeScript
-✓ 添加 PWA 支持
-✓ 实现暗色模式
+Phase 3 - Modernization:
+✓ Migrate to TypeScript
+✓ Add PWA support
+✓ Implement dark mode
 
-要我开始执行优化吗？每个阶段我都会详细说明更改。`}
+Shall I start executing the optimization? I'll explain each change in detail for every phase.`}
 </CodeBlock>
 
-## 🎉 课程总结
+## 🎉 Course Summary
 
-### 您已掌握的技能
+### Skills You've Mastered
 
 <div className="skills-summary">
   <div className="skill-achieved">
     <span className="check-icon">✓</span>
     <div>
-      <h4>环境配置专家</h4>
-      <p>能够使用 AI 快速配置任何项目的开发环境</p>
+      <h4>Environment Configuration Expert</h4>
+      <p>Able to quickly configure development environment for any project using AI</p>
     </div>
   </div>
-  
+
   <div className="skill-achieved">
     <span className="check-icon">✓</span>
     <div>
-      <h4>模板定制高手</h4>
-      <p>掌握了将模板转化为个人特色网站的技巧</p>
+      <h4>Template Customization Master</h4>
+      <p>Mastered the skills to transform templates into personalized websites</p>
     </div>
   </div>
-  
+
   <div className="skill-achieved">
     <span className="check-icon">✓</span>
     <div>
-      <h4>部署流程通</h4>
-      <p>熟悉现代化的 CI/CD 部署流程</p>
+      <h4>Deployment Process Expert</h4>
+      <p>Familiar with modern CI/CD deployment processes</p>
     </div>
   </div>
-  
+
   <div className="skill-achieved">
     <span className="check-icon">✓</span>
     <div>
-      <h4>AI 优化达人</h4>
-      <p>学会使用 AI 持续优化网站性能和体验</p>
+      <h4>AI Optimization Pro</h4>
+      <p>Learned to use AI to continuously optimize website performance and experience</p>
     </div>
   </div>
 </div>
 
-### 🚀 下一步行动
+### 🚀 Next Steps
 
-1. **完善内容**：持续更新您的作品集和博客
-2. **性能监控**：使用 Vercel Analytics 跟踪网站表现
-3. **社区分享**：在社交媒体展示您的网站
-4. **持续学习**：探索更多高级功能和优化技巧
+1. **Improve Content**: Continuously update your portfolio and blog
+2. **Performance Monitoring**: Use Vercel Analytics to track website performance
+3. **Community Sharing**: Showcase your website on social media
+4. **Continuous Learning**: Explore more advanced features and optimization techniques
 
 <div className="cta-section">
-  <h3>🤝 保持联系</h3>
-  <p>如果您觉得这个课程对您有帮助，欢迎：</p>
+  <h3>🤝 Stay Connected</h3>
+  <p>If you found this course helpful, feel free to:</p>
   <ul>
-    <li>在 LinkedIn 上关注我：<a href="https://www.linkedin.com/in/chanmeng666/" target="_blank">Chan Meng 的 LinkedIn</a></li>
-    <li>为我写下推荐语，分享您的学习收获</li>
-    <li>将您的作品网站分享给我，期待看到您的创作！</li>
+    <li>Follow me on LinkedIn: <a href="https://www.linkedin.com/in/chanmeng666/" target="_blank">Chan Meng's LinkedIn</a></li>
+    <li>Write a recommendation for me and share your learning experience</li>
+    <li>Share your portfolio website with me, looking forward to seeing your creation!</li>
   </ul>
 </div>
 

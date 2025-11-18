@@ -1,51 +1,51 @@
 ---
-title: 场景应用指南
+title: Use Case Application Guide
 sidebar_position: 5
 ---
 
 import CodeBlock from '@theme/CodeBlock';
 import Admonition from '@theme/Admonition';
 
-# 图表在不同场景的应用指南
+# Diagram Application Guide for Different Scenarios
 
-## 📚 学术论文图表规范
+## 📚 Academic Paper Diagram Standards
 
-### 期刊投稿要求
+### Journal Submission Requirements
 
-<Admonition type="important" title="通用学术规范">
-- **矢量格式**：使用 SVG 或 EPS 格式，确保打印质量
-- **字体规范**：Times New Roman 或 Arial，大小不小于 8pt
-- **编号规则**：Figure 1, Figure 2... 连续编号
-- **引用格式**：在正文中使用 "如图 1 所示" 或 "见图 1"
-- **分辨率要求**：位图至少 300 DPI
-- **颜色模式**：打印用 CMYK，电子版用 RGB
+<Admonition type="important" title="General Academic Standards">
+- **Vector Format**: Use SVG or EPS format to ensure print quality
+- **Font Standards**: Times New Roman or Arial, minimum 8pt size
+- **Numbering Rules**: Figure 1, Figure 2... consecutive numbering
+- **Citation Format**: Use "as shown in Figure 1" or "see Figure 1" in the text
+- **Resolution Requirements**: Bitmap minimum 300 DPI
+- **Color Mode**: CMYK for print, RGB for digital
 </Admonition>
 
-### IEEE 论文图表规范
+### IEEE Paper Diagram Standards
 
 <div className="academic-standards">
   <div className="standard-card">
-    <h4>尺寸要求</h4>
+    <h4>Size Requirements</h4>
     <ul>
-      <li>单栏：3.5 英寸宽</li>
-      <li>双栏：7.16 英寸宽</li>
-      <li>高度：不超过 9.5 英寸</li>
+      <li>Single column: 3.5 inches wide</li>
+      <li>Double column: 7.16 inches wide</li>
+      <li>Height: not exceeding 9.5 inches</li>
     </ul>
   </div>
   <div className="standard-card">
-    <h4>标注规范</h4>
+    <h4>Label Standards</h4>
     <ul>
-      <li>图题：图下方，居中</li>
-      <li>字体：8-10pt</li>
-      <li>线宽：0.5-1pt</li>
+      <li>Caption: Below figure, centered</li>
+      <li>Font: 8-10pt</li>
+      <li>Line width: 0.5-1pt</li>
     </ul>
   </div>
 </div>
 
-### LaTeX 集成
+### LaTeX Integration
 
 <CodeBlock language="latex">
-{`% 在 LaTeX 中嵌入矢量图
+{`% Embedding vector graphics in LaTeX
 \\usepackage{graphicx}
 \\usepackage{svg}
 
@@ -56,29 +56,29 @@ import Admonition from '@theme/Admonition';
   \\label{fig:architecture}
 \\end{figure}
 
-% 引用图表
+% Referencing figures
 As shown in Figure~\\ref{fig:architecture}...`}
 </CodeBlock>
 
-### Mermaid 图表转换为学术格式
+### Converting Mermaid Diagrams to Academic Format
 
 <CodeBlock language="text">
-{`您：将我的 Mermaid 流程图转换为适合 IEEE 论文的格式
+{`You: Convert my Mermaid flowchart to a format suitable for IEEE papers
 
-Gemini：我来帮您转换为学术论文格式：
+Gemini: I'll help you convert it to academic paper format:
 
-1. 导出为 SVG：
+1. Export as SVG:
    - Mermaid Live Editor → Actions → Download SVG
-   - 保存为 figure1_flowchart.svg
+   - Save as figure1_flowchart.svg
 
-2. 优化 SVG：
-   - 使用 Inkscape 打开
-   - 设置文档大小为 3.5 英寸（单栏）
-   - 字体改为 Arial 10pt
-   - 线宽调整为 0.75pt
-   - 导出为 EPS 格式
+2. Optimize SVG:
+   - Open with Inkscape
+   - Set document size to 3.5 inches (single column)
+   - Change font to Arial 10pt
+   - Adjust line width to 0.75pt
+   - Export as EPS format
 
-3. LaTeX 代码：
+3. LaTeX code:
 \\begin{figure}[t]
   \\centering
   \\includegraphics[width=\\columnwidth]{figure1_flowchart.eps}
@@ -87,14 +87,14 @@ Gemini：我来帮您转换为学术论文格式：
 \\end{figure}`}
 </CodeBlock>
 
-## 📝 技术文档最佳实践
+## 📝 Technical Documentation Best Practices
 
-### README 文档图表
+### README Documentation Diagrams
 
 <CodeBlock language="markdown">
-{`# 项目架构
+{`# Project Architecture
 
-## 系统概览
+## System Overview
 
 \`\`\`mermaid
 graph TB
@@ -102,18 +102,18 @@ graph TB
         A[React App]
         B[Redux Store]
     end
-    
+
     subgraph "后端服务"
         C[API Gateway]
         D[Auth Service]
         E[Business Logic]
     end
-    
+
     subgraph "数据层"
         F[(PostgreSQL)]
         G[(Redis Cache)]
     end
-    
+
     A --> C
     C --> D
     C --> E
@@ -121,99 +121,99 @@ graph TB
     E --> G
 \`\`\`
 
-## API 流程
+## API Flow
 
 ![API Flow](./docs/api-flow.png)
 
-## 部署架构
+## Deployment Architecture
 
-详见 [部署文档](./docs/deployment.md) 中的架构图。`}
+See architecture diagram in [Deployment Documentation](./docs/deployment.md).`}
 </CodeBlock>
 
-### API 文档图表
+### API Documentation Diagrams
 
 <div className="api-docs">
-  <h4>推荐图表类型</h4>
-  
+  <h4>Recommended Diagram Types</h4>
+
   <div className="doc-types">
     <div className="type-card">
-      <h5>时序图</h5>
-      <p>展示 API 调用流程</p>
-      <p>适合：认证流程、支付流程</p>
+      <h5>Sequence Diagrams</h5>
+      <p>Show API call flow</p>
+      <p>Suitable for: Authentication, Payment flows</p>
     </div>
     <div className="type-card">
-      <h5>流程图</h5>
-      <p>说明业务逻辑</p>
-      <p>适合：数据处理、决策流程</p>
+      <h5>Flowcharts</h5>
+      <p>Explain business logic</p>
+      <p>Suitable for: Data processing, Decision flows</p>
     </div>
     <div className="type-card">
-      <h5>状态图</h5>
-      <p>描述资源状态变化</p>
-      <p>适合：订单状态、任务状态</p>
+      <h5>State Diagrams</h5>
+      <p>Describe resource state changes</p>
+      <p>Suitable for: Order status, Task status</p>
     </div>
   </div>
 </div>
 
-### 系统设计文档
+### System Design Documentation
 
-<Admonition type="tip" title="图表组织建议">
-1. **分层展示**：从高层架构到详细设计逐层深入
-2. **统一风格**：保持配色、字体、图标风格一致
-3. **版本管理**：图表源文件纳入 Git 管理
-4. **更新同步**：代码变更时及时更新图表
+<Admonition type="tip" title="Diagram Organization Recommendations">
+1. **Layered Display**: Progress from high-level architecture to detailed design layer by layer
+2. **Unified Style**: Maintain consistent colors, fonts, and icon styles
+3. **Version Control**: Include diagram source files in Git
+4. **Synchronized Updates**: Update diagrams promptly when code changes
 </Admonition>
 
-## 🎯 PPT 演示优化
+## 🎯 PPT Presentation Optimization
 
-### 分步展示技巧
+### Step-by-Step Display Techniques
 
 <div className="ppt-optimization">
   <div className="technique">
-    <h4>渐进式展示</h4>
+    <h4>Progressive Display</h4>
     <ol>
-      <li>第 1 页：核心概念</li>
-      <li>第 2 页：添加细节</li>
-      <li>第 3 页：完整架构</li>
-      <li>第 4 页：关键点强调</li>
+      <li>Slide 1: Core concepts</li>
+      <li>Slide 2: Add details</li>
+      <li>Slide 3: Complete architecture</li>
+      <li>Slide 4: Emphasize key points</li>
     </ol>
   </div>
   <div className="technique">
-    <h4>动画效果</h4>
+    <h4>Animation Effects</h4>
     <ul>
-      <li>淡入：新增组件</li>
-      <li>路径动画：数据流向</li>
-      <li>颜色变化：状态改变</li>
-      <li>缩放：焦点切换</li>
+      <li>Fade in: New components</li>
+      <li>Path animation: Data flow</li>
+      <li>Color change: State transitions</li>
+      <li>Zoom: Focus switching</li>
     </ul>
   </div>
 </div>
 
-### PowerPoint 集成
+### PowerPoint Integration
 
 <CodeBlock language="text">
-{`导出设置：
-1. Draw.io：
+{`Export Settings:
+1. Draw.io:
    - File → Export as → PNG
-   - 分辨率：300 DPI
-   - 背景：透明
-   - 边距：20px
+   - Resolution: 300 DPI
+   - Background: Transparent
+   - Margin: 20px
 
-2. Mermaid：
-   - 下载 SVG
-   - 在 PowerPoint 中：插入 → 图片 → SVG
-   - 右键 → 转换为形状（可编辑）
+2. Mermaid:
+   - Download SVG
+   - In PowerPoint: Insert → Picture → SVG
+   - Right-click → Convert to Shape (editable)
 
-3. 优化技巧：
-   - 使用母版统一样式
-   - 设置图表动画顺序
-   - 添加标注和指引线`}
+3. Optimization Tips:
+   - Use slide master for unified styles
+   - Set diagram animation sequence
+   - Add annotations and guide lines`}
 </CodeBlock>
 
-### 商务演示配色
+### Business Presentation Color Schemes
 
 <div className="color-schemes">
   <div className="scheme-card">
-    <h5>专业蓝</h5>
+    <h5>Professional Blue</h5>
     <div className="colors">
       <span style={{background: '#003366'}}></span>
       <span style={{background: '#0066CC'}}></span>
@@ -222,7 +222,7 @@ graph TB
     </div>
   </div>
   <div className="scheme-card">
-    <h5>科技感</h5>
+    <h5>Tech Style</h5>
     <div className="colors">
       <span style={{background: '#2C3E50'}}></span>
       <span style={{background: '#34495E'}}></span>
@@ -232,12 +232,12 @@ graph TB
   </div>
 </div>
 
-## 🌐 Web 集成
+## 🌐 Web Integration
 
-### 在线文档嵌入
+### Online Documentation Embedding
 
 <CodeBlock language="html">
-{`<!-- Mermaid 图表嵌入 -->
+{`<!-- Mermaid diagram embedding -->
 <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
 <script>
   mermaid.initialize({ startOnLoad: true });
@@ -249,19 +249,19 @@ graph LR
     B --> C[结束]
 </div>
 
-<!-- Draw.io 图表嵌入 -->
-<iframe 
-  frameborder="0" 
-  style="width:100%;height:400px;" 
+<!-- Draw.io diagram embedding -->
+<iframe
+  frameborder="0"
+  style="width:100%;height:400px;"
   src="https://viewer.diagrams.net/?highlight=0000ff&edit=_blank&layers=1&nav=1">
 </iframe>`}
 </CodeBlock>
 
-### Markdown 平台支持
+### Markdown Platform Support
 
 <div className="platform-support">
   <div className="platform">
-    <h5>✅ 原生支持 Mermaid</h5>
+    <h5>✅ Native Mermaid Support</h5>
     <ul>
       <li>GitHub</li>
       <li>GitLab</li>
@@ -270,7 +270,7 @@ graph LR
     </ul>
   </div>
   <div className="platform">
-    <h5>🔧 需要插件</h5>
+    <h5>🔧 Plugin Required</h5>
     <ul>
       <li>Confluence</li>
       <li>WordPress</li>
@@ -280,50 +280,50 @@ graph LR
   </div>
 </div>
 
-## 📱 响应式设计
+## 📱 Responsive Design
 
-### 移动端优化
+### Mobile Optimization
 
-<Admonition type="tip" title="移动端图表设计原则">
-- **简化内容**：减少节点数量，突出核心信息
-- **增大元素**：确保触摸目标至少 44×44 像素
-- **垂直布局**：优先使用从上到下的布局
-- **可缩放**：使用 SVG 格式支持缩放
-- **分段展示**：复杂图表拆分为多个简单图表
+<Admonition type="tip" title="Mobile Diagram Design Principles">
+- **Simplify Content**: Reduce number of nodes, highlight core information
+- **Enlarge Elements**: Ensure touch targets are at least 44×44 pixels
+- **Vertical Layout**: Prioritize top-to-bottom layout
+- **Scalable**: Use SVG format to support zooming
+- **Segmented Display**: Split complex diagrams into multiple simple diagrams
 </Admonition>
 
-## 🎨 品牌一致性
+## 🎨 Brand Consistency
 
-### 企业 VI 应用
+### Corporate VI Application
 
 <CodeBlock language="text">
-{`您：帮我创建符合公司 VI 规范的图表样式
+{`You: Help me create diagram styles that comply with company VI guidelines
 
-Gemini：我来帮您创建企业 VI 规范的图表样式：
+Gemini: I'll help you create diagram styles for corporate VI guidelines:
 
-📐 Draw.io 样式配置：
+📐 Draw.io Style Configuration:
 
-1. 创建企业样式库：
+1. Create corporate style library:
    - File → New Library
-   - 命名：CompanyVI_Shapes
+   - Name: CompanyVI_Shapes
 
-2. 定义颜色规范：
-   主色：#1E40AF (企业蓝)
-   辅色：#10B981 (成功绿)
-   警告：#F59E0B (警告橙)
-   错误：#EF4444 (错误红)
-   
-3. 字体规范：
-   标题：Helvetica Bold 14pt
-   正文：Helvetica Regular 11pt
-   注释：Helvetica Light 9pt
+2. Define color specifications:
+   Primary: #1E40AF (Corporate Blue)
+   Secondary: #10B981 (Success Green)
+   Warning: #F59E0B (Warning Orange)
+   Error: #EF4444 (Error Red)
 
-4. 元素样式：
-   圆角：8px
-   线宽：2px
-   阴影：0 2px 4px rgba(0,0,0,0.1)
+3. Font specifications:
+   Heading: Helvetica Bold 14pt
+   Body: Helvetica Regular 11pt
+   Caption: Helvetica Light 9pt
 
-5. Mermaid 主题配置：
+4. Element styles:
+   Border radius: 8px
+   Line width: 2px
+   Shadow: 0 2px 4px rgba(0,0,0,0.1)
+
+5. Mermaid theme configuration:
    %%{init: {
      'theme': 'base',
      'themeVariables': {
@@ -336,16 +336,16 @@ Gemini：我来帮您创建企业 VI 规范的图表样式：
    }}%%`}
 </CodeBlock>
 
-## 🚀 下一步
+## 🚀 Next Steps
 
-学习更多高级技巧：
+Learn more advanced techniques:
 
 <div className="next-steps">
   <a href="./ai-assistance" className="next-button">
-    AI 辅助创作 →
+    AI-Assisted Creation →
   </a>
   <a href="./projects" className="next-button secondary">
-    实战项目 →
+    Practical Projects →
   </a>
 </div>
 

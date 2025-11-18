@@ -1,19 +1,19 @@
 ---
-title: 实战项目
+title: Practical Projects
 sidebar_position: 7
 ---
 
 import CodeBlock from '@theme/CodeBlock';
 import Admonition from '@theme/Admonition';
 
-# 实战项目
+# Practical Projects
 
-## 📝 项目 1：学术论文图表套件
+## 📝 Project 1: Academic Paper Diagram Suite
 
-### 项目目标
-为一篇关于机器学习的学术论文创建完整的图表套件，包括研究方法流程图、实验设计图、数据分析流程和结果对比图表。
+### Project Objective
+Create a complete diagram suite for an academic paper on machine learning, including research methodology flowcharts, experimental design diagrams, data analysis workflows, and result comparison charts.
 
-### 1.1 研究方法流程图
+### 1.1 Research Methodology Flowchart
 
 <CodeBlock language="mermaid">
 {`graph TB
@@ -59,53 +59,53 @@ import Admonition from '@theme/Admonition';
     style Best fill:#fff3e0`}
 </CodeBlock>
 
-### 1.2 实验设计图
+### 1.2 Experimental Design Diagram
 
 ```mermaid
 graph TB
     Start[研究问题定义] --> Literature[文献调研与分析]
     Literature --> Gap[研究空白识别]
     Gap --> Hypothesis[提出研究假设]
-    
+
     Hypothesis --> Design[实验设计]
     Design --> Data[数据收集]
-    
+
     Data --> Split[数据集划分]
     Split --> Train[训练集 70%]
     Split --> Valid[验证集 15%]
     Split --> Test[测试集 15%]
-    
+
     Train --> Preprocess[数据预处理]
     Preprocess --> Feature[特征工程]
-    
+
     Feature --> Models[模型选择]
     Models --> RF[随机森林]
     Models --> SVM[支持向量机]
     Models --> DL[深度学习]
-    
+
     RF --> Training1[模型训练]
     SVM --> Training2[模型训练]
     DL --> Training3[模型训练]
-    
+
     Training1 --> Validation[验证集评估]
     Training2 --> Validation
     Training3 --> Validation
-    
+
     Validation --> Tuning[超参数调优]
     Tuning --> Best[最佳模型选择]
     Best --> Testing[测试集评估]
-    
+
     Testing --> Analysis[结果分析]
     Analysis --> Comparison[对比分析]
     Comparison --> Conclusion[结论与讨论]
     Conclusion --> Paper[论文撰写]
-    
+
     style Start fill:#e1f5fe
     style Paper fill:#e8f5e9
     style Best fill:#fff3e0
 ```
 
-### 1.3 数据处理管道
+### 1.3 Data Processing Pipeline
 
 <CodeBlock language="mermaid">
 {`sequenceDiagram
@@ -130,7 +130,7 @@ graph TB
     Note over Select: PCA<br/>互信息<br/>递归特征消除`}
 </CodeBlock>
 
-### 1.4 结果可视化
+### 1.4 Results Visualization
 
 <CodeBlock language="mermaid">
 {`pie title 模型性能对比（准确率）
@@ -140,24 +140,24 @@ graph TB
     "集成模型" : 96.2`}
 </CodeBlock>
 
-<Admonition type="info" title="项目交付物">
-1. **流程图集**：PDF 格式，300 DPI
-2. **LaTeX 源码**：可直接嵌入论文
-3. **SVG 矢量图**：支持无损缩放
-4. **说明文档**：图表使用指南
+<Admonition type="info" title="Project Deliverables">
+1. **Flowchart Collection**: PDF format, 300 DPI
+2. **LaTeX Source Code**: Ready for direct embedding in papers
+3. **SVG Vector Graphics**: Support lossless scaling
+4. **Documentation**: Diagram usage guide
 </Admonition>
 
-## 🏗️ 项目 2：系统架构文档
+## 🏗️ Project 2: System Architecture Documentation
 
-### 项目目标
-为一个微服务电商系统创建完整的架构文档图表，包括系统架构图、数据流图、API 时序图和部署架构图。
+### Project Objective
+Create complete architecture documentation diagrams for a microservices e-commerce system, including system architecture diagrams, data flow diagrams, API sequence diagrams, and deployment architecture diagrams.
 
-### 2.1 系统整体架构
+### 2.1 Overall System Architecture
 
 <CodeBlock language="text">
-{`您：为电商系统生成整体架构图
+{`You: Generate an overall architecture diagram for the e-commerce system
 
-Gemini：我来创建完整的电商系统架构图：
+Gemini: I'll create a complete e-commerce system architecture diagram:
 
 \`\`\`mermaid
 graph TB
@@ -237,7 +237,7 @@ graph TB
 \`\`\``}
 </CodeBlock>
 
-### 2.2 数据流图
+### 2.2 Data Flow Diagram
 
 <CodeBlock language="mermaid">
 {`graph LR
@@ -246,42 +246,42 @@ graph TB
         User[用户行为]
         Trans[交易数据]
     end
-    
+
     subgraph "数据处理"
         Kafka[Kafka队列]
         Flink[实时处理]
         Spark[批处理]
     end
-    
+
     subgraph "数据存储"
         HDFS[HDFS存储]
         Hive[数据仓库]
         HBase[NoSQL存储]
     end
-    
+
     subgraph "数据服务"
         OLAP[OLAP分析]
         API[数据API]
         Report[报表系统]
     end
-    
+
     App --> Kafka
     User --> Kafka
     Trans --> Kafka
-    
+
     Kafka --> Flink
     Kafka --> Spark
-    
+
     Flink --> HBase
     Spark --> HDFS
     HDFS --> Hive
-    
+
     HBase --> API
     Hive --> OLAP
     OLAP --> Report`}
 </CodeBlock>
 
-### 2.3 核心 API 时序图
+### 2.3 Core API Sequence Diagram
 
 <CodeBlock language="mermaid">
 {`sequenceDiagram
@@ -320,12 +320,12 @@ graph TB
     N-->>U: 订单确认邮件`}
 </CodeBlock>
 
-## 💼 项目 3：商业计划书图表
+## 💼 Project 3: Business Plan Diagrams
 
-### 项目目标
-为创业项目商业计划书创建专业图表，包括商业模式画布、市场分析图表、产品路线图和组织架构图。
+### Project Objective
+Create professional diagrams for a startup business plan, including business model canvas, market analysis charts, product roadmap, and organizational structure diagrams.
 
-### 3.1 商业模式画布
+### 3.1 Business Model Canvas
 
 <CodeBlock language="mermaid">
 {`graph TB
@@ -364,26 +364,26 @@ graph TB
     CS --> R$`}
 </CodeBlock>
 
-### 3.2 市场增长预测
+### 3.2 Market Growth Forecast
 
 <CodeBlock language="mermaid">
 {`gantt
     title 产品发展路线图
     dateFormat YYYY-MM-DD
     axisFormat %Y-Q%q
-    
+
     section 产品开发
     MVP版本           :done, mvp, 2024-01-01, 90d
     功能完善           :done, feature, after mvp, 120d
     2.0版本开发        :active, v2, 2024-07-01, 150d
     3.0版本规划        :v3, 2025-01-01, 180d
-    
+
     section 市场拓展
     种子用户获取       :done, seed, 2024-02-01, 60d
     市场推广           :done, market, 2024-04-01, 90d
     规模化增长         :active, scale, 2024-07-01, 180d
     国际化             :intl, 2025-01-01, 365d
-    
+
     section 融资计划
     天使轮             :done, angel, 2024-01-15, 30d
     Pre-A轮            :done, prea, 2024-06-01, 45d
@@ -391,7 +391,7 @@ graph TB
     B轮                :roundb, 2025-06-01, 60d`}
 </CodeBlock>
 
-### 3.3 组织架构
+### 3.3 Organizational Structure
 
 <CodeBlock language="mermaid">
 {`graph TB
@@ -424,106 +424,106 @@ graph TB
     style CMO fill:#fce4ec`}
 </CodeBlock>
 
-## 🎯 综合练习
+## 🎯 Comprehensive Exercises
 
-### 练习任务
+### Exercise Tasks
 
 <div className="exercise-list">
   <div className="exercise-card">
-    <h4>📚 练习 1：技术文档</h4>
-    <p>为您的开源项目创建：</p>
+    <h4>📚 Exercise 1: Technical Documentation</h4>
+    <p>Create for your open source project:</p>
     <ul>
-      <li>系统架构图</li>
-      <li>API 流程图</li>
-      <li>部署架构图</li>
-      <li>数据模型图</li>
+      <li>System architecture diagram</li>
+      <li>API flow diagram</li>
+      <li>Deployment architecture diagram</li>
+      <li>Data model diagram</li>
     </ul>
   </div>
-  
+
   <div className="exercise-card">
-    <h4>🎓 练习 2：学术图表</h4>
-    <p>为研究论文准备：</p>
+    <h4>🎓 Exercise 2: Academic Diagrams</h4>
+    <p>Prepare for research paper:</p>
     <ul>
-      <li>实验流程图</li>
-      <li>算法流程图</li>
-      <li>数据分析图</li>
-      <li>结果对比图</li>
+      <li>Experimental workflow diagram</li>
+      <li>Algorithm flowchart</li>
+      <li>Data analysis diagram</li>
+      <li>Results comparison chart</li>
     </ul>
   </div>
-  
+
   <div className="exercise-card">
-    <h4>💼 练习 3：商务演示</h4>
-    <p>为项目汇报制作：</p>
+    <h4>💼 Exercise 3: Business Presentation</h4>
+    <p>Create for project reporting:</p>
     <ul>
-      <li>项目时间线</li>
-      <li>团队架构图</li>
-      <li>业务流程图</li>
-      <li>财务分析图</li>
+      <li>Project timeline</li>
+      <li>Team structure diagram</li>
+      <li>Business process diagram</li>
+      <li>Financial analysis chart</li>
     </ul>
   </div>
 </div>
 
-### 评估标准
+### Evaluation Criteria
 
-<Admonition type="success" title="优秀作品标准">
-- **准确性**：信息准确，逻辑清晰
-- **美观性**：配色协调，布局合理
-- **规范性**：符合行业标准
-- **创新性**：有独特的表现形式
-- **实用性**：能够有效传达信息
+<Admonition type="success" title="Excellent Work Standards">
+- **Accuracy**: Information is accurate, logic is clear
+- **Aesthetics**: Coordinated colors, reasonable layout
+- **Standards Compliance**: Meets industry standards
+- **Innovation**: Has unique presentation format
+- **Practicality**: Effectively communicates information
 </Admonition>
 
-## 📦 项目模板下载
+## 📦 Project Template Downloads
 
 <div className="download-section">
-  <h3>可下载资源</h3>
+  <h3>Downloadable Resources</h3>
   <ul>
-    <li>📄 Mermaid 图表模板集</li>
-    <li>🎨 Draw.io 样式库</li>
-    <li>📊 学术论文图表示例</li>
-    <li>🏗️ 系统架构图模板</li>
-    <li>💼 商业图表模板</li>
+    <li>📄 Mermaid diagram template collection</li>
+    <li>🎨 Draw.io style library</li>
+    <li>📊 Academic paper diagram examples</li>
+    <li>🏗️ System architecture diagram templates</li>
+    <li>💼 Business diagram templates</li>
   </ul>
-  
-  <p>访问 <a href="https://github.com/your-repo/diagram-templates" target="_blank">GitHub 仓库</a> 获取所有模板</p>
+
+  <p>Visit <a href="https://github.com/your-repo/diagram-templates" target="_blank">GitHub Repository</a> to get all templates</p>
 </div>
 
-## 🎉 课程完成
+## 🎉 Course Completion
 
-恭喜您完成了图表制作课程的学习！您现在已经掌握了：
+Congratulations on completing the diagram creation course! You have now mastered:
 
 <div className="completion-summary">
   <div className="skill-item">
     <span className="check">✅</span>
-    <span>Mermaid 代码化图表制作</span>
+    <span>Mermaid code-based diagram creation</span>
   </div>
   <div className="skill-item">
     <span className="check">✅</span>
-    <span>Draw.io 专业图表设计</span>
+    <span>Draw.io professional diagram design</span>
   </div>
   <div className="skill-item">
     <span className="check">✅</span>
-    <span>AI 辅助图表创作技巧</span>
+    <span>AI-assisted diagram creation techniques</span>
   </div>
   <div className="skill-item">
     <span className="check">✅</span>
-    <span>不同场景的图表应用</span>
+    <span>Diagram applications in different scenarios</span>
   </div>
   <div className="skill-item">
     <span className="check">✅</span>
-    <span>实战项目经验</span>
+    <span>Practical project experience</span>
   </div>
 </div>
 
-### 继续学习
+### Continue Learning
 
 <div className="next-learning">
-  <p>推荐后续学习路径：</p>
+  <p>Recommended learning paths:</p>
   <ul>
-    <li>深入学习数据可视化（D3.js、ECharts）</li>
-    <li>探索 UML 建模工具（PlantUML、StarUML）</li>
-    <li>学习信息图表设计（Infographic）</li>
-    <li>掌握交互式图表（Plotly、Bokeh）</li>
+    <li>Deep dive into data visualization (D3.js, ECharts)</li>
+    <li>Explore UML modeling tools (PlantUML, StarUML)</li>
+    <li>Learn infographic design</li>
+    <li>Master interactive charts (Plotly, Bokeh)</li>
   </ul>
 </div>
 
