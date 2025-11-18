@@ -172,49 +172,6 @@ const config = {
 
         // Optional: path for search page that enabled by default (`false` to disable it)
         searchPagePath: 'search',
-
-        // 搜索占位符文本
-        placeholder: '搜索文档...',
-        
-        // 搜索结果翻译
-        translations: {
-          button: {
-            buttonText: '搜索',
-            buttonAriaLabel: '搜索',
-          },
-          modal: {
-            searchBox: {
-              resetButtonTitle: '清除查询',
-              resetButtonAriaLabel: '清除查询',
-              cancelButtonText: '取消',
-              cancelButtonAriaLabel: '取消',
-            },
-            startScreen: {
-              recentSearchesTitle: '最近搜索',
-              noRecentSearchesText: '没有最近搜索',
-              saveRecentSearchButtonTitle: '保存此搜索',
-              removeRecentSearchButtonTitle: '从历史中删除此搜索',
-              favoriteSearchesTitle: '收藏',
-              removeFavoriteSearchButtonTitle: '从收藏中删除',
-            },
-            errorScreen: {
-              titleText: '无法获取结果',
-              helpText: '您可能需要检查您的网络连接',
-            },
-            footer: {
-              selectText: '选择',
-              navigateText: '导航',
-              closeText: '关闭',
-              searchByText: '搜索由',
-            },
-            noResultsScreen: {
-              noResultsText: '无法找到相关结果',
-              suggestedQueryText: '您可以尝试查询',
-              reportMissingResultsText: '您认为这个查询应该有结果吗？',
-              reportMissingResultsLinkText: '点击反馈',
-            },
-          },
-        },
       },
       // 文档侧边栏配置
       docs: {

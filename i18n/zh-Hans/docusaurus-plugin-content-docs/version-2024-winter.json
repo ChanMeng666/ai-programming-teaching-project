@@ -1,0 +1,42 @@
+{
+  "version.label": {
+    "message": "2024年冬季她行活动",
+    "description": "The label for version 2024-winter"
+  },
+  "sidebar.tutorialSidebar.category.🚀 快速开始": {
+    "message": "🚀 快速开始",
+    "description": "The label for category 🚀 快速开始 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.📚 基础知识": {
+    "message": "📚 基础知识",
+    "description": "The label for category 📚 基础知识 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.🛠️ 开发工具": {
+    "message": "🛠️ 开发工具",
+    "description": "The label for category 🛠️ 开发工具 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.📖 教程与实战": {
+    "message": "📖 教程与实战",
+    "description": "The label for category 📖 教程与实战 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.基础教程": {
+    "message": "基础教程",
+    "description": "The label for category 基础教程 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.实战项目": {
+    "message": "实战项目",
+    "description": "The label for category 实战项目 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.🎯 进阶应用": {
+    "message": "🎯 进阶应用",
+    "description": "The label for category 🎯 进阶应用 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.AI系统开发": {
+    "message": "AI系统开发",
+    "description": "The label for category AI系统开发 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.优秀案例": {
+    "message": "优秀案例",
+    "description": "The label for category 优秀案例 in sidebar tutorialSidebar"
+  }
+}
