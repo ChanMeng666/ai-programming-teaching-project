@@ -1,0 +1,243 @@
+---
+slug: design-system-guide
+title: "Design System: AI Programming Education Platform Guide"
+authors: [chanmeng]
+tags: [design, UI-UX, documentation]
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+{/* Creative style block */}
+export const ColorBox = ({color, name}) => (
+  <div style={{
+    backgroundColor: color,
+    width: '100px',
+    height: '100px',
+    display: 'inline-block',
+    margin: '10px',
+    borderRadius: '4px',
+    textAlign: 'center',
+    color: ['#ffffff', '#f5f6f7'].includes(color) ? '#121212' : 'white',
+    padding: '8px'
+  }}>
+    <div>{name}</div>
+    <div>{color}</div>
+  </div>
+);
+
+# Design System: AI Programming Education Platform
+
+## Design Philosophy
+Inspired by minimalist geometric artists, our design system emphasizes:
+- Clean lines and basic geometric shapes (squares, circles, triangles)
+- Limited but high-contrast color palette
+- Grid-based layouts
+- Negative space as a design element
+- Systematic repetition of visual elements
+- Focus on functionality and readability
+
+{/* truncate */}
+
+## Color System
+
+### Primary Colors
+<div style={{display: 'flex', flexWrap: 'wrap', gap: '10px'}}>
+  <ColorBox color="#1a237e" name="Deep Navy" />
+  <ColorBox color="#ffffff" name="Pure White" />
+  <ColorBox color="#121212" name="Geometric Black" />
+</div>
+
+### Secondary Colors
+<div style={{display: 'flex', flexWrap: 'wrap', gap: '10px'}}>
+  <ColorBox color="#4a5fc1" name="Soft Blue" />
+  <ColorBox color="#f5f6f7" name="Light Gray" />
+  <ColorBox color="#ef5350" name="Accent Red" />
+</div>
+
+## Typography System
+
+<Tabs>
+  <TabItem value="base" label="Base Font">
+    ```css
+    --ifm-font-family-base: 'Space Grotesk', system-ui, -apple-system;
+    ```
+  </TabItem>
+  <TabItem value="mono" label="Monospace Font">
+    ```css
+    --ifm-font-family-monospace: 'JetBrains Mono', SFMono-Regular, Monaco;
+    ```
+  </TabItem>
+</Tabs>
+
+### Font Sizes
+- Headings:
+  - h1: 2.5rem (40px)
+  - h2: 2rem (32px)
+  - h3: 1.5rem (24px)
+- Body: 1rem (16px)
+- Code: 0.9375rem (15px)
+
+## Layout Guidelines
+
+### Grid System
+- 12-column grid
+- Gutter width: 24px
+- Maximum content width: 1200px
+- Responsive breakpoints:
+  - Mobile: 320px
+  - Tablet: 768px
+  - Desktop: 1024px
+
+### Spacing Scale
+```css
+--space-xs: 0.25rem;  /* 4px */
+--space-sm: 0.5rem;   /* 8px */
+--space-md: 1rem;     /* 16px */
+--space-lg: 1.5rem;   /* 24px */
+--space-xl: 2rem;     /* 32px */
+```
+
+## Component Design
+
+### Navigation Bar
+- Fixed header with geometric logo
+- Horizontal menu for desktop
+- Hamburger menu for mobile
+- Geometric shapes as active state indicators
+
+### Hero Section
+```css
+.hero {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+  min-height: 80vh;
+}
+```
+
+### Code Blocks
+- Dark background: `#1e1e1e`
+- Syntax highlighting inspired by geometric patterns
+- Border radius: 4px
+- Padding: 1.5rem
+
+### Cards
+```css
+.card {
+  border: none;
+  border-radius: 4px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+```
+
+## Implementation Guide
+
+### 1. Update docusaurus.config.js
+```javascript
+module.exports = {
+  themeConfig: {
+    navbar: {
+      style: 'dark',
+      logo: {
+        alt: 'Site Logo',
+        src: 'img/logo.svg',
+      },
+      items: [
+        // Navigation items
+      ],
+    },
+    prism: {
+      theme: require('prism-react-renderer/themes/nightOwl'),
+    },
+  },
+};
+```
+
+### 2. Custom CSS Variables
+In `src/css/custom.css`:
+```css
+:root {
+  --ifm-color-primary: #1a237e;
+  --ifm-color-primary-dark: #172069;
+  --ifm-color-primary-darker: #151e63;
+  --ifm-color-primary-darkest: #111851;
+  --ifm-color-primary-light: #1d2893;
+  --ifm-color-primary-lighter: #1f2a99;
+  --ifm-color-primary-lightest: #232fab;
+
+  --ifm-code-font-size: 0.9375rem;
+  --ifm-font-size-base: 16px;
+  --ifm-line-height-base: 1.5;
+  --ifm-spacing-horizontal: var(--space-md);
+}
+```
+
+### 3. Homepage Structure
+In `src/pages/index.js`:
+```javascript
+import React from 'react';
+import Layout from '@theme/Layout';
+import Link from '@docusaurus/Link';
+
+export default function Home() {
+  return (
+    <Layout
+      title="AI Programming Education"
+      description="Learn AI programming through collaborative examples">
+      <header className="hero">
+        <div className="container">
+          <h1 className="hero__title">Master AI Programming</h1>
+          <p className="hero__subtitle">
+            Through collaborative learning and practical examples
+          </p>
+          <div className="buttons">
+            <Link className="button button--primary button--lg">
+              Get Started
+            </Link>
+          </div>
+        </div>
+      </header>
+
+      {/* Features section */}
+      <main>
+        <section className="features">
+          <div className="container">
+            {/* Feature cards */}
+          </div>
+        </section>
+      </main>
+    </Layout>
+  );
+}
+```
+
+## Animation Guidelines
+- Use subtle transition effects (0.2-0.3s)
+- Prefer transform over opacity changes
+- Implement geometric reveal animations
+- Keep interactions smooth and purposeful
+
+## Responsive Design
+- Mobile-first approach
+- Fluid typography
+- Flexible grid system
+- Adaptive layout changes at breakpoints
+
+## Accessibility
+- WCAG 2.1 AA compliant
+- High contrast ratios
+- Clear focus states
+- Semantic HTML structure
+- Screen reader optimized
+
+## Performance Optimization
+- Optimized images
+- Lazy loading implementation
+- Minimized CSS/JS bundles
+- System fonts when possible
+- Static asset caching

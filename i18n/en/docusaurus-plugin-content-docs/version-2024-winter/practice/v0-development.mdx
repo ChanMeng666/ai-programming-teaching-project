@@ -1,0 +1,447 @@
+---
+sidebar_position: 3
+title: Continue Development on v0
+description: Learn how to use the v0 platform for team collaboration development
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Continue Development on v0
+
+## Import Cursor Project
+
+### Preparation
+
+<div className="preparation">
+
+#### 1. Commit Local Changes
+```bash
+# Ensure all changes are committed
+git add .
+git commit -m "Complete initial development in Cursor"
+git push origin main
+```
+
+#### 2. Project Cleanup
+- Remove unnecessary temporary files
+- Organize project structure
+- Update .gitignore file
+
+#### 3. Check Dependencies
+```bash
+# Ensure dependencies in package.json are up to date
+npm outdated
+npm update
+```
+
+</div>
+
+## Develop New Features on v0
+
+### Comment System Implementation
+
+<div className="comment-system">
+
+#### Comment Component
+```tsx
+// components/Comments.tsx
+import { useState } from 'react';
+import { useSession } from 'next-auth/react';
+
+interface Comment {
+  id: string;
+  content: string;
+  author: {
+    name: string;
+    avatar: string;
+  };
+  createdAt: string;
+}
+
+export function Comments({ postId }: { postId: string }) {
+  const { data: session } = useSession();
+  const [comments, setComments] = useState<Comment[]>([]);
+  const [newComment, setNewComment] = useState('');
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!session) return;
+
+    try {
+      const response = await fetch('/api/comments', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          postId,
+          content: newComment,
+        }),
+      });
+
+      if (response.ok) {
+        const comment = await response.json();
+        setComments([...comments, comment]);
+        setNewComment('');
+      }
+    } catch (error) {
+      console.error('Error posting comment:', error);
+    }
+  };
+
+  return (
+    <div className="space-y-6">
+      <h3 className="text-xl font-bold">Comments</h3>
+
+      {session ? (
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <textarea
+            value={newComment}
+            onChange={(e) => setNewComment(e.target.value)}
+            className="w-full p-2 border rounded-lg"
+            placeholder="Write your comment..."
+            rows={4}
+          />
+          <button
+            type="submit"
+            className="px-4 py-2 bg-blue-500 text-white rounded-lg"
+          >
+            Post Comment
+          </button>
+        </form>
+      ) : (
+        <p>Please log in to post a comment</p>
+      )}
+
+      <div className="space-y-4">
+        {comments.map((comment) => (
+          <div key={comment.id} className="border p-4 rounded-lg">
+            <div className="flex items-center space-x-2 mb-2">
+              <img
+                src={comment.author.avatar}
+                alt={comment.author.name}
+                className="w-8 h-8 rounded-full"
+              />
+              <span className="font-medium">{comment.author.name}</span>
+              <span className="text-gray-500">{comment.createdAt}</span>
+            </div>
+            <p>{comment.content}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+```
+
+#### API Routes
+```typescript
+// pages/api/comments.ts
+import { NextApiRequest, NextApiResponse } from 'next';
+import { getSession } from 'next-auth/react';
+import { prisma } from '@/lib/prisma';
+
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
+  const session = await getSession({ req });
+
+  if (!session) {
+    return res.status(401).json({ message: 'Unauthorized' });
+  }
+
+  if (req.method === 'POST') {
+    const { postId, content } = req.body;
+
+    try {
+      const comment = await prisma.comment.create({
+        data: {
+          content,
+          post: { connect: { id: postId } },
+          author: { connect: { email: session.user.email } },
+        },
+        include: {
+          author: {
+            select: {
+              name: true,
+              image: true,
+            },
+          },
+        },
+      });
+
+      res.status(201).json(comment);
+    } catch (error) {
+      res.status(500).json({ message: 'Error creating comment' });
+    }
+  } else {
+    res.setHeader('Allow', ['POST']);
+    res.status(405).end(`Method ${req.method} Not Allowed`);
+  }
+}
+```
+
+</div>
+
+### Tag System Optimization
+
+<div className="tag-system">
+
+#### Tag Component
+```tsx
+// components/TagCloud.tsx
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
+
+interface Tag {
+  name: string;
+  count: number;
+}
+
+export function TagCloud() {
+  const [tags, setTags] = useState<Tag[]>([]);
+  const [selectedTag, setSelectedTag] = useState<string | null>(null);
+
+  useEffect(() => {
+    fetch('/api/tags')
+      .then(res => res.json())
+      .then(data => setTags(data))
+      .catch(error => console.error('Error fetching tags:', error));
+  }, []);
+
+  return (
+    <div className="p-4 bg-gray-50 rounded-lg">
+      <h3 className="text-lg font-semibold mb-4">Tag Cloud</h3>
+      <div className="flex flex-wrap gap-2">
+        {tags.map(tag => (
+          <Link
+            key={tag.name}
+            href={`/tags/${tag.name}`}
+            className={`px-3 py-1 rounded-full text-sm ${
+              selectedTag === tag.name
+                ? 'bg-blue-500 text-white'
+                : 'bg-white hover:bg-blue-100'
+            }`}
+            onClick={() => setSelectedTag(tag.name)}
+          >
+            {tag.name} ({tag.count})
+          </Link>
+        ))}
+      </div>
+    </div>
+  );
+}
+```
+
+#### Tag API
+```typescript
+// pages/api/tags.ts
+import { NextApiRequest, NextApiResponse } from 'next';
+import { prisma } from '@/lib/prisma';
+
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
+  if (req.method === 'GET') {
+    try {
+      const tags = await prisma.tag.findMany({
+        include: {
+          _count: {
+            select: { posts: true }
+          }
+        }
+      });
+
+      const formattedTags = tags.map(tag => ({
+        name: tag.name,
+        count: tag._count.posts
+      }));
+
+      res.status(200).json(formattedTags);
+    } catch (error) {
+      res.status(500).json({ message: 'Error fetching tags' });
+    }
+  } else {
+    res.setHeader('Allow', ['GET']);
+    res.status(405).end(`Method ${req.method} Not Allowed`);
+  }
+}
+```
+
+</div>
+
+## Team Collaboration
+
+### Code Review
+
+<div className="code-review">
+
+#### Create Pull Request
+```bash
+# Create feature branch
+git checkout -b feature/comment-system
+
+# Commit changes
+git add .
+git commit -m "feat: add comment system
+- Add comment component
+- Implement comment API
+- Add authentication check
+- Style comment section"
+
+# Push to remote
+git push origin feature/comment-system
+```
+
+#### Review Checklist
+:::tip Code Review Points
+1. Code Quality
+   - Follow project coding standards
+   - Proper error handling
+   - Performance considerations
+
+2. Feature Completeness
+   - All features working properly
+   - Edge case handling
+   - User experience considerations
+
+3. Security
+   - Input validation
+   - Permission checks
+   - Data security
+:::
+
+</div>
+
+### Real-time Collaboration
+
+<div className="collaboration">
+
+#### Using v0's Real-time Editing Features
+- Edit the same file simultaneously
+- View teammates' changes in real-time
+- Resolve conflicts
+
+#### Team Communication
+```typescript
+// Add collaboration comments in code
+/**
+ * @todo: Need to add comment pagination feature
+ * @author: Alice
+ * @assignee: Bob
+ * @priority: high
+ */
+```
+
+</div>
+
+## Performance Optimization
+
+### Code Splitting
+
+<div className="code-splitting">
+
+#### Dynamic Imports
+```typescript
+// Dynamically import comment component
+const CommentSection = dynamic(() => import('@/components/Comments'), {
+  loading: () => <CommentSkeleton />,
+  ssr: false
+});
+
+// Dynamically import tag cloud component
+const TagCloud = dynamic(() => import('@/components/TagCloud'), {
+  loading: () => <TagCloudSkeleton />,
+  ssr: true
+});
+```
+
+#### Route Splitting
+```typescript
+// Page-level code splitting
+export default function BlogPost() {
+  const [showComments, setShowComments] = useState(false);
+
+  return (
+    <article>
+      {/* Article content */}
+      <button onClick={() => setShowComments(true)}>
+        Show Comments
+      </button>
+      {showComments && <CommentSection />}
+    </article>
+  );
+}
+```
+
+</div>
+
+### Caching Optimization
+
+<div className="caching">
+
+#### API Caching
+```typescript
+// lib/cache.ts
+import { Redis } from '@upstash/redis';
+
+const redis = new Redis({
+  url: process.env.REDIS_URL,
+  token: process.env.REDIS_TOKEN,
+});
+
+export async function getCachedData(key: string) {
+  const cached = await redis.get(key);
+  if (cached) return JSON.parse(cached);
+  return null;
+}
+
+export async function setCachedData(key: string, data: any, ttl = 3600) {
+  await redis.setex(key, ttl, JSON.stringify(data));
+}
+```
+
+#### Using SWR
+```typescript
+// hooks/useComments.ts
+import useSWR from 'swr';
+
+export function useComments(postId: string) {
+  const { data, error, mutate } = useSWR(
+    `/api/comments?postId=${postId}`,
+    fetcher,
+    {
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+    }
+  );
+
+  return {
+    comments: data,
+    isLoading: !error && !data,
+    isError: error,
+    refresh: mutate,
+  };
+}
+```
+
+</div>
+
+export const styles = {
+  preparation: {
+    backgroundColor: '#f6f8fa',
+    padding: '1rem',
+    borderRadius: '8px',
+    marginBottom: '1rem'
+  },
+  codeReview: {
+    borderLeft: '3px solid #1a73e8',
+    paddingLeft: '1rem'
+  },
+  collaboration: {
+    backgroundColor: '#f0f7ff',
+    padding: '1rem',
+    borderRadius: '8px'
+  }
+};

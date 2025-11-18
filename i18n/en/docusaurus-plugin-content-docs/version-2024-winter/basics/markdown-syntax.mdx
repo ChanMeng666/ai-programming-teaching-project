@@ -1,0 +1,142 @@
+---
+sidebar_position: 2
+title: Markdown Format Introduction
+description: Learn the basics of Markdown syntax, master essential skills for writing technical documentation
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Markdown Format Introduction
+
+## What is Markdown
+
+Markdown is a lightweight markup language created in 2004 by John Gruber. It allows people to write documents in an easy-to-read, easy-to-write plain text format, then convert them into valid HTML documents.
+
+:::tip Advantages of Markdown
+
+- Easy to learn: Syntax is concise and clear, with a gentle learning curve
+- Plain text: Can be written with any text editor
+- Rich formatting: Supports headings, lists, links, images, and many other formats
+- Cross-platform: Can be read and edited on any device
+- Focus on content: Allows authors to focus on writing rather than formatting
+
+:::
+
+## Applications of Markdown in Blog Writing
+
+- Quick article writing: No need to worry about complex HTML tags
+- Easy to maintain: Plain text format is convenient for version control and collaboration
+- Good readability: Easy to read even without rendering
+- Flexible conversion: Can be easily converted to HTML, PDF, and other formats
+
+## Basic Markdown Syntax
+
+### Heading Syntax
+
+```markdown
+# Level 1 Heading
+## Level 2 Heading
+### Level 3 Heading
+```
+
+### Paragraphs and Line Breaks
+
+Leave a blank line between paragraphs. If you want to break a line within a paragraph, add two spaces at the end of the line.
+
+```markdown
+This is the first paragraph.
+
+This is the second paragraph.
+This line ends with two spaces.
+This creates a line break.
+```
+
+### Emphasis Syntax
+
+```markdown
+*Italic* or _Italic_
+**Bold** or __Bold__
+***Bold and Italic*** or ___Bold and Italic___
+```
+
+### List Syntax
+
+Unordered lists:
+```markdown
+- Item 1
+- Item 2
+  - Sub-item A
+  - Sub-item B
+```
+
+Ordered lists:
+```markdown
+1. First item
+2. Second item
+3. Third item
+```
+
+### Link and Image Syntax
+
+Links:
+```markdown
+[Link Text](URL "Optional Title")
+Example: [Google](https://www.google.com "Google Search Engine")
+```
+
+Images:
+```markdown
+![Alt Text](Image URL "Optional Title")
+```
+
+### Quote Syntax
+
+```markdown
+> This is a quote.
+>
+> This is the second paragraph of the quote.
+```
+
+### Code Block Syntax
+
+````markdown
+```python
+def hello_world():
+    print("Hello, World!")
+```
+````
+
+### Table Syntax
+
+```markdown
+| Column 1 | Column 2 | Column 3 |
+|----------|----------|----------|
+| Content 1 | Content 2 | Content 3 |
+| Content 4 | Content 5 | Content 6 |
+```
+
+### Task List Syntax
+
+```markdown
+- [x] Completed task
+- [ ] Incomplete task
+- [ ] Another incomplete task
+```
+
+### Horizontal Rule Syntax
+
+Use three or more `-`, `*`, or `_`:
+
+```markdown
+---
+***
+___
+```
+
+:::note
+If you need to use more complex formatting in Markdown, consider:
+- Using more native Markdown syntax
+- Appropriately using simple HTML tags
+- Using extended syntax supported by your documentation system
+:::

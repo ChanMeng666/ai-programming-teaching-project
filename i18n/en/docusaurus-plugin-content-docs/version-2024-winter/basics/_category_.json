@@ -1,0 +1,9 @@
+{
+  "label": "基础知识",
+  "position": 3,
+  "link": {
+    "type": "generated-index",
+    "description": "学习AI辅助开发的基础知识，包括提示词工程、Markdown语法和高效AI沟通技巧。",
+    "slug": "/category/basics"
+  }
+} 

@@ -1,0 +1,9 @@
+{
+  "label": "AI合作编程教程",
+  "position": 1,
+  "link": {
+    "type": "generated-index",
+    "description": "通过这个系列教程，你将学习如何使用AI工具（Cursor、v0、Vercel等）进行高效的现代化开发。本教程包含基础知识、开发工具和实战项目三个主要部分。",
+    "slug": "/category/ai-coding"
+  }
+} 

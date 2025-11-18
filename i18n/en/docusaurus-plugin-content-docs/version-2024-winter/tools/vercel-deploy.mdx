@@ -1,0 +1,295 @@
+---
+sidebar_position: 3
+title: Vercel Deployment Guide
+description: Learn how to deploy and host your web applications using Vercel
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Vercel Deployment Guide
+
+## Vercel Introduction
+
+Vercel is a cloud platform for frontend developers, focusing on providing deployment solutions for static and server-side rendered applications.
+
+<div className="feature-cards">
+
+### ⚡ Zero Configuration Deployment
+- Automatic project type detection
+- Intelligent build settings
+- Instant deployment previews
+
+### 🌍 Global CDN
+- Edge network distribution
+- Automatic SSL certificates
+- Smart routing
+
+### 🔄 Continuous Deployment
+- Git integration
+- Automatic builds
+- Version control
+
+### 🛠️ Development Tools
+- Real-time preview
+- Performance analysis
+- Environment variable management
+
+</div>
+
+## Deploying Projects
+
+### Preparation
+
+<div className="prerequisites">
+
+#### Requirements
+- Git repository (GitHub, GitLab, or Bitbucket)
+- Project package.json file
+- Node.js environment
+
+#### Recommended Configuration
+```json
+{
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  }
+}
+```
+
+</div>
+
+### Importing Project
+
+<div className="step-guide">
+
+#### 1. Connect Git Platform
+
+<Tabs>
+  <TabItem value="github" label="GitHub" default>
+    1. Visit [Vercel Dashboard](https://vercel.com/dashboard)
+    2. Click "New Project"
+    3. Select "Import Git Repository"
+    4. Authorize GitHub access
+  </TabItem>
+  <TabItem value="gitlab" label="GitLab">
+    1. Visit Vercel Dashboard
+    2. Click "Add GitLab Account"
+    3. Complete GitLab authorization
+    4. Select repository to import
+  </TabItem>
+</Tabs>
+
+#### 2. Configure Project
+
+```yaml
+# vercel.json configuration example
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/next"
+    }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "/" }
+  ]
+}
+```
+
+#### 3. Deployment Settings
+
+- Select project framework (usually auto-detected)
+- Configure build command and output directory
+- Set environment variables (if needed)
+
+</div>
+
+## Advanced Feature Configuration
+
+### Custom Domain
+
+<div className="domain-setup">
+
+#### Adding Domain
+1. Find "Domains" in project settings
+2. Click "Add Domain"
+3. Enter your domain name
+
+#### DNS Configuration
+```bash
+# A Record configuration
+Type: A
+Name: @
+Value: 76.76.21.21
+
+# CNAME configuration
+Type: CNAME
+Name: www
+Value: cname.vercel-dns.com
+```
+
+</div>
+
+### Environment Variable Management
+
+<div className="env-management">
+
+#### Setting in Vercel Dashboard
+1. Project Settings > Environment Variables
+2. Add key-value pairs
+3. Select environment (Production/Preview/Development)
+
+#### Using .env Files
+```bash
+# .env.local
+DATABASE_URL=xxx
+API_KEY=xxx
+
+# .env.production
+NODE_ENV=production
+API_ENDPOINT=https://api.example.com
+```
+
+:::caution Note
+Do not commit .env files containing sensitive information to Git repository!
+:::
+
+</div>
+
+### Performance Monitoring
+
+<div className="monitoring">
+
+#### Core Web Vitals Monitoring
+```javascript
+// pages/_app.js
+export function reportWebVitals(metric) {
+  if (metric.label === 'web-vital') {
+    console.log(metric); // Send to analytics service
+  }
+}
+```
+
+#### Setting Performance Budget
+```json
+{
+  "performance": {
+    "budget": {
+      "firstContentfulPaint": 1500,
+      "interactive": 3000,
+      "firstMeaningfulPaint": 2000
+    }
+  }
+}
+```
+
+</div>
+
+### Team Collaboration
+
+<div className="collaboration">
+
+#### Team Setup
+1. Create team
+2. Invite members
+3. Set permissions
+
+#### Deployment Comments
+```javascript
+// Add deployment comments in PR
+async function commentOnDeploy(deployment) {
+  const comment = `
+    🚀 Preview deployed at: ${deployment.url}
+    Build: ${deployment.meta.buildId}
+    Status: ${deployment.state}
+  `;
+  await github.createComment(comment);
+}
+```
+
+</div>
+
+## Best Practices
+
+### Optimizing Build Process
+
+<div className="optimization-tips">
+
+#### Caching Strategy
+```json
+{
+  "build": {
+    "env": {
+      "NEXT_PUBLIC_BUILD_TIME": "@now"
+    }
+  },
+  "headers": [
+    {
+      "source": "/static/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ]
+}
+```
+
+#### Build Optimization
+- Use dependency caching
+- Optimize build commands
+- Configure output directory properly
+
+</div>
+
+### Monitoring and Alerts
+
+<div className="monitoring-setup">
+
+#### Setting Alert Rules
+```javascript
+// Example: Performance alert configuration
+{
+  "alerts": [
+    {
+      "metric": "firstContentfulPaint",
+      "threshold": 2000,
+      "notification": {
+        "type": "email",
+        "recipients": ["team@example.com"]
+      }
+    }
+  ]
+}
+```
+
+#### Log Management
+- Integrate logging service
+- Set up error tracking
+- Configure performance monitoring
+
+</div>
+
+export const styles = {
+  featureCards: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+    gap: '1rem',
+    marginBottom: '2rem'
+  },
+  stepGuide: {
+    borderLeft: '3px solid #1a73e8',
+    paddingLeft: '1rem'
+  },
+  optimizationTips: {
+    backgroundColor: '#f6f8fa',
+    padding: '1rem',
+    borderRadius: '8px'
+  }
+};

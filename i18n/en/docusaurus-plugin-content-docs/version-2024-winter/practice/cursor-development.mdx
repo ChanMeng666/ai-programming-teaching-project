@@ -1,0 +1,783 @@
+---
+sidebar_position: 2
+title: Developing with Cursor
+description: Learn how to develop a blog using Cursor and AI assistants
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Developing a Blog with Cursor
+
+## Project Initialization
+
+### Creating a Next.js Project
+
+<div className="setup-steps">
+
+#### 1. Using create-next-app
+
+```bash title="Terminal Command"
+npx create-next-app@latest my-blog --typescript --tailwind --eslint
+cd my-blog
+```
+
+#### 2. Install Dependencies
+
+```bash title="Install Core Dependencies" showLineNumbers
+npm install @headlessui/react @heroicons/react
+npm install @mdx-js/react @mdx-js/loader
+npm install gray-matter next-mdx-remote
+npm install date-fns
+```
+
+#### 3. Configure Project Structure
+
+```bash title="Create Project Directory Structure"
+mkdir -p src/{components,layouts,lib,styles,types}
+mkdir -p content/{posts,pages}
+```
+
+</div>
+
+## Basic Component Development
+
+### Layout Components
+
+<div className="component-development">
+
+#### Layout Component
+
+```tsx title="src/components/Layout.tsx" showLineNumbers {3,9-11,17-19}
+// src/components/Layout.tsx
+import { ReactNode } from 'react';
+import Header from './Header';
+import Footer from './Footer';
+
+interface LayoutProps {
+  children: ReactNode;
+  title?: string;
+  description?: string;
+}
+
+export default function Layout({ children, title, description }: LayoutProps) {
+  return (
+    <div className="min-h-screen flex flex-col">
+      {/* Top Navigation */}
+      <Header />
+
+      {/* Main Content Area */}
+      <main className="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {children}
+      </main>
+
+      {/* Footer Information */}
+      <Footer />
+    </div>
+  );
+}
+```
+
+#### Header Component
+
+```tsx title="src/components/Header.tsx" showLineNumbers {12-14,20-22}
+import Link from 'next/link';
+import { useState } from 'react';
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+
+export default function Header() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const navigation = [
+    { name: 'Home', href: '/' },
+    { name: 'Posts', href: '/posts' },
+    { name: 'About', href: '/about' },
+    { name: 'Contact', href: '/contact' },
+  ];
+
+  return (
+    <header className="bg-white shadow-sm">
+      <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between h-16">
+          <div className="flex items-center">
+            <Link href="/" className="text-xl font-bold text-gray-900">
+              My Blog
+            </Link>
+          </div>
+
+          {/* Desktop Navigation */}
+          <div className="hidden sm:flex sm:items-center sm:space-x-8">
+            {navigation.map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                className="text-gray-500 hover:text-gray-900 px-3 py-2 text-sm font-medium"
+              >
+                {item.name}
+              </Link>
+            ))}
+          </div>
+
+          {/* Mobile Menu Button */}
+          <div className="sm:hidden">
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100"
+            >
+              {isMenuOpen ? (
+                <XMarkIcon className="h-6 w-6" />
+              ) : (
+                <Bars3Icon className="h-6 w-6" />
+              )}
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile Menu */}
+        {isMenuOpen && (
+          <div className="sm:hidden">
+            <div className="pt-2 pb-3 space-y-1">
+              {navigation.map((item) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className="block px-3 py-2 text-base font-medium text-gray-500 hover:text-gray-900"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {item.name}
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
+      </nav>
+    </header>
+  );
+}
+```
+
+#### Using AI to Optimize Styles
+
+:::tip[AI Prompt]
+Use the following prompt to have AI help optimize styles:
+```
+Add responsive styles to this Layout component, including:
+1. Appropriate maximum content width
+2. Good spacing and margins
+3. Mobile responsiveness
+4. Dark mode support
+```
+:::
+
+</div>
+
+### Post List Component
+
+<div className="post-list">
+
+#### PostList Component
+
+```tsx title="src/components/PostList.tsx" showLineNumbers {5-7,15-17,25-27}
+import { useState } from 'react';
+import Link from 'next/link';
+import { Post } from '@/types';
+
+interface PostListProps {
+  posts: Post[];
+  showExcerpt?: boolean;
+}
+
+export default function PostList({ posts, showExcerpt = true }: PostListProps) {
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const filteredPosts = posts.filter(post =>
+    post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    post.excerpt.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  return (
+    <div className="space-y-6">
+      {/* Search Box */}
+      <div className="relative">
+        <input
+          type="text"
+          placeholder="Search posts..."
+          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </div>
+
+      {/* Post List */}
+      <div className="space-y-4">
+        {filteredPosts.map((post) => (
+          <article key={post.slug} className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200">
+            <div className="p-6">
+              <div className="flex items-center justify-between mb-2">
+                <time className="text-sm text-gray-500">
+                  {new Date(post.date).toLocaleDateString()}
+                </time>
+                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                  {post.category}
+                </span>
+              </div>
+              
+              <h2 className="text-xl font-semibold text-gray-900 mb-2">
+                <Link href={`/posts/${post.slug}`} className="hover:text-blue-600">
+                  {post.title}
+                </Link>
+              </h2>
+              
+              {showExcerpt && (
+                <p className="text-gray-600 mb-4 line-clamp-3">
+                  {post.excerpt}
+                </p>
+              )}
+              
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-4">
+                  <span className="text-sm text-gray-500">
+                    Read time: {post.readTime} min
+                  </span>
+                  <span className="text-sm text-gray-500">
+                    {post.views} views
+                  </span>
+                </div>
+
+                <Link
+                  href={`/posts/${post.slug}`}
+                  className="text-blue-600 hover:text-blue-800 text-sm font-medium"
+                >
+                  Read more →
+                </Link>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      {filteredPosts.length === 0 && (
+        <div className="text-center py-12">
+          <p className="text-gray-500">No matching posts found</p>
+        </div>
+      )}
+    </div>
+  );
+}
+```
+
+#### Type Definitions
+
+```typescript title="src/types/index.ts" showLineNumbers
+export interface Post {
+  slug: string;
+  title: string;
+  excerpt: string;
+  content: string;
+  date: string;
+  category: string;
+  tags: string[];
+  readTime: number;
+  views: number;
+  featured?: boolean;
+}
+
+export interface Category {
+  name: string;
+  slug: string;
+  count: number;
+}
+
+export interface Tag {
+  name: string;
+  slug: string;
+  count: number;
+}
+```
+
+</div>
+
+## Page Component Development
+
+### Homepage Component
+
+```tsx title="src/pages/index.tsx" showLineNumbers {10-12,20-22,35-37}
+import { GetStaticProps } from 'next';
+import Layout from '@/components/Layout';
+import PostList from '@/components/PostList';
+import { Post } from '@/types';
+import { getAllPosts } from '@/lib/posts';
+
+interface HomeProps {
+  posts: Post[];
+  featuredPosts: Post[];
+}
+
+export default function Home({ posts, featuredPosts }: HomeProps) {
+  return (
+    <Layout title="Home" description="My Tech Blog">
+      <div className="space-y-12">
+        {/* Welcome Section */}
+        <section className="text-center py-12">
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+            Welcome to My Blog
+          </h1>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            Sharing frontend development, technical insights, and personal growth stories
+          </p>
+        </section>
+
+        {/* Featured Posts */}
+        {featuredPosts.length > 0 && (
+          <section>
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">Featured Posts</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {featuredPosts.map((post) => (
+                <article key={post.slug} className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200">
+                  <div className="p-6">
+                    <div className="flex items-center justify-between mb-2">
+                      <time className="text-sm text-gray-500">
+                        {new Date(post.date).toLocaleDateString()}
+                      </time>
+                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                        Featured
+                      </span>
+                    </div>
+
+                    <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                      <Link href={`/posts/${post.slug}`} className="hover:text-blue-600">
+                        {post.title}
+                      </Link>
+                    </h3>
+
+                    <p className="text-gray-600 text-sm line-clamp-3 mb-4">
+                      {post.excerpt}
+                    </p>
+
+                    <Link
+                      href={`/posts/${post.slug}`}
+                      className="text-blue-600 hover:text-blue-800 text-sm font-medium"
+                    >
+                      Read more →
+                    </Link>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* Latest Posts */}
+        <section>
+          <h2 className="text-2xl font-bold text-gray-900 mb-6">Latest Posts</h2>
+          <PostList posts={posts.slice(0, 6)} />
+        </section>
+      </div>
+    </Layout>
+  );
+}
+
+export const getStaticProps: GetStaticProps = async () => {
+  const posts = getAllPosts();
+  const featuredPosts = posts.filter(post => post.featured);
+
+  return {
+    props: {
+      posts,
+      featuredPosts,
+    },
+  };
+};
+```
+
+### Post Detail Page
+
+```tsx title="src/pages/posts/[slug].tsx" showLineNumbers {15-17,25-27,40-42}
+import { GetStaticPaths, GetStaticProps } from 'next';
+import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
+import { serialize } from 'next-mdx-remote/serialize';
+import Layout from '@/components/Layout';
+import { Post } from '@/types';
+import { getPostBySlug, getAllPosts } from '@/lib/posts';
+
+interface PostPageProps {
+  post: Post;
+  source: MDXRemoteSerializeResult;
+}
+
+const components = {
+  h1: (props: any) => <h1 className="text-3xl font-bold mb-4" {...props} />,
+  h2: (props: any) => <h2 className="text-2xl font-semibold mb-3 mt-8" {...props} />,
+  h3: (props: any) => <h3 className="text-xl font-medium mb-2 mt-6" {...props} />,
+  p: (props: any) => <p className="mb-4 leading-relaxed" {...props} />,
+  ul: (props: any) => <ul className="list-disc list-inside mb-4" {...props} />,
+  ol: (props: any) => <ol className="list-decimal list-inside mb-4" {...props} />,
+  li: (props: any) => <li className="mb-1" {...props} />,
+  code: (props: any) => (
+    <code className="bg-gray-100 px-2 py-1 rounded text-sm" {...props} />
+  ),
+  pre: (props: any) => (
+    <pre className="bg-gray-900 text-white p-4 rounded-lg overflow-x-auto mb-4" {...props} />
+  ),
+  blockquote: (props: any) => (
+    <blockquote className="border-l-4 border-blue-500 pl-4 italic mb-4" {...props} />
+  ),
+};
+
+export default function PostPage({ post, source }: PostPageProps) {
+  return (
+    <Layout title={post.title} description={post.excerpt}>
+      <article className="max-w-4xl mx-auto">
+        {/* Article Header */}
+        <header className="mb-8">
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+            {post.title}
+          </h1>
+
+          <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
+            <div className="flex items-center space-x-4">
+              <time>{new Date(post.date).toLocaleDateString()}</time>
+              <span>Read time: {post.readTime} min</span>
+              <span>{post.views} views</span>
+            </div>
+            
+            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+              {post.category}
+            </span>
+          </div>
+          
+          <div className="flex flex-wrap gap-2">
+            {post.tags.map((tag) => (
+              <span
+                key={tag}
+                className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800"
+              >
+                #{tag}
+              </span>
+            ))}
+          </div>
+        </header>
+
+        {/* Article Content */}
+        <div className="prose prose-lg max-w-none">
+          <MDXRemote {...source} components={components} />
+        </div>
+      </article>
+    </Layout>
+  );
+}
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const posts = getAllPosts();
+  const paths = posts.map((post) => ({
+    params: { slug: post.slug },
+  }));
+
+  return {
+    paths,
+    fallback: false,
+  };
+};
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const post = getPostBySlug(params?.slug as string);
+  const source = await serialize(post.content);
+
+  return {
+    props: {
+      post,
+      source,
+    },
+  };
+};
+```
+
+## Utility Function Development
+
+### Post Processing Utilities
+
+```typescript title="src/lib/posts.ts" showLineNumbers {8-10,20-22,35-37}
+import fs from 'fs';
+import path from 'path';
+import matter from 'gray-matter';
+import { Post } from '@/types';
+
+const postsDirectory = path.join(process.cwd(), 'content/posts');
+
+export function getAllPosts(): Post[] {
+  const fileNames = fs.readdirSync(postsDirectory);
+  const allPostsData = fileNames
+    .filter((name) => name.endsWith('.md'))
+    .map((name) => {
+      const slug = name.replace(/\.md$/, '');
+      const fullPath = path.join(postsDirectory, name);
+      const fileContents = fs.readFileSync(fullPath, 'utf8');
+      const { data, content } = matter(fileContents);
+
+      return {
+        slug,
+        content,
+        title: data.title || '',
+        excerpt: data.excerpt || '',
+        date: data.date || '',
+        category: data.category || 'Uncategorized',
+        tags: data.tags || [],
+        readTime: calculateReadTime(content),
+        views: data.views || 0,
+        featured: data.featured || false,
+      } as Post;
+    });
+
+  return allPostsData.sort((a, b) => (a.date < b.date ? 1 : -1));
+}
+
+export function getPostBySlug(slug: string): Post {
+  const fullPath = path.join(postsDirectory, `${slug}.md`);
+  const fileContents = fs.readFileSync(fullPath, 'utf8');
+  const { data, content } = matter(fileContents);
+
+  return {
+    slug,
+    content,
+    title: data.title || '',
+    excerpt: data.excerpt || '',
+    date: data.date || '',
+    category: data.category || '未分类',
+    tags: data.tags || [],
+    readTime: calculateReadTime(content),
+    views: data.views || 0,
+    featured: data.featured || false,
+  } as Post;
+}
+
+function calculateReadTime(content: string): number {
+  const wordsPerMinute = 200;
+  const words = content.split(/\s+/).length;
+  return Math.ceil(words / wordsPerMinute);
+}
+
+export function getCategories(): { name: string; count: number }[] {
+  const posts = getAllPosts();
+  const categoryCount: { [key: string]: number } = {};
+
+  posts.forEach((post) => {
+    categoryCount[post.category] = (categoryCount[post.category] || 0) + 1;
+  });
+
+  return Object.entries(categoryCount).map(([name, count]) => ({
+    name,
+    count,
+  }));
+}
+
+export function getTags(): { name: string; count: number }[] {
+  const posts = getAllPosts();
+  const tagCount: { [key: string]: number } = {};
+
+  posts.forEach((post) => {
+    post.tags.forEach((tag) => {
+      tagCount[tag] = (tagCount[tag] || 0) + 1;
+    });
+  });
+
+  return Object.entries(tagCount).map(([name, count]) => ({
+    name,
+    count,
+  }));
+}
+```
+
+### Styling Utilities
+
+```css title="src/styles/globals.css" showLineNumbers {5-7,15-17,25-27}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Styles */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-gray-50 text-gray-900;
+  }
+}
+
+@layer components {
+  .prose {
+    @apply text-gray-700 leading-relaxed;
+  }
+  
+  .prose h1 {
+    @apply text-3xl font-bold mb-4 text-gray-900;
+  }
+  
+  .prose h2 {
+    @apply text-2xl font-semibold mb-3 mt-8 text-gray-900;
+  }
+  
+  .prose h3 {
+    @apply text-xl font-medium mb-2 mt-6 text-gray-900;
+  }
+  
+  .prose p {
+    @apply mb-4;
+  }
+  
+  .prose ul {
+    @apply list-disc list-inside mb-4;
+  }
+  
+  .prose ol {
+    @apply list-decimal list-inside mb-4;
+  }
+  
+  .prose li {
+    @apply mb-1;
+  }
+  
+  .prose code {
+    @apply bg-gray-100 px-2 py-1 rounded text-sm font-mono;
+  }
+  
+  .prose pre {
+    @apply bg-gray-900 text-white p-4 rounded-lg overflow-x-auto mb-4;
+  }
+  
+  .prose blockquote {
+    @apply border-l-4 border-blue-500 pl-4 italic mb-4 text-gray-600;
+  }
+}
+
+@layer utilities {
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+```
+
+:::tip[AI Prompt]
+Use the following prompt to have AI help optimize the code:
+```
+Please review this code and provide improvement suggestions for:
+1. Performance optimization
+2. Code structure
+3. Error handling
+4. Accessibility
+5. SEO optimization
+```
+:::
+
+## Configuration Files
+
+### Next.js Configuration
+
+```javascript title="next.config.js" showLineNumbers {5-7,15-17}
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  reactStrictMode: true,
+  swcMinify: true,
+
+  // Image optimization configuration
+  images: {
+    domains: ['example.com'],
+    formats: ['image/webp', 'image/avif'],
+  },
+
+  // Experimental features
+  experimental: {
+    appDir: false,
+  },
+
+  // Custom Webpack configuration
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+      };
+    }
+    return config;
+  },
+};
+
+module.exports = nextConfig;
+```
+
+### Tailwind Configuration
+
+```javascript title="tailwind.config.js" showLineNumbers {8-10,20-22}
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+  ],
+  theme: {
+    extend: {
+      fontFamily: {
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+        mono: ['Fira Code', 'monospace'],
+      },
+      colors: {
+        primary: {
+          50: '#eff6ff',
+          500: '#3b82f6',
+          900: '#1e3a8a',
+        },
+      },
+      typography: {
+        DEFAULT: {
+          css: {
+            maxWidth: 'none',
+            color: '#374151',
+            lineHeight: '1.75',
+          },
+        },
+      },
+    },
+  },
+  plugins: [
+    require('@tailwindcss/typography'),
+    require('@tailwindcss/forms'),
+  ],
+};
+```
+
+:::tip[AI Prompt]
+Use the following prompt to have AI help optimize deployment:
+```
+Please provide a deployment guide for this Next.js blog application, including:
+1. Vercel deployment configuration
+2. Environment variable setup
+3. Build optimization
+4. Performance monitoring
+```
+:::
+
+export const styles = {
+  setupSteps: {
+    backgroundColor: '#f8f9fa',
+    padding: '20px',
+    borderRadius: '8px',
+    marginBottom: '20px'
+  },
+  componentDevelopment: {
+    backgroundColor: '#f0f7ff',
+    padding: '20px',
+    borderRadius: '8px',
+    marginBottom: '20px'
+  },
+  postList: {
+    backgroundColor: '#fff9f0',
+    padding: '20px',
+    borderRadius: '8px',
+    marginBottom: '20px'
+  }
+};

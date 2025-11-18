@@ -1,0 +1,522 @@
+---
+title: 基础教程
+sidebar_position: 1
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import CodeBlock from '@theme/CodeBlock';
+import Admonition from '@theme/Admonition';
+
+# 基础教程：环境准备与工具安装
+
+:::info 学习目标
+完成本章学习后，您将能够：
+- ✅ 成功注册所需的开发账号
+- ✅ 在本地安装并配置 Gemini CLI
+- ✅ 使用 AI 管理您的开发环境
+- ✅ 掌握基本的 AI 辅助开发流程
+:::
+
+## 📹 课程视频
+
+观看课程一和课程二的完整教学视频：
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ft1tRrgUy9I?si=3o_xHXbiHsN4yMAi" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+## 📋 必备账号注册
+
+在开始使用 Gemini CLI 之前，我们需要准备三个重要的账号。这些账号将贯穿整个开发流程。
+
+<Tabs>
+  <TabItem value="github" label="GitHub 账号" default>
+
+### 为什么需要 GitHub？
+
+GitHub 是全球最大的代码托管平台，我们将用它来：
+- 存储和管理代码
+- 与他人协作开发
+- 展示个人项目作品集
+
+### 注册步骤
+
+1. 访问 [GitHub.com](https://github.com)
+2. 点击右上角的 "Sign up"
+3. 填写注册信息：
+   - **Username**：选择一个专业的用户名（建议使用真实姓名或昵称）
+   - **Email**：使用常用邮箱
+   - **Password**：设置强密码
+
+<Admonition type="tip" title="专业建议">
+选择用户名时要慎重，因为它将出现在您所有的项目 URL 中。建议使用：
+- 真实姓名：`john-smith`
+- 专业昵称：`webdev-pro`
+- 避免使用数字结尾：~~`coder123`~~
+</Admonition>
+
+### 初始配置
+
+注册完成后，建议完成以下配置：
+
+<CodeBlock language="bash">
+{`# 配置 Git 全局用户信息
+git config --global user.name "您的姓名"
+git config --global user.email "your-email@example.com"`}
+</CodeBlock>
+
+  </TabItem>
+  <TabItem value="vercel" label="Vercel 账号">
+
+### 为什么选择 Vercel？
+
+Vercel 是现代化的部署平台，特别适合：
+- 一键部署前端项目
+- 自动化 CI/CD 流程
+- 免费的 HTTPS 和全球 CDN
+
+### 注册流程
+
+1. 访问 [Vercel.com](https://vercel.com)
+2. 点击 "Sign Up"
+3. **推荐**：选择 "Continue with GitHub" 使用 GitHub 账号登录
+4. 授权 Vercel 访问您的 GitHub 仓库
+
+### 优势特性
+
+<div className="feature-grid">
+  <div className="feature-card">
+    <h4>🚀 极速部署</h4>
+    <p>推送代码后自动部署，秒级生效</p>
+  </div>
+  <div className="feature-card">
+    <h4>🌍 全球加速</h4>
+    <p>内置 CDN，让您的网站在全球都能快速访问</p>
+  </div>
+  <div className="feature-card">
+    <h4>📊 分析面板</h4>
+    <p>实时监控网站性能和访问数据</p>
+  </div>
+</div>
+
+  </TabItem>
+  <TabItem value="google" label="Google 账号">
+
+### Google 账号的重要性
+
+Google 账号是使用 Gemini CLI 的核心要求：
+- 登录 Gemini CLI
+- 访问 Google 的 AI 服务
+- 同步配置和偏好设置
+
+### 创建账号
+
+1. 访问 [accounts.google.com](https://accounts.google.com)
+2. 点击 "创建账号"
+3. 选择 "个人用途"
+4. 填写基本信息
+
+<Admonition type="warning" title="安全提醒">
+请务必：
+- 启用两步验证
+- 使用强密码
+- 定期检查账号活动
+</Admonition>
+
+  </TabItem>
+</Tabs>
+
+## 🛠️ Gemini CLI 安装配置
+
+### 系统要求
+
+<Tabs groupId="operating-systems">
+  <TabItem value="windows" label="Windows">
+    <div>
+      <h4>最低要求：</h4>
+      <ul>
+        <li>Windows 10 版本 1903 或更高</li>
+        <li>Node.js 16.0 或更高版本</li>
+        <li>4GB RAM（推荐 8GB）</li>
+      </ul>
+      <h4>推荐配置：</h4>
+      <ul>
+        <li>Windows 11</li>
+        <li>Node.js 18.x LTS</li>
+        <li>使用 Windows Terminal</li>
+      </ul>
+    </div>
+  </TabItem>
+  <TabItem value="macos" label="macOS">
+    <div>
+      <h4>最低要求：</h4>
+      <ul>
+        <li>macOS 10.15 (Catalina) 或更高</li>
+        <li>Node.js 16.0 或更高版本</li>
+        <li>4GB RAM</li>
+      </ul>
+      <h4>推荐配置：</h4>
+      <ul>
+        <li>macOS 12.0 (Monterey) 或更高</li>
+        <li>Node.js 18.x LTS</li>
+        <li>使用 iTerm2 或原生 Terminal</li>
+      </ul>
+    </div>
+  </TabItem>
+  <TabItem value="linux" label="Linux">
+    <div>
+      <h4>支持的发行版：</h4>
+      <ul>
+        <li>Ubuntu 20.04 LTS 或更高</li>
+        <li>Debian 10 或更高</li>
+        <li>Fedora 34 或更高</li>
+        <li>其他主流发行版</li>
+      </ul>
+      <h4>依赖要求：</h4>
+      <ul>
+        <li>Node.js 16.0 或更高版本</li>
+        <li>npm 或 yarn</li>
+      </ul>
+    </div>
+  </TabItem>
+</Tabs>
+
+### 安装步骤
+
+<div className="installation-steps">
+
+#### 步骤 1：检查 Node.js 版本
+
+<CodeBlock language="bash">
+{`# 检查 Node.js 是否已安装
+node --version
+
+# 如果未安装或版本过低，请访问 nodejs.org 下载安装`}
+</CodeBlock>
+
+#### 步骤 2：全局安装 Gemini CLI
+
+<CodeBlock language="bash">
+{`# 使用 npm 安装（推荐）
+npm install -g @google/gemini-cli
+
+# 或使用 yarn
+yarn global add @google/gemini-cli
+
+# 或使用 pnpm
+pnpm add -g @google/gemini-cli`}
+</CodeBlock>
+
+<Admonition type="info" title="安装提示">
+如果遇到权限问题，请：
+- **Windows**：以管理员身份运行命令提示符
+- **macOS/Linux**：使用 `sudo npm install -g @google/gemini-cli`
+</Admonition>
+
+#### 步骤 3：验证安装
+
+<CodeBlock language="bash">
+{`# 检查安装是否成功
+gemini --version
+
+# 查看可用命令
+gemini --help`}
+</CodeBlock>
+
+</div>
+
+### 首次配置
+
+安装完成后，需要进行初始配置：
+
+<CodeBlock language="bash">
+{`# 1. 登录 Google 账号
+gemini auth login
+
+# 2. 系统将打开浏览器，请登录您的 Google 账号
+# 3. 授权 Gemini CLI 访问必要的权限
+# 4. 返回终端，您应该看到 "Successfully authenticated!" 的提示`}
+</CodeBlock>
+
+### 配置选项
+
+<Tabs>
+  <TabItem value="basic" label="基础配置" default>
+
+<CodeBlock language="bash">
+{`# 设置默认项目路径
+gemini config set default-path ~/projects
+
+# 设置语言偏好
+gemini config set language zh-CN
+
+# 查看当前配置
+gemini config list`}
+</CodeBlock>
+
+  </TabItem>
+  <TabItem value="advanced" label="高级配置">
+
+<CodeBlock language="bash">
+{`# 设置 API 超时时间（毫秒）
+gemini config set timeout 30000
+
+# 启用调试模式
+gemini config set debug true
+
+# 设置代理（如需要）
+gemini config set proxy http://proxy.example.com:8080
+
+# 导出配置文件
+gemini config export > gemini-config.json`}
+</CodeBlock>
+
+  </TabItem>
+</Tabs>
+
+## 🎮 基础使用示例
+
+### 您的第一次对话
+
+现在让我们开始使用 Gemini CLI！
+
+<CodeBlock language="bash">
+{`# 启动交互式对话
+gemini chat
+
+# Gemini 会回应：
+# "你好！我是 Gemini，您的 AI 编程助手。有什么可以帮助您的吗？"`}
+</CodeBlock>
+
+### 实用对话示例
+
+<div className="example-grid">
+
+<div className="example-card">
+<h4>🔧 环境配置</h4>
+<CodeBlock language="text">
+{`您：你好，我想开发web应用，请问我需要安装哪些必须的开发环境？
+
+Gemini：我来帮您配置 Web 开发环境。建议安装以下工具：
+
+1. Node.js 和 npm - JavaScript 运行环境
+2. VS Code - 代码编辑器  
+3. Git - 版本控制
+4. Chrome DevTools - 调试工具
+
+需要我帮您自动安装这些工具吗？`}
+</CodeBlock>
+</div>
+
+<div className="example-card">
+<h4>📦 依赖管理</h4>
+<CodeBlock language="text">
+{`您：请帮我检查本地有哪些 Node.js 全局包，并建议哪些可以删除
+
+Gemini：正在扫描您的全局 npm 包...
+
+找到以下包：
+- create-react-app (v4.0.3) - 建议删除，使用 npx 代替
+- nodemon (v2.0.15) - 保留，开发常用
+- typescript (v4.5.2) - 建议删除，项目级安装更好
+- pm2 (v5.1.0) - 保留，进程管理工具
+
+需要我帮您清理这些包吗？`}
+</CodeBlock>
+</div>
+
+<div className="example-card">
+<h4>🛤️ PATH 管理</h4>
+<CodeBlock language="text">
+{`您：帮我查看并整理系统 PATH
+
+Gemini：检测到您的 PATH 中有以下条目：
+
+重复项：
+- /usr/local/bin (出现 3 次)
+- ~/.npm-global/bin (出现 2 次)
+
+无效路径：
+- /opt/old-software/bin (不存在)
+
+建议优化后的 PATH 顺序：
+1. ~/.local/bin
+2. /usr/local/bin
+3. ~/.npm-global/bin
+4. /usr/bin
+
+要应用这些更改吗？`}
+</CodeBlock>
+</div>
+
+</div>
+
+## 🚫 告别繁琐的传统方式
+
+### 不再需要的工具
+
+<div className="comparison-table">
+
+| 传统工具 | 被 Gemini CLI 替代的原因 |
+|---------|------------------------|
+| **Cursor** | • 中国大陆锁区<br/>• Pro 额度性价比低<br/>• Gemini CLI 完全免费可用 |
+| **GitHub Desktop** | • 无需 GUI 工具<br/>• Gemini 可以执行所有 Git 操作<br/>• 更灵活的命令行交互 |
+| **Git 命令** | • 不用记忆任何 Git 命令<br/>• 自然语言描述即可<br/>• AI 自动处理复杂操作 |
+
+</div>
+
+### 新旧对比
+
+<Tabs>
+  <TabItem value="old" label="❌ 传统方式">
+
+<CodeBlock language="bash">
+{`# 需要记忆和输入的命令
+git add .
+git commit -m "feat: add new feature"
+git push origin main
+
+# 解决冲突
+git fetch origin
+git merge origin/main
+# 手动解决冲突...
+git add .
+git commit
+git push
+
+# 查看历史
+git log --oneline --graph --all`}
+</CodeBlock>
+
+  </TabItem>
+  <TabItem value="new" label="✅ Gemini CLI 方式" default>
+
+<CodeBlock language="text">
+{`您：提交我的更改，描述是"添加了新功能"
+Gemini：好的，我帮您提交更改...
+[执行 git add, commit, push]
+✓ 成功提交到 main 分支
+
+您：有冲突了，帮我解决
+Gemini：检测到合并冲突，我来帮您：
+1. 分析冲突文件...
+2. 基于代码逻辑建议解决方案...
+3. 要接受我的建议吗？
+
+您：查看最近的提交历史
+Gemini：最近 5 次提交：
+• 2分钟前: 添加了新功能 (您)
+• 1小时前: 修复了登录问题 (张三)
+• 3小时前: 更新了文档 (李四)
+...`}
+</CodeBlock>
+
+  </TabItem>
+</Tabs>
+
+## 💡 最佳实践建议
+
+### 日常工作流程
+
+1. **每日开始**
+   ```text
+   您：早上好，帮我检查项目状态
+   Gemini：为您检查项目状态...
+   ```
+
+2. **开发过程**
+   ```text
+   您：我要开始开发用户认证功能
+   Gemini：我来帮您准备...
+   ```
+
+3. **问题解决**
+   ```text
+   您：npm install 报错了，帮我看看
+   Gemini：我来分析错误...
+   ```
+
+### 效率提升技巧
+
+<div className="tips-grid">
+  <div className="tip-card">
+    <h4>🎯 明确表达</h4>
+    <p>清晰描述您的需求，AI 会更准确地帮助您</p>
+  </div>
+  <div className="tip-card">
+    <h4>🔄 持续对话</h4>
+    <p>保持上下文，让 AI 更好地理解您的项目</p>
+  </div>
+  <div className="tip-card">
+    <h4>📝 善用历史</h4>
+    <p>使用 `gemini history` 查看之前的对话</p>
+  </div>
+</div>
+
+<style>{`
+.feature-grid, .example-grid, .tips-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.feature-card, .example-card, .tip-card {
+  padding: 1.5rem;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.feature-card h4, .example-card h4, .tip-card h4 {
+  margin-top: 0;
+  color: #2d3748;
+}
+
+.installation-steps {
+  margin: 2rem 0;
+}
+
+.installation-steps h4 {
+  color: #4a5568;
+  margin: 1.5rem 0 0.5rem 0;
+}
+
+.comparison-table {
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
+.comparison-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.comparison-table th, .comparison-table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.comparison-table th {
+  background: #f7fafc;
+  font-weight: 600;
+}
+
+.next-step-container {
+  text-align: center;
+  margin-top: 3rem;
+}
+`}</style>
+
+## 🎯 下一步
+
+恭喜您完成了基础环境的配置！现在您已经拥有了：
+- ✅ 三个必要的开发账号
+- ✅ 本地安装的 Gemini CLI
+- ✅ AI 辅助开发的基础知识
+
+<div className="next-step-container">
+  <a href="/docs/practice" className="button button--primary button--lg">
+    继续学习实践项目 →
+  </a>
+</div>
