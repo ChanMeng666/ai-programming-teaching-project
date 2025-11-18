@@ -78,7 +78,19 @@ const config = {
   // 国际化配置 - 设置为中文
   i18n: {
     defaultLocale: 'zh-Hans',
-    locales: ['zh-Hans'],
+    locales: ['zh-Hans', 'en'],
+    localeConfigs: {
+      'zh-Hans': {
+        label: '简体中文',
+        direction: 'ltr',
+        htmlLang: 'zh-Hans',
+      },
+      en: {
+        label: 'English',
+        direction: 'ltr',
+        htmlLang: 'en-US',
+      },
+    },
   },
 
   presets: [
@@ -241,6 +253,11 @@ const config = {
               '2025-summer': {label: '2025年夏季她行活动'},
               '2024-winter': {label: '2024年冬季她行活动'},
             },
+          },
+          {
+            type: 'localeDropdown',
+            position: 'right',
+            dropdownItemsAfter: [],
           },
           {
             href: 'https://github.com/ChanMeng666/ai-programming-teaching-project',
