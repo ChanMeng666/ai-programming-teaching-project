@@ -1,0 +1,507 @@
+---
+title: Mermaid 基础教程
+sidebar_position: 2
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import CodeBlock from '@theme/CodeBlock';
+import Admonition from '@theme/Admonition';
+
+# Mermaid 基础教程
+
+## 📚 什么是 Mermaid？
+
+Mermaid 是一个基于文本的图表生成工具，通过简单的文本描述就能生成各种专业图表。它的核心理念是"代码即图表"，让图表的创建和维护变得像编写代码一样简单。
+
+### 核心优势
+
+- **版本控制友好**：纯文本格式，可以使用 Git 管理
+- **易于维护**：修改图表只需编辑文本
+- **平台通用**：支持 GitHub、GitLab、Notion、Obsidian 等多个平台
+- **实时预览**：编写即可见，所见即所得
+- **无需设计技能**：专注于内容，样式自动处理
+
+## 🛠️ 环境配置
+
+<Tabs>
+  <TabItem value="vscode" label="VS Code" default>
+
+<div>
+
+#### 安装 Mermaid 插件
+
+<CodeBlock language="text">
+{`您：请帮我在 VS Code 中配置 Mermaid 环境
+
+Gemini：我来帮您配置 VS Code 的 Mermaid 开发环境。
+
+📦 需要安装的扩展：
+
+1. Mermaid Preview
+   - 扩展 ID: bierner.markdown-mermaid
+   - 功能：在 Markdown 中预览 Mermaid 图表
+
+2. Mermaid Editor
+   - 扩展 ID: tomoyukim.vscode-mermaid-editor
+   - 功能：专门的 Mermaid 编辑器
+
+安装命令：
+code --install-extension bierner.markdown-mermaid
+code --install-extension tomoyukim.vscode-mermaid-editor
+
+✅ 配置完成！现在您可以：
+- 在 .md 文件中使用 \`\`\`mermaid 代码块
+- 使用 Ctrl+Shift+V 预览图表
+- 右键选择 "Preview Mermaid" 查看图表`}
+</CodeBlock>
+
+</div>
+
+  </TabItem>
+  <TabItem value="online" label="在线编辑器">
+
+<div>
+
+#### Mermaid Live Editor
+
+访问 [Mermaid Live Editor](https://mermaid.live) 即可开始使用，无需任何配置。
+
+特点：
+- 实时预览
+- 导出 SVG/PNG
+- 分享链接
+- 主题切换
+
+</div>
+
+  </TabItem>
+  <TabItem value="github" label="GitHub">
+
+<div>
+
+#### GitHub 原生支持
+
+GitHub 自动渲染 Mermaid 代码块，只需在 Markdown 中使用：
+
+<CodeBlock language="markdown">
+{`\`\`\`mermaid
+graph TD
+    A[开始] --> B[处理]
+    B --> C[结束]
+\`\`\``}
+</CodeBlock>
+
+</div>
+
+  </TabItem>
+</Tabs>
+
+## 📊 流程图（Flowchart）
+
+流程图是最常用的图表类型，用于展示过程、算法或工作流程。
+
+### 基础语法
+
+<div className="syntax-section">
+
+#### 图表方向
+
+<CodeBlock language="mermaid">
+{`graph TD  %% Top Down - 从上到下
+graph LR  %% Left to Right - 从左到右  
+graph BT  %% Bottom to Top - 从下到上
+graph RL  %% Right to Left - 从右到左`}
+</CodeBlock>
+
+#### 节点形状
+
+<CodeBlock language="mermaid">
+{`graph LR
+    A[矩形节点]
+    B(圆角矩形)
+    C([体育场形])
+    D[[子程序形]]
+    E[(数据库形)]
+    F((圆形))
+    G{菱形判断}
+    H{{六边形}}
+    I[/平行四边形/]
+    J[\反向平行四边形\]`}
+</CodeBlock>
+
+```mermaid
+graph LR
+    A[矩形节点]
+    B(圆角矩形)
+    C([体育场形])
+    D[[子程序形]]
+    E[(数据库形)]
+    F((圆形))
+    G{菱形判断}
+    H{{六边形}}
+    I[/平行四边形/]
+    J[\反向平行四边形\]
+```
+
+#### 连接线样式
+
+<CodeBlock language="mermaid">
+{`graph LR
+    A --> B     %% 实线箭头
+    C --- D     %% 实线
+    E -.-> F    %% 虚线箭头
+    G -.- H     %% 虚线
+    I ==> J     %% 粗线箭头
+    K === L     %% 粗线`}
+</CodeBlock>
+
+```mermaid
+graph LR
+    A --> B
+    C --- D
+    E -.-> F
+    G -.- H
+    I ==> J
+    K === L
+```
+
+</div>
+
+### 实战示例
+
+#### 用户登录流程
+
+<CodeBlock language="mermaid">
+{`graph TD
+    A[开始] --> B[访问登录页]
+    B --> C{输入凭证}
+    C --> D{验证信息}
+    D -->|成功| E[进入系统]
+    D -->|失败| F[显示错误]
+    F --> C
+    E --> G[结束]`}
+</CodeBlock>
+
+```mermaid
+graph TD
+    A[开始] --> B[访问登录页]
+    B --> C{输入凭证}
+    C --> D{验证信息}
+    D -->|成功| E[进入系统]
+    D -->|失败| F[显示错误]
+    F --> C
+    E --> G[结束]
+```
+
+<Admonition type="tip" title="AI 辅助创建">
+使用 Gemini CLI 可以通过自然语言快速生成流程图：
+
+<CodeBlock language="text">
+{`您：帮我生成一个订单处理流程图，包括下单、支付、发货、收货
+
+Gemini：我来为您生成订单处理流程图：
+
+\`\`\`mermaid
+graph TD
+    Start[客户访问商城] --> Browse[浏览商品]
+    Browse --> AddCart[加入购物车]
+    AddCart --> Checkout{结算}
+    Checkout --> Payment[选择支付方式]
+    Payment --> Pay{支付}
+    Pay -->|成功| OrderConfirm[订单确认]
+    Pay -->|失败| PayError[支付失败]
+    PayError --> Payment
+    OrderConfirm --> Warehouse[仓库处理]
+    Warehouse --> Ship[发货]
+    Ship --> Transit[运输中]
+    Transit --> Deliver{签收}
+    Deliver -->|成功| Complete[订单完成]
+    Deliver -->|失败| Return[退货流程]
+    Complete --> End[结束]
+\`\`\``}
+</CodeBlock>
+</Admonition>
+
+## 🔄 时序图（Sequence Diagram）
+
+时序图用于展示对象之间的交互顺序，特别适合描述系统组件间的通信过程。
+
+### 基础语法
+
+<CodeBlock language="mermaid">
+{`sequenceDiagram
+    participant A as Alice
+    participant B as Bob
+    
+    A->>B: 实线箭头消息
+    B-->>A: 虚线箭头响应
+    A->>+B: 激活 B
+    B->>-A: 停用 B
+    
+    Note over A: 单个参与者注释
+    Note over A,B: 跨参与者注释`}
+</CodeBlock>
+
+```mermaid
+sequenceDiagram
+    participant A as Alice
+    participant B as Bob
+    
+    A->>B: 实线箭头消息
+    B-->>A: 虚线箭头响应
+    A->>+B: 激活 B
+    B->>-A: 停用 B
+    
+    Note over A: 单个参与者注释
+    Note over A,B: 跨参与者注释
+```
+
+### 高级特性
+
+#### 循环和条件
+
+<CodeBlock language="mermaid">
+{`sequenceDiagram
+    participant U as 用户
+    participant S as 服务器
+    participant D as 数据库
+    
+    U->>S: 登录请求
+    
+    alt 凭证正确
+        S->>D: 查询用户信息
+        D-->>S: 返回用户数据
+        S-->>U: 登录成功
+    else 凭证错误
+        S-->>U: 登录失败
+    end
+    
+    loop 每5秒
+        U->>S: 心跳检测
+        S-->>U: 在线状态
+    end`}
+</CodeBlock>
+
+```mermaid
+sequenceDiagram
+    participant U as 用户
+    participant S as 服务器
+    participant D as 数据库
+    
+    U->>S: 登录请求
+    
+    alt 凭证正确
+        S->>D: 查询用户信息
+        D-->>S: 返回用户数据
+        S-->>U: 登录成功
+    else 凭证错误
+        S-->>U: 登录失败
+    end
+    
+    loop 每5秒
+        U->>S: 心跳检测
+        S-->>U: 在线状态
+    end
+```
+
+### 实战示例：API 调用流程
+
+<CodeBlock language="mermaid">
+{`sequenceDiagram
+    participant C as 客户端
+    participant G as API网关
+    participant A as 认证服务
+    participant B as 业务服务
+    participant D as 数据库
+    
+    C->>G: HTTP请求 + Token
+    G->>A: 验证Token
+    A-->>G: Token有效
+    G->>B: 转发请求
+    B->>D: 查询数据
+    D-->>B: 返回数据
+    B-->>G: 业务响应
+    G-->>C: HTTP响应`}
+</CodeBlock>
+
+```mermaid
+sequenceDiagram
+    participant C as 客户端
+    participant G as API网关
+    participant A as 认证服务
+    participant B as 业务服务
+    participant D as 数据库
+    
+    C->>G: HTTP请求 + Token
+    G->>A: 验证Token
+    A-->>G: Token有效
+    G->>B: 转发请求
+    B->>D: 查询数据
+    D-->>B: 返回数据
+    B-->>G: 业务响应
+    G-->>C: HTTP响应
+```
+
+## 🎨 样式和主题
+
+### 自定义节点样式
+
+<CodeBlock language="mermaid">
+{`graph TD
+    A[开始]:::startClass
+    B[处理]:::processClass
+    C[结束]:::endClass
+    
+    A --> B --> C
+    
+    classDef startClass fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+    classDef processClass fill:#fff3e0,stroke:#e65100,stroke-width:2px
+    classDef endClass fill:#e8f5e9,stroke:#1b5e20,stroke-width:2px`}
+</CodeBlock>
+
+```mermaid
+graph TD
+    A[开始]:::startClass
+    B[处理]:::processClass
+    C[结束]:::endClass
+    
+    A --> B --> C
+    
+    classDef startClass fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+    classDef processClass fill:#fff3e0,stroke:#e65100,stroke-width:2px
+    classDef endClass fill:#e8f5e9,stroke:#1b5e20,stroke-width:2px
+```
+
+### 主题配置
+
+<Tabs>
+  <TabItem value="default" label="默认主题" default>
+
+<CodeBlock language="mermaid">
+{`%%{init: {'theme':'default'}}%%
+graph TD
+    A[默认主题] --> B[清晰简洁]
+    B --> C[适合大多数场景]`}
+</CodeBlock>
+
+  </TabItem>
+  <TabItem value="dark" label="暗色主题">
+
+<CodeBlock language="mermaid">
+{`%%{init: {'theme':'dark'}}%%
+graph TD
+    A[暗色主题] --> B[适合深色背景]
+    B --> C[减少眼部疲劳]`}
+</CodeBlock>
+
+  </TabItem>
+  <TabItem value="forest" label="森林主题">
+
+<CodeBlock language="mermaid">
+{`%%{init: {'theme':'forest'}}%%
+graph TD
+    A[森林主题] --> B[绿色调]
+    B --> C[自然清新]`}
+</CodeBlock>
+
+  </TabItem>
+</Tabs>
+
+## 💡 最佳实践
+
+<div className="best-practices">
+  <div className="practice-card">
+    <h4>📝 命名规范</h4>
+    <ul>
+      <li>使用有意义的节点ID</li>
+      <li>保持标签简洁明了</li>
+      <li>避免过长的文本</li>
+    </ul>
+  </div>
+  <div className="practice-card">
+    <h4>🎯 布局优化</h4>
+    <ul>
+      <li>选择合适的图表方向</li>
+      <li>控制图表复杂度</li>
+      <li>合理使用子图分组</li>
+    </ul>
+  </div>
+  <div className="practice-card">
+    <h4>🎨 视觉设计</h4>
+    <ul>
+      <li>保持样式一致性</li>
+      <li>使用颜色区分类别</li>
+      <li>避免过度装饰</li>
+    </ul>
+  </div>
+</div>
+
+## 🚀 下一步
+
+恭喜您掌握了 Mermaid 的基础知识！接下来可以：
+
+<div className="next-steps">
+  <a href="./mermaid-advanced" className="next-button">
+    学习 Mermaid 高级特性 →
+  </a>
+  <a href="./ai-assistance" className="next-button secondary">
+    探索 AI 辅助创作 →
+  </a>
+</div>
+
+<style>{`
+.syntax-section {
+  background: #f8fafc;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin: 1rem 0;
+}
+
+.best-practices {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.practice-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.practice-card h4 {
+  color: #1e3a8a;
+  margin-bottom: 1rem;
+}
+
+.next-steps {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin: 3rem 0;
+}
+
+.next-button {
+  display: inline-block;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: transform 0.3s ease;
+}
+
+.next-button:hover {
+  transform: translateY(-2px);
+  color: white;
+}
+
+.next-button.secondary {
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  color: #1e3a8a;
+}
+`}</style>

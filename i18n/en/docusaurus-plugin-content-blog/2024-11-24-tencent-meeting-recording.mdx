@@ -1,0 +1,209 @@
+---
+slug: tencent-meeting-recording-download
+title: Complete Guide to Downloading Tencent Meeting Recordings
+authors: [chanmeng]
+tags: [tutorial, Tencent Meeting, video download]
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Tencent Meeting Recording Download Tutorial
+
+:::tip 📝 Introduction
+This tutorial will teach you how to download Tencent Meeting recording videos. The entire process doesn't require programming knowledge - just follow the steps.
+:::
+
+{/* truncate */}
+
+## 🔧 Prerequisites
+
+<div className="prerequisite-box">
+
+You will need:
+- 💻 A computer (Windows system)
+- 🌐 Google Chrome browser
+- ⚙️ Git Bash software (we'll show you how to install it)
+
+</div>
+
+## 📝 Detailed Steps
+
+### Step 1: Install Necessary Software
+
+<div className="step-box">
+
+1. If you haven't installed Git Bash yet:
+   - Visit the official website: [Git Download Page](https://git-scm.com/downloads)
+   - Click "Download for Windows"
+   - Double-click the installer after download completes
+   - Click "Next" through the installation using default settings
+
+</div>
+
+### Step 2: Get Video Download Information
+
+<div className="steps-container">
+
+1. Open the Tencent Meeting recording link in Google Chrome
+2. Click play on the video and wait for it to start playing
+3. Press the `F12` key on your keyboard (some laptops may need `Fn + F12`)
+4. Find and click the "Network" tab at the top of the developer tools window
+5. Find and click the "Media" option under Network
+6. Refresh the page and start playing the video again
+7. Wait a few seconds and find the file ending with `.mp4`
+8. Right-click on this `.mp4` file
+9. Select "Copy" → "Copy as cURL(bash)"
+
+</div>
+
+### Step 3: Modify the Download Command
+
+<Tabs>
+  <TabItem value="before" label="Before Modification" default>
+    ```bash
+    curl 'https://example.com/video.mp4' \
+    -H 'range: bytes=14200808-314114094' \
+    -H 'if-range: "17c5ccf6d75f9bccce2a71f5a32dbea4-3"' \
+    -H 'accept: */*' \
+    ```
+  </TabItem>
+  <TabItem value="after" label="After Modification">
+    ```bash
+    curl 'https://example.com/video.mp4' \
+    -H 'accept: */*' \
+    --output /d/meeting_video.mp4
+    ```
+  </TabItem>
+</Tabs>
+
+:::warning Important Note
+You must delete the lines containing `range:` and `if-range:` - this is the key step to ensure you download the complete video!
+:::
+
+### Step 4: Download the Video
+
+1. Open Git Bash (find it in the Start menu)
+2. Paste the modified command
+3. Press Enter to execute
+4. Wait for the download to complete
+
+Download process example:
+
+![Tencent Meeting Video Download Process Screenshot](/screenshot/2024-11-24-tencent-meeting-recording.png)
+
+## ❓ Frequently Asked Questions
+
+<details>
+<summary>1. Why is my downloaded video incomplete?</summary>
+
+- The most likely reason is that you didn't delete the range field
+- Please go back to step 3 and make sure you deleted all range-related lines
+- Get the download command again and start over from the beginning
+
+</details>
+
+<details>
+<summary>2. What if I can't find the range field?</summary>
+
+- Carefully check if the copied command contains `range:` or `if-range:`
+- If you really can't find it, it may not need to be deleted - just add the save path
+- If unsure, send the command to a tech-savvy friend for help
+
+</details>
+
+<details>
+<summary>3. How to change the save location?</summary>
+
+You can modify the `--output` parameter:
+```bash
+# D drive root directory
+--output /d/video-name.mp4
+
+# Videos folder on D drive
+--output /d/Videos/video-name.mp4
+
+# Desktop
+--output /c/Users/your-username/Desktop/video-name.mp4
+```
+
+</details>
+
+## ⚠️ Important Notes
+
+<div className="notice-box">
+
+- Ensure you have enough disk space
+- Don't close Git Bash during the download
+- Keep your network connection stable
+- Don't shut down or sleep your computer before download completes
+- If download speed is very slow, try getting the download command again
+
+</div>
+
+## 🎯 Advanced Tips
+
+<div className="tips-grid">
+
+- 📁 Create a dedicated folder for downloaded videos
+- 📝 Give video files meaningful names
+- ✅ Verify the video plays correctly after download
+- 💾 Back up important video files promptly
+
+</div>
+
+## 📌 Final Reminder
+
+:::caution Important
+1. Please respect video copyrights and don't distribute downloaded videos without permission
+2. Downloaded videos are for personal study use only
+3. Back up important videos promptly
+4. If you encounter problems, start over from step 1
+5. Special emphasis: Don't forget to delete the range field - this is the most critical step!
+:::
+
+export const styles = `
+.prerequisite-box {
+  background: #f8f9fa;
+  padding: 1rem;
+  border-radius: 8px;
+  margin: 1rem 0;
+  border-left: 4px solid #0366d6;
+}
+
+.step-box {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin: 1rem 0;
+}
+
+.steps-container {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin: 1rem 0;
+}
+
+.notice-box {
+  background: #fff3cd;
+  padding: 1rem;
+  border-radius: 8px;
+  margin: 1rem 0;
+  border-left: 4px solid #ffc107;
+}
+
+.tips-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.tips-grid > * {
+  background: #e9ecef;
+  padding: 1rem;
+  border-radius: 8px;
+}
+`;

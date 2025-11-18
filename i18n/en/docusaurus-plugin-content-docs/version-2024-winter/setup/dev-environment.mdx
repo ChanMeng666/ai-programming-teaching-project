@@ -1,0 +1,131 @@
+---
+sidebar_position: 4
+title: Configure Development Environment
+description: Configure Node.js, package managers, and other development environment components
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Configure Development Environment
+
+## Install Node.js Environment
+
+### Install Node.js Using nvm
+
+<div className="installation-steps">
+
+#### 1. Install nvm
+```bash
+# Enter the following command and press Enter
+curl -o nvm-setup.exe https://github.com/coreybutler/nvm-windows/releases/download/1.1.11/nvm-setup.exe
+```
+
+1. Wait for download to complete
+2. Find the downloaded nvm-setup.exe (usually in Downloads folder)
+3. Double-click to run the installer
+4. Select all default settings and click Next throughout
+5. Close Cursor after installation completes
+6. Reopen Cursor and terminal
+
+#### 2. Install Node.js
+```bash
+# Install the latest stable version of Node.js
+nvm install --lts
+
+# Use the installed version
+nvm use --lts
+
+# Verify installation was successful
+node --version
+```
+
+</div>
+
+## Install Package Manager
+
+### npm and yarn Configuration
+
+<div className="package-manager">
+
+#### Install yarn
+```bash
+# Install yarn
+npm install -g yarn
+
+# Install npx tool
+npm install -g npx
+```
+
+#### Configure Registry Mirrors
+```bash
+# Set npm registry
+npm config set registry https://registry.npmmirror.com
+
+# Set yarn registry
+yarn config set registry https://registry.npmmirror.com
+```
+
+</div>
+
+## Common Issues Resolution
+
+<div className="troubleshooting">
+
+### Permission Issues
+- Run Cursor as administrator
+- Right-click Cursor icon → Select "Run as administrator"
+
+### Network Issues
+1. Check if VPN tool is working properly
+2. Verify you can access the GitHub website
+3. Try clearing cache:
+```bash
+# Clear npm cache
+npm cache clean --force
+
+# Clear yarn cache
+yarn cache clean
+```
+
+### Environment Verification
+```bash
+# Check Node.js version
+node --version
+
+# Check npm version
+npm --version
+
+# Check yarn version
+yarn --version
+
+# Check Git version
+git --version
+```
+
+</div>
+
+:::tip Important Notes
+- You must press Enter after typing each command to execute it
+- If a command appears stuck during execution, you can press `Ctrl+C` to interrupt
+- To paste commands into terminal, use `Ctrl+V` or right-click and select "Paste"
+- Avoid Chinese characters in paths
+- Make sure each command completes before entering the next one
+:::
+
+export const styles = {
+  installationSteps: {
+    backgroundColor: '#f6f8fa',
+    padding: '1rem',
+    borderRadius: '8px'
+  },
+  packageManager: {
+    borderLeft: '3px solid #1a73e8',
+    paddingLeft: '1rem'
+  },
+  troubleshooting: {
+    backgroundColor: '#f0f7ff',
+    padding: '1rem',
+    borderRadius: '8px'
+  }
+};

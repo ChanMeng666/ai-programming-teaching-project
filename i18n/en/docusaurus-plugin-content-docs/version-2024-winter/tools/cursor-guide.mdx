@@ -1,0 +1,245 @@
+---
+sidebar_position: 1
+title: Cursor Usage Guide
+description: Learn how to use Cursor editor for AI-assisted development
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Cursor Usage Guide
+
+## Introduction to Cursor
+
+Cursor is a revolutionary code editor that integrates powerful AI features designed to improve developer productivity.
+
+<div className="feature-grid">
+
+### 🤖 AI-Assisted Coding
+- Real-time code completion
+- Error detection and fix suggestions
+- Intelligent code generation
+
+### 🔄 Code Explanation and Refactoring
+- Explain complex code
+- Provide refactoring suggestions
+- Code optimization recommendations
+
+### 🌐 Multi-Language Support
+- Support for mainstream programming languages
+- Framework-aware suggestions
+- Syntax highlighting
+
+### ⚡ Integrated Development Environment
+- Built-in terminal
+- Git integration
+- Debugging tools
+
+</div>
+
+## Installation and Setup
+
+### Download and Installation Steps
+
+<div className="step-by-step">
+
+#### 1. Download the Installer
+
+Visit [Cursor official website](https://cursor.sh/) and click the "Download" button.
+
+#### 2. Run the Installer
+
+Choose the appropriate version for your operating system:
+
+<Tabs>
+  <TabItem value="windows" label="Windows" default>
+    ```bash
+    # Run the downloaded .exe file
+    cursor-setup.exe
+    ```
+  </TabItem>
+  <TabItem value="mac" label="macOS">
+    ```bash
+    # Open the .dmg file and drag to Applications folder
+    # Or install using Homebrew
+    brew install --cask cursor
+    ```
+  </TabItem>
+  <TabItem value="linux" label="Linux">
+    ```bash
+    # Download the .AppImage file
+    chmod +x cursor.AppImage
+    ./cursor.AppImage
+    ```
+  </TabItem>
+</Tabs>
+
+#### 3. Initial Configuration
+
+1. Log in or create an account on first run
+2. Choose your preferred theme and font
+3. Configure commonly used programming languages
+4. Set up AI features (may require API key)
+
+</div>
+
+## Common Keyboard Shortcuts
+
+:::tip Key to Efficiency
+Mastering these shortcuts can significantly improve your development efficiency. It's recommended to print them out and keep them handy until you're fully familiar.
+:::
+
+### File Operation Shortcuts
+
+<div className="shortcut-table">
+
+| Operation | Windows/Linux | macOS |
+|------|--------------|-------|
+| New File | `Ctrl + N` | `Cmd + N` |
+| Open File | `Ctrl + O` | `Cmd + O` |
+| Save File | `Ctrl + S` | `Cmd + S` |
+| Close File | `Ctrl + W` | `Cmd + W` |
+
+</div>
+
+### Editing Operation Shortcuts
+
+<div className="shortcut-table">
+
+| Operation | Windows/Linux | macOS |
+|------|--------------|-------|
+| Copy | `Ctrl + C` | `Cmd + C` |
+| Cut | `Ctrl + X` | `Cmd + X` |
+| Paste | `Ctrl + V` | `Cmd + V` |
+| Undo | `Ctrl + Z` | `Cmd + Z` |
+| Redo | `Ctrl + Y` | `Cmd + Shift + Z` |
+| Find | `Ctrl + F` | `Cmd + F` |
+| Replace | `Ctrl + H` | `Cmd + H` |
+
+</div>
+
+### AI Assistant Feature Shortcuts
+
+<div className="shortcut-table">
+
+| Operation | Windows/Linux | macOS |
+|------|--------------|-------|
+| Activate AI Assistant | `Ctrl + K` | `Cmd + K` |
+| AI Code Comment | `Ctrl + /` | `Cmd + /` |
+| AI Code Explanation | `Alt + [` | `Option + [` |
+| AI Optimization Suggestions | `Alt + ]` | `Option + ]` |
+
+</div>
+
+## Collaborative Development with AI
+
+### Code Completion and Suggestions
+
+<div className="code-example">
+
+#### Auto Code Completion Example
+
+```python
+def calculate_average(numbers):
+    # Start typing 'return', AI will provide complete average calculation code
+    return sum(numbers) / len(numbers)
+```
+
+:::note Usage Tips
+- Use Tab or Enter key to accept suggestions
+- Use up/down arrow keys to switch between multiple suggestions
+- Press Esc to cancel suggestions
+:::
+
+</div>
+
+### Code Explanation and Refactoring
+
+<Tabs>
+  <TabItem value="original" label="Original Code">
+    ```python
+    def fibonacci(n):
+        if n <= 1:
+            return n
+        else:
+            return fibonacci(n-1) + fibonacci(n-2)
+    ```
+  </TabItem>
+  <TabItem value="explanation" label="AI Explanation">
+    ```
+    This is a recursive implementation of the Fibonacci sequence function:
+    1. Base case: When n<=1, directly return n
+    2. Recursive case: Return the sum of the previous two numbers
+    3. Note: This implementation has a time complexity of O(2^n)
+    ```
+  </TabItem>
+  <TabItem value="optimized" label="AI Optimization Suggestion">
+    ```python
+    def fibonacci(n):
+        if n <= 1:
+            return n
+        a, b = 0, 1
+        for _ in range(n):
+            a, b = b, a + b
+        return a
+    ```
+  </TabItem>
+</Tabs>
+
+### Error Diagnosis and Fixing
+
+<div className="error-example">
+
+#### Example: Syntax Error Fix
+
+```python
+# Code with syntax error
+def greet(name)
+    print("Hello, " + name + "!")
+
+# Cursor will detect the missing colon and provide a fix suggestion:
+def greet(name):
+    print("Hello, " + name + "!")
+```
+
+</div>
+
+### Generate Code Using Natural Language
+
+<div className="nlp-example">
+
+#### Example: Generate Code Through Comments
+
+```python
+# Create a function that takes a list of strings and returns all strings with length greater than 5
+```
+
+Press `Ctrl + K`, and AI will generate:
+
+```python
+def filter_long_strings(string_list):
+    return [s for s in string_list if len(s) > 5]
+```
+
+</div>
+
+export const styles = {
+  featureGrid: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+    gap: '1rem',
+    marginBottom: '2rem'
+  },
+  stepByStep: {
+    borderLeft: '3px solid #1a73e8',
+    paddingLeft: '1rem'
+  },
+  shortcutTable: {
+    marginBottom: '1.5rem'
+  },
+  codeExample: {
+    backgroundColor: '#f6f8fa',
+    padding: '1rem',
+    borderRadius: '8px'
+  }
+};
