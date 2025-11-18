@@ -1,5 +1,5 @@
 ---
-title: AI 辅助图表创作
+title: AI-Assisted Diagram Creation
 sidebar_position: 6
 ---
 
@@ -8,24 +8,24 @@ import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
 import Admonition from '@theme/Admonition';
 
-# AI 辅助图表创作
+# AI-Assisted Diagram Creation
 
-## 🤖 使用 Gemini CLI 高效创建图表
+## 🤖 Efficiently Creating Diagrams with Gemini CLI
 
-### 自然语言生成图表
+### Natural Language Diagram Generation
 
 <Tabs>
-  <TabItem value="describe" label="描述生成" default>
+  <TabItem value="describe" label="Description Generation" default>
 
 <CodeBlock language="text">
-{`您：我需要一个展示用户注册流程的图表，包括：
-1. 用户填写表单
-2. 邮箱验证
-3. 手机验证（可选）
-4. 创建账户
-5. 发送欢迎邮件
+{`You: I need a diagram showing the user registration process, including:
+1. User fills out form
+2. Email verification
+3. Phone verification (optional)
+4. Create account
+5. Send welcome email
 
-Gemini：我来为您生成用户注册流程图：
+Gemini: I'll generate a user registration flowchart for you:
 
 \`\`\`mermaid
 graph TD
@@ -50,21 +50,21 @@ graph TD
     Welcome --> Success[注册成功]
 \`\`\`
 
-这个流程图清晰展示了完整的注册流程，包括错误处理和可选步骤。`}
+This flowchart clearly shows the complete registration process, including error handling and optional steps.`}
 </CodeBlock>
 
   </TabItem>
-  <TabItem value="optimize" label="优化现有图表">
+  <TabItem value="optimize" label="Optimize Existing Diagrams">
 
 <CodeBlock language="text">
-{`您：这是我的图表代码，请帮我优化布局和样式：
+{`You: This is my diagram code, please help me optimize the layout and style:
 graph LR
 A --> B
 B --> C
 C --> D
 D --> E
 
-Gemini：我来优化您的图表，增加可读性和美观度：
+Gemini: I'll optimize your diagram to improve readability and aesthetics:
 
 \`\`\`mermaid
 graph TB
@@ -72,33 +72,33 @@ graph TB
     B -->|数据收集| C[处理阶段]
     C -->|分析处理| D[验证阶段]
     D -->|质量检查| E[完成阶段]
-    
+
     style A fill:#e1f5fe,stroke:#01579b,stroke-width:2px
     style B fill:#fff3e0,stroke:#e65100,stroke-width:2px
     style C fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
     style D fill:#fff8e1,stroke:#f57f17,stroke-width:2px
     style E fill:#e8f5e9,stroke:#1b5e20,stroke-width:2px
-    
+
     classDef default font-size:16px;
 \`\`\`
 
-优化内容：
-1. 改为从上到下布局（TB），更符合流程阅读习惯
-2. 为每个节点添加描述性文字
-3. 在连接线上添加动作说明
-4. 使用不同颜色区分各阶段
-5. 统一字体大小提升可读性`}
+Optimizations:
+1. Changed to top-to-bottom layout (TB), better fits reading habits for processes
+2. Added descriptive text to each node
+3. Added action descriptions on connecting lines
+4. Used different colors to distinguish phases
+5. Unified font size to improve readability`}
 </CodeBlock>
 
   </TabItem>
-  <TabItem value="batch" label="批量生成">
+  <TabItem value="batch" label="Batch Generation">
 
 <CodeBlock language="text">
-{`您：我需要为 5 个不同的 API 端点生成时序图
+{`You: I need to generate sequence diagrams for 5 different API endpoints
 
-Gemini：我来为您批量生成 API 时序图：
+Gemini: I'll batch generate API sequence diagrams for you:
 
-1️⃣ 用户登录 API：
+1️⃣ User Login API:
 \`\`\`mermaid
 sequenceDiagram
     Client->>+API: POST /auth/login
@@ -109,7 +109,7 @@ sequenceDiagram
     API-->>-Client: JWT Token
 \`\`\`
 
-2️⃣ 获取用户信息 API：
+2️⃣ Get User Info API:
 \`\`\`mermaid
 sequenceDiagram
     Client->>+API: GET /users/{id}
@@ -123,7 +123,7 @@ sequenceDiagram
     API-->>-Client: 用户信息
 \`\`\`
 
-3️⃣ 创建订单 API：
+3️⃣ Create Order API:
 \`\`\`mermaid
 sequenceDiagram
     Client->>+API: POST /orders
@@ -137,7 +137,7 @@ sequenceDiagram
     API-->>-Client: 订单创建成功
 \`\`\`
 
-4️⃣ 更新产品 API：
+4️⃣ Update Product API:
 \`\`\`mermaid
 sequenceDiagram
     Client->>+API: PUT /products/{id}
@@ -152,7 +152,7 @@ sequenceDiagram
     API-->>-Client: 更新成功
 \`\`\`
 
-5️⃣ 删除评论 API：
+5️⃣ Delete Comment API:
 \`\`\`mermaid
 sequenceDiagram
     Client->>+API: DELETE /comments/{id}
@@ -169,17 +169,17 @@ sequenceDiagram
   </TabItem>
 </Tabs>
 
-## 📝 智能图表设计建议
+## 📝 Intelligent Diagram Design Recommendations
 
-### 根据内容推荐图表类型
+### Recommend Diagram Types Based on Content
 
 <CodeBlock language="text">
-{`您：我想展示系统各模块的依赖关系，应该用什么图表？
+{`You: I want to show the dependencies between system modules, what diagram should I use?
 
-Gemini：根据您要展示的系统模块依赖关系，我推荐以下几种图表类型：
+Gemini: Based on the system module dependencies you want to show, I recommend the following diagram types:
 
-🎯 最推荐：类图（Class Diagram）
-适合展示模块间的静态依赖关系
+🎯 Most Recommended: Class Diagram
+Suitable for showing static dependencies between modules
 
 \`\`\`mermaid
 classDiagram
@@ -193,30 +193,30 @@ classDiagram
     UIModule --> APIModule : calls
 \`\`\`
 
-🔄 备选1：流程图（带分组）
-适合展示模块层次和数据流向
+🔄 Alternative 1: Flowchart (with grouping)
+Suitable for showing module hierarchy and data flow
 
 \`\`\`mermaid
 graph TB
     subgraph "表现层"
         UI[UI Module]
     end
-    
+
     subgraph "业务层"
         API[API Module]
         Auth[Auth Module]
     end
-    
+
     subgraph "数据层"
         Data[Data Module]
         Cache[Cache Module]
         DB[DB Module]
     end
-    
+
     subgraph "基础层"
         Core[Core Module]
     end
-    
+
     UI --> API
     API --> Auth
     API --> Data
@@ -226,61 +226,61 @@ graph TB
     Data --> Core
 \`\`\`
 
-🏗️ 备选2：架构图（Draw.io）
-适合展示复杂的系统架构和部署关系
-- 使用容器分组相关模块
-- 用不同颜色表示不同层次
-- 添加图标增强可读性`}
+🏗️ Alternative 2: Architecture Diagram (Draw.io)
+Suitable for showing complex system architecture and deployment relationships
+- Use containers to group related modules
+- Use different colors for different layers
+- Add icons to enhance readability`}
 </CodeBlock>
 
-### AI 优化建议
+### AI Optimization Recommendations
 
 <div className="ai-suggestions">
   <div className="suggestion-card">
-    <h4>🎨 视觉优化</h4>
-    <p>AI 可以帮助：</p>
+    <h4>🎨 Visual Optimization</h4>
+    <p>AI can help with:</p>
     <ul>
-      <li>推荐配色方案</li>
-      <li>优化布局平衡</li>
-      <li>调整元素间距</li>
-      <li>选择合适字体</li>
+      <li>Recommending color schemes</li>
+      <li>Optimizing layout balance</li>
+      <li>Adjusting element spacing</li>
+      <li>Selecting appropriate fonts</li>
     </ul>
   </div>
   <div className="suggestion-card">
-    <h4>📊 内容优化</h4>
-    <p>AI 可以协助：</p>
+    <h4>📊 Content Optimization</h4>
+    <p>AI can assist with:</p>
     <ul>
-      <li>简化复杂流程</li>
-      <li>补充缺失步骤</li>
-      <li>优化文字描述</li>
-      <li>添加必要注释</li>
+      <li>Simplifying complex processes</li>
+      <li>Completing missing steps</li>
+      <li>Optimizing text descriptions</li>
+      <li>Adding necessary annotations</li>
     </ul>
   </div>
   <div className="suggestion-card">
-    <h4>🔧 技术优化</h4>
-    <p>AI 能够提供：</p>
+    <h4>🔧 Technical Optimization</h4>
+    <p>AI can provide:</p>
     <ul>
-      <li>最佳实践建议</li>
-      <li>性能优化方案</li>
-      <li>兼容性检查</li>
-      <li>导出格式建议</li>
+      <li>Best practice recommendations</li>
+      <li>Performance optimization solutions</li>
+      <li>Compatibility checking</li>
+      <li>Export format recommendations</li>
     </ul>
   </div>
 </div>
 
-## 🔄 图表转换和迁移
+## 🔄 Diagram Conversion and Migration
 
-### 不同格式间转换
+### Converting Between Different Formats
 
 <Tabs>
   <TabItem value="mermaid-to-drawio" label="Mermaid → Draw.io" default>
 
 <CodeBlock language="text">
-{`您：将这个 Mermaid 流程图转换为 Draw.io 格式的说明
+{`You: Convert this Mermaid flowchart to Draw.io format
 
-Gemini：我来帮您将 Mermaid 图表转换为 Draw.io：
+Gemini: I'll help you convert the Mermaid diagram to Draw.io:
 
-原始 Mermaid：
+Original Mermaid:
 \`\`\`mermaid
 graph TD
     A[开始] --> B{判断}
@@ -288,58 +288,58 @@ graph TD
     B -->|否| D[结束]
 \`\`\`
 
-Draw.io 实现步骤：
+Draw.io implementation steps:
 
-1. 创建元素：
-   - 拖入"圆角矩形"作为 A（开始）
-   - 拖入"菱形"作为 B（判断）
-   - 拖入"矩形"作为 C（执行）
-   - 拖入"圆角矩形"作为 D（结束）
+1. Create elements:
+   - Drag in "Rounded Rectangle" for A (Start)
+   - Drag in "Diamond" for B (Decision)
+   - Drag in "Rectangle" for C (Execute)
+   - Drag in "Rounded Rectangle" for D (End)
 
-2. 设置样式：
-   - A: 填充色 #e1f5fe，边框 #01579b
-   - B: 填充色 #fff3e0，边框 #e65100
-   - C: 填充色 #f3e5f5，边框 #4a148c
-   - D: 填充色 #e8f5e9，边框 #1b5e20
+2. Set styles:
+   - A: Fill color #e1f5fe, border #01579b
+   - B: Fill color #fff3e0, border #e65100
+   - C: Fill color #f3e5f5, border #4a148c
+   - D: Fill color #e8f5e9, border #1b5e20
 
-3. 添加连接：
-   - 选择"连接线"工具
-   - 从 A 连到 B
-   - 从 B 连到 C，双击添加标签"是"
-   - 从 B 连到 D，双击添加标签"否"
+3. Add connections:
+   - Select "Connector" tool
+   - Connect from A to B
+   - Connect from B to C, double-click to add label "Yes"
+   - Connect from B to D, double-click to add label "No"
 
-4. 布局调整：
-   - 选中所有元素
+4. Layout adjustment:
+   - Select all elements
    - Arrange → Layout → Vertical Tree
-   - 调整间距至合适位置`}
+   - Adjust spacing to appropriate positions`}
 </CodeBlock>
 
   </TabItem>
   <TabItem value="visio-to-mermaid" label="Visio → Mermaid">
 
 <CodeBlock language="text">
-{`您：如何将 Visio 图表转换为 Mermaid 代码？
+{`You: How do I convert Visio diagrams to Mermaid code?
 
-Gemini：将 Visio 图表转换为 Mermaid 的方法：
+Gemini: Methods for converting Visio diagrams to Mermaid:
 
-📋 手动转换步骤：
+📋 Manual conversion steps:
 
-1. 分析 Visio 图表结构：
-   - 识别节点类型（矩形、菱形、圆形等）
-   - 记录连接关系
-   - 提取文本标签
+1. Analyze Visio diagram structure:
+   - Identify node types (rectangle, diamond, circle, etc.)
+   - Record connection relationships
+   - Extract text labels
 
-2. 映射到 Mermaid 语法：
-   Visio 形状 → Mermaid 语法
-   - 矩形 → [文本]
-   - 菱形 → {文本}
-   - 圆形 → ((文本))
-   - 箭头 → -->
-   - 虚线箭头 → -.->
+2. Map to Mermaid syntax:
+   Visio shapes → Mermaid syntax
+   - Rectangle → [text]
+   - Diamond → {text}
+   - Circle → ((text))
+   - Arrow → -->
+   - Dashed arrow → -.->
 
-3. 示例转换：
-   Visio: 开始(矩形) → 处理(矩形) → 判断(菱形)
-   
+3. Conversion example:
+   Visio: Start(rectangle) → Process(rectangle) → Decision(diamond)
+
    Mermaid:
    \`\`\`mermaid
    graph LR
@@ -347,28 +347,28 @@ Gemini：将 Visio 图表转换为 Mermaid 的方法：
        Process --> Decision{判断}
    \`\`\`
 
-🤖 AI 辅助转换：
-您可以：
-1. 截图 Visio 图表
-2. 发送给我描述图表内容
-3. 我帮您生成对应的 Mermaid 代码
+🤖 AI-assisted conversion:
+You can:
+1. Screenshot the Visio diagram
+2. Send it to me with a description
+3. I'll generate the corresponding Mermaid code
 
-⚙️ 自动化工具：
-- vsdx2svg：先转 SVG，再手动转 Mermaid
-- 使用 Draw.io 作为中间格式`}
+⚙️ Automation tools:
+- vsdx2svg: Convert to SVG first, then manually to Mermaid
+- Use Draw.io as an intermediate format`}
 </CodeBlock>
 
   </TabItem>
 </Tabs>
 
-## 🚀 高级 AI 技巧
+## 🚀 Advanced AI Techniques
 
-### 复杂系统架构生成
+### Complex System Architecture Generation
 
 <CodeBlock language="text">
-{`您：为电商平台生成完整的微服务架构图，包括所有关键组件
+{`You: Generate a complete microservices architecture diagram for an e-commerce platform, including all key components
 
-Gemini：我来为您生成完整的电商微服务架构图：
+Gemini: I'll generate a complete e-commerce microservices architecture diagram for you:
 
 \`\`\`mermaid
 graph TB
@@ -469,29 +469,29 @@ graph TB
     class Monitor,Log,Trace,Alert infra
 \`\`\`
 
-架构特点：
-1. 分层清晰：6层架构，职责分明
-2. 服务解耦：通过消息队列实现异步通信
-3. 高可用：多级缓存、服务注册发现
-4. 可观测：完整的监控、日志、链路追踪
-5. 可扩展：微服务架构，独立部署扩容`}
+Architecture Features:
+1. Clear layering: 6-layer architecture with distinct responsibilities
+2. Service decoupling: Asynchronous communication via message queues
+3. High availability: Multi-level caching, service discovery
+4. Observability: Complete monitoring, logging, tracing
+5. Scalability: Microservices architecture, independent deployment and scaling`}
 </CodeBlock>
 
-### 自动文档生成
+### Automatic Documentation Generation
 
-<Admonition type="tip" title="AI 批量生成文档图表">
-使用 Gemini CLI 可以根据代码或文档自动生成相应的图表：
+<Admonition type="tip" title="AI Batch Generation of Documentation Diagrams">
+Use Gemini CLI to automatically generate diagrams from code or documentation:
 
 <CodeBlock language="text">
-{`您：根据这个 API 文档生成所有接口的时序图
+{`You: Generate sequence diagrams for all endpoints based on this API documentation
 
-Gemini：我来为您的 API 文档批量生成时序图：
+Gemini: I'll batch generate sequence diagrams for your API documentation:
 
-# API 时序图文档
+# API Sequence Diagram Documentation
 
-## 1. 用户认证模块
+## 1. User Authentication Module
 
-### 1.1 注册接口
+### 1.1 Registration Endpoint
 \`\`\`mermaid
 sequenceDiagram
     participant C as Client
@@ -512,17 +512,17 @@ sequenceDiagram
     A-->>C: 201 Created
 \`\`\`
 
-### 1.2 登录接口
-[继续生成其他接口...]
+### 1.2 Login Endpoint
+[Continue generating other endpoints...]
 
-## 自动生成脚本
-您可以使用以下脚本批量生成：
+## Automation Scripts
+You can use the following scripts for batch generation:
 
 \`\`\`javascript
-// 读取 OpenAPI 规范
+// Read OpenAPI specification
 const spec = require('./openapi.json');
 
-// 为每个端点生成 Mermaid 图表
+// Generate Mermaid diagrams for each endpoint
 Object.keys(spec.paths).forEach(path => {
   Object.keys(spec.paths[path]).forEach(method => {
     const operation = spec.paths[path][method];
@@ -533,71 +533,71 @@ Object.keys(spec.paths).forEach(path => {
 </CodeBlock>
 </Admonition>
 
-## 💡 提示词工程
+## 💡 Prompt Engineering
 
-### 高效提示词模板
+### Efficient Prompt Templates
 
 <div className="prompt-templates">
   <div className="template">
-    <h4>📊 流程图生成</h4>
+    <h4>📊 Flowchart Generation</h4>
     <CodeBlock language="text">
-{`生成一个[主题]的流程图，包括：
-1. [步骤1]
-2. [步骤2]
-3. [判断条件]
-4. [异常处理]
-要求：
-- 使用 Mermaid 语法
-- 包含开始和结束节点
-- 标注关键判断点
-- 添加必要的循环`}
+{`Generate a flowchart for [topic], including:
+1. [Step 1]
+2. [Step 2]
+3. [Decision conditions]
+4. [Error handling]
+Requirements:
+- Use Mermaid syntax
+- Include start and end nodes
+- Mark key decision points
+- Add necessary loops`}
     </CodeBlock>
   </div>
-  
+
   <div className="template">
-    <h4>🏗️ 架构图设计</h4>
+    <h4>🏗️ Architecture Diagram Design</h4>
     <CodeBlock language="text">
-{`设计一个[系统名称]的架构图：
-技术栈：[列出技术]
-规模：[用户量/QPS]
-要求：
-- 分层展示
-- 标注技术选型
-- 显示数据流向
-- 包含冗余设计`}
+{`Design an architecture diagram for [system name]:
+Tech stack: [list technologies]
+Scale: [user volume/QPS]
+Requirements:
+- Layered display
+- Mark technology choices
+- Show data flow
+- Include redundancy design`}
     </CodeBlock>
   </div>
-  
+
   <div className="template">
-    <h4>🔄 优化请求</h4>
+    <h4>🔄 Optimization Request</h4>
     <CodeBlock language="text">
-{`优化这个图表：
-[粘贴现有代码]
-优化方向：
-- 提升可读性
-- 优化布局
-- 统一样式
-- 添加缺失信息`}
+{`Optimize this diagram:
+[paste existing code]
+Optimization directions:
+- Improve readability
+- Optimize layout
+- Unify style
+- Add missing information`}
     </CodeBlock>
   </div>
 </div>
 
-## 🎯 实战案例
+## 🎯 Practical Case Studies
 
-### 案例：从需求到图表
+### Case Study: From Requirements to Diagrams
 
 <CodeBlock language="text">
-{`需求描述：
-"我们需要一个用户下单的完整流程，从选择商品到收货评价"
+{`Requirement Description:
+"We need a complete user order process, from selecting products to receiving and reviewing"
 
-Gemini 生成过程：
+Gemini Generation Process:
 
-步骤1：理解需求
-- 识别参与者：用户、系统、支付、物流
-- 梳理主流程：浏览→下单→支付→发货→收货
-- 考虑异常：库存不足、支付失败、退货
+Step 1: Understanding requirements
+- Identify participants: user, system, payment, logistics
+- Outline main process: browse → order → pay → ship → receive
+- Consider exceptions: out of stock, payment failure, returns
 
-步骤2：生成基础图表
+Step 2: Generate basic diagram
 \`\`\`mermaid
 graph TD
     Start[用户浏览商品] --> Select[选择商品]
@@ -611,7 +611,7 @@ graph TD
     Review --> End[完成]
 \`\`\`
 
-步骤3：添加异常处理
+Step 3: Add exception handling
 \`\`\`mermaid
 graph TD
     Start[用户浏览商品] --> Select[选择商品]
@@ -634,17 +634,17 @@ graph TD
     Refund --> End
 \`\`\`
 
-步骤4：优化样式和布局
-[最终优化版本...]`}
+Step 4: Optimize style and layout
+[Final optimized version...]`}
 </CodeBlock>
 
-## 🚀 下一步
+## 🚀 Next Steps
 
-掌握了 AI 辅助技巧后，开始实战：
+After mastering AI-assisted techniques, start practicing:
 
 <div className="next-steps">
   <a href="./projects" className="next-button">
-    实战项目练习 →
+    Practical Project Exercises →
   </a>
 </div>
 

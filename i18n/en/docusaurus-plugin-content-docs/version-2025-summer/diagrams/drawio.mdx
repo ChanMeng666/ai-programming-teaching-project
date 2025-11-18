@@ -1,5 +1,5 @@
 ---
-title: Draw.io 专业设计
+title: Draw.io Professional Design
 sidebar_position: 4
 ---
 
@@ -8,317 +8,317 @@ import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
 import Admonition from '@theme/Admonition';
 
-# Draw.io 专业设计
+# Draw.io Professional Design
 
-## 🎨 Draw.io 简介
+## 🎨 Introduction to Draw.io
 
-Draw.io（现称 diagrams.net）是一款功能强大的在线图表绘制工具，完全免费且无需注册。它提供了丰富的图形库和专业的绘图功能，适合创建各种复杂的专业图表。
+Draw.io (now called diagrams.net) is a powerful online diagramming tool that is completely free and requires no registration. It provides a rich graphics library and professional drawing features, suitable for creating various complex professional diagrams.
 
-### 核心优势
+### Core Advantages
 
-- **完全免费**：所有功能免费使用，无付费墙
-- **无需注册**：打开即用，保护隐私
-- **多平台支持**：Web、桌面版、VS Code 插件
-- **丰富模板**：内置大量专业模板
-- **多格式导出**：支持 PNG、SVG、PDF、XML 等格式
-- **实时协作**：支持团队协作编辑
+- **Completely Free**: All features are free to use, no paywall
+- **No Registration Required**: Open and use, protects privacy
+- **Multi-platform Support**: Web, desktop, VS Code plugin
+- **Rich Templates**: Built-in numerous professional templates
+- **Multi-format Export**: Supports PNG, SVG, PDF, XML, and other formats
+- **Real-time Collaboration**: Supports team collaborative editing
 
-## 🚀 快速开始
+## 🚀 Quick Start
 
 <div className="getting-started">
-  <h3>访问方式</h3>
-  
+  <h3>Access Methods</h3>
+
   <div className="access-methods">
     <div className="method-card">
-      <h4>🌐 在线版本</h4>
-      <p>访问 <a href="https://app.diagrams.net" target="_blank">app.diagrams.net</a></p>
-      <p>特点：无需安装，云端保存</p>
+      <h4>🌐 Online Version</h4>
+      <p>Visit <a href="https://app.diagrams.net" target="_blank">app.diagrams.net</a></p>
+      <p>Features: No installation needed, cloud storage</p>
     </div>
     <div className="method-card">
-      <h4>💻 桌面应用</h4>
-      <p><a href="https://github.com/jgraph/drawio-desktop/releases" target="_blank">下载桌面版</a></p>
-      <p>特点：离线使用，性能更好</p>
+      <h4>💻 Desktop Application</h4>
+      <p><a href="https://github.com/jgraph/drawio-desktop/releases" target="_blank">Download Desktop Version</a></p>
+      <p>Features: Offline use, better performance</p>
     </div>
     <div className="method-card">
-      <h4>🔧 VS Code 插件</h4>
-      <p>扩展名：Draw.io Integration</p>
-      <p>特点：集成开发环境</p>
+      <h4>🔧 VS Code Plugin</h4>
+      <p>Extension name: Draw.io Integration</p>
+      <p>Features: Integrated development environment</p>
     </div>
   </div>
 </div>
 
-## 📐 界面介绍
+## 📐 Interface Introduction
 
-### 工作区布局
+### Workspace Layout
 
 <div className="interface-layout">
   <div className="layout-section">
-    <h4>1. 形状面板（左侧）</h4>
+    <h4>1. Shapes Panel (Left)</h4>
     <ul>
-      <li>基础形状</li>
-      <li>高级图形库</li>
-      <li>自定义形状</li>
-      <li>搜索功能</li>
+      <li>Basic shapes</li>
+      <li>Advanced graphics library</li>
+      <li>Custom shapes</li>
+      <li>Search function</li>
     </ul>
   </div>
   <div className="layout-section">
-    <h4>2. 画布区域（中央）</h4>
+    <h4>2. Canvas Area (Center)</h4>
     <ul>
-      <li>绘图主区域</li>
-      <li>网格和对齐线</li>
-      <li>缩放和平移</li>
-      <li>页面管理</li>
+      <li>Main drawing area</li>
+      <li>Grid and alignment guides</li>
+      <li>Zoom and pan</li>
+      <li>Page management</li>
     </ul>
   </div>
   <div className="layout-section">
-    <h4>3. 格式面板（右侧）</h4>
+    <h4>3. Format Panel (Right)</h4>
     <ul>
-      <li>样式设置</li>
-      <li>文本格式</li>
-      <li>排列对齐</li>
-      <li>图层管理</li>
+      <li>Style settings</li>
+      <li>Text formatting</li>
+      <li>Arrange and align</li>
+      <li>Layer management</li>
     </ul>
   </div>
 </div>
 
-## 🏗️ 系统架构图绘制
+## 🏗️ System Architecture Diagram Creation
 
-### 微服务架构图
+### Microservices Architecture Diagram
 
 <Tabs>
-  <TabItem value="design" label="设计要点" default>
+  <TabItem value="design" label="Design Points" default>
 
-#### 架构图设计原则
+#### Architecture Diagram Design Principles
 
-1. **层次分明**：使用不同的颜色和区域划分层次
-2. **连线清晰**：使用不同线型表示不同的通信方式
-3. **图标统一**：使用一致的图标风格
-4. **标注完整**：添加必要的文字说明
+1. **Clear Hierarchy**: Use different colors and areas to divide layers
+2. **Clear Connections**: Use different line types to represent different communication methods
+3. **Unified Icons**: Use consistent icon styles
+4. **Complete Annotations**: Add necessary text descriptions
 
-#### 推荐配色方案
+#### Recommended Color Schemes
 
 <div className="color-schemes">
   <div className="scheme">
-    <div className="color-box" style={{background: '#2E86AB'}}>API 网关</div>
-    <div className="color-box" style={{background: '#A23B72'}}>业务服务</div>
-    <div className="color-box" style={{background: '#F18F01'}}>数据层</div>
-    <div className="color-box" style={{background: '#C73E1D'}}>消息队列</div>
+    <div className="color-box" style={{background: '#2E86AB'}}>API Gateway</div>
+    <div className="color-box" style={{background: '#A23B72'}}>Business Services</div>
+    <div className="color-box" style={{background: '#F18F01'}}>Data Layer</div>
+    <div className="color-box" style={{background: '#C73E1D'}}>Message Queue</div>
   </div>
 </div>
 
   </TabItem>
-  <TabItem value="components" label="组件清单">
+  <TabItem value="components" label="Component Checklist">
 
 <CodeBlock language="text">
-{`您：帮我列出微服务架构图需要包含的组件
+{`You: Help me list the components needed in a microservices architecture diagram
 
-Gemini：我来为您整理微服务架构的核心组件：
+Gemini: I'll organize the core components of microservices architecture for you:
 
-🏗️ 架构组件清单：
+🏗️ Architecture Component Checklist:
 
-1. 客户端层
-   □ Web 应用
-   □ 移动应用
-   □ 第三方应用
+1. Client Layer
+   □ Web application
+   □ Mobile application
+   □ Third-party applications
 
-2. 网关层
+2. Gateway Layer
    □ API Gateway (Kong/Nginx)
-   □ 负载均衡器
-   □ 认证授权
+   □ Load balancer
+   □ Authentication & authorization
 
-3. 服务层
-   □ 用户服务
-   □ 订单服务
-   □ 支付服务
-   □ 库存服务
-   □ 通知服务
+3. Service Layer
+   □ User service
+   □ Order service
+   □ Payment service
+   □ Inventory service
+   □ Notification service
 
-4. 服务治理
-   □ 服务注册中心 (Consul/Eureka)
-   □ 配置中心 (Config Server)
-   □ 链路追踪 (Zipkin)
-   □ 熔断器 (Hystrix)
+4. Service Governance
+   □ Service registry (Consul/Eureka)
+   □ Configuration center (Config Server)
+   □ Distributed tracing (Zipkin)
+   □ Circuit breaker (Hystrix)
 
-5. 数据层
-   □ MySQL 集群
-   □ Redis 缓存
+5. Data Layer
+   □ MySQL cluster
+   □ Redis cache
    □ MongoDB
    □ Elasticsearch
 
-6. 消息中间件
+6. Message Middleware
    □ RabbitMQ/Kafka
-   □ 事件总线
+   □ Event bus
 
-7. 监控运维
+7. Monitoring & Operations
    □ Prometheus
    □ Grafana
    □ ELK Stack`}
 </CodeBlock>
 
   </TabItem>
-  <TabItem value="tips" label="绘制技巧">
+  <TabItem value="tips" label="Drawing Tips">
 
 <div>
 
-#### Draw.io 绘制技巧
+#### Draw.io Drawing Tips
 
-1. **使用容器分组**
-   - 将相关组件放入容器
-   - 设置容器背景色区分层次
-   - 启用容器折叠功能
+1. **Use Container Grouping**
+   - Put related components in containers
+   - Set container background color to distinguish layers
+   - Enable container collapse feature
 
-2. **对齐和分布**
-   - 使用 Arrange → Align 对齐元素
-   - 使用 Distribute 均匀分布
-   - 启用网格吸附
+2. **Alignment and Distribution**
+   - Use Arrange → Align to align elements
+   - Use Distribute to evenly space elements
+   - Enable grid snapping
 
-3. **连接线优化**
-   - 使用直角连接线
-   - 添加连接点锚定
-   - 设置线条跳跃避免交叉
+3. **Connection Line Optimization**
+   - Use right-angle connectors
+   - Add connection point anchors
+   - Set line jumps to avoid crossings
 
-4. **快捷键**
-   - `Ctrl+D`: 复制元素
-   - `Ctrl+G`: 组合元素
-   - `Ctrl+Shift+G`: 取消组合
-   - `Alt+Shift+方向键`: 精确移动
+4. **Shortcuts**
+   - `Ctrl+D`: Duplicate element
+   - `Ctrl+G`: Group elements
+   - `Ctrl+Shift+G`: Ungroup
+   - `Alt+Shift+Arrow keys`: Precise movement
 
 </div>
 
   </TabItem>
 </Tabs>
 
-## 🌐 网络拓扑图
+## 🌐 Network Topology Diagram
 
-### 企业网络架构
+### Enterprise Network Architecture
 
 <div className="network-design">
-  <h4>设计要素</h4>
-  
+  <h4>Design Elements</h4>
+
   <div className="design-elements">
     <div className="element-card">
-      <h5>🖥️ 网络设备</h5>
+      <h5>🖥️ Network Devices</h5>
       <ul>
-        <li>路由器</li>
-        <li>交换机</li>
-        <li>防火墙</li>
-        <li>负载均衡器</li>
+        <li>Routers</li>
+        <li>Switches</li>
+        <li>Firewalls</li>
+        <li>Load balancers</li>
       </ul>
     </div>
     <div className="element-card">
-      <h5>🔒 安全区域</h5>
+      <h5>🔒 Security Zones</h5>
       <ul>
-        <li>DMZ 区</li>
-        <li>内网区</li>
-        <li>核心区</li>
-        <li>管理区</li>
+        <li>DMZ zone</li>
+        <li>Internal network</li>
+        <li>Core zone</li>
+        <li>Management zone</li>
       </ul>
     </div>
     <div className="element-card">
-      <h5>📡 连接类型</h5>
+      <h5>📡 Connection Types</h5>
       <ul>
-        <li>光纤连接</li>
-        <li>以太网</li>
-        <li>无线连接</li>
-        <li>VPN 隧道</li>
+        <li>Fiber connection</li>
+        <li>Ethernet</li>
+        <li>Wireless connection</li>
+        <li>VPN tunnel</li>
       </ul>
     </div>
   </div>
 </div>
 
-<Admonition type="tip" title="AI 辅助设计">
-使用 Gemini CLI 生成网络拓扑设计方案：
+<Admonition type="tip" title="AI-Assisted Design">
+Use Gemini CLI to generate network topology design solutions:
 
 <CodeBlock language="text">
-{`您：帮我设计一个中型企业的网络拓扑结构
+{`You: Help me design a network topology structure for a medium-sized enterprise
 
-Gemini：我来为您设计中型企业网络拓扑：
+Gemini: I'll design a medium-sized enterprise network topology for you:
 
-🌐 网络架构设计：
+🌐 Network Architecture Design:
 
-1. 互联网接入层
-   - 双ISP接入（主备冗余）
-   - 边界路由器 × 2
-   - DDoS防护设备
+1. Internet Access Layer
+   - Dual ISP access (primary/backup redundancy)
+   - Border routers × 2
+   - DDoS protection devices
 
-2. DMZ区域
-   - Web服务器集群
-   - 邮件服务器
-   - FTP服务器
-   - 反向代理
+2. DMZ Zone
+   - Web server cluster
+   - Mail server
+   - FTP server
+   - Reverse proxy
 
-3. 核心层
-   - 核心交换机（双机热备）
-   - VRRP/HSRP配置
-   - 10G骨干网
+3. Core Layer
+   - Core switches (dual hot standby)
+   - VRRP/HSRP configuration
+   - 10G backbone network
 
-4. 汇聚层
-   - 部门汇聚交换机
-   - VLAN划分
-   - QoS策略
+4. Aggregation Layer
+   - Department aggregation switches
+   - VLAN segmentation
+   - QoS policies
 
-5. 接入层
-   - 接入交换机
-   - 无线AP
-   - IP电话
+5. Access Layer
+   - Access switches
+   - Wireless APs
+   - IP phones
 
-6. 服务器区
-   - 应用服务器
-   - 数据库服务器
-   - 文件服务器
-   - 备份服务器
+6. Server Zone
+   - Application servers
+   - Database servers
+   - File servers
+   - Backup servers
 
-7. 安全设备
-   - 下一代防火墙
+7. Security Devices
+   - Next-generation firewall
    - IDS/IPS
-   - 堡垒机
-   - 日志审计
+   - Bastion host
+   - Log auditing
 
-IP地址规划：
+IP Address Planning:
 - DMZ: 192.168.100.0/24
-- 服务器: 192.168.10.0/24
-- 办公网: 192.168.20.0/23
-- 访客网: 192.168.200.0/24`}
+- Servers: 192.168.10.0/24
+- Office network: 192.168.20.0/23
+- Guest network: 192.168.200.0/24`}
 </CodeBlock>
 </Admonition>
 
-## 📋 UML 图表
+## 📋 UML Diagrams
 
-### 用例图（Use Case Diagram）
-
-<div className="uml-guide">
-  <h4>绘制步骤</h4>
-  
-  1. **添加参与者**：从 UML 图形库拖入 Actor
-  2. **创建用例**：使用椭圆形表示用例
-  3. **建立关联**：连接参与者和用例
-  4. **添加关系**：include、extend、generalization
-</div>
-
-### 活动图（Activity Diagram）
+### Use Case Diagram
 
 <div className="uml-guide">
-  <h4>关键元素</h4>
-  
-  - **开始节点**：实心圆
-  - **活动节点**：圆角矩形
-  - **判断节点**：菱形
-  - **并行处理**：分叉/汇合条
-  - **结束节点**：双圆圈
+  <h4>Drawing Steps</h4>
+
+  1. **Add Actors**: Drag Actor from UML graphics library
+  2. **Create Use Cases**: Use ellipse to represent use cases
+  3. **Establish Associations**: Connect actors and use cases
+  4. **Add Relationships**: include, extend, generalization
 </div>
 
-## 🎨 样式和主题定制
+### Activity Diagram
 
-### 创建自定义样式
+<div className="uml-guide">
+  <h4>Key Elements</h4>
+
+  - **Start Node**: Filled circle
+  - **Activity Node**: Rounded rectangle
+  - **Decision Node**: Diamond
+  - **Parallel Processing**: Fork/join bars
+  - **End Node**: Double circle
+</div>
+
+## 🎨 Style and Theme Customization
+
+### Create Custom Styles
 
 <Tabs>
-  <TabItem value="colors" label="配色方案" default>
+  <TabItem value="colors" label="Color Schemes" default>
 
-#### 专业配色模板
+#### Professional Color Templates
 
 <div className="color-templates">
   <div className="template">
-    <h5>技术文档</h5>
+    <h5>Technical Documentation</h5>
     <div className="colors">
       <span style={{background: '#1e3a8a'}}>#1e3a8a</span>
       <span style={{background: '#3b82f6'}}>#3b82f6</span>
@@ -327,7 +327,7 @@ IP地址规划：
     </div>
   </div>
   <div className="template">
-    <h5>商务演示</h5>
+    <h5>Business Presentation</h5>
     <div className="colors">
       <span style={{background: '#059669'}}>#059669</span>
       <span style={{background: '#10b981'}}>#10b981</span>
@@ -338,18 +338,18 @@ IP地址规划：
 </div>
 
   </TabItem>
-  <TabItem value="shapes" label="形状库">
+  <TabItem value="shapes" label="Shape Library">
 
 <div>
 
-#### 创建自定义形状库
+#### Create Custom Shape Library
 
-1. **选择基础形状**
-2. **自定义样式**
-3. **保存为库**：File → New Library
-4. **导入使用**：File → Open Library
+1. **Select Basic Shape**
+2. **Customize Style**
+3. **Save as Library**: File → New Library
+4. **Import and Use**: File → Open Library
 
-#### 推荐形状库
+#### Recommended Shape Libraries
 
 - AWS Architecture Icons
 - Azure Icons
@@ -360,133 +360,133 @@ IP地址规划：
 </div>
 
   </TabItem>
-  <TabItem value="templates" label="模板管理">
+  <TabItem value="templates" label="Template Management">
 
 <div>
 
-#### 保存和使用模板
+#### Save and Use Templates
 
-1. **创建模板**
-   - 设计基础框架
-   - 定义样式规范
-   - 添加占位符
+1. **Create Template**
+   - Design basic framework
+   - Define style specifications
+   - Add placeholders
 
-2. **保存模板**
+2. **Save Template**
    - File → Save as Template
-   - 命名和分类
-   - 添加描述
+   - Name and categorize
+   - Add description
 
-3. **应用模板**
+3. **Apply Template**
    - File → New from Template
-   - 选择合适模板
-   - 自定义内容
+   - Select appropriate template
+   - Customize content
 
 </div>
 
   </TabItem>
 </Tabs>
 
-## 🔄 协作功能
+## 🔄 Collaboration Features
 
-### 团队协作
+### Team Collaboration
 
 <div className="collaboration-features">
   <div className="feature">
-    <h4>🔗 共享链接</h4>
-    <p>生成只读或可编辑链接</p>
+    <h4>🔗 Share Links</h4>
+    <p>Generate read-only or editable links</p>
   </div>
   <div className="feature">
-    <h4>💾 版本控制</h4>
-    <p>与 GitHub/GitLab 集成</p>
+    <h4>💾 Version Control</h4>
+    <p>Integration with GitHub/GitLab</p>
   </div>
   <div className="feature">
-    <h4>📝 评论功能</h4>
-    <p>添加批注和反馈</p>
+    <h4>📝 Comment Feature</h4>
+    <p>Add annotations and feedback</p>
   </div>
   <div className="feature">
-    <h4>🔄 实时同步</h4>
-    <p>多人同时编辑</p>
+    <h4>🔄 Real-time Sync</h4>
+    <p>Multiple people editing simultaneously</p>
   </div>
 </div>
 
-## 📤 导出和集成
+## 📤 Export and Integration
 
-### 导出格式
+### Export Formats
 
 <div className="export-options">
   <div className="option">
-    <h5>图片格式</h5>
+    <h5>Image Formats</h5>
     <ul>
-      <li>PNG（透明背景）</li>
-      <li>JPG（压缩图片）</li>
-      <li>SVG（矢量图）</li>
-      <li>WebP（Web优化）</li>
+      <li>PNG (transparent background)</li>
+      <li>JPG (compressed image)</li>
+      <li>SVG (vector graphics)</li>
+      <li>WebP (web-optimized)</li>
     </ul>
   </div>
   <div className="option">
-    <h5>文档格式</h5>
+    <h5>Document Formats</h5>
     <ul>
-      <li>PDF（打印）</li>
-      <li>HTML（网页嵌入）</li>
-      <li>XML（源文件）</li>
-      <li>VSDX（Visio）</li>
+      <li>PDF (printing)</li>
+      <li>HTML (web embedding)</li>
+      <li>XML (source file)</li>
+      <li>VSDX (Visio)</li>
     </ul>
   </div>
 </div>
 
-### 集成方式
+### Integration Methods
 
 <CodeBlock language="html">
-{`<!-- 在网页中嵌入 Draw.io 图表 -->
-<iframe 
+{`<!-- Embed Draw.io diagram in webpage -->
+<iframe
   src="https://viewer.diagrams.net/?highlight=0000ff&edit=_blank&layers=1&nav=1&title=diagram.drawio#Uhttps%3A%2F%2Fdrive.google.com%2Ffile%2Fd%2F..."
-  width="100%" 
+  width="100%"
   height="600">
 </iframe>`}
 </CodeBlock>
 
-## 💡 专业技巧
+## 💡 Professional Tips
 
 <div className="pro-tips">
   <div className="tip">
-    <h4>⚡ 提高效率</h4>
+    <h4>⚡ Improve Efficiency</h4>
     <ul>
-      <li>掌握快捷键</li>
-      <li>使用搜索功能快速找到形状</li>
-      <li>创建常用元素库</li>
-      <li>批量操作技巧</li>
+      <li>Master keyboard shortcuts</li>
+      <li>Use search function to quickly find shapes</li>
+      <li>Create commonly used element libraries</li>
+      <li>Batch operation techniques</li>
     </ul>
   </div>
   <div className="tip">
-    <h4>🎯 保持一致性</h4>
+    <h4>🎯 Maintain Consistency</h4>
     <ul>
-      <li>定义颜色规范</li>
-      <li>统一字体大小</li>
-      <li>保持间距一致</li>
-      <li>使用样式复制</li>
+      <li>Define color specifications</li>
+      <li>Unify font sizes</li>
+      <li>Keep spacing consistent</li>
+      <li>Use style copying</li>
     </ul>
   </div>
   <div className="tip">
-    <h4>📐 专业布局</h4>
+    <h4>📐 Professional Layout</h4>
     <ul>
-      <li>使用网格对齐</li>
-      <li>保持黄金比例</li>
-      <li>留白的艺术</li>
-      <li>视觉层次设计</li>
+      <li>Use grid alignment</li>
+      <li>Maintain golden ratio</li>
+      <li>The art of whitespace</li>
+      <li>Visual hierarchy design</li>
     </ul>
   </div>
 </div>
 
-## 🚀 下一步
+## 🚀 Next Steps
 
-掌握了 Draw.io 后，继续学习：
+After mastering Draw.io, continue learning:
 
 <div className="next-steps">
   <a href="./use-cases" className="next-button">
-    场景应用指南 →
+    Scenario Application Guide →
   </a>
   <a href="./ai-assistance" className="next-button secondary">
-    AI 辅助创作 →
+    AI-Assisted Creation →
   </a>
 </div>
 
