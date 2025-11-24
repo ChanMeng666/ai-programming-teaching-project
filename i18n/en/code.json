@@ -457,7 +457,7 @@
     "message": "Master AI Programming"
   },
   "homepage.hero.description": {
-    "message": "Learn AI development through practical examples, from basics to advanced, building a complete AI programming skill set"
+    "message": "Learn AI development through practical examples, from basics to advanced, building a complete AI programming skill set. Beginner-friendly, practice-oriented."
   },
   "homepage.hero.startButton": {
     "message": "Get Started"
@@ -512,5 +512,17 @@
   },
   "homepage.features.modern.description": {
     "message": "Stay at the forefront of AI technology development and learn the latest AI programming techniques and applications."
+  },
+  "homepage.hero.badge": {
+    "message": "AI Programming Education Platform"
+  },
+  "homepage.hero.titlePre": {
+    "message": "Master"
+  },
+  "homepage.hero.titleHighlight": {
+    "message": "AI Coding"
+  },
+  "homepage.hero.titlePost": {
+    "message": "The Modern Way"
   }
 }
