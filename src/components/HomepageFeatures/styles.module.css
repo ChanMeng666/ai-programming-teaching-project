@@ -1,391 +1,115 @@
-/* 特性区域 */
+/* Features Section */
 .features {
-  padding: var(--space-40) 0;
-  background: var(--color-background);
+  padding: 6rem 0;
+  background: var(--modern-bg-primary);
   position: relative;
-  margin-top: -2px; /* 消除可能的间隙 */
 }
 
-
-
-.featuresWave {
-  position: absolute;
-  top: -1px; /* 稍微向上偏移，确保完全覆盖可能的间隙 */
-  left: 0;
-  right: 0;
-  z-index: 1;
-}
-
-.features::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--color-border), transparent);
-}
-
-/* 自定义容器和网格布局 */
 .featuresContainer {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 0 var(--space-8);
-  position: relative;
-  z-index: 2;
+  padding: 0 2rem;
 }
 
 .featuresGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-12);
+  gap: 2.5rem;
+}
+
+@media (max-width: 996px) {
+  .featuresGrid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
 }
 
 .featureItem {
-  width: 100%;
+  display: flex;
 }
 
-@media (max-width: 1200px) {
-  .featuresGrid {
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: var(--space-10);
-  }
-  
-  .featuresContainer {
-    padding: 0 var(--space-6);
-  }
-}
-
-@media (max-width: 968px) {
-  .featuresGrid {
-    grid-template-columns: 1fr;
-    gap: var(--space-6);
-  }
-}
-
-@media (max-width: 768px) {
-  .features {
-    padding: var(--space-24) 0;
-  }
-  
-  .featuresContainer {
-    padding: 0 var(--space-4);
-  }
-  
-  .featuresGrid {
-    grid-template-columns: 1fr;
-    gap: 2.5rem; /* 40px间距 */
-  }
-}
-
-@media (max-width: 480px) {
-  .features {
-    padding: var(--space-24) 0;
-    margin-top: -3px; /* 在移动端进一步消除空隙 */
-  }
-  
-  .featuresWave {
-    top: -2px; /* 移动端波浪向上偏移更多 */
-  }
-  
-  .featuresContainer {
-    padding: 0 var(--space-4);
-  }
-  
-  .featuresGrid {
-    grid-template-columns: 1fr;
-    gap: 3.5rem; /* 增加到56px间距，确保足够的视觉分离 */
-    width: 100%;
-  }
-  
-  .featureItem {
-    margin-bottom: 0; /* 确保没有额外边距 */
-    width: 100%;
-  }
-}
-
-/* 特性卡片 */
 .featureCard {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-2xl);
-  padding: var(--space-10);
-  text-align: center;
-  transition: all var(--animation-duration-normal) var(--animation-timing-ease);
-  box-shadow: var(--shadow-sm);
-  position: relative;
-  overflow: hidden;
-  height: 100%;
+  background: var(--modern-bg-primary);
+  border-radius: 16px;
+  padding: 2.5rem;
+  width: 100%;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid var(--modern-border);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.025);
 }
 
-.featureCard::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, var(--color-teal), var(--color-coral));
-  opacity: 0;
-  transition: opacity var(--animation-duration-normal) var(--animation-timing-ease);
+[data-theme='dark'] .featureCard {
+  background: var(--modern-bg-secondary);
+  border-color: var(--modern-border);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
 }
 
 .featureCard:hover {
   transform: translateY(-8px);
-  box-shadow: var(--shadow-xl);
-  border-color: var(--color-teal);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  border-color: var(--modern-accent);
 }
 
-.featureCard:hover::before {
-  opacity: 1;
+[data-theme='dark'] .featureCard:hover {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
 }
 
-/* 特性图标区域 */
+/* Updated: Removed box container styles and increased SVG size */
 .featureImage {
-  margin-bottom: var(--space-6);
-  position: relative;
+  margin-bottom: 1.5rem;
+  /* Removed padding, background, and border-radius for cleaner look */
+  padding: 0;
+  background: transparent;
+  border-radius: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Align left */
+  transition: transform 0.3s ease;
+}
+
+[data-theme='dark'] .featureImage {
+  background: transparent;
+}
+
+.featureCard:hover .featureImage {
+  background: transparent;
+  transform: scale(1.1); /* Slight zoom on hover */
+}
+
+[data-theme='dark'] .featureCard:hover .featureImage {
+  background: transparent;
 }
 
 .featureSvg {
-  width: 140px;
-  height: 140px;
-  transition: all var(--animation-duration-normal) var(--animation-timing-ease);
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+  width: 80px; /* Increased from 48px */
+  height: 80px; /* Increased from 48px */
+  color: var(--modern-accent);
 }
 
-.featureCard:hover .featureSvg {
-  transform: scale(1.1) rotate(5deg);
-  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.15));
-}
-
-/* 特性内容区域 */
-.featureContent {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
+/* We might need to target the SVG paths if they are inline SVGs not controlled by color */
+/* But usually Docusaurus SVGs are loaded as components */
 
 .featureContent h3 {
-  font-size: 1.375rem;
-  font-weight: var(--ifm-font-weight-bold);
-  color: var(--color-text-primary);
-  margin-bottom: var(--space-5);
-  background: linear-gradient(135deg, var(--color-teal) 0%, var(--color-coral) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--modern-text-primary);
 }
 
 .featureContent p {
-  color: var(--color-text-secondary);
-  line-height: 1.7;
-  font-size: 1.0625rem;
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: var(--modern-text-secondary);
   margin: 0;
-  flex: 1;
 }
 
-/* 响应式调整 */
-@media (max-width: 968px) {
-  .featureCard {
-    padding: var(--space-6);
-  }
-  
-  .featureSvg {
-    width: 100px;
-    height: 100px;
-  }
-}
-
-@media (max-width: 768px) {
-  .featureCard {
-    padding: var(--space-6);
-    border-radius: var(--radius-xl);
-    margin: 0; /* 移除边距，使用grid gap控制间距 */
-  }
-  
-  .featureSvg {
-    width: 90px;
-    height: 90px;
-  }
-  
-  .featureContent h3 {
-    font-size: var(--ifm-h4-font-size);
-    margin-bottom: var(--space-3);
-  }
-  
-  .featureContent p {
-    font-size: 0.95rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .featureCard {
-    padding: var(--space-6);
-    border-radius: var(--radius-lg);
-    margin: 0; /* 移除所有边距，使用grid gap控制间距 */
-  }
-  
-  .featureSvg {
-    width: 80px;
-    height: 80px;
-  }
-  
-  .featureImage {
-    margin-bottom: var(--space-4);
-  }
-  
-  .featureContent h3 {
-    font-size: 1.125rem;
-    margin-bottom: var(--space-3);
-  }
-  
-  .featureContent p {
-    font-size: 0.9rem;
-    line-height: 1.5;
-  }
-  
-  /* 移动端触摸优化 */
-  .featureCard {
-    touch-action: manipulation;
-  }
-  
-  .featureCard:active {
-    transform: scale(0.98);
-  }
-  
-  /* 简化动画以提高性能 */
-  .featureCard:hover .featureSvg {
-    transform: scale(1.05);
-  }
-  
-  .featureCard {
-    animation: none;
-  }
-  
-  .featureCard:nth-child(1),
-  .featureCard:nth-child(2),
-  .featureCard:nth-child(3) {
-    animation: none;
-  }
-}
-
-/* 大屏幕优化 */
-@media (min-width: 1400px) {
-  .features {
-    padding: var(--space-48) 0;
-  }
-  
-  .featuresContainer {
-    max-width: 1400px;
-    padding: 0 var(--space-12);
-  }
-  
-  .featuresGrid {
-    gap: var(--space-16);
-  }
-  
-  .featureCard {
-    padding: var(--space-12);
-  }
-  
-  .featureSvg {
-    width: 160px;
-    height: 160px;
-  }
-  
-  .featureImage {
-    margin-bottom: var(--space-8);
-  }
-  
-  .featureContent h3 {
-    font-size: 1.5rem;
-    margin-bottom: var(--space-6);
-  }
-  
-  .featureContent p {
-    font-size: 1.125rem;
-    line-height: 1.8;
-  }
-}
-
-/* 高分辨率屏幕优化 */
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 2dppx) {
-  .featureCard {
-    border-width: 0.5px;
-  }
-}
-
-/* 动画效果 */
-.featureCard {
-  animation: fadeInUp var(--animation-duration-slow) var(--animation-timing-ease-out) both;
-}
-
-.featureCard:nth-child(1) {
-  animation-delay: 0.1s;
-}
-
-.featureCard:nth-child(2) {
-  animation-delay: 0.2s;
-}
-
-.featureCard:nth-child(3) {
-  animation-delay: 0.3s;
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-@keyframes shimmer {
-  0% {
-    transform: translateX(-100%);
-  }
-  100% {
-    transform: translateX(100%);
-  }
-}
-
-/* 桌面端增强动画效果 */
-@media (min-width: 969px) {
-  .featureCard::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-    transition: left 0.5s ease;
-  }
-  
-  .featureCard:hover::after {
-    left: 100%;
-  }
-  
-  .featureCard:hover .featureSvg {
-    animation: float 3s ease-in-out infinite;
-  }
-  
-  .featureCard:hover {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
+/* Remove the wave if it exists in DOM but we don't want it visible via CSS, 
+   though cleaner to remove from JS. 
+   For now, I'll hide it via CSS if the class matches 
+*/
+.featuresWave {
+  display: none; 
 }

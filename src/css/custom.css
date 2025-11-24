@@ -6,7 +6,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 :root {
-  /* 新的配色方案 */
+  /* Modern Minimal Theme Colors */
+  --modern-bg-primary: #ffffff;
+  --modern-bg-secondary: #f8fafc;
+  --modern-text-primary: #1e293b;
+  --modern-text-secondary: #64748b;
+  --modern-accent: #0f7173;
+  --modern-accent-light: #e0f2f2;
+  --modern-border: #e2e8f0;
+  
+  /* Glassmorphism Utils */
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.5);
+  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+  --glass-blur: 10px;
+
+  /* 新的配色方案 - 保持兼容性 */
   --ifm-color-primary: #0f7173;
   --ifm-color-primary-dark: #0c5c5e;
   --ifm-color-primary-darker: #0a4d4f;
@@ -133,6 +148,20 @@
 
 /* 深色模式变量 */
 [data-theme='dark'] {
+  /* Modern Minimal Theme Colors Dark */
+  --modern-bg-primary: #0f172a;
+  --modern-bg-secondary: #1e293b;
+  --modern-text-primary: #f8fafc;
+  --modern-text-secondary: #cbd5e1;
+  --modern-accent: #2dd4bf;
+  --modern-accent-light: rgba(45, 212, 191, 0.1);
+  --modern-border: #334155;
+  
+  /* Glassmorphism Utils Dark */
+  --glass-bg: rgba(15, 23, 42, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+
   --ifm-color-primary: #1ab0b2;
   --ifm-color-primary-dark: #159b9d;
   --ifm-color-primary-darker: #128688;
@@ -220,6 +249,7 @@ a:hover {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   border-bottom: 1px solid var(--color-light-gray);
   background-color: var(--color-background);
+  backdrop-filter: blur(var(--glass-blur));
 }
 
 /* 导航链接基础样式 */
@@ -624,195 +654,6 @@ html {
   }
 }
 
-/* 导航栏下拉菜单样式 */
-.dropdown__menu {
-  background: var(--color-background);
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  padding: var(--space-sm) 0;
-}
-
-.dropdown__link {
-  color: #333 !important; /* 白天模式下使用深色文字 */
-  transition: all var(--animation-duration) var(--animation-timing);
-}
-
-.dropdown__link:hover {
-  background: var(--color-light-gray);
-  color: var(--ifm-color-primary);
-}
-
-[data-theme='dark'] .dropdown__menu {
-  background: rgba(18, 18, 18, 0.95);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-[data-theme='dark'] .dropdown__link {
-  color: rgba(255, 255, 255, 0.9) !important; /* 深色模式下使用亮色文字 */
-}
-
-[data-theme='dark'] .dropdown__link:hover {
-  background: rgba(255, 255, 255, 0.05);
-  color: var(--ifm-color-primary-lighter);
-}
-
-/* 代码块标题 */
-.prism-code::before {
-  content: attr(data-language);
-  position: absolute;
-  top: 0;
-  right: var(--space-md);
-  color: var(--color-secondary);
-  font-size: 0.8em;
-  font-weight: bold;
-  text-transform: uppercase;
-  padding: var(--space-xs) var(--space-sm);
-}
-
-/* 表格样式优化 */
-table {
-  display: table;
-  width: 100%;
-  margin: var(--space-lg) 0;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-thead tr {
-  background: var(--ifm-color-primary);
-  color: var(--color-background);
-}
-
-tbody tr:nth-child(even) {
-  background: var(--color-light-gray);
-}
-
-/* 链接样式优化 */
-.markdown a {
-  color: var(--ifm-color-primary);
-  text-decoration: none;
-  transition: all var(--animation-duration) var(--animation-timing);
-  border-bottom: 1px solid transparent;
-}
-
-.markdown a:hover {
-  color: var(--color-accent);
-  border-bottom-color: var(--color-accent);
-}
-
-/* 引用块样式 */
-blockquote {
-  border-left: 4px solid var(--ifm-color-primary);
-  background: var(--color-light-gray);
-  margin: var(--space-lg) 0;
-  padding: var(--space-md) var(--space-lg);
-  border-radius: 0 8px 8px 0;
-}
-
-[data-theme='dark'] blockquote {
-  background: rgba(255, 255, 255, 0.05);
-}
-
-/* 列表样式优化 */
-.markdown ul li::marker {
-  color: var(--ifm-color-primary);
-}
-
-.markdown ol li::marker {
-  color: var(--ifm-color-primary);
-}
-
-/* 图片样式优化 */
-.markdown img {
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform var(--animation-duration) var(--animation-timing);
-}
-
-.markdown img:hover {
-  transform: scale(1.02);
-}
-
-/* 标题锚点样式 */
-.hash-link {
-  opacity: 0;
-  padding-left: var(--space-sm);
-  transition: opacity var(--animation-duration) var(--animation-timing);
-}
-
-.hash-link:hover {
-  opacity: 1;
-}
-
-h1:hover .hash-link,
-h2:hover .hash-link,
-h3:hover .hash-link {
-  opacity: 0.5;
-}
-
-/* 代码行高亮 */
-.docusaurus-highlight-code-line {
-  background-color: rgba(0, 0, 0, 0.1);
-  display: block;
-  margin: 0 calc(-1 * var(--ifm-pre-padding));
-  padding: 0 var(--ifm-pre-padding);
-}
-
-[data-theme='dark'] .docusaurus-highlight-code-line {
-  background-color: rgba(255, 255, 255, 0.1);
-}
-
-/* 搜索框样式增强 */
-.navbar__search {
-  padding: 0.5rem;
-}
-
-.navbar__search-input {
-  background-color: var(--color-light-gray);
-  border: 2px solid transparent;
-  border-radius: 20px;
-  padding: var(--space-xs) var(--space-md);
-  transition: all var(--animation-duration) var(--animation-timing);
-}
-
-.navbar__search-input:focus {
-  background-color: var(--color-background);
-  border-color: var(--color-accent);
-  outline: none;
-}
-
-/* 品牌标题样式 */
-.navbar__brand {
-  font-weight: 700;
-  font-size: 1.2rem;
-  color: var(--ifm-color-primary);
-}
-
-.navbar__logo {
-  height: 2rem;
-  margin-right: 0.5rem;
-}
-
-/* 黑暗模式适配 */
-[data-theme='dark'] .navbar {
-  background-color: var(--color-background);
-  border-bottom-color: rgba(255, 255, 255, 0.1);
-}
-
-[data-theme='dark'] .navbar__link:hover,
-[data-theme='dark'] .navbar__link--active {
-  background-color: rgba(255, 255, 255, 0.05);
-}
-
-[data-theme='dark'] .navbar__search-input {
-  background-color: rgba(255, 255, 255, 0.05);
-}
-
-[data-theme='dark'] .navbar__search-input:focus {
-  background-color: rgba(255, 255, 255, 0.1);
-}
-
 /* 下拉菜单样式增强 */
 .dropdown__menu {
   min-width: 200px;
@@ -824,7 +665,7 @@ h3:hover .hash-link {
 
 .dropdown__link {
   padding: 0.5rem 1rem;
-  color: var(--color-text);
+  color: var(--color-text-primary);
   transition: all var(--animation-duration) var(--animation-timing);
 }
 
@@ -1287,107 +1128,5 @@ html:not([data-theme='dark']) .clean-btn svg path {
   
   .footer-copyright {
     padding: 1rem 0;
-  }
-}
-
-
-/* 波浪效果样式 */
-.waves {
-  position: absolute;
-  width: 100%;
-  height: 15vh;
-  bottom: 0;
-  left: 0;
-  min-height: 100px;
-  max-height: 150px;
-}
-
-header.hero {
-  padding: 4rem 0 16vh 0;
-  background: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
-}
-
-[data-theme='dark'] header.hero {
-  background: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
-}
-
-header.hero .container {
-  position: relative;
-  z-index: 1;
-}
-
-/* 波浪动画 */
-.parallax > use {
-  animation: move-forever 25s cubic-bezier(.55,.5,.45,.5) infinite;
-}
-
-.parallax > use:nth-child(1) {
-  animation-delay: -2s;
-  animation-duration: 7s;
-  fill: rgba(255, 255, 255, 0.7);
-}
-
-[data-theme='dark'] .parallax > use:nth-child(1) {
-  fill: rgba(20, 20, 24, 0.7);
-}
-
-.parallax > use:nth-child(2) {
-  animation-delay: -3s;
-  animation-duration: 10s;
-  fill: rgba(255, 255, 255, 0.5);
-}
-
-[data-theme='dark'] .parallax > use:nth-child(2) {
-  fill: rgba(20, 20, 24, 0.5);
-}
-
-.parallax > use:nth-child(3) {
-  animation-delay: -4s;
-  animation-duration: 13s;
-  fill: rgba(255, 255, 255, 0.3);
-}
-
-[data-theme='dark'] .parallax > use:nth-child(3) {
-  fill: rgba(20, 20, 24, 0.3);
-}
-
-.parallax > use:nth-child(4) {
-  animation-delay: -5s;
-  animation-duration: 20s;
-  fill: rgba(255, 255, 255, 1.0);
-}
-
-[data-theme='dark'] .parallax > use:nth-child(4) {
-  fill: rgba(20, 20, 24, 1.0);
-}
-
-@keyframes move-forever {
-  0% {
-    transform: translate3d(-90px,0,0);
-  }
-  100% { 
-    transform: translate3d(85px,0,0);
-  }
-}
-
-/* 确保特性卡片间距在移动端正确显示 */
-@media (max-width: 480px) {
-  /* 覆盖任何可能的全局样式 */
-  .features .featuresGrid {
-    gap: 3.5rem !important;
-    display: grid !important;
-    grid-template-columns: 1fr !important;
-  }
-  
-  .features .featureItem {
-    margin: 0 !important;
-    width: 100% !important;
-  }
-}
-
-@media (max-width: 768px) {
-  .features .featuresGrid {
-    gap: 2.5rem !important;
-    grid-template-columns: 1fr !important;
   }
 }
