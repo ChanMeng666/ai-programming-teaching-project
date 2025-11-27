@@ -64,7 +64,7 @@ const config = {
   future: {
     // Enable all v4 future flags for easier migration
     v4: {
-      useCssCascadeLayers: true,
+      useCssCascadeLayers: false, // 临时禁用以修复移动端侧边栏显示问题
       removeLegacyPostBuildHeadAttribute: true,
     },
     // Enable Docusaurus Faster experimental features
