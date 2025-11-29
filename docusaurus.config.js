@@ -69,8 +69,8 @@ const config = {
     },
     // Enable Docusaurus Faster experimental features
     experimental_faster: {
-      rspackBundler: true,
-      rspackPersistentCache: true,
+      rspackBundler: false,  // Temporarily disabled for Docusaurus 3.9.2 compatibility
+      rspackPersistentCache: false,
       ssgWorkerThreads: true,
     },
   },
