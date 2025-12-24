@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gh api:*)",
+      "Bash(npm audit:*)",
+      "Bash(npm run build:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nfix: resolve all Dependabot security alerts\n\n- Update dependencies via npm audit fix to address 14 security vulnerabilities\n- Fix node-forge ASN.1 vulnerabilities (high severity)\n- Fix js-yaml prototype pollution issues (medium)\n- Fix webpack-dev-server source code theft vulnerabilities (medium)\n- Fix http-proxy-middleware body parsing issues (medium)\n- Fix @babel/helpers and @babel/runtime RegExp complexity (medium)\n- Fix estree-util-value-to-estree prototype pollution (medium)\n- Fix brace-expansion ReDoS vulnerability (low)\n- Fix on-headers response header manipulation (low)\n- Temporarily disable rspackBundler for Docusaurus 3.9.2 compatibility\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(git push)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
