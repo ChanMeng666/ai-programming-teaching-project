@@ -1,0 +1,24 @@
+name = "ai-chat-worker"
+main = "src/index.ts"
+compatibility_date = "2024-12-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Workers AI binding
+[ai]
+binding = "AI"
+
+# KV namespace for session storage
+[[kv_namespaces]]
+binding = "CHAT_SESSIONS"
+id = "5c20418b4b924a6dabe67c75610b4c08"
+preview_id = "66791f36d34a430cb2e1ef5a6cfb8d82"
+
+# Vectorize for RAG
+# Run: npx wrangler vectorize create docs-index --dimensions=768 --metric=cosine
+# Then uncomment and configure below
+# [[vectorize]]
+# binding = "VECTORIZE"
+# index_name = "docs-index"
+
+[vars]
+CORS_ORIGIN = "*"
