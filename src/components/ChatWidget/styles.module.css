@@ -191,11 +191,17 @@
   height: 32px;
   border-radius: 50%;
   background: var(--ifm-color-primary-lightest);
-  color: var(--ifm-color-primary);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  padding: 4px;
+  overflow: hidden;
+}
+
+.avatarIcon {
+  width: 100%;
+  height: 100%;
 }
 
 .messageBubble {
@@ -224,8 +230,100 @@
 }
 
 .messageContent {
-  white-space: pre-wrap;
   word-break: break-word;
+}
+
+/* Markdown Content Styles */
+.markdownContent {
+  line-height: 1.6;
+}
+
+.markdownContent > *:first-child {
+  margin-top: 0;
+}
+
+.markdownContent > *:last-child {
+  margin-bottom: 0;
+}
+
+.mdParagraph {
+  margin: 0 0 8px 0;
+}
+
+.mdParagraph:last-child {
+  margin-bottom: 0;
+}
+
+.mdHeading {
+  font-size: 1em;
+  font-weight: 600;
+  margin: 12px 0 6px 0;
+}
+
+.mdHeading:first-child {
+  margin-top: 0;
+}
+
+.mdInlineCode {
+  background: rgba(0, 0, 0, 0.08);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  font-size: 0.9em;
+}
+
+.mdCodeBlock {
+  background: rgba(0, 0, 0, 0.06);
+  padding: 10px 12px;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 8px 0;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  font-size: 0.85em;
+  line-height: 1.5;
+}
+
+.mdCodeBlock code {
+  background: transparent;
+  padding: 0;
+}
+
+.mdList {
+  margin: 8px 0;
+  padding-left: 20px;
+}
+
+.mdListItem {
+  margin: 4px 0;
+}
+
+.mdLink {
+  color: var(--ifm-color-primary);
+  text-decoration: none;
+}
+
+.mdLink:hover {
+  text-decoration: underline;
+}
+
+.mdBlockquote {
+  border-left: 3px solid var(--ifm-color-primary);
+  margin: 8px 0;
+  padding: 4px 12px;
+  background: rgba(0, 0, 0, 0.03);
+  border-radius: 0 4px 4px 0;
+}
+
+.mdBlockquote p {
+  margin: 0;
+}
+
+.mdStrong {
+  font-weight: 600;
+}
+
+.mdEmphasis {
+  font-style: italic;
 }
 
 /* Typing Indicator */
@@ -403,7 +501,19 @@
 
 [data-theme='dark'] .messageAvatar {
   background: var(--ifm-color-primary-darker);
-  color: var(--ifm-color-primary-lightest);
+}
+
+/* Dark mode markdown styles */
+[data-theme='dark'] .mdInlineCode {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+[data-theme='dark'] .mdCodeBlock {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme='dark'] .mdBlockquote {
+  background: rgba(255, 255, 255, 0.05);
 }
 
 [data-theme='dark'] .assistantMessage .messageBubble {
