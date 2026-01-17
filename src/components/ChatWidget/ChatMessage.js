@@ -1,19 +1,38 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
-import { useColorMode } from '@docusaurus/theme-common';
 import styles from './styles.module.css';
-
-// Import avatar images
-import AvatarBlack from '@site/static/img/chan_logo_without_brand_black.svg';
-import AvatarWhite from '@site/static/img/chan_logo_without_brand_white.svg';
 
 export default function ChatMessage({ message }) {
   const { role, content, isStreaming, isError } = message;
   const isUser = role === 'user';
-  const { colorMode } = useColorMode();
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
-  // Choose avatar based on theme
-  const Avatar = colorMode === 'dark' ? AvatarWhite : AvatarBlack;
+  // Detect theme from DOM instead of using useColorMode hook
+  useEffect(() => {
+    const checkTheme = () => {
+      const theme = document.documentElement.getAttribute('data-theme');
+      setIsDarkMode(theme === 'dark');
+    };
+
+    // Initial check
+    checkTheme();
+
+    // Watch for theme changes
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.attributeName === 'data-theme') {
+          checkTheme();
+        }
+      });
+    });
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-theme'],
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <div
@@ -21,7 +40,14 @@ export default function ChatMessage({ message }) {
     >
       {!isUser && (
         <div className={styles.messageAvatar}>
-          <Avatar className={styles.avatarIcon} />
+          <img
+            src={isDarkMode
+              ? '/img/chan_logo_without_brand_white.svg'
+              : '/img/chan_logo_without_brand_black.svg'
+            }
+            alt="AI"
+            className={styles.avatarIcon}
+          />
         </div>
       )}
       <div
