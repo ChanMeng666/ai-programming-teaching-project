@@ -1,19 +1,24 @@
 /* ============================================
    音乐播放器样式
+
+   架构说明：
+   - iframe 由 iframeManager 独立管理，固定在 body 中
+   - 弹窗 UI 与 iframe 位置对齐
+   - iframe 位置: top: 117px, right: 20px, width: 520px, height: 240px
    ============================================ */
 
-/* 包装器 */
 .musicPlayerWrapper {
   font-family: var(--ifm-font-family-base);
 }
 
 /* ============================================
-   主弹窗容器
+   弹窗容器 - 与 iframe 位置对齐
    ============================================ */
 .musicPlayerContainer {
   position: fixed;
   top: 70px;
   right: 20px;
+  width: 520px;
   z-index: 998;
   transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
 }
@@ -32,13 +37,21 @@
   pointer-events: none;
 }
 
+/* 移动端容器 */
+.musicPlayerContainer.mobile {
+  top: 10px;
+  right: 10px;
+  left: 10px;
+  width: auto;
+}
+
 /* ============================================
    弹窗窗口
    ============================================ */
 .popup {
-  width: 520px;
+  width: 100%;
   background: #ffffff;
-  border-radius: 16px;
+  border-radius: 16px 16px 0 0;
   box-shadow:
     0 4px 6px rgba(0, 0, 0, 0.07),
     0 12px 28px rgba(0, 0, 0, 0.12),
@@ -164,18 +177,11 @@
 }
 
 /* ============================================
-   内容区域（iframe）
+   内容区域（占位，iframe 在外部渲染）
    ============================================ */
 .content {
   height: 240px;
-  overflow: hidden;
-  background: linear-gradient(180deg, #f8f9fa 0%, #f0f0f0 100%);
-}
-
-.iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
+  background: transparent;
 }
 
 /* ============================================
@@ -184,6 +190,7 @@
 .footer {
   padding: 10px 16px;
   background: #f8f9fa;
+  border-radius: 0 0 16px 16px;
   border-top: 1px solid rgba(0, 0, 0, 0.06);
 }
 
@@ -325,28 +332,24 @@
 /* ============================================
    移动端响应式
    ============================================ */
-@media (max-width: 480px) {
+@media (max-width: 768px) {
   .musicPlayerContainer {
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    z-index: 1001;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(4px);
-  }
-
-  .musicPlayerContainer.minimized {
-    transform: none;
+    top: 10px;
+    right: 10px;
+    left: 10px;
+    width: auto;
   }
 
   .popup {
-    width: 95%;
-    max-width: 520px;
-    border-radius: 20px;
+    border-radius: 12px 12px 0 0;
+  }
+
+  .content {
+    height: 200px;
+  }
+
+  .footer {
+    border-radius: 0 0 12px 12px;
   }
 
   .miniPlayer {
@@ -373,10 +376,6 @@
     0 0 0 1px rgba(255, 255, 255, 0.05);
 }
 
-[data-theme='dark'] .content {
-  background: linear-gradient(180deg, #242424 0%, #1a1a1a 100%);
-}
-
 [data-theme='dark'] .footer {
   background: #242424;
   border-top-color: rgba(255, 255, 255, 0.06);
@@ -390,10 +389,4 @@
   box-shadow:
     0 4px 12px rgba(0, 0, 0, 0.3),
     0 0 0 1px rgba(255, 255, 255, 0.05) inset;
-}
-
-@media (max-width: 480px) {
-  [data-theme='dark'] .musicPlayerContainer {
-    background: rgba(0, 0, 0, 0.7);
-  }
 }

@@ -1,28 +1,18 @@
-import React, { useEffect, useRef } from 'react';
-import { mountIframe } from './iframeManager';
+import React from 'react';
 import styles from './styles.module.css';
 
 /**
  * 音乐播放器弹窗组件
  *
- * 使用 iframeManager 来管理 iframe，确保 iframe 不会因组件重新挂载而被销毁
- * 这样可以保持音乐播放状态
+ * 注意：iframe 由 iframeManager 独立管理，不在此组件中渲染
+ * 此组件只渲染弹窗的头部和底部，iframe 通过 CSS 定位显示在中间
  */
 export default function MusicPopup({ onMinimize, onClose }) {
-  const iframeContainerRef = useRef(null);
-
-  // 挂载 iframe 到容器
-  useEffect(() => {
-    if (iframeContainerRef.current) {
-      mountIframe(iframeContainerRef.current);
-    }
-  }, []);
-
   return (
     <div className={styles.popup}>
+      {/* 头部 */}
       <div className={styles.header}>
         <div className={styles.headerLeft}>
-          {/* 音乐波形动画 */}
           <div className={styles.waveform}>
             <span></span>
             <span></span>
@@ -33,7 +23,6 @@ export default function MusicPopup({ onMinimize, onClose }) {
         </div>
 
         <div className={styles.headerActions}>
-          {/* 最小化按钮 */}
           <button
             className={styles.minimizeButton}
             onClick={onMinimize}
@@ -45,7 +34,6 @@ export default function MusicPopup({ onMinimize, onClose }) {
             </svg>
           </button>
 
-          {/* 关闭按钮 */}
           <button
             className={styles.closeButton}
             onClick={onClose}
@@ -60,8 +48,8 @@ export default function MusicPopup({ onMinimize, onClose }) {
         </div>
       </div>
 
-      {/* iframe 容器 - 使用 ref 让 iframeManager 挂载 iframe */}
-      <div className={styles.content} ref={iframeContainerRef} />
+      {/* 中间区域 - 占位，iframe 通过 iframeManager 独立渲染并定位在此处 */}
+      <div className={styles.content} />
 
       {/* 底部提示 */}
       <div className={styles.footer}>
