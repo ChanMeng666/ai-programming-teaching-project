@@ -3,24 +3,6 @@
 .spaceMain {
   position: relative;
   z-index: 1;
-}
-
-/* 特性展示区域 */
-.featuresSection {
-  position: relative;
-  padding: 4rem 0 6rem;
-  z-index: 10;
-}
-
-/* 响应式调整 */
-@media (max-width: 996px) {
-  .featuresSection {
-    padding: 3rem 0 4rem;
-  }
-}
-
-@media (max-width: 576px) {
-  .featuresSection {
-    padding: 2rem 0 3rem;
-  }
+  overflow-x: hidden;
+  max-width: 100vw;
 }

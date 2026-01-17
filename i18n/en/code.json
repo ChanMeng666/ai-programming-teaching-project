@@ -459,11 +459,25 @@
   "homepage.hero.description": {
     "message": "Learn AI development through practical examples, from basics to advanced, building a complete AI programming skill set. Beginner-friendly, practice-oriented."
   },
+  "homepage.hero.welcome": {
+    "message": "Welcome to",
+    "description": "Homepage hero welcome text"
+  },
+  "homepage.hero.platform": {
+    "message": "AI Programming Universe",
+    "description": "Homepage hero platform name"
+  },
+  "homepage.hero.description2": {
+    "message": "Embark on a journey through the programming galaxy. Whether you're a beginner or an experienced developer, AI will be your co-pilot, helping you explore the infinite possibilities of the code universe.",
+    "description": "Homepage hero description"
+  },
   "homepage.hero.startButton": {
-    "message": "Get Started"
+    "message": "Start Exploring",
+    "description": "Homepage hero primary button"
   },
   "homepage.hero.blogButton": {
-    "message": "Read Blog"
+    "message": "Latest Updates",
+    "description": "Homepage hero secondary button"
   },
   "homepage.hero.codeComment": {
     "message": "Build AI Applications"

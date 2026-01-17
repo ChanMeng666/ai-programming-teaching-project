@@ -1,7 +1,6 @@
 import React from 'react';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
-import HomepageFeatures from '@site/src/components/HomepageFeatures';
 import SpaceBackground from '@site/src/components/SpaceBackground';
 import SpaceHero from '@site/src/components/SpaceHero';
 import GEOHead from '@site/src/components/GEOHead';
@@ -76,11 +75,6 @@ export default function Home() {
       <main className={styles.spaceMain} data-page="homepage">
         {/* 太空主题Hero区域 */}
         <SpaceHero />
-
-        {/* 特性展示区域 */}
-        <section className={styles.featuresSection}>
-          <HomepageFeatures />
-        </section>
       </main>
 
       <Analytics />

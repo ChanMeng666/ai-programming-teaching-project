@@ -5,11 +5,25 @@
   "homepage.hero.description": {
     "message": "通过实践案例学习人工智能开发，从基础到进阶，打造完整的AI编程技能体系"
   },
+  "homepage.hero.welcome": {
+    "message": "欢迎来到",
+    "description": "Homepage hero welcome text"
+  },
+  "homepage.hero.platform": {
+    "message": "AI 编程宇宙",
+    "description": "Homepage hero platform name"
+  },
+  "homepage.hero.description2": {
+    "message": "在这里，你将踏上一段星际编程之旅。无论你是编程新手还是经验开发者，AI 都将成为你最强大的副驾驶，带你探索代码宇宙的无限可能。",
+    "description": "Homepage hero description"
+  },
   "homepage.hero.startButton": {
-    "message": "开始学习"
+    "message": "开始探索",
+    "description": "Homepage hero primary button"
   },
   "homepage.hero.blogButton": {
-    "message": "阅读博客"
+    "message": "最新动态",
+    "description": "Homepage hero secondary button"
   },
   "homepage.hero.codeComment": {
     "message": "构建AI应用"

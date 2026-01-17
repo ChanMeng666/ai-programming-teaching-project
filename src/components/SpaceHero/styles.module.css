@@ -5,7 +5,7 @@
   align-items: center;
   justify-content: center;
   padding: 6rem 2rem 4rem;
-  overflow: visible;
+  overflow: hidden;
 }
 
 .heroContainer {
@@ -23,29 +23,6 @@
   max-width: 580px;
 }
 
-/* 徽章 */
-.badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 16px;
-  background: linear-gradient(
-    135deg,
-    rgba(45, 212, 191, 0.15) 0%,
-    rgba(244, 114, 182, 0.15) 100%
-  );
-  border-radius: 100px;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--space-accent-cyan, #2dd4bf);
-  margin-bottom: 1.5rem;
-  border: 1px solid rgba(45, 212, 191, 0.3);
-}
-
-.badgeIcon {
-  font-size: 1rem;
-}
-
 /* 标题 */
 .title {
   font-size: 3.5rem;
@@ -56,16 +33,9 @@
   letter-spacing: -0.02em;
 }
 
-.gradientText {
-  background: linear-gradient(
-    135deg,
-    var(--space-accent-cyan, #2dd4bf) 0%,
-    var(--space-accent-pink, #f472b6) 50%,
-    var(--space-accent-purple, #a855f7) 100%
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+/* 高亮文字 - 使用项目主色调 */
+.highlightText {
+  color: var(--ifm-color-primary, #0f7173);
 }
 
 /* 副标题 */
@@ -82,6 +52,65 @@
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
+}
+
+/* 主按钮 - 使用项目主色调 */
+.primaryButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 28px;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: var(--ifm-color-primary, #0f7173);
+  color: #ffffff;
+  box-shadow: 0 4px 14px 0 rgba(15, 113, 115, 0.3);
+}
+
+.primaryButton:hover {
+  background: var(--ifm-color-primary-dark, #0c5c5e);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px 0 rgba(15, 113, 115, 0.4);
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.primaryButton:active {
+  transform: translateY(0);
+}
+
+/* 次按钮 - 使用项目主色调 */
+.secondaryButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 28px;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: transparent;
+  color: var(--space-pane-text, #01064a);
+  border: 2px solid var(--ifm-color-primary, #0f7173);
+}
+
+.secondaryButton:hover {
+  background: rgba(15, 113, 115, 0.1);
+  transform: translateY(-2px);
+  text-decoration: none;
+  color: var(--ifm-color-primary, #0f7173);
+}
+
+.secondaryButton:active {
+  transform: translateY(0);
 }
 
 /* 右侧视觉区域 */
@@ -102,7 +131,7 @@
 .rocket {
   width: 280px;
   height: auto;
-  filter: drop-shadow(0 20px 40px rgba(45, 212, 191, 0.3));
+  filter: drop-shadow(0 20px 40px rgba(15, 113, 115, 0.3));
   transform: rotate(-15deg);
 }
 
@@ -115,23 +144,11 @@
   transform: translate(-50%, -50%);
   background: radial-gradient(
     circle,
-    rgba(45, 212, 191, 0.25) 0%,
-    rgba(45, 212, 191, 0.1) 40%,
+    rgba(15, 113, 115, 0.2) 0%,
+    rgba(15, 113, 115, 0.08) 40%,
     transparent 70%
   );
   border-radius: 50%;
-  pointer-events: none;
-  z-index: -1;
-}
-
-/* 高光装饰 */
-.highlight {
-  position: absolute;
-  width: 500px;
-  height: auto;
-  top: -100px;
-  right: -150px;
-  opacity: 0.4;
   pointer-events: none;
   z-index: -1;
 }
@@ -175,12 +192,6 @@
   .rocket {
     width: 200px;
   }
-
-  .highlight {
-    width: 300px;
-    top: -50px;
-    right: -100px;
-  }
 }
 
 @media (max-width: 576px) {
@@ -200,16 +211,18 @@
     flex-direction: column;
   }
 
+  .primaryButton,
+  .secondaryButton {
+    width: 100%;
+    justify-content: center;
+  }
+
   .rocket {
     width: 160px;
   }
 
   .heroVisual {
     min-height: 220px;
-  }
-
-  .highlight {
-    display: none;
   }
 }
 

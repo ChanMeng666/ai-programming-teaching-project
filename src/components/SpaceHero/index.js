@@ -1,7 +1,7 @@
 import React from 'react';
 import Translate, { translate } from '@docusaurus/Translate';
 import GlassPanel from '../GlassPanel';
-import SpaceButton from '../SpaceButton';
+import Link from '@docusaurus/Link';
 import styles from './styles.module.css';
 
 // 火箭图标组件
@@ -31,16 +31,10 @@ export default function SpaceHero() {
       <div className={styles.heroContainer}>
         {/* 左侧：主内容面板 */}
         <GlassPanel highlight className={styles.heroPanel} padding="large">
-          {/* 徽章 */}
-          <div className={styles.badge}>
-            <span className={styles.badgeIcon}>🚀</span>
-            <Translate id="homepage.hero.badge">Code to the Stars</Translate>
-          </div>
-
           {/* 主标题 */}
           <h1 className={styles.title}>
             <Translate id="homepage.hero.welcome">欢迎来到</Translate>
-            <span className={styles.gradientText}>
+            <span className={styles.highlightText}>
               <Translate id="homepage.hero.platform">AI 编程宇宙</Translate>
             </span>
           </h1>
@@ -55,13 +49,13 @@ export default function SpaceHero() {
 
           {/* 按钮组 */}
           <div className={styles.actions}>
-            <SpaceButton to="/docs/intro" primary>
+            <Link to="/docs/intro" className={styles.primaryButton}>
               <RocketIcon />
               <Translate id="homepage.hero.startButton">开始探索</Translate>
-            </SpaceButton>
-            <SpaceButton to="/blog">
+            </Link>
+            <Link to="/blog" className={styles.secondaryButton}>
               <Translate id="homepage.hero.blogButton">最新动态</Translate>
-            </SpaceButton>
+            </Link>
           </div>
         </GlassPanel>
 
@@ -75,12 +69,6 @@ export default function SpaceHero() {
             />
             <div className={styles.rocketGlow} />
           </div>
-          {/* 高光装饰 */}
-          <img
-            src="/img/space/PinkHighlight.png"
-            alt=""
-            className={styles.highlight}
-          />
         </div>
       </div>
     </header>

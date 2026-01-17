@@ -328,6 +328,12 @@
 
 /* 首页特殊样式 - 使用 wrapperClassName="homepage-wrapper" */
 
+/* 防止首页横向滚动 */
+.homepage-wrapper {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
 /* 首页导航栏 - 透明背景，白色文字 */
 .homepage-wrapper .navbar {
   --ifm-navbar-background-color: transparent;
