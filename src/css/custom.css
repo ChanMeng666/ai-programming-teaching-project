@@ -334,14 +334,16 @@
   max-width: 100vw;
 }
 
-/* 首页背景透明 - 确保星空背景在黑暗模式下可见 */
-.homepage-wrapper,
-.homepage-wrapper .main-wrapper {
+/* 首页背景透明 - 确保星空背景在所有模式下可见 */
+/* 使用 :has() 选择器针对包含首页的 html 和 body */
+html:has(.homepage-wrapper),
+html:has(.homepage-wrapper) body,
+html:has(.homepage-wrapper) #__docusaurus {
   background: transparent !important;
 }
 
-[data-theme='dark'] .homepage-wrapper,
-[data-theme='dark'] .homepage-wrapper .main-wrapper {
+.homepage-wrapper,
+.homepage-wrapper .main-wrapper {
   background: transparent !important;
 }
 
