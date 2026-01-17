@@ -20,6 +20,7 @@ One-click **FREE** deployment of your personalized learning environment.
 
 [![][github-release-shield]][github-release-link]
 [![][vercel-shield]][vercel-link]
+[![][cloudflare-shield]][cloudflare-link]
 [![][docusaurus-shield]][docusaurus-link]<br/>
 [![][github-contributors-shield]][github-contributors-link]
 [![][github-forks-shield]][github-forks-link]
@@ -105,10 +106,12 @@ https://github.com/user-attachments/assets/7f452170-ee23-44ad-ac87-7ad41161cd3b
 
 <div align="center">
 
- <img src="https://img.shields.io/badge/docusaurus-3.6.1-blue?style=for-the-badge&logo=docusaurus"/>
+ <img src="https://img.shields.io/badge/docusaurus-3.8.1-blue?style=for-the-badge&logo=docusaurus"/>
  <img src="https://img.shields.io/badge/react-%5E18.0.0-blue?style=for-the-badge&logo=react"/>
  <img src="https://img.shields.io/badge/javascript-ES6+-yellow?style=for-the-badge&logo=javascript"/>
+ <img src="https://img.shields.io/badge/typescript-5.0-blue?style=for-the-badge&logo=typescript"/>
  <img src="https://img.shields.io/badge/node.js-%3E%3D18.0-green?style=for-the-badge&logo=nodedotjs"/>
+ <img src="https://img.shields.io/badge/cloudflare-workers-orange?style=for-the-badge&logo=cloudflare"/>
  <img src="https://img.shields.io/badge/vercel-deployment-black?style=for-the-badge&logo=vercel"/>
 
 </div>
@@ -129,23 +132,27 @@ https://github.com/user-attachments/assets/7f452170-ee23-44ad-ac87-7ad41161cd3b
   - [✨ Key Features](#-key-features)
     - [`1` Interactive Learning Modules](#1-interactive-learning-modules)
     - [`2` Comprehensive Tutorial System](#2-comprehensive-tutorial-system)
+    - [`3` AI Chat Assistant with RAG](#3-ai-chat-assistant-with-rag)
     - [`*` Additional Features](#-additional-features)
   - [🛠️ Tech Stack](#️-tech-stack)
   - [🏗️ Architecture](#️-architecture)
     - [System Architecture](#system-architecture)
-    - [Content Structure](#content-structure)
+    - [AI Chat Architecture](#ai-chat-architecture)
+    - [Project Structure](#project-structure)
   - [🚀 Getting Started](#-getting-started)
     - [Prerequisites](#prerequisites)
     - [Quick Installation](#quick-installation)
     - [Development Mode](#development-mode)
   - [🛳 Deployment](#-deployment)
-    - [`A` Vercel Deployment](#a-vercel-deployment)
-    - [`B` Docker Deployment](#b-docker-deployment)
+    - [`A` Frontend Deployment (Vercel)](#a-frontend-deployment-vercel)
+    - [`B` Backend Deployment (Cloudflare Workers)](#b-backend-deployment-cloudflare-workers)
+    - [`C` Docker Deployment](#c-docker-deployment)
   - [📖 Learning Path](#-learning-path)
     - [Beginner Level](#beginner-level)
     - [Intermediate Level](#intermediate-level)
     - [Advanced Level](#advanced-level)
   - [🔌 Integrations](#-integrations)
+    - [Cloudflare Services Pricing](#cloudflare-services-pricing)
   - [⌨️ Development](#️-development)
     - [Local Development](#local-development)
     - [Adding Content](#adding-content)
@@ -208,18 +215,49 @@ Revolutionary tutorial system that transforms how learners interact with AI prog
 - **Project Implementation**: Complete project walkthroughs
 - **Advanced Topics**: AI drawing, chat systems, and Coze integration
 
+### `3` AI Chat Assistant with RAG
+
+An intelligent AI chat assistant powered by Cloudflare Workers AI, providing real-time Q&A support based on the course content. The assistant uses Retrieval-Augmented Generation (RAG) to provide accurate, context-aware answers.
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant ChatWidget
+    participant Worker as Cloudflare Worker
+    participant Vectorize
+    participant AI as Workers AI
+
+    User->>ChatWidget: Ask question
+    ChatWidget->>Worker: POST /api/chat
+    Worker->>Vectorize: Search relevant docs
+    Vectorize-->>Worker: Return matching chunks
+    Worker->>AI: Generate response with context
+    AI-->>Worker: Stream response
+    Worker-->>ChatWidget: SSE stream
+    ChatWidget-->>User: Display answer
+```
+
+**Key Capabilities:**
+- 🤖 **Intelligent Q&A**: Answers questions based on course documentation
+- 📚 **RAG-Powered**: Uses vector search to find relevant content
+- 🌊 **Streaming Responses**: Real-time typing effect for better UX
+- 🌐 **Bilingual Support**: Supports both Chinese and English
+- 🎨 **Theme Aware**: Adapts to light/dark mode automatically
+
 ### `*` Additional Features
 
 Beyond the core learning modules, this platform includes:
 
+- [x] 🤖 **AI Chat Assistant**: Intelligent Q&A powered by Cloudflare Workers AI
 - [x] 📚 **Rich Documentation**: Comprehensive guides and references
 - [x] 🎨 **Modern UI/UX**: Beautiful design with dark/light themes
 - [x] 📝 **Blog System**: Regular updates and insights
-- [x] 🔍 **Search Functionality**: Find content quickly and easily
+- [x] 🔍 **Search Functionality**: Find content quickly and easily (Algolia)
 - [x] 📊 **Progress Tracking**: Monitor your learning journey
 - [x] 💻 **Code Examples**: Interactive code snippets and demos
 - [x] 🚀 **One-Click Deploy**: Easy deployment to your own instance
 - [x] 📱 **Mobile Optimized**: Perfect experience on all devices
+- [x] 🌐 **i18n Support**: Full internationalization (Chinese & English)
 
 > ✨ New content and features are continuously added as the field evolves.
 
@@ -236,19 +274,19 @@ Beyond the core learning modules, this platform includes:
     <tr>
       <td align="center" width="96">
         <img src="https://cdn.simpleicons.org/docusaurus" width="48" height="48" alt="Docusaurus" />
-        <br>Docusaurus 3.6
+        <br>Docusaurus 3.8
       </td>
       <td align="center" width="96">
         <img src="https://cdn.simpleicons.org/react" width="48" height="48" alt="React" />
         <br>React 18
       </td>
       <td align="center" width="96">
-        <img src="https://cdn.simpleicons.org/javascript" width="48" height="48" alt="JavaScript" />
-        <br>JavaScript ES6+
+        <img src="https://cdn.simpleicons.org/typescript" width="48" height="48" alt="TypeScript" />
+        <br>TypeScript
       </td>
       <td align="center" width="96">
-        <img src="https://cdn.simpleicons.org/css3" width="48" height="48" alt="CSS3" />
-        <br>CSS3
+        <img src="https://cdn.simpleicons.org/cloudflare" width="48" height="48" alt="Cloudflare" />
+        <br>Workers AI
       </td>
       <td align="center" width="96">
         <img src="https://cdn.simpleicons.org/markdown" width="48" height="48" alt="Markdown" />
@@ -263,17 +301,27 @@ Beyond the core learning modules, this platform includes:
 </div>
 
 **Frontend Stack:**
-- **Framework**: Docusaurus 3.6.1 with React 18
+- **Framework**: Docusaurus 3.8.1 with React 18
 - **Styling**: CSS3 + Custom Design System
 - **Content**: MDX for rich interactive documentation
 - **Analytics**: Vercel Analytics integration
-- **Icons**: SVG-based icon system
+- **Search**: Algolia DocSearch integration
+- **i18n**: Chinese (zh-Hans) and English support
+- **Components**: Custom React components (ChatWidget, BackToTop, etc.)
+
+**Backend Stack (AI Chat):**
+- **Runtime**: Cloudflare Workers (Edge Computing)
+- **AI Model**: Llama 3.1 8B Instruct via Workers AI
+- **Embeddings**: BGE Base EN v1.5 (768 dimensions)
+- **Vector Database**: Cloudflare Vectorize (~4,800 document chunks)
+- **Session Storage**: Cloudflare KV
+- **API**: RESTful with SSE streaming
 
 **Development Tools:**
-- **Build System**: Webpack-based Docusaurus build
+- **Build System**: Rspack-based Docusaurus build (@docusaurus/faster)
 - **Development Server**: Hot reload development environment
-- **Content Management**: File-based content system
-- **Deployment**: Vercel for seamless deployments
+- **Content Management**: File-based content system with versioning
+- **Deployment**: Vercel (Frontend) + Cloudflare Workers (Backend)
 - **Version Control**: Git-based workflow
 
 > [!TIP]
@@ -288,47 +336,104 @@ Beyond the core learning modules, this platform includes:
 
 ```mermaid
 graph TB
-    subgraph "Content Layer"
-        A[Documentation] --> B[Blog Posts]
-        B --> C[Tutorial Modules]
-        C --> D[Interactive Examples]
+    subgraph "Frontend - Docusaurus"
+        A[MDX Documentation] --> B[React Components]
+        B --> C[ChatWidget]
+        B --> D[Theme Components]
+        C --> E[i18n Support]
     end
-    
-    subgraph "Presentation Layer"
-        E[React Components] --> F[Docusaurus Framework]
-        F --> G[Responsive UI]
-        G --> H[Search & Navigation]
+
+    subgraph "Backend - Cloudflare Workers"
+        F[Worker Entry] --> G[Chat Handler]
+        G --> H[RAG Module]
+        H --> I[Vectorize Search]
+        H --> J[Workers AI]
+        G --> K[KV Sessions]
     end
-    
+
     subgraph "Deployment"
-        I[Build Process]
-        J[Static Generation]
-        K[CDN Distribution]
-        L[Analytics]
+        L[Vercel CDN]
+        M[Cloudflare Edge]
     end
-    
-    A --> E
-    E --> I
-    I --> J
-    J --> K
-    F --> L
+
+    C -->|API Request| F
+    J -->|Llama 3.1 8B| G
+    I -->|BGE Embeddings| H
+    A --> L
+    F --> M
 ```
 
-### Content Structure
+### AI Chat Architecture
+
+The AI Chat system uses a RAG (Retrieval-Augmented Generation) architecture to provide accurate, context-aware responses:
+
+```mermaid
+flowchart LR
+    subgraph "Document Processing"
+        A[MDX Files] -->|Parse| B[Text Chunks]
+        B -->|Embed| C[Vector Store]
+    end
+
+    subgraph "Query Processing"
+        D[User Query] -->|Embed| E[Query Vector]
+        E -->|Search| C
+        C -->|Top 3 Matches| F[Context]
+    end
+
+    subgraph "Response Generation"
+        F --> G[System Prompt]
+        D --> G
+        G -->|Llama 3.1| H[AI Response]
+        H -->|SSE Stream| I[Chat UI]
+    end
+```
+
+| Component | Technology | Purpose |
+|-----------|------------|---------|
+| Vector DB | Cloudflare Vectorize | Store 4,800+ document embeddings |
+| Embeddings | BGE Base EN v1.5 | Convert text to 768-dim vectors |
+| LLM | Llama 3.1 8B Instruct | Generate conversational responses |
+| Sessions | Cloudflare KV | Maintain conversation history |
+| Streaming | Server-Sent Events | Real-time response delivery |
+
+### Project Structure
 
 ```
-docs/
-├── basics/               # Fundamental concepts
-│   ├── ai-communication  # AI interaction principles
-│   ├── markdown-syntax   # Documentation basics
-│   └── prompt-engineering # Effective prompting
-├── setup/               # Environment configuration
-├── tools/               # Development tools
-├── tutorials/           # Hands-on tutorials
-├── practice/            # Project implementations
-├── ai-chat/             # Chat system development
-├── ai-drawing/          # AI art and design
-└── coze/                # Coze platform integration
+ai-programming-teaching-project/
+├── docs/                        # Current version documentation
+│   ├── basics/                  # Fundamental concepts
+│   ├── practice/                # Project implementations
+│   └── website/                 # Website development tutorials
+├── versioned_docs/              # Versioned documentation
+│   ├── version-2024-winter/     # Winter 2024 curriculum
+│   └── version-2025-summer/     # Summer 2025 curriculum
+├── blog/                        # Blog posts
+├── i18n/                        # Internationalization
+│   ├── en/                      # English translations
+│   └── zh-Hans/                 # Chinese translations
+├── src/
+│   ├── components/              # React components
+│   │   ├── ChatWidget/          # AI Chat assistant
+│   │   ├── BackToTop/           # Back to top button
+│   │   ├── HomepageFeatures/    # Homepage features
+│   │   └── WaveAnimation/       # Wave animation
+│   ├── pages/                   # Custom pages
+│   ├── theme/                   # Theme customizations
+│   └── css/                     # Global styles
+├── worker/                      # Cloudflare Worker backend
+│   ├── src/
+│   │   ├── index.ts             # Worker entry point
+│   │   ├── chat.ts              # Chat logic & streaming
+│   │   ├── rag.ts               # RAG & vector search
+│   │   └── types.ts             # TypeScript types
+│   ├── scripts/
+│   │   └── seed-vectors.ts      # Document vectorization
+│   ├── wrangler.toml            # Cloudflare configuration
+│   └── package.json             # Worker dependencies
+├── static/                      # Static assets
+├── docusaurus.config.js         # Docusaurus configuration
+├── sidebars.js                  # Sidebar configuration
+└── package.json                 # Project dependencies
 ```
 
 ## 🚀 Getting Started
@@ -392,9 +497,9 @@ npm run clear
 ## 🛳 Deployment
 
 > [!IMPORTANT]
-> Choose the deployment strategy that best fits your educational needs. Vercel is recommended for its simplicity and performance.
+> This project requires deploying both the frontend (Vercel) and backend (Cloudflare Workers) for full functionality.
 
-### `A` Vercel Deployment
+### `A` Frontend Deployment (Vercel)
 
 **One-Click Deploy:**
 
@@ -410,7 +515,68 @@ npm i -g vercel
 vercel --prod
 ```
 
-### `B` Docker Deployment
+### `B` Backend Deployment (Cloudflare Workers)
+
+**Prerequisites:**
+- Cloudflare account with Workers enabled
+- Wrangler CLI installed
+
+**Step 1: Configure Cloudflare Resources**
+
+```bash
+cd worker
+
+# Login to Cloudflare
+npx wrangler login
+
+# Create KV namespace for sessions
+npx wrangler kv namespace create CHAT_SESSIONS
+
+# Create Vectorize index for RAG
+npx wrangler vectorize create docs-index --dimensions=768 --metric=cosine
+```
+
+**Step 2: Update wrangler.toml**
+
+```toml
+name = "ai-chat-worker"
+main = "src/index.ts"
+compatibility_date = "2024-12-01"
+compatibility_flags = ["nodejs_compat"]
+
+[ai]
+binding = "AI"
+
+[[kv_namespaces]]
+binding = "CHAT_SESSIONS"
+id = "<YOUR_KV_ID>"
+
+[[vectorize]]
+binding = "VECTORIZE"
+index_name = "docs-index"
+
+[vars]
+CORS_ORIGIN = "*"
+```
+
+**Step 3: Deploy Worker**
+
+```bash
+# Install dependencies
+npm install
+
+# Deploy to Cloudflare
+npx wrangler deploy
+```
+
+**Step 4: Seed Vector Database**
+
+```bash
+# Run document vectorization
+npm run seed
+```
+
+### `C` Docker Deployment
 
 ```bash
 # Build Docker image
@@ -418,6 +584,32 @@ docker build -t ai-programming-platform .
 
 # Run container
 docker run -p 3000:3000 ai-programming-platform
+```
+
+### Deployment Architecture
+
+```mermaid
+graph LR
+    subgraph "User"
+        A[Browser]
+    end
+
+    subgraph "Vercel"
+        B[Static Site CDN]
+    end
+
+    subgraph "Cloudflare"
+        C[Workers Edge]
+        D[KV Storage]
+        E[Vectorize]
+        F[Workers AI]
+    end
+
+    A -->|HTTPS| B
+    A -->|API Calls| C
+    C --> D
+    C --> E
+    C --> F
 ```
 
 ## 📖 Learning Path
@@ -450,13 +642,28 @@ docker run -p 3000:3000 ai-programming-platform
 
 We support integration with leading development and AI platforms:
 
-| Category | Platform | Status | Documentation |
-|----------|----------|--------|---------------|
-| **Code Editors** | Cursor | ✅ Active | [Setup Guide](docs/tools/cursor-guide.mdx) |
-| **Development** | v0 Platform | ✅ Active | [Setup Guide](docs/tools/v0-platform.mdx) |
-| **Deployment** | Vercel | ✅ Active | [Setup Guide](docs/tools/vercel-deploy.mdx) |
-| **AI Tools** | Coze | ✅ Active | [Setup Guide](docs/coze/index.mdx) |
-| **Analytics** | Vercel Analytics | ✅ Active | Built-in Integration |
+| Category | Platform | Status | Description |
+|----------|----------|--------|-------------|
+| **AI Chat** | Cloudflare Workers AI | ✅ Active | Llama 3.1 8B for intelligent Q&A |
+| **Vector Search** | Cloudflare Vectorize | ✅ Active | RAG-powered document retrieval |
+| **Session Storage** | Cloudflare KV | ✅ Active | Conversation history management |
+| **Code Editors** | Cursor | ✅ Active | AI-assisted code editing tutorials |
+| **Development** | v0 Platform | ✅ Active | Rapid prototyping guides |
+| **Deployment** | Vercel | ✅ Active | Frontend hosting & CDN |
+| **Search** | Algolia DocSearch | ✅ Active | Full-text documentation search |
+| **AI Tools** | Coze | ✅ Active | Chatbot development tutorials |
+| **Analytics** | Vercel Analytics | ✅ Active | Usage tracking & insights |
+
+### Cloudflare Services Pricing
+
+| Service | Free Tier | Paid Pricing |
+|---------|-----------|--------------|
+| Workers AI | 10,000 Neurons/day | $0.011/1,000 Neurons |
+| KV Storage | 100K reads/day, 1GB | $0.50/million reads |
+| Vectorize | 30M queried dims/month | $0.01/million dims |
+
+> [!NOTE]
+> For typical educational usage (~50 daily conversations), the platform operates within free tier limits.
 
 ## ⌨️ Development
 
@@ -606,12 +813,14 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 <!-- External Links -->
 [vercel-link]: https://vercel.com
+[cloudflare-link]: https://workers.cloudflare.com
 [docusaurus-link]: https://docusaurus.io
 
 <!-- Shield Badges -->
 [github-release-shield]: https://img.shields.io/github/v/release/ChanMeng666/ai-programming-teaching-project?color=369eff&labelColor=black&logo=github&style=flat-square
 [vercel-shield]: https://img.shields.io/badge/vercel-online-55b467?labelColor=black&logo=vercel&style=flat-square
-[docusaurus-shield]: https://img.shields.io/badge/docusaurus-3.6.1-blue?labelColor=black&logo=docusaurus&style=flat-square
+[cloudflare-shield]: https://img.shields.io/badge/cloudflare-workers%20AI-f38020?labelColor=black&logo=cloudflare&style=flat-square
+[docusaurus-shield]: https://img.shields.io/badge/docusaurus-3.8.1-blue?labelColor=black&logo=docusaurus&style=flat-square
 [github-contributors-shield]: https://img.shields.io/github/contributors/ChanMeng666/ai-programming-teaching-project?color=c4f042&labelColor=black&style=flat-square
 [github-forks-shield]: https://img.shields.io/github/forks/ChanMeng666/ai-programming-teaching-project?color=8ae8ff&labelColor=black&style=flat-square
 [github-stars-shield]: https://img.shields.io/github/stars/ChanMeng666/ai-programming-teaching-project?color=ffcb47&labelColor=black&style=flat-square
