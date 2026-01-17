@@ -1,6 +1,8 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 import MusicPopup from './MusicPopup';
 import MiniPlayer from './MiniPlayer';
+import { destroyIframe } from './iframeManager';
 import styles from './styles.module.css';
 
 // sessionStorage keys for persisting state across page navigations
@@ -23,26 +25,33 @@ function getPersistedState(key, defaultValue) {
 /**
  * 音乐播放器组件
  *
- * 设计理念：
- * - iframe 一旦激活就保持挂载（音乐不中断）
- * - 弹窗可展开/最小化，但不会卸载播放器
- * - 最小化时显示迷你播放器条
- * - 导航栏按钮显示激活状态
- * - 状态持久化到 sessionStorage，确保页面切换时音乐不中断
+ * 架构设计：
+ * 1. 使用 Portal 将播放器渲染到独立的 DOM 节点，与 React 页面路由解耦
+ * 2. 使用 iframeManager 管理 iframe 的创建和销毁，确保 iframe 在页面切换时不被重新挂载
+ * 3. 使用事件委托处理所有音乐按钮点击（包括移动端侧边栏动态创建的按钮）
+ * 4. 使用 sessionStorage 持久化状态
  */
 export default function MusicPlayer() {
-  // 是否已激活（首次打开后为 true，iframe 保持挂载）
-  // 从 sessionStorage 恢复状态，确保页面切换时保持
   const [isActivated, setIsActivated] = useState(() =>
     getPersistedState(STORAGE_KEY_ACTIVATED, false)
   );
-  // 弹窗是否展开
   const [isExpanded, setIsExpanded] = useState(() =>
     getPersistedState(STORAGE_KEY_EXPANDED, false)
   );
+  const [portalContainer, setPortalContainer] = useState(null);
 
-  // 用于防止重复绑定事件
-  const listenerAttached = useRef(false);
+  // 创建 Portal 容器（独立于 React 路由）
+  useEffect(() => {
+    if (typeof document === 'undefined') return;
+
+    let container = document.getElementById('music-player-portal');
+    if (!container) {
+      container = document.createElement('div');
+      container.id = 'music-player-portal';
+      document.body.appendChild(container);
+    }
+    setPortalContainer(container);
+  }, []);
 
   // 持久化状态到 sessionStorage
   useEffect(() => {
@@ -54,124 +63,84 @@ export default function MusicPlayer() {
     }
   }, [isActivated, isExpanded]);
 
-  // 监听导航栏按钮点击
+  // 使用事件委托监听所有音乐按钮点击
   useEffect(() => {
-    const handleToggle = (e) => {
+    const handleClick = (e) => {
+      const button = e.target.closest('.header-music-link');
+      if (!button) return;
+
       e.preventDefault();
       e.stopPropagation();
 
-      setIsActivated(prev => {
-        if (!prev) {
-          // 首次点击：激活播放器并展开
-          setIsExpanded(true);
-          return true;
-        }
-        // 已激活：切换展开/最小化
-        setIsExpanded(expanded => !expanded);
-        return prev;
-      });
+      if (!isActivated) {
+        setIsActivated(true);
+        setIsExpanded(true);
+      } else {
+        setIsExpanded(prev => !prev);
+      }
     };
 
-    // 使用 MutationObserver 等待按钮渲染并绑定事件
-    const attachListener = () => {
-      const buttons = document.querySelectorAll('.header-music-link');
-      if (buttons.length === 0) return false;
+    document.addEventListener('click', handleClick, true);
+    return () => document.removeEventListener('click', handleClick, true);
+  }, [isActivated]);
 
-      buttons.forEach(button => {
-        // 移除旧的监听器（如果有的话）
-        button.removeEventListener('click', handleToggle);
-        // 添加新的监听器
-        button.addEventListener('click', handleToggle);
-      });
-      listenerAttached.current = true;
-      return true;
-    };
-
-    // 尝试立即附加监听器
-    if (!attachListener()) {
-      const observer = new MutationObserver(() => {
-        if (attachListener()) {
-          observer.disconnect();
-        }
-      });
-      observer.observe(document.body, { childList: true, subtree: true });
-      return () => observer.disconnect();
-    }
-
-    return () => {
-      const buttons = document.querySelectorAll('.header-music-link');
-      buttons.forEach(button => {
-        button.removeEventListener('click', handleToggle);
-      });
-      listenerAttached.current = false;
-    };
-  }, []);
-
-  // 更新导航栏按钮状态
+  // 更新所有音乐按钮的状态样式
   useEffect(() => {
     const updateButtonState = () => {
       const buttons = document.querySelectorAll('.header-music-link');
       buttons.forEach(button => {
-        // 激活状态（播放器已打开过）
-        if (isActivated) {
-          button.classList.add('header-music-link--activated');
-        } else {
-          button.classList.remove('header-music-link--activated');
-        }
-        // 展开状态
-        if (isExpanded) {
-          button.classList.add('header-music-link--expanded');
-        } else {
-          button.classList.remove('header-music-link--expanded');
-        }
+        button.classList.toggle('header-music-link--activated', isActivated);
+        button.classList.toggle('header-music-link--expanded', isExpanded);
       });
     };
 
     updateButtonState();
 
-    // 页面切换后可能需要重新更新按钮状态
     const observer = new MutationObserver(updateButtonState);
     observer.observe(document.body, { childList: true, subtree: true });
-
     return () => observer.disconnect();
   }, [isActivated, isExpanded]);
 
-  // 最小化弹窗（但保持 iframe 挂载）
   const handleMinimize = useCallback(() => {
     setIsExpanded(false);
   }, []);
 
-  // 从迷你播放器展开
   const handleExpand = useCallback(() => {
     setIsExpanded(true);
   }, []);
 
-  // 完全关闭播放器（停止音乐）
   const handleClose = useCallback(() => {
+    // 销毁 iframe（停止音乐）
+    destroyIframe();
     setIsActivated(false);
     setIsExpanded(false);
   }, []);
 
-  // 未激活时不渲染任何内容
-  if (!isActivated) return null;
+  if (!portalContainer) return null;
 
-  return (
-    <div className={styles.musicPlayerWrapper}>
-      {/* 弹窗 - 始终挂载，通过 CSS 控制显示/隐藏 */}
-      <div className={`${styles.musicPlayerContainer} ${isExpanded ? styles.expanded : styles.minimized}`}>
+  return createPortal(
+    <div
+      className={styles.musicPlayerWrapper}
+      style={{ display: isActivated ? 'block' : 'none' }}
+    >
+      {/* 弹窗容器 */}
+      <div
+        className={`${styles.musicPlayerContainer} ${isExpanded ? styles.expanded : styles.minimized}`}
+      >
         <MusicPopup
           onMinimize={handleMinimize}
           onClose={handleClose}
         />
       </div>
 
-      {/* 迷你播放器 - 最小化时显示 */}
-      {!isExpanded && (
+      {/* 迷你播放器 */}
+      <div style={{ display: isExpanded ? 'none' : 'block' }}>
         <MiniPlayer
           onExpand={handleExpand}
           onClose={handleClose}
         />
-      )}
-    </div>
+      </div>
+    </div>,
+    portalContainer
   );
 }

@@ -1,17 +1,23 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
+import { mountIframe } from './iframeManager';
 import styles from './styles.module.css';
-
-const SUNO_EMBED_URL = 'https://suno.com/embed/da76e35e-d870-4eca-831a-22885d088ffc';
 
 /**
  * 音乐播放器弹窗组件
- * 包含 Suno 音乐嵌入播放器
  *
- * 设计说明：
- * - 最小化按钮：隐藏弹窗但保持音乐播放
- * - 关闭按钮：完全停止音乐并关闭播放器
+ * 使用 iframeManager 来管理 iframe，确保 iframe 不会因组件重新挂载而被销毁
+ * 这样可以保持音乐播放状态
  */
 export default function MusicPopup({ onMinimize, onClose }) {
+  const iframeContainerRef = useRef(null);
+
+  // 挂载 iframe 到容器
+  useEffect(() => {
+    if (iframeContainerRef.current) {
+      mountIframe(iframeContainerRef.current);
+    }
+  }, []);
+
   return (
     <div className={styles.popup}>
       <div className={styles.header}>
@@ -54,18 +60,8 @@ export default function MusicPopup({ onMinimize, onClose }) {
         </div>
       </div>
 
-      <div className={styles.content}>
-        <iframe
-          src={SUNO_EMBED_URL}
-          className={styles.iframe}
-          title="Suno Music Player"
-          frameBorder="0"
-          allow="autoplay; clipboard-write; encrypted-media; fullscreen"
-          allowFullScreen
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-        />
-      </div>
+      {/* iframe 容器 - 使用 ref 让 iframeManager 挂载 iframe */}
+      <div className={styles.content} ref={iframeContainerRef} />
 
       {/* 底部提示 */}
       <div className={styles.footer}>
