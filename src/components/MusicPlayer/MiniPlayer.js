@@ -1,11 +1,15 @@
 import React from 'react';
+import { getTranslations } from './i18n';
 import styles from './styles.module.css';
 
 /**
  * 迷你播放器组件
  * 当主弹窗最小化时显示，提供快捷操作
+ * 支持中英文国际化
  */
-export default function MiniPlayer({ onExpand, onClose }) {
+export default function MiniPlayer({ onExpand, onClose, locale }) {
+  const t = getTranslations(locale);
+
   return (
     <div className={styles.miniPlayer}>
       {/* 音乐波形动画指示器 */}
@@ -20,9 +24,9 @@ export default function MiniPlayer({ onExpand, onClose }) {
       <button
         className={styles.miniExpandArea}
         onClick={onExpand}
-        aria-label="展开音乐播放器"
+        aria-label={t.expandLabel}
       >
-        <span className={styles.miniTitle}>背景音乐播放中</span>
+        <span className={styles.miniTitle}>{t.playing}</span>
         <svg
           className={styles.miniExpandIcon}
           width="16"
@@ -40,8 +44,8 @@ export default function MiniPlayer({ onExpand, onClose }) {
       <button
         className={styles.miniCloseButton}
         onClick={onClose}
-        aria-label="停止音乐"
-        title="停止音乐"
+        aria-label={t.stopLabel}
+        title={t.stopLabel}
       >
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
           <line x1="18" y1="6" x2="6" y2="18" />

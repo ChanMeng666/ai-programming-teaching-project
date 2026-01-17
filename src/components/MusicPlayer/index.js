@@ -8,6 +8,7 @@ import {
   destroyIframe,
   updateIframePosition
 } from './iframeManager';
+import { getCurrentLocale } from './i18n';
 import styles from './styles.module.css';
 
 const STORAGE_KEY_ACTIVATED = 'musicPlayer_isActivated';
@@ -31,6 +32,7 @@ function getPersistedState(key, defaultValue) {
  * 2. iframe 由 iframeManager 独立管理，位于头部和底部之间
  * 3. 三者通过 CSS 定位对齐，形成视觉上的完整弹窗
  * 4. iframe 永不移动，只用 CSS visibility 控制显示/隐藏
+ * 5. 支持中英文国际化
  */
 export default function MusicPlayer() {
   const [isActivated, setIsActivated] = useState(() =>
@@ -41,6 +43,7 @@ export default function MusicPlayer() {
   );
   const [portalContainer, setPortalContainer] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
+  const [locale, setLocale] = useState(() => getCurrentLocale());
 
   // 检测移动端并更新 iframe 位置
   useEffect(() => {
@@ -89,6 +92,20 @@ export default function MusicPlayer() {
       document.body.appendChild(container);
     }
     setPortalContainer(container);
+  }, []);
+
+  // 检测语言变化
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const updateLocale = () => {
+      setLocale(getCurrentLocale());
+    };
+
+    // 监听 URL 变化（用于 SPA 导航）
+    window.addEventListener('popstate', updateLocale);
+
+    return () => window.removeEventListener('popstate', updateLocale);
   }, []);
 
   // 持久化状态
@@ -197,6 +214,7 @@ export default function MusicPlayer() {
           onMinimize={handleMinimize}
           onClose={handleClose}
           isMobile={isMobile}
+          locale={locale}
         />
       </div>
 
@@ -205,6 +223,7 @@ export default function MusicPlayer() {
         <MiniPlayer
           onExpand={handleExpand}
           onClose={handleClose}
+          locale={locale}
         />
       )}
     </div>,
