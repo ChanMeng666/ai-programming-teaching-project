@@ -4,14 +4,16 @@ import styles from './styles.module.css';
 /**
  * 音乐播放器弹窗组件
  *
- * 注意：iframe 由 iframeManager 独立管理，不在此组件中渲染
- * 此组件只渲染弹窗的头部和底部，iframe 通过 CSS 定位显示在中间
+ * 架构说明：
+ * - 头部和底部是独立的固定定位元素
+ * - iframe 由 iframeManager 独立管理，位于头部和底部之间
+ * - 三者通过 CSS 定位对齐，形成视觉上的完整弹窗
  */
-export default function MusicPopup({ onMinimize, onClose }) {
+export default function MusicPopup({ onMinimize, onClose, isMobile }) {
   return (
-    <div className={styles.popup}>
-      {/* 头部 */}
-      <div className={styles.header}>
+    <>
+      {/* 头部 - 独立固定定位 */}
+      <div className={`${styles.popupHeader} ${isMobile ? styles.mobileHeader : ''}`}>
         <div className={styles.headerLeft}>
           <div className={styles.waveform}>
             <span></span>
@@ -48,15 +50,12 @@ export default function MusicPopup({ onMinimize, onClose }) {
         </div>
       </div>
 
-      {/* 中间区域 - 占位，iframe 通过 iframeManager 独立渲染并定位在此处 */}
-      <div className={styles.content} />
-
-      {/* 底部提示 */}
-      <div className={styles.footer}>
+      {/* 底部提示 - 独立固定定位 */}
+      <div className={`${styles.popupFooter} ${isMobile ? styles.mobileFooter : ''}`}>
         <span className={styles.footerTip}>
           点击最小化按钮可隐藏窗口，音乐将继续播放
         </span>
       </div>
-    </div>
+    </>
   );
 }

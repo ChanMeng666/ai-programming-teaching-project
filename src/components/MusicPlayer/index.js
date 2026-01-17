@@ -27,10 +27,10 @@ function getPersistedState(key, defaultValue) {
  * 音乐播放器组件
  *
  * 架构设计：
- * 1. iframe 由 iframeManager 独立管理，固定在 document.body 中永不移动
- * 2. 弹窗 UI (MusicPopup) 通过 Portal 渲染，与 iframe 位置对齐
- * 3. 使用事件委托处理所有音乐按钮点击
- * 4. 响应式布局：检测屏幕尺寸，调整 iframe 和弹窗位置
+ * 1. 头部和底部是独立的固定定位元素（由 MusicPopup 渲染）
+ * 2. iframe 由 iframeManager 独立管理，位于头部和底部之间
+ * 3. 三者通过 CSS 定位对齐，形成视觉上的完整弹窗
+ * 4. iframe 永不移动，只用 CSS visibility 控制显示/隐藏
  */
 export default function MusicPlayer() {
   const [isActivated, setIsActivated] = useState(() =>
@@ -42,7 +42,7 @@ export default function MusicPlayer() {
   const [portalContainer, setPortalContainer] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
 
-  // 检测移动端
+  // 检测移动端并更新 iframe 位置
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
@@ -50,24 +50,25 @@ export default function MusicPlayer() {
       const mobile = window.innerWidth <= 768;
       setIsMobile(mobile);
 
-      // 更新 iframe 位置以适应屏幕
+      // 更新 iframe 位置
+      // 头部高度约 47px，底部高度约 37px
       if (mobile) {
         updateIframePosition({
-          top: '60px',
+          top: '57px',      // 10px (container top) + 47px (header height)
           right: '10px',
           left: '10px',
           width: 'auto',
           height: '200px',
-          borderRadius: '0 0 12px 12px'
+          borderRadius: '0'
         });
       } else {
         updateIframePosition({
-          top: '117px',
+          top: '117px',     // 70px (container top) + 47px (header height)
           right: '20px',
           left: 'auto',
           width: '520px',
           height: '240px',
-          borderRadius: '0 0 16px 16px'
+          borderRadius: '0'
         });
       }
     };
@@ -98,14 +99,34 @@ export default function MusicPlayer() {
     } catch {}
   }, [isActivated, isExpanded]);
 
-  // 控制 iframe 显示/隐藏
+  // 控制 iframe 显示/隐藏，并确保位置正确
   useEffect(() => {
     if (isActivated && isExpanded) {
       showIframe();
+      // iframe 创建后更新位置
+      if (isMobile) {
+        updateIframePosition({
+          top: '57px',
+          right: '10px',
+          left: '10px',
+          width: 'auto',
+          height: '200px',
+          borderRadius: '0'
+        });
+      } else {
+        updateIframePosition({
+          top: '117px',
+          right: '20px',
+          left: 'auto',
+          width: '520px',
+          height: '240px',
+          borderRadius: '0'
+        });
+      }
     } else {
       hideIframe();
     }
-  }, [isActivated, isExpanded]);
+  }, [isActivated, isExpanded, isMobile]);
 
   // 事件委托处理按钮点击
   useEffect(() => {
@@ -116,7 +137,7 @@ export default function MusicPlayer() {
       e.preventDefault();
       e.stopPropagation();
 
-      // 关闭移动端侧边栏（如果打开）
+      // 关闭移动端侧边栏
       const sidebar = document.querySelector('.navbar-sidebar--show');
       if (sidebar) {
         const closeButton = document.querySelector('.navbar-sidebar__close');
@@ -168,13 +189,14 @@ export default function MusicPlayer() {
 
   return createPortal(
     <div className={styles.musicPlayerWrapper}>
-      {/* 弹窗 UI - 与固定的 iframe 位置对齐 */}
+      {/* 弹窗 UI（头部 + 底部） */}
       <div
-        className={`${styles.musicPlayerContainer} ${isMobile ? styles.mobile : ''} ${isExpanded ? styles.expanded : styles.minimized}`}
+        className={`${styles.popupContainer} ${isExpanded ? styles.expanded : styles.minimized}`}
       >
         <MusicPopup
           onMinimize={handleMinimize}
           onClose={handleClose}
+          isMobile={isMobile}
         />
       </div>
 

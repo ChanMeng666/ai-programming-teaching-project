@@ -2,9 +2,14 @@
    音乐播放器样式
 
    架构说明：
-   - iframe 由 iframeManager 独立管理，固定在 body 中
-   - 弹窗 UI 与 iframe 位置对齐
-   - iframe 位置: top: 117px, right: 20px, width: 520px, height: 240px
+   - 头部和底部是独立的固定定位元素
+   - iframe 由 iframeManager 独立管理，位于头部和底部之间
+   - 三者通过 CSS 定位对齐，形成视觉上的完整弹窗
+
+   桌面端布局：
+   - 头部: top: 70px, height: 47px
+   - iframe: top: 117px, height: 240px (由 iframeManager 管理)
+   - 底部: top: 357px, height: 37px
    ============================================ */
 
 .musicPlayerWrapper {
@@ -12,77 +17,54 @@
 }
 
 /* ============================================
-   弹窗容器 - 与 iframe 位置对齐
+   弹窗容器 - 控制整体显示/隐藏
    ============================================ */
-.musicPlayerContainer {
-  position: fixed;
-  top: 70px;
-  right: 20px;
-  width: 520px;
-  z-index: 998;
-  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+.popupContainer {
+  transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
-.musicPlayerContainer.expanded {
+.popupContainer.expanded {
   opacity: 1;
-  transform: translateY(0);
   visibility: visible;
-  pointer-events: auto;
 }
 
-.musicPlayerContainer.minimized {
+.popupContainer.minimized {
   opacity: 0;
-  transform: translateY(-20px);
   visibility: hidden;
   pointer-events: none;
 }
 
-/* 移动端容器 */
-.musicPlayerContainer.mobile {
-  top: 10px;
-  right: 10px;
-  left: 10px;
-  width: auto;
-}
-
 /* ============================================
-   弹窗窗口
+   弹窗头部 - 独立固定定位
    ============================================ */
-.popup {
-  width: 100%;
-  background: #ffffff;
-  border-radius: 16px 16px 0 0;
-  box-shadow:
-    0 4px 6px rgba(0, 0, 0, 0.07),
-    0 12px 28px rgba(0, 0, 0, 0.12),
-    0 0 0 1px rgba(0, 0, 0, 0.05);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  animation: popupEnter 0.3s ease;
-}
-
-@keyframes popupEnter {
-  from {
-    opacity: 0;
-    transform: translateY(-10px) scale(0.98);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-/* ============================================
-   弹窗头部
-   ============================================ */
-.header {
+.popupHeader {
+  position: fixed;
+  top: 70px;
+  right: 20px;
+  width: 520px;
+  z-index: 999;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 14px 16px;
   background: linear-gradient(135deg, var(--ifm-color-primary) 0%, var(--ifm-color-primary-dark) 100%);
   color: white;
+  border-radius: 16px 16px 0 0;
+  box-shadow:
+    0 -4px 12px rgba(0, 0, 0, 0.1),
+    0 0 0 1px rgba(0, 0, 0, 0.05);
+  animation: headerEnter 0.3s ease;
+}
+
+@keyframes headerEnter {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .headerLeft {
@@ -101,6 +83,66 @@
   display: flex;
   align-items: center;
   gap: 4px;
+}
+
+/* 移动端头部 */
+.mobileHeader {
+  top: 10px;
+  right: 10px;
+  left: 10px;
+  width: auto;
+  border-radius: 12px 12px 0 0;
+}
+
+/* ============================================
+   弹窗底部 - 独立固定定位
+   ============================================ */
+.popupFooter {
+  position: fixed;
+  top: 357px;  /* 70px + 47px (header) + 240px (iframe) */
+  right: 20px;
+  width: 520px;
+  z-index: 999;
+  padding: 10px 16px;
+  background: #f8f9fa;
+  border-radius: 0 0 16px 16px;
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.1),
+    0 0 0 1px rgba(0, 0, 0, 0.05);
+  animation: footerEnter 0.3s ease;
+}
+
+@keyframes footerEnter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.footerTip {
+  font-size: 12px;
+  color: #666;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.footerTip::before {
+  content: '💡';
+  font-size: 11px;
+}
+
+/* 移动端底部 */
+.mobileFooter {
+  top: 257px;  /* 10px + 47px (header) + 200px (iframe) */
+  right: 10px;
+  left: 10px;
+  width: auto;
+  border-radius: 0 0 12px 12px;
 }
 
 /* ============================================
@@ -177,44 +219,13 @@
 }
 
 /* ============================================
-   内容区域（占位，iframe 在外部渲染）
-   ============================================ */
-.content {
-  height: 240px;
-  background: transparent;
-}
-
-/* ============================================
-   底部提示
-   ============================================ */
-.footer {
-  padding: 10px 16px;
-  background: #f8f9fa;
-  border-radius: 0 0 16px 16px;
-  border-top: 1px solid rgba(0, 0, 0, 0.06);
-}
-
-.footerTip {
-  font-size: 12px;
-  color: #666;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.footerTip::before {
-  content: '💡';
-  font-size: 11px;
-}
-
-/* ============================================
    迷你播放器
    ============================================ */
 .miniPlayer {
   position: fixed;
   bottom: 160px;
   right: 24px;
-  z-index: 998;
+  z-index: 999;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -333,25 +344,6 @@
    移动端响应式
    ============================================ */
 @media (max-width: 768px) {
-  .musicPlayerContainer {
-    top: 10px;
-    right: 10px;
-    left: 10px;
-    width: auto;
-  }
-
-  .popup {
-    border-radius: 12px 12px 0 0;
-  }
-
-  .content {
-    height: 200px;
-  }
-
-  .footer {
-    border-radius: 0 0 12px 12px;
-  }
-
   .miniPlayer {
     bottom: 140px;
     right: 16px;
@@ -368,17 +360,11 @@
 /* ============================================
    深色模式
    ============================================ */
-[data-theme='dark'] .popup {
-  background: #1a1a1a;
-  box-shadow:
-    0 4px 6px rgba(0, 0, 0, 0.2),
-    0 12px 28px rgba(0, 0, 0, 0.3),
-    0 0 0 1px rgba(255, 255, 255, 0.05);
-}
-
-[data-theme='dark'] .footer {
+[data-theme='dark'] .popupFooter {
   background: #242424;
-  border-top-color: rgba(255, 255, 255, 0.06);
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.05);
 }
 
 [data-theme='dark'] .footerTip {
