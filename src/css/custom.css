@@ -334,6 +334,17 @@
   max-width: 100vw;
 }
 
+/* 首页背景透明 - 确保星空背景在黑暗模式下可见 */
+.homepage-wrapper,
+.homepage-wrapper .main-wrapper {
+  background: transparent !important;
+}
+
+[data-theme='dark'] .homepage-wrapper,
+[data-theme='dark'] .homepage-wrapper .main-wrapper {
+  background: transparent !important;
+}
+
 /* 首页导航栏 - 透明背景，白色文字 */
 .homepage-wrapper .navbar {
   --ifm-navbar-background-color: transparent;
