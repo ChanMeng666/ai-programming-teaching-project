@@ -195,6 +195,228 @@
   --docusaurus-highlighted-code-line-bg: rgba(255, 255, 255, 0.1);
 }
 
+/* ========================================
+   太空主题 (Space Theme) - 仅首页使用
+   ======================================== */
+
+/* 太空主题CSS变量 */
+:root {
+  /* 太空背景色 */
+  --space-bg-primary: #060842;
+  --space-bg-secondary: #0a0c52;
+  --space-bg-tertiary: #1a1a5e;
+  --space-bg-gradient: linear-gradient(135deg, #060842 0%, #1a1a5e 50%, #2d1b69 100%);
+
+  /* 太空强调色 */
+  --space-accent-cyan: #2dd4bf;
+  --space-accent-pink: #f472b6;
+  --space-accent-purple: #a855f7;
+  --space-accent-gold: #fbbf24;
+  --space-accent-blue: #3b82f6;
+
+  /* 太空文本色 */
+  --space-text-primary: #f8fafc;
+  --space-text-secondary: #cbd5e1;
+  --space-text-muted: #94a3b8;
+
+  /* 玻璃态面板 (来自示例项目) */
+  --space-glass-bg: rgba(230, 225, 252, 0.85);
+  --space-glass-bg-opaque: #e6e1fc;
+  --space-glass-border: rgba(255, 255, 255, 0.2);
+  --space-glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  --space-pane-text: #01064a;
+  --space-pane-separator: #bfbaec;
+
+  /* 太空动画 */
+  --space-animation-slow: 600s;
+  --space-animation-medium: 15s;
+  --space-animation-fast: 3s;
+  --space-float-duration: 6s;
+
+  /* 太空渐变 */
+  --space-gradient-text: linear-gradient(135deg, var(--space-accent-cyan) 0%, var(--space-accent-pink) 100%);
+  --space-gradient-button: linear-gradient(135deg, var(--space-accent-cyan) 0%, var(--space-accent-purple) 100%);
+  --space-gradient-glow: radial-gradient(ellipse at center, rgba(45, 212, 191, 0.3) 0%, transparent 70%);
+}
+
+/* 太空主题动画关键帧 */
+
+/* 行星轨道动画 - 需要 @property 支持 */
+@property --orbit-progress {
+  syntax: '<number>';
+  initial-value: 0;
+  inherits: false;
+}
+
+@keyframes orbit {
+  from {
+    --orbit-progress: 0;
+  }
+  to {
+    --orbit-progress: 1;
+  }
+}
+
+/* 星星闪烁动画 */
+@property --twinkle-progress {
+  syntax: '<number>';
+  initial-value: 0;
+  inherits: false;
+}
+
+@keyframes twinkle {
+  from {
+    --twinkle-progress: 0;
+  }
+  to {
+    --twinkle-progress: 1;
+  }
+}
+
+/* 浮动动画 */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+/* 脉冲发光动画 */
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+/* 缓慢旋转动画 */
+@keyframes slow-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* 光泽扫过动画 */
+@keyframes shine-sweep {
+  0% {
+    transform: translateX(-100%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(100%) rotate(45deg);
+  }
+}
+
+/* 无障碍：减少动画 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* 首页特殊样式 - 使用 wrapperClassName="homepage-wrapper" */
+
+/* 首页导航栏 - 透明背景，白色文字 */
+.homepage-wrapper .navbar {
+  --ifm-navbar-background-color: transparent;
+  --ifm-navbar-shadow: none;
+  background: transparent !important;
+  position: absolute;
+  width: 100%;
+}
+
+.homepage-wrapper .navbar__logo img {
+  filter: brightness(0) invert(1);
+}
+
+.homepage-wrapper .navbar__title {
+  color: var(--space-text-primary, #f8fafc);
+}
+
+.homepage-wrapper .navbar__link {
+  color: var(--space-text-primary, #f8fafc);
+}
+
+.homepage-wrapper .navbar__link:hover,
+.homepage-wrapper .navbar__link--active {
+  color: var(--space-accent-cyan, #2dd4bf);
+}
+
+.homepage-wrapper .navbar__toggle {
+  color: var(--space-text-primary, #f8fafc);
+}
+
+/* 首页搜索框样式 */
+.homepage-wrapper .DocSearch-Button {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.homepage-wrapper .DocSearch-Button:hover {
+  background: rgba(255, 255, 255, 0.2) !important;
+}
+
+.homepage-wrapper .DocSearch-Button-Placeholder,
+.homepage-wrapper .DocSearch-Button-Keys kbd {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.homepage-wrapper .DocSearch-Search-Icon {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* 首页颜色模式切换和语言切换 */
+.homepage-wrapper [class*='colorModeToggle'] button {
+  color: var(--space-text-primary, #f8fafc);
+}
+
+.homepage-wrapper .dropdown__link {
+  color: var(--ifm-dropdown-link-color);
+}
+
+/* 首页页脚样式 */
+.homepage-wrapper .footer {
+  background: var(--space-bg-primary, #060842);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.homepage-wrapper .footer__title {
+  color: var(--space-text-primary, #f8fafc);
+}
+
+.homepage-wrapper .footer__item {
+  color: var(--space-text-secondary, #cbd5e1);
+}
+
+.homepage-wrapper .footer__link-item {
+  color: var(--space-text-secondary, #cbd5e1);
+}
+
+.homepage-wrapper .footer__link-item:hover {
+  color: var(--space-accent-cyan, #2dd4bf);
+}
+
+.homepage-wrapper .footer__copyright {
+  color: var(--space-text-muted, #94a3b8);
+}
+
+/* 确保首页内容不被导航栏遮挡 */
+.homepage-wrapper main {
+  margin-top: 0;
+}
+
 /* 基础网格系统 */
 .container {
   max-width: 1200px;

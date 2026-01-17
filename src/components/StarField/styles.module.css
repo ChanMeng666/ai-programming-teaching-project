@@ -1,0 +1,61 @@
+.starField {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.star {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  animation: twinkle 3s ease-in-out infinite alternate;
+}
+
+.starLarge {
+  width: 4px;
+  height: 4px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.8) 40%, transparent 70%);
+  box-shadow:
+    0 0 4px 2px rgba(255, 255, 255, 0.4),
+    0 0 8px 4px rgba(255, 255, 255, 0.2);
+  animation: twinkleLarge 4s ease-in-out infinite alternate;
+}
+
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes twinkleLarge {
+  0%, 100% {
+    opacity: 0.5;
+    transform: scale(1);
+    box-shadow:
+      0 0 4px 2px rgba(255, 255, 255, 0.4),
+      0 0 8px 4px rgba(255, 255, 255, 0.2);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.3);
+    box-shadow:
+      0 0 8px 4px rgba(255, 255, 255, 0.6),
+      0 0 16px 8px rgba(255, 255, 255, 0.3),
+      0 0 24px 12px rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* 减少动画支持 */
+@media (prefers-reduced-motion: reduce) {
+  .star,
+  .starLarge {
+    animation: none;
+    opacity: 0.6;
+  }
+}

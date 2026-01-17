@@ -1,12 +1,12 @@
-/* Features Section */
+/* Features Section - 太空主题 */
 .features {
-  padding: 6rem 0;
-  background: var(--modern-bg-primary);
+  padding: 2rem 0 4rem;
   position: relative;
+  z-index: 10;
 }
 
 .featuresContainer {
-  max-width: 1280px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 0 2rem;
 }
@@ -14,13 +14,13 @@
 .featuresGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 2.5rem;
+  gap: 2rem;
 }
 
 @media (max-width: 996px) {
   .featuresGrid {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 1.5rem;
   }
 }
 
@@ -28,88 +28,124 @@
   display: flex;
 }
 
+/* 玻璃态特性卡片 */
 .featureCard {
-  background: var(--modern-bg-primary);
-  border-radius: 16px;
-  padding: 2.5rem;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background: var(--space-glass-bg, rgba(230, 225, 252, 0.85));
+  border-radius: 20px;
+  padding: 2rem;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  border: 1px solid var(--modern-border);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.025);
-}
-
-[data-theme='dark'] .featureCard {
-  background: var(--modern-bg-secondary);
-  border-color: var(--modern-border);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--space-glass-border, rgba(255, 255, 255, 0.2));
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
 }
 
 .featureCard:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-  border-color: var(--modern-accent);
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px 0 rgba(31, 38, 135, 0.3);
+  border-color: var(--space-accent-cyan, #2dd4bf);
 }
 
-[data-theme='dark'] .featureCard:hover {
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
-}
-
-/* Updated: Removed box container styles and increased SVG size */
+/* 图标容器 */
 .featureImage {
   margin-bottom: 1.5rem;
-  /* Removed padding, background, and border-radius for cleaner look */
-  padding: 0;
-  background: transparent;
-  border-radius: 0;
+  padding: 1rem;
+  background: linear-gradient(
+    135deg,
+    rgba(45, 212, 191, 0.15) 0%,
+    rgba(168, 85, 247, 0.1) 100%
+  );
+  border-radius: 16px;
   display: flex;
   align-items: center;
-  justify-content: flex-start; /* Align left */
-  transition: transform 0.3s ease;
-}
-
-[data-theme='dark'] .featureImage {
-  background: transparent;
+  justify-content: center;
+  transition: all 0.3s ease;
 }
 
 .featureCard:hover .featureImage {
-  background: transparent;
-  transform: scale(1.1); /* Slight zoom on hover */
-}
-
-[data-theme='dark'] .featureCard:hover .featureImage {
-  background: transparent;
+  background: linear-gradient(
+    135deg,
+    rgba(45, 212, 191, 0.25) 0%,
+    rgba(168, 85, 247, 0.2) 100%
+  );
+  transform: scale(1.05);
 }
 
 .featureSvg {
-  width: 80px; /* Increased from 48px */
-  height: 80px; /* Increased from 48px */
-  color: var(--modern-accent);
+  width: 56px;
+  height: 56px;
+  color: var(--space-accent-cyan, #2dd4bf);
 }
 
-/* We might need to target the SVG paths if they are inline SVGs not controlled by color */
-/* But usually Docusaurus SVGs are loaded as components */
-
+/* 内容文本 */
 .featureContent h3 {
-  font-size: 1.5rem;
+  font-size: 1.375rem;
   font-weight: 700;
-  margin-bottom: 1rem;
-  color: var(--modern-text-primary);
+  margin-bottom: 0.75rem;
+  color: var(--space-pane-text, #01064a);
 }
 
 .featureContent p {
-  font-size: 1.125rem;
-  line-height: 1.6;
-  color: var(--modern-text-secondary);
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--space-pane-text, #01064a);
+  opacity: 0.85;
   margin: 0;
 }
 
-/* Remove the wave if it exists in DOM but we don't want it visible via CSS, 
-   though cleaner to remove from JS. 
-   For now, I'll hide it via CSS if the class matches 
-*/
+/* 隐藏波浪效果 */
 .featuresWave {
-  display: none; 
+  display: none;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .features {
+    padding: 1.5rem 0 3rem;
+  }
+
+  .featuresContainer {
+    padding: 0 1rem;
+  }
+
+  .featureCard {
+    padding: 1.5rem;
+    border-radius: 16px;
+  }
+
+  .featureSvg {
+    width: 48px;
+    height: 48px;
+  }
+
+  .featureContent h3 {
+    font-size: 1.25rem;
+  }
+
+  .featureContent p {
+    font-size: 0.9375rem;
+  }
+}
+
+/* 减少动画支持 */
+@media (prefers-reduced-motion: reduce) {
+  .featureCard {
+    transition: none;
+  }
+
+  .featureCard:hover {
+    transform: none;
+  }
+
+  .featureImage {
+    transition: none;
+  }
+
+  .featureCard:hover .featureImage {
+    transform: none;
+  }
 }

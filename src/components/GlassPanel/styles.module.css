@@ -1,0 +1,87 @@
+.glassPanel {
+  position: relative;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background: var(--space-glass-bg, rgba(230, 225, 252, 0.85));
+  border-radius: 25px;
+  border: 1px solid var(--space-glass-border, rgba(255, 255, 255, 0.2));
+  box-shadow: var(--space-glass-shadow, 0 8px 32px 0 rgba(31, 38, 135, 0.37));
+  overflow: hidden;
+}
+
+.glassInner {
+  position: relative;
+  background: var(--space-glass-bg, rgba(230, 225, 252, 0.9));
+  border-radius: 15px;
+  color: var(--space-pane-text, #01064a);
+  z-index: 1;
+}
+
+/* 高光效果 */
+.highlightGlow {
+  position: absolute;
+  inset: -20px;
+  background: radial-gradient(
+    ellipse at 50% 0%,
+    rgba(255, 255, 255, 0.4) 0%,
+    transparent 60%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* 内边距变体 */
+.paddingNone .glassInner {
+  padding: 0;
+}
+
+.paddingSmall {
+  padding: 8px;
+}
+
+.paddingSmall .glassInner {
+  padding: 16px;
+}
+
+.paddingNormal {
+  padding: 12px;
+}
+
+.paddingNormal .glassInner {
+  padding: 24px;
+}
+
+.paddingLarge {
+  padding: 16px;
+}
+
+.paddingLarge .glassInner {
+  padding: 32px;
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+  .glassPanel {
+    border-radius: 20px;
+  }
+
+  .glassInner {
+    border-radius: 12px;
+  }
+
+  .paddingNormal {
+    padding: 8px;
+  }
+
+  .paddingNormal .glassInner {
+    padding: 20px;
+  }
+
+  .paddingLarge {
+    padding: 10px;
+  }
+
+  .paddingLarge .glassInner {
+    padding: 24px;
+  }
+}

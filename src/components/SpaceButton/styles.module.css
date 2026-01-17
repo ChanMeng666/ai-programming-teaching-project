@@ -1,0 +1,109 @@
+.spaceButton {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 28px;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: none;
+  outline: none;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* 主按钮样式 */
+.primary {
+  background: linear-gradient(135deg, var(--space-accent-cyan, #2dd4bf) 0%, #14b8a6 100%);
+  color: #ffffff;
+  box-shadow:
+    0 4px 14px 0 rgba(45, 212, 191, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.primary:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 8px 20px 0 rgba(45, 212, 191, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.primary:active {
+  transform: translateY(0);
+}
+
+/* 次按钮样式 */
+.secondary {
+  background: transparent;
+  color: var(--space-pane-text, #01064a);
+  border: 2px solid var(--space-pane-separator, #bfbaec);
+  box-shadow: none;
+}
+
+.secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--space-accent-cyan, #2dd4bf);
+  transform: translateY(-2px);
+}
+
+.secondary:active {
+  transform: translateY(0);
+}
+
+/* 鼠标跟随光泽效果 */
+.shine {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  margin-left: -75px;
+  margin-top: -75px;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.3) 0%,
+    rgba(255, 255, 255, 0.1) 40%,
+    transparent 70%
+  );
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  z-index: 0;
+}
+
+.visible {
+  opacity: 1;
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+  .spaceButton {
+    padding: 12px 24px;
+    font-size: 0.9375rem;
+  }
+}
+
+/* 减少动画支持 */
+@media (prefers-reduced-motion: reduce) {
+  .spaceButton {
+    transition: none;
+  }
+
+  .spaceButton:hover {
+    transform: none;
+  }
+
+  .shine {
+    display: none;
+  }
+}

@@ -1,0 +1,103 @@
+/* 轨道行星容器 */
+.orbitContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* CSS @property 用于动画进度 */
+@property --orbit-progress {
+  syntax: '<number>';
+  initial-value: 0;
+  inherits: false;
+}
+
+.planet {
+  position: relative;
+  animation: orbit var(--orbit-duration, 120s) linear infinite;
+  /* 使用 calc 和三角函数计算位置 */
+  --progress-rad: calc(var(--orbit-progress) * 6.28318530718);
+  translate:
+    calc(sin(var(--progress-rad)) * var(--orbit-radius-x, 45vw))
+    calc(cos(var(--progress-rad)) * var(--orbit-radius-y, 10vw));
+}
+
+@keyframes orbit {
+  from {
+    --orbit-progress: calc(0 + var(--start-offset, 0));
+  }
+  to {
+    --orbit-progress: calc(1 + var(--start-offset, 0));
+  }
+}
+
+.planetImage {
+  display: block;
+  object-fit: contain;
+  filter: drop-shadow(0 0 20px rgba(45, 212, 191, 0.3));
+  animation: float 8s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(3deg);
+  }
+}
+
+.planetGlow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(
+    circle,
+    rgba(45, 212, 191, 0.2) 0%,
+    rgba(45, 212, 191, 0.1) 30%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* 不支持 @property 的浏览器回退 */
+@supports not (animation-timeline: auto) {
+  .planet {
+    animation: orbitFallback var(--orbit-duration, 120s) linear infinite;
+  }
+
+  @keyframes orbitFallback {
+    0% {
+      transform: translateX(calc(var(--orbit-radius-x, 45vw) * -1)) translateY(0);
+    }
+    25% {
+      transform: translateX(0) translateY(calc(var(--orbit-radius-y, 10vw) * -1));
+    }
+    50% {
+      transform: translateX(var(--orbit-radius-x, 45vw)) translateY(0);
+    }
+    75% {
+      transform: translateX(0) translateY(var(--orbit-radius-y, 10vw));
+    }
+    100% {
+      transform: translateX(calc(var(--orbit-radius-x, 45vw) * -1)) translateY(0);
+    }
+  }
+}
+
+/* 减少动画支持 */
+@media (prefers-reduced-motion: reduce) {
+  .planet {
+    animation: none;
+    translate: 0 0;
+  }
+
+  .planetImage {
+    animation: none;
+  }
+}
