@@ -1140,8 +1140,25 @@ html:not([data-theme='dark']) .clean-btn svg path {
     text-align: center;
     gap: 0.5rem;
   }
-  
+
   .footer-copyright {
     padding: 1rem 0;
+  }
+}
+
+/* ========================================
+   Back to Top Button Position Override
+   Prevent overlap with ChatWidget button
+   ======================================== */
+
+/* Docusaurus built-in back to top button */
+.theme-back-to-top-button {
+  bottom: 100px !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .theme-back-to-top-button {
+    bottom: 88px !important;
   }
 }
