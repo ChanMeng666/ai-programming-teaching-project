@@ -1,74 +1,175 @@
-/* 音乐播放器容器 - 固定定位 */
+/* ============================================
+   音乐播放器样式
+   ============================================ */
+
+/* 包装器 */
+.musicPlayerWrapper {
+  font-family: var(--ifm-font-family-base);
+}
+
+/* ============================================
+   主弹窗容器
+   ============================================ */
 .musicPlayerContainer {
   position: fixed;
   top: 70px;
   right: 20px;
-  z-index: 999;
+  z-index: 998;
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
 }
 
-/* 弹窗窗口 */
+.musicPlayerContainer.expanded {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.musicPlayerContainer.minimized {
+  opacity: 0;
+  transform: translateY(-20px);
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* ============================================
+   弹窗窗口
+   ============================================ */
 .popup {
   width: 380px;
-  height: 300px;
   background: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  border-radius: 16px;
+  box-shadow:
+    0 4px 6px rgba(0, 0, 0, 0.07),
+    0 12px 28px rgba(0, 0, 0, 0.12),
+    0 0 0 1px rgba(0, 0, 0, 0.05);
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  animation: slideDown 0.3s ease;
-  border: 1px solid var(--ifm-color-emphasis-200);
+  animation: popupEnter 0.3s ease;
 }
 
-@keyframes slideDown {
+@keyframes popupEnter {
   from {
     opacity: 0;
-    transform: translateY(-10px);
+    transform: translateY(-10px) scale(0.98);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
   }
 }
 
-/* 头部 */
+/* ============================================
+   弹窗头部
+   ============================================ */
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 16px;
+  padding: 14px 16px;
   background: linear-gradient(135deg, var(--ifm-color-primary) 0%, var(--ifm-color-primary-dark) 100%);
   color: white;
 }
 
-.title {
-  font-weight: 600;
-  font-size: 14px;
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
+.title {
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.3px;
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* ============================================
+   波形动画
+   ============================================ */
+.waveform {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 18px;
+}
+
+.waveform span {
+  width: 3px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 2px;
+  animation: waveform 1.2s ease-in-out infinite;
+}
+
+.waveform span:nth-child(1) {
+  height: 8px;
+  animation-delay: 0s;
+}
+
+.waveform span:nth-child(2) {
+  height: 14px;
+  animation-delay: 0.2s;
+}
+
+.waveform span:nth-child(3) {
+  height: 10px;
+  animation-delay: 0.4s;
+}
+
+.waveform span:nth-child(4) {
+  height: 16px;
+  animation-delay: 0.6s;
+}
+
+@keyframes waveform {
+  0%, 100% {
+    transform: scaleY(0.5);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+/* ============================================
+   按钮样式
+   ============================================ */
+.minimizeButton,
 .closeButton {
-  background: transparent;
+  background: rgba(255, 255, 255, 0.1);
   border: none;
   color: white;
   cursor: pointer;
-  padding: 4px;
-  border-radius: 4px;
+  padding: 6px;
+  border-radius: 6px;
   display: flex;
   align-items: center;
-  opacity: 0.8;
-  transition: opacity 0.2s, background 0.2s;
+  justify-content: center;
+  transition: background 0.2s, transform 0.2s;
 }
 
+.minimizeButton:hover,
 .closeButton:hover {
-  opacity: 1;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.2);
 }
 
-/* 内容区域 */
+.minimizeButton:active,
+.closeButton:active {
+  transform: scale(0.95);
+}
+
+/* ============================================
+   内容区域（iframe）
+   ============================================ */
 .content {
-  flex: 1;
+  height: 240px;
   overflow: hidden;
-  background: #f5f5f5;
+  background: linear-gradient(180deg, #f8f9fa 0%, #f0f0f0 100%);
 }
 
 .iframe {
@@ -77,7 +178,153 @@
   border: none;
 }
 
-/* 移动端响应式 */
+/* ============================================
+   底部提示
+   ============================================ */
+.footer {
+  padding: 10px 16px;
+  background: #f8f9fa;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.footerTip {
+  font-size: 12px;
+  color: #666;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.footerTip::before {
+  content: '💡';
+  font-size: 11px;
+}
+
+/* ============================================
+   迷你播放器
+   ============================================ */
+.miniPlayer {
+  position: fixed;
+  bottom: 100px;
+  right: 24px;
+  z-index: 998;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, var(--ifm-color-primary) 0%, var(--ifm-color-primary-dark) 100%);
+  padding: 10px 12px 10px 14px;
+  border-radius: 50px;
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.15),
+    0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+  animation: miniPlayerEnter 0.3s ease;
+  color: white;
+}
+
+@keyframes miniPlayerEnter {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* 迷你波形动画 */
+.miniWaveform {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 14px;
+}
+
+.miniWaveform span {
+  width: 2.5px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 1px;
+  animation: waveform 1.2s ease-in-out infinite;
+}
+
+.miniWaveform span:nth-child(1) {
+  height: 6px;
+  animation-delay: 0s;
+}
+
+.miniWaveform span:nth-child(2) {
+  height: 10px;
+  animation-delay: 0.2s;
+}
+
+.miniWaveform span:nth-child(3) {
+  height: 8px;
+  animation-delay: 0.4s;
+}
+
+.miniWaveform span:nth-child(4) {
+  height: 12px;
+  animation-delay: 0.6s;
+}
+
+/* 展开按钮区域 */
+.miniExpandArea {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 0;
+  font-family: inherit;
+}
+
+.miniExpandArea:hover .miniTitle {
+  text-decoration: underline;
+}
+
+.miniTitle {
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.miniExpandIcon {
+  opacity: 0.8;
+  transition: transform 0.2s;
+}
+
+.miniExpandArea:hover .miniExpandIcon {
+  transform: translateY(-2px);
+}
+
+/* 迷你关闭按钮 */
+.miniCloseButton {
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 4px;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.miniCloseButton:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.miniCloseButton:active {
+  transform: scale(0.9);
+}
+
+/* ============================================
+   移动端响应式
+   ============================================ */
 @media (max-width: 480px) {
   .musicPlayerContainer {
     top: 0;
@@ -85,21 +332,68 @@
     left: 0;
     bottom: 0;
     z-index: 1001;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+  }
+
+  .musicPlayerContainer.minimized {
+    transform: none;
   }
 
   .popup {
-    width: 100%;
-    height: 100%;
-    border-radius: 0;
+    width: 95%;
+    max-width: 400px;
+    border-radius: 20px;
+  }
+
+  .miniPlayer {
+    bottom: 80px;
+    right: 16px;
+    left: 16px;
+    justify-content: center;
+    border-radius: 16px;
+  }
+
+  .miniTitle {
+    font-size: 14px;
   }
 }
 
-/* 深色模式 */
+/* ============================================
+   深色模式
+   ============================================ */
 [data-theme='dark'] .popup {
-  background: #1e1e1e;
-  border-color: #3a3a3a;
+  background: #1a1a1a;
+  box-shadow:
+    0 4px 6px rgba(0, 0, 0, 0.2),
+    0 12px 28px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.05);
 }
 
 [data-theme='dark'] .content {
-  background: #2d2d2d;
+  background: linear-gradient(180deg, #242424 0%, #1a1a1a 100%);
+}
+
+[data-theme='dark'] .footer {
+  background: #242424;
+  border-top-color: rgba(255, 255, 255, 0.06);
+}
+
+[data-theme='dark'] .footerTip {
+  color: #999;
+}
+
+[data-theme='dark'] .miniPlayer {
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+}
+
+@media (max-width: 480px) {
+  [data-theme='dark'] .musicPlayerContainer {
+    background: rgba(0, 0, 0, 0.7);
+  }
 }

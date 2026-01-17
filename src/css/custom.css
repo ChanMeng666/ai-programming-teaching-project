@@ -331,10 +331,17 @@ a:hover {
   padding: 0;
   display: flex;
   align-items: center;
+  position: relative;
+  transition: transform 0.2s ease;
 }
 
 .header-music-link:hover {
-  opacity: 0.6;
+  opacity: 0.7;
+  transform: scale(1.1);
+}
+
+.header-music-link:active {
+  transform: scale(0.95);
 }
 
 .header-music-link::before {
@@ -344,6 +351,7 @@ a:hover {
   display: flex;
   background: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z'/%3E%3C/svg%3E")
     no-repeat;
+  transition: transform 0.3s ease;
 }
 
 [data-theme='dark'] .header-music-link::before {
@@ -351,9 +359,54 @@ a:hover {
     no-repeat;
 }
 
-.header-music-link--active::before {
+/* 激活状态 - 播放器已打开（音乐可能正在播放） */
+.header-music-link--activated::before {
   background: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%2325c2a0' d='M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z'/%3E%3C/svg%3E")
     no-repeat !important;
+  animation: musicPulse 2s ease-in-out infinite;
+}
+
+/* 展开状态 - 弹窗已打开 */
+.header-music-link--expanded::before {
+  transform: scale(1.15);
+}
+
+/* 音乐脉冲动画 */
+@keyframes musicPulse {
+  0%, 100% {
+    opacity: 1;
+    filter: drop-shadow(0 0 0 transparent);
+  }
+  50% {
+    opacity: 0.85;
+    filter: drop-shadow(0 0 6px rgba(37, 194, 160, 0.5));
+  }
+}
+
+/* 激活状态的光晕效果 */
+.header-music-link--activated::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(37, 194, 160, 0.2) 0%, transparent 70%);
+  animation: glowPulse 2s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    opacity: 0.5;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.2);
+  }
 }
 
 /* 页面滚动动画 */
