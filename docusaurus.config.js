@@ -230,6 +230,11 @@ const config = {
             'aria-label': 'RSS 订阅',
             position: 'right',
           },
+          {
+            type: 'html',
+            position: 'right',
+            value: '<button class="header-music-link" aria-label="背景音乐" title="背景音乐"></button>',
+          },
         ],
       },
       footer: {
