@@ -2,20 +2,16 @@
  * Script to seed Vectorize with document embeddings
  *
  * Usage:
- * 1. First create the Vectorize index:
- *    npx wrangler vectorize create docs-index --dimensions=768 --metric=cosine
- *
- * 2. Update wrangler.toml with the Vectorize binding
- *
- * 3. Run this script:
- *    npm run seed
- *
- * Note: This script requires the Cloudflare API and cannot be run directly.
- * It's provided as a reference for the seeding process.
+ * 1. Deploy the worker first: npm run deploy
+ * 2. Run this script: npm run seed
  */
 
 import * as fs from 'fs';
 import * as path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 interface DocumentChunk {
   id: string;
@@ -24,14 +20,16 @@ interface DocumentChunk {
   source: string;
 }
 
+const WORKER_URL = 'https://ai-chat-worker.chanmeng-dev.workers.dev';
+
 const DOCS_PATHS = [
-  '../docs',
-  '../versioned_docs/version-2024-winter',
-  '../versioned_docs/version-2025-summer',
+  '../../docs',
+  '../../versioned_docs/version-2024-winter',
+  '../../versioned_docs/version-2025-summer',
 ];
 
-const CHUNK_SIZE = 500; // characters per chunk
-const CHUNK_OVERLAP = 100; // overlap between chunks
+const CHUNK_SIZE = 800; // characters per chunk
+const CHUNK_OVERLAP = 150; // overlap between chunks
 
 /**
  * Extract frontmatter and content from MDX file
@@ -75,24 +73,27 @@ function chunkContent(content: string, chunkSize: number, overlap: number): stri
 
     // Try to end at a sentence boundary
     if (end < content.length) {
-      const lastPeriod = chunk.lastIndexOf('。');
-      const lastNewline = chunk.lastIndexOf('\n');
+      const lastPeriod = Math.max(
+        chunk.lastIndexOf('。'),
+        chunk.lastIndexOf('！'),
+        chunk.lastIndexOf('？'),
+        chunk.lastIndexOf('.')
+      );
+      const lastNewline = chunk.lastIndexOf('\n\n');
       const breakPoint = Math.max(lastPeriod, lastNewline);
       if (breakPoint > chunkSize * 0.5) {
         chunk = chunk.slice(0, breakPoint + 1);
       }
     }
 
-    chunks.push(chunk.trim());
-    start += chunk.length - overlap;
-
-    // Prevent infinite loop
-    if (start <= chunks.length * (chunkSize - overlap) - (chunkSize - overlap)) {
-      start = chunks.length * (chunkSize - overlap);
+    if (chunk.trim().length > 50) {
+      chunks.push(chunk.trim());
     }
+
+    start += Math.max(chunk.length - overlap, 1);
   }
 
-  return chunks.filter((c) => c.length > 50);
+  return chunks;
 }
 
 /**
@@ -136,7 +137,12 @@ function processDocuments(): DocumentChunk[] {
       try {
         const content = fs.readFileSync(filePath, 'utf-8');
         const { title, body } = parseMdx(content);
-        const relativePath = path.relative(path.resolve(__dirname, '..'), filePath);
+        const relativePath = path.relative(path.resolve(__dirname, '../..'), filePath);
+
+        if (body.length < 50) {
+          console.log(`Skipping ${relativePath} (too short)`);
+          continue;
+        }
 
         const contentChunks = chunkContent(body, CHUNK_SIZE, CHUNK_OVERLAP);
 
@@ -148,6 +154,8 @@ function processDocuments(): DocumentChunk[] {
             source: relativePath,
           });
         }
+
+        console.log(`Processed ${relativePath}: ${contentChunks.length} chunks`);
       } catch (error) {
         console.error(`Error processing ${filePath}:`, error);
       }
@@ -158,24 +166,55 @@ function processDocuments(): DocumentChunk[] {
 }
 
 /**
- * Main function to run the seeding process
+ * Send documents to the seed endpoint in batches
+ */
+async function seedDocuments(chunks: DocumentChunk[]): Promise<void> {
+  const BATCH_SIZE = 5; // Process 5 documents at a time to avoid timeouts
+
+  console.log(`\nSeeding ${chunks.length} chunks to ${WORKER_URL}/api/seed...`);
+
+  for (let i = 0; i < chunks.length; i += BATCH_SIZE) {
+    const batch = chunks.slice(i, i + BATCH_SIZE);
+    console.log(`Processing batch ${Math.floor(i / BATCH_SIZE) + 1}/${Math.ceil(chunks.length / BATCH_SIZE)}...`);
+
+    try {
+      const response = await fetch(`${WORKER_URL}/api/seed`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ documents: batch }),
+      });
+
+      const result = await response.json();
+      console.log(`  Result: ${JSON.stringify(result)}`);
+
+      // Add a small delay between batches
+      if (i + BATCH_SIZE < chunks.length) {
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+      }
+    } catch (error) {
+      console.error(`  Error seeding batch:`, error);
+    }
+  }
+
+  console.log('\nSeeding complete!');
+}
+
+/**
+ * Main function
  */
 async function main() {
-  console.log('Processing documents...');
+  console.log('Processing documents...\n');
   const chunks = processDocuments();
-  console.log(`Generated ${chunks.length} chunks from documents`);
+  console.log(`\nGenerated ${chunks.length} chunks from documents`);
 
-  // Output chunks for manual insertion or API call
-  console.log('\nTo seed these documents, you need to:');
-  console.log('1. Deploy the worker first: npm run deploy');
-  console.log('2. Create a seed endpoint or use the Wrangler API');
-  console.log('\nChunk sample:');
-  console.log(JSON.stringify(chunks.slice(0, 2), null, 2));
+  if (chunks.length === 0) {
+    console.log('No documents to seed.');
+    return;
+  }
 
-  // Save chunks to a JSON file for later use
-  const outputPath = path.resolve(__dirname, '../chunks.json');
-  fs.writeFileSync(outputPath, JSON.stringify(chunks, null, 2));
-  console.log(`\nChunks saved to: ${outputPath}`);
+  await seedDocuments(chunks);
 }
 
 main().catch(console.error);

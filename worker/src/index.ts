@@ -1,5 +1,15 @@
 import type { Env, ChatRequest } from './types';
 import { processChat } from './chat';
+import { generateEmbedding } from './rag';
+
+interface SeedRequest {
+  documents: Array<{
+    id: string;
+    title: string;
+    content: string;
+    source: string;
+  }>;
+}
 
 /**
  * Handle CORS preflight requests
@@ -83,6 +93,85 @@ async function handleChat(request: Request, env: Env): Promise<Response> {
 }
 
 /**
+ * Handle document seeding for RAG
+ */
+async function handleSeed(request: Request, env: Env): Promise<Response> {
+  if (!env.VECTORIZE) {
+    return new Response(
+      JSON.stringify({ error: 'Vectorize not configured' }),
+      {
+        status: 500,
+        headers: { 'Content-Type': 'application/json' },
+      }
+    );
+  }
+
+  try {
+    const body = (await request.json()) as SeedRequest;
+
+    if (!body.documents || !Array.isArray(body.documents)) {
+      return new Response(
+        JSON.stringify({ error: 'Documents array is required' }),
+        {
+          status: 400,
+          headers: { 'Content-Type': 'application/json' },
+        }
+      );
+    }
+
+    const results: Array<{ id: string; success: boolean; error?: string }> = [];
+
+    for (const doc of body.documents) {
+      try {
+        // Generate embedding for the document content
+        const embedding = await generateEmbedding(env, doc.content);
+
+        // Insert into Vectorize
+        await env.VECTORIZE.upsert([
+          {
+            id: doc.id,
+            values: embedding,
+            metadata: {
+              title: doc.title,
+              content: doc.content.substring(0, 1000), // Limit metadata size
+              source: doc.source,
+            },
+          },
+        ]);
+
+        results.push({ id: doc.id, success: true });
+      } catch (error) {
+        results.push({
+          id: doc.id,
+          success: false,
+          error: error instanceof Error ? error.message : 'Unknown error',
+        });
+      }
+    }
+
+    const successCount = results.filter((r) => r.success).length;
+    return new Response(
+      JSON.stringify({
+        message: `Seeded ${successCount}/${body.documents.length} documents`,
+        results,
+      }),
+      {
+        headers: { 'Content-Type': 'application/json' },
+      }
+    );
+  } catch (error) {
+    console.error('Seed error:', error);
+    return new Response(
+      JSON.stringify({ error: 'Failed to seed documents' }),
+      {
+        status: 500,
+        headers: { 'Content-Type': 'application/json' },
+      }
+    );
+  }
+}
+
+/**
  * Handle health check
  */
 function handleHealth(): Response {
@@ -109,6 +198,8 @@ export default {
     // Route handling
     if (pathname === '/api/chat' && request.method === 'POST') {
       response = await handleChat(request, env);
+    } else if (pathname === '/api/seed' && request.method === 'POST') {
+      response = await handleSeed(request, env);
     } else if (pathname === '/api/health' || pathname === '/') {
       response = handleHealth();
     } else {

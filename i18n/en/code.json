@@ -524,5 +524,45 @@
   },
   "homepage.hero.titlePost": {
     "message": "The Modern Way"
+  },
+  "chatWidget.header.title": {
+    "message": "AI Assistant",
+    "description": "Chat widget header title"
+  },
+  "chatWidget.button.clear": {
+    "message": "Clear chat",
+    "description": "Clear chat button title"
+  },
+  "chatWidget.button.close": {
+    "message": "Close chat",
+    "description": "Close chat button aria label"
+  },
+  "chatWidget.button.send": {
+    "message": "Send message",
+    "description": "Send message button aria label"
+  },
+  "chatWidget.welcome.title": {
+    "message": "Hi! I'm your AI Assistant",
+    "description": "Welcome message title"
+  },
+  "chatWidget.welcome.text": {
+    "message": "Feel free to ask me anything about AI programming!",
+    "description": "Welcome message text"
+  },
+  "chatWidget.input.placeholder": {
+    "message": "Type your question...",
+    "description": "Chat input placeholder text"
+  },
+  "chatWidget.toggle.close": {
+    "message": "Close chat",
+    "description": "Close chat toggle button label"
+  },
+  "chatWidget.toggle.open": {
+    "message": "Open AI Assistant",
+    "description": "Open chat toggle button label"
+  },
+  "chatWidget.error.message": {
+    "message": "Sorry, an error occurred. Please try again later.",
+    "description": "Error message when chat fails"
   }
 }

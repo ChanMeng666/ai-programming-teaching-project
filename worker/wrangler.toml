@@ -14,11 +14,9 @@ id = "5c20418b4b924a6dabe67c75610b4c08"
 preview_id = "66791f36d34a430cb2e1ef5a6cfb8d82"
 
 # Vectorize for RAG
-# Run: npx wrangler vectorize create docs-index --dimensions=768 --metric=cosine
-# Then uncomment and configure below
-# [[vectorize]]
-# binding = "VECTORIZE"
-# index_name = "docs-index"
+[[vectorize]]
+binding = "VECTORIZE"
+index_name = "docs-index"
 
 [vars]
 CORS_ORIGIN = "*"

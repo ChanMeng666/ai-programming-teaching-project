@@ -512,5 +512,45 @@
   "theme.tags.tagsPageTitle": {
     "message": "标签",
     "description": "The title of the tag list page"
+  },
+  "chatWidget.header.title": {
+    "message": "AI 助手",
+    "description": "Chat widget header title"
+  },
+  "chatWidget.button.clear": {
+    "message": "清空对话",
+    "description": "Clear chat button title"
+  },
+  "chatWidget.button.close": {
+    "message": "关闭聊天",
+    "description": "Close chat button aria label"
+  },
+  "chatWidget.button.send": {
+    "message": "发送消息",
+    "description": "Send message button aria label"
+  },
+  "chatWidget.welcome.title": {
+    "message": "你好！我是 AI 助手",
+    "description": "Welcome message title"
+  },
+  "chatWidget.welcome.text": {
+    "message": "有任何关于 AI 编程的问题都可以问我哦~",
+    "description": "Welcome message text"
+  },
+  "chatWidget.input.placeholder": {
+    "message": "输入你的问题...",
+    "description": "Chat input placeholder text"
+  },
+  "chatWidget.toggle.close": {
+    "message": "关闭聊天",
+    "description": "Close chat toggle button label"
+  },
+  "chatWidget.toggle.open": {
+    "message": "打开 AI 助手",
+    "description": "Open chat toggle button label"
+  },
+  "chatWidget.error.message": {
+    "message": "抱歉，发生了错误。请稍后重试。",
+    "description": "Error message when chat fails"
   }
 }

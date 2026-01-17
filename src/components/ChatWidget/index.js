@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { translate } from '@docusaurus/Translate';
 import ChatBox from './ChatBox';
 import ChatToggle from './ChatToggle';
 import styles from './styles.module.css';
@@ -151,13 +152,18 @@ export default function ChatWidget() {
       );
     } catch (error) {
       console.error('Chat error:', error);
+      const errorMessage = translate({
+        id: 'chatWidget.error.message',
+        message: '抱歉，发生了错误。请稍后重试。',
+        description: 'Error message when chat fails',
+      });
       // Update message with error
       setMessages((prev) =>
         prev.map((msg) =>
           msg.id === assistantMessageId
             ? {
                 ...msg,
-                content: '抱歉，发生了错误。请稍后重试。',
+                content: errorMessage,
                 isStreaming: false,
                 isError: true,
               }

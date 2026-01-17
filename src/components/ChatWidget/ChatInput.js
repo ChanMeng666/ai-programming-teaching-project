@@ -1,9 +1,22 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { translate } from '@docusaurus/Translate';
 import styles from './styles.module.css';
 
 export default function ChatInput({ onSend, isLoading }) {
   const [input, setInput] = useState('');
   const textareaRef = useRef(null);
+
+  const placeholder = translate({
+    id: 'chatWidget.input.placeholder',
+    message: '输入你的问题...',
+    description: 'Chat input placeholder text',
+  });
+
+  const sendButtonLabel = translate({
+    id: 'chatWidget.button.send',
+    message: '发送消息',
+    description: 'Send message button aria label',
+  });
 
   // Auto-resize textarea
   useEffect(() => {
@@ -40,7 +53,7 @@ export default function ChatInput({ onSend, isLoading }) {
         value={input}
         onChange={(e) => setInput(e.target.value)}
         onKeyDown={handleKeyDown}
-        placeholder="输入你的问题..."
+        placeholder={placeholder}
         disabled={isLoading}
         rows={1}
       />
@@ -48,7 +61,7 @@ export default function ChatInput({ onSend, isLoading }) {
         type="submit"
         className={styles.sendButton}
         disabled={!input.trim() || isLoading}
-        aria-label="发送消息"
+        aria-label={sendButtonLabel}
       >
         {isLoading ? (
           <span className={styles.loadingSpinner} />

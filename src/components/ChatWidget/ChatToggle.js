@@ -1,13 +1,26 @@
 import React from 'react';
+import { translate } from '@docusaurus/Translate';
 import styles from './styles.module.css';
 
 export default function ChatToggle({ isOpen, onClick }) {
+  const closeChatLabel = translate({
+    id: 'chatWidget.toggle.close',
+    message: '关闭聊天',
+    description: 'Close chat toggle button label',
+  });
+
+  const openChatLabel = translate({
+    id: 'chatWidget.toggle.open',
+    message: '打开 AI 助手',
+    description: 'Open chat toggle button label',
+  });
+
   return (
     <button
       className={`${styles.toggleButton} ${isOpen ? styles.toggleButtonOpen : ''}`}
       onClick={onClick}
-      aria-label={isOpen ? '关闭聊天' : '打开聊天'}
-      title={isOpen ? '关闭聊天' : '打开 AI 助手'}
+      aria-label={isOpen ? closeChatLabel : openChatLabel}
+      title={isOpen ? closeChatLabel : openChatLabel}
     >
       {isOpen ? (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

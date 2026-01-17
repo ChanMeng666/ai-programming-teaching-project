@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from 'react';
+import { translate } from '@docusaurus/Translate';
 import ChatMessage from './ChatMessage';
 import ChatInput from './ChatInput';
 import styles from './styles.module.css';
@@ -11,6 +12,36 @@ export default function ChatBox({ messages, isLoading, onSend, onClose, onClear 
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
+  const headerTitle = translate({
+    id: 'chatWidget.header.title',
+    message: 'AI 助手',
+    description: 'Chat widget header title',
+  });
+
+  const clearButtonTitle = translate({
+    id: 'chatWidget.button.clear',
+    message: '清空对话',
+    description: 'Clear chat button title',
+  });
+
+  const closeButtonLabel = translate({
+    id: 'chatWidget.button.close',
+    message: '关闭聊天',
+    description: 'Close chat button aria label',
+  });
+
+  const welcomeTitle = translate({
+    id: 'chatWidget.welcome.title',
+    message: '你好！我是 AI 助手',
+    description: 'Welcome message title',
+  });
+
+  const welcomeText = translate({
+    id: 'chatWidget.welcome.text',
+    message: '有任何关于 AI 编程的问题都可以问我哦~',
+    description: 'Welcome message text',
+  });
+
   return (
     <div className={styles.chatBox}>
       {/* Header */}
@@ -21,15 +52,15 @@ export default function ChatBox({ messages, isLoading, onSend, onClose, onClear 
               <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
             </svg>
           </span>
-          <span>AI 助手</span>
+          <span>{headerTitle}</span>
         </div>
         <div className={styles.headerActions}>
           {messages.length > 0 && (
             <button
               className={styles.clearButton}
               onClick={onClear}
-              title="清空对话"
-              aria-label="清空对话"
+              title={clearButtonTitle}
+              aria-label={clearButtonTitle}
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
@@ -39,7 +70,7 @@ export default function ChatBox({ messages, isLoading, onSend, onClose, onClear 
           <button
             className={styles.closeButton}
             onClick={onClose}
-            aria-label="关闭聊天"
+            aria-label={closeButtonLabel}
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <line x1="18" y1="6" x2="6" y2="18" />
@@ -61,8 +92,8 @@ export default function ChatBox({ messages, isLoading, onSend, onClose, onClear 
                 <line x1="15" y1="9" x2="15.01" y2="9" />
               </svg>
             </div>
-            <h3>你好！我是 AI 助手</h3>
-            <p>有任何关于 AI 编程的问题都可以问我哦~</p>
+            <h3>{welcomeTitle}</h3>
+            <p>{welcomeText}</p>
           </div>
         ) : (
           messages.map((message) => (
