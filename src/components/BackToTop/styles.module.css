@@ -1,6 +1,6 @@
 .backToTop {
   position: fixed;
-  bottom: 90px;
+  bottom: 100px;
   right: 20px;
   width: 40px;
   height: 40px;
@@ -39,7 +39,7 @@
 
 @media (max-width: 768px) {
   .backToTop {
-    bottom: 90px;
+    bottom: 100px;
     right: 20px;
     width: 44px;
     height: 44px;
@@ -49,7 +49,7 @@
 
 @media (max-width: 480px) {
   .backToTop {
-    bottom: 82px;
+    bottom: 88px;
     right: 16px;
     width: 40px;
     height: 40px;
