@@ -36,7 +36,7 @@
    弹窗窗口
    ============================================ */
 .popup {
-  width: 380px;
+  width: 520px;
   background: #ffffff;
   border-radius: 16px;
   box-shadow:
@@ -205,7 +205,7 @@
    ============================================ */
 .miniPlayer {
   position: fixed;
-  bottom: 100px;
+  bottom: 160px;
   right: 24px;
   z-index: 998;
   display: flex;
@@ -345,12 +345,12 @@
 
   .popup {
     width: 95%;
-    max-width: 400px;
+    max-width: 520px;
     border-radius: 20px;
   }
 
   .miniPlayer {
-    bottom: 80px;
+    bottom: 140px;
     right: 16px;
     left: 16px;
     justify-content: center;
