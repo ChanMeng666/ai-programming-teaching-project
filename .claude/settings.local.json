@@ -24,7 +24,14 @@
       "Bash(git commit -m \"$\\(cat <<''EOF''\nfeat: enhance chat widget with white background, i18n support, and RAG\n\n- Change chat widget background from transparent to solid white/dark\n- Add i18n support for Chinese and English languages\n- Enable RAG functionality with Cloudflare Vectorize\n- Add document seeding endpoint for vector embeddings\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
       "Bash(git commit:*)",
       "Bash(npm install:*)",
-      "Bash(git ls-files:*)"
+      "Bash(git ls-files:*)",
+      "Bash(git push:*)",
+      "Bash(netstat:*)",
+      "Bash(findstr:*)",
+      "Bash(taskkill:*)",
+      "Bash(npx kill-port 3000)",
+      "Bash(npm run clear:*)",
+      "Bash(npm start:*)"
     ],
     "deny": [],
     "ask": []

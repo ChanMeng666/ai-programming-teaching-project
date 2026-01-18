@@ -239,6 +239,13 @@ const config = {
       },
       footer: {
         style: 'dark',
+        logo: {
+          alt: 'AI Programming Education Logo',
+          src: 'img/logo.svg',
+          href: '/',
+          width: 80,
+          height: 80,
+        },
         links: [
           {
             title: '课程内容',
@@ -326,19 +333,9 @@ const config = {
           },
         ],
         copyright: `<div class="footer-copyright">
-            <div class="footer-project-brand">
-              <img src="/img/logo.svg" alt="AI Programming Logo" class="footer-project-logo" />
-              <div class="footer-project-name">AI Programming Education</div>
-            </div>
             <div class="footer-legal">
               <div>Copyright © ${new Date().getFullYear()} AI Programming Education.</div>
-            </div>
-            <div class="footer-developer">
-              <span>Crafted with 💛 by</span>
-              <a class="footer-link" href="https://github.com/ChanMeng666">
-                <img src="/img/chan_logo.svg" alt="Chan Meng" class="footer-developer-logo" />
-                <span>Chan Meng</span>
-              </a>
+              <div>Crafted with 💛 by <a class="footer-link" href="https://github.com/ChanMeng666"><img src="/img/chan_logo.svg" alt="Chan Meng" class="footer-developer-logo" />Chan Meng</a></div>
             </div>
           </div>`,
       },

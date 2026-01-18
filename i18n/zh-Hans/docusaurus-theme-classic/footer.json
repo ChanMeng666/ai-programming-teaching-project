@@ -80,7 +80,7 @@
     "description": "The label of footer link with label=联系开发者 linking to mailto:chanmeng.dev@gmail.com"
   },
   "copyright": {
-    "message": "<div class=\"footer-copyright\">\n            <div class=\"footer-brand-section\">\n              <img src=\"/img/chan_logo.svg\" alt=\"Chan Meng Logo\" class=\"footer-logo\" />\n              <div class=\"footer-brand-info\">\n                <div class=\"footer-brand-name\">Chan Meng</div>\n              </div>\n            </div>\n            <div class=\"footer-legal\">\n              <div>Copyright © 2025 AI Programming Education.</div>\n              <div>Crafted with 💛 by <a class=\"footer-link\" href=\"https://github.com/ChanMeng666\">Chan Meng</a></div>\n            </div>\n            </div>",
+    "message": "<div class=\"footer-copyright\">\n            <div class=\"footer-legal\">\n              <div>Copyright © 2025 AI Programming Education.</div>\n              <div>Crafted with 💛 by <a class=\"footer-link\" href=\"https://github.com/ChanMeng666\"><img src=\"/img/chan_logo.svg\" alt=\"Chan Meng\" class=\"footer-developer-logo\" />Chan Meng</a></div>\n            </div>\n          </div>",
     "description": "The footer copyright"
   }
 }

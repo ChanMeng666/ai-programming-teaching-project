@@ -1369,6 +1369,20 @@ html:not([data-theme='dark']) .clean-btn svg path {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
+/* Footer logo - prominent brand display */
+.footer__logo {
+  width: 80px !important;
+  height: 80px !important;
+  border-radius: 16px;
+  transition: transform var(--animation-duration) var(--animation-timing);
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.2));
+  margin-bottom: 1rem;
+}
+
+.footer__logo:hover {
+  transform: scale(1.05);
+}
+
 /* Footer copyright section */
 .footer-copyright {
   display: flex;
@@ -1407,26 +1421,17 @@ html:not([data-theme='dark']) .clean-btn svg path {
   letter-spacing: 0.5px;
 }
 
-/* Developer section - subtle at bottom */
-.footer-developer {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.8rem;
-  opacity: 0.75;
-  margin-top: 1rem;
-  padding-top: 1rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
+/* Developer logo - inline with name */
 .footer-developer-logo {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   border-radius: 4px;
+  vertical-align: middle;
+  margin-right: 6px;
   transition: transform var(--animation-duration) var(--animation-timing);
 }
 
-.footer-developer-logo:hover {
+.footer-link:hover .footer-developer-logo {
   transform: scale(1.1);
 }
 
