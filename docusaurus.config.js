@@ -326,17 +326,21 @@ const config = {
           },
         ],
         copyright: `<div class="footer-copyright">
-            <div class="footer-brand-section">
-              <img src="/img/chan_logo.svg" alt="Chan Meng Logo" class="footer-logo" />
-              <div class="footer-brand-info">
-                <div class="footer-brand-name">Chan Meng</div>
-              </div>
+            <div class="footer-project-brand">
+              <img src="/img/logo.svg" alt="AI Programming Logo" class="footer-project-logo" />
+              <div class="footer-project-name">AI Programming Education</div>
             </div>
             <div class="footer-legal">
               <div>Copyright © ${new Date().getFullYear()} AI Programming Education.</div>
-              <div>Crafted with 💛 by <a class="footer-link" href="https://github.com/ChanMeng666">Chan Meng</a></div>
             </div>
-            </div>`,
+            <div class="footer-developer">
+              <span>Crafted with 💛 by</span>
+              <a class="footer-link" href="https://github.com/ChanMeng666">
+                <img src="/img/chan_logo.svg" alt="Chan Meng" class="footer-developer-logo" />
+                <span>Chan Meng</span>
+              </a>
+            </div>
+          </div>`,
       },
       prism: {
         theme: prismThemes.github,

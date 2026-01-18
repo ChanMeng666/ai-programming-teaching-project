@@ -1379,7 +1379,58 @@ html:not([data-theme='dark']) .clean-btn svg path {
   padding: 1.5rem 0;
 }
 
-/* Footer brand section */
+/* Project brand section - prominent display */
+.footer-project-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.footer-project-logo {
+  width: 72px;
+  height: 72px;
+  border-radius: 12px;
+  transition: transform var(--animation-duration) var(--animation-timing);
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15));
+}
+
+.footer-project-logo:hover {
+  transform: scale(1.05);
+}
+
+.footer-project-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--ifm-color-primary-lighter);
+  letter-spacing: 0.5px;
+}
+
+/* Developer section - subtle at bottom */
+.footer-developer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  opacity: 0.75;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-developer-logo {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  transition: transform var(--animation-duration) var(--animation-timing);
+}
+
+.footer-developer-logo:hover {
+  transform: scale(1.1);
+}
+
+/* Footer brand section (legacy) */
 .footer-brand-section {
   display: flex;
   align-items: center;
@@ -1438,6 +1489,14 @@ html:not([data-theme='dark']) .clean-btn svg path {
 }
 
 /* Dark mode adjustments */
+[data-theme='dark'] .footer-project-name {
+  color: #e2e8f0;
+}
+
+[data-theme='dark'] .footer-developer {
+  border-top-color: rgba(255, 255, 255, 0.15);
+}
+
 [data-theme='dark'] .footer-brand-name {
   color: #a0aec0;
 }
@@ -1462,6 +1521,15 @@ html:not([data-theme='dark']) .clean-btn svg path {
 
 /* Responsive design for footer */
 @media (max-width: 768px) {
+  .footer-project-logo {
+    width: 56px;
+    height: 56px;
+  }
+
+  .footer-project-name {
+    font-size: 1.1rem;
+  }
+
   .footer-brand-section {
     flex-direction: column;
     text-align: center;
