@@ -1,4 +1,13 @@
+/* 页面包装器 - 用于定位背景 */
+.pageWrapper {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
 .feedsContainer {
+  position: relative;
+  z-index: 1;
   max-width: 1200px;
   margin: 0 auto;
   padding: 3rem 2rem;
@@ -19,16 +28,18 @@
 .heroSection {
   text-align: center;
   margin-bottom: 4rem;
-  padding: 2rem 0;
-  background: linear-gradient(135deg, var(--ifm-color-primary-lightest) 0%, transparent 100%);
+  padding: 2rem;
+  background: linear-gradient(135deg, rgba(45, 212, 191, 0.03) 0%, rgba(168, 85, 247, 0.02) 100%);
   border-radius: 16px;
+  backdrop-filter: blur(2px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .title {
   font-size: 3rem;
   font-weight: 800;
   margin-bottom: 1.5rem;
-  background: linear-gradient(135deg, var(--ifm-color-primary) 0%, var(--ifm-color-primary-dark) 100%);
+  background: linear-gradient(135deg, #2dd4bf 0%, #a855f7 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -36,7 +47,7 @@
 
 .subtitle {
   font-size: 1.25rem;
-  color: var(--ifm-color-emphasis-700);
+  color: rgba(255, 255, 255, 0.85);
   max-width: 600px;
   margin: 0 auto;
   line-height: 1.6;
@@ -45,22 +56,25 @@
 .contentSection {
   margin-bottom: 3rem;
   padding: 2rem;
-  background: var(--ifm-background-surface-color);
+  background: rgba(10, 12, 82, 0.15);
   border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(3px);
+  border: 1px solid rgba(255, 255, 255, 0.04);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .contentSection:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+  border-color: rgba(45, 212, 191, 0.2);
 }
 
 .contentSection h2 {
   font-size: 1.75rem;
   margin-bottom: 1.5rem;
-  color: var(--ifm-color-primary-dark);
-  border-bottom: 2px solid var(--ifm-color-primary-lightest);
+  color: #2dd4bf;
+  border-bottom: 2px solid rgba(45, 212, 191, 0.3);
   padding-bottom: 0.5rem;
 }
 
@@ -68,7 +82,11 @@
   font-size: 1.3rem;
   margin-top: 2rem;
   margin-bottom: 1rem;
-  color: var(--ifm-color-emphasis-800);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.contentSection p {
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .subscriptionTable {
@@ -82,24 +100,26 @@
   border-spacing: 0;
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 0 0 1px var(--ifm-color-emphasis-200);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.05);
+  background: rgba(6, 8, 66, 0.1);
 }
 
 .subscriptionTable th {
-  background: var(--ifm-color-primary-lightest);
+  background: rgba(45, 212, 191, 0.08);
   padding: 1rem;
   text-align: left;
   font-weight: 600;
-  color: var(--ifm-color-primary-darkest);
+  color: #2dd4bf;
 }
 
 .subscriptionTable td {
   padding: 1rem;
-  border-top: 1px solid var(--ifm-color-emphasis-200);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.85);
 }
 
 .subscriptionTable tr:hover td {
-  background: var(--ifm-background-color-secondary);
+  background: rgba(45, 212, 191, 0.08);
 }
 
 .feedLink {
@@ -107,18 +127,20 @@
   align-items: center;
   padding: 0.5rem 1rem;
   border-radius: 6px;
-  background: var(--ifm-color-primary-lightest);
-  color: var(--ifm-color-primary-dark);
+  background: rgba(45, 212, 191, 0.15);
+  color: #2dd4bf;
   text-decoration: none;
   font-weight: 500;
+  border: 1px solid rgba(45, 212, 191, 0.3);
   transition: all 0.3s ease;
 }
 
 .feedLink:hover {
-  background: var(--ifm-color-primary);
-  color: white;
+  background: rgba(45, 212, 191, 0.25);
+  color: #5eead4;
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 12px rgba(45, 212, 191, 0.3);
+  border-color: rgba(45, 212, 191, 0.5);
 }
 
 .benefitsList {
@@ -130,13 +152,14 @@
 .benefitsList li {
   padding: 0.75rem 0;
   font-size: 1.1rem;
-  border-bottom: 1px solid var(--ifm-color-emphasis-100);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.85);
   transition: padding-left 0.3s ease;
 }
 
 .benefitsList li:hover {
   padding-left: 1rem;
-  background: var(--ifm-background-color-secondary);
+  background: rgba(45, 212, 191, 0.08);
   margin: 0 -1rem;
   padding-right: 1rem;
 }
@@ -148,9 +171,9 @@
 .stepSection {
   margin: 2rem 0;
   padding: 1.5rem;
-  background: var(--ifm-background-color-secondary);
+  background: rgba(6, 8, 66, 0.12);
   border-radius: 8px;
-  border-left: 4px solid var(--ifm-color-primary);
+  border-left: 4px solid rgba(45, 212, 191, 0.7);
 }
 
 .readerGrid {
@@ -162,17 +185,14 @@
 
 .readerCategory {
   padding: 1.5rem;
-  background: white;
+  background: rgba(10, 12, 82, 0.1);
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-}
-
-[data-theme='dark'] .readerCategory {
-  background: var(--ifm-background-surface-color);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.03);
 }
 
 .readerCategory h4 {
-  color: var(--ifm-color-primary);
+  color: #a855f7;
   margin-bottom: 1rem;
   font-size: 1.1rem;
   font-weight: 600;
@@ -186,17 +206,18 @@
 .readerCategory li {
   padding: 0.5rem 0;
   font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.75);
 }
 
 .readerCategory a {
-  color: var(--ifm-color-primary-dark);
+  color: #2dd4bf;
   font-weight: 500;
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
 .readerCategory a:hover {
-  color: var(--ifm-color-primary);
+  color: #5eead4;
   text-decoration: underline;
 }
 
@@ -211,6 +232,7 @@
   padding: 1rem 0 1rem 3rem;
   position: relative;
   font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.85);
 }
 
 .stepsList li::before {
@@ -220,7 +242,7 @@
   top: 0.8rem;
   width: 2rem;
   height: 2rem;
-  background: var(--ifm-color-primary);
+  background: linear-gradient(135deg, #2dd4bf 0%, #a855f7 100%);
   color: white;
   border-radius: 50%;
   display: flex;
@@ -230,11 +252,15 @@
 }
 
 .infoBox {
-  background: var(--ifm-color-info-contrast-background);
-  border: 1px solid var(--ifm-color-info-dark);
+  background: rgba(45, 212, 191, 0.02);
+  border: 1px solid rgba(45, 212, 191, 0.12);
   border-radius: 8px;
   padding: 1.5rem;
   margin: 1.5rem 0;
+}
+
+.infoBox strong {
+  color: #2dd4bf;
 }
 
 .infoBox ul {
@@ -244,6 +270,7 @@
 
 .infoBox li {
   margin: 0.5rem 0;
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .socialLinks {
@@ -257,43 +284,45 @@
   display: inline-flex;
   align-items: center;
   padding: 1rem 1.5rem;
-  background: var(--ifm-background-color-secondary);
+  background: rgba(6, 8, 66, 0.1);
   border-radius: 8px;
   text-decoration: none;
-  color: var(--ifm-font-color-base);
+  color: rgba(255, 255, 255, 0.9);
   transition: all 0.3s ease;
-  border: 1px solid transparent;
+  border: 1px solid rgba(255, 255, 255, 0.04);
 }
 
 .socialLink:hover {
-  background: var(--ifm-color-primary-lightest);
-  border-color: var(--ifm-color-primary);
+  background: rgba(45, 212, 191, 0.15);
+  border-color: rgba(45, 212, 191, 0.4);
   transform: translateX(8px);
   text-decoration: none;
-  color: var(--ifm-color-primary-dark);
+  color: #2dd4bf;
 }
 
 .faqItem {
   margin: 2rem 0;
   padding: 1.5rem;
-  background: var(--ifm-background-color-secondary);
+  background: rgba(6, 8, 66, 0.1);
   border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.03);
   transition: transform 0.3s ease;
 }
 
 .faqItem:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  border-color: rgba(168, 85, 247, 0.3);
 }
 
 .faqItem h3 {
-  color: var(--ifm-color-primary-dark);
+  color: #a855f7;
   margin-bottom: 1rem;
   font-size: 1.2rem;
 }
 
 .faqItem p {
-  color: var(--ifm-color-emphasis-700);
+  color: rgba(255, 255, 255, 0.75);
   line-height: 1.6;
   margin: 0;
 }
@@ -302,18 +331,23 @@
   text-align: center;
   margin-top: 4rem;
   padding: 3rem 2rem;
-  background: linear-gradient(135deg, var(--ifm-color-primary-lightest) 0%, transparent 100%);
+  background: linear-gradient(135deg, rgba(45, 212, 191, 0.02) 0%, rgba(168, 85, 247, 0.015) 100%);
   border-radius: 16px;
+  backdrop-filter: blur(2px);
+  border: 1px solid rgba(255, 255, 255, 0.03);
 }
 
 .footer p {
   font-size: 1.2rem;
-  color: var(--ifm-color-emphasis-800);
+  color: rgba(255, 255, 255, 0.85);
   line-height: 1.8;
 }
 
 .footer strong {
-  color: var(--ifm-color-primary-dark);
+  background: linear-gradient(135deg, #2dd4bf 0%, #a855f7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   font-size: 1.3rem;
 }
 
