@@ -1,96 +1,74 @@
-facebook:
-  label: Facebook
-  permalink: /facebook
-  description: Facebook tag description
-
-hello:
-  label: Hello
-  permalink: /hello
-  description: Hello tag description
-
-docusaurus:
-  label: Docusaurus
-  permalink: /docusaurus
-  description: Docusaurus tag description
-
-hola:
-  label: Hola
-  permalink: /hola
-  description: Hola tag description
-
 design:
   label: 设计
-  permalink: /tags/design
+  permalink: /design
   description: 用户界面和用户体验设计相关的文章
-  
+
 UI-UX:
   label: UI/UX
-  permalink: /tags/ui-ux
+  permalink: /ui-ux
   description: 用户界面和用户体验设计的最佳实践和指南
-  
+
 documentation:
   label: 文档
-  permalink: /tags/documentation
+  permalink: /documentation
   description: 技术文档、设计规范和指南文档
 
-教程:
+tutorial:
   label: 教程
-  permalink: /tags/tutorial
+  permalink: /tutorial
   description: 各类实用教程和指南
 
-腾讯会议:
+tencent-meeting:
   label: 腾讯会议
-  permalink: /tags/tencent-meeting
+  permalink: /tencent-meeting
   description: 关于腾讯会议的使用技巧和教程
 
-视频下载:
+video-download:
   label: 视频下载
-  permalink: /tags/video-download
+  permalink: /video-download
   description: 视频下载相关的教程和工具使用指南
 
-
-留学:
+study-abroad:
   label: 留学
-  permalink: /tags/留学
+  permalink: /study-abroad
   description: 留学相关的教程和指南
 
-职业规划:
+career-planning:
   label: 职业规划
-  permalink: /tags/职业规划
+  permalink: /career-planning
   description: 职业规划相关的教程和指南
 
-海外发展:
+overseas-development:
   label: 海外发展
-  permalink: /tags/海外发展
+  permalink: /overseas-development
   description: 海外发展相关的教程和指南
 
-视频资源:
+video-resources:
   label: 视频资源
-  permalink: /tags/视频资源
+  permalink: /video-resources
   description: 各类教学和演讲视频资源
 
-她行活动:
+shexing-activity:
   label: 她行活动
-  permalink: /tags/她行活动
+  permalink: /shexing-activity
   description: 她行活动相关内容和分享
 
-导师答疑:
+mentor-qa:
   label: 导师答疑
-  permalink: /tags/导师答疑
+  permalink: /mentor-qa
   description: 导师答疑会议内容和总结
 
-身份认知:
+identity-recognition:
   label: 身份认知
-  permalink: /tags/身份认知
+  permalink: /identity-recognition
   description: 关于身份认同和社会认知的讨论
 
-社会认同理论:
+social-identity-theory:
   label: 社会认同理论
-  permalink: /tags/社会认同理论
+  permalink: /social-identity-theory
   description: 社会认同理论相关的学术内容
 
-交叉性:
+intersectionality:
   label: 交叉性
-  permalink: /tags/交叉性
+  permalink: /intersectionality
   description: 交叉性理论和多重身份研究
-

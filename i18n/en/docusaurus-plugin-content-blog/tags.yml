@@ -1,96 +1,74 @@
-facebook:
-  label: Facebook
-  permalink: /facebook
-  description: Facebook tag description
-
-hello:
-  label: Hello
-  permalink: /hello
-  description: Hello tag description
-
-docusaurus:
-  label: Docusaurus
-  permalink: /docusaurus
-  description: Docusaurus tag description
-
-hola:
-  label: Hola
-  permalink: /hola
-  description: Hola tag description
-
 design:
-  label: 设计
-  permalink: /tags/design
-  description: 用户界面和用户体验设计相关的文章
-  
+  label: Design
+  permalink: /design
+  description: Articles about user interface and user experience design
+
 UI-UX:
   label: UI/UX
-  permalink: /tags/ui-ux
-  description: 用户界面和用户体验设计的最佳实践和指南
-  
+  permalink: /ui-ux
+  description: Best practices and guides for UI and UX design
+
 documentation:
-  label: 文档
-  permalink: /tags/documentation
-  description: 技术文档、设计规范和指南文档
+  label: Documentation
+  permalink: /documentation
+  description: Technical documentation, design specs and guides
 
-教程:
-  label: 教程
-  permalink: /tags/tutorial
-  description: 各类实用教程和指南
+tutorial:
+  label: Tutorial
+  permalink: /tutorial
+  description: Practical tutorials and how-to guides
 
-腾讯会议:
-  label: 腾讯会议
-  permalink: /tags/tencent-meeting
-  description: 关于腾讯会议的使用技巧和教程
+tencent-meeting:
+  label: Tencent Meeting
+  permalink: /tencent-meeting
+  description: Tips and tutorials for using Tencent Meeting
 
-视频下载:
-  label: 视频下载
-  permalink: /tags/video-download
-  description: 视频下载相关的教程和工具使用指南
+video-download:
+  label: Video Download
+  permalink: /video-download
+  description: Tutorials and tools for downloading videos
 
+study-abroad:
+  label: Study Abroad
+  permalink: /study-abroad
+  description: Guides and resources for studying abroad
 
-留学:
-  label: 留学
-  permalink: /tags/留学
-  description: 留学相关的教程和指南
+career-planning:
+  label: Career Planning
+  permalink: /career-planning
+  description: Career planning guides and resources
 
-职业规划:
-  label: 职业规划
-  permalink: /tags/职业规划
-  description: 职业规划相关的教程和指南
+overseas-development:
+  label: Overseas Development
+  permalink: /overseas-development
+  description: Guides for overseas career development
 
-海外发展:
-  label: 海外发展
-  permalink: /tags/海外发展
-  description: 海外发展相关的教程和指南
+video-resources:
+  label: Video Resources
+  permalink: /video-resources
+  description: Educational and lecture video resources
 
-视频资源:
-  label: 视频资源
-  permalink: /tags/视频资源
-  description: 各类教学和演讲视频资源
+shexing-activity:
+  label: SheXing Activity
+  permalink: /shexing-activity
+  description: SheXing activity content and sharing
 
-她行活动:
-  label: 她行活动
-  permalink: /tags/她行活动
-  description: 她行活动相关内容和分享
+mentor-qa:
+  label: Mentor Q&A
+  permalink: /mentor-qa
+  description: Mentor Q&A session summaries
 
-导师答疑:
-  label: 导师答疑
-  permalink: /tags/导师答疑
-  description: 导师答疑会议内容和总结
+identity-recognition:
+  label: Identity Recognition
+  permalink: /identity-recognition
+  description: Discussions on identity and social cognition
 
-身份认知:
-  label: 身份认知
-  permalink: /tags/身份认知
-  description: 关于身份认同和社会认知的讨论
+social-identity-theory:
+  label: Social Identity Theory
+  permalink: /social-identity-theory
+  description: Academic content on social identity theory
 
-社会认同理论:
-  label: 社会认同理论
-  permalink: /tags/社会认同理论
-  description: 社会认同理论相关的学术内容
-
-交叉性:
-  label: 交叉性
-  permalink: /tags/交叉性
-  description: 交叉性理论和多重身份研究
-
+intersectionality:
+  label: Intersectionality
+  permalink: /intersectionality
+  description: Intersectionality theory and multiple identity research
