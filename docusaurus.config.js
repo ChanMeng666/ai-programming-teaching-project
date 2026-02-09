@@ -159,14 +159,8 @@ const config = {
         // 使用主索引名称
         indexName: 'ai-programming-crawler',
 
-        // 禁用 contextual search，避免版本过滤问题
-        contextualSearch: false,
-
-        // Optional: Algolia search parameters
-        searchParameters: {
-          // 确保搜索所有语言内容
-          facetFilters: [],
-        },
+        // 启用 contextual search，按当前语言和版本过滤搜索结果
+        contextualSearch: true,
 
         // Optional: path for search page that enabled by default (`false` to disable it)
         searchPagePath: 'search',
