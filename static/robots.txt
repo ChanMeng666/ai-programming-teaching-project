@@ -1,4 +1,14 @@
-# AI编程教育平台 - AI友好版robots.txt
+# AI编程教育平台 - SEO + AI友好版robots.txt
+
+# 搜索引擎爬虫优化
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
 User-agent: *
 Allow: /
 
@@ -7,7 +17,7 @@ User-agent: GPTBot
 Allow: /
 Crawl-delay: 1
 
-User-agent: Google-Extended  
+User-agent: Google-Extended
 Allow: /
 Crawl-delay: 1
 

@@ -72,3 +72,33 @@ intersectionality:
   label: 交叉性
   permalink: /intersectionality
   description: 交叉性理论和多重身份研究
+
+gemini-cli:
+  label: Gemini CLI
+  permalink: /gemini-cli
+  description: Google Gemini CLI 工具使用教程和技巧
+
+ai-programming:
+  label: AI编程
+  permalink: /ai-programming
+  description: AI辅助编程相关的教程和实践经验
+
+ai-tools:
+  label: AI工具
+  permalink: /ai-tools
+  description: 各类AI开发工具的使用和比较
+
+beginners-guide:
+  label: 入门指南
+  permalink: /beginners-guide
+  description: 面向初学者的入门教程和指南
+
+cursor-ide:
+  label: Cursor IDE
+  permalink: /cursor-ide
+  description: Cursor IDE 使用教程和技巧
+
+tool-comparison:
+  label: 工具对比
+  permalink: /tool-comparison
+  description: 开发工具的功能对比和选型建议

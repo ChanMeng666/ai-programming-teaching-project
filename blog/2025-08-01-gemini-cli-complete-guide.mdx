@@ -1,0 +1,265 @@
+---
+title: "Gemini CLI 完全指南：从安装到实战的 AI 编程助手"
+description: "详细介绍 Google Gemini CLI 的安装、配置和实际使用方法。涵盖 Windows、macOS、Linux 三大平台，适合零基础开发者快速上手 AI 辅助编程。"
+slug: gemini-cli-complete-guide
+authors: chanmeng
+tags: [gemini-cli, tutorial, ai-programming, beginners-guide]
+hide_table_of_contents: false
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import Admonition from '@theme/Admonition';
+
+# Gemini CLI 完全指南：从安装到实战的 AI 编程助手
+
+Google 推出的 Gemini CLI 是一款强大的命令行 AI 编程助手，它可以帮助开发者在终端中直接与 AI 对话，完成代码生成、环境管理、文件操作等任务。本文将带你从零开始，全面掌握 Gemini CLI 的使用方法。
+
+<!--truncate-->
+
+## 什么是 Gemini CLI？
+
+Gemini CLI 是 Google 基于 Gemini 大语言模型打造的命令行工具。与传统的 AI 聊天界面不同，它直接运行在你的终端中，能够：
+
+- 理解你的项目结构和代码上下文
+- 直接读写本地文件
+- 执行系统命令
+- 帮助调试和修复代码问题
+- 自动化重复性开发任务
+
+<Admonition type="tip" title="为什么选择 Gemini CLI？">
+对于初学者来说，Gemini CLI 的最大优势在于**免费**且**无需复杂配置**。只需要一个 Google 账号，就能立即开始使用。
+</Admonition>
+
+## 安装 Gemini CLI
+
+### 前置要求
+
+在安装 Gemini CLI 之前，你需要确保系统已安装 **Node.js 18 或更高版本**。
+
+<Tabs>
+<TabItem value="windows" label="Windows" default>
+
+**1. 安装 Node.js**
+
+访问 [Node.js 官网](https://nodejs.org/) 下载并安装 LTS 版本。安装完成后，打开 PowerShell 验证：
+
+```bash
+node --version
+npm --version
+```
+
+**2. 安装 Gemini CLI**
+
+```bash
+npm install -g @google/gemini-cli
+```
+
+或使用 npx 直接运行（无需全局安装）：
+
+```bash
+npx @google/gemini-cli
+```
+
+</TabItem>
+<TabItem value="macos" label="macOS">
+
+**1. 安装 Node.js（推荐使用 Homebrew）**
+
+```bash
+brew install node
+```
+
+**2. 安装 Gemini CLI**
+
+```bash
+npm install -g @google/gemini-cli
+```
+
+或直接运行：
+
+```bash
+npx @google/gemini-cli
+```
+
+</TabItem>
+<TabItem value="linux" label="Linux">
+
+**1. 安装 Node.js**
+
+```bash
+# Ubuntu/Debian
+curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
+sudo apt-get install -y nodejs
+
+# Fedora
+sudo dnf install nodejs
+```
+
+**2. 安装 Gemini CLI**
+
+```bash
+npm install -g @google/gemini-cli
+```
+
+</TabItem>
+</Tabs>
+
+### 首次配置
+
+安装完成后，首次运行 Gemini CLI 会引导你完成 Google 账号授权：
+
+```bash
+gemini
+```
+
+按照终端中的提示完成 OAuth 登录流程。授权成功后，你就可以开始使用了。
+
+## 基础使用
+
+### 启动交互模式
+
+在任意项目目录中运行：
+
+```bash
+gemini
+```
+
+进入交互模式后，你可以直接输入自然语言指令：
+
+```
+> 帮我查看这个项目的结构
+> 这个目录下有哪些 JavaScript 文件？
+> 帮我创建一个简单的 HTTP 服务器
+```
+
+### 单次命令模式
+
+如果只需要执行一次性任务：
+
+```bash
+gemini "帮我解释这段代码的作用" < main.py
+```
+
+### 常用指令示例
+
+以下是一些实用的 Gemini CLI 使用场景：
+
+**环境诊断与修复：**
+```
+> 检查我的开发环境，看看是否缺少必要的工具
+> 我的 Git 配置有什么问题吗？帮我修复
+> 清理系统中不需要的 Node.js 旧版本
+```
+
+**代码生成与修改：**
+```
+> 在当前目录创建一个 Express.js 项目模板
+> 帮我给这个函数添加错误处理
+> 把这个 JavaScript 文件重构为 TypeScript
+```
+
+**Git 操作自动化：**
+```
+> 帮我初始化 Git 仓库并创建 .gitignore
+> 查看最近的修改并帮我写一个有意义的 commit 信息
+> 创建一个新分支并切换过去
+```
+
+## 实战案例：用 Gemini CLI 搭建个人网站
+
+让我们通过一个实际案例来展示 Gemini CLI 的强大能力。
+
+### 第一步：项目初始化
+
+```
+> 帮我创建一个基于 Docusaurus 的个人网站项目，项目名叫 my-portfolio
+```
+
+Gemini CLI 会为你执行必要的命令，创建项目结构，并安装依赖。
+
+### 第二步：自定义配置
+
+```
+> 帮我修改 docusaurus.config.js，把网站标题改成"我的作品集"，
+  并添加中文语言支持
+```
+
+### 第三步：创建内容
+
+```
+> 在 docs 目录下创建一个自我介绍页面，使用 Markdown 格式，
+  包含个人简介、技能列表和项目经历
+```
+
+### 第四步：本地预览
+
+```
+> 启动开发服务器，让我预览网站效果
+```
+
+### 第五步：部署上线
+
+```
+> 帮我把这个项目部署到 Vercel，给我详细的操作步骤
+```
+
+## 进阶技巧
+
+### 1. 利用上下文感知
+
+Gemini CLI 能够读取当前目录下的文件，自动理解项目上下文。在项目根目录下启动 Gemini CLI，它就能智能地：
+
+- 识别项目类型（Node.js、Python、Go 等）
+- 理解项目结构和依赖关系
+- 根据现有代码风格生成一致的代码
+
+### 2. 批量文件操作
+
+```
+> 帮我把 src 目录下所有 .js 文件的 var 声明改成 const 或 let
+> 给所有 Python 文件添加 type hints
+```
+
+### 3. 学习与调试
+
+```
+> 解释这个正则表达式的含义：/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+> 这段代码为什么会产生内存泄漏？帮我找到原因并修复
+```
+
+### 4. 安全实践
+
+<Admonition type="caution" title="安全提示">
+- Gemini CLI 可以执行系统命令，使用前请仔细确认它即将执行的操作
+- 不要在包含敏感信息（密码、API 密钥）的目录中使用不受限的命令执行
+- 建议在版本控制下的项目中使用，便于回滚意外修改
+</Admonition>
+
+## 常见问题
+
+### Q: Gemini CLI 和 ChatGPT 有什么区别？
+
+Gemini CLI 运行在本地终端，能直接访问你的文件系统和开发环境，适合实际编程任务。而 ChatGPT 是网页聊天界面，更适合一般性的问答。
+
+### Q: 使用 Gemini CLI 需要付费吗？
+
+Gemini CLI 基础版本免费使用，有每日使用次数限制。对于大多数个人学习和小型项目来说完全够用。
+
+### Q: 我完全不会编程，也能用 Gemini CLI 吗？
+
+可以！Gemini CLI 的一大优势就是你可以用自然语言描述你想做的事情，它会帮你生成代码和执行命令。不过，建议先学习一些基础的终端操作知识。
+
+## 总结
+
+Gemini CLI 是学习 AI 辅助编程的绝佳工具。它降低了编程的门槛，让初学者能够通过自然语言与 AI 协作完成开发任务。无论你是想学习编程、管理开发环境、还是快速搭建项目，Gemini CLI 都能成为你的得力助手。
+
+想要更深入地学习 Gemini CLI 的使用？欢迎查看我们的 [Gemini CLI 环境管理课程](/docs/basics/)，通过实践项目系统性地掌握这一工具。
+
+---
+
+:::info 相关资源
+- [课程一：Gemini CLI 环境管理](/docs/basics/) - 系统性学习 Gemini CLI
+- [课程二：开发并部署个人网站](/docs/website/) - 用 AI 搭建个人网站
+- [Discord 社区](https://discord.gg/T3NJG5n98a) - 加入学习社区交流
+:::

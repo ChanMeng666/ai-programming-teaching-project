@@ -1,0 +1,235 @@
+---
+title: "Gemini CLI Complete Guide: Your AI Programming Assistant from Install to Practice"
+description: "A detailed guide to installing, configuring, and using Google Gemini CLI. Covers Windows, macOS, and Linux platforms, perfect for beginners getting started with AI-assisted programming."
+slug: gemini-cli-complete-guide
+authors: chanmeng
+tags: [gemini-cli, tutorial, ai-programming, beginners-guide]
+hide_table_of_contents: false
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import Admonition from '@theme/Admonition';
+
+# Gemini CLI Complete Guide: Your AI Programming Assistant from Install to Practice
+
+Google's Gemini CLI is a powerful command-line AI programming assistant that helps developers interact with AI directly from the terminal to generate code, manage environments, manipulate files, and more. This guide will take you from zero to mastering Gemini CLI.
+
+<!--truncate-->
+
+## What is Gemini CLI?
+
+Gemini CLI is a command-line tool built by Google on the Gemini large language model. Unlike traditional AI chat interfaces, it runs directly in your terminal and can:
+
+- Understand your project structure and code context
+- Read and write local files directly
+- Execute system commands
+- Help debug and fix code issues
+- Automate repetitive development tasks
+
+<Admonition type="tip" title="Why Choose Gemini CLI?">
+For beginners, the biggest advantage of Gemini CLI is that it's **free** and requires **no complex setup**. All you need is a Google account to get started immediately.
+</Admonition>
+
+## Installing Gemini CLI
+
+### Prerequisites
+
+Before installing Gemini CLI, make sure you have **Node.js 18 or later** installed on your system.
+
+<Tabs>
+<TabItem value="windows" label="Windows" default>
+
+**1. Install Node.js**
+
+Visit [Node.js website](https://nodejs.org/) and download the LTS version. After installation, verify in PowerShell:
+
+```bash
+node --version
+npm --version
+```
+
+**2. Install Gemini CLI**
+
+```bash
+npm install -g @google/gemini-cli
+```
+
+Or run directly with npx (no global install needed):
+
+```bash
+npx @google/gemini-cli
+```
+
+</TabItem>
+<TabItem value="macos" label="macOS">
+
+**1. Install Node.js (Homebrew recommended)**
+
+```bash
+brew install node
+```
+
+**2. Install Gemini CLI**
+
+```bash
+npm install -g @google/gemini-cli
+```
+
+</TabItem>
+<TabItem value="linux" label="Linux">
+
+**1. Install Node.js**
+
+```bash
+# Ubuntu/Debian
+curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
+sudo apt-get install -y nodejs
+
+# Fedora
+sudo dnf install nodejs
+```
+
+**2. Install Gemini CLI**
+
+```bash
+npm install -g @google/gemini-cli
+```
+
+</TabItem>
+</Tabs>
+
+### First-time Setup
+
+After installation, running Gemini CLI for the first time will guide you through Google account authorization:
+
+```bash
+gemini
+```
+
+Follow the prompts in the terminal to complete the OAuth login process.
+
+## Basic Usage
+
+### Interactive Mode
+
+Run in any project directory:
+
+```bash
+gemini
+```
+
+In interactive mode, type natural language instructions:
+
+```
+> Show me the structure of this project
+> What JavaScript files are in this directory?
+> Create a simple HTTP server for me
+```
+
+### Common Use Cases
+
+**Environment diagnosis and fixing:**
+```
+> Check my development environment for missing tools
+> Is there anything wrong with my Git configuration? Fix it
+> Clean up old Node.js versions on my system
+```
+
+**Code generation and modification:**
+```
+> Create an Express.js project template in the current directory
+> Add error handling to this function
+> Refactor this JavaScript file to TypeScript
+```
+
+**Git automation:**
+```
+> Initialize a Git repo and create a .gitignore
+> Review recent changes and write a meaningful commit message
+> Create and switch to a new branch
+```
+
+## Practical Example: Building a Personal Website with Gemini CLI
+
+Let's demonstrate Gemini CLI's capabilities through a real project.
+
+### Step 1: Initialize the Project
+
+```
+> Create a Docusaurus-based personal website project called my-portfolio
+```
+
+### Step 2: Customize Configuration
+
+```
+> Modify docusaurus.config.js to change the title to "My Portfolio"
+  and add Chinese language support
+```
+
+### Step 3: Create Content
+
+```
+> Create a self-introduction page in the docs directory using Markdown,
+  including bio, skills list, and project experience
+```
+
+### Step 4: Preview Locally
+
+```
+> Start the dev server so I can preview the website
+```
+
+### Step 5: Deploy
+
+```
+> Help me deploy this project to Vercel with detailed steps
+```
+
+## Advanced Tips
+
+### 1. Context Awareness
+
+Gemini CLI reads files in the current directory and automatically understands project context. Launch it in your project root for smart behavior.
+
+### 2. Batch File Operations
+
+```
+> Change all var declarations to const or let in src/ directory .js files
+> Add type hints to all Python files
+```
+
+### 3. Learning and Debugging
+
+```
+> Explain what this regex does: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+> Why does this code cause a memory leak? Find the cause and fix it
+```
+
+## FAQ
+
+### Q: How is Gemini CLI different from ChatGPT?
+
+Gemini CLI runs locally in your terminal with direct access to your file system and development environment. ChatGPT is a web chat interface better suited for general Q&A.
+
+### Q: Does Gemini CLI cost money?
+
+The basic version is free with daily usage limits. It's more than enough for personal learning and small projects.
+
+### Q: Can I use Gemini CLI with zero programming experience?
+
+Yes! One of Gemini CLI's biggest strengths is that you can describe what you want in natural language. However, learning basic terminal operations first is recommended.
+
+## Summary
+
+Gemini CLI is an excellent tool for learning AI-assisted programming. It lowers the barrier to coding, enabling beginners to collaborate with AI through natural language to complete development tasks.
+
+Want to learn Gemini CLI more deeply? Check out our [Gemini CLI Environment Management course](/docs/basics/) for a systematic, project-based approach.
+
+---
+
+:::info Related Resources
+- [Course 1: Gemini CLI Environment Management](/docs/basics/) - Systematic Gemini CLI learning
+- [Course 2: Build and Deploy Personal Website](/docs/website/) - Build a website with AI
+- [Discord Community](https://discord.gg/T3NJG5n98a) - Join the learning community
+:::

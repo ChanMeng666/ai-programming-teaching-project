@@ -72,3 +72,33 @@ intersectionality:
   label: Intersectionality
   permalink: /intersectionality
   description: Intersectionality theory and multiple identity research
+
+gemini-cli:
+  label: Gemini CLI
+  permalink: /gemini-cli
+  description: Google Gemini CLI tutorials and tips
+
+ai-programming:
+  label: AI Programming
+  permalink: /ai-programming
+  description: AI-assisted programming tutorials and practices
+
+ai-tools:
+  label: AI Tools
+  permalink: /ai-tools
+  description: AI development tool usage and comparisons
+
+beginners-guide:
+  label: Beginners Guide
+  permalink: /beginners-guide
+  description: Beginner-friendly tutorials and getting started guides
+
+cursor-ide:
+  label: Cursor IDE
+  permalink: /cursor-ide
+  description: Cursor IDE tutorials and tips
+
+tool-comparison:
+  label: Tool Comparison
+  permalink: /tool-comparison
+  description: Development tool feature comparisons and selection guides

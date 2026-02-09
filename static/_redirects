@@ -1,0 +1,2 @@
+# www 域名规范化重定向
+https://www.programming.chanmeng.org/* https://programming.chanmeng.org/:splat 301

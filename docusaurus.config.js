@@ -21,15 +21,15 @@ const config = {
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'facebook', // Usually your GitHub org/user name.
-  projectName: 'docusaurus', // Usually your repo name.
+  organizationName: 'ChanMeng666', // Usually your GitHub org/user name.
+  projectName: 'ai-programming-teaching-project', // Usually your repo name.
 
   trailingSlash: true,
 
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
 
-  // RSS 自动发现
+  // RSS 自动发现 + SEO head tags
   headTags: [
     {
       tagName: 'link',
@@ -56,6 +56,14 @@ const config = {
         type: 'application/feed+json',
         title: 'AI Programming 教学博客 - JSON Feed',
         href: '/blog/feed.json',
+      },
+    },
+    // TODO: Replace YOUR_VERIFICATION_CODE with actual Google Search Console verification code
+    {
+      tagName: 'meta',
+      attributes: {
+        name: 'google-site-verification',
+        content: 'YOUR_VERIFICATION_CODE',
       },
     },
   ],
@@ -141,6 +149,11 @@ const config = {
         theme: {
           customCss: './src/css/custom.css',
         },
+        sitemap: {
+          changefreq: 'weekly',
+          priority: 0.5,
+          filename: 'sitemap.xml',
+        },
       }),
     ],
   ],
@@ -148,6 +161,11 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      metadata: [
+        { name: 'keywords', content: 'AI编程, Gemini CLI, AI辅助编程, 零基础编程, 个人网站开发, Vercel部署, AI programming, coding tutorial' },
+        { name: 'author', content: 'Chan Meng' },
+        { property: 'og:site_name', content: 'AI Programming - Chan Meng 的 AI 编程公开课' },
+      ],
       // Replace with your project's social card
       image: 'img/docusaurus-social-card.png',
       // Algolia DocSearch 配置
