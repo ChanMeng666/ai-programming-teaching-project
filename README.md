@@ -799,9 +799,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 [back-to-top]: https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square
 
 <!-- Project Links -->
-[demo-link]: https://ai-programming-teaching-project.vercel.app/
-[docs-link]: https://ai-programming-teaching-project.vercel.app/docs/intro
-[blog-link]: https://ai-programming-teaching-project.vercel.app/blog
+[demo-link]: https://programming.chanmeng.org/
+[docs-link]: https://programming.chanmeng.org/docs/intro
+[blog-link]: https://programming.chanmeng.org/blog
 
 <!-- GitHub Links -->
 [github-issues-link]: https://github.com/ChanMeng666/ai-programming-teaching-project/issues

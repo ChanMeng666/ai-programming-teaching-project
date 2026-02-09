@@ -41,4 +41,4 @@ Allow: /blog/
 
 # Algolia-Crawler-Verif: A2AE254F59B4E42C
 
-Sitemap: https://ai-programming-teaching-project.vercel.app/sitemap.xml
+Sitemap: https://programming.chanmeng.org/sitemap.xml

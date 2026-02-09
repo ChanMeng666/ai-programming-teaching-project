@@ -5,8 +5,6 @@
 // See: https://docusaurus.io/docs/api/docusaurus-config
 
 import {themes as prismThemes} from 'prism-react-renderer';
-import { Analytics } from '@vercel/analytics/react';
-
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 /** @type {import('@docusaurus/types').Config} */
@@ -16,7 +14,7 @@ const config = {
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
-  url: 'https://ai-programming-teaching-project.vercel.app',
+  url: 'https://programming.chanmeng.org',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
@@ -343,17 +341,6 @@ const config = {
         theme: prismThemes.github,
         darkTheme: prismThemes.dracula,
       },
-      customScripts: [
-        {
-          content: `
-            import { Analytics } from '@vercel/analytics/react';
-            export default function AnalyticsWrapper() {
-              return <Analytics />;
-            }
-          `,
-          defer: true,
-        },
-      ],
     }),
   markdown: {
     mermaid: true,

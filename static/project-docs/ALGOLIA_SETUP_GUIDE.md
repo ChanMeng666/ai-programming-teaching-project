@@ -62,7 +62,8 @@
 在Algolia控制台：
 1. 进入 Settings > Allowed referrers
 2. 添加你的网站域名：
-   - https://ai-programming-teaching-project.vercel.app
+   - https://programming.chanmeng.org
+   - https://ai-programming-teaching-project.pages.dev
    - http://localhost:3000（用于本地测试）
 
 ### 4. 重新爬取内容（如果需要）
@@ -129,7 +130,7 @@ algolia: {
 ## 验证步骤
 
 1. 清除浏览器缓存
-2. 重新部署到Vercel
+2. 重新部署到Cloudflare Pages
 3. 等待几分钟让CDN更新
 4. 测试搜索功能
 

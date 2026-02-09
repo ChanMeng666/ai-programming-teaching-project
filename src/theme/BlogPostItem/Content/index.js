@@ -61,12 +61,12 @@ export default function ContentWrapper(props) {
               "name": "AI Programming Education",
               "logo": {
                 "@type": "ImageObject",
-                "url": "https://ai-programming-teaching-project.vercel.app/img/logo.svg"
+                "url": "https://programming.chanmeng.org/img/logo.svg"
               }
             },
             "mainEntityOfPage": {
               "@type": "WebPage",
-              "@id": `https://ai-programming-teaching-project.vercel.app${metadata.permalink}`
+              "@id": `https://programming.chanmeng.org${metadata.permalink}`
             },
             "keywords": metadata.tags.map(tag => tag.label).join(', '),
             "about": ["AI编程", "教育技术", "开发教程"],

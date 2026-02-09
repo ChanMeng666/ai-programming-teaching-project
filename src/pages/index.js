@@ -6,7 +6,6 @@ import SpaceHero from '@site/src/components/SpaceHero';
 import GEOHead from '@site/src/components/GEOHead';
 import AITracker from '@site/src/components/AITracker';
 import { translate } from '@docusaurus/Translate';
-import { Analytics } from '@vercel/analytics/react';
 import styles from './index.module.css';
 
 export default function Home() {
@@ -77,7 +76,6 @@ export default function Home() {
         <SpaceHero />
       </main>
 
-      <Analytics />
       <AITracker />
     </Layout>
   );
