@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import Layout from '@theme/Layout';
-import FeedsSpaceBackground from '../components/FeedsSpaceBackground';
 import styles from './message-board.module.css';
 
 const API_BASE = 'https://ai-chat-worker.chanmeng-dev.workers.dev';
@@ -147,9 +146,12 @@ function MessageCard({ message }) {
       })
     : '';
 
+  const initial = (message.nickname || '?')[0];
+
   return (
     <div className={styles.messageCard}>
       <div className={styles.messageHeader}>
+        <span className={styles.avatar}>{initial}</span>
         <span className={styles.nickname}>{message.nickname}</span>
         <span className={styles.categoryBadge}>{message.category}</span>
         {date && <span className={styles.messageDate}>{date}</span>}
@@ -224,7 +226,7 @@ export default function MessageBoardPage() {
       description="分享你的 AI 编程学习心得和经验"
     >
       <div className={styles.pageWrapper}>
-        <FeedsSpaceBackground />
+        <div className={styles.bgImage} />
         <div className={styles.container}>
           {toast && (
             <Toast
@@ -259,15 +261,17 @@ export default function MessageBoardPage() {
 
           {loading ? (
             <div className={styles.loadingState}>
-              <span className={styles.loadingIcon}>...</span>
+              <div className={styles.loadingDots}>
+                <span />
+                <span />
+                <span />
+              </div>
               <p>加载留言中...</p>
             </div>
           ) : filteredMessages.length === 0 ? (
             <div className={styles.emptyState}>
               <span className={styles.emptyIcon}>
-                {activeFilter !== FILTER_ALL
-                  ? '(empty)'
-                  : '(empty)'}
+                {activeFilter !== FILTER_ALL ? '\u{1F50D}' : '\u{1F4AD}'}
               </span>
               <p>
                 {activeFilter !== FILTER_ALL
