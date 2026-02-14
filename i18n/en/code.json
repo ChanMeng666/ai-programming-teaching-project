@@ -678,5 +678,205 @@
   "messageBoard.emptyCategory": {
     "message": "No messages in \"{category}\" category",
     "description": "Empty state for filtered category"
+  },
+  "feeds.pageTitle": {
+    "message": "RSS Feeds",
+    "description": "Page title for feeds page"
+  },
+  "feeds.pageDescription": {
+    "message": "Subscribe to the AI Programming blog for the latest tutorials and articles",
+    "description": "Page meta description for feeds page"
+  },
+  "feeds.heroTitle": {
+    "message": "📡 RSS Feeds",
+    "description": "Hero section title"
+  },
+  "feeds.heroSubtitle": {
+    "message": "Subscribe to our blog to get the latest AI programming tutorials, project examples and tech insights",
+    "description": "Hero section subtitle"
+  },
+  "feeds.feedSources": {
+    "message": "🎯 Feed Sources",
+    "description": "Feed sources section title"
+  },
+  "feeds.feedSourcesDesc": {
+    "message": "We offer feeds in multiple formats. Choose the one that works best with your RSS reader:",
+    "description": "Feed sources description"
+  },
+  "feeds.table.content": {
+    "message": "Content",
+    "description": "Table header for content column"
+  },
+  "feeds.table.allPosts": {
+    "message": "All Blog Posts",
+    "description": "Table row label for all posts"
+  },
+  "feeds.whatIsRss": {
+    "message": "📖 What is RSS?",
+    "description": "What is RSS section title"
+  },
+  "feeds.whatIsRssDesc": {
+    "message": "RSS (Really Simple Syndication) is a web content syndication format. By subscribing to RSS feeds, you can:",
+    "description": "What is RSS description"
+  },
+  "feeds.benefit1": {
+    "message": "✅ Read updates from multiple websites in one place",
+    "description": "RSS benefit 1"
+  },
+  "feeds.benefit2": {
+    "message": "✅ Get the latest content without frequently visiting websites",
+    "description": "RSS benefit 2"
+  },
+  "feeds.benefit3": {
+    "message": "✅ Read articles at your own pace",
+    "description": "RSS benefit 3"
+  },
+  "feeds.benefit4": {
+    "message": "✅ Never miss important updates",
+    "description": "RSS benefit 4"
+  },
+  "feeds.howToUse": {
+    "message": "🛠️ How to Use RSS?",
+    "description": "How to use section title"
+  },
+  "feeds.step1Title": {
+    "message": "Step 1: Choose an RSS Reader",
+    "description": "Step 1 title"
+  },
+  "feeds.desktop": {
+    "message": "Desktop",
+    "description": "Desktop readers category"
+  },
+  "feeds.netnewswire": {
+    "message": "Free, open-source, clean interface",
+    "description": "NetNewsWire description"
+  },
+  "feeds.feedly": {
+    "message": "Cross-platform, feature-rich",
+    "description": "Feedly description"
+  },
+  "feeds.inoreader": {
+    "message": "Advanced filtering and rules",
+    "description": "Inoreader description"
+  },
+  "feeds.newsblur": {
+    "message": "Open-source, social features",
+    "description": "NewsBlur description"
+  },
+  "feeds.mobile": {
+    "message": "Mobile",
+    "description": "Mobile readers category"
+  },
+  "feeds.reeder": {
+    "message": "Beautifully designed",
+    "description": "Reeder description"
+  },
+  "feeds.feedme": {
+    "message": "Full-featured",
+    "description": "FeedMe description"
+  },
+  "feeds.readyou": {
+    "message": "Free and open-source",
+    "description": "Read You description"
+  },
+  "feeds.browser": {
+    "message": "Browser Extensions",
+    "description": "Browser extensions category"
+  },
+  "feeds.step2Title": {
+    "message": "Step 2: Add a Feed",
+    "description": "Step 2 title"
+  },
+  "feeds.step2a": {
+    "message": "Copy a feed link from the table above",
+    "description": "Step 2 instruction a"
+  },
+  "feeds.step2b": {
+    "message": "In your RSS reader, select \"Add Feed\" or \"Add Subscription\"",
+    "description": "Step 2 instruction b"
+  },
+  "feeds.step2c": {
+    "message": "Paste the link and confirm",
+    "description": "Step 2 instruction c"
+  },
+  "feeds.step2d": {
+    "message": "Start reading!",
+    "description": "Step 2 instruction d"
+  },
+  "feeds.tips": {
+    "message": "💡 Tips",
+    "description": "Tips section title"
+  },
+  "feeds.tipsTitle": {
+    "message": "Choosing a feed format:",
+    "description": "Tips box title"
+  },
+  "feeds.tipsRss": {
+    "message": "Most widely supported, works with most readers",
+    "description": "RSS 2.0 tip"
+  },
+  "feeds.tipsAtom": {
+    "message": "More standardized, richer metadata",
+    "description": "Atom 1.0 tip"
+  },
+  "feeds.tipsJson": {
+    "message": "Newest format, ideal for modern apps",
+    "description": "JSON Feed tip"
+  },
+  "feeds.otherWays": {
+    "message": "🔔 Other Ways to Follow",
+    "description": "Other ways section title"
+  },
+  "feeds.otherWaysDesc": {
+    "message": "Besides RSS, you can also follow us through:",
+    "description": "Other ways description"
+  },
+  "feeds.github": {
+    "message": "🌟 GitHub - Star our project",
+    "description": "GitHub link text"
+  },
+  "feeds.discord": {
+    "message": "💬 Discord - Join the community",
+    "description": "Discord link text"
+  },
+  "feeds.bookmark": {
+    "message": "🔖 Bookmark - Save our website",
+    "description": "Bookmark text"
+  },
+  "feeds.faq": {
+    "message": "❓ FAQ",
+    "description": "FAQ section title"
+  },
+  "feeds.faq1q": {
+    "message": "Are RSS readers free?",
+    "description": "FAQ question 1"
+  },
+  "feeds.faq1a": {
+    "message": "Most RSS readers offer a free tier with enough features for daily use. Paid versions typically provide advanced features like full-text search and automation rules.",
+    "description": "FAQ answer 1"
+  },
+  "feeds.faq2q": {
+    "message": "How often is the feed updated?",
+    "description": "FAQ question 2"
+  },
+  "feeds.faq2a": {
+    "message": "The feed updates automatically when we publish new articles. Most RSS readers check for updates every 15-60 minutes.",
+    "description": "FAQ answer 2"
+  },
+  "feeds.faq3q": {
+    "message": "Can I subscribe to specific topics only?",
+    "description": "FAQ question 3"
+  },
+  "feeds.faq3a": {
+    "message": "Currently we offer a feed for all blog posts. If you're interested in specific topics, you can use the filtering features in your RSS reader.",
+    "description": "FAQ answer 3"
+  },
+  "feeds.thanks": {
+    "message": "Thanks for following us!",
+    "description": "Footer thanks text"
+  },
+  "feeds.thanksDesc": {
+    "message": "We'll keep publishing high-quality AI programming content",
+    "description": "Footer description"
   }
 }
