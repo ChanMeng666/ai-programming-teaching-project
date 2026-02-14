@@ -578,5 +578,105 @@
   "chatWidget.error.message": {
     "message": "Sorry, an error occurred. Please try again later.",
     "description": "Error message when chat fails"
+  },
+  "messageBoard.pageTitle": {
+    "message": "Message Board",
+    "description": "Page title for message board"
+  },
+  "messageBoard.pageDescription": {
+    "message": "Share your AI programming learning experiences",
+    "description": "Page meta description for message board"
+  },
+  "messageBoard.heroTitle": {
+    "message": "Message Board",
+    "description": "Hero section title"
+  },
+  "messageBoard.heroSubtitle": {
+    "message": "Share your AI programming experiences, insights and ideas here, and grow together with the community",
+    "description": "Hero section subtitle"
+  },
+  "messageBoard.formTitle": {
+    "message": "Leave a Message",
+    "description": "Form section title"
+  },
+  "messageBoard.nicknameLabel": {
+    "message": "Nickname",
+    "description": "Nickname input label"
+  },
+  "messageBoard.nicknamePlaceholder": {
+    "message": "Your nickname",
+    "description": "Nickname input placeholder"
+  },
+  "messageBoard.categoryLabel": {
+    "message": "Category",
+    "description": "Category select label"
+  },
+  "messageBoard.contentLabel": {
+    "message": "Message",
+    "description": "Content textarea label"
+  },
+  "messageBoard.contentPlaceholder": {
+    "message": "Share your AI programming experiences, insights or ideas...",
+    "description": "Content textarea placeholder"
+  },
+  "messageBoard.submit": {
+    "message": "Submit",
+    "description": "Submit button text"
+  },
+  "messageBoard.submitting": {
+    "message": "Submitting...",
+    "description": "Submit button text while submitting"
+  },
+  "messageBoard.submitSuccess": {
+    "message": "Message submitted! It will appear after review.",
+    "description": "Success toast after submitting"
+  },
+  "messageBoard.submitFailed": {
+    "message": "Submission failed",
+    "description": "Generic submit failure message"
+  },
+  "messageBoard.networkError": {
+    "message": "Network error, please try again later",
+    "description": "Network error message"
+  },
+  "messageBoard.filterAll": {
+    "message": "All",
+    "description": "Filter tab for all categories"
+  },
+  "messageBoard.category.experience": {
+    "message": "Reflections",
+    "description": "Category label for 心得体会"
+  },
+  "messageBoard.category.sharing": {
+    "message": "Tips & Tricks",
+    "description": "Category label for 经验分享"
+  },
+  "messageBoard.category.discussion": {
+    "message": "Tutorial Discussion",
+    "description": "Category label for 教程讨论"
+  },
+  "messageBoard.category.other": {
+    "message": "Other",
+    "description": "Category label for 其他"
+  },
+  "messageBoard.loading": {
+    "message": "Loading messages...",
+    "description": "Loading state text"
+  },
+  "messageBoard.loadMore": {
+    "message": "Load More",
+    "description": "Load more button text"
+  },
+  "messageBoard.loadingMore": {
+    "message": "Loading...",
+    "description": "Loading more button text"
+  },
+  "messageBoard.emptyAll": {
+    "message": "No messages yet. Be the first to share!",
+    "description": "Empty state when no messages exist"
+  },
+  "messageBoard.emptyCategory": {
+    "message": "No messages in \"{category}\" category",
+    "description": "Empty state for filtered category"
   }
 }
