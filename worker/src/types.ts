@@ -3,6 +3,10 @@ export interface Env {
   CHAT_SESSIONS: KVNamespace;
   VECTORIZE?: VectorizeIndex;
   CORS_ORIGIN: string;
+  NOTION_TOKEN: string;
+  NOTION_DATABASE_ID: string;
+  MESSAGE_BOARD: KVNamespace;
+  SETUP_SECRET?: string;
 }
 
 export interface ChatMessage {

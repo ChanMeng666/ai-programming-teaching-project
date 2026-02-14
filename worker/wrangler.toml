@@ -18,5 +18,11 @@ preview_id = "66791f36d34a430cb2e1ef5a6cfb8d82"
 binding = "VECTORIZE"
 index_name = "docs-index"
 
+# KV namespace for message board
+[[kv_namespaces]]
+binding = "MESSAGE_BOARD"
+id = "4b5e9ccd69394e74b92ea90ba05618ec"
+preview_id = "53ab78ac60834482a3f5eca82389bd28"
+
 [vars]
 CORS_ORIGIN = "*"

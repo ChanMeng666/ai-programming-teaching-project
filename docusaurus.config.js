@@ -214,6 +214,7 @@ const config = {
             label: '教程',
           },
           {to: '/blog', label: '博客', position: 'left'},
+          {to: '/message-board/', label: '留言板', position: 'left'},
           {
             type: 'docsVersionDropdown',
             position: 'left',

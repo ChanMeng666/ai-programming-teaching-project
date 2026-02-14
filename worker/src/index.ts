@@ -1,6 +1,7 @@
 import type { Env, ChatRequest } from './types';
 import { processChat } from './chat';
 import { generateEmbedding } from './rag';
+import { handleGetMessages, handlePostMessage, handleSetupDatabase } from './messages';
 
 interface SeedRequest {
   documents: Array<{
@@ -200,6 +201,12 @@ export default {
       response = await handleChat(request, env);
     } else if (pathname === '/api/seed' && request.method === 'POST') {
       response = await handleSeed(request, env);
+    } else if (pathname === '/api/messages' && request.method === 'GET') {
+      response = await handleGetMessages(request, env);
+    } else if (pathname === '/api/messages' && request.method === 'POST') {
+      response = await handlePostMessage(request, env);
+    } else if (pathname === '/api/messages/setup' && request.method === 'POST') {
+      response = await handleSetupDatabase(request, env);
     } else if (pathname === '/api/health' || pathname === '/') {
       response = handleHealth();
     } else {
