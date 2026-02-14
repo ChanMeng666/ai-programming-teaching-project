@@ -12,7 +12,7 @@
   z-index: 0;
   background: url('/img/message-board.svg') no-repeat center center;
   background-size: cover;
-  opacity: 0.06;
+  opacity: 0.18;
   pointer-events: none;
 }
 
@@ -451,7 +451,7 @@
 }
 
 [data-theme='dark'] .bgImage {
-  opacity: 0.03;
+  opacity: 0.08;
 }
 
 [data-theme='dark'] .title {
