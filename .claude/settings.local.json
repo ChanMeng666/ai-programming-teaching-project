@@ -31,7 +31,16 @@
       "Bash(taskkill:*)",
       "Bash(npx kill-port 3000)",
       "Bash(npm run clear:*)",
-      "Bash(npm start:*)"
+      "Bash(npm start:*)",
+      "Bash(powershell -Command \"Get-Process node -ErrorAction SilentlyContinue | Stop-Process -Force\")",
+      "mcp__plugin_context7_context7__resolve-library-id",
+      "Bash(npm uninstall:*)",
+      "WebFetch(domain:programming.chanmeng.org)",
+      "Bash(python -m json.tool:*)",
+      "Bash(powershell:*)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(node -e:*)",
+      "Bash(find:*)"
     ],
     "deny": [],
     "ask": []
