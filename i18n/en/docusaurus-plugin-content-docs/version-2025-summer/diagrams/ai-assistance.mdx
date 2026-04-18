@@ -10,12 +10,12 @@ import Admonition from '@theme/Admonition';
 
 # AI-Assisted Diagram Creation
 
-## 🤖 Efficiently Creating Diagrams with Gemini CLI
+## Efficiently Creating Diagrams with Gemini CLI
 
 ### Natural Language Diagram Generation
 
 <Tabs>
-  <TabItem value="describe" label="Description Generation" default>
+<TabItem value="describe" label="Description Generation" default>
 
 <CodeBlock language="text">
 {`You: I need a diagram showing the user registration process, including:
@@ -53,8 +53,8 @@ graph TD
 This flowchart clearly shows the complete registration process, including error handling and optional steps.`}
 </CodeBlock>
 
-  </TabItem>
-  <TabItem value="optimize" label="Optimize Existing Diagrams">
+</TabItem>
+<TabItem value="optimize" label="Optimize Existing Diagrams">
 
 <CodeBlock language="text">
 {`You: This is my diagram code, please help me optimize the layout and style:
@@ -90,8 +90,8 @@ Optimizations:
 5. Unified font size to improve readability`}
 </CodeBlock>
 
-  </TabItem>
-  <TabItem value="batch" label="Batch Generation">
+</TabItem>
+<TabItem value="batch" label="Batch Generation">
 
 <CodeBlock language="text">
 {`You: I need to generate sequence diagrams for 5 different API endpoints
@@ -166,10 +166,10 @@ sequenceDiagram
 \`\`\``}
 </CodeBlock>
 
-  </TabItem>
+</TabItem>
 </Tabs>
 
-## 📝 Intelligent Diagram Design Recommendations
+## Intelligent Diagram Design Recommendations
 
 ### Recommend Diagram Types Based on Content
 
@@ -234,46 +234,30 @@ Suitable for showing complex system architecture and deployment relationships
 </CodeBlock>
 
 ### AI Optimization Recommendations
-
-<div className="ai-suggestions">
-  <div className="suggestion-card">
-    <h4>🎨 Visual Optimization</h4>
-    <p>AI can help with:</p>
-    <ul>
-      <li>Recommending color schemes</li>
-      <li>Optimizing layout balance</li>
-      <li>Adjusting element spacing</li>
-      <li>Selecting appropriate fonts</li>
-    </ul>
-  </div>
-  <div className="suggestion-card">
-    <h4>📊 Content Optimization</h4>
-    <p>AI can assist with:</p>
-    <ul>
-      <li>Simplifying complex processes</li>
-      <li>Completing missing steps</li>
-      <li>Optimizing text descriptions</li>
-      <li>Adding necessary annotations</li>
-    </ul>
-  </div>
-  <div className="suggestion-card">
-    <h4>🔧 Technical Optimization</h4>
-    <p>AI can provide:</p>
-    <ul>
-      <li>Best practice recommendations</li>
-      <li>Performance optimization solutions</li>
-      <li>Compatibility checking</li>
-      <li>Export format recommendations</li>
-    </ul>
-  </div>
-</div>
-
-## 🔄 Diagram Conversion and Migration
+#### Visual Optimization
+AI can help with:
+    - Recommending color schemes
+- Optimizing layout balance
+- Adjusting element spacing
+- Selecting appropriate fonts
+#### Content Optimization
+AI can assist with:
+    - Simplifying complex processes
+- Completing missing steps
+- Optimizing text descriptions
+- Adding necessary annotations
+#### Technical Optimization
+AI can provide:
+    - Best practice recommendations
+- Performance optimization solutions
+- Compatibility checking
+- Export format recommendations
+## Diagram Conversion and Migration
 
 ### Converting Between Different Formats
 
 <Tabs>
-  <TabItem value="mermaid-to-drawio" label="Mermaid → Draw.io" default>
+<TabItem value="mermaid-to-drawio" label="Mermaid → Draw.io" default>
 
 <CodeBlock language="text">
 {`You: Convert this Mermaid flowchart to Draw.io format
@@ -314,8 +298,8 @@ Draw.io implementation steps:
    - Adjust spacing to appropriate positions`}
 </CodeBlock>
 
-  </TabItem>
-  <TabItem value="visio-to-mermaid" label="Visio → Mermaid">
+</TabItem>
+<TabItem value="visio-to-mermaid" label="Visio → Mermaid">
 
 <CodeBlock language="text">
 {`You: How do I convert Visio diagrams to Mermaid code?
@@ -358,10 +342,10 @@ You can:
 - Use Draw.io as an intermediate format`}
 </CodeBlock>
 
-  </TabItem>
+</TabItem>
 </Tabs>
 
-## 🚀 Advanced AI Techniques
+## Advanced AI Techniques
 
 ### Complex System Architecture Generation
 
@@ -533,13 +517,10 @@ Object.keys(spec.paths).forEach(path => {
 </CodeBlock>
 </Admonition>
 
-## 💡 Prompt Engineering
+## Prompt Engineering
 
 ### Efficient Prompt Templates
-
-<div className="prompt-templates">
-  <div className="template">
-    <h4>📊 Flowchart Generation</h4>
+#### Flowchart Generation
     <CodeBlock language="text">
 {`Generate a flowchart for [topic], including:
 1. [Step 1]
@@ -552,10 +533,7 @@ Requirements:
 - Mark key decision points
 - Add necessary loops`}
     </CodeBlock>
-  </div>
-
-  <div className="template">
-    <h4>🏗️ Architecture Diagram Design</h4>
+#### Architecture Diagram Design
     <CodeBlock language="text">
 {`Design an architecture diagram for [system name]:
 Tech stack: [list technologies]
@@ -566,10 +544,7 @@ Requirements:
 - Show data flow
 - Include redundancy design`}
     </CodeBlock>
-  </div>
-
-  <div className="template">
-    <h4>🔄 Optimization Request</h4>
+#### Optimization Request
     <CodeBlock language="text">
 {`Optimize this diagram:
 [paste existing code]
@@ -579,10 +554,7 @@ Optimization directions:
 - Unify style
 - Add missing information`}
     </CodeBlock>
-  </div>
-</div>
-
-## 🎯 Practical Case Studies
+## Practical Case Studies
 
 ### Case Study: From Requirements to Diagrams
 
@@ -638,62 +610,11 @@ Step 4: Optimize style and layout
 [Final optimized version...]`}
 </CodeBlock>
 
-## 🚀 Next Steps
+## Next Steps
 
 After mastering AI-assisted techniques, start practicing:
 
-<div className="next-steps">
   <a href="../projects" className="next-button">
     Practical Project Exercises →
   </a>
-</div>
 
-<style>{`
-.ai-suggestions {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1rem;
-  margin: 2rem 0;
-}
-
-.suggestion-card {
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-  padding: 1.5rem;
-  border-radius: 8px;
-}
-
-.prompt-templates {
-  display: grid;
-  gap: 1.5rem;
-  margin: 2rem 0;
-}
-
-.template {
-  background: white;
-  padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.next-steps {
-  display: flex;
-  justify-content: center;
-  margin: 3rem 0;
-}
-
-.next-button {
-  display: inline-block;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  padding: 1rem 2rem;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: transform 0.3s ease;
-}
-
-.next-button:hover {
-  transform: translateY(-2px);
-  color: white;
-}
-`}</style>

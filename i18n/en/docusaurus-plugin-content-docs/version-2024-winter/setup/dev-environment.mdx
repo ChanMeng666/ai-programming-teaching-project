@@ -13,8 +13,6 @@ import TabItem from '@theme/TabItem';
 
 ### Install Node.js Using nvm
 
-<div className="installation-steps">
-
 #### 1. Install nvm
 ```bash
 # Enter the following command and press Enter
@@ -40,13 +38,9 @@ nvm use --lts
 node --version
 ```
 
-</div>
-
 ## Install Package Manager
 
 ### npm and yarn Configuration
-
-<div className="package-manager">
 
 #### Install yarn
 ```bash
@@ -66,11 +60,7 @@ npm config set registry https://registry.npmmirror.com
 yarn config set registry https://registry.npmmirror.com
 ```
 
-</div>
-
 ## Common Issues Resolution
-
-<div className="troubleshooting">
 
 ### Permission Issues
 - Run Cursor as administrator
@@ -103,8 +93,6 @@ yarn --version
 git --version
 ```
 
-</div>
-
 :::tip Important Notes
 - You must press Enter after typing each command to execute it
 - If a command appears stuck during execution, you can press `Ctrl+C` to interrupt
@@ -112,20 +100,3 @@ git --version
 - Avoid Chinese characters in paths
 - Make sure each command completes before entering the next one
 :::
-
-export const styles = {
-  installationSteps: {
-    backgroundColor: '#f6f8fa',
-    padding: '1rem',
-    borderRadius: '8px'
-  },
-  packageManager: {
-    borderLeft: '3px solid #1a73e8',
-    paddingLeft: '1rem'
-  },
-  troubleshooting: {
-    backgroundColor: '#f0f7ff',
-    padding: '1rem',
-    borderRadius: '8px'
-  }
-};

@@ -13,24 +13,24 @@ import Admonition from '@theme/Admonition';
 
 :::info Learning Objectives
 After completing this chapter, you will be able to:
-- ✅ Successfully register required development accounts
-- ✅ Install and configure Gemini CLI locally
-- ✅ Use AI to manage your development environment
-- ✅ Master basic AI-assisted development workflows
+- Successfully register required development accounts
+- Install and configure Gemini CLI locally
+- Use AI to manage your development environment
+- Master basic AI-assisted development workflows
 :::
 
-## 📹 Course Video
+## Course Video
 
 Watch the complete teaching video for Lessons 1 and 2:
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/ft1tRrgUy9I?si=3o_xHXbiHsN4yMAi" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-## 📋 Required Account Registration
+## Required Account Registration
 
 Before we start using Gemini CLI, we need to prepare three important accounts. These accounts will be used throughout the entire development process.
 
 <Tabs>
-  <TabItem value="github" label="GitHub Account" default>
+<TabItem value="github" label="GitHub Account" default>
 
 ### Why Do You Need GitHub?
 
@@ -65,8 +65,8 @@ git config --global user.name "Your Name"
 git config --global user.email "your-email@example.com"`}
 </CodeBlock>
 
-  </TabItem>
-  <TabItem value="vercel" label="Vercel Account">
+</TabItem>
+<TabItem value="vercel" label="Vercel Account">
 
 ### Why Choose Vercel?
 
@@ -84,23 +84,12 @@ Vercel is a modern deployment platform, particularly suitable for:
 
 ### Advantage Features
 
-<div className="feature-grid">
-  <div className="feature-card">
-    <h4>🚀 Lightning-Fast Deployment</h4>
-    <p>Automatic deployment after code push, takes effect in seconds</p>
-  </div>
-  <div className="feature-card">
-    <h4>🌍 Global Acceleration</h4>
-    <p>Built-in CDN allows your website to be accessed quickly worldwide</p>
-  </div>
-  <div className="feature-card">
-    <h4>📊 Analytics Dashboard</h4>
-    <p>Real-time monitoring of website performance and visitor data</p>
-  </div>
-</div>
+- **Lightning-Fast Deployment**: Automatic deployment after code push, takes effect in seconds
+- **Global Acceleration**: Built-in CDN allows your website to be accessed quickly worldwide
+- **Analytics Dashboard**: Real-time monitoring of website performance and visitor data
 
-  </TabItem>
-  <TabItem value="google" label="Google Account">
+</TabItem>
+<TabItem value="google" label="Google Account">
 
 ### Importance of Google Account
 
@@ -123,67 +112,62 @@ Be sure to:
 - Regularly check account activity
 </Admonition>
 
-  </TabItem>
+</TabItem>
 </Tabs>
 
-## 🛠️ Gemini CLI Installation and Configuration
+## Gemini CLI Installation and Configuration
 
 ### System Requirements
 
 <Tabs groupId="operating-systems">
-  <TabItem value="windows" label="Windows">
-    <div>
-      <h4>Minimum Requirements:</h4>
-      <ul>
-        <li>Windows 10 version 1903 or higher</li>
-        <li>Node.js 16.0 or higher</li>
-        <li>4GB RAM (8GB recommended)</li>
-      </ul>
-      <h4>Recommended Configuration:</h4>
-      <ul>
-        <li>Windows 11</li>
-        <li>Node.js 18.x LTS</li>
-        <li>Use Windows Terminal</li>
-      </ul>
-    </div>
-  </TabItem>
-  <TabItem value="macos" label="macOS">
-    <div>
-      <h4>Minimum Requirements:</h4>
-      <ul>
-        <li>macOS 10.15 (Catalina) or higher</li>
-        <li>Node.js 16.0 or higher</li>
-        <li>4GB RAM</li>
-      </ul>
-      <h4>Recommended Configuration:</h4>
-      <ul>
-        <li>macOS 12.0 (Monterey) or higher</li>
-        <li>Node.js 18.x LTS</li>
-        <li>Use iTerm2 or native Terminal</li>
-      </ul>
-    </div>
-  </TabItem>
-  <TabItem value="linux" label="Linux">
-    <div>
-      <h4>Supported Distributions:</h4>
-      <ul>
-        <li>Ubuntu 20.04 LTS or higher</li>
-        <li>Debian 10 or higher</li>
-        <li>Fedora 34 or higher</li>
-        <li>Other mainstream distributions</li>
-      </ul>
-      <h4>Dependencies:</h4>
-      <ul>
-        <li>Node.js 16.0 or higher</li>
-        <li>npm or yarn</li>
-      </ul>
-    </div>
-  </TabItem>
+<TabItem value="windows" label="Windows">
+
+**Minimum Requirements**
+
+- Windows 10 version 1903 or higher
+- Node.js 16.0 or higher
+- 4GB RAM (8GB recommended)
+
+**Recommended Configuration**
+
+- Windows 11
+- Node.js 18.x LTS
+- Use Windows Terminal
+
+</TabItem>
+<TabItem value="macos" label="macOS">
+
+**Minimum Requirements**
+
+- macOS 10.15 (Catalina) or higher
+- Node.js 16.0 or higher
+- 4GB RAM
+
+**Recommended Configuration**
+
+- macOS 12.0 (Monterey) or higher
+- Node.js 18.x LTS
+- Use iTerm2 or native Terminal
+
+</TabItem>
+<TabItem value="linux" label="Linux">
+
+**Supported Distributions**
+
+- Ubuntu 20.04 LTS or higher
+- Debian 10 or higher
+- Fedora 34 or higher
+- Other mainstream distributions
+
+**Dependencies**
+
+- Node.js 16.0 or higher
+- npm or yarn
+
+</TabItem>
 </Tabs>
 
 ### Installation Steps
-
-<div className="installation-steps">
 
 #### Step 1: Check Node.js Version
 
@@ -223,8 +207,6 @@ gemini --version
 gemini --help`}
 </CodeBlock>
 
-</div>
-
 ### Initial Configuration
 
 After installation, you need to perform initial configuration:
@@ -241,7 +223,7 @@ gemini auth login
 ### Configuration Options
 
 <Tabs>
-  <TabItem value="basic" label="Basic Configuration" default>
+<TabItem value="basic" label="Basic Configuration" default>
 
 <CodeBlock language="bash">
 {`# Set default project path
@@ -254,8 +236,8 @@ gemini config set language en-US
 gemini config list`}
 </CodeBlock>
 
-  </TabItem>
-  <TabItem value="advanced" label="Advanced Configuration">
+</TabItem>
+<TabItem value="advanced" label="Advanced Configuration">
 
 <CodeBlock language="bash">
 {`# Set API timeout (milliseconds)
@@ -271,10 +253,10 @@ gemini config set proxy http://proxy.example.com:8080
 gemini config export > gemini-config.json`}
 </CodeBlock>
 
-  </TabItem>
+</TabItem>
 </Tabs>
 
-## 🎮 Basic Usage Examples
+## Basic Usage Examples
 
 ### Your First Conversation
 
@@ -289,11 +271,7 @@ gemini chat
 </CodeBlock>
 
 ### Practical Conversation Examples
-
-<div className="example-grid">
-
-<div className="example-card">
-<h4>🔧 Environment Configuration</h4>
+#### Environment Configuration
 <CodeBlock language="text">
 {`You: Hello, I want to develop a web application. What development environment do I need to install?
 
@@ -306,10 +284,7 @@ Gemini: I'll help you configure a web development environment. I recommend insta
 
 Would you like me to help you automatically install these tools?`}
 </CodeBlock>
-</div>
-
-<div className="example-card">
-<h4>📦 Dependency Management</h4>
+#### Dependency Management
 <CodeBlock language="text">
 {`You: Please help me check what Node.js global packages I have locally, and suggest which ones can be removed
 
@@ -323,10 +298,7 @@ Found the following packages:
 
 Would you like me to help clean up these packages?`}
 </CodeBlock>
-</div>
-
-<div className="example-card">
-<h4>🛤️ PATH Management</h4>
+#### PATH Management
 <CodeBlock language="text">
 {`You: Help me view and organize the system PATH
 
@@ -347,15 +319,10 @@ Recommended optimized PATH order:
 
 Would you like to apply these changes?`}
 </CodeBlock>
-</div>
 
-</div>
-
-## 🚫 Say Goodbye to Traditional Cumbersome Methods
+## Say Goodbye to Traditional Cumbersome Methods
 
 ### Tools No Longer Needed
-
-<div className="comparison-table">
 
 | Traditional Tool | Why Replaced by Gemini CLI |
 |---------|------------------------|
@@ -363,12 +330,10 @@ Would you like to apply these changes?`}
 | **GitHub Desktop** | • No need for GUI tools<br/>• Gemini can execute all Git operations<br/>• More flexible command-line interaction |
 | **Git Commands** | • No need to memorize any Git commands<br/>• Natural language description is enough<br/>• AI automatically handles complex operations |
 
-</div>
-
 ### Old vs New Comparison
 
 <Tabs>
-  <TabItem value="old" label="❌ Traditional Way">
+<TabItem value="old" label="Traditional Way">
 
 <CodeBlock language="bash">
 {`# Commands to memorize and type
@@ -388,8 +353,8 @@ git push
 git log --oneline --graph --all`}
 </CodeBlock>
 
-  </TabItem>
-  <TabItem value="new" label="✅ Gemini CLI Way" default>
+</TabItem>
+<TabItem value="new" label="Gemini CLI Way" default>
 
 <CodeBlock language="text">
 {`You: Commit my changes, description is "added new feature"
@@ -411,10 +376,10 @@ Gemini: Last 5 commits:
 ...`}
 </CodeBlock>
 
-  </TabItem>
+</TabItem>
 </Tabs>
 
-## 💡 Best Practice Recommendations
+## Best Practice Recommendations
 
 ### Daily Workflow
 
@@ -438,86 +403,15 @@ Gemini: Last 5 commits:
 
 ### Efficiency Improvement Tips
 
-<div className="tips-grid">
-  <div className="tip-card">
-    <h4>🎯 Clear Expression</h4>
-    <p>Clearly describe your needs, AI will help you more accurately</p>
-  </div>
-  <div className="tip-card">
-    <h4>🔄 Continuous Conversation</h4>
-    <p>Maintain context, letting AI better understand your project</p>
-  </div>
-  <div className="tip-card">
-    <h4>📝 Use History Well</h4>
-    <p>Use `gemini history` to view previous conversations</p>
-  </div>
-</div>
+- **Clear Expression**: Clearly describe your needs, AI will help you more accurately
+- **Continuous Conversation**: Maintain context, letting AI better understand your project
+- **Use History Well**: Use `gemini history` to view previous conversations
 
-<style>{`
-.feature-grid, .example-grid, .tips-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1rem;
-  margin: 1.5rem 0;
-}
-
-.feature-card, .example-card, .tip-card {
-  padding: 1.5rem;
-  border-radius: 8px;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-.feature-card h4, .example-card h4, .tip-card h4 {
-  margin-top: 0;
-  color: #2d3748;
-}
-
-.installation-steps {
-  margin: 2rem 0;
-}
-
-.installation-steps h4 {
-  color: #4a5568;
-  margin: 1.5rem 0 0.5rem 0;
-}
-
-.comparison-table {
-  overflow-x: auto;
-  margin: 1.5rem 0;
-}
-
-.comparison-table table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.comparison-table th, .comparison-table td {
-  padding: 1rem;
-  text-align: left;
-  border-bottom: 1px solid #e2e8f0;
-}
-
-.comparison-table th {
-  background: #f7fafc;
-  font-weight: 600;
-}
-
-.next-step-container {
-  text-align: center;
-  margin-top: 3rem;
-}
-`}</style>
-
-## 🎯 Next Steps
+## Next Steps
 
 Congratulations on completing the basic environment configuration! Now you have:
-- ✅ Three necessary development accounts
-- ✅ Locally installed Gemini CLI
-- ✅ Basic knowledge of AI-assisted development
+- Three necessary development accounts
+- Locally installed Gemini CLI
+- Basic knowledge of AI-assisted development
 
-<div className="next-step-container">
-  <a href="/docs/practice" className="button button--primary button--lg">
-    Continue to Practical Projects →
-  </a>
-</div>
+[Continue to Practical Projects](/docs/practice)

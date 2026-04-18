@@ -8,7 +8,7 @@ import Admonition from '@theme/Admonition';
 
 # 图表在不同场景的应用指南
 
-## 📚 学术论文图表规范
+## 学术论文图表规范
 
 ### 期刊投稿要求
 
@@ -23,24 +23,17 @@ import Admonition from '@theme/Admonition';
 
 ### IEEE 论文图表规范
 
-<div className="academic-standards">
-  <div className="standard-card">
-    <h4>尺寸要求</h4>
-    <ul>
-      <li>单栏：3.5 英寸宽</li>
-      <li>双栏：7.16 英寸宽</li>
-      <li>高度：不超过 9.5 英寸</li>
-    </ul>
-  </div>
-  <div className="standard-card">
-    <h4>标注规范</h4>
-    <ul>
-      <li>图题：图下方，居中</li>
-      <li>字体：8-10pt</li>
-      <li>线宽：0.5-1pt</li>
-    </ul>
-  </div>
-</div>
+**尺寸要求**：
+
+- 单栏：3.5 英寸宽
+- 双栏：7.16 英寸宽
+- 高度：不超过 9.5 英寸
+
+**标注规范**：
+
+- 图题：图下方，居中
+- 字体：8-10pt
+- 线宽：0.5-1pt
 
 ### LaTeX 集成
 
@@ -87,7 +80,7 @@ Gemini：我来帮您转换为学术论文格式：
 \\end{figure}`}
 </CodeBlock>
 
-## 📝 技术文档最佳实践
+## 技术文档最佳实践
 
 ### README 文档图表
 
@@ -102,18 +95,18 @@ graph TB
         A[React App]
         B[Redux Store]
     end
-    
+
     subgraph "后端服务"
         C[API Gateway]
         D[Auth Service]
         E[Business Logic]
     end
-    
+
     subgraph "数据层"
         F[(PostgreSQL)]
         G[(Redis Cache)]
     end
-    
+
     A --> C
     C --> D
     C --> E
@@ -132,27 +125,11 @@ graph TB
 
 ### API 文档图表
 
-<div className="api-docs">
-  <h4>推荐图表类型</h4>
-  
-  <div className="doc-types">
-    <div className="type-card">
-      <h5>时序图</h5>
-      <p>展示 API 调用流程</p>
-      <p>适合：认证流程、支付流程</p>
-    </div>
-    <div className="type-card">
-      <h5>流程图</h5>
-      <p>说明业务逻辑</p>
-      <p>适合：数据处理、决策流程</p>
-    </div>
-    <div className="type-card">
-      <h5>状态图</h5>
-      <p>描述资源状态变化</p>
-      <p>适合：订单状态、任务状态</p>
-    </div>
-  </div>
-</div>
+**推荐图表类型**：
+
+- **时序图**：展示 API 调用流程，适合认证流程、支付流程
+- **流程图**：说明业务逻辑，适合数据处理、决策流程
+- **状态图**：描述资源状态变化，适合订单状态、任务状态
 
 ### 系统设计文档
 
@@ -163,30 +140,23 @@ graph TB
 4. **更新同步**：代码变更时及时更新图表
 </Admonition>
 
-## 🎯 PPT 演示优化
+## PPT 演示优化
 
 ### 分步展示技巧
 
-<div className="ppt-optimization">
-  <div className="technique">
-    <h4>渐进式展示</h4>
-    <ol>
-      <li>第 1 页：核心概念</li>
-      <li>第 2 页：添加细节</li>
-      <li>第 3 页：完整架构</li>
-      <li>第 4 页：关键点强调</li>
-    </ol>
-  </div>
-  <div className="technique">
-    <h4>动画效果</h4>
-    <ul>
-      <li>淡入：新增组件</li>
-      <li>路径动画：数据流向</li>
-      <li>颜色变化：状态改变</li>
-      <li>缩放：焦点切换</li>
-    </ul>
-  </div>
-</div>
+**渐进式展示**：
+
+1. 第 1 页：核心概念
+2. 第 2 页：添加细节
+3. 第 3 页：完整架构
+4. 第 4 页：关键点强调
+
+**动画效果**：
+
+- 淡入：新增组件
+- 路径动画：数据流向
+- 颜色变化：状态改变
+- 缩放：焦点切换
 
 ### PowerPoint 集成
 
@@ -211,28 +181,10 @@ graph TB
 
 ### 商务演示配色
 
-<div className="color-schemes">
-  <div className="scheme-card">
-    <h5>专业蓝</h5>
-    <div className="colors">
-      <span style={{background: '#003366'}}></span>
-      <span style={{background: '#0066CC'}}></span>
-      <span style={{background: '#3399FF'}}></span>
-      <span style={{background: '#99CCFF'}}></span>
-    </div>
-  </div>
-  <div className="scheme-card">
-    <h5>科技感</h5>
-    <div className="colors">
-      <span style={{background: '#2C3E50'}}></span>
-      <span style={{background: '#34495E'}}></span>
-      <span style={{background: '#7F8C8D'}}></span>
-      <span style={{background: '#95A5A6'}}></span>
-    </div>
-  </div>
-</div>
+- **专业蓝**：#003366、#0066CC、#3399FF、#99CCFF
+- **科技感**：#2C3E50、#34495E、#7F8C8D、#95A5A6
 
-## 🌐 Web 集成
+## Web 集成
 
 ### 在线文档嵌入
 
@@ -250,37 +202,30 @@ graph LR
 </div>
 
 <!-- Draw.io 图表嵌入 -->
-<iframe 
-  frameborder="0" 
-  style="width:100%;height:400px;" 
+<iframe
+  frameborder="0"
+  style="width:100%;height:400px;"
   src="https://viewer.diagrams.net/?highlight=0000ff&edit=_blank&layers=1&nav=1">
 </iframe>`}
 </CodeBlock>
 
 ### Markdown 平台支持
 
-<div className="platform-support">
-  <div className="platform">
-    <h5>✅ 原生支持 Mermaid</h5>
-    <ul>
-      <li>GitHub</li>
-      <li>GitLab</li>
-      <li>Notion</li>
-      <li>Obsidian</li>
-    </ul>
-  </div>
-  <div className="platform">
-    <h5>🔧 需要插件</h5>
-    <ul>
-      <li>Confluence</li>
-      <li>WordPress</li>
-      <li>Ghost</li>
-      <li>Hugo</li>
-    </ul>
-  </div>
-</div>
+**原生支持 Mermaid**：
 
-## 📱 响应式设计
+- GitHub
+- GitLab
+- Notion
+- Obsidian
+
+**需要插件**：
+
+- Confluence
+- WordPress
+- Ghost
+- Hugo
+
+## 响应式设计
 
 ### 移动端优化
 
@@ -292,7 +237,7 @@ graph LR
 - **分段展示**：复杂图表拆分为多个简单图表
 </Admonition>
 
-## 🎨 品牌一致性
+## 品牌一致性
 
 ### 企业 VI 应用
 
@@ -301,7 +246,7 @@ graph LR
 
 Gemini：我来帮您创建企业 VI 规范的图表样式：
 
-📐 Draw.io 样式配置：
+Draw.io 样式配置：
 
 1. 创建企业样式库：
    - File → New Library
@@ -312,7 +257,7 @@ Gemini：我来帮您创建企业 VI 规范的图表样式：
    辅色：#10B981 (成功绿)
    警告：#F59E0B (警告橙)
    错误：#EF4444 (错误红)
-   
+
 3. 字体规范：
    标题：Helvetica Bold 14pt
    正文：Helvetica Regular 11pt
@@ -336,128 +281,9 @@ Gemini：我来帮您创建企业 VI 规范的图表样式：
    }}%%`}
 </CodeBlock>
 
-## 🚀 下一步
+## 下一步
 
 学习更多高级技巧：
 
-<div className="next-steps">
-  <a href="../ai-assistance" className="next-button">
-    AI 辅助创作 →
-  </a>
-  <a href="../projects" className="next-button secondary">
-    实战项目 →
-  </a>
-</div>
-
-<style>{`
-.academic-standards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1rem;
-  margin: 2rem 0;
-}
-
-.standard-card {
-  background: #f8fafc;
-  padding: 1.5rem;
-  border-radius: 8px;
-}
-
-.api-docs {
-  margin: 2rem 0;
-}
-
-.doc-types {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
-  margin: 1rem 0;
-}
-
-.type-card {
-  background: white;
-  padding: 1rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.ppt-optimization {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1rem;
-  margin: 2rem 0;
-}
-
-.technique {
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-  padding: 1.5rem;
-  border-radius: 8px;
-}
-
-.color-schemes {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
-  margin: 2rem 0;
-}
-
-.scheme-card {
-  background: white;
-  padding: 1rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.colors {
-  display: flex;
-  gap: 0.5rem;
-  margin-top: 0.5rem;
-}
-
-.colors span {
-  width: 40px;
-  height: 40px;
-  border-radius: 4px;
-}
-
-.platform-support {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1rem;
-  margin: 2rem 0;
-}
-
-.platform {
-  background: #f8fafc;
-  padding: 1.5rem;
-  border-radius: 8px;
-}
-
-.next-steps {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  margin: 3rem 0;
-}
-
-.next-button {
-  display: inline-block;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  padding: 1rem 2rem;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: transform 0.3s ease;
-}
-
-.next-button:hover {
-  transform: translateY(-2px);
-  color: white;
-}
-
-.next-button.secondary {
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-  color: #1e3a8a;
-}
-`}</style>
+- [AI 辅助创作](../ai-assistance)
+- [实战项目](../projects)

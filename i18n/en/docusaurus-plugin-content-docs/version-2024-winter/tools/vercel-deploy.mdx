@@ -13,35 +13,29 @@ import TabItem from '@theme/TabItem';
 
 Vercel is a cloud platform for frontend developers, focusing on providing deployment solutions for static and server-side rendered applications.
 
-<div className="feature-cards">
-
-### ⚡ Zero Configuration Deployment
+### Zero Configuration Deployment
 - Automatic project type detection
 - Intelligent build settings
 - Instant deployment previews
 
-### 🌍 Global CDN
+### Global CDN
 - Edge network distribution
 - Automatic SSL certificates
 - Smart routing
 
-### 🔄 Continuous Deployment
+### Continuous Deployment
 - Git integration
 - Automatic builds
 - Version control
 
-### 🛠️ Development Tools
+### Development Tools
 - Real-time preview
 - Performance analysis
 - Environment variable management
 
-</div>
-
 ## Deploying Projects
 
 ### Preparation
-
-<div className="prerequisites">
 
 #### Requirements
 - Git repository (GitHub, GitLab, or Bitbucket)
@@ -59,27 +53,23 @@ Vercel is a cloud platform for frontend developers, focusing on providing deploy
 }
 ```
 
-</div>
-
 ### Importing Project
-
-<div className="step-guide">
 
 #### 1. Connect Git Platform
 
 <Tabs>
-  <TabItem value="github" label="GitHub" default>
+<TabItem value="github" label="GitHub" default>
     1. Visit [Vercel Dashboard](https://vercel.com/dashboard)
     2. Click "New Project"
     3. Select "Import Git Repository"
     4. Authorize GitHub access
-  </TabItem>
-  <TabItem value="gitlab" label="GitLab">
+</TabItem>
+<TabItem value="gitlab" label="GitLab">
     1. Visit Vercel Dashboard
     2. Click "Add GitLab Account"
     3. Complete GitLab authorization
     4. Select repository to import
-  </TabItem>
+</TabItem>
 </Tabs>
 
 #### 2. Configure Project
@@ -106,13 +96,9 @@ Vercel is a cloud platform for frontend developers, focusing on providing deploy
 - Configure build command and output directory
 - Set environment variables (if needed)
 
-</div>
-
 ## Advanced Feature Configuration
 
 ### Custom Domain
-
-<div className="domain-setup">
 
 #### Adding Domain
 1. Find "Domains" in project settings
@@ -132,11 +118,7 @@ Name: www
 Value: cname.vercel-dns.com
 ```
 
-</div>
-
 ### Environment Variable Management
-
-<div className="env-management">
 
 #### Setting in Vercel Dashboard
 1. Project Settings > Environment Variables
@@ -158,11 +140,7 @@ API_ENDPOINT=https://api.example.com
 Do not commit .env files containing sensitive information to Git repository!
 :::
 
-</div>
-
 ### Performance Monitoring
-
-<div className="monitoring">
 
 #### Core Web Vitals Monitoring
 ```javascript
@@ -187,11 +165,7 @@ export function reportWebVitals(metric) {
 }
 ```
 
-</div>
-
 ### Team Collaboration
-
-<div className="collaboration">
 
 #### Team Setup
 1. Create team
@@ -211,13 +185,9 @@ async function commentOnDeploy(deployment) {
 }
 ```
 
-</div>
-
 ## Best Practices
 
 ### Optimizing Build Process
-
-<div className="optimization-tips">
 
 #### Caching Strategy
 ```json
@@ -246,11 +216,7 @@ async function commentOnDeploy(deployment) {
 - Optimize build commands
 - Configure output directory properly
 
-</div>
-
 ### Monitoring and Alerts
-
-<div className="monitoring-setup">
 
 #### Setting Alert Rules
 ```javascript
@@ -273,23 +239,3 @@ async function commentOnDeploy(deployment) {
 - Integrate logging service
 - Set up error tracking
 - Configure performance monitoring
-
-</div>
-
-export const styles = {
-  featureCards: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-    gap: '1rem',
-    marginBottom: '2rem'
-  },
-  stepGuide: {
-    borderLeft: '3px solid #1a73e8',
-    paddingLeft: '1rem'
-  },
-  optimizationTips: {
-    backgroundColor: '#f6f8fa',
-    padding: '1rem',
-    borderRadius: '8px'
-  }
-};

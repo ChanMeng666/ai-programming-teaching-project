@@ -13,8 +13,6 @@ import TabItem from '@theme/TabItem';
 
 ### 创建Next.js项目
 
-<div className="setup-steps">
-
 #### 1. 使用create-next-app
 
 ```bash title="终端命令"
@@ -38,13 +36,9 @@ mkdir -p src/{components,layouts,lib,styles,types}
 mkdir -p content/{posts,pages}
 ```
 
-</div>
-
 ## 基础组件开发
 
 ### 布局组件
-
-<div className="component-development">
 
 #### Layout组件
 
@@ -158,8 +152,9 @@ export default function Header() {
 
 #### 使用AI优化样式
 
-:::tip[AI提示]
+:::tip AI提示
 使用以下提示让AI帮助优化样式：
+
 ```
 为这个Layout组件添加响应式样式，包括：
 1. 合适的内容最大宽度
@@ -167,13 +162,10 @@ export default function Header() {
 3. 移动端适配
 4. 深色模式支持
 ```
+
 :::
 
-</div>
-
 ### 文章列表组件
-
-<div className="post-list">
 
 #### PostList组件
 
@@ -294,8 +286,6 @@ export interface Tag {
   count: number;
 }
 ```
-
-</div>
 
 ## 页面组件开发
 
@@ -661,8 +651,9 @@ export function getTags(): { name: string; count: number }[] {
 }
 ```
 
-:::tip[AI提示]
+:::tip AI提示
 使用以下提示让AI帮助优化代码：
+
 ```
 请审查这些代码，提供以下方面的改进建议：
 1. 性能优化
@@ -671,6 +662,7 @@ export function getTags(): { name: string; count: number }[] {
 4. 可访问性
 5. SEO优化
 ```
+
 :::
 
 ## 配置文件
@@ -750,8 +742,9 @@ module.exports = {
 };
 ```
 
-:::tip[AI提示]
+:::tip AI提示
 使用以下提示让AI帮助优化部署：
+
 ```
 请提供这个Next.js博客应用的部署指南，包括：
 1. Vercel部署配置
@@ -759,25 +752,5 @@ module.exports = {
 3. 构建优化
 4. 性能监控
 ```
-:::
 
-export const styles = {
-  setupSteps: {
-    backgroundColor: '#f8f9fa',
-    padding: '20px',
-    borderRadius: '8px',
-    marginBottom: '20px'
-  },
-  componentDevelopment: {
-    backgroundColor: '#f0f7ff',
-    padding: '20px',
-    borderRadius: '8px',
-    marginBottom: '20px'
-  },
-  postList: {
-    backgroundColor: '#fff9f0',
-    padding: '20px',
-    borderRadius: '8px',
-    marginBottom: '20px'
-  }
-};
+:::

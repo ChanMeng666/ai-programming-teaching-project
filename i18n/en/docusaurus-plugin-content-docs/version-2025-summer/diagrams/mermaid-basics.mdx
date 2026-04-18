@@ -10,7 +10,7 @@ import Admonition from '@theme/Admonition';
 
 # Mermaid Basics Tutorial
 
-## 📚 What is Mermaid?
+## What is Mermaid?
 
 Mermaid is a text-based diagram generation tool that creates various professional diagrams through simple text descriptions. Its core concept is "code as diagram," making diagram creation and maintenance as simple as writing code.
 
@@ -22,13 +22,10 @@ Mermaid is a text-based diagram generation tool that creates various professiona
 - **Real-time Preview**: Write and see immediately, what you see is what you get
 - **No Design Skills Required**: Focus on content, styles are handled automatically
 
-## 🛠️ Environment Setup
+## Environment Setup
 
 <Tabs>
-  <TabItem value="vscode" label="VS Code" default>
-
-<div>
-
+<TabItem value="vscode" label="VS Code" default>
 #### Install Mermaid Plugin
 
 <CodeBlock language="text">
@@ -56,13 +53,8 @@ code --install-extension tomoyukim.vscode-mermaid-editor
 - Right-click and select "Preview Mermaid" to view diagrams`}
 </CodeBlock>
 
-</div>
-
-  </TabItem>
-  <TabItem value="online" label="Online Editor">
-
-<div>
-
+</TabItem>
+<TabItem value="online" label="Online Editor">
 #### Mermaid Live Editor
 
 Visit [Mermaid Live Editor](https://mermaid.live) to start using immediately, no configuration needed.
@@ -73,13 +65,8 @@ Features:
 - Share links
 - Theme switching
 
-</div>
-
-  </TabItem>
-  <TabItem value="github" label="GitHub">
-
-<div>
-
+</TabItem>
+<TabItem value="github" label="GitHub">
 #### GitHub Native Support
 
 GitHub automatically renders Mermaid code blocks, just use in Markdown:
@@ -92,18 +79,14 @@ graph TD
 \`\`\``}
 </CodeBlock>
 
-</div>
-
-  </TabItem>
+</TabItem>
 </Tabs>
 
-## 📊 Flowchart
+## Flowchart
 
 Flowcharts are the most commonly used diagram type, used to display processes, algorithms, or workflows.
 
 ### Basic Syntax
-
-<div className="syntax-section">
 
 #### Chart Direction
 
@@ -166,8 +149,6 @@ graph LR
     K === L
 ```
 
-</div>
-
 ### Practical Examples
 
 #### User Login Flow
@@ -223,7 +204,7 @@ graph TD
 </CodeBlock>
 </Admonition>
 
-## 🔄 Sequence Diagram
+## Sequence Diagram
 
 Sequence diagrams are used to show the interaction order between objects, particularly suitable for describing communication processes between system components.
 
@@ -343,7 +324,7 @@ sequenceDiagram
     G-->>C: HTTP响应
 ```
 
-## 🎨 Styles and Themes
+## Styles and Themes
 
 ### Custom Node Styles
 
@@ -376,7 +357,7 @@ graph TD
 ### Theme Configuration
 
 <Tabs>
-  <TabItem value="default" label="Default Theme" default>
+<TabItem value="default" label="Default Theme" default>
 
 <CodeBlock language="mermaid">
 {`%%{init: {'theme':'default'}}%%
@@ -385,8 +366,8 @@ graph TD
     B --> C[适合大多数场景]`}
 </CodeBlock>
 
-  </TabItem>
-  <TabItem value="dark" label="Dark Theme">
+</TabItem>
+<TabItem value="dark" label="Dark Theme">
 
 <CodeBlock language="mermaid">
 {`%%{init: {'theme':'dark'}}%%
@@ -395,8 +376,8 @@ graph TD
     B --> C[减少眼部疲劳]`}
 </CodeBlock>
 
-  </TabItem>
-  <TabItem value="forest" label="Forest Theme">
+</TabItem>
+<TabItem value="forest" label="Forest Theme">
 
 <CodeBlock language="mermaid">
 {`%%{init: {'theme':'forest'}}%%
@@ -405,103 +386,30 @@ graph TD
     B --> C[自然清新]`}
 </CodeBlock>
 
-  </TabItem>
+</TabItem>
 </Tabs>
 
-## 💡 Best Practices
-
-<div className="best-practices">
-  <div className="practice-card">
-    <h4>📝 Naming Conventions</h4>
-    <ul>
-      <li>Use meaningful node IDs</li>
-      <li>Keep labels concise and clear</li>
-      <li>Avoid overly long text</li>
-    </ul>
-  </div>
-  <div className="practice-card">
-    <h4>🎯 Layout Optimization</h4>
-    <ul>
-      <li>Choose appropriate chart direction</li>
-      <li>Control diagram complexity</li>
-      <li>Use subgraph grouping appropriately</li>
-    </ul>
-  </div>
-  <div className="practice-card">
-    <h4>🎨 Visual Design</h4>
-    <ul>
-      <li>Maintain style consistency</li>
-      <li>Use colors to distinguish categories</li>
-      <li>Avoid over-decoration</li>
-    </ul>
-  </div>
-</div>
-
-## 🚀 Next Steps
+## Best Practices
+#### Naming Conventions
+    - Use meaningful node IDs
+- Keep labels concise and clear
+- Avoid overly long text
+#### Layout Optimization
+    - Choose appropriate chart direction
+- Control diagram complexity
+- Use subgraph grouping appropriately
+#### Visual Design
+    - Maintain style consistency
+- Use colors to distinguish categories
+- Avoid over-decoration
+## Next Steps
 
 Congratulations on mastering the basics of Mermaid! Next you can:
 
-<div className="next-steps">
   <a href="../mermaid-advanced" className="next-button">
     Learn Mermaid Advanced Features →
   </a>
   <a href="../ai-assistance" className="next-button secondary">
     Explore AI-Assisted Creation →
   </a>
-</div>
 
-<style>{`
-.syntax-section {
-  background: #f8fafc;
-  padding: 1.5rem;
-  border-radius: 8px;
-  margin: 1rem 0;
-}
-
-.best-practices {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1rem;
-  margin: 2rem 0;
-}
-
-.practice-card {
-  background: white;
-  padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.practice-card h4 {
-  color: #1e3a8a;
-  margin-bottom: 1rem;
-}
-
-.next-steps {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  margin: 3rem 0;
-}
-
-.next-button {
-  display: inline-block;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  padding: 1rem 2rem;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: transform 0.3s ease;
-}
-
-.next-button:hover {
-  transform: translateY(-2px);
-  color: white;
-}
-
-.next-button.secondary {
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-  color: #1e3a8a;
-}
-`}</style>

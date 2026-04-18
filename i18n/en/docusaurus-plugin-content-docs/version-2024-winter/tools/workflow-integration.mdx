@@ -11,9 +11,7 @@ import TabItem from '@theme/TabItem';
 
 ## Workflow Overview
 
-<div className="workflow-overview">
-
-### 🔄 Complete Development Cycle
+### Complete Development Cycle
 
 1. **Local Development** (Cursor)
    - AI-assisted coding
@@ -30,13 +28,9 @@ import TabItem from '@theme/TabItem';
    - Performance monitoring
    - Domain management
 
-</div>
-
 ## Environment Configuration
 
 ### Toolchain Setup
-
-<div className="setup-steps">
 
 #### 1. Cursor Configuration
 
@@ -83,18 +77,14 @@ integrations:
 }
 ```
 
-</div>
-
 ## Development Workflow
 
 ### From Cursor to v0
 
-<div className="workflow-steps">
-
 #### 1. Local Development Process
 
 <Tabs>
-  <TabItem value="create" label="Create Feature" default>
+<TabItem value="create" label="Create Feature" default>
     ```bash
     # 1. Create new branch
     git checkout -b feature/new-blog-post
@@ -106,8 +96,8 @@ integrations:
     git add .
     git commit -m "Add new blog post feature"
     ```
-  </TabItem>
-  <TabItem value="push" label="Push to v0">
+</TabItem>
+<TabItem value="push" label="Push to v0">
     ```bash
     # 1. Push to remote repository
     git push origin feature/new-blog-post
@@ -115,7 +105,7 @@ integrations:
     # 2. Create PR on v0 platform
     # 3. Wait for team review
     ```
-  </TabItem>
+</TabItem>
 </Tabs>
 
 #### 2. Code Review Process
@@ -128,11 +118,7 @@ graph LR
     D --> E[Merge to Main Branch]
 ```
 
-</div>
-
 ### From v0 to Vercel
-
-<div className="deployment-flow">
 
 #### 1. Automatic Deployment Configuration
 
@@ -146,8 +132,8 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Deploy to Vercel
+- uses: actions/checkout@v2
+- name: Deploy to Vercel
         uses: amondnet/vercel-action@v20
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
@@ -161,13 +147,9 @@ jobs:
 Each PR generates an independent preview environment, making it easy for team members to view changes.
 :::
 
-</div>
-
 ## Collaboration Best Practices
 
 ### Branch Management Strategy
-
-<div className="branch-strategy">
 
 #### Branch Structure
 ```
@@ -186,11 +168,7 @@ main
 3. Merge after code review passes
 4. Periodically merge `develop` to `main`
 
-</div>
-
 ### Commit Message Convention
-
-<div className="commit-convention">
 
 #### Commit Format
 ```
@@ -210,11 +188,7 @@ main
 - `test`: Test-related
 - `chore`: Build process or tool changes
 
-</div>
-
 ### Automated Testing Integration
-
-<div className="testing-integration">
 
 #### Test Configuration
 
@@ -239,20 +213,16 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Install dependencies
+- uses: actions/checkout@v2
+- name: Install dependencies
         run: npm ci
-      - name: Run tests
+- name: Run tests
         run: npm test
 ```
-
-</div>
 
 ## Monitoring and Maintenance
 
 ### Performance Monitoring
-
-<div className="monitoring-setup">
 
 #### Performance Metrics Tracking
 ```javascript
@@ -281,11 +251,7 @@ export const alerts = {
 };
 ```
 
-</div>
-
 ### Error Tracking
-
-<div className="error-tracking">
 
 #### Sentry Integration
 ```javascript
@@ -320,29 +286,3 @@ class ErrorBoundary extends React.Component {
   }
 }
 ```
-
-</div>
-
-export const styles = {
-  workflowOverview: {
-    backgroundColor: '#f6f8fa',
-    padding: '1rem',
-    borderRadius: '8px',
-    marginBottom: '2rem'
-  },
-  setupSteps: {
-    borderLeft: '3px solid #1a73e8',
-    paddingLeft: '1rem'
-  },
-  branchStrategy: {
-    backgroundColor: '#f0f7ff',
-    padding: '1rem',
-    borderRadius: '8px'
-  },
-  errorTracking: {
-    marginTop: '1rem',
-    padding: '1rem',
-    border: '1px solid #e1e4e8',
-    borderRadius: '8px'
-  }
-};

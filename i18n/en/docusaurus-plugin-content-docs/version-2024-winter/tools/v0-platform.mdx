@@ -13,51 +13,45 @@ import TabItem from '@theme/TabItem';
 
 v0 is an innovative AI-driven development platform designed to simplify and accelerate the software development process. It combines code editing, project management, and AI assistance features, providing developers with a brand new collaborative environment.
 
-<div className="feature-cards">
-
-### 🤖 AI-Assisted Development
+### AI-Assisted Development
 - Understand natural language instructions
 - Intelligent code generation
 - Code optimization suggestions
 
-### 👥 Real-time Collaboration
+### Real-time Collaboration
 - Multi-user simultaneous editing
 - Google Docs-like experience
 - Real-time communication features
 
-### 🔄 Version Control
+### Version Control
 - Built-in Git functionality
 - Branch management
 - Code review
 
-### ☁️ Cross-platform Access
+### Cross-platform Access
 - Web-based interface
 - Access anytime, anywhere
 - Multi-device synchronization
 
-</div>
-
 ## Creating Projects on v0
 
 ### Registration and Login
-
-<div className="step-guide">
 
 #### 1. Access Platform
 Visit [v0 Official Website](https://v0.dev/)
 
 #### 2. Create Account
 <Tabs>
-  <TabItem value="github" label="Using GitHub" default>
+<TabItem value="github" label="Using GitHub" default>
     1. Click "Sign in with GitHub"
     2. Authorize v0 to access your GitHub account
     3. Complete account linking
-  </TabItem>
-  <TabItem value="email" label="Using Email">
+</TabItem>
+<TabItem value="email" label="Using Email">
     1. Click "Sign up with email"
     2. Fill in email and password
     3. Verify email address
-  </TabItem>
+</TabItem>
 </Tabs>
 
 #### 3. Complete Setup
@@ -65,16 +59,12 @@ Visit [v0 Official Website](https://v0.dev/)
 - Set notification options
 - Configure team information (optional)
 
-</div>
-
 ### Creating New Project
-
-<div className="project-creation">
 
 #### 1. Select Project Type
 
 <Tabs>
-  <TabItem value="web" label="Web Application" default>
+<TabItem value="web" label="Web Application" default>
     ```bash
     # Choose framework
     - Next.js
@@ -82,8 +72,8 @@ Visit [v0 Official Website](https://v0.dev/)
     - Vue.js
     - Angular
     ```
-  </TabItem>
-  <TabItem value="api" label="API Service">
+</TabItem>
+<TabItem value="api" label="API Service">
     ```bash
     # Choose backend technology
     - Node.js
@@ -91,7 +81,7 @@ Visit [v0 Official Website](https://v0.dev/)
     - Go
     - Java
     ```
-  </TabItem>
+</TabItem>
 </Tabs>
 
 #### 2. Configure Project
@@ -114,13 +104,9 @@ Visit [v0 Official Website](https://v0.dev/)
 - API service
 :::
 
-</div>
-
 ## Developing with v0
 
 ### v0 Editor Introduction
-
-<div className="editor-features">
 
 #### Main Functional Areas
 
@@ -144,11 +130,7 @@ Visit [v0 Official Website](https://v0.dev/)
    - Build tools
    - Package manager
 
-</div>
-
 ### Collaborating with AI
-
-<div className="ai-collaboration">
 
 #### Code Generation Example
 
@@ -159,18 +141,14 @@ Visit [v0 Official Website](https://v0.dev/)
 // AI will generate code like this:
 function BlogList({ posts }) {
   return (
-    <div className="blog-list">
       {posts.map(post => (
         <article key={post.id} className="blog-post">
-          <h2>{post.title}</h2>
-          <p>{post.excerpt}</p>
-          <div className="metadata">
+## {post.title}
+{post.excerpt}
             <span>{post.date}</span>
             <span>{post.author}</span>
-          </div>
         </article>
       ))}
-    </div>
   );
 }
 ```
@@ -200,11 +178,7 @@ function BlogSearch({ onSearch }) {
 }
 ```
 
-</div>
-
 ### Version Control and Collaboration
-
-<div className="collaboration-tools">
 
 #### Git Operations
 
@@ -227,11 +201,7 @@ git push origin feature/add-comments
 3. Discuss and modify
 4. Merge to main branch
 
-</div>
-
 ### Deployment and Integration
-
-<div className="deployment-options">
 
 #### Supported Deployment Platforms
 
@@ -253,35 +223,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Deploy to Vercel
+- uses: actions/checkout@v2
+- name: Deploy to Vercel
         uses: amondnet/vercel-action@v20
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
 ```
-
-</div>
-
-export const styles = {
-  featureCards: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-    gap: '1rem',
-    marginBottom: '2rem'
-  },
-  stepGuide: {
-    borderLeft: '3px solid #1a73e8',
-    paddingLeft: '1rem'
-  },
-  editorFeatures: {
-    backgroundColor: '#f6f8fa',
-    padding: '1rem',
-    borderRadius: '8px'
-  },
-  collaborationTools: {
-    marginTop: '1rem',
-    padding: '1rem',
-    border: '1px solid #e1e4e8',
-    borderRadius: '8px'
-  }
-};

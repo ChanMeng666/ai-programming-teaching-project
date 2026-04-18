@@ -10,12 +10,12 @@ import Admonition from '@theme/Admonition';
 
 # AI 辅助图表创作
 
-## 🤖 使用 Gemini CLI 高效创建图表
+## 使用 Gemini CLI 高效创建图表
 
 ### 自然语言生成图表
 
 <Tabs>
-  <TabItem value="describe" label="描述生成" default>
+<TabItem value="describe" label="描述生成" default>
 
 <CodeBlock language="text">
 {`您：我需要一个展示用户注册流程的图表，包括：
@@ -53,8 +53,8 @@ graph TD
 这个流程图清晰展示了完整的注册流程，包括错误处理和可选步骤。`}
 </CodeBlock>
 
-  </TabItem>
-  <TabItem value="optimize" label="优化现有图表">
+</TabItem>
+<TabItem value="optimize" label="优化现有图表">
 
 <CodeBlock language="text">
 {`您：这是我的图表代码，请帮我优化布局和样式：
@@ -72,13 +72,13 @@ graph TB
     B -->|数据收集| C[处理阶段]
     C -->|分析处理| D[验证阶段]
     D -->|质量检查| E[完成阶段]
-    
+
     style A fill:#e1f5fe,stroke:#01579b,stroke-width:2px
     style B fill:#fff3e0,stroke:#e65100,stroke-width:2px
     style C fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
     style D fill:#fff8e1,stroke:#f57f17,stroke-width:2px
     style E fill:#e8f5e9,stroke:#1b5e20,stroke-width:2px
-    
+
     classDef default font-size:16px;
 \`\`\`
 
@@ -90,15 +90,15 @@ graph TB
 5. 统一字体大小提升可读性`}
 </CodeBlock>
 
-  </TabItem>
-  <TabItem value="batch" label="批量生成">
+</TabItem>
+<TabItem value="batch" label="批量生成">
 
 <CodeBlock language="text">
 {`您：我需要为 5 个不同的 API 端点生成时序图
 
 Gemini：我来为您批量生成 API 时序图：
 
-1️⃣ 用户登录 API：
+用户登录 API：
 \`\`\`mermaid
 sequenceDiagram
     Client->>+API: POST /auth/login
@@ -109,7 +109,7 @@ sequenceDiagram
     API-->>-Client: JWT Token
 \`\`\`
 
-2️⃣ 获取用户信息 API：
+获取用户信息 API：
 \`\`\`mermaid
 sequenceDiagram
     Client->>+API: GET /users/{id}
@@ -123,7 +123,7 @@ sequenceDiagram
     API-->>-Client: 用户信息
 \`\`\`
 
-3️⃣ 创建订单 API：
+创建订单 API：
 \`\`\`mermaid
 sequenceDiagram
     Client->>+API: POST /orders
@@ -137,7 +137,7 @@ sequenceDiagram
     API-->>-Client: 订单创建成功
 \`\`\`
 
-4️⃣ 更新产品 API：
+更新产品 API：
 \`\`\`mermaid
 sequenceDiagram
     Client->>+API: PUT /products/{id}
@@ -152,7 +152,7 @@ sequenceDiagram
     API-->>-Client: 更新成功
 \`\`\`
 
-5️⃣ 删除评论 API：
+删除评论 API：
 \`\`\`mermaid
 sequenceDiagram
     Client->>+API: DELETE /comments/{id}
@@ -166,10 +166,10 @@ sequenceDiagram
 \`\`\``}
 </CodeBlock>
 
-  </TabItem>
+</TabItem>
 </Tabs>
 
-## 📝 智能图表设计建议
+## 智能图表设计建议
 
 ### 根据内容推荐图表类型
 
@@ -178,7 +178,7 @@ sequenceDiagram
 
 Gemini：根据您要展示的系统模块依赖关系，我推荐以下几种图表类型：
 
-🎯 最推荐：类图（Class Diagram）
+最推荐：类图（Class Diagram）
 适合展示模块间的静态依赖关系
 
 \`\`\`mermaid
@@ -193,7 +193,7 @@ classDiagram
     UIModule --> APIModule : calls
 \`\`\`
 
-🔄 备选1：流程图（带分组）
+备选1：流程图（带分组）
 适合展示模块层次和数据流向
 
 \`\`\`mermaid
@@ -201,22 +201,22 @@ graph TB
     subgraph "表现层"
         UI[UI Module]
     end
-    
+
     subgraph "业务层"
         API[API Module]
         Auth[Auth Module]
     end
-    
+
     subgraph "数据层"
         Data[Data Module]
         Cache[Cache Module]
         DB[DB Module]
     end
-    
+
     subgraph "基础层"
         Core[Core Module]
     end
-    
+
     UI --> API
     API --> Auth
     API --> Data
@@ -226,7 +226,7 @@ graph TB
     Data --> Core
 \`\`\`
 
-🏗️ 备选2：架构图（Draw.io）
+备选2：架构图（Draw.io）
 适合展示复杂的系统架构和部署关系
 - 使用容器分组相关模块
 - 用不同颜色表示不同层次
@@ -235,45 +235,16 @@ graph TB
 
 ### AI 优化建议
 
-<div className="ai-suggestions">
-  <div className="suggestion-card">
-    <h4>🎨 视觉优化</h4>
-    <p>AI 可以帮助：</p>
-    <ul>
-      <li>推荐配色方案</li>
-      <li>优化布局平衡</li>
-      <li>调整元素间距</li>
-      <li>选择合适字体</li>
-    </ul>
-  </div>
-  <div className="suggestion-card">
-    <h4>📊 内容优化</h4>
-    <p>AI 可以协助：</p>
-    <ul>
-      <li>简化复杂流程</li>
-      <li>补充缺失步骤</li>
-      <li>优化文字描述</li>
-      <li>添加必要注释</li>
-    </ul>
-  </div>
-  <div className="suggestion-card">
-    <h4>🔧 技术优化</h4>
-    <p>AI 能够提供：</p>
-    <ul>
-      <li>最佳实践建议</li>
-      <li>性能优化方案</li>
-      <li>兼容性检查</li>
-      <li>导出格式建议</li>
-    </ul>
-  </div>
-</div>
+- **视觉优化**：推荐配色方案；优化布局平衡；调整元素间距；选择合适字体
+- **内容优化**：简化复杂流程；补充缺失步骤；优化文字描述；添加必要注释
+- **技术优化**：最佳实践建议；性能优化方案；兼容性检查；导出格式建议
 
-## 🔄 图表转换和迁移
+## 图表转换和迁移
 
 ### 不同格式间转换
 
 <Tabs>
-  <TabItem value="mermaid-to-drawio" label="Mermaid → Draw.io" default>
+<TabItem value="mermaid-to-drawio" label="Mermaid → Draw.io" default>
 
 <CodeBlock language="text">
 {`您：将这个 Mermaid 流程图转换为 Draw.io 格式的说明
@@ -314,15 +285,15 @@ Draw.io 实现步骤：
    - 调整间距至合适位置`}
 </CodeBlock>
 
-  </TabItem>
-  <TabItem value="visio-to-mermaid" label="Visio → Mermaid">
+</TabItem>
+<TabItem value="visio-to-mermaid" label="Visio → Mermaid">
 
 <CodeBlock language="text">
 {`您：如何将 Visio 图表转换为 Mermaid 代码？
 
 Gemini：将 Visio 图表转换为 Mermaid 的方法：
 
-📋 手动转换步骤：
+手动转换步骤：
 
 1. 分析 Visio 图表结构：
    - 识别节点类型（矩形、菱形、圆形等）
@@ -339,7 +310,7 @@ Gemini：将 Visio 图表转换为 Mermaid 的方法：
 
 3. 示例转换：
    Visio: 开始(矩形) → 处理(矩形) → 判断(菱形)
-   
+
    Mermaid:
    \`\`\`mermaid
    graph LR
@@ -347,21 +318,21 @@ Gemini：将 Visio 图表转换为 Mermaid 的方法：
        Process --> Decision{判断}
    \`\`\`
 
-🤖 AI 辅助转换：
+AI 辅助转换：
 您可以：
 1. 截图 Visio 图表
 2. 发送给我描述图表内容
 3. 我帮您生成对应的 Mermaid 代码
 
-⚙️ 自动化工具：
+自动化工具：
 - vsdx2svg：先转 SVG，再手动转 Mermaid
 - 使用 Draw.io 作为中间格式`}
 </CodeBlock>
 
-  </TabItem>
+</TabItem>
 </Tabs>
 
-## 🚀 高级 AI 技巧
+## 高级 AI 技巧
 
 ### 复杂系统架构生成
 
@@ -377,13 +348,13 @@ graph TB
         Mobile[移动APP]
         Admin[管理后台]
     end
-    
+
     subgraph "接入层"
         CDN[CDN]
         LB[负载均衡器]
         Gateway[API网关]
     end
-    
+
     subgraph "业务服务层"
         subgraph "核心服务"
             UserSvc[用户服务]
@@ -391,14 +362,14 @@ graph TB
             OrderSvc[订单服务]
             PaymentSvc[支付服务]
         end
-        
+
         subgraph "支撑服务"
             SearchSvc[搜索服务]
             RecSvc[推荐服务]
             CartSvc[购物车服务]
             InventorySvc[库存服务]
         end
-        
+
         subgraph "运营服务"
             PromotionSvc[促销服务]
             CouponSvc[优惠券服务]
@@ -406,53 +377,53 @@ graph TB
             LogisticsSvc[物流服务]
         end
     end
-    
+
     subgraph "中间件层"
         MQ[消息队列<br/>RabbitMQ/Kafka]
         Cache[缓存<br/>Redis Cluster]
         Registry[服务注册<br/>Consul/Eureka]
         Config[配置中心<br/>Apollo]
     end
-    
+
     subgraph "数据层"
         MySQL[(MySQL<br/>主从集群)]
         MongoDB[(MongoDB<br/>分片集群)]
         ES[(ElasticSearch<br/>搜索引擎)]
         HBase[(HBase<br/>大数据存储)]
     end
-    
+
     subgraph "基础设施"
         Monitor[监控<br/>Prometheus]
         Log[日志<br/>ELK Stack]
         Trace[链路追踪<br/>Zipkin]
         Alert[告警<br/>AlertManager]
     end
-    
+
     %% 连接关系
     Web --> CDN
     Mobile --> CDN
     Admin --> LB
     CDN --> LB
     LB --> Gateway
-    
+
     Gateway --> UserSvc
     Gateway --> ProductSvc
     Gateway --> OrderSvc
     Gateway --> PaymentSvc
-    
+
     OrderSvc --> MQ
     PaymentSvc --> MQ
     MQ --> InventorySvc
     MQ --> LogisticsSvc
-    
+
     ProductSvc --> Cache
     CartSvc --> Cache
-    
+
     UserSvc --> MySQL
     OrderSvc --> MySQL
     ProductSvc --> MongoDB
     SearchSvc --> ES
-    
+
     %% 样式
     classDef client fill:#e3f2fd,stroke:#1976d2
     classDef gateway fill:#fff3e0,stroke:#f57c00
@@ -460,7 +431,7 @@ graph TB
     classDef middleware fill:#e8f5e9,stroke:#388e3c
     classDef data fill:#fce4ec,stroke:#c2185b
     classDef infra fill:#f5f5f5,stroke:#616161
-    
+
     class Web,Mobile,Admin client
     class CDN,LB,Gateway gateway
     class UserSvc,ProductSvc,OrderSvc,PaymentSvc,SearchSvc,RecSvc,CartSvc,InventorySvc,PromotionSvc,CouponSvc,CommentSvc,LogisticsSvc service
@@ -499,7 +470,7 @@ sequenceDiagram
     participant V as Validator
     participant D as Database
     participant E as Email Service
-    
+
     C->>A: POST /auth/register
     A->>V: 验证输入数据
     V-->>A: 验证通过
@@ -533,14 +504,13 @@ Object.keys(spec.paths).forEach(path => {
 </CodeBlock>
 </Admonition>
 
-## 💡 提示词工程
+## 提示词工程
 
 ### 高效提示词模板
 
-<div className="prompt-templates">
-  <div className="template">
-    <h4>📊 流程图生成</h4>
-    <CodeBlock language="text">
+#### 流程图生成
+
+<CodeBlock language="text">
 {`生成一个[主题]的流程图，包括：
 1. [步骤1]
 2. [步骤2]
@@ -551,12 +521,11 @@ Object.keys(spec.paths).forEach(path => {
 - 包含开始和结束节点
 - 标注关键判断点
 - 添加必要的循环`}
-    </CodeBlock>
-  </div>
-  
-  <div className="template">
-    <h4>🏗️ 架构图设计</h4>
-    <CodeBlock language="text">
+</CodeBlock>
+
+#### 架构图设计
+
+<CodeBlock language="text">
 {`设计一个[系统名称]的架构图：
 技术栈：[列出技术]
 规模：[用户量/QPS]
@@ -565,12 +534,11 @@ Object.keys(spec.paths).forEach(path => {
 - 标注技术选型
 - 显示数据流向
 - 包含冗余设计`}
-    </CodeBlock>
-  </div>
-  
-  <div className="template">
-    <h4>🔄 优化请求</h4>
-    <CodeBlock language="text">
+</CodeBlock>
+
+#### 优化请求
+
+<CodeBlock language="text">
 {`优化这个图表：
 [粘贴现有代码]
 优化方向：
@@ -578,11 +546,9 @@ Object.keys(spec.paths).forEach(path => {
 - 优化布局
 - 统一样式
 - 添加缺失信息`}
-    </CodeBlock>
-  </div>
-</div>
+</CodeBlock>
 
-## 🎯 实战案例
+## 实战案例
 
 ### 案例：从需求到图表
 
@@ -638,62 +604,8 @@ graph TD
 [最终优化版本...]`}
 </CodeBlock>
 
-## 🚀 下一步
+## 下一步
 
 掌握了 AI 辅助技巧后，开始实战：
 
-<div className="next-steps">
-  <a href="../projects" className="next-button">
-    实战项目练习 →
-  </a>
-</div>
-
-<style>{`
-.ai-suggestions {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1rem;
-  margin: 2rem 0;
-}
-
-.suggestion-card {
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-  padding: 1.5rem;
-  border-radius: 8px;
-}
-
-.prompt-templates {
-  display: grid;
-  gap: 1.5rem;
-  margin: 2rem 0;
-}
-
-.template {
-  background: white;
-  padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.next-steps {
-  display: flex;
-  justify-content: center;
-  margin: 3rem 0;
-}
-
-.next-button {
-  display: inline-block;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  padding: 1rem 2rem;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: transform 0.3s ease;
-}
-
-.next-button:hover {
-  transform: translateY(-2px);
-  color: white;
-}
-`}</style>
+[实战项目练习](../projects)

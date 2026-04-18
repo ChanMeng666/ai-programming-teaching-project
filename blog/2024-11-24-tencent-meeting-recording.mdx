@@ -10,28 +10,23 @@ import TabItem from '@theme/TabItem';
 
 # 腾讯会议录屏下载教程
 
-:::tip 📝 前言
+:::tip 前言
 这份教程将教你如何下载腾讯会议的录屏视频。整个过程不需要编程知识，只需要按照步骤操作即可。
 :::
 
 {/* truncate */}
 
-## 🔧 准备工作
-
-<div className="prerequisite-box">
+## 准备工作
 
 你需要准备：
-- 💻 电脑（Windows系统）
-- 🌐 谷歌浏览器（Chrome）
-- ⚙️ Git Bash 软件（后面会教你安装）
 
-</div>
+- 电脑（Windows系统）
+- 谷歌浏览器（Chrome）
+- Git Bash 软件（后面会教你安装）
 
-## 📝 详细步骤
+## 详细步骤
 
 ### 第一步：安装必要软件
-
-<div className="step-box">
 
 1. 如果你还没有安装 Git Bash：
    - 访问官网：[Git 下载页面](https://git-scm.com/downloads)
@@ -39,11 +34,7 @@ import TabItem from '@theme/TabItem';
    - 下载完成后双击安装包
    - 一路点击"下一步"使用默认设置完成安装
 
-</div>
-
 ### 第二步：获取视频下载信息
-
-<div className="steps-container">
 
 1. 用谷歌浏览器打开腾讯会议录屏链接
 2. 点击播放视频，等待视频开始播放
@@ -55,26 +46,24 @@ import TabItem from '@theme/TabItem';
 8. 右键点击这个 `.mp4` 文件
 9. 选择 "Copy" → "Copy as cURL(bash)"
 
-</div>
-
 ### 第三步：修改下载命令
 
 <Tabs>
-  <TabItem value="before" label="修改前" default>
+<TabItem value="before" label="修改前" default>
     ```bash
     curl 'https://example.com/video.mp4' \
     -H 'range: bytes=14200808-314114094' \
     -H 'if-range: "17c5ccf6d75f9bccce2a71f5a32dbea4-3"' \
     -H 'accept: */*' \
     ```
-  </TabItem>
-  <TabItem value="after" label="修改后">
+</TabItem>
+<TabItem value="after" label="修改后">
     ```bash
     curl 'https://example.com/video.mp4' \
     -H 'accept: */*' \
     --output /d/meeting_video.mp4
     ```
-  </TabItem>
+</TabItem>
 </Tabs>
 
 :::warning 重要提示
@@ -92,7 +81,7 @@ import TabItem from '@theme/TabItem';
 
 ![腾讯会议视频下载过程截图](/screenshot/2024-11-24-tencent-meeting-recording.png)
 
-## ❓ 常见问题解答
+## 常见问题解答
 
 <details>
 <summary>1. 为什么我下载的视频不完整？</summary>
@@ -129,9 +118,7 @@ import TabItem from '@theme/TabItem';
 
 </details>
 
-## ⚠️ 注意事项
-
-<div className="notice-box">
+## 注意事项
 
 - 确保有足够的磁盘空间
 - 下载过程中不要关闭 Git Bash
@@ -139,20 +126,14 @@ import TabItem from '@theme/TabItem';
 - 下载完成前不要关机或休眠
 - 如果下载速度很慢，可以尝试重新获取下载命令
 
-</div>
+## 进阶提示
 
-## 🎯 进阶提示
+- 创建专门的文件夹存放下载的视频
+- 给视频文件起一个有意义的名字
+- 下载完成后确认视频是否可以正常播放
+- 及时备份重要的视频文件
 
-<div className="tips-grid">
-
-- 📁 创建专门的文件夹存放下载的视频
-- 📝 给视频文件起一个有意义的名字
-- ✅ 下载完成后确认视频是否可以正常播放
-- 💾 及时备份重要的视频文件
-
-</div>
-
-## 📌 最后提醒
+## 最后提醒
 
 :::caution 重要
 1. 请尊重视频版权，不要随意传播下载的视频
@@ -161,49 +142,3 @@ import TabItem from '@theme/TabItem';
 4. 如果遇到问题，可以从第一步重新操作
 5. 特别强调：别忘了删除 range 字段，这是最关键的一步！
 :::
-
-export const styles = `
-.prerequisite-box {
-  background: #f8f9fa;
-  padding: 1rem;
-  border-radius: 8px;
-  margin: 1rem 0;
-  border-left: 4px solid #0366d6;
-}
-
-.step-box {
-  background: #fff;
-  padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  margin: 1rem 0;
-}
-
-.steps-container {
-  background: #f8f9fa;
-  padding: 1.5rem;
-  border-radius: 8px;
-  margin: 1rem 0;
-}
-
-.notice-box {
-  background: #fff3cd;
-  padding: 1rem;
-  border-radius: 8px;
-  margin: 1rem 0;
-  border-left: 4px solid #ffc107;
-}
-
-.tips-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
-  margin: 1rem 0;
-}
-
-.tips-grid > * {
-  background: #e9ecef;
-  padding: 1rem;
-  border-radius: 8px;
-}
-`; 

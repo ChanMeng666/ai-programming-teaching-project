@@ -10,28 +10,22 @@ import TabItem from '@theme/TabItem';
 
 # Tencent Meeting Recording Download Tutorial
 
-:::tip 📝 Introduction
+:::tip Introduction
 This tutorial will teach you how to download Tencent Meeting recording videos. The entire process doesn't require programming knowledge - just follow the steps.
 :::
 
 {/* truncate */}
 
-## 🔧 Prerequisites
-
-<div className="prerequisite-box">
+## Prerequisites
 
 You will need:
-- 💻 A computer (Windows system)
-- 🌐 Google Chrome browser
-- ⚙️ Git Bash software (we'll show you how to install it)
+- A computer (Windows system)
+- Google Chrome browser
+- Git Bash software (we'll show you how to install it)
 
-</div>
-
-## 📝 Detailed Steps
+## Detailed Steps
 
 ### Step 1: Install Necessary Software
-
-<div className="step-box">
 
 1. If you haven't installed Git Bash yet:
    - Visit the official website: [Git Download Page](https://git-scm.com/downloads)
@@ -39,11 +33,7 @@ You will need:
    - Double-click the installer after download completes
    - Click "Next" through the installation using default settings
 
-</div>
-
 ### Step 2: Get Video Download Information
-
-<div className="steps-container">
 
 1. Open the Tencent Meeting recording link in Google Chrome
 2. Click play on the video and wait for it to start playing
@@ -55,26 +45,24 @@ You will need:
 8. Right-click on this `.mp4` file
 9. Select "Copy" → "Copy as cURL(bash)"
 
-</div>
-
 ### Step 3: Modify the Download Command
 
 <Tabs>
-  <TabItem value="before" label="Before Modification" default>
+<TabItem value="before" label="Before Modification" default>
     ```bash
     curl 'https://example.com/video.mp4' \
     -H 'range: bytes=14200808-314114094' \
     -H 'if-range: "17c5ccf6d75f9bccce2a71f5a32dbea4-3"' \
     -H 'accept: */*' \
     ```
-  </TabItem>
-  <TabItem value="after" label="After Modification">
+</TabItem>
+<TabItem value="after" label="After Modification">
     ```bash
     curl 'https://example.com/video.mp4' \
     -H 'accept: */*' \
     --output /d/meeting_video.mp4
     ```
-  </TabItem>
+</TabItem>
 </Tabs>
 
 :::warning Important Note
@@ -92,7 +80,7 @@ Download process example:
 
 ![Tencent Meeting Video Download Process Screenshot](/screenshot/2024-11-24-tencent-meeting-recording.png)
 
-## ❓ Frequently Asked Questions
+## Frequently Asked Questions
 
 <details>
 <summary>1. Why is my downloaded video incomplete?</summary>
@@ -129,9 +117,7 @@ You can modify the `--output` parameter:
 
 </details>
 
-## ⚠️ Important Notes
-
-<div className="notice-box">
+## Important Notes
 
 - Ensure you have enough disk space
 - Don't close Git Bash during the download
@@ -139,20 +125,14 @@ You can modify the `--output` parameter:
 - Don't shut down or sleep your computer before download completes
 - If download speed is very slow, try getting the download command again
 
-</div>
+## Advanced Tips
 
-## 🎯 Advanced Tips
+- Create a dedicated folder for downloaded videos
+- Give video files meaningful names
+- Verify the video plays correctly after download
+- Back up important video files promptly
 
-<div className="tips-grid">
-
-- 📁 Create a dedicated folder for downloaded videos
-- 📝 Give video files meaningful names
-- ✅ Verify the video plays correctly after download
-- 💾 Back up important video files promptly
-
-</div>
-
-## 📌 Final Reminder
+## Final Reminder
 
 :::caution Important
 1. Please respect video copyrights and don't distribute downloaded videos without permission
@@ -161,49 +141,3 @@ You can modify the `--output` parameter:
 4. If you encounter problems, start over from step 1
 5. Special emphasis: Don't forget to delete the range field - this is the most critical step!
 :::
-
-export const styles = `
-.prerequisite-box {
-  background: #f8f9fa;
-  padding: 1rem;
-  border-radius: 8px;
-  margin: 1rem 0;
-  border-left: 4px solid #0366d6;
-}
-
-.step-box {
-  background: #fff;
-  padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  margin: 1rem 0;
-}
-
-.steps-container {
-  background: #f8f9fa;
-  padding: 1.5rem;
-  border-radius: 8px;
-  margin: 1rem 0;
-}
-
-.notice-box {
-  background: #fff3cd;
-  padding: 1rem;
-  border-radius: 8px;
-  margin: 1rem 0;
-  border-left: 4px solid #ffc107;
-}
-
-.tips-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
-  margin: 1rem 0;
-}
-
-.tips-grid > * {
-  background: #e9ecef;
-  padding: 1rem;
-  border-radius: 8px;
-}
-`;

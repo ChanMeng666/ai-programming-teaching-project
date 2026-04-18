@@ -13,8 +13,6 @@ import TabItem from '@theme/TabItem';
 
 ### Preparation
 
-<div className="preparation">
-
 #### 1. Commit Local Changes
 ```bash
 # Ensure all changes are committed
@@ -35,13 +33,9 @@ npm outdated
 npm update
 ```
 
-</div>
-
 ## Develop New Features on v0
 
 ### Comment System Implementation
-
-<div className="comment-system">
 
 #### Comment Component
 ```tsx
@@ -89,7 +83,6 @@ export function Comments({ postId }: { postId: string }) {
   };
 
   return (
-    <div className="space-y-6">
       <h3 className="text-xl font-bold">Comments</h3>
 
       {session ? (
@@ -109,13 +102,10 @@ export function Comments({ postId }: { postId: string }) {
           </button>
         </form>
       ) : (
-        <p>Please log in to post a comment</p>
+Please log in to post a comment
       )}
-
-      <div className="space-y-4">
         {comments.map((comment) => (
           <div key={comment.id} className="border p-4 rounded-lg">
-            <div className="flex items-center space-x-2 mb-2">
               <img
                 src={comment.author.avatar}
                 alt={comment.author.name}
@@ -123,12 +113,8 @@ export function Comments({ postId }: { postId: string }) {
               />
               <span className="font-medium">{comment.author.name}</span>
               <span className="text-gray-500">{comment.createdAt}</span>
-            </div>
-            <p>{comment.content}</p>
-          </div>
+{comment.content}
         ))}
-      </div>
-    </div>
   );
 }
 ```
@@ -181,11 +167,7 @@ export default async function handler(
 }
 ```
 
-</div>
-
 ### Tag System Optimization
-
-<div className="tag-system">
 
 #### Tag Component
 ```tsx
@@ -210,9 +192,7 @@ export function TagCloud() {
   }, []);
 
   return (
-    <div className="p-4 bg-gray-50 rounded-lg">
       <h3 className="text-lg font-semibold mb-4">Tag Cloud</h3>
-      <div className="flex flex-wrap gap-2">
         {tags.map(tag => (
           <Link
             key={tag.name}
@@ -227,8 +207,6 @@ export function TagCloud() {
             {tag.name} ({tag.count})
           </Link>
         ))}
-      </div>
-    </div>
   );
 }
 ```
@@ -269,13 +247,9 @@ export default async function handler(
 }
 ```
 
-</div>
-
 ## Team Collaboration
 
 ### Code Review
-
-<div className="code-review">
 
 #### Create Pull Request
 ```bash
@@ -312,11 +286,7 @@ git push origin feature/comment-system
    - Data security
 :::
 
-</div>
-
 ### Real-time Collaboration
-
-<div className="collaboration">
 
 #### Using v0's Real-time Editing Features
 - Edit the same file simultaneously
@@ -334,13 +304,9 @@ git push origin feature/comment-system
  */
 ```
 
-</div>
-
 ## Performance Optimization
 
 ### Code Splitting
-
-<div className="code-splitting">
 
 #### Dynamic Imports
 ```typescript
@@ -375,11 +341,7 @@ export default function BlogPost() {
 }
 ```
 
-</div>
-
 ### Caching Optimization
-
-<div className="caching">
 
 #### API Caching
 ```typescript
@@ -425,23 +387,3 @@ export function useComments(postId: string) {
   };
 }
 ```
-
-</div>
-
-export const styles = {
-  preparation: {
-    backgroundColor: '#f6f8fa',
-    padding: '1rem',
-    borderRadius: '8px',
-    marginBottom: '1rem'
-  },
-  codeReview: {
-    borderLeft: '3px solid #1a73e8',
-    paddingLeft: '1rem'
-  },
-  collaboration: {
-    backgroundColor: '#f0f7ff',
-    padding: '1rem',
-    borderRadius: '8px'
-  }
-};

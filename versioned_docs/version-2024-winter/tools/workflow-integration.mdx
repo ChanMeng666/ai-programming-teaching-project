@@ -11,9 +11,7 @@ import TabItem from '@theme/TabItem';
 
 ## 工作流程概述
 
-<div className="workflow-overview">
-
-### 🔄 完整开发周期
+### 完整开发周期
 
 1. **本地开发** (Cursor)
    - AI辅助编码
@@ -30,13 +28,9 @@ import TabItem from '@theme/TabItem';
    - 性能监控
    - 域名管理
 
-</div>
-
 ## 环境配置
 
 ### 工具链设置
-
-<div className="setup-steps">
 
 #### 1. Cursor配置
 
@@ -83,18 +77,14 @@ integrations:
 }
 ```
 
-</div>
-
 ## 开发工作流
 
 ### 从Cursor到v0
 
-<div className="workflow-steps">
-
 #### 1. 本地开发流程
 
 <Tabs>
-  <TabItem value="create" label="创建功能" default>
+<TabItem value="create" label="创建功能" default>
     ```bash
     # 1. 创建新分支
     git checkout -b feature/new-blog-post
@@ -106,8 +96,8 @@ integrations:
     git add .
     git commit -m "Add new blog post feature"
     ```
-  </TabItem>
-  <TabItem value="push" label="推送到v0">
+</TabItem>
+<TabItem value="push" label="推送到v0">
     ```bash
     # 1. 推送到远程仓库
     git push origin feature/new-blog-post
@@ -115,7 +105,7 @@ integrations:
     # 2. 在v0平台创建PR
     # 3. 等待团队审查
     ```
-  </TabItem>
+</TabItem>
 </Tabs>
 
 #### 2. 代码审查流程
@@ -128,11 +118,7 @@ graph LR
     D --> E[合并到主分支]
 ```
 
-</div>
-
 ### 从v0到Vercel
-
-<div className="deployment-flow">
 
 #### 1. 自动部署配置
 
@@ -161,15 +147,12 @@ jobs:
 每个PR都会生成一个独立的预览环境，方便团队成员查看更改效果。
 :::
 
-</div>
-
 ## 协作最佳实践
 
 ### 分支管理策略
 
-<div className="branch-strategy">
-
 #### 分支结构
+
 ```
 main
 ├── develop
@@ -181,18 +164,15 @@ main
 
 #### 工作流程规范
 
-1. 从`develop`分支创建特性分支
-2. 完成开发后创建PR到`develop`
+1. 从 `develop` 分支创建特性分支
+2. 完成开发后创建PR到 `develop`
 3. 代码审查通过后合并
-4. 定期将`develop`合并到`main`
-
-</div>
+4. 定期将 `develop` 合并到 `main`
 
 ### 提交信息规范
 
-<div className="commit-convention">
-
 #### 提交格式
+
 ```
 <type>(<scope>): <subject>
 
@@ -202,19 +182,16 @@ main
 ```
 
 #### 类型说明
-- `feat`: 新功能
-- `fix`: 修复bug
-- `docs`: 文档更新
-- `style`: 代码格式调整
-- `refactor`: 代码重构
-- `test`: 测试相关
-- `chore`: 构建过程或辅助工具的变动
 
-</div>
+- `feat`：新功能
+- `fix`：修复bug
+- `docs`：文档更新
+- `style`：代码格式调整
+- `refactor`：代码重构
+- `test`：测试相关
+- `chore`：构建过程或辅助工具的变动
 
 ### 自动化测试集成
-
-<div className="testing-integration">
 
 #### 测试配置
 
@@ -231,6 +208,7 @@ module.exports = {
 ```
 
 #### CI流程
+
 ```yaml
 # .github/workflows/test.yml
 name: Run Tests
@@ -246,15 +224,12 @@ jobs:
         run: npm test
 ```
 
-</div>
-
 ## 监控和维护
 
 ### 性能监控
 
-<div className="monitoring-setup">
-
 #### 性能指标追踪
+
 ```javascript
 // pages/_app.js
 export function reportWebVitals(metric) {
@@ -270,24 +245,22 @@ export function reportWebVitals(metric) {
 ```
 
 #### 告警设置
+
 ```javascript
 // monitoring-config.js
 export const alerts = {
   performance: {
     FCP: 2000, // 首次内容绘制阈值
     LCP: 2500, // 最大内容绘制阈值
-    TTI: 3500  // 可交互���间阈值
+    TTI: 3500  // 可交互时间阈值
   }
 };
 ```
 
-</div>
-
 ### 错误追踪
 
-<div className="error-tracking">
-
 #### Sentry集成
+
 ```javascript
 // sentry.config.js
 import * as Sentry from '@sentry/nextjs';
@@ -300,6 +273,7 @@ Sentry.init({
 ```
 
 #### 错误边界组件
+
 ```jsx
 class ErrorBoundary extends React.Component {
   state = { hasError: false }
@@ -320,29 +294,3 @@ class ErrorBoundary extends React.Component {
   }
 }
 ```
-
-</div>
-
-export const styles = {
-  workflowOverview: {
-    backgroundColor: '#f6f8fa',
-    padding: '1rem',
-    borderRadius: '8px',
-    marginBottom: '2rem'
-  },
-  setupSteps: {
-    borderLeft: '3px solid #1a73e8',
-    paddingLeft: '1rem'
-  },
-  branchStrategy: {
-    backgroundColor: '#f0f7ff',
-    padding: '1rem',
-    borderRadius: '8px'
-  },
-  errorTracking: {
-    marginTop: '1rem',
-    padding: '1rem',
-    border: '1px solid #e1e4e8',
-    borderRadius: '8px'
-  }
-};

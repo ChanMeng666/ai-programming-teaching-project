@@ -6,22 +6,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 :root {
-  /* Modern Minimal Theme Colors */
-  --modern-bg-primary: #ffffff;
-  --modern-bg-secondary: #f8fafc;
-  --modern-text-primary: #1e293b;
-  --modern-text-secondary: #64748b;
-  --modern-accent: #0f7173;
-  --modern-accent-light: #e0f2f2;
-  --modern-border: #e2e8f0;
-  
-  /* Glassmorphism Utils */
-  --glass-bg: rgba(255, 255, 255, 0.7);
-  --glass-border: rgba(255, 255, 255, 0.5);
-  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
-  --glass-blur: 10px;
-
-  /* 新的配色方案 - 保持兼容性 */
+  /* 主要配色变量 */
   --ifm-color-primary: #0f7173;
   --ifm-color-primary-dark: #0c5c5e;
   --ifm-color-primary-darker: #0a4d4f;
@@ -148,20 +133,6 @@
 
 /* 深色模式变量 */
 [data-theme='dark'] {
-  /* Modern Minimal Theme Colors Dark */
-  --modern-bg-primary: #0f172a;
-  --modern-bg-secondary: #1e293b;
-  --modern-text-primary: #f8fafc;
-  --modern-text-secondary: #cbd5e1;
-  --modern-accent: #2dd4bf;
-  --modern-accent-light: rgba(45, 212, 191, 0.1);
-  --modern-border: #334155;
-  
-  /* Glassmorphism Utils Dark */
-  --glass-bg: rgba(15, 23, 42, 0.7);
-  --glass-border: rgba(255, 255, 255, 0.1);
-  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
-
   --ifm-color-primary: #1ab0b2;
   --ifm-color-primary-dark: #159b9d;
   --ifm-color-primary-darker: #128688;
@@ -730,19 +701,67 @@ html {
   text-decoration: none;
 }
 
-/* 文档页面优化 */
+/* ========================================
+   文档正文统一基线
+   - 所有 MDX 文档渲染后使用一致的排版节奏
+   ======================================== */
 .markdown {
-  --ifm-heading-margin-bottom: var(--space-md);
+  --ifm-heading-margin-top: 2.5rem;
+  --ifm-heading-margin-bottom: 1rem;
 }
 
-.markdown h1, .markdown h2, .markdown h3 {
-  color: var(--ifm-color-primary);
+.markdown > h1:first-child {
+  margin-top: 0;
 }
+
+.markdown h1,
+.markdown h2,
+.markdown h3,
+.markdown h4,
+.markdown h5,
+.markdown h6 {
+  color: var(--color-text-primary);
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.markdown h1 { font-size: 2rem; }
+.markdown h2 { font-size: 1.5rem; margin-top: 2.5rem; }
+.markdown h3 { font-size: 1.2rem; margin-top: 2rem; }
+.markdown h4 { font-size: 1.05rem; margin-top: 1.5rem; }
 
 .markdown > h2 {
-  border-bottom: 2px solid var(--color-light-gray);
-  padding-bottom: var(--space-sm);
-  margin-top: var(--space-xl);
+  padding-top: 1rem;
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.markdown p,
+.markdown li {
+  line-height: 1.75;
+  color: var(--color-text-primary);
+}
+
+.markdown a {
+  color: var(--ifm-color-primary);
+  text-decoration: none;
+}
+
+.markdown a:hover {
+  text-decoration: underline;
+}
+
+.markdown table {
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.25rem 0;
+}
+
+.markdown blockquote {
+  border-left: 3px solid var(--ifm-color-emphasis-300);
+  background: transparent;
+  padding: 0.25rem 0 0.25rem 1rem;
+  color: var(--color-text-secondary);
 }
 
 /* 代码块优化 */

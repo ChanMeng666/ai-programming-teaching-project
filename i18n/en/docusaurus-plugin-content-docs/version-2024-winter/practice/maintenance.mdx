@@ -13,8 +13,6 @@ import TabItem from '@theme/TabItem';
 
 ### Automated Testing
 
-<div className="testing">
-
 #### Unit Testing
 ```typescript
 // __tests__/components/PostList.test.tsx
@@ -67,11 +65,7 @@ describe('Blog', () => {
 });
 ```
 
-</div>
-
 ### Deployment Pipeline
-
-<div className="pipeline">
 
 #### GitHub Actions Configuration
 ```yaml
@@ -88,22 +82,22 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Setup Node.js
+- uses: actions/checkout@v2
+- name: Setup Node.js
         uses: actions/setup-node@v2
         with:
           node-version: '18'
       
-      - name: Install dependencies
+- name: Install dependencies
         run: npm ci
       
-      - name: Run linter
+- name: Run linter
         run: npm run lint
       
-      - name: Run tests
+- name: Run tests
         run: npm test
       
-      - name: Run E2E tests
+- name: Run E2E tests
         run: npm run test:e2e
         
   deploy:
@@ -111,19 +105,15 @@ jobs:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy to Vercel
+- name: Deploy to Vercel
         uses: amondnet/vercel-action@v20
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
 ```
 
-</div>
-
 ## Performance Optimization
 
 ### Image Optimization
-
-<div className="image-optimization">
 
 #### Image Component
 ```typescript
@@ -142,7 +132,6 @@ export function OptimizedImage({ src, alt, width, height }: OptimizedImageProps)
   const [isLoading, setIsLoading] = useState(true);
 
   return (
-    <div className="relative">
       <Image
         src={src}
         alt={alt}
@@ -159,7 +148,6 @@ export function OptimizedImage({ src, alt, width, height }: OptimizedImageProps)
       {isLoading && (
         <div className="absolute inset-0 bg-gray-200 animate-pulse" />
       )}
-    </div>
   );
 }
 ```
@@ -180,11 +168,7 @@ export async function optimizeImage(buffer: Buffer) {
 }
 ```
 
-</div>
-
 ### Code Optimization
-
-<div className="code-optimization">
 
 #### Code Splitting
 ```typescript
@@ -221,13 +205,9 @@ export function reportWebVitals(metric: any) {
 }
 ```
 
-</div>
-
 ## Content Management
 
 ### Article Management System
-
-<div className="content-management">
 
 #### Article Editor
 ```typescript
@@ -251,7 +231,6 @@ export function Editor({ initialContent, onSave }: EditorProps) {
   };
 
   return (
-    <div className="editor-container">
       <MDXEditor
         ref={editorRef}
         markdown={initialContent}
@@ -260,7 +239,6 @@ export function Editor({ initialContent, onSave }: EditorProps) {
           // 添加所需插件
         ]}
       />
-    </div>
   );
 }
 ```
@@ -303,11 +281,7 @@ export async function publishDraft(postId: string) {
 }
 ```
 
-</div>
-
 ### SEO Optimization
-
-<div className="seo-optimization">
 
 #### Meta Tag Management
 ```typescript
@@ -383,13 +357,9 @@ async function generateSitemap() {
 }
 ```
 
-</div>
-
 ## Security Maintenance
 
 ### Security Updates
-
-<div className="security">
 
 #### Dependency Checks
 ```typescript
@@ -440,11 +410,7 @@ export function middleware(request: NextRequest) {
 }
 ```
 
-</div>
-
 ### Backup Strategy
-
-<div className="backup">
 
 #### Data Backup
 ```typescript
@@ -486,36 +452,16 @@ jobs:
   backup:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+- uses: actions/checkout@v2
       
-      - name: Configure AWS credentials
+- name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           
-      - name: Run backup script
+- name: Run backup script
         run: npm run backup
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
 ```
-
-</div>
-
-export const styles = {
-  testing: {
-    backgroundColor: '#f6f8fa',
-    padding: '1rem',
-    borderRadius: '8px',
-    marginBottom: '1rem'
-  },
-  pipeline: {
-    borderLeft: '3px solid #1a73e8',
-    paddingLeft: '1rem'
-  },
-  security: {
-    backgroundColor: '#f0f7ff',
-    padding: '1rem',
-    borderRadius: '8px'
-  }
-};

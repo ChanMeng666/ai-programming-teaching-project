@@ -14,9 +14,10 @@ import TOCInline from '@theme/TOCInline';
 
 ## 教程概述
 
-:::tip[🎯 教程目标]
+:::tip 教程目标
 
 通过本教程，您将学会：
+
 - 搭建一个现代化的技术博客
 - 配置多语言和版本控制
 - 实现自动部署和持续集成
@@ -41,10 +42,6 @@ graph TD
     G --> H[测试优化]
     H --> I[部署上线]
     I --> J[维护更新]
-    
-    style A fill:#e1f5fe
-    style I fill:#e8f5e8
-    style J fill:#fff3e0
 ```
 
 ### 技术架构图
@@ -78,9 +75,6 @@ graph TB
     F --> G
     G --> H
     H --> I
-    
-    style D fill:#e1f5fe
-    style I fill:#e8f5e8
 ```
 
 ## 环境准备
@@ -297,10 +291,6 @@ flowchart TD
     F -->|是| G[保存配置]
     F -->|否| H[调整配置]
     H --> E
-    
-    style A fill:#e1f5fe
-    style G fill:#e8f5e8
-    style H fill:#fff3e0
 ```
 
 ## 内容创建
@@ -412,9 +402,9 @@ toc_max_heading_level: 3
 
 或者**立即尝试Docusaurus**：
 
-```bash
+\`\`\`bash
 npx create-docusaurus@latest my-website classic
-```
+\`\`\`
 
 ### 你需要什么
 
@@ -424,31 +414,6 @@ npx create-docusaurus@latest my-website classic
 ## 生成新站点
 
 使用**经典模板**生成新的 Docusaurus 站点。
-
-经典模板将自动添加到您的项目中，在你运行命令之后：
-
-```bash
-npx create-docusaurus@latest my-website classic
-```
-
-您可以在命令行中输入此命令，无论是在 Command Prompt、Powershell、Terminal 还是您代码编辑器的任何其他集成终端中。
-
-该命令还会安装运行 Docusaurus 所需的所有依赖项。
-
-## 启动站点
-
-运行开发服务器：
-
-```bash
-cd my-website
-npm run start
-```
-
-`cd` 命令更改您正在使用的目录。为了使用您新创建的 Docusaurus 站点，您需要在终端中导航到该目录。
-
-`npm run start` 命令在本地构建您的网站并通过开发服务器为其提供服务，供您在 http://localhost:3000 上查看。
-
-打开 `docs/intro.md`（此页面）并编辑一些行：站点会**自动重新加载**并显示您的更改。
 ```
 
 ## 样式定制
@@ -537,10 +502,6 @@ graph LR
     F -->|是| G[样式确认]
     F -->|否| H[调整样式]
     H --> C
-    
-    style A fill:#e1f5fe
-    style G fill:#e8f5e8
-    style H fill:#fff3e0
 ```
 
 ## 功能扩展
@@ -576,8 +537,6 @@ graph TB
     G --> J
     H --> J
     I --> J
-    
-    style J fill:#e1f5fe
 ```
 
 ### 添加搜索功能
@@ -684,9 +643,10 @@ jobs:
         working-directory: ./
 ```
 
-:::info[💡 小贴士]
+:::info 小贴士
 
 在部署前请确保：
+
 - 所有依赖都已正确安装
 - 构建过程没有错误
 - 静态资源路径正确
@@ -714,11 +674,6 @@ graph TD
     D --> D1[懒加载]
     D --> D2[预加载]
     D --> D3[缓存策略]
-    
-    style A fill:#e1f5fe
-    style B fill:#f3e5f5
-    style C fill:#e8f5e8
-    style D fill:#fff3e0
 ```
 
 ### 图片优化配置
@@ -744,11 +699,12 @@ const config = {
 };
 ```
 
-:::success[🎉 部署成功]
+:::success 部署成功
 
 恭喜！您已经成功搭建了一个功能完整的Docusaurus博客。
 
 接下来可以：
+
 - 添加更多内容
 - 定制个性化样式
 - 集成第三方服务
@@ -829,9 +785,10 @@ journey
       贡献开源项目: 5: 专家
 ```
 
-:::warning[⚠️ 注意事项]
+:::warning 注意事项
 
 在开发过程中请注意：
+
 - 定期备份重要数据
 - 测试多种浏览器兼容性
 - 优化移动端显示效果
@@ -844,13 +801,3 @@ journey
 通过本教程，您已经掌握了Docusaurus博客搭建的完整流程。从项目初始化到部署上线，每个步骤都配有详细说明和代码示例。
 
 继续探索Docusaurus的更多可能性，打造属于您的独特博客平台！
-
-export const styles = {
-  card: {
-    borderRadius: '12px',
-    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-    transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-    padding: '20px',
-    margin: '16px 0'
-  }
-}; 

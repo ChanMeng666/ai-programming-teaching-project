@@ -10,81 +10,64 @@ import ReactPlayer from 'react-player';
 
 # Coze Workflow Development
 
-## 🚀 Platform Introduction
+## Platform Introduction
 
 Coze is a powerful AI workflow development platform. Through this tutorial, you will learn how to build a complete AI-driven workflow.
 
 ### Tutorial Videos
 
-<div className="video-grid">
-  <div className="video-card">
-    <h4>🎥 Environment Setup Tutorial 1</h4>
-    <div className="video-wrapper">
-      <ReactPlayer
-        url="https://www.youtube.com/embed/ANmv1dMY7fY"
-        controls={true}
-        width="100%"
-        height="100%"
-        style={{ aspectRatio: '16/9' }}
-      />
-    </div>
-  </div>
+**Environment Setup Tutorial 1**
 
-  <div className="video-card">
-    <h4>🎥 Environment Setup Tutorial 2</h4>
-    <div className="video-wrapper">
-      <ReactPlayer
-        url="https://www.youtube.com/embed/85Z324xsD-w"
-        controls={true}
-        width="100%"
-        height="100%"
-        style={{ aspectRatio: '16/9' }}
-      />
-    </div>
-  </div>
+<ReactPlayer
+  url="https://www.youtube.com/embed/ANmv1dMY7fY"
+  controls={true}
+  width="100%"
+/>
 
-  <div className="video-card">
-    <h4>🎥 Environment Setup Tutorial 3</h4>
-    <div className="video-wrapper">
-      <ReactPlayer
-        url="https://www.youtube.com/embed/4VVJv9SfJqc"
-        controls={true}
-        width="100%"
-        height="100%"
-        style={{ aspectRatio: '16/9' }}
-      />
-    </div>
-  </div>
-</div>
+**Environment Setup Tutorial 2**
 
-## 🎯 Learning Objectives
+<ReactPlayer
+  url="https://www.youtube.com/embed/85Z324xsD-w"
+  controls={true}
+  width="100%"
+/>
+
+**Environment Setup Tutorial 3**
+
+<ReactPlayer
+  url="https://www.youtube.com/embed/4VVJv9SfJqc"
+  controls={true}
+  width="100%"
+/>
+
+## Learning Objectives
 
 Through this tutorial, you will master:
-- ✅ Creating complete Coze workflows
-- ✅ Implementing automatic webpage content retrieval
-- ✅ Using AI to generate high-quality summaries
-- ✅ Saving data to Notion
+- Creating complete Coze workflows
+- Implementing automatic webpage content retrieval
+- Using AI to generate high-quality summaries
+- Saving data to Notion
 
-## 🛠️ Environment Preparation
+## Environment Preparation
 
 ### Notion Configuration
 
 #### 1. Create Integration
 
 <Tabs>
-  <TabItem value="integration" label="Create Integration" default>
+<TabItem value="integration" label="Create Integration" default>
     1. Visit [Notion Developers](https://developers.notion.com/)
     2. Click "Create new integration"
     3. Fill in integration information:
        - Name: Article Summary
        - Associated workspace: Select your workspace
     4. Save the generated Integration Token
-  </TabItem>
-  <TabItem value="auth" label="Page Authorization">
+</TabItem>
+<TabItem value="auth" label="Page Authorization">
     1. Create a new Notion page
     2. Click Share button in top right
     3. Select and add your integration
-  </TabItem>
+</TabItem>
 </Tabs>
 
 #### 2. Get Page ID
@@ -104,12 +87,12 @@ const pageId = url.match(/[a-f\d]{32}/)[0];
 - Configure basic project information
 
 #### 2. Required Nodes
-- 🌐 Browse Node - Web scraping
-- 🤖 LLM Node - Generate summaries
-- 📝 Text Processing Node - Text processing
-- 💾 Write Page Node - Notion integration
+- Browse Node - Web scraping
+- LLM Node - Generate summaries
+- Text Processing Node - Text processing
+- Write Page Node - Notion integration
 
-## 🔧 Workflow Construction
+## Workflow Construction
 
 ### 1. Browse Node Configuration
 
@@ -194,23 +177,23 @@ Please provide a summary of the following article:
 }
 ```
 
-## 🎨 Optimization Strategies
+## Optimization Strategies
 
 ### Prompt Optimization
 
 <Tabs>
-  <TabItem value="prompts" label="Prompt Tips" default>
+<TabItem value="prompts" label="Prompt Tips" default>
     - Use clear role definitions
     - Set specific output requirements
     - Maintain prompt consistency
     - Regularly update and optimize prompts
-  </TabItem>
-  <TabItem value="quality" label="Quality Assurance">
+</TabItem>
+<TabItem value="quality" label="Quality Assurance">
     - Establish quality evaluation criteria
     - Conduct A/B testing comparisons
     - Collect user feedback
     - Continuous optimization improvement
-  </TabItem>
+</TabItem>
 </Tabs>
 
 ### Performance Monitoring
@@ -230,7 +213,7 @@ const metrics = {
 - AI processing < 5 seconds
 - Data storage < 2 seconds
 
-## 🚫 Common Issues
+## Common Issues
 
 ### Network Issues
 - **URL Inaccessible**: Check URL format and network connection
@@ -242,7 +225,7 @@ const metrics = {
 - **Character Encoding Issue**: Adjust text processing parameters
 - **Content Truncation Error**: Increase text length limit
 
-## 🎯 Testing and Optimization
+## Testing and Optimization
 
 ### Functional Testing
 
@@ -270,7 +253,7 @@ const metrics = {
 - CPU utilization
 - API call frequency
 
-## 🌟 Best Practices
+## Best Practices
 
 ### Daily Maintenance
 1. Regularly check functional completeness
@@ -284,7 +267,7 @@ const metrics = {
 3. Optimize processing flow
 4. Expand feature capabilities
 
-## 🔄 Development Process
+## Development Process
 
 ```mermaid
 graph LR
@@ -303,43 +286,3 @@ graph LR
 :::
 
 Through this Coze workflow project, you will master how to build a complete AI-driven workflow, from web scraping to intelligent summary generation, to data storage - the full development process.
-
-export const styles = `
-.video-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  margin: 2rem 0;
-}
-
-.video-card {
-  background: #ffffff;
-  border-radius: 12px;
-  padding: 1.5rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease;
-}
-
-.video-card:hover {
-  transform: translateY(-5px);
-}
-
-.video-card h4 {
-  margin: 0 0 1rem 0;
-  color: #2e8555;
-  font-size: 1.1rem;
-}
-
-.video-wrapper {
-  position: relative;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-@media (max-width: 768px) {
-  .video-grid {
-    grid-template-columns: 1fr;
-  }
-}
-`;

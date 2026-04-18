@@ -12,25 +12,20 @@ import ReactPlayer from 'react-player';
 
 在这个章节中，你将学习如何开发中国艺人AI对话系统。
 
-## 🎥 教程视频
+## 教程视频
 
-<div className="video-container">
-  <div className="video-wrapper">
-    <ReactPlayer
-      url="https://www.youtube.com/embed/sJdptJj9pAw"
-      controls={true}
-      width="100%"
-      height="100%"
-      style={{ aspectRatio: '16/9' }}
-    />
-  </div>
-</div>
+<ReactPlayer
+  url="https://www.youtube.com/embed/sJdptJj9pAw"
+  controls={true}
+  width="100%"
+/>
 
-## 📋 学习内容
+## 学习内容
 
 ### 1. 环境准备
 
 #### Hugging Face配置
+
 1. 访问 [Hugging Face](https://huggingface.co/join) 注册账号
 2. 生成访问令牌：
    - 访问 [Token设置页面](https://huggingface.co/settings/tokens)
@@ -39,17 +34,18 @@ import ReactPlayer from 'react-player';
    - 生成令牌并保存
 
 :::caution 重要提示
-令牌非常重要，请妥善保存，关闭页面后将无法再次查看完整令牌
+令牌非常重要，请妥善保存，关闭页面后将无法再次查看完整令牌。
 :::
 
 #### 开发环境配置
+
 <Tabs>
-  <TabItem value="required" label="必需软件" default>
+<TabItem value="required" label="必需软件" default>
     1. Python 3.8+
     2. Git
     3. Cursor编辑器
-  </TabItem>
-  <TabItem value="dependencies" label="依赖安装">
+</TabItem>
+<TabItem value="dependencies" label="依赖安装">
     ```bash
     # 创建虚拟环境
     python -m venv venv
@@ -63,22 +59,24 @@ import ReactPlayer from 'react-player';
     # 安装依赖
     pip install gradio huggingface_hub
     ```
-  </TabItem>
+</TabItem>
 </Tabs>
 
 ### 2. 项目创建
 
 #### Hugging Face Space设置
+
 1. 登录Hugging Face
 2. 点击 "New Space"
 3. 填写基本信息：
-   - Owner: 你的用户名
-   - Space name: role-play-chat
-   - SDK: Gradio
-   - Hardware: CPU basic
-   - Visibility: Public
+   - Owner：你的用户名
+   - Space name：role-play-chat
+   - SDK：Gradio
+   - Hardware：CPU basic
+   - Visibility：Public
 
 #### 本地项目配置
+
 ```bash
 # 克隆Space仓库
 git clone https://huggingface.co/spaces/你的用户名/role-play-chat
@@ -103,6 +101,7 @@ graph TD
 ### 4. 核心功能实现
 
 #### 对话系统
+
 ```python
 class DialogueSystem:
     def __init__(self):
@@ -133,6 +132,7 @@ class DialogueSystem:
 ```
 
 #### 角色系统
+
 ```python
 class Character:
     def __init__(self, name: str, profile: dict):
@@ -154,6 +154,7 @@ class Character:
 ### 5. 测试与部署
 
 #### 测试规范
+
 ```python
 # tests/test_dialogue.py
 import pytest
@@ -175,6 +176,7 @@ async def test_message_processing():
 ```
 
 #### 部署流程
+
 1. 提交代码到GitHub
 2. 检查部署状态
 3. 监控系统性能
@@ -182,6 +184,7 @@ async def test_message_processing():
 ### 6. 最佳实践
 
 #### 代码规范
+
 ```python
 # 良好的命名和注释示例
 class DialogueManager:
@@ -200,6 +203,7 @@ class DialogueManager:
 ```
 
 #### 性能优化
+
 ```python
 from functools import lru_cache
 
@@ -216,6 +220,7 @@ async def process_messages(messages: list) -> list:
 ```
 
 #### 安全实践
+
 ```python
 from pydantic import BaseModel, validator
 
@@ -239,4 +244,4 @@ class UserInput(BaseModel):
 - 完整的错误处理机制
 :::
 
-这个AI对话系统项目展示了如何构建一个完整的AI应用，从环境配置到部署维护的全流程。 
+这个AI对话系统项目展示了如何构建一个完整的AI应用，从环境配置到部署维护的全流程。

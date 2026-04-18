@@ -12,41 +12,30 @@ import ReactPlayer from 'react-player';
 
 在这个章节中，你将学习如何使用各种AI工具进行图像设计和3D模型制作。
 
-## 🎨 LOGO设计基础
+## LOGO设计基础
 
 ### 教程视频
 
-<div className="video-grid">
-  <div className="video-card">
-    <h4>🎥 LOGO设计教程 1</h4>
-    <div className="video-wrapper">
-      <ReactPlayer
-        url="https://www.youtube.com/embed/JKTXXC1qt5o"
-        controls={true}
-        width="100%"
-        height="100%"
-        style={{ aspectRatio: '16/9' }}
-      />
-    </div>
-  </div>
+**LOGO设计教程 1**
 
-  <div className="video-card">
-    <h4>🎥 LOGO设计教程 2</h4>
-    <div className="video-wrapper">
-      <ReactPlayer
-        url="https://www.youtube.com/embed/n8JVcE5YEi4"
-        controls={true}
-        width="100%"
-        height="100%"
-        style={{ aspectRatio: '16/9' }}
-      />
-    </div>
-  </div>
-</div>
+<ReactPlayer
+  url="https://www.youtube.com/embed/JKTXXC1qt5o"
+  controls={true}
+  width="100%"
+/>
+
+**LOGO设计教程 2**
+
+<ReactPlayer
+  url="https://www.youtube.com/embed/n8JVcE5YEi4"
+  controls={true}
+  width="100%"
+/>
 
 ### AI LOGO设计平台
 
 #### ailogomaker.io使用指南
+
 1. 访问 [ailogomaker.io](https://ailogomaker.io/zh-CN)
 2. 输入品牌名称和关键词
 3. 选择喜欢的风格
@@ -60,6 +49,7 @@ import ReactPlayer from 'react-player';
 :::
 
 #### Figma优化流程
+
 1. 导出SVG文件
 2. 在Figma中打开
 3. 调整细节：
@@ -68,11 +58,12 @@ import ReactPlayer from 'react-player';
    - 优化字体
    - 微调形状
 
-## 🖼️ 图像生成技巧
+## 图像生成技巧
 
 ### Recraft平台使用
 
 #### 基础功能
+
 1. 访问 [Recraft](https://www.recraft.ai/projects)
 2. 创建新项目
 3. 选择生成类型：
@@ -82,6 +73,7 @@ import ReactPlayer from 'react-player';
    - LOGO贴图
 
 #### 扩图技巧
+
 ```typescript
 interface ImagePrompt {
   baseImage: string;
@@ -102,6 +94,7 @@ const promptExample = {
 ### Hugging Face Spaces
 
 #### Flux模型使用
+
 1. 访问 [Hugging Face Spaces](https://huggingface.co/spaces)
 2. 搜索"flux"关键词
 3. 使用 Kolors-Character-With-Flux：
@@ -110,6 +103,7 @@ const promptExample = {
    - 生成新图像
 
 #### Lora模型探索
+
 - 搜索"lora"关键词
 - 尝试不同模型
 - 比较效果差异
@@ -118,6 +112,7 @@ const promptExample = {
 ### 哩布哩布AI平台
 
 #### 3D潮流形象生成
+
 1. 访问 [哩布哩布AI](https://www.liblib.art/)
 2. 选择3D形象生成模型
 3. 设置参数：
@@ -127,6 +122,7 @@ const promptExample = {
    - 场景设置
 
 #### 工作流程
+
 ```mermaid
 graph LR
     A[上传参考图] --> B[选择风格]
@@ -136,16 +132,18 @@ graph LR
     E --> F[最终导出]
 ```
 
-## 📐 3D模型制作
+## 3D模型制作
 
 ### Tripo3D平台
 
 #### 基础使用
+
 1. 访问 [Tripo3D](https://www.tripo3d.ai/app/home)
 2. 创建账号
 3. 开始新项目
 
 #### 功能特点
+
 - 图片转3D模型
 - 材质自动生成
 - 姿态调整
@@ -154,6 +152,7 @@ graph LR
 ### 工作流程
 
 #### 准备工作
+
 ```mermaid
 graph TD
     A[准备参考图片] --> B[选择模型类型]
@@ -163,6 +162,7 @@ graph TD
 ```
 
 #### 模型生成
+
 1. 上传参考图片
 2. 选择模型类型
 3. 调整参数：
@@ -174,6 +174,7 @@ graph TD
 ### 优化技巧
 
 #### 模型优化
+
 ```typescript
 interface ModelSettings {
   detail: number;  // 1-10
@@ -202,20 +203,23 @@ const recommendedSettings: ModelSettings = {
 ```
 
 #### 常见问题解决
-- **模型变形**: 检查参考图片质量，调整生成参数
-- **材质问题**: 优化贴图分辨率，调整材质参数
-- **细节缺失**: 提高细节程度设置，使用多角度参考
 
-## 🎯 实用技巧
+- **模型变形**：检查参考图片质量，调整生成参数
+- **材质问题**：优化贴图分辨率，调整材质参数
+- **细节缺失**：提高细节程度设置，使用多角度参考
+
+## 实用技巧
 
 ### 提示词优化
 
 #### 基础结构
+
 ```
 主体 + 风格 + 场景 + 光效 + 构图
 ```
 
 #### 示例
+
 ```
 赛博朋克风格的年轻女性，霓虹街道背景，侧光打射，低角度拍摄
 ```
@@ -223,18 +227,18 @@ const recommendedSettings: ModelSettings = {
 ### 参数调优
 
 <Tabs>
-  <TabItem value="sampling" label="采样设置" default>
+<TabItem value="sampling" label="采样设置" default>
     - 采样方法选择
     - 步数设置 (20-50)
     - CFG Scale (7-15)
     - 种子值固定
-  </TabItem>
-  <TabItem value="prompts" label="提示词权重">
-    - 使用括号增强: (keyword:1.2)
-    - 使用方括号减弱: [keyword:0.8]
+</TabItem>
+<TabItem value="prompts" label="提示词权重">
+    - 使用括号增强：(keyword:1.2)
+    - 使用方括号减弱：[keyword:0.8]
     - 负面提示词设置
     - 关键词顺序调整
-  </TabItem>
+</TabItem>
 </Tabs>
 
 ### 后期处理
@@ -254,17 +258,19 @@ const recommendedSettings: ModelSettings = {
    - 风格匹配
    - 系列化处理
 
-## 💼 实战项目
+## 实战项目
 
 ### 个人IP形象设计
 
 #### 工作流程
+
 1. 使用哩布哩布AI生成基础形象
 2. Recraft扩展场景
 3. 添加文字和标识
 4. 生成系列作品
 
 #### 实践步骤
+
 ```mermaid
 graph TD
     A[形象设计] --> B[场景扩展]
@@ -276,11 +282,13 @@ graph TD
 ### 品牌视觉设计
 
 #### LOGO设计
+
 1. 使用ailogomaker生成基础LOGO
 2. Figma优化调整
 3. 生成品牌规范
 
 #### 应用场景
+
 - 社交媒体封面
 - 产品包装
 - 宣传材料
@@ -289,12 +297,14 @@ graph TD
 ### 3D角色建模
 
 #### 模型制作
+
 1. 准备参考图片
 2. 使用Tripo3D生成模型
 3. 调整优化
 4. 导出使用
 
 #### 应用示例
+
 ```typescript
 interface ProjectWorkflow {
   stage: string;
@@ -325,9 +335,10 @@ const workflow: ProjectWorkflow[] = [
 ];
 ```
 
-## 📚 设计原则
+## 设计原则
 
 ### 品牌定位
+
 ```mermaid
 graph TD
     A[品牌定位] --> B[目标受众]
@@ -339,13 +350,14 @@ graph TD
 ```
 
 ### 设计理念
-- **简单性**: 易识别、好记忆
-- **独特性**: 区别于竞品
-- **适应性**: 各种场景使用
-- **永恒性**: 避免过时元素
+
+- **简单性**：易识别、好记忆
+- **独特性**：区别于竞品
+- **适应性**：各种场景使用
+- **永恒性**：避免过时元素
 
 :::info 学习建议
 AI绘图需要大量实践和尝试，建议从简单的LOGO设计开始，逐步深入到复杂的3D建模。
 :::
 
-这个AI绘图应用展示了如何使用各种AI工具进行创意设计，从基础的图像生成到复杂的3D建模都有涉及。 
+这个AI绘图应用展示了如何使用各种AI工具进行创意设计，从基础的图像生成到复杂的3D建模都有涉及。

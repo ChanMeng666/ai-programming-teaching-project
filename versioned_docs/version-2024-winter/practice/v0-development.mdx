@@ -13,9 +13,8 @@ import TabItem from '@theme/TabItem';
 
 ### 准备工作
 
-<div className="preparation">
-
 #### 1. 提交本地更改
+
 ```bash
 # 确保所有更改已提交
 git add .
@@ -24,26 +23,25 @@ git push origin main
 ```
 
 #### 2. 项目清理
+
 - 删除不必要的临时文件
 - 整理项目结构
 - 更新.gitignore文件
 
 #### 3. 检查依赖
+
 ```bash
 # 确保package.json中的依赖是最新的
 npm outdated
 npm update
 ```
 
-</div>
-
 ## 在v0上开发新功能
 
 ### 评论系统实现
 
-<div className="comment-system">
-
 #### 评论组件
+
 ```tsx
 // components/Comments.tsx
 import { useState } from 'react';
@@ -134,6 +132,7 @@ export function Comments({ postId }: { postId: string }) {
 ```
 
 #### API路由
+
 ```typescript
 // pages/api/comments.ts
 import { NextApiRequest, NextApiResponse } from 'next';
@@ -181,13 +180,10 @@ export default async function handler(
 }
 ```
 
-</div>
-
 ### 标签系统优化
 
-<div className="tag-system">
-
 #### 标签组件
+
 ```tsx
 // components/TagCloud.tsx
 import { useState, useEffect } from 'react';
@@ -234,6 +230,7 @@ export function TagCloud() {
 ```
 
 #### 标签API
+
 ```typescript
 // pages/api/tags.ts
 import { NextApiRequest, NextApiResponse } from 'next';
@@ -269,15 +266,12 @@ export default async function handler(
 }
 ```
 
-</div>
-
 ## 团队协作
 
 ### 代码审查
 
-<div className="code-review">
-
 #### 创建Pull Request
+
 ```bash
 # 创建功能分支
 git checkout -b feature/comment-system
@@ -295,7 +289,9 @@ git push origin feature/comment-system
 ```
 
 #### 审查清单
+
 :::tip 代码审查要点
+
 1. 代码质量
    - 遵循项目代码规范
    - 适当的错误处理
@@ -310,20 +306,19 @@ git push origin feature/comment-system
    - 输入验证
    - 权限检查
    - 数据安全
-:::
 
-</div>
+:::
 
 ### 实时协作
 
-<div className="collaboration">
-
 #### 使用v0的实时编辑功能
+
 - 同时编辑同一文件
 - 实时查看队友的更改
 - 解决冲突
 
 #### 团队沟通
+
 ```typescript
 // 在代码中添加协作注释
 /**
@@ -334,15 +329,12 @@ git push origin feature/comment-system
  */
 ```
 
-</div>
-
 ## 性能优化
 
 ### 代码分割
 
-<div className="code-splitting">
-
 #### 动态导入
+
 ```typescript
 // 动态导入评论组件
 const CommentSection = dynamic(() => import('@/components/Comments'), {
@@ -350,7 +342,7 @@ const CommentSection = dynamic(() => import('@/components/Comments'), {
   ssr: false
 });
 
-// 动态导��标签云组件
+// 动态导入标签云组件
 const TagCloud = dynamic(() => import('@/components/TagCloud'), {
   loading: () => <TagCloudSkeleton />,
   ssr: true
@@ -358,6 +350,7 @@ const TagCloud = dynamic(() => import('@/components/TagCloud'), {
 ```
 
 #### 路由分割
+
 ```typescript
 // 页面级代码分割
 export default function BlogPost() {
@@ -375,13 +368,10 @@ export default function BlogPost() {
 }
 ```
 
-</div>
-
 ### 缓存优化
 
-<div className="caching">
-
 #### API缓存
+
 ```typescript
 // lib/cache.ts
 import { Redis } from '@upstash/redis';
@@ -403,6 +393,7 @@ export async function setCachedData(key: string, data: any, ttl = 3600) {
 ```
 
 #### 使用SWR
+
 ```typescript
 // hooks/useComments.ts
 import useSWR from 'swr';
@@ -425,23 +416,3 @@ export function useComments(postId: string) {
   };
 }
 ```
-
-</div>
-
-export const styles = {
-  preparation: {
-    backgroundColor: '#f6f8fa',
-    padding: '1rem',
-    borderRadius: '8px',
-    marginBottom: '1rem'
-  },
-  codeReview: {
-    borderLeft: '3px solid #1a73e8',
-    paddingLeft: '1rem'
-  },
-  collaboration: {
-    backgroundColor: '#f0f7ff',
-    padding: '1rem',
-    borderRadius: '8px'
-  }
-};

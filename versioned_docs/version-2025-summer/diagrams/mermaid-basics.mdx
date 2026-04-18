@@ -10,7 +10,7 @@ import Admonition from '@theme/Admonition';
 
 # Mermaid 基础教程
 
-## 📚 什么是 Mermaid？
+## 什么是 Mermaid
 
 Mermaid 是一个基于文本的图表生成工具，通过简单的文本描述就能生成各种专业图表。它的核心理念是"代码即图表"，让图表的创建和维护变得像编写代码一样简单。
 
@@ -22,12 +22,10 @@ Mermaid 是一个基于文本的图表生成工具，通过简单的文本描述
 - **实时预览**：编写即可见，所见即所得
 - **无需设计技能**：专注于内容，样式自动处理
 
-## 🛠️ 环境配置
+## 环境配置
 
 <Tabs>
-  <TabItem value="vscode" label="VS Code" default>
-
-<div>
+<TabItem value="vscode" label="VS Code" default>
 
 #### 安装 Mermaid 插件
 
@@ -36,7 +34,7 @@ Mermaid 是一个基于文本的图表生成工具，通过简单的文本描述
 
 Gemini：我来帮您配置 VS Code 的 Mermaid 开发环境。
 
-📦 需要安装的扩展：
+需要安装的扩展：
 
 1. Mermaid Preview
    - 扩展 ID: bierner.markdown-mermaid
@@ -50,35 +48,28 @@ Gemini：我来帮您配置 VS Code 的 Mermaid 开发环境。
 code --install-extension bierner.markdown-mermaid
 code --install-extension tomoyukim.vscode-mermaid-editor
 
-✅ 配置完成！现在您可以：
+配置完成！现在您可以：
 - 在 .md 文件中使用 \`\`\`mermaid 代码块
 - 使用 Ctrl+Shift+V 预览图表
 - 右键选择 "Preview Mermaid" 查看图表`}
 </CodeBlock>
 
-</div>
-
-  </TabItem>
-  <TabItem value="online" label="在线编辑器">
-
-<div>
+</TabItem>
+<TabItem value="online" label="在线编辑器">
 
 #### Mermaid Live Editor
 
 访问 [Mermaid Live Editor](https://mermaid.live) 即可开始使用，无需任何配置。
 
 特点：
+
 - 实时预览
 - 导出 SVG/PNG
 - 分享链接
 - 主题切换
 
-</div>
-
-  </TabItem>
-  <TabItem value="github" label="GitHub">
-
-<div>
+</TabItem>
+<TabItem value="github" label="GitHub">
 
 #### GitHub 原生支持
 
@@ -92,24 +83,20 @@ graph TD
 \`\`\``}
 </CodeBlock>
 
-</div>
-
-  </TabItem>
+</TabItem>
 </Tabs>
 
-## 📊 流程图（Flowchart）
+## 流程图（Flowchart）
 
 流程图是最常用的图表类型，用于展示过程、算法或工作流程。
 
 ### 基础语法
 
-<div className="syntax-section">
-
 #### 图表方向
 
 <CodeBlock language="mermaid">
 {`graph TD  %% Top Down - 从上到下
-graph LR  %% Left to Right - 从左到右  
+graph LR  %% Left to Right - 从左到右
 graph BT  %% Bottom to Top - 从下到上
 graph RL  %% Right to Left - 从右到左`}
 </CodeBlock>
@@ -127,7 +114,7 @@ graph RL  %% Right to Left - 从右到左`}
     G{菱形判断}
     H{{六边形}}
     I[/平行四边形/]
-    J[\反向平行四边形\]`}
+    J[\\反向平行四边形\\]`}
 </CodeBlock>
 
 ```mermaid
@@ -165,8 +152,6 @@ graph LR
     I ==> J
     K === L
 ```
-
-</div>
 
 ### 实战示例
 
@@ -223,7 +208,7 @@ graph TD
 </CodeBlock>
 </Admonition>
 
-## 🔄 时序图（Sequence Diagram）
+## 时序图（Sequence Diagram）
 
 时序图用于展示对象之间的交互顺序，特别适合描述系统组件间的通信过程。
 
@@ -233,12 +218,12 @@ graph TD
 {`sequenceDiagram
     participant A as Alice
     participant B as Bob
-    
+
     A->>B: 实线箭头消息
     B-->>A: 虚线箭头响应
     A->>+B: 激活 B
     B->>-A: 停用 B
-    
+
     Note over A: 单个参与者注释
     Note over A,B: 跨参与者注释`}
 </CodeBlock>
@@ -247,12 +232,12 @@ graph TD
 sequenceDiagram
     participant A as Alice
     participant B as Bob
-    
+
     A->>B: 实线箭头消息
     B-->>A: 虚线箭头响应
     A->>+B: 激活 B
     B->>-A: 停用 B
-    
+
     Note over A: 单个参与者注释
     Note over A,B: 跨参与者注释
 ```
@@ -266,9 +251,9 @@ sequenceDiagram
     participant U as 用户
     participant S as 服务器
     participant D as 数据库
-    
+
     U->>S: 登录请求
-    
+
     alt 凭证正确
         S->>D: 查询用户信息
         D-->>S: 返回用户数据
@@ -276,7 +261,7 @@ sequenceDiagram
     else 凭证错误
         S-->>U: 登录失败
     end
-    
+
     loop 每5秒
         U->>S: 心跳检测
         S-->>U: 在线状态
@@ -288,9 +273,9 @@ sequenceDiagram
     participant U as 用户
     participant S as 服务器
     participant D as 数据库
-    
+
     U->>S: 登录请求
-    
+
     alt 凭证正确
         S->>D: 查询用户信息
         D-->>S: 返回用户数据
@@ -298,7 +283,7 @@ sequenceDiagram
     else 凭证错误
         S-->>U: 登录失败
     end
-    
+
     loop 每5秒
         U->>S: 心跳检测
         S-->>U: 在线状态
@@ -314,7 +299,7 @@ sequenceDiagram
     participant A as 认证服务
     participant B as 业务服务
     participant D as 数据库
-    
+
     C->>G: HTTP请求 + Token
     G->>A: 验证Token
     A-->>G: Token有效
@@ -332,7 +317,7 @@ sequenceDiagram
     participant A as 认证服务
     participant B as 业务服务
     participant D as 数据库
-    
+
     C->>G: HTTP请求 + Token
     G->>A: 验证Token
     A-->>G: Token有效
@@ -343,7 +328,7 @@ sequenceDiagram
     G-->>C: HTTP响应
 ```
 
-## 🎨 样式和主题
+## 样式和主题
 
 ### 自定义节点样式
 
@@ -352,9 +337,9 @@ sequenceDiagram
     A[开始]:::startClass
     B[处理]:::processClass
     C[结束]:::endClass
-    
+
     A --> B --> C
-    
+
     classDef startClass fill:#e1f5fe,stroke:#01579b,stroke-width:2px
     classDef processClass fill:#fff3e0,stroke:#e65100,stroke-width:2px
     classDef endClass fill:#e8f5e9,stroke:#1b5e20,stroke-width:2px`}
@@ -365,9 +350,9 @@ graph TD
     A[开始]:::startClass
     B[处理]:::processClass
     C[结束]:::endClass
-    
+
     A --> B --> C
-    
+
     classDef startClass fill:#e1f5fe,stroke:#01579b,stroke-width:2px
     classDef processClass fill:#fff3e0,stroke:#e65100,stroke-width:2px
     classDef endClass fill:#e8f5e9,stroke:#1b5e20,stroke-width:2px
@@ -376,7 +361,7 @@ graph TD
 ### 主题配置
 
 <Tabs>
-  <TabItem value="default" label="默认主题" default>
+<TabItem value="default" label="默认主题" default>
 
 <CodeBlock language="mermaid">
 {`%%{init: {'theme':'default'}}%%
@@ -385,8 +370,8 @@ graph TD
     B --> C[适合大多数场景]`}
 </CodeBlock>
 
-  </TabItem>
-  <TabItem value="dark" label="暗色主题">
+</TabItem>
+<TabItem value="dark" label="暗色主题">
 
 <CodeBlock language="mermaid">
 {`%%{init: {'theme':'dark'}}%%
@@ -395,8 +380,8 @@ graph TD
     B --> C[减少眼部疲劳]`}
 </CodeBlock>
 
-  </TabItem>
-  <TabItem value="forest" label="森林主题">
+</TabItem>
+<TabItem value="forest" label="森林主题">
 
 <CodeBlock language="mermaid">
 {`%%{init: {'theme':'forest'}}%%
@@ -405,103 +390,32 @@ graph TD
     B --> C[自然清新]`}
 </CodeBlock>
 
-  </TabItem>
+</TabItem>
 </Tabs>
 
-## 💡 最佳实践
+## 最佳实践
 
-<div className="best-practices">
-  <div className="practice-card">
-    <h4>📝 命名规范</h4>
-    <ul>
-      <li>使用有意义的节点ID</li>
-      <li>保持标签简洁明了</li>
-      <li>避免过长的文本</li>
-    </ul>
-  </div>
-  <div className="practice-card">
-    <h4>🎯 布局优化</h4>
-    <ul>
-      <li>选择合适的图表方向</li>
-      <li>控制图表复杂度</li>
-      <li>合理使用子图分组</li>
-    </ul>
-  </div>
-  <div className="practice-card">
-    <h4>🎨 视觉设计</h4>
-    <ul>
-      <li>保持样式一致性</li>
-      <li>使用颜色区分类别</li>
-      <li>避免过度装饰</li>
-    </ul>
-  </div>
-</div>
+**命名规范**：
 
-## 🚀 下一步
+- 使用有意义的节点ID
+- 保持标签简洁明了
+- 避免过长的文本
 
-恭喜您掌握了 Mermaid 的基础知识！接下来可以：
+**布局优化**：
 
-<div className="next-steps">
-  <a href="../mermaid-advanced" className="next-button">
-    学习 Mermaid 高级特性 →
-  </a>
-  <a href="../ai-assistance" className="next-button secondary">
-    探索 AI 辅助创作 →
-  </a>
-</div>
+- 选择合适的图表方向
+- 控制图表复杂度
+- 合理使用子图分组
 
-<style>{`
-.syntax-section {
-  background: #f8fafc;
-  padding: 1.5rem;
-  border-radius: 8px;
-  margin: 1rem 0;
-}
+**视觉设计**：
 
-.best-practices {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1rem;
-  margin: 2rem 0;
-}
+- 保持样式一致性
+- 使用颜色区分类别
+- 避免过度装饰
 
-.practice-card {
-  background: white;
-  padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
+## 下一步
 
-.practice-card h4 {
-  color: #1e3a8a;
-  margin-bottom: 1rem;
-}
+恭喜您掌握了 Mermaid 的基础知识。接下来可以：
 
-.next-steps {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  margin: 3rem 0;
-}
-
-.next-button {
-  display: inline-block;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  padding: 1rem 2rem;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: transform 0.3s ease;
-}
-
-.next-button:hover {
-  transform: translateY(-2px);
-  color: white;
-}
-
-.next-button.secondary {
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-  color: #1e3a8a;
-}
-`}</style>
+- [学习 Mermaid 高级特性](../mermaid-advanced)
+- [探索 AI 辅助创作](../ai-assistance)

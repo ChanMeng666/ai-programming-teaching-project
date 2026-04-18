@@ -10,7 +10,7 @@ import Admonition from '@theme/Admonition';
 
 # Draw.io 专业设计
 
-## 🎨 Draw.io 简介
+## Draw.io 简介
 
 Draw.io（现称 diagrams.net）是一款功能强大的在线图表绘制工具，完全免费且无需注册。它提供了丰富的图形库和专业的绘图功能，适合创建各种复杂的专业图表。
 
@@ -23,70 +23,45 @@ Draw.io（现称 diagrams.net）是一款功能强大的在线图表绘制工具
 - **多格式导出**：支持 PNG、SVG、PDF、XML 等格式
 - **实时协作**：支持团队协作编辑
 
-## 🚀 快速开始
+## 快速开始
 
-<div className="getting-started">
-  <h3>访问方式</h3>
-  
-  <div className="access-methods">
-    <div className="method-card">
-      <h4>🌐 在线版本</h4>
-      <p>访问 <a href="https://app.diagrams.net" target="_blank">app.diagrams.net</a></p>
-      <p>特点：无需安装，云端保存</p>
-    </div>
-    <div className="method-card">
-      <h4>💻 桌面应用</h4>
-      <p><a href="https://github.com/jgraph/drawio-desktop/releases" target="_blank">下载桌面版</a></p>
-      <p>特点：离线使用，性能更好</p>
-    </div>
-    <div className="method-card">
-      <h4>🔧 VS Code 插件</h4>
-      <p>扩展名：Draw.io Integration</p>
-      <p>特点：集成开发环境</p>
-    </div>
-  </div>
-</div>
+### 访问方式
 
-## 📐 界面介绍
+- **在线版本**：访问 [app.diagrams.net](https://app.diagrams.net)，无需安装，云端保存
+- **桌面应用**：[下载桌面版](https://github.com/jgraph/drawio-desktop/releases)，离线使用，性能更好
+- **VS Code 插件**：扩展名 Draw.io Integration，集成开发环境
+
+## 界面介绍
 
 ### 工作区布局
 
-<div className="interface-layout">
-  <div className="layout-section">
-    <h4>1. 形状面板（左侧）</h4>
-    <ul>
-      <li>基础形状</li>
-      <li>高级图形库</li>
-      <li>自定义形状</li>
-      <li>搜索功能</li>
-    </ul>
-  </div>
-  <div className="layout-section">
-    <h4>2. 画布区域（中央）</h4>
-    <ul>
-      <li>绘图主区域</li>
-      <li>网格和对齐线</li>
-      <li>缩放和平移</li>
-      <li>页面管理</li>
-    </ul>
-  </div>
-  <div className="layout-section">
-    <h4>3. 格式面板（右侧）</h4>
-    <ul>
-      <li>样式设置</li>
-      <li>文本格式</li>
-      <li>排列对齐</li>
-      <li>图层管理</li>
-    </ul>
-  </div>
-</div>
+**1. 形状面板（左侧）**
 
-## 🏗️ 系统架构图绘制
+- 基础形状
+- 高级图形库
+- 自定义形状
+- 搜索功能
+
+**2. 画布区域（中央）**
+
+- 绘图主区域
+- 网格和对齐线
+- 缩放和平移
+- 页面管理
+
+**3. 格式面板（右侧）**
+
+- 样式设置
+- 文本格式
+- 排列对齐
+- 图层管理
+
+## 系统架构图绘制
 
 ### 微服务架构图
 
 <Tabs>
-  <TabItem value="design" label="设计要点" default>
+<TabItem value="design" label="设计要点" default>
 
 #### 架构图设计原则
 
@@ -97,68 +72,64 @@ Draw.io（现称 diagrams.net）是一款功能强大的在线图表绘制工具
 
 #### 推荐配色方案
 
-<div className="color-schemes">
-  <div className="scheme">
-    <div className="color-box" style={{background: '#2E86AB'}}>API 网关</div>
-    <div className="color-box" style={{background: '#A23B72'}}>业务服务</div>
-    <div className="color-box" style={{background: '#F18F01'}}>数据层</div>
-    <div className="color-box" style={{background: '#C73E1D'}}>消息队列</div>
-  </div>
-</div>
+| 用途 | 颜色 |
+|------|------|
+| API 网关 | #2E86AB |
+| 业务服务 | #A23B72 |
+| 数据层 | #F18F01 |
+| 消息队列 | #C73E1D |
 
-  </TabItem>
-  <TabItem value="components" label="组件清单">
+</TabItem>
+<TabItem value="components" label="组件清单">
 
 <CodeBlock language="text">
 {`您：帮我列出微服务架构图需要包含的组件
 
 Gemini：我来为您整理微服务架构的核心组件：
 
-🏗️ 架构组件清单：
+架构组件清单：
 
 1. 客户端层
-   □ Web 应用
-   □ 移动应用
-   □ 第三方应用
+   - Web 应用
+   - 移动应用
+   - 第三方应用
 
 2. 网关层
-   □ API Gateway (Kong/Nginx)
-   □ 负载均衡器
-   □ 认证授权
+   - API Gateway (Kong/Nginx)
+   - 负载均衡器
+   - 认证授权
 
 3. 服务层
-   □ 用户服务
-   □ 订单服务
-   □ 支付服务
-   □ 库存服务
-   □ 通知服务
+   - 用户服务
+   - 订单服务
+   - 支付服务
+   - 库存服务
+   - 通知服务
 
 4. 服务治理
-   □ 服务注册中心 (Consul/Eureka)
-   □ 配置中心 (Config Server)
-   □ 链路追踪 (Zipkin)
-   □ 熔断器 (Hystrix)
+   - 服务注册中心 (Consul/Eureka)
+   - 配置中心 (Config Server)
+   - 链路追踪 (Zipkin)
+   - 熔断器 (Hystrix)
 
 5. 数据层
-   □ MySQL 集群
-   □ Redis 缓存
-   □ MongoDB
-   □ Elasticsearch
+   - MySQL 集群
+   - Redis 缓存
+   - MongoDB
+   - Elasticsearch
 
 6. 消息中间件
-   □ RabbitMQ/Kafka
-   □ 事件总线
+   - RabbitMQ/Kafka
+   - 事件总线
 
 7. 监控运维
-   □ Prometheus
-   □ Grafana
-   □ ELK Stack`}
+   - Prometheus
+   - Grafana
+   - ELK Stack`}
 </CodeBlock>
 
-  </TabItem>
-  <TabItem value="tips" label="绘制技巧">
-
-<div>
+</TabItem>
+<TabItem value="tips" label="绘制技巧">
 
 #### Draw.io 绘制技巧
 
@@ -183,48 +154,18 @@ Gemini：我来为您整理微服务架构的核心组件：
    - `Ctrl+Shift+G`: 取消组合
    - `Alt+Shift+方向键`: 精确移动
 
-</div>
-
-  </TabItem>
+</TabItem>
 </Tabs>
 
-## 🌐 网络拓扑图
+## 网络拓扑图
 
 ### 企业网络架构
 
-<div className="network-design">
-  <h4>设计要素</h4>
-  
-  <div className="design-elements">
-    <div className="element-card">
-      <h5>🖥️ 网络设备</h5>
-      <ul>
-        <li>路由器</li>
-        <li>交换机</li>
-        <li>防火墙</li>
-        <li>负载均衡器</li>
-      </ul>
-    </div>
-    <div className="element-card">
-      <h5>🔒 安全区域</h5>
-      <ul>
-        <li>DMZ 区</li>
-        <li>内网区</li>
-        <li>核心区</li>
-        <li>管理区</li>
-      </ul>
-    </div>
-    <div className="element-card">
-      <h5>📡 连接类型</h5>
-      <ul>
-        <li>光纤连接</li>
-        <li>以太网</li>
-        <li>无线连接</li>
-        <li>VPN 隧道</li>
-      </ul>
-    </div>
-  </div>
-</div>
+**设计要素**：
+
+- **网络设备**：路由器、交换机、防火墙、负载均衡器
+- **安全区域**：DMZ 区、内网区、核心区、管理区
+- **连接类型**：光纤连接、以太网、无线连接、VPN 隧道
 
 <Admonition type="tip" title="AI 辅助设计">
 使用 Gemini CLI 生成网络拓扑设计方案：
@@ -234,7 +175,7 @@ Gemini：我来为您整理微服务架构的核心组件：
 
 Gemini：我来为您设计中型企业网络拓扑：
 
-🌐 网络架构设计：
+网络架构设计：
 
 1. 互联网接入层
    - 双ISP接入（主备冗余）
@@ -282,65 +223,42 @@ IP地址规划：
 </CodeBlock>
 </Admonition>
 
-## 📋 UML 图表
+## UML 图表
 
 ### 用例图（Use Case Diagram）
 
-<div className="uml-guide">
-  <h4>绘制步骤</h4>
-  
-  1. **添加参与者**：从 UML 图形库拖入 Actor
-  2. **创建用例**：使用椭圆形表示用例
-  3. **建立关联**：连接参与者和用例
-  4. **添加关系**：include、extend、generalization
-</div>
+**绘制步骤**：
+
+1. **添加参与者**：从 UML 图形库拖入 Actor
+2. **创建用例**：使用椭圆形表示用例
+3. **建立关联**：连接参与者和用例
+4. **添加关系**：include、extend、generalization
 
 ### 活动图（Activity Diagram）
 
-<div className="uml-guide">
-  <h4>关键元素</h4>
-  
-  - **开始节点**：实心圆
-  - **活动节点**：圆角矩形
-  - **判断节点**：菱形
-  - **并行处理**：分叉/汇合条
-  - **结束节点**：双圆圈
-</div>
+**关键元素**：
 
-## 🎨 样式和主题定制
+- **开始节点**：实心圆
+- **活动节点**：圆角矩形
+- **判断节点**：菱形
+- **并行处理**：分叉/汇合条
+- **结束节点**：双圆圈
+
+## 样式和主题定制
 
 ### 创建自定义样式
 
 <Tabs>
-  <TabItem value="colors" label="配色方案" default>
+<TabItem value="colors" label="配色方案" default>
 
 #### 专业配色模板
 
-<div className="color-templates">
-  <div className="template">
-    <h5>技术文档</h5>
-    <div className="colors">
-      <span style={{background: '#1e3a8a'}}>#1e3a8a</span>
-      <span style={{background: '#3b82f6'}}>#3b82f6</span>
-      <span style={{background: '#93c5fd'}}>#93c5fd</span>
-      <span style={{background: '#dbeafe'}}>#dbeafe</span>
-    </div>
-  </div>
-  <div className="template">
-    <h5>商务演示</h5>
-    <div className="colors">
-      <span style={{background: '#059669'}}>#059669</span>
-      <span style={{background: '#10b981'}}>#10b981</span>
-      <span style={{background: '#fbbf24'}}>#fbbf24</span>
-      <span style={{background: '#f3f4f6'}}>#f3f4f6</span>
-    </div>
-  </div>
-</div>
+**技术文档**：#1e3a8a、#3b82f6、#93c5fd、#dbeafe
 
-  </TabItem>
-  <TabItem value="shapes" label="形状库">
+**商务演示**：#059669、#10b981、#fbbf24、#f3f4f6
 
-<div>
+</TabItem>
+<TabItem value="shapes" label="形状库">
 
 #### 创建自定义形状库
 
@@ -357,12 +275,8 @@ IP地址规划：
 - Network Diagram Icons
 - BPMN 2.0
 
-</div>
-
-  </TabItem>
-  <TabItem value="templates" label="模板管理">
-
-<div>
+</TabItem>
+<TabItem value="templates" label="模板管理">
 
 #### 保存和使用模板
 
@@ -381,285 +295,73 @@ IP地址规划：
    - 选择合适模板
    - 自定义内容
 
-</div>
-
-  </TabItem>
+</TabItem>
 </Tabs>
 
-## 🔄 协作功能
+## 协作功能
 
 ### 团队协作
 
-<div className="collaboration-features">
-  <div className="feature">
-    <h4>🔗 共享链接</h4>
-    <p>生成只读或可编辑链接</p>
-  </div>
-  <div className="feature">
-    <h4>💾 版本控制</h4>
-    <p>与 GitHub/GitLab 集成</p>
-  </div>
-  <div className="feature">
-    <h4>📝 评论功能</h4>
-    <p>添加批注和反馈</p>
-  </div>
-  <div className="feature">
-    <h4>🔄 实时同步</h4>
-    <p>多人同时编辑</p>
-  </div>
-</div>
+- **共享链接**：生成只读或可编辑链接
+- **版本控制**：与 GitHub/GitLab 集成
+- **评论功能**：添加批注和反馈
+- **实时同步**：多人同时编辑
 
-## 📤 导出和集成
+## 导出和集成
 
 ### 导出格式
 
-<div className="export-options">
-  <div className="option">
-    <h5>图片格式</h5>
-    <ul>
-      <li>PNG（透明背景）</li>
-      <li>JPG（压缩图片）</li>
-      <li>SVG（矢量图）</li>
-      <li>WebP（Web优化）</li>
-    </ul>
-  </div>
-  <div className="option">
-    <h5>文档格式</h5>
-    <ul>
-      <li>PDF（打印）</li>
-      <li>HTML（网页嵌入）</li>
-      <li>XML（源文件）</li>
-      <li>VSDX（Visio）</li>
-    </ul>
-  </div>
-</div>
+**图片格式**：
+
+- PNG（透明背景）
+- JPG（压缩图片）
+- SVG（矢量图）
+- WebP（Web优化）
+
+**文档格式**：
+
+- PDF（打印）
+- HTML（网页嵌入）
+- XML（源文件）
+- VSDX（Visio）
 
 ### 集成方式
 
 <CodeBlock language="html">
 {`<!-- 在网页中嵌入 Draw.io 图表 -->
-<iframe 
+<iframe
   src="https://viewer.diagrams.net/?highlight=0000ff&edit=_blank&layers=1&nav=1&title=diagram.drawio#Uhttps%3A%2F%2Fdrive.google.com%2Ffile%2Fd%2F..."
-  width="100%" 
+  width="100%"
   height="600">
 </iframe>`}
 </CodeBlock>
 
-## 💡 专业技巧
+## 专业技巧
 
-<div className="pro-tips">
-  <div className="tip">
-    <h4>⚡ 提高效率</h4>
-    <ul>
-      <li>掌握快捷键</li>
-      <li>使用搜索功能快速找到形状</li>
-      <li>创建常用元素库</li>
-      <li>批量操作技巧</li>
-    </ul>
-  </div>
-  <div className="tip">
-    <h4>🎯 保持一致性</h4>
-    <ul>
-      <li>定义颜色规范</li>
-      <li>统一字体大小</li>
-      <li>保持间距一致</li>
-      <li>使用样式复制</li>
-    </ul>
-  </div>
-  <div className="tip">
-    <h4>📐 专业布局</h4>
-    <ul>
-      <li>使用网格对齐</li>
-      <li>保持黄金比例</li>
-      <li>留白的艺术</li>
-      <li>视觉层次设计</li>
-    </ul>
-  </div>
-</div>
+**提高效率**：
 
-## 🚀 下一步
+- 掌握快捷键
+- 使用搜索功能快速找到形状
+- 创建常用元素库
+- 批量操作技巧
+
+**保持一致性**：
+
+- 定义颜色规范
+- 统一字体大小
+- 保持间距一致
+- 使用样式复制
+
+**专业布局**：
+
+- 使用网格对齐
+- 保持黄金比例
+- 留白的艺术
+- 视觉层次设计
+
+## 下一步
 
 掌握了 Draw.io 后，继续学习：
 
-<div className="next-steps">
-  <a href="../use-cases" className="next-button">
-    场景应用指南 →
-  </a>
-  <a href="../ai-assistance" className="next-button secondary">
-    AI 辅助创作 →
-  </a>
-</div>
-
-<style>{`
-.getting-started {
-  margin: 2rem 0;
-}
-
-.access-methods {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1rem;
-  margin: 1rem 0;
-}
-
-.method-card {
-  background: white;
-  padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.interface-layout {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
-  margin: 2rem 0;
-}
-
-.layout-section {
-  background: #f8fafc;
-  padding: 1rem;
-  border-radius: 8px;
-}
-
-.color-schemes {
-  margin: 1rem 0;
-}
-
-.scheme {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.color-box {
-  padding: 0.5rem 1rem;
-  color: white;
-  border-radius: 4px;
-  font-weight: bold;
-}
-
-.network-design {
-  margin: 2rem 0;
-}
-
-.design-elements {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
-  margin: 1rem 0;
-}
-
-.element-card {
-  background: white;
-  padding: 1rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.uml-guide {
-  background: #f8fafc;
-  padding: 1.5rem;
-  border-radius: 8px;
-  margin: 1rem 0;
-}
-
-.color-templates {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1rem;
-  margin: 1rem 0;
-}
-
-.template {
-  background: white;
-  padding: 1rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.colors {
-  display: flex;
-  gap: 0.5rem;
-  margin-top: 0.5rem;
-}
-
-.colors span {
-  width: 60px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-size: 10px;
-  border-radius: 4px;
-}
-
-.collaboration-features {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
-  margin: 2rem 0;
-}
-
-.feature {
-  background: #f8fafc;
-  padding: 1rem;
-  border-radius: 8px;
-  text-align: center;
-}
-
-.export-options {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1rem;
-  margin: 2rem 0;
-}
-
-.option {
-  background: white;
-  padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.pro-tips {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1rem;
-  margin: 2rem 0;
-}
-
-.tip {
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-  padding: 1.5rem;
-  border-radius: 8px;
-}
-
-.next-steps {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  margin: 3rem 0;
-}
-
-.next-button {
-  display: inline-block;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  padding: 1rem 2rem;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: transform 0.3s ease;
-}
-
-.next-button:hover {
-  transform: translateY(-2px);
-  color: white;
-}
-
-.next-button.secondary {
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-  color: #1e3a8a;
-}
-`}</style>
+- [场景应用指南](../use-cases)
+- [AI 辅助创作](../ai-assistance)

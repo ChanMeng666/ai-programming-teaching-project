@@ -13,8 +13,6 @@ import TabItem from '@theme/TabItem';
 
 ### Creating a Next.js Project
 
-<div className="setup-steps">
-
 #### 1. Using create-next-app
 
 ```bash title="Terminal Command"
@@ -38,13 +36,9 @@ mkdir -p src/{components,layouts,lib,styles,types}
 mkdir -p content/{posts,pages}
 ```
 
-</div>
-
 ## Basic Component Development
 
 ### Layout Components
-
-<div className="component-development">
 
 #### Layout Component
 
@@ -62,7 +56,6 @@ interface LayoutProps {
 
 export default function Layout({ children, title, description }: LayoutProps) {
   return (
-    <div className="min-h-screen flex flex-col">
       {/* Top Navigation */}
       <Header />
 
@@ -73,7 +66,6 @@ export default function Layout({ children, title, description }: LayoutProps) {
 
       {/* Footer Information */}
       <Footer />
-    </div>
   );
 }
 ```
@@ -98,15 +90,10 @@ export default function Header() {
   return (
     <header className="bg-white shadow-sm">
       <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16">
-          <div className="flex items-center">
             <Link href="/" className="text-xl font-bold text-gray-900">
               My Blog
             </Link>
-          </div>
-
           {/* Desktop Navigation */}
-          <div className="hidden sm:flex sm:items-center sm:space-x-8">
             {navigation.map((item) => (
               <Link
                 key={item.name}
@@ -116,10 +103,7 @@ export default function Header() {
                 {item.name}
               </Link>
             ))}
-          </div>
-
           {/* Mobile Menu Button */}
-          <div className="sm:hidden">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100"
@@ -130,13 +114,8 @@ export default function Header() {
                 <Bars3Icon className="h-6 w-6" />
               )}
             </button>
-          </div>
-        </div>
-
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="sm:hidden">
-            <div className="pt-2 pb-3 space-y-1">
               {navigation.map((item) => (
                 <Link
                   key={item.name}
@@ -147,8 +126,6 @@ export default function Header() {
                   {item.name}
                 </Link>
               ))}
-            </div>
-          </div>
         )}
       </nav>
     </header>
@@ -169,11 +146,7 @@ Add responsive styles to this Layout component, including:
 ```
 :::
 
-</div>
-
 ### Post List Component
-
-<div className="post-list">
 
 #### PostList Component
 
@@ -196,9 +169,7 @@ export default function PostList({ posts, showExcerpt = true }: PostListProps) {
   );
 
   return (
-    <div className="space-y-6">
       {/* Search Box */}
-      <div className="relative">
         <input
           type="text"
           placeholder="Search posts..."
@@ -206,22 +177,15 @@ export default function PostList({ posts, showExcerpt = true }: PostListProps) {
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-      </div>
-
       {/* Post List */}
-      <div className="space-y-4">
         {filteredPosts.map((post) => (
           <article key={post.slug} className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200">
-            <div className="p-6">
-              <div className="flex items-center justify-between mb-2">
                 <time className="text-sm text-gray-500">
                   {new Date(post.date).toLocaleDateString()}
                 </time>
                 <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
                   {post.category}
                 </span>
-              </div>
-              
               <h2 className="text-xl font-semibold text-gray-900 mb-2">
                 <Link href={`/posts/${post.slug}`} className="hover:text-blue-600">
                   {post.title}
@@ -233,35 +197,23 @@ export default function PostList({ posts, showExcerpt = true }: PostListProps) {
                   {post.excerpt}
                 </p>
               )}
-              
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-4">
                   <span className="text-sm text-gray-500">
                     Read time: {post.readTime} min
                   </span>
                   <span className="text-sm text-gray-500">
                     {post.views} views
                   </span>
-                </div>
-
                 <Link
                   href={`/posts/${post.slug}`}
                   className="text-blue-600 hover:text-blue-800 text-sm font-medium"
                 >
                   Read more →
                 </Link>
-              </div>
-            </div>
           </article>
         ))}
-      </div>
-
       {filteredPosts.length === 0 && (
-        <div className="text-center py-12">
-          <p className="text-gray-500">No matching posts found</p>
-        </div>
+No matching posts found
       )}
-    </div>
   );
 }
 ```
@@ -295,8 +247,6 @@ export interface Tag {
 }
 ```
 
-</div>
-
 ## Page Component Development
 
 ### Homepage Component
@@ -316,7 +266,6 @@ interface HomeProps {
 export default function Home({ posts, featuredPosts }: HomeProps) {
   return (
     <Layout title="Home" description="My Tech Blog">
-      <div className="space-y-12">
         {/* Welcome Section */}
         <section className="text-center py-12">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
@@ -331,19 +280,14 @@ export default function Home({ posts, featuredPosts }: HomeProps) {
         {featuredPosts.length > 0 && (
           <section>
             <h2 className="text-2xl font-bold text-gray-900 mb-6">Featured Posts</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {featuredPosts.map((post) => (
                 <article key={post.slug} className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200">
-                  <div className="p-6">
-                    <div className="flex items-center justify-between mb-2">
                       <time className="text-sm text-gray-500">
                         {new Date(post.date).toLocaleDateString()}
                       </time>
                       <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
                         Featured
                       </span>
-                    </div>
-
                     <h3 className="text-lg font-semibold text-gray-900 mb-2">
                       <Link href={`/posts/${post.slug}`} className="hover:text-blue-600">
                         {post.title}
@@ -360,10 +304,8 @@ export default function Home({ posts, featuredPosts }: HomeProps) {
                     >
                       Read more →
                     </Link>
-                  </div>
                 </article>
               ))}
-            </div>
           </section>
         )}
 
@@ -372,7 +314,6 @@ export default function Home({ posts, featuredPosts }: HomeProps) {
           <h2 className="text-2xl font-bold text-gray-900 mb-6">Latest Posts</h2>
           <PostList posts={posts.slice(0, 6)} />
         </section>
-      </div>
     </Layout>
   );
 }
@@ -433,20 +374,12 @@ export default function PostPage({ post, source }: PostPageProps) {
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
             {post.title}
           </h1>
-
-          <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
-            <div className="flex items-center space-x-4">
               <time>{new Date(post.date).toLocaleDateString()}</time>
               <span>Read time: {post.readTime} min</span>
               <span>{post.views} views</span>
-            </div>
-            
             <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
               {post.category}
             </span>
-          </div>
-          
-          <div className="flex flex-wrap gap-2">
             {post.tags.map((tag) => (
               <span
                 key={tag}
@@ -455,13 +388,10 @@ export default function PostPage({ post, source }: PostPageProps) {
                 #{tag}
               </span>
             ))}
-          </div>
         </header>
 
         {/* Article Content */}
-        <div className="prose prose-lg max-w-none">
           <MDXRemote {...source} components={components} />
-        </div>
       </article>
     </Layout>
   );
@@ -760,24 +690,3 @@ Please provide a deployment guide for this Next.js blog application, including:
 4. Performance monitoring
 ```
 :::
-
-export const styles = {
-  setupSteps: {
-    backgroundColor: '#f8f9fa',
-    padding: '20px',
-    borderRadius: '8px',
-    marginBottom: '20px'
-  },
-  componentDevelopment: {
-    backgroundColor: '#f0f7ff',
-    padding: '20px',
-    borderRadius: '8px',
-    marginBottom: '20px'
-  },
-  postList: {
-    backgroundColor: '#fff9f0',
-    padding: '20px',
-    borderRadius: '8px',
-    marginBottom: '20px'
-  }
-};

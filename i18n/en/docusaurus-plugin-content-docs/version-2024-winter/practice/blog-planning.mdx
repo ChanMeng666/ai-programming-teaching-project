@@ -13,60 +13,52 @@ import TabItem from '@theme/TabItem';
 
 ### Core Feature Planning
 
-<div className="feature-grid">
-
-#### 📝 Content Management
+**Content Management**
 - Article list display
 - Article detail page
 - Category and tag system
 - Search functionality
 
-#### 💬 Interactive Features
+**Interactive Features**
 - Comment system
 - Like functionality
 - Share buttons
 - Subscription feature
 
-#### 👤 User Experience
+**User Experience**
 - Responsive design
 - Dark mode
 - Reading progress bar
 - Back to top button
 
-#### ⚙️ Management Features
+**Management Features**
 - Article management
 - Comment moderation
 - Data analytics
 - SEO optimization
 
-</div>
-
 ### Technology Stack Selection
 
-<div className="tech-stack">
-
 <Tabs>
-  <TabItem value="frontend" label="Frontend" default>
+<TabItem value="frontend" label="Frontend" default>
     - **Framework**: Next.js
     - **Styling**: Tailwind CSS
     - **State Management**: React Context/Redux
     - **UI Components**: Headless UI
-  </TabItem>
-  <TabItem value="backend" label="Backend">
+</TabItem>
+<TabItem value="backend" label="Backend">
     - **API**: Next.js API Routes
     - **Database**: MongoDB
     - **Authentication**: NextAuth.js
     - **Storage**: Vercel Blob Storage
-  </TabItem>
-  <TabItem value="tools" label="Development Tools">
+</TabItem>
+<TabItem value="tools" label="Development Tools">
     - **Editor**: Cursor
     - **Collaboration**: v0
     - **Deployment**: Vercel
     - **Analytics**: Vercel Analytics
-  </TabItem>
+</TabItem>
 </Tabs>
-
-</div>
 
 ## Design Planning
 
@@ -84,8 +76,6 @@ graph TD
 ```
 
 ### Data Models
-
-<div className="data-models">
 
 #### Post Model
 ```typescript
@@ -127,13 +117,9 @@ interface User {
 }
 ```
 
-</div>
-
 ## Development Plan
 
 ### Project Milestones
-
-<div className="timeline">
 
 #### Phase 1: Foundation Setup
 1. Project initialization
@@ -159,11 +145,7 @@ interface User {
 3. Error handling
 4. Unit testing
 
-</div>
-
 ### Development Standards
-
-<div className="guidelines">
 
 #### Code Standards
 ```json
@@ -207,13 +189,9 @@ components/
     PostList.tsx
 ```
 
-</div>
-
 ## Performance and SEO Considerations
 
 ### Performance Optimization Plan
-
-<div className="performance-plan">
 
 #### Image Optimization
 ```typescript
@@ -242,11 +220,7 @@ const CommentSection = dynamic(() => import('@/components/CommentSection'), {
 });
 ```
 
-</div>
-
 ### SEO Strategy
-
-<div className="seo-strategy">
 
 #### Meta Tag Configuration
 ```typescript
@@ -286,23 +260,3 @@ generateSitemap({
   generateRobotsTxt: true
 });
 ```
-
-</div>
-
-export const styles = {
-  featureGrid: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-    gap: '1rem',
-    marginBottom: '2rem'
-  },
-  timeline: {
-    borderLeft: '3px solid #1a73e8',
-    paddingLeft: '1rem'
-  },
-  guidelines: {
-    backgroundColor: '#f6f8fa',
-    padding: '1rem',
-    borderRadius: '8px'
-  }
-};

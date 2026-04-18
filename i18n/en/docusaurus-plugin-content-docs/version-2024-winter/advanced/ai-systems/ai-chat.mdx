@@ -12,21 +12,15 @@ import ReactPlayer from 'react-player';
 
 In this chapter, you will learn how to develop a Chinese celebrity AI conversational system.
 
-## 🎥 Tutorial Video
+## Tutorial Video
 
-<div className="video-container">
-  <div className="video-wrapper">
-    <ReactPlayer
-      url="https://www.youtube.com/embed/sJdptJj9pAw"
-      controls={true}
-      width="100%"
-      height="100%"
-      style={{ aspectRatio: '16/9' }}
-    />
-  </div>
-</div>
+<ReactPlayer
+  url="https://www.youtube.com/embed/sJdptJj9pAw"
+  controls={true}
+  width="100%"
+/>
 
-## 📋 Learning Content
+## Learning Content
 
 ### 1. Environment Preparation
 
@@ -44,12 +38,12 @@ The token is very important, please save it carefully. You will not be able to v
 
 #### Development Environment Configuration
 <Tabs>
-  <TabItem value="required" label="Required Software" default>
+<TabItem value="required" label="Required Software" default>
     1. Python 3.8+
     2. Git
     3. Cursor editor
-  </TabItem>
-  <TabItem value="dependencies" label="Dependency Installation">
+</TabItem>
+<TabItem value="dependencies" label="Dependency Installation">
     ```bash
     # Create virtual environment
     python -m venv venv
@@ -63,7 +57,7 @@ The token is very important, please save it carefully. You will not be able to v
     # Install dependencies
     pip install gradio huggingface_hub
     ```
-  </TabItem>
+</TabItem>
 </Tabs>
 
 ### 2. Project Creation
