@@ -688,7 +688,7 @@
     "description": "Page meta description for feeds page"
   },
   "feeds.heroTitle": {
-    "message": "📡 RSS Feeds",
+    "message": "RSS Feeds",
     "description": "Hero section title"
   },
   "feeds.heroSubtitle": {
@@ -696,7 +696,7 @@
     "description": "Hero section subtitle"
   },
   "feeds.feedSources": {
-    "message": "🎯 Feed Sources",
+    "message": "Feed Sources",
     "description": "Feed sources section title"
   },
   "feeds.feedSourcesDesc": {
@@ -712,7 +712,7 @@
     "description": "Table row label for all posts"
   },
   "feeds.whatIsRss": {
-    "message": "📖 What is RSS?",
+    "message": "What is RSS?",
     "description": "What is RSS section title"
   },
   "feeds.whatIsRssDesc": {
@@ -720,23 +720,23 @@
     "description": "What is RSS description"
   },
   "feeds.benefit1": {
-    "message": "✅ Read updates from multiple websites in one place",
+    "message": "Read updates from multiple websites in one place",
     "description": "RSS benefit 1"
   },
   "feeds.benefit2": {
-    "message": "✅ Get the latest content without frequently visiting websites",
+    "message": "Get the latest content without frequently visiting websites",
     "description": "RSS benefit 2"
   },
   "feeds.benefit3": {
-    "message": "✅ Read articles at your own pace",
+    "message": "Read articles at your own pace",
     "description": "RSS benefit 3"
   },
   "feeds.benefit4": {
-    "message": "✅ Never miss important updates",
+    "message": "Never miss important updates",
     "description": "RSS benefit 4"
   },
   "feeds.howToUse": {
-    "message": "🛠️ How to Use RSS?",
+    "message": "How to Use RSS?",
     "description": "How to use section title"
   },
   "feeds.step1Title": {
@@ -804,7 +804,7 @@
     "description": "Step 2 instruction d"
   },
   "feeds.tips": {
-    "message": "💡 Tips",
+    "message": "Tips",
     "description": "Tips section title"
   },
   "feeds.tipsTitle": {
@@ -824,7 +824,7 @@
     "description": "JSON Feed tip"
   },
   "feeds.otherWays": {
-    "message": "🔔 Other Ways to Follow",
+    "message": "Other Ways to Follow",
     "description": "Other ways section title"
   },
   "feeds.otherWaysDesc": {
@@ -832,19 +832,19 @@
     "description": "Other ways description"
   },
   "feeds.github": {
-    "message": "🌟 GitHub - Star our project",
+    "message": "GitHub — Star our project",
     "description": "GitHub link text"
   },
   "feeds.discord": {
-    "message": "💬 Discord - Join the community",
+    "message": "Discord — Join the community",
     "description": "Discord link text"
   },
   "feeds.bookmark": {
-    "message": "🔖 Bookmark - Save our website",
+    "message": "Bookmark — Save our website",
     "description": "Bookmark text"
   },
   "feeds.faq": {
-    "message": "❓ FAQ",
+    "message": "FAQ",
     "description": "FAQ section title"
   },
   "feeds.faq1q": {
