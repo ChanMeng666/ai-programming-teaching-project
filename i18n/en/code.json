@@ -800,19 +800,19 @@
     "message": "We'll keep publishing high-quality AI programming content"
   },
   "theme.Mermaid.viewDiagram": {
-    "message": "图表",
+    "message": "Diagram",
     "description": "Mermaid view toggle: diagram"
   },
   "theme.Mermaid.viewCode": {
-    "message": "代码",
+    "message": "Code",
     "description": "Mermaid view toggle: code"
   },
   "theme.Mermaid.copied": {
-    "message": "已复制",
+    "message": "Copied",
     "description": "Mermaid copy success label"
   },
   "theme.Mermaid.copy": {
-    "message": "复制",
+    "message": "Copy",
     "description": "Mermaid copy button"
   },
   "theme.IconExternalLink.ariaLabel": {
