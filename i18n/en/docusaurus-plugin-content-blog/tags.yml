@@ -48,10 +48,10 @@ video-resources:
   permalink: /video-resources
   description: Educational and lecture video resources
 
-Forward with Her Mentorship Program-activity:
-  label: Forward with Her Mentorship Program Activity
-  permalink: /Forward with Her Mentorship Program-activity
-  description: Forward with Her Mentorship Program activity content and sharing
+Forward with Her-activity:
+  label: Forward with Her Activity
+  permalink: /Forward with Her-activity
+  description: Forward with Her activity content and sharing
 
 mentor-qa:
   label: Mentor Q&A
