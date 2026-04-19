@@ -1,0 +1,45 @@
+{
+  "tutorialSidebar": [
+    {
+      "type": "category",
+      "label": "📋 项目介绍",
+      "collapsible": true,
+      "collapsed": false,
+      "items": [
+        "programme/about-technest",
+        "programme/schedule",
+        "programme/contact"
+      ]
+    },
+    {
+      "type": "doc",
+      "id": "curriculum-outline",
+      "label": "📖 课程大纲"
+    },
+    {
+      "type": "category",
+      "label": "🎓 教学阶段（第 1–8 周）",
+      "collapsible": true,
+      "collapsed": false,
+      "items": [
+        "weeks/week-01-dev-tools-setup",
+        "weeks/week-02-portfolio-deploy",
+        "weeks/week-03-ai-avatar",
+        "weeks/week-04-fullstack-neon",
+        "weeks/week-05-vercel-blob",
+        "weeks/week-06-blog-system",
+        "weeks/week-07-slack-notifications",
+        "weeks/week-08-typst-cv"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "🚀 毕业项目（第 9–12 周）",
+      "collapsible": true,
+      "collapsed": false,
+      "items": [
+        "capstone/capstone-spec"
+      ]
+    }
+  ]
+}

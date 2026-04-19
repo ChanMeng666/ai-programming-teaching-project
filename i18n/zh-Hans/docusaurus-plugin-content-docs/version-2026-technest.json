@@ -1,0 +1,22 @@
+{
+  "version.label": {
+    "message": "2026 TECHNEST 项目",
+    "description": "The label for version 2026-technest"
+  },
+  "sidebar.tutorialSidebar.category.📋 项目介绍": {
+    "message": "📋 项目介绍",
+    "description": "The label for category '📋 项目介绍' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.🎓 教学阶段（第 1–8 周）": {
+    "message": "🎓 教学阶段（第 1–8 周）",
+    "description": "The label for category '🎓 教学阶段（第 1–8 周）' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.🚀 毕业项目（第 9–12 周）": {
+    "message": "🚀 毕业项目（第 9–12 周）",
+    "description": "The label for category '🚀 毕业项目（第 9–12 周）' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.doc.📖 课程大纲": {
+    "message": "📖 课程大纲",
+    "description": "The label for the doc item '📖 课程大纲' in sidebar 'tutorialSidebar', linking to the doc curriculum-outline"
+  }
+}

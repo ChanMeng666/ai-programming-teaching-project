@@ -1,0 +1,211 @@
+---
+title: "第 6 周：加一个博客系统"
+description: 给你的 Next.js 作品集嫁接一个真正的 /blog —— MDX、语法高亮代码块、有效的 RSS 订阅。发表你的第一篇 500 字博文。
+sidebar_label: "第 6 周：加一个博客系统"
+---
+
+<AxisBadge axes={["JOB", "LIFE"]} />
+
+# 加一个博客系统
+
+## 学习目标
+
+到本节课结束，学员应当能够：
+
+- **把一个真正的博客嫁接到现有的 Next.js 应用上**，方法是把这件事描述给 Cursor 听，并指给它一个参考模板——全程不用手改任何 route 文件。
+- **写并发布你的第一篇 MDX 博文**，让它在线上站点上以正确的排版、封面图、可用的 permalink 渲染出来。
+- **上线一个有效的 RSS 订阅**，让 feed 阅读器能订阅它——因为发了博客却不带 RSS，等于只发了半个博客。
+
+## 核心主题
+
+- MDX = Markdown + React 组件。为什么这是开发者博客最对的内容格式。
+- 路由：`app/blog/[slug]/page.tsx` 怎么映射到 URL。
+- Metadata 模式：frontmatter、OG image、canonical URL、reading time。
+- 2026 年的 RSS：仍然是被发现和被聚合最干净的方式。
+- "参考模板"提示词模式：通过指给 Cursor 一个好的现成例子来"教"它，而不是从零重造。
+
+## 工具 / 技术栈
+
+| 工具 | 本周角色 |
+|---|---|
+| **Vercel Blog Starter** | 我们指给 Cursor 的参考模板。 |
+| **MDX** | 你的文章文件 —— Markdown + React 组件。 |
+| **`remark-gfm` + `rehype-pretty-code`** | 文章里的语法高亮代码块。 |
+| **`reading-time` + `gray-matter`** | Frontmatter + 阅读时长工具。 |
+| **`feed`（npm）** | 在 build 时生成有效的 RSS 2.0 / Atom feed。 |
+
+<SiteEvolution thisWeek={6} />
+
+## 课堂计划
+
+| 时间 | 活动 |
+|---|---|
+| 0 – 15 分钟 | **回顾与 Check-in。** 这周留言簿上有没有哪个表情包"出圈"了？30 秒 show-and-tell。 |
+| 15 – 40 分钟 | **概念讲解。** MDX vs 纯 Markdown。Route group 怎么帮你把 `/blog` 和站点其它部分隔开。静态 vs 动态渲染——博客这种场景，静态完胜。 |
+| 40 – 75 分钟 | **现场演示。** 讲师参考 Vercel blog starter，把 `/blog` 加到自己的站，然后实时写一篇 **"What I learned in Weeks 1–5"**。15 分钟内，全班看着排版和 RSS 双双落地。 |
+| 75 – 105 分钟 | **动手 Lab。** 学员把 `/blog` 嫁接进自己的站，发表第一篇真文章——本学期到目前为止的复盘，用自己的口吻写。 |
+| 105 – 120 分钟 | **Q&A + 收尾。** 三位同学念出自己的标题；全班选一个最有勾子的。 |
+
+## 动手 Lab
+
+**任务。** 下课时你的站有 `/blog`，至少一篇已发布的文章 —— 你自己第一人称的 1–5 周复盘 —— 加一个在 `/feed.xml` 校验通过的 RSS 订阅。
+
+### 阶段 1 —— 嫁接博客结构
+
+<PromptStep n={1} audience="Cursor">
+请把博客系统加到我现有的 `my-portfolio` 项目里。用 Vercel Next.js Blog Starter 模板作为结构参考——特别是它怎么组织 `app/blog`、MDX 组件和文章加载。别覆盖我现有的站；**嫁接** 进去。
+
+具体来说：
+
+1. 创建 `app/blog/page.tsx` —— 文章索引，最新在前。
+2. 创建 `app/blog/[slug]/page.tsx` —— 单篇文章页。
+3. 创建 `content/posts/` 作为 MDX 文件存放目录。
+4. 装上并接好 MDX 支持：`@next/mdx`、`remark-gfm`、`rehype-pretty-code`、`gray-matter`、`reading-time`。
+5. 在站点 header 里现有 nav 旁边加一个 **Blog** 链接，匹配当前的设计语言。
+
+先别写文章。只把管子搭好 + 一个空的 listing 页，零文章时显示 "No posts yet"。
+</PromptStep>
+
+<VerifyStep n={2}>
+
+- 在 localhost 进 `/blog` 显示空状态。
+- header 里 **Blog** 链接可见，和站点其它链接风格一致。
+- `content/posts/` 存在，是空的。
+- `package.json` 里有那些新增的 MDX 依赖。
+
+</VerifyStep>
+
+### 阶段 2 —— 排版 + metadata
+
+<PromptStep n={3} audience="Cursor">
+在我写真内容之前，先把文章页模板打磨好。要求：
+
+- 文章布局用一个易读的行宽（约 68 ch）。正文用 serif。
+- 支持 frontmatter：`title`、`date`（ISO）、`summary`、`cover`（可选，`public/` 里图片路径）、`tags`（可选数组）。
+- 头部渲染：封面图（如果有）、标题（H1 大字号）、日期 + 阅读时长 + tag 列在一条 muted 的元数据行里。
+- 代码块通过 `rehype-pretty-code` 用 one-dark 主题。
+- 文章里的图片用 Next.js Image，带 lazy-load + blur placeholder。
+- 每篇底部：一行小字 **Written by \[我的名字\] — part of the TECHNEST AI Programming track**，链接回 `/`。
+- 文章页正确导出 Open Graph metadata，让 Twitter / 微信里的预览卡好看。
+</PromptStep>
+
+<VerifyStep n={4}>
+
+- 在 `content/posts/` 里建一个全 frontmatter 字段都填了的 dummy MDX，访问 `/blog/\[slug\]`。
+- 排版舒服；代码块高亮；封面图显示。
+- 查看页面源码：`<meta property="og:title">` 和文章标题一致。
+
+</VerifyStep>
+
+### 阶段 3 —— 写第一篇真文章
+
+<PromptStep n={5} audience="Cursor">
+我来写第一篇真文章。请草拟 `content/posts/weeks-1-to-5-recap.mdx`，作为第一人称对过去 5 周的诚实复盘。这是我的原始素材——请把它打磨成 ~500–700 字，用我的声音（匹配我 About 页和 persona.md 的语气）。
+
+- 第 1 周：第一次 AI 驱动的 Vercel 部署。让我意外的是 **\[在让 Cursor 写之前，先在这里加一句你自己的体会\]**。
+- 第 2 周：Magic Portfolio 模板。一个意外让我满足的细节：**\[你的体会\]**。
+- 第 3 周：AI 克隆聊天。它说过关于我最好笑的一句话：**\[你的\]**。
+- 第 4 周：Neon + Auth。最大的困惑时刻：**\[你的\]**。
+- 第 5 周：表情包上传。目前最棒的一张：**\[你的\]**。
+
+挑一个具体的好标题——别叫 "My Journey"。给文章加上 **technest** 和 **learning** 两个 tag。设一张封面图（用 About 页的头像就行）。写完把完整 Markdown 贴回给我，我读一下、调一下再 commit。
+</PromptStep>
+
+<VerifyStep n={6}>
+
+- 读初稿。改掉任何不像你说话的句子。
+- 让 Cursor 保存最终版并 commit。
+- 刷新 `/blog`——你的文章出现在索引里。
+- 点进去——读起来顺、封面图加载、署名链接能跳。
+
+</VerifyStep>
+
+### 阶段 4 —— RSS feed
+
+<PromptStep n={7} audience="Cursor">
+在 `/feed.xml` 加一个 RSS feed，包含所有文章（全文，不要只放摘要——RSS 阅读器更喜欢全文）。用 `feed` 这个 npm 包。它要：
+
+- 在 build 时从 MDX 文件自动生成。
+- 包含：title、author、canonical link、pubDate、summary、完整 HTML content、从 tags 数组来的 categories。
+- 通过 RSS 2.0 校验（用 `https://validator.w3.org/feed/` 测）。
+- 在站点 `<head>` 里加 `<link rel="alternate" type="application/rss+xml" ...>`，让浏览器和 RSS 阅读器能自动发现。
+</PromptStep>
+
+<VerifyStep n={8}>
+
+- `curl https://localhost:3000/feed.xml` 返回格式良好的 XML（Cursor 会跑）。
+- 在浏览器打开这个 URL —— 能看到 feed 内容。
+- 看一下首页源码——`<link rel="alternate">` 在那里。
+
+</VerifyStep>
+
+### 阶段 5 —— 发布
+
+<PromptStep n={9} audience="Cursor">
+上线：把所有新文件按合理颗粒 commit，push 到 GitHub，等 Vercel 部署，在线上 URL 上验证。再做一件事：把线上的 `/feed.xml` URL 提交给 W3C feed validator，把结果反馈给我。
+</PromptStep>
+
+<VerifyStep n={10}>
+
+- 生产站有 `/blog`，里面有你的文章。
+- 线上 `/feed.xml` 校验干净通过。
+- 把你线上的文章 URL 粘到微信 / Slack / Twitter —— 预览卡正确显示标题 + 封面 + 摘要。
+
+</VerifyStep>
+
+<RecoverStep n={11}>
+RSS feed 显示了文章 summary，但 `<content:encoded>` 正文是空的。你能不能查一下 feed 生成器里 MDX-to-HTML 转换在哪一步漏了，把它修好让 feed 里出现完整正文？
+</RecoverStep>
+
+<Tip title="先写文章，再去打磨模板">
+一个常见错误：90 分钟用在排版、5 分钟用在内容上。**先内容**。同学们记得住的是你写了什么，不是你的字距。
+</Tip>
+
+<Note title="Career · 写博客是悄悄复利的事">
+本学期写 4–5 篇博文，已经超过 90% 工程师终其一生公开发表的量。一年后，搜 **"agentic systems learning in public"** 的招聘官可能因此找到你的文章并 DM 你。复利效应。
+</Note>
+
+## 本周作业
+
+**做 / 交付。**
+
+- 线上站点 `/blog` 里至少有 *一篇真文章*（约 500+ 字、你自己的口吻、有封面图）。
+- 有效的 `/feed.xml` RSS 订阅。
+- header 里有 Blog 链接。
+
+**要求。**
+
+- 支持 MDX（不只是纯 Markdown——至少在一篇文章里 import 一个 React 组件，证明管道是通的）。
+- 生产环境的 feed URL 能在 W3C 校验干净通过。
+- 把链接粘到聊天里，OG image 正确渲染。
+
+**提交。** 第 7 周开课前，把线上文章 URL + RSS 校验通过截图发到 Slack。
+
+## 资源
+
+| 文档 | 视频 | 仓库 |
+|---|---|---|
+| Vercel Blog Starter —— 参考模板 | 讲师 demo："Blog + RSS，15 分钟" | `vercel/examples/solutions/blog` |
+| `@next/mdx` —— App Router 集成 | | `shadcn-ui/taxonomy` —— 一个观点更强的博客例子 |
+| `rehype-pretty-code` —— 语法高亮 | | |
+| W3C Feed Validation Service | | |
+
+## 真实世界应用
+
+你尊敬的每个工程师都有一个博客。不是那种 "hire me" 博客 —— 是 *出声思考* 的博客。本周你把基础设施搭好了。每周写一篇、坚持两个月——这件事对你职业的影响，会超过任何证书。未来的你会感谢现在的你今天就开始写。
+
+<Note title="Career">
+把第一篇手动 cross-post 到 LinkedIn 和 dev.to。之后再去搞自动化（如果时间允许，我们会在 bonus 周做）。第一次手动 cross-post 会让你看清，文章里哪些部分会让人点击。
+</Note>
+
+## 踩坑提醒 & 小贴士
+
+- *"MDX 编译报错：解析不了 frontmatter。"* Frontmatter 必须是文件最开头的内容，前面不准有空行。问 Cursor：**"修一下我 MDX 的 frontmatter，让它能干净地解析。"**
+- *"封面图巨大且加载慢。"* 你在用 4 MB 的原图。问 Cursor：**"在 build 时把博客封面图预优化成 1200 × 630 给 OG 用，800 × 450 给文章页用。"**
+- *"RSS 校验过了，但 Reeder 里没显示。"* `<head>` 里的 `<link>` 标签可能 self-closing 不正确。问：**"检查一下我 `<head>` 里的 RSS autodiscovery link 标签。"**
+- *"文章页报 `next/headers` 错误。"* 你在 Client 组件里用了 Server-only 函数。问 Cursor：**"把文章页里 Client 那部分拆到一个 `ClientPost` 组件里。"**
+- *"索引里 Tags 链接跳到 /blog/tag/foo 但 404。"* 你承诺了动态 tag 页，但还没实现。要么让 Cursor 加 `/blog/tag/[tag]/page.tsx`，要么先把 tag-link 行为去掉。
+
+<Info title="如果文章本地能渲染，生产挂了">
+检查文件名大小写。macOS 大小写不敏感，Vercel 的 Linux 是敏感的。问 Cursor：**"把所有 MDX 文件名规范成全小写，并相应更新 import。"**
+</Info>

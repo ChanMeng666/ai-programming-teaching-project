@@ -111,22 +111,27 @@ const config = {
           editUrl:
             'https://github.com/ChanMeng666/ai-programming-teaching-project/tree/main/',
           // 版本控制配置
-          lastVersion: '2025-summer',  // 设置2025-summer为默认版本
+          lastVersion: '2026-technest',  // 设置2026-technest为默认版本（当前活动）
           includeCurrentVersion: false,  // 不包含current版本
           versions: {
-            '2025-summer': {
-              label: '2025年夏季她行活动',
+            '2026-technest': {
+              label: '2026 TECHNEST 项目',
               path: '/',  // 设置为根路径，这样用户访问网站时默认看到这个版本
-              banner: 'none',
-            },
-            '2024-winter': {
-              label: '2024年冬季她行活动',
-              path: '2024-winter',
               banner: 'none',
             },
             '2026-her-waka': {
               label: '2026 HER WAKA 活动',
               path: '2026-her-waka',
+              banner: 'none',
+            },
+            '2025-summer': {
+              label: '2025年夏季她行活动',
+              path: '2025-summer',  // 从根路径迁移至嵌套路径
+              banner: 'none',
+            },
+            '2024-winter': {
+              label: '2024年冬季她行活动',
+              path: '2024-winter',
               banner: 'none',
             },
           },
@@ -268,24 +273,24 @@ const config = {
             title: '课程内容',
             items: [
               {
-                label: '2025年夏季课程',
-                to: '/docs/intro',
+                label: '2026 TECHNEST 项目',
+                to: '/docs/programme/about-technest',
               },
               {
-                label: 'Gemini CLI 环境管理',
-                to: '/docs/basics/',
-              },
-              {
-                label: '个人网站开发部署',
-                to: '/docs/website/',
-              },
-              {
-                label: '2024年冬季课程',
-                to: '/docs/2024-winter/intro',
+                label: 'TECHNEST 课程大纲',
+                to: '/docs/curriculum-outline',
               },
               {
                 label: '2026 HER WAKA 活动',
                 to: '/docs/2026-her-waka/programme/about-her-waka',
+              },
+              {
+                label: '2025年夏季课程',
+                to: '/docs/2025-summer/intro',
+              },
+              {
+                label: '2024年冬季课程',
+                to: '/docs/2024-winter/intro',
               },
             ],
           },
@@ -372,6 +377,22 @@ const config = {
     },
   },
   themes: ['@docusaurus/theme-mermaid'],
+  plugins: [
+    [
+      '@docusaurus/plugin-client-redirects',
+      {
+        // 2025-summer 从根路径 / 迁移至嵌套路径 /2025-summer/ 后，
+        // 旧链接（博客、外部书签、llms.txt 等）通过这些 meta-refresh 跳转保持可达。
+        // trailingSlash: true 已经生成带斜杠的规范 URL，无需为同一路径写两条记录。
+        redirects: [
+          { from: '/docs/intro', to: '/docs/2025-summer/intro' },
+          { from: '/docs/basics/', to: '/docs/2025-summer/basics/' },
+          { from: '/docs/website/', to: '/docs/2025-summer/website/' },
+          { from: '/docs/practice/', to: '/docs/2025-summer/practice/' },
+        ],
+      },
+    ],
+  ],
 };
 
 export default config;

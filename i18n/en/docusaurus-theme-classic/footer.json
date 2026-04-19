@@ -17,7 +17,7 @@
   },
   "link.item.label.2025年夏季课程": {
     "message": "Summer 2025 Program",
-    "description": "The label of footer link with label=2025年夏季课程 linking to /docs/intro"
+    "description": "The label of footer link with label=2025年夏季课程 linking to /docs/2025-summer/intro"
   },
   "link.item.label.Gemini CLI 环境管理": {
     "message": "Gemini CLI Environment",
@@ -86,5 +86,17 @@
   "copyright": {
     "message": "<div class=\"footer-copyright\">\n            <div class=\"footer-legal\">\n              <div>Copyright © 2025 AI Programming Education.</div>\n              <div>Crafted with 💛 by <a class=\"footer-link\" href=\"https://github.com/ChanMeng666\"><img src=\"/img/chan_logo.svg\" alt=\"Chan Meng\" class=\"footer-developer-logo\" />Chan Meng</a></div>\n            </div>\n          </div>",
     "description": "The footer copyright"
+  },
+  "link.item.label.2026 TECHNEST 项目": {
+    "message": "TECHNEST 2026 Programme",
+    "description": "The label of footer link with label=2026 TECHNEST 项目 linking to /docs/programme/about-technest"
+  },
+  "link.item.label.TECHNEST 课程大纲": {
+    "message": "TECHNEST Curriculum Outline",
+    "description": "The label of footer link with label=TECHNEST 课程大纲 linking to /docs/curriculum-outline"
+  },
+  "logo.alt": {
+    "message": "AI Programming Education Logo",
+    "description": "The alt text of footer logo"
   }
 }

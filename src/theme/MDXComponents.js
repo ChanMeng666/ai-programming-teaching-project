@@ -2,11 +2,15 @@
 // 把 MintlifyShim 组件全局注入 MDX 作用域，让 her-waka 迁移过来的
 // <Tip>/<Note>/<Warning>/<Info>/<Tabs>/<Tab>/<Steps>/<Step>/<Accordion>/
 // <AccordionGroup>/<Card>/<CardGroup>/<Frame> 都无需 import 即可使用。
+// TechNest 组件（<PromptStep>/<VerifyStep>/<ManualStep>/<RecoverStep>/
+// <AxisBadge>/<SiteEvolution>）同理，由 2026-technest 课程使用。
 
 import MDXComponents from '@theme-original/MDXComponents';
 import * as MintlifyShim from '@site/src/components/MintlifyShim';
+import * as TechNest from '@site/src/components/TechNest';
 
 export default {
   ...MDXComponents,
   ...MintlifyShim,
+  ...TechNest,
 };

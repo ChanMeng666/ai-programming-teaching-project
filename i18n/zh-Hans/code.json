@@ -6,24 +6,19 @@
     "message": "通过实践案例学习人工智能开发，从基础到进阶，打造完整的AI编程技能体系"
   },
   "homepage.hero.welcome": {
-    "message": "欢迎来到",
-    "description": "Homepage hero welcome text"
+    "message": "欢迎来到"
   },
   "homepage.hero.platform": {
-    "message": "AI 编程宇宙",
-    "description": "Homepage hero platform name"
+    "message": "AI 编程宇宙"
   },
   "homepage.hero.description2": {
-    "message": "在这里，你将踏上一段星际编程之旅。无论你是编程新手还是经验开发者，AI 都将成为你最强大的副驾驶，带你探索代码宇宙的无限可能。",
-    "description": "Homepage hero description"
+    "message": "在这里，你将踏上一段星际编程之旅。无论你是编程新手还是经验开发者，AI 都将成为你最强大的副驾驶，带你探索代码宇宙的无限可能。"
   },
   "homepage.hero.startButton": {
-    "message": "开始探索",
-    "description": "Homepage hero primary button"
+    "message": "开始探索"
   },
   "homepage.hero.blogButton": {
-    "message": "最新动态",
-    "description": "Homepage hero secondary button"
+    "message": "最新动态"
   },
   "homepage.hero.codeComment": {
     "message": "构建AI应用"
@@ -362,15 +357,15 @@
   },
   "theme.SearchModal.startScreen.noRecentSearchesText": {
     "message": "没有最近搜索",
-    "description": "The text when no recent searches"
+    "description": "The text when there are no recent searches"
   },
   "theme.SearchModal.startScreen.saveRecentSearchButtonTitle": {
     "message": "保存这个搜索",
-    "description": "The label for save recent search button"
+    "description": "The title for save recent search button"
   },
   "theme.SearchModal.startScreen.removeRecentSearchButtonTitle": {
     "message": "从历史记录中删除这个搜索",
-    "description": "The label for remove recent search button"
+    "description": "The title for remove recent search button"
   },
   "theme.SearchModal.startScreen.favoriteSearchesTitle": {
     "message": "收藏",
@@ -378,63 +373,63 @@
   },
   "theme.SearchModal.startScreen.removeFavoriteSearchButtonTitle": {
     "message": "从收藏列表中删除这个搜索",
-    "description": "The label for remove favorite search button"
+    "description": "The title for remove favorite search button"
   },
   "theme.SearchModal.errorScreen.titleText": {
     "message": "无法获取结果",
-    "description": "The title for error screen of search modal"
+    "description": "The title for error screen"
   },
   "theme.SearchModal.errorScreen.helpText": {
     "message": "你可能需要检查网络连接。",
-    "description": "The help text for error screen of search modal"
+    "description": "The help text for error screen"
   },
   "theme.SearchModal.footer.selectText": {
     "message": "选中",
-    "description": "The explanatory text of the action for the enter key"
+    "description": "The select text for footer"
   },
   "theme.SearchModal.footer.selectKeyAriaLabel": {
     "message": "Enter 键",
-    "description": "The ARIA label for the Enter key button that makes the selection"
+    "description": "The ARIA label for select key in footer"
   },
   "theme.SearchModal.footer.navigateText": {
     "message": "导航",
-    "description": "The explanatory text of the action for the Arrow up and Arrow down key"
+    "description": "The navigate text for footer"
   },
   "theme.SearchModal.footer.navigateUpKeyAriaLabel": {
     "message": "向上键",
-    "description": "The ARIA label for the Arrow up key button that makes the navigation"
+    "description": "The ARIA label for navigate up key in footer"
   },
   "theme.SearchModal.footer.navigateDownKeyAriaLabel": {
     "message": "向下键",
-    "description": "The ARIA label for the Arrow down key button that makes the navigation"
+    "description": "The ARIA label for navigate down key in footer"
   },
   "theme.SearchModal.footer.closeText": {
     "message": "关闭",
-    "description": "The explanatory text of the action for Escape key"
+    "description": "The close text for footer"
   },
   "theme.SearchModal.footer.closeKeyAriaLabel": {
     "message": "Esc 键",
-    "description": "The ARIA label for the Escape key button that close the modal"
+    "description": "The ARIA label for close key in footer"
   },
   "theme.SearchModal.footer.searchByText": {
     "message": "搜索提供",
-    "description": "The text explain that the search is making by Algolia"
+    "description": "The 'Powered by' text for footer"
   },
   "theme.SearchModal.noResultsScreen.noResultsText": {
     "message": "没有结果：",
-    "description": "The text explains that there are no results for the following search"
+    "description": "The text when there are no results"
   },
   "theme.SearchModal.noResultsScreen.suggestedQueryText": {
     "message": "试试搜索",
-    "description": "The text for the suggested query when no results are found for the following search"
+    "description": "The text for suggested query"
   },
   "theme.SearchModal.noResultsScreen.reportMissingResultsText": {
     "message": "认为这个查询应该有结果？",
-    "description": "The text for the question where the user thinks there are missing results"
+    "description": "The text for reporting missing results"
   },
   "theme.SearchModal.noResultsScreen.reportMissingResultsLinkText": {
     "message": "请告知我们。",
-    "description": "The text for the link to report missing results"
+    "description": "The link text for reporting missing results"
   },
   "theme.SearchModal.placeholder": {
     "message": "搜索文档",
@@ -462,7 +457,7 @@
   },
   "theme.SearchPage.algoliaLabel": {
     "message": "通过 Algolia 搜索",
-    "description": "The ARIA label for Algolia mention"
+    "description": "The description label for Algolia mention"
   },
   "theme.SearchPage.noResultsText": {
     "message": "未找到任何结果",
@@ -566,5 +561,350 @@
   "chatWidget.error.message": {
     "message": "抱歉，发生了错误。请稍后重试。",
     "description": "Error message when chat fails"
+  },
+  "feeds.pageTitle": {
+    "message": "RSS 订阅"
+  },
+  "feeds.pageDescription": {
+    "message": "订阅 AI Programming 教学博客，获取最新的教程和文章更新"
+  },
+  "feeds.heroTitle": {
+    "message": "RSS 订阅"
+  },
+  "feeds.heroSubtitle": {
+    "message": "订阅我们的博客，第一时间获取最新的 AI 编程教程、项目案例和技术分享"
+  },
+  "feeds.feedSources": {
+    "message": "订阅源"
+  },
+  "feeds.feedSourcesDesc": {
+    "message": "我们提供多种格式的订阅源，您可以根据您使用的 RSS 阅读器选择合适的格式："
+  },
+  "feeds.table.content": {
+    "message": "内容"
+  },
+  "feeds.table.allPosts": {
+    "message": "所有博客文章"
+  },
+  "feeds.whatIsRss": {
+    "message": "什么是 RSS？"
+  },
+  "feeds.whatIsRssDesc": {
+    "message": "RSS（Really Simple Syndication）是一种网络内容聚合格式。通过订阅 RSS 源，您可以："
+  },
+  "feeds.benefit1": {
+    "message": "在一个地方阅读多个网站的更新"
+  },
+  "feeds.benefit2": {
+    "message": "无需频繁访问网站即可获取最新内容"
+  },
+  "feeds.benefit3": {
+    "message": "按照自己的节奏阅读文章"
+  },
+  "feeds.benefit4": {
+    "message": "避免错过重要更新"
+  },
+  "feeds.howToUse": {
+    "message": "如何使用 RSS？"
+  },
+  "feeds.step1Title": {
+    "message": "第一步：选择 RSS 阅读器"
+  },
+  "feeds.desktop": {
+    "message": "桌面端推荐"
+  },
+  "feeds.netnewswire": {
+    "message": "免费开源，界面简洁"
+  },
+  "feeds.feedly": {
+    "message": "跨平台，功能强大"
+  },
+  "feeds.inoreader": {
+    "message": "支持高级过滤和规则"
+  },
+  "feeds.newsblur": {
+    "message": "开源，支持社交功能"
+  },
+  "feeds.mobile": {
+    "message": "移动端推荐"
+  },
+  "feeds.reeder": {
+    "message": "设计精美"
+  },
+  "feeds.feedme": {
+    "message": "功能全面"
+  },
+  "feeds.readyou": {
+    "message": "开源免费"
+  },
+  "feeds.browser": {
+    "message": "浏览器扩展"
+  },
+  "feeds.step2Title": {
+    "message": "第二步：添加订阅源"
+  },
+  "feeds.step2a": {
+    "message": "复制上方表格中的订阅链接"
+  },
+  "feeds.step2b": {
+    "message": "在您的 RSS 阅读器中选择\"添加订阅\"或\"Add Feed\""
+  },
+  "feeds.step2c": {
+    "message": "粘贴链接并确认"
+  },
+  "feeds.step2d": {
+    "message": "开始阅读！"
+  },
+  "feeds.tips": {
+    "message": "小贴士"
+  },
+  "feeds.tipsTitle": {
+    "message": "订阅格式选择建议："
+  },
+  "feeds.tipsRss": {
+    "message": "最广泛支持，适合大多数阅读器"
+  },
+  "feeds.tipsAtom": {
+    "message": "更标准化，支持更多元数据"
+  },
+  "feeds.tipsJson": {
+    "message": "最新格式，适合现代应用"
+  },
+  "feeds.otherWays": {
+    "message": "其他订阅方式"
+  },
+  "feeds.otherWaysDesc": {
+    "message": "除了 RSS，您还可以通过以下方式关注我们："
+  },
+  "feeds.github": {
+    "message": "GitHub — Star 我们的项目"
+  },
+  "feeds.discord": {
+    "message": "Discord — 加入社区讨论"
+  },
+  "feeds.bookmark": {
+    "message": "浏览器书签 — 收藏我们的网站"
+  },
+  "feeds.faq": {
+    "message": "常见问题"
+  },
+  "feeds.faq1q": {
+    "message": "RSS 阅读器收费吗？"
+  },
+  "feeds.faq1a": {
+    "message": "大部分 RSS 阅读器都提供免费版本，功能已经足够日常使用。付费版本通常提供更多高级功能，如全文搜索、自动化规则等。"
+  },
+  "feeds.faq2q": {
+    "message": "多久更新一次？"
+  },
+  "feeds.faq2a": {
+    "message": "订阅源会在我们发布新文章时自动更新。大多数 RSS 阅读器会每隔 15-60 分钟检查一次更新。"
+  },
+  "feeds.faq3q": {
+    "message": "可以只订阅特定主题吗？"
+  },
+  "feeds.faq3a": {
+    "message": "目前我们提供全部博客文章的订阅。如果您对特定主题感兴趣，可以在 RSS 阅读器中使用过滤功能。"
+  },
+  "feeds.thanks": {
+    "message": "感谢您的关注！"
+  },
+  "feeds.thanksDesc": {
+    "message": "我们会持续更新高质量的 AI 编程内容"
+  },
+  "messageBoard.category.experience": {
+    "message": "心得体会"
+  },
+  "messageBoard.category.sharing": {
+    "message": "经验分享"
+  },
+  "messageBoard.category.discussion": {
+    "message": "教程讨论"
+  },
+  "messageBoard.category.other": {
+    "message": "其他"
+  },
+  "messageBoard.submitFailed": {
+    "message": "提交失败"
+  },
+  "messageBoard.submitSuccess": {
+    "message": "留言已提交，等待审核后将会显示"
+  },
+  "messageBoard.networkError": {
+    "message": "网络错误，请稍后重试"
+  },
+  "messageBoard.formTitle": {
+    "message": "写下你的留言"
+  },
+  "messageBoard.nicknameLabel": {
+    "message": "昵称"
+  },
+  "messageBoard.nicknamePlaceholder": {
+    "message": "你的昵称"
+  },
+  "messageBoard.categoryLabel": {
+    "message": "分类"
+  },
+  "messageBoard.contentLabel": {
+    "message": "留言内容"
+  },
+  "messageBoard.contentPlaceholder": {
+    "message": "分享你的 AI 编程学习心得、经验或想法..."
+  },
+  "messageBoard.submitting": {
+    "message": "提交中..."
+  },
+  "messageBoard.submit": {
+    "message": "提交留言"
+  },
+  "messageBoard.filterAll": {
+    "message": "全部"
+  },
+  "messageBoard.pageTitle": {
+    "message": "留言板"
+  },
+  "messageBoard.pageDescription": {
+    "message": "分享你的 AI 编程学习心得和经验"
+  },
+  "messageBoard.heroTitle": {
+    "message": "留言板"
+  },
+  "messageBoard.heroSubtitle": {
+    "message": "在这里分享你的 AI 编程学习心得、经验与想法，和大家一起交流成长"
+  },
+  "messageBoard.loading": {
+    "message": "加载留言中..."
+  },
+  "messageBoard.emptyCategory": {
+    "message": "暂无「{category}」分类的留言"
+  },
+  "messageBoard.emptyAll": {
+    "message": "还没有留言，来做第一个分享的人吧！"
+  },
+  "messageBoard.loadingMore": {
+    "message": "加载中..."
+  },
+  "messageBoard.loadMore": {
+    "message": "加载更多"
+  },
+  "theme.Mermaid.viewDiagram": {
+    "message": "图表",
+    "description": "Mermaid view toggle: diagram"
+  },
+  "theme.Mermaid.viewCode": {
+    "message": "代码",
+    "description": "Mermaid view toggle: code"
+  },
+  "theme.Mermaid.copied": {
+    "message": "已复制",
+    "description": "Mermaid copy success label"
+  },
+  "theme.Mermaid.copy": {
+    "message": "复制",
+    "description": "Mermaid copy button"
+  },
+  "theme.IconExternalLink.ariaLabel": {
+    "message": "(opens in new tab)",
+    "description": "The ARIA label for the external link icon"
+  },
+  "theme.SearchModal.searchBox.placeholderText": {
+    "message": "Search docs",
+    "description": "The placeholder text for the main search input field"
+  },
+  "theme.SearchModal.searchBox.placeholderTextAskAi": {
+    "message": "Ask another question...",
+    "description": "The placeholder text when in AI question mode"
+  },
+  "theme.SearchModal.searchBox.placeholderTextAskAiStreaming": {
+    "message": "Answering...",
+    "description": "The placeholder text for search box when AI is streaming an answer"
+  },
+  "theme.SearchModal.searchBox.enterKeyHint": {
+    "message": "search",
+    "description": "The hint for the search box enter key text"
+  },
+  "theme.SearchModal.searchBox.enterKeyHintAskAi": {
+    "message": "enter",
+    "description": "The hint for the Ask AI search box enter key text"
+  },
+  "theme.SearchModal.searchBox.searchInputLabel": {
+    "message": "Search",
+    "description": "The ARIA label for search input"
+  },
+  "theme.SearchModal.searchBox.backToKeywordSearchButtonText": {
+    "message": "Back to keyword search",
+    "description": "The text for back to keyword search button"
+  },
+  "theme.SearchModal.searchBox.backToKeywordSearchButtonAriaLabel": {
+    "message": "Back to keyword search",
+    "description": "The ARIA label for back to keyword search button"
+  },
+  "theme.SearchModal.startScreen.recentConversationsTitle": {
+    "message": "Recent conversations",
+    "description": "The title for recent conversations"
+  },
+  "theme.SearchModal.startScreen.removeRecentConversationButtonTitle": {
+    "message": "Remove this conversation from history",
+    "description": "The title for remove recent conversation button"
+  },
+  "theme.SearchModal.resultsScreen.askAiPlaceholder": {
+    "message": "Ask AI: ",
+    "description": "The placeholder text for Ask AI input"
+  },
+  "theme.SearchModal.askAiScreen.disclaimerText": {
+    "message": "Answers are generated with AI which can make mistakes. Verify responses.",
+    "description": "The disclaimer text for AI answers"
+  },
+  "theme.SearchModal.askAiScreen.relatedSourcesText": {
+    "message": "Related sources",
+    "description": "The text for related sources"
+  },
+  "theme.SearchModal.askAiScreen.thinkingText": {
+    "message": "Thinking...",
+    "description": "The text when AI is thinking"
+  },
+  "theme.SearchModal.askAiScreen.copyButtonText": {
+    "message": "Copy",
+    "description": "The text for copy button"
+  },
+  "theme.SearchModal.askAiScreen.copyButtonCopiedText": {
+    "message": "Copied!",
+    "description": "The text for copy button when copied"
+  },
+  "theme.SearchModal.askAiScreen.copyButtonTitle": {
+    "message": "Copy",
+    "description": "The title for copy button"
+  },
+  "theme.SearchModal.askAiScreen.likeButtonTitle": {
+    "message": "Like",
+    "description": "The title for like button"
+  },
+  "theme.SearchModal.askAiScreen.dislikeButtonTitle": {
+    "message": "Dislike",
+    "description": "The title for dislike button"
+  },
+  "theme.SearchModal.askAiScreen.thanksForFeedbackText": {
+    "message": "Thanks for your feedback!",
+    "description": "The text for thanks for feedback"
+  },
+  "theme.SearchModal.askAiScreen.preToolCallText": {
+    "message": "Searching...",
+    "description": "The text before tool call"
+  },
+  "theme.SearchModal.askAiScreen.duringToolCallText": {
+    "message": "Searching for ",
+    "description": "The text during tool call"
+  },
+  "theme.SearchModal.askAiScreen.afterToolCallText": {
+    "message": "Searched for",
+    "description": "The text after tool call"
+  },
+  "theme.SearchModal.footer.submitQuestionText": {
+    "message": "Submit question",
+    "description": "The submit question text for footer"
+  },
+  "theme.SearchModal.footer.backToSearchText": {
+    "message": "Back to search",
+    "description": "The back to search text for footer"
   }
 }

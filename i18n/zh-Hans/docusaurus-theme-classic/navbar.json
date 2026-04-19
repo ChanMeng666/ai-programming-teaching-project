@@ -14,5 +14,9 @@
   "item.label.博客": {
     "message": "博客",
     "description": "Navbar item with label 博客"
+  },
+  "item.label.留言板": {
+    "message": "留言板",
+    "description": "Navbar item with label 留言板"
   }
 }

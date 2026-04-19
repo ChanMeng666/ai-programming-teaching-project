@@ -800,7 +800,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 <!-- Project Links -->
 [demo-link]: https://programming.chanmeng.org/
-[docs-link]: https://programming.chanmeng.org/docs/intro
+[docs-link]: https://programming.chanmeng.org/docs/2025-summer/intro
 [blog-link]: https://programming.chanmeng.org/blog
 
 <!-- GitHub Links -->

@@ -5,38 +5,38 @@
   },
   "sidebar.tutorialSidebar.category.🚀 快速开始": {
     "message": "🚀 Quick Start",
-    "description": "The label for category 🚀 快速开始 in sidebar tutorialSidebar"
+    "description": "The label for category '🚀 快速开始' in sidebar 'tutorialSidebar'"
   },
   "sidebar.tutorialSidebar.category.📚 基础知识": {
     "message": "📚 Fundamentals",
-    "description": "The label for category 📚 基础知识 in sidebar tutorialSidebar"
+    "description": "The label for category '📚 基础知识' in sidebar 'tutorialSidebar'"
   },
   "sidebar.tutorialSidebar.category.🛠️ 开发工具": {
     "message": "🛠️ Development Tools",
-    "description": "The label for category 🛠️ 开发工具 in sidebar tutorialSidebar"
+    "description": "The label for category '🛠️ 开发工具' in sidebar 'tutorialSidebar'"
   },
   "sidebar.tutorialSidebar.category.📖 教程与实战": {
     "message": "📖 Tutorials & Practice",
-    "description": "The label for category 📖 教程与实战 in sidebar tutorialSidebar"
+    "description": "The label for category '📖 教程与实战' in sidebar 'tutorialSidebar'"
   },
   "sidebar.tutorialSidebar.category.基础教程": {
     "message": "Basic Tutorials",
-    "description": "The label for category 基础教程 in sidebar tutorialSidebar"
+    "description": "The label for category '基础教程' in sidebar 'tutorialSidebar'"
   },
   "sidebar.tutorialSidebar.category.实战项目": {
     "message": "Practical Projects",
-    "description": "The label for category 实战项目 in sidebar tutorialSidebar"
+    "description": "The label for category '实战项目' in sidebar 'tutorialSidebar'"
   },
   "sidebar.tutorialSidebar.category.🎯 进阶应用": {
     "message": "🎯 Advanced Applications",
-    "description": "The label for category 🎯 进阶应用 in sidebar tutorialSidebar"
+    "description": "The label for category '🎯 进阶应用' in sidebar 'tutorialSidebar'"
   },
   "sidebar.tutorialSidebar.category.AI系统开发": {
     "message": "AI System Development",
-    "description": "The label for category AI系统开发 in sidebar tutorialSidebar"
+    "description": "The label for category 'AI系统开发' in sidebar 'tutorialSidebar'"
   },
   "sidebar.tutorialSidebar.category.优秀案例": {
     "message": "Outstanding Examples",
-    "description": "The label for category 优秀案例 in sidebar tutorialSidebar"
+    "description": "The label for category '优秀案例' in sidebar 'tutorialSidebar'"
   }
 }

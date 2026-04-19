@@ -1,0 +1,33 @@
+.row {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0.5rem 0 1rem 0;
+}
+
+.badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 3px;
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.4;
+}
+
+.job {
+  background: #b78a2a;
+}
+
+.life {
+  background: #1f7ab8;
+}
+
+.fun {
+  background: #1fae6a;
+}
+
+.cool {
+  background: #9b2e83;
+}

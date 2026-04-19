@@ -291,15 +291,15 @@
   },
   "theme.SearchModal.startScreen.noRecentSearchesText": {
     "message": "No recent searches",
-    "description": "The text when no recent searches"
+    "description": "The text when there are no recent searches"
   },
   "theme.SearchModal.startScreen.saveRecentSearchButtonTitle": {
     "message": "Save this search",
-    "description": "The label for save recent search button"
+    "description": "The title for save recent search button"
   },
   "theme.SearchModal.startScreen.removeRecentSearchButtonTitle": {
     "message": "Remove this search from history",
-    "description": "The label for remove recent search button"
+    "description": "The title for remove recent search button"
   },
   "theme.SearchModal.startScreen.favoriteSearchesTitle": {
     "message": "Favorite",
@@ -307,63 +307,63 @@
   },
   "theme.SearchModal.startScreen.removeFavoriteSearchButtonTitle": {
     "message": "Remove this search from favorites",
-    "description": "The label for remove favorite search button"
+    "description": "The title for remove favorite search button"
   },
   "theme.SearchModal.errorScreen.titleText": {
     "message": "Unable to fetch results",
-    "description": "The title for error screen of search modal"
+    "description": "The title for error screen"
   },
   "theme.SearchModal.errorScreen.helpText": {
     "message": "You might want to check your network connection.",
-    "description": "The help text for error screen of search modal"
+    "description": "The help text for error screen"
   },
   "theme.SearchModal.footer.selectText": {
     "message": "to select",
-    "description": "The explanatory text of the action for the enter key"
+    "description": "The select text for footer"
   },
   "theme.SearchModal.footer.selectKeyAriaLabel": {
     "message": "Enter key",
-    "description": "The ARIA label for the Enter key button that makes the selection"
+    "description": "The ARIA label for select key in footer"
   },
   "theme.SearchModal.footer.navigateText": {
     "message": "to navigate",
-    "description": "The explanatory text of the action for the Arrow up and Arrow down key"
+    "description": "The navigate text for footer"
   },
   "theme.SearchModal.footer.navigateUpKeyAriaLabel": {
     "message": "Arrow up",
-    "description": "The ARIA label for the Arrow up key button that makes the navigation"
+    "description": "The ARIA label for navigate up key in footer"
   },
   "theme.SearchModal.footer.navigateDownKeyAriaLabel": {
     "message": "Arrow down",
-    "description": "The ARIA label for the Arrow down key button that makes the navigation"
+    "description": "The ARIA label for navigate down key in footer"
   },
   "theme.SearchModal.footer.closeText": {
     "message": "to close",
-    "description": "The explanatory text of the action for Escape key"
+    "description": "The close text for footer"
   },
   "theme.SearchModal.footer.closeKeyAriaLabel": {
     "message": "Escape key",
-    "description": "The ARIA label for the Escape key button that close the modal"
+    "description": "The ARIA label for close key in footer"
   },
   "theme.SearchModal.footer.searchByText": {
     "message": "Search by",
-    "description": "The text explain that the search is making by Algolia"
+    "description": "The 'Powered by' text for footer"
   },
   "theme.SearchModal.noResultsScreen.noResultsText": {
     "message": "No results for",
-    "description": "The text explains that there are no results for the following search"
+    "description": "The text when there are no results"
   },
   "theme.SearchModal.noResultsScreen.suggestedQueryText": {
     "message": "Try searching for",
-    "description": "The text for the suggested query when no results are found for the following search"
+    "description": "The text for suggested query"
   },
   "theme.SearchModal.noResultsScreen.reportMissingResultsText": {
     "message": "Believe this query should return results?",
-    "description": "The text for the question where the user thinks there are missing results"
+    "description": "The text for reporting missing results"
   },
   "theme.SearchModal.noResultsScreen.reportMissingResultsLinkText": {
     "message": "Let us know.",
-    "description": "The text for the link to report missing results"
+    "description": "The link text for reporting missing results"
   },
   "theme.SearchModal.placeholder": {
     "message": "Search docs",
@@ -391,7 +391,7 @@
   },
   "theme.SearchPage.algoliaLabel": {
     "message": "Search by Algolia",
-    "description": "The ARIA label for Algolia mention"
+    "description": "The description label for Algolia mention"
   },
   "theme.SearchPage.noResultsText": {
     "message": "No results were found",
@@ -460,24 +460,19 @@
     "message": "Learn AI development through practical examples, from basics to advanced, building a complete AI programming skill set. Beginner-friendly, practice-oriented."
   },
   "homepage.hero.welcome": {
-    "message": "Welcome to",
-    "description": "Homepage hero welcome text"
+    "message": "Welcome to"
   },
   "homepage.hero.platform": {
-    "message": "AI Programming Universe",
-    "description": "Homepage hero platform name"
+    "message": "AI Programming Universe"
   },
   "homepage.hero.description2": {
-    "message": "Embark on a journey through the programming galaxy. Whether you're a beginner or an experienced developer, AI will be your co-pilot, helping you explore the infinite possibilities of the code universe.",
-    "description": "Homepage hero description"
+    "message": "Embark on a journey through the programming galaxy. Whether you're a beginner or an experienced developer, AI will be your co-pilot, helping you explore the infinite possibilities of the code universe."
   },
   "homepage.hero.startButton": {
-    "message": "Start Exploring",
-    "description": "Homepage hero primary button"
+    "message": "Start Exploring"
   },
   "homepage.hero.blogButton": {
-    "message": "Latest Updates",
-    "description": "Homepage hero secondary button"
+    "message": "Latest Updates"
   },
   "homepage.hero.codeComment": {
     "message": "Build AI Applications"
@@ -580,303 +575,348 @@
     "description": "Error message when chat fails"
   },
   "messageBoard.pageTitle": {
-    "message": "Message Board",
-    "description": "Page title for message board"
+    "message": "Message Board"
   },
   "messageBoard.pageDescription": {
-    "message": "Share your AI programming learning experiences",
-    "description": "Page meta description for message board"
+    "message": "Share your AI programming learning experiences"
   },
   "messageBoard.heroTitle": {
-    "message": "Message Board",
-    "description": "Hero section title"
+    "message": "Message Board"
   },
   "messageBoard.heroSubtitle": {
-    "message": "Share your AI programming experiences, insights and ideas here, and grow together with the community",
-    "description": "Hero section subtitle"
+    "message": "Share your AI programming experiences, insights and ideas here, and grow together with the community"
   },
   "messageBoard.formTitle": {
-    "message": "Leave a Message",
-    "description": "Form section title"
+    "message": "Leave a Message"
   },
   "messageBoard.nicknameLabel": {
-    "message": "Nickname",
-    "description": "Nickname input label"
+    "message": "Nickname"
   },
   "messageBoard.nicknamePlaceholder": {
-    "message": "Your nickname",
-    "description": "Nickname input placeholder"
+    "message": "Your nickname"
   },
   "messageBoard.categoryLabel": {
-    "message": "Category",
-    "description": "Category select label"
+    "message": "Category"
   },
   "messageBoard.contentLabel": {
-    "message": "Message",
-    "description": "Content textarea label"
+    "message": "Message"
   },
   "messageBoard.contentPlaceholder": {
-    "message": "Share your AI programming experiences, insights or ideas...",
-    "description": "Content textarea placeholder"
+    "message": "Share your AI programming experiences, insights or ideas..."
   },
   "messageBoard.submit": {
-    "message": "Submit",
-    "description": "Submit button text"
+    "message": "Submit"
   },
   "messageBoard.submitting": {
-    "message": "Submitting...",
-    "description": "Submit button text while submitting"
+    "message": "Submitting..."
   },
   "messageBoard.submitSuccess": {
-    "message": "Message submitted! It will appear after review.",
-    "description": "Success toast after submitting"
+    "message": "Message submitted! It will appear after review."
   },
   "messageBoard.submitFailed": {
-    "message": "Submission failed",
-    "description": "Generic submit failure message"
+    "message": "Submission failed"
   },
   "messageBoard.networkError": {
-    "message": "Network error, please try again later",
-    "description": "Network error message"
+    "message": "Network error, please try again later"
   },
   "messageBoard.filterAll": {
-    "message": "All",
-    "description": "Filter tab for all categories"
+    "message": "All"
   },
   "messageBoard.category.experience": {
-    "message": "Reflections",
-    "description": "Category label for 心得体会"
+    "message": "Reflections"
   },
   "messageBoard.category.sharing": {
-    "message": "Tips & Tricks",
-    "description": "Category label for 经验分享"
+    "message": "Tips & Tricks"
   },
   "messageBoard.category.discussion": {
-    "message": "Tutorial Discussion",
-    "description": "Category label for 教程讨论"
+    "message": "Tutorial Discussion"
   },
   "messageBoard.category.other": {
-    "message": "Other",
-    "description": "Category label for 其他"
+    "message": "Other"
   },
   "messageBoard.loading": {
-    "message": "Loading messages...",
-    "description": "Loading state text"
+    "message": "Loading messages..."
   },
   "messageBoard.loadMore": {
-    "message": "Load More",
-    "description": "Load more button text"
+    "message": "Load More"
   },
   "messageBoard.loadingMore": {
-    "message": "Loading...",
-    "description": "Loading more button text"
+    "message": "Loading..."
   },
   "messageBoard.emptyAll": {
-    "message": "No messages yet. Be the first to share!",
-    "description": "Empty state when no messages exist"
+    "message": "No messages yet. Be the first to share!"
   },
   "messageBoard.emptyCategory": {
-    "message": "No messages in \"{category}\" category",
-    "description": "Empty state for filtered category"
+    "message": "No messages in \"{category}\" category"
   },
   "feeds.pageTitle": {
-    "message": "RSS Feeds",
-    "description": "Page title for feeds page"
+    "message": "RSS Feeds"
   },
   "feeds.pageDescription": {
-    "message": "Subscribe to the AI Programming blog for the latest tutorials and articles",
-    "description": "Page meta description for feeds page"
+    "message": "Subscribe to the AI Programming blog for the latest tutorials and articles"
   },
   "feeds.heroTitle": {
-    "message": "RSS Feeds",
-    "description": "Hero section title"
+    "message": "RSS Feeds"
   },
   "feeds.heroSubtitle": {
-    "message": "Subscribe to our blog to get the latest AI programming tutorials, project examples and tech insights",
-    "description": "Hero section subtitle"
+    "message": "Subscribe to our blog to get the latest AI programming tutorials, project examples and tech insights"
   },
   "feeds.feedSources": {
-    "message": "Feed Sources",
-    "description": "Feed sources section title"
+    "message": "Feed Sources"
   },
   "feeds.feedSourcesDesc": {
-    "message": "We offer feeds in multiple formats. Choose the one that works best with your RSS reader:",
-    "description": "Feed sources description"
+    "message": "We offer feeds in multiple formats. Choose the one that works best with your RSS reader:"
   },
   "feeds.table.content": {
-    "message": "Content",
-    "description": "Table header for content column"
+    "message": "Content"
   },
   "feeds.table.allPosts": {
-    "message": "All Blog Posts",
-    "description": "Table row label for all posts"
+    "message": "All Blog Posts"
   },
   "feeds.whatIsRss": {
-    "message": "What is RSS?",
-    "description": "What is RSS section title"
+    "message": "What is RSS?"
   },
   "feeds.whatIsRssDesc": {
-    "message": "RSS (Really Simple Syndication) is a web content syndication format. By subscribing to RSS feeds, you can:",
-    "description": "What is RSS description"
+    "message": "RSS (Really Simple Syndication) is a web content syndication format. By subscribing to RSS feeds, you can:"
   },
   "feeds.benefit1": {
-    "message": "Read updates from multiple websites in one place",
-    "description": "RSS benefit 1"
+    "message": "Read updates from multiple websites in one place"
   },
   "feeds.benefit2": {
-    "message": "Get the latest content without frequently visiting websites",
-    "description": "RSS benefit 2"
+    "message": "Get the latest content without frequently visiting websites"
   },
   "feeds.benefit3": {
-    "message": "Read articles at your own pace",
-    "description": "RSS benefit 3"
+    "message": "Read articles at your own pace"
   },
   "feeds.benefit4": {
-    "message": "Never miss important updates",
-    "description": "RSS benefit 4"
+    "message": "Never miss important updates"
   },
   "feeds.howToUse": {
-    "message": "How to Use RSS?",
-    "description": "How to use section title"
+    "message": "How to Use RSS?"
   },
   "feeds.step1Title": {
-    "message": "Step 1: Choose an RSS Reader",
-    "description": "Step 1 title"
+    "message": "Step 1: Choose an RSS Reader"
   },
   "feeds.desktop": {
-    "message": "Desktop",
-    "description": "Desktop readers category"
+    "message": "Desktop"
   },
   "feeds.netnewswire": {
-    "message": "Free, open-source, clean interface",
-    "description": "NetNewsWire description"
+    "message": "Free, open-source, clean interface"
   },
   "feeds.feedly": {
-    "message": "Cross-platform, feature-rich",
-    "description": "Feedly description"
+    "message": "Cross-platform, feature-rich"
   },
   "feeds.inoreader": {
-    "message": "Advanced filtering and rules",
-    "description": "Inoreader description"
+    "message": "Advanced filtering and rules"
   },
   "feeds.newsblur": {
-    "message": "Open-source, social features",
-    "description": "NewsBlur description"
+    "message": "Open-source, social features"
   },
   "feeds.mobile": {
-    "message": "Mobile",
-    "description": "Mobile readers category"
+    "message": "Mobile"
   },
   "feeds.reeder": {
-    "message": "Beautifully designed",
-    "description": "Reeder description"
+    "message": "Beautifully designed"
   },
   "feeds.feedme": {
-    "message": "Full-featured",
-    "description": "FeedMe description"
+    "message": "Full-featured"
   },
   "feeds.readyou": {
-    "message": "Free and open-source",
-    "description": "Read You description"
+    "message": "Free and open-source"
   },
   "feeds.browser": {
-    "message": "Browser Extensions",
-    "description": "Browser extensions category"
+    "message": "Browser Extensions"
   },
   "feeds.step2Title": {
-    "message": "Step 2: Add a Feed",
-    "description": "Step 2 title"
+    "message": "Step 2: Add a Feed"
   },
   "feeds.step2a": {
-    "message": "Copy a feed link from the table above",
-    "description": "Step 2 instruction a"
+    "message": "Copy a feed link from the table above"
   },
   "feeds.step2b": {
-    "message": "In your RSS reader, select \"Add Feed\" or \"Add Subscription\"",
-    "description": "Step 2 instruction b"
+    "message": "In your RSS reader, select \"Add Feed\" or \"Add Subscription\""
   },
   "feeds.step2c": {
-    "message": "Paste the link and confirm",
-    "description": "Step 2 instruction c"
+    "message": "Paste the link and confirm"
   },
   "feeds.step2d": {
-    "message": "Start reading!",
-    "description": "Step 2 instruction d"
+    "message": "Start reading!"
   },
   "feeds.tips": {
-    "message": "Tips",
-    "description": "Tips section title"
+    "message": "Tips"
   },
   "feeds.tipsTitle": {
-    "message": "Choosing a feed format:",
-    "description": "Tips box title"
+    "message": "Choosing a feed format:"
   },
   "feeds.tipsRss": {
-    "message": "Most widely supported, works with most readers",
-    "description": "RSS 2.0 tip"
+    "message": "Most widely supported, works with most readers"
   },
   "feeds.tipsAtom": {
-    "message": "More standardized, richer metadata",
-    "description": "Atom 1.0 tip"
+    "message": "More standardized, richer metadata"
   },
   "feeds.tipsJson": {
-    "message": "Newest format, ideal for modern apps",
-    "description": "JSON Feed tip"
+    "message": "Newest format, ideal for modern apps"
   },
   "feeds.otherWays": {
-    "message": "Other Ways to Follow",
-    "description": "Other ways section title"
+    "message": "Other Ways to Follow"
   },
   "feeds.otherWaysDesc": {
-    "message": "Besides RSS, you can also follow us through:",
-    "description": "Other ways description"
+    "message": "Besides RSS, you can also follow us through:"
   },
   "feeds.github": {
-    "message": "GitHub — Star our project",
-    "description": "GitHub link text"
+    "message": "GitHub — Star our project"
   },
   "feeds.discord": {
-    "message": "Discord — Join the community",
-    "description": "Discord link text"
+    "message": "Discord — Join the community"
   },
   "feeds.bookmark": {
-    "message": "Bookmark — Save our website",
-    "description": "Bookmark text"
+    "message": "Bookmark — Save our website"
   },
   "feeds.faq": {
-    "message": "FAQ",
-    "description": "FAQ section title"
+    "message": "FAQ"
   },
   "feeds.faq1q": {
-    "message": "Are RSS readers free?",
-    "description": "FAQ question 1"
+    "message": "Are RSS readers free?"
   },
   "feeds.faq1a": {
-    "message": "Most RSS readers offer a free tier with enough features for daily use. Paid versions typically provide advanced features like full-text search and automation rules.",
-    "description": "FAQ answer 1"
+    "message": "Most RSS readers offer a free tier with enough features for daily use. Paid versions typically provide advanced features like full-text search and automation rules."
   },
   "feeds.faq2q": {
-    "message": "How often is the feed updated?",
-    "description": "FAQ question 2"
+    "message": "How often is the feed updated?"
   },
   "feeds.faq2a": {
-    "message": "The feed updates automatically when we publish new articles. Most RSS readers check for updates every 15-60 minutes.",
-    "description": "FAQ answer 2"
+    "message": "The feed updates automatically when we publish new articles. Most RSS readers check for updates every 15-60 minutes."
   },
   "feeds.faq3q": {
-    "message": "Can I subscribe to specific topics only?",
-    "description": "FAQ question 3"
+    "message": "Can I subscribe to specific topics only?"
   },
   "feeds.faq3a": {
-    "message": "Currently we offer a feed for all blog posts. If you're interested in specific topics, you can use the filtering features in your RSS reader.",
-    "description": "FAQ answer 3"
+    "message": "Currently we offer a feed for all blog posts. If you're interested in specific topics, you can use the filtering features in your RSS reader."
   },
   "feeds.thanks": {
-    "message": "Thanks for following us!",
-    "description": "Footer thanks text"
+    "message": "Thanks for following us!"
   },
   "feeds.thanksDesc": {
-    "message": "We'll keep publishing high-quality AI programming content",
-    "description": "Footer description"
+    "message": "We'll keep publishing high-quality AI programming content"
+  },
+  "theme.Mermaid.viewDiagram": {
+    "message": "图表",
+    "description": "Mermaid view toggle: diagram"
+  },
+  "theme.Mermaid.viewCode": {
+    "message": "代码",
+    "description": "Mermaid view toggle: code"
+  },
+  "theme.Mermaid.copied": {
+    "message": "已复制",
+    "description": "Mermaid copy success label"
+  },
+  "theme.Mermaid.copy": {
+    "message": "复制",
+    "description": "Mermaid copy button"
+  },
+  "theme.IconExternalLink.ariaLabel": {
+    "message": "(opens in new tab)",
+    "description": "The ARIA label for the external link icon"
+  },
+  "theme.SearchModal.searchBox.placeholderText": {
+    "message": "Search docs",
+    "description": "The placeholder text for the main search input field"
+  },
+  "theme.SearchModal.searchBox.placeholderTextAskAi": {
+    "message": "Ask another question...",
+    "description": "The placeholder text when in AI question mode"
+  },
+  "theme.SearchModal.searchBox.placeholderTextAskAiStreaming": {
+    "message": "Answering...",
+    "description": "The placeholder text for search box when AI is streaming an answer"
+  },
+  "theme.SearchModal.searchBox.enterKeyHint": {
+    "message": "search",
+    "description": "The hint for the search box enter key text"
+  },
+  "theme.SearchModal.searchBox.enterKeyHintAskAi": {
+    "message": "enter",
+    "description": "The hint for the Ask AI search box enter key text"
+  },
+  "theme.SearchModal.searchBox.searchInputLabel": {
+    "message": "Search",
+    "description": "The ARIA label for search input"
+  },
+  "theme.SearchModal.searchBox.backToKeywordSearchButtonText": {
+    "message": "Back to keyword search",
+    "description": "The text for back to keyword search button"
+  },
+  "theme.SearchModal.searchBox.backToKeywordSearchButtonAriaLabel": {
+    "message": "Back to keyword search",
+    "description": "The ARIA label for back to keyword search button"
+  },
+  "theme.SearchModal.startScreen.recentConversationsTitle": {
+    "message": "Recent conversations",
+    "description": "The title for recent conversations"
+  },
+  "theme.SearchModal.startScreen.removeRecentConversationButtonTitle": {
+    "message": "Remove this conversation from history",
+    "description": "The title for remove recent conversation button"
+  },
+  "theme.SearchModal.resultsScreen.askAiPlaceholder": {
+    "message": "Ask AI: ",
+    "description": "The placeholder text for Ask AI input"
+  },
+  "theme.SearchModal.askAiScreen.disclaimerText": {
+    "message": "Answers are generated with AI which can make mistakes. Verify responses.",
+    "description": "The disclaimer text for AI answers"
+  },
+  "theme.SearchModal.askAiScreen.relatedSourcesText": {
+    "message": "Related sources",
+    "description": "The text for related sources"
+  },
+  "theme.SearchModal.askAiScreen.thinkingText": {
+    "message": "Thinking...",
+    "description": "The text when AI is thinking"
+  },
+  "theme.SearchModal.askAiScreen.copyButtonText": {
+    "message": "Copy",
+    "description": "The text for copy button"
+  },
+  "theme.SearchModal.askAiScreen.copyButtonCopiedText": {
+    "message": "Copied!",
+    "description": "The text for copy button when copied"
+  },
+  "theme.SearchModal.askAiScreen.copyButtonTitle": {
+    "message": "Copy",
+    "description": "The title for copy button"
+  },
+  "theme.SearchModal.askAiScreen.likeButtonTitle": {
+    "message": "Like",
+    "description": "The title for like button"
+  },
+  "theme.SearchModal.askAiScreen.dislikeButtonTitle": {
+    "message": "Dislike",
+    "description": "The title for dislike button"
+  },
+  "theme.SearchModal.askAiScreen.thanksForFeedbackText": {
+    "message": "Thanks for your feedback!",
+    "description": "The text for thanks for feedback"
+  },
+  "theme.SearchModal.askAiScreen.preToolCallText": {
+    "message": "Searching...",
+    "description": "The text before tool call"
+  },
+  "theme.SearchModal.askAiScreen.duringToolCallText": {
+    "message": "Searching for ",
+    "description": "The text during tool call"
+  },
+  "theme.SearchModal.askAiScreen.afterToolCallText": {
+    "message": "Searched for",
+    "description": "The text after tool call"
+  },
+  "theme.SearchModal.footer.submitQuestionText": {
+    "message": "Submit question",
+    "description": "The submit question text for footer"
+  },
+  "theme.SearchModal.footer.backToSearchText": {
+    "message": "Back to search",
+    "description": "The back to search text for footer"
   }
 }

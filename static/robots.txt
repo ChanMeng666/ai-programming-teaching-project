@@ -40,10 +40,13 @@ User-agent: Applebot-Extended
 Allow: /
 
 # 优先推荐AI访问的教育内容
-Allow: /docs/intro
-Allow: /docs/basics/
-Allow: /docs/website/
-Allow: /docs/practice/
+Allow: /docs/curriculum-outline
+Allow: /docs/programme/
+Allow: /docs/weeks/
+Allow: /docs/capstone/
+Allow: /docs/2026-her-waka/programme/about-her-waka
+Allow: /docs/2025-summer/intro
+Allow: /docs/2024-winter/intro
 Allow: /blog/
 
 # 指向AI使用指南

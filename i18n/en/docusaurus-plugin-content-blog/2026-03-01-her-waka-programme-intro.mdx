@@ -1,0 +1,43 @@
+---
+slug: her-waka-2026-programme-intro
+title: "HER WAKA 2026: AI × Career Empowerment Programme for Auckland Women"
+description: "HER WAKA 2026 — co-launched by SheSharp, MSD and AcademyEX. Four in-person workshops, 10 self-paced AI tutorials, and a complete job-search resource library. Now merged into this site as a new version."
+authors: chanmeng
+tags: [shexing-activity, ai-programming, tutorial]
+image: /img/her-waka/banners/her-waka-banner-landscape.jpg
+---
+
+We have merged the entire **HER WAKA 2026** curriculum into this site as a brand new version — [HER WAKA 2026](/en/docs/2026-her-waka/programme/about-her-waka) — sitting alongside the existing "Winter 2024 SheCodes Program" and "Summer 2025 SheCodes Program".
+
+{/* truncate */}
+
+## What is it?
+
+HER WAKA is a comprehensive employment-empowerment programme co-delivered by **SheSharp** and **Ministry of Social Development (MSD, New Zealand)**, hosted by **academyEX**, with industry insights from **RCSA** on the NZ recruitment landscape. It is designed for women MSD clients in the Auckland region preparing to return to the workforce. One workshop per month from March to June 2026, all in person at academyEX Pikopiko.
+
+The programme has three core pillars:
+
+1. **Four in-person workshops** — AI & The Future of Work, #IAmRemarkable & Vibe Coding, Employment Rights, Networking & Career Connections
+2. **10 self-paced AI tutorials** — organised across five difficulty levels from ★ to ★★★★★, ranging from "Summarise Gmail with AI" to "Build a Daily Report Bot with Claude Code"
+3. **A complete job-search resource library** — NZ IT job market, job platforms, recruitment agencies, CV/LinkedIn, employment rights, AI learning tools, tech communities
+
+## Why merge it into this site?
+
+HER WAKA was originally a standalone Mintlify site. Merging it here gives us:
+
+- **One navigation, three cohorts** — switch seamlessly between Winter 2024, Summer 2025 and HER WAKA 2026 via the version dropdown in the top-right
+- **Shared search and blog** — Algolia indexes all three cohorts in one go; the blog continues to grow
+- **Bilingual support** — Chinese is the default; switch to English to read the original English curriculum (originally designed for MSD clients)
+
+## Quick links
+
+- 👉 [Programme overview](/en/docs/2026-her-waka/programme/about-her-waka)
+- 👉 [Four-workshop schedule](/en/docs/2026-her-waka/programme/schedule)
+- 👉 [10 self-paced tutorials](/en/docs/2026-her-waka/tutorial/)
+- 👉 [Job-search resource library](/en/docs/2026-her-waka/resources/job-readiness)
+
+## Technical note (for the curious)
+
+The original site used Mintlify-specific components (`<Card>`/`<Tabs>`/`<Steps>`/`<Accordion>` etc.). To avoid 1000+ MDX manual rewrites, this migration introduces a lightweight **MintlifyShim compatibility layer** that maps these components to native Docusaurus features (`@theme/Tabs`, `@theme/Admonition`, native `<details>`, etc.) and globally injects them via a swizzled `MDXComponents.js` — leaving the MDX files almost untouched. The shim layer can also be reused for any future Mintlify-to-Docusaurus migration.
+
+Happy learning 🌸

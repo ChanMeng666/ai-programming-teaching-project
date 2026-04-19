@@ -49,7 +49,7 @@ export default function SpaceHero() {
 
           {/* 按钮组 */}
           <div className={styles.actions}>
-            <Link to="/docs/intro" className={styles.primaryButton}>
+            <Link to="/docs/curriculum-outline" className={styles.primaryButton}>
               <RocketIcon />
               <Translate id="homepage.hero.startButton">开始探索</Translate>
             </Link>
