@@ -787,6 +787,10 @@ html {
   color: var(--ifm-color-primary);
 }
 
+html[lang|='en'] .table-of-contents:before {
+  content: 'On this page';
+}
+
 .table-of-contents__link {
   transition: all var(--animation-duration) var(--animation-timing);
 }
