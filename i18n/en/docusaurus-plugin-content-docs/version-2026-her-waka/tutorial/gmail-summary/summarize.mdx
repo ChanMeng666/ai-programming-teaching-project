@@ -1,0 +1,334 @@
+---
+title: "Summarise your Gmail"
+description: "Ask AI to read your emails and create clear, useful summaries — catch up on unread messages, filter by sender, and try different summary styles."
+---
+
+Your AI tool is connected to Gmail. Now let's put it to work — ask it to read your inbox and give you a summary you can actually use.
+
+## Get your first summary
+
+<Tabs>
+  <Tab title="Full Tutorial (CLI + Voice)">
+    Make sure Gemini CLI is running in your terminal. Then say (with Wispr Flow) or type this prompt:
+
+    ```text title="Say this or copy this prompt"
+    Check my Gmail and summarise all my unread emails. Include the main topics, any action items I need to take, and flag anything urgent.
+    ```
+
+    Gemini CLI will use the Gmail tools to fetch your emails and return a structured summary.
+
+    <Tip>
+    **Gemini asks for permission?** If Gemini CLI asks to approve a tool call, type `y` and press **Enter**.
+    </Tip>
+
+    <Tip>
+    **Voice or typing — both work.** If you have Wispr Flow running, just start speaking. Otherwise, copy and paste the prompt or type your own request. Gemini understands natural language either way.
+    </Tip>
+  </Tab>
+
+  <Tab title="Quick Preview (browser)">
+    Open [gemini.google.com](https://gemini.google.com) and paste this prompt:
+
+    ```text title="Copy this prompt"
+    Check my Gmail and summarise all my unread emails.
+
+    For each email, include:
+    - Who it's from
+    - The subject line
+    - A one-sentence summary of what it says
+    - Whether it needs a reply (yes / no / not sure)
+
+    Group them by importance: urgent first, then informational, then newsletters or promotions.
+    ```
+
+    Within a few seconds, Gemini will read your inbox and return a structured summary.
+
+    <Tip>
+    **First time?** Gemini may ask you to confirm Gmail access. Click **Allow** when prompted.
+    </Tip>
+  </Tab>
+</Tabs>
+
+You should see a summary that looks something like this:
+
+> **Unread emails (12 total):**
+>
+> **Urgent**
+> - **Sarah Chen** — "Budget approval needed" — Asking for sign-off on Q2 budget by Wednesday. *Needs reply: yes*
+> - **IT Support** — "Password expiry reminder" — Your password expires in 3 days. *Needs reply: no (action needed)*
+>
+> **Informational**
+> - **Project Team** — "Sprint review notes" — Summary of last week's sprint. 3 action items assigned to you. *Needs reply: not sure*
+> - **HR** — "Updated leave policy" — New guidelines for annual leave requests. *Needs reply: no*
+>
+> **Newsletters & Promotions**
+> - **LinkedIn News** — "This week in tech" — Weekly industry roundup. *Needs reply: no*
+> - **Coursera** — "New courses for you" — Course recommendations based on your profile. *Needs reply: no*
+
+That's it — you just caught up on your entire inbox in seconds.
+
+## Filter by sender
+
+Want to see everything from a specific person? Try this prompt.
+
+<Tabs>
+  <Tab title="Full Tutorial (CLI + Voice)">
+    ```text title="Say this or copy this prompt"
+    Find all emails from [person's name] in the last 30 days and give me a summary of what they've been writing about.
+    ```
+  </Tab>
+
+  <Tab title="Quick Preview (browser)">
+    ```text title="Copy this prompt — replace the name"
+    Find all emails from [person's name or email address] in the last 30 days
+    and summarise them.
+
+    Include:
+    - The date of each email
+    - The subject line
+    - A brief summary of what they said or asked
+    - Any action items or requests directed at me
+
+    Put the most recent emails first.
+    ```
+  </Tab>
+</Tabs>
+
+<Info>
+**This is incredibly useful for catching up before meetings.** If you're about to meet with someone, ask AI to summarise all recent emails from them. You'll walk in fully prepared.
+</Info>
+
+## Try different summary styles
+
+The first summary is a great start. But depending on your situation, you might want a different format. Try these styles.
+
+<Tabs>
+  <Tab title="Quick catch-up">
+    <Tabs>
+      <Tab title="Full Tutorial (CLI + Voice)">
+        ```text title="Say this or copy this prompt"
+        Give me a quick casual catch-up on my unread emails, like a colleague filling me in over coffee. Keep it to five sentences maximum.
+        ```
+      </Tab>
+
+      <Tab title="Quick Preview (browser)">
+        ```text title="Copy this prompt"
+        Summarise my unread emails as a quick catch-up for someone who's been
+        away for a few days.
+
+        Write it in a casual, friendly tone — like a colleague filling me in
+        over coffee. Keep it to 5 sentences maximum.
+        ```
+      </Tab>
+    </Tabs>
+  </Tab>
+
+  <Tab title="Executive briefing">
+    <Tabs>
+      <Tab title="Full Tutorial (CLI + Voice)">
+        ```text title="Say this or copy this prompt"
+        Summarise my unread emails as a professional executive briefing I could forward to my manager. Include key decisions needed, action items with deadlines, and any risks.
+        ```
+      </Tab>
+
+      <Tab title="Quick Preview (browser)">
+        ```text title="Copy this prompt"
+        Summarise my unread emails as a professional executive briefing.
+
+        Include:
+        - Date range covered
+        - Key decisions or approvals needed
+        - Action items with deadlines (if mentioned)
+        - Risks or escalations
+
+        Format it as a document I could forward to my manager.
+        ```
+      </Tab>
+    </Tabs>
+  </Tab>
+
+  <Tab title="Action items only">
+    <Tabs>
+      <Tab title="Full Tutorial (CLI + Voice)">
+        ```text title="Say this or copy this prompt"
+        Go through my Gmail and extract only action items — things people are asking me to do or deadlines I need to meet. Ignore newsletters and promotions.
+        ```
+      </Tab>
+
+      <Tab title="Quick Preview (browser)">
+        ```text title="Copy this prompt"
+        Read my unread emails and extract only the action items —
+        things I need to do, respond to, or follow up on.
+
+        Ignore newsletters, promotions, and informational emails.
+        List each action item as a bullet point with the sender's name
+        and the deadline (if mentioned).
+        ```
+      </Tab>
+    </Tabs>
+  </Tab>
+
+  <Tab title="Meeting invites">
+    <Tabs>
+      <Tab title="Full Tutorial (CLI + Voice)">
+        ```text title="Say this or copy this prompt"
+        Check my Gmail for any meeting invitations I haven't responded to. List the date, time, and topic for each one.
+        ```
+      </Tab>
+
+      <Tab title="Quick Preview (browser)">
+        ```text title="Copy this prompt"
+        Check my Gmail for any meeting invitations or calendar-related emails.
+
+        List the date, time, topic, and organiser for each.
+        Tell me which ones I haven't responded to yet.
+        ```
+      </Tab>
+    </Tabs>
+  </Tab>
+
+  <Tab title="By topic">
+    <Tabs>
+      <Tab title="Full Tutorial (CLI + Voice)">
+        ```text title="Say this or copy this prompt"
+        Search my emails for anything related to [topic or project name] and summarise what's been discussed, what was decided, and what's still pending.
+        ```
+      </Tab>
+
+      <Tab title="Quick Preview (browser)">
+        ```text title="Copy this prompt — replace the topic"
+        Search my recent emails for anything related to [topic or project name].
+
+        Summarise what's been discussed, any decisions made, and what's
+        still pending. Include who's involved in each thread.
+        ```
+      </Tab>
+    </Tabs>
+  </Tab>
+</Tabs>
+
+<Info>
+**The key skill here is prompt writing.** Notice how each prompt tells the AI exactly what format you want, what to include, and what to leave out. The more specific your instructions, the more useful the summary.
+</Info>
+
+## Go further
+
+Once you're comfortable with the basics, try these creative prompts. They work with both paths — say them with Wispr Flow, type them, or paste them.
+
+```text title="Say this or copy this prompt"
+Are there any emails I haven't replied to that are more than 3 days old?
+```
+
+```text title="Say this or copy this prompt"
+Summarise all newsletters I received this week.
+```
+
+```text title="Say this or copy this prompt"
+Find emails with attachments and list what was attached.
+```
+
+```text title="Say this or copy this prompt"
+Find all emails from [person's name] and draft a quick reply to their most recent one.
+```
+
+```text title="Say this or copy this prompt"
+Which emails this week mentioned a deadline? List the deadline and who set it.
+```
+
+<Tip>
+**This is the magic of natural language.** You do not need to memorise commands or search syntax — just describe what you want. If the AI is not sure what you mean, it will ask you to clarify.
+</Tip>
+
+## Ask follow-up questions
+
+The AI remembers the emails it just read. You can ask follow-up questions without fetching the emails again. Try any of these:
+
+```text title="Say this or copy this prompt"
+Were there any emails about [topic]?
+```
+
+```text title="Say this or copy this prompt"
+Which emails had attachments? List the sender, subject, and what the attachment seems to be.
+```
+
+```text title="Say this or copy this prompt"
+Summarise only emails from the last 24 hours.
+```
+
+```text title="Say this or copy this prompt"
+Draft a short, professional reply to [sender's name]'s email about [topic].
+```
+
+<Tip>
+**This is where AI really shines.** Instead of scrolling through hundreds of emails looking for one piece of information, you can just ask. "Did anyone send me a PDF this week?" is much faster than checking every email yourself.
+</Tip>
+
+## Save your summary
+
+Want to keep a copy of your summary? Here's how.
+
+<Tabs>
+  <Tab title="Full Tutorial (CLI + Voice)">
+    Ask Gemini CLI to save it to a file:
+
+    ```text title="Say this or copy this prompt"
+    Save that summary to a file called email-summary.txt in the current folder.
+    ```
+
+    The summary is now saved as a text file on your computer.
+  </Tab>
+
+  <Tab title="Quick Preview (browser)">
+    - **Copy and paste:** Select the summary text and paste it into a document, email, or notes app
+    - **Share:** Click the **share** icon on Gemini's response to get a shareable link
+  </Tab>
+</Tabs>
+
+## What just happened?
+
+Let's recap what you did:
+
+1. **Connected** an AI tool to your Gmail account
+2. **Fetched** your unread emails — the AI handled this automatically
+3. **Summarised** your inbox in a structured, useful format
+4. **Filtered** by sender to see emails from a specific person
+5. **Customised** the summary style to match your needs
+6. **Asked follow-up questions** to find specific information
+
+The key insight: AI is excellent at reading large amounts of text and extracting what matters. A task that would take you 20 minutes of scrolling took the AI about 10 seconds.
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Gemini says it cannot access Gmail">
+    Go to [gemini.google.com/extensions](https://gemini.google.com/extensions) and check that the Google Workspace extension is toggled on. If it shows an error, toggle it off and on again. Make sure you are signed in with the correct Google account.
+  </Accordion>
+  <Accordion title="Gemini CLI says it has no Gmail tools">
+    Check that the Workspace extension is installed by typing `/extensions list` in Gemini CLI. If it's not listed, run the install command again:
+    ```bash
+    gemini extensions install https://github.com/gemini-cli-extensions/workspace
+    ```
+    Then exit (`/quit`) and restart Gemini CLI.
+  </Accordion>
+  <Accordion title="The summary is too vague or short">
+    Your inbox might not have enough unread emails. Try asking for a broader search: "Summarise all emails from the last 7 days" instead of just unread ones. You can also be more specific: "Summarise the 20 most recent emails."
+  </Accordion>
+  <Accordion title="The AI only shows a few emails">
+    By default, the AI may only fetch the most recent messages. Ask it to go further back: "Read all emails from the last 30 days and summarise them" or "Find the last 50 emails and give me a summary."
+  </Accordion>
+  <Accordion title="I get an authentication or permission error">
+    Your Gmail authorisation may have expired. Try these steps:
+    - **Gemini App:** Toggle the Workspace extension off and on again in Settings → Extensions
+    - **Gemini CLI:** Exit and restart Gemini CLI — it should prompt you to re-authorise
+  </Accordion>
+  <Accordion title="The summary includes irrelevant emails">
+    Add filtering instructions to your prompt. For example: "Ignore promotional emails and newsletters", "Only include emails from real people, not automated systems", or "Focus on emails related to [project name]."
+  </Accordion>
+  <Accordion title="My voice input has errors">
+    Wispr Flow may occasionally mishear technical terms or proper nouns. You can review and correct the text in Gemini CLI before pressing Enter. If voice input is causing too many errors, switch to typing or pasting prompts instead.
+  </Accordion>
+</AccordionGroup>
+
+<Note>
+Nice work — you've built a real productivity workflow for your inbox. Head to [Keep going](/docs/2026-her-waka/tutorial/gmail-summary/keep-going) for ideas on how to use this every day.
+</Note>

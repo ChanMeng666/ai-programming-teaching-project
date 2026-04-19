@@ -1,0 +1,26 @@
+.frame {
+  margin: 1rem 0;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--ifm-background-surface-color);
+}
+
+.frameBody {
+  padding: 0.5rem;
+}
+
+.frameBody img {
+  max-width: 100%;
+  display: block;
+  margin: 0 auto;
+  border-radius: 4px;
+}
+
+.caption {
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  color: var(--ifm-color-emphasis-700);
+  text-align: center;
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+}

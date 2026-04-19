@@ -1,0 +1,222 @@
+---
+title: "Get your morning briefing"
+description: "Ask AI to read your calendar and inbox — get a complete morning briefing in seconds."
+---
+
+Your AI tools are connected to Google Calendar and Gmail. Now let's put them to work — ask for a morning briefing and get everything you need to start your day.
+
+## Today's agenda
+
+First, let's see what's on your calendar today.
+
+<Tabs>
+  <Tab title="Gemini CLI + Voice">
+    Make sure Gemini CLI is running in your terminal. Then say (with Wispr Flow) or type this prompt:
+
+    ```text title="Say this or copy this prompt"
+    Show me my calendar for today. List each meeting with the time, title, and who's attending.
+    ```
+
+    <Tip>
+    **Gemini asks for permission?** If Gemini CLI asks to approve a tool call, type `y` and press **Enter**.
+    </Tip>
+
+    <Tip>
+    **Voice or typing — both work.** If you have Wispr Flow running, just start speaking. Otherwise, copy and paste the prompt or type your own request. Gemini understands natural language either way.
+    </Tip>
+  </Tab>
+
+  <Tab title="Direct gws Commands">
+    If you prefer to use `gws` directly in your terminal:
+
+    ```bash title="Copy this command"
+    gws calendar +agenda --today
+    ```
+
+    This prints today's events directly to your terminal — no AI needed.
+  </Tab>
+</Tabs>
+
+You should see something like this:
+
+> **Today's meetings (3 total):**
+>
+> - **9:00 AM** — Team standup · Sarah, James, Priya
+> - **11:30 AM** — Design review · Alex, Morgan
+> - **2:00 PM** — 1:1 with manager · Taylor
+
+That's your day at a glance — no need to open Google Calendar.
+
+## Email triage
+
+Now let's check your inbox. Instead of scrolling through every message, ask AI to sort them by urgency.
+
+<Tabs>
+  <Tab title="Gemini CLI + Voice">
+    ```text title="Say this or copy this prompt"
+    Check my Gmail and triage my unread emails. Group them by urgency: needs reply today, informational, and can ignore.
+    ```
+  </Tab>
+
+  <Tab title="Direct gws Commands">
+    ```bash title="Copy this command"
+    gws gmail +triage
+    ```
+
+    This runs the built-in triage workflow, which groups your unread emails by urgency.
+  </Tab>
+</Tabs>
+
+You should see something like this:
+
+> **Email triage (14 unread):**
+>
+> **Needs reply today**
+> - **Sarah Chen** — "Budget sign-off needed" — Asking for approval by end of day
+> - **Recruiter** — "Interview confirmation" — Confirming your slot for Thursday at 2 PM
+>
+> **Informational**
+> - **Project Team** — "Sprint notes" — Summary of last week's sprint, 2 action items for you
+> - **HR** — "Updated leave policy" — New guidelines for annual leave
+>
+> **Can ignore**
+> - **LinkedIn** — "Weekly digest" — Industry news roundup
+> - **Coursera** — "New courses for you" — Course recommendations
+
+Your inbox is triaged in seconds — you know exactly what needs your attention.
+
+## Standup summary
+
+Now let's generate a standup update based on your real calendar and email data.
+
+<Tabs>
+  <Tab title="Gemini CLI + Voice">
+    ```text title="Say this or copy this prompt"
+    Based on my calendar from yesterday and today, plus my recent emails, give me a standup summary: what I did yesterday, what I'm doing today, and any blockers.
+    ```
+  </Tab>
+
+  <Tab title="Direct gws Commands">
+    ```bash title="Copy this command"
+    gws workflow +standup-report
+    ```
+
+    This generates a standup report from your calendar and email activity.
+  </Tab>
+</Tabs>
+
+You should see something like this:
+
+> **Standup summary:**
+>
+> **Yesterday**
+> - Attended design review with Alex and Morgan
+> - Replied to Sarah's budget thread
+> - Reviewed sprint notes from Project Team
+>
+> **Today**
+> - Team standup at 9:00 AM
+> - Design review at 11:30 AM
+> - 1:1 with Taylor at 2:00 PM
+>
+> **Blockers**
+> - Waiting on budget sign-off from Sarah (email sent yesterday, reply needed today)
+
+Copy that into Slack and you're done — no more scrambling to remember what you did yesterday.
+
+## The full briefing
+
+Here's where AI really shines. Instead of asking for each piece separately, combine everything into one prompt.
+
+<Tabs>
+  <Tab title="Gemini CLI + Voice">
+    ```text title="Say this or copy this prompt"
+    Give me a complete morning briefing: today's meetings with times, urgent emails that need replies, and a quick standup summary I can paste into Slack.
+    ```
+  </Tab>
+
+  <Tab title="Direct gws Commands">
+    For the combined briefing, you will want to use Gemini CLI — this is exactly the kind of task where AI adds value by combining multiple data sources into one summary. The direct `gws` commands work best for individual tasks.
+  </Tab>
+</Tabs>
+
+<Info>
+**This is where AI shines.** Instead of checking your calendar, then your inbox, then trying to write a standup update — AI pulls from all three sources at once and gives you a single, structured briefing. One prompt replaces 15 minutes of context-switching.
+</Info>
+
+## Save your briefing
+
+Want to keep a copy of your briefing? Here's how.
+
+<Tabs>
+  <Tab title="Gemini CLI + Voice">
+    Ask Gemini CLI to save it to a file:
+
+    ```text title="Say this or copy this prompt"
+    Save that briefing to a file called morning-briefing.txt in the current folder.
+    ```
+
+    The briefing is now saved as a text file on your computer.
+  </Tab>
+
+  <Tab title="Direct gws Commands">
+    You can pipe the output of any `gws` command to a file:
+
+    ```bash title="Copy this command"
+    gws calendar +agenda --today > morning-briefing.txt
+    ```
+
+    This saves the calendar output to a text file. You can append email triage to the same file:
+
+    ```bash title="Copy this command"
+    gws gmail +triage >> morning-briefing.txt
+    ```
+  </Tab>
+</Tabs>
+
+## What just happened?
+
+Let's recap what you did:
+
+1. **Checked your calendar** — AI listed today's meetings with times and attendees
+2. **Triaged your inbox** — AI grouped emails by urgency so you know what to tackle first
+3. **Generated a standup summary** — AI wrote a ready-to-paste update from your real data
+4. **Combined everything** — one prompt gave you a complete morning briefing
+
+The key insight: AI is excellent at pulling data from multiple sources and combining it into something useful. A task that would take you 15 minutes of tab-switching took AI about 10 seconds.
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Calendar shows no events">
+    Make sure your Google Calendar actually has events for today. Try asking for a broader range: "Show me my calendar for this week" to confirm the connection is working. If you see events for other days but not today, your calendar is connected correctly — you just have a free day.
+  </Accordion>
+  <Accordion title="Gmail triage is empty">
+    You may not have unread emails. Try asking: "Show me all emails from the last 3 days" instead of just unread ones. You can also check that Gmail is connected by asking: "How many emails do I have in my inbox?"
+  </Accordion>
+  <Accordion title="Gemini says it can't access Calendar or Gmail">
+    The extension may not be installed correctly. Check with `/extensions list` inside Gemini CLI. If the workspace extension is not listed, install it again:
+    ```bash
+    gemini extensions install https://github.com/googleworkspace/cli
+    ```
+    Then exit (`/quit`) and restart Gemini CLI.
+  </Accordion>
+  <Accordion title="Authentication error">
+    Your Google authorisation may have expired. Try these steps:
+    1. Exit Gemini CLI (`/quit`)
+    2. Re-authenticate with gws: `gws auth login -s gmail,calendar`
+    3. Restart Gemini CLI and try again
+
+    If that doesn't work, check your [Google Account security settings](https://myaccount.google.com/permissions) to make sure the app still has access.
+  </Accordion>
+  <Accordion title="The standup summary is generic or inaccurate">
+    AI builds the standup from your calendar events and recent emails. If your calendar was empty yesterday, there won't be much to report. Try being more specific: "Check my calendar for the last 3 days and my emails from the last 2 days, then write a standup summary."
+  </Accordion>
+  <Accordion title="My voice input has errors">
+    Wispr Flow may occasionally mishear technical terms or proper nouns. You can review and correct the text in Gemini CLI before pressing Enter. If voice input is causing too many errors, switch to typing or pasting prompts instead.
+  </Accordion>
+</AccordionGroup>
+
+<Note>
+Nice work — you've built a real morning briefing workflow. Head to [Keep going](/docs/2026-her-waka/tutorial/morning-briefing/keep-going) for ideas on how to make this a daily habit.
+</Note>

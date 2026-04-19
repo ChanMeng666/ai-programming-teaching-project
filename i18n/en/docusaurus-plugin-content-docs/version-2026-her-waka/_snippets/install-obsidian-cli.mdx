@@ -1,0 +1,57 @@
+Obsidian is a free note-taking app that stores your notes as plain text files on your computer. The CLI lets you control it from the terminal.
+
+<Tabs>
+  <Tab title="Windows">
+    1. Go to [obsidian.md/download](https://obsidian.md/download) and click **Download for Windows**
+    2. Run the installer and follow the prompts
+    3. Open Obsidian — if this is your first time, click **Create new vault**, give it a name (e.g. "My Notes"), and choose where to save it
+  </Tab>
+  <Tab title="macOS">
+    1. Go to [obsidian.md/download](https://obsidian.md/download) and click **Download for macOS**
+    2. Drag Obsidian to your **Applications** folder
+    3. Open Obsidian — if this is your first time, click **Create new vault**, give it a name (e.g. "My Notes"), and choose where to save it
+  </Tab>
+</Tabs>
+
+<Info>
+**Already have Obsidian?** Make sure you are running version **1.12.4 or later**. Go to **Settings** → **General** → check the version number at the top. If you need to update, download the latest installer from [obsidian.md/download](https://obsidian.md/download).
+</Info>
+
+Now enable the CLI:
+
+1. In Obsidian, open **Settings** (gear icon in the bottom-left)
+2. Go to **General**
+3. Find **Command line interface** and toggle it **on**
+4. Follow the prompt to register the CLI
+5. **Close and reopen your terminal** for the changes to take effect
+
+Test it by opening your terminal and typing:
+
+```bash
+obsidian help
+```
+
+You should see a list of available commands. If you do, the CLI is ready.
+
+<Accordion title="'obsidian' command not found">
+Restart your terminal after enabling the CLI — the PATH changes only take effect in new terminal windows.
+
+**macOS:** Check that your `~/.zprofile` file contains this line:
+```bash
+export PATH="$PATH:/Applications/Obsidian.app/Contents/MacOS"
+```
+If it is missing, add it manually, then restart your terminal.
+
+**Windows:** Make sure you are using the Obsidian 1.12.4+ installer. The installer adds a terminal redirector that allows the CLI to work. If the command still isn't found, try restarting your computer.
+</Accordion>
+
+<Accordion title="Obsidian must be running">
+The CLI connects to the running Obsidian app. Make sure Obsidian is open before running CLI commands. If Obsidian is not running, the first CLI command should launch it automatically — but this may take a few seconds.
+</Accordion>
+
+<Accordion title="I have multiple vaults">
+By default, the CLI uses the vault in your current terminal directory, or the most recently active vault. To target a specific vault, add `vault=<name>` before your command:
+```bash
+obsidian vault="My Notes" help
+```
+</Accordion>

@@ -1,0 +1,121 @@
+---
+title: "Set up your tools"
+description: "Install Gemini CLI, Obsidian with the CLI plugin, and optionally Wispr Flow for voice input. Then verify everything works by talking to your vault."
+---
+
+import InstallNodejs from "../../_snippets/install-nodejs.mdx";
+import InstallGeminiCli from "../../_snippets/install-gemini-cli.mdx";
+import InstallObsidianCli from "../../_snippets/install-obsidian-cli.mdx";
+import InstallWisprFlow from "../../_snippets/install-wispr-flow.mdx";
+
+Before we start organising, let's make sure all your tools are installed and working.
+
+<Warning>
+**You will need:** a laptop and Obsidian installed with the CLI plugin enabled. No coding experience is required — we will guide you through every step.
+</Warning>
+
+<Tip>
+**Already set up?** If you completed the [Voice-Control Your Notes](/docs/2026-her-waka/tutorial/obsidian-daily/overview) tutorial, you are already set up! Skip to Step 5 to check your vault.
+</Tip>
+
+<Steps>
+  <Step title="Install Node.js">
+    <Info>
+    **Already have Node.js?** If you installed it for a previous tutorial, skip this step. Run `node --version` in your terminal to check — you should see a version number like `v22.x.x`.
+    </Info>
+
+    <InstallNodejs />
+  </Step>
+
+  <Step title="Install Gemini CLI">
+    <Info>
+    **Already have Gemini CLI?** If you installed it for a previous tutorial, skip this step. Just run `gemini` in your terminal to check it still works.
+    </Info>
+
+    <InstallGeminiCli />
+  </Step>
+
+  <Step title="Install Obsidian and enable the CLI">
+    <Info>
+    **Already done this?** If you installed the Obsidian CLI plugin in a previous tutorial, skip this step. Run `obsidian version` in your terminal to check — you should see a version number.
+    </Info>
+
+    <InstallObsidianCli />
+  </Step>
+
+  <Step title="Install Wispr Flow (optional)">
+    <InstallWisprFlow />
+  </Step>
+
+  <Step title="Check your vault">
+    Let's make sure Gemini CLI can talk to your Obsidian vault. Start Gemini CLI:
+
+    ```bash title="Copy this command"
+    gemini
+    ```
+
+    Then say or type this prompt:
+
+    ```text title="Say this or copy this prompt"
+    How many files and folders are in my Obsidian vault?
+    ```
+
+    Gemini CLI should return information about your vault — the number of files, folders, and possibly the vault name and path. If it does, everything is connected.
+
+    <Info>
+    **Multiple vaults?** If you have more than one vault, Obsidian CLI uses your default vault. You can switch vaults in the Obsidian app settings.
+    </Info>
+  </Step>
+
+  <Step title="Create sample notes if your vault is empty">
+    If you have a fresh vault with no notes, give Gemini CLI these prompts one at a time. This creates sample notes so the tutorial has material to work with.
+
+    ```text title="Say this or copy this prompt"
+    Create a note in Obsidian called 'Meeting Notes - March 15' with a heading Team Meeting, some discussion points about the project timeline, two checkbox tasks about reviewing the budget and sending an update to Sarah, and tag it with meeting and work
+    ```
+
+    ```text title="Say this or copy this prompt"
+    Create a note called 'Recipe - Banana Bread' with ingredients list and tag it recipe and baking
+    ```
+
+    ```text title="Say this or copy this prompt"
+    Create a note called 'Book Notes' with a reading list of Atomic Habits and The Lean Startup, tagged books and reading
+    ```
+
+    ```text title="Say this or copy this prompt"
+    Create a note called 'Project Ideas' with three career-related ideas, tagged ideas and career
+    ```
+
+    ```text title="Say this or copy this prompt"
+    Create a note called 'Untitled' with some random unstructured text and no tags
+    ```
+
+    <Info>
+    **Already have notes?** Skip this step. These sample notes are only for people starting with an empty vault so the tutorial has something to work with.
+    </Info>
+  </Step>
+</Steps>
+
+## Verify your setup
+
+<AccordionGroup>
+  <Accordion title="Node.js installed">
+    Running `node --version` in your terminal shows a version number.
+  </Accordion>
+  <Accordion title="Gemini CLI installed and signed in">
+    Running `gemini` in your terminal starts the AI assistant and shows a prompt where you can type.
+  </Accordion>
+  <Accordion title="Obsidian CLI is working">
+    Running `obsidian version` in your terminal shows a version number.
+  </Accordion>
+  <Accordion title="Vault info is visible">
+    Asking Gemini CLI about your vault returns file and folder counts.
+  </Accordion>
+  <Accordion title="Wispr Flow installed (optional)">
+    You can speak and see text appear in your terminal.
+  </Accordion>
+</AccordionGroup>
+
+<Note>
+All set? Head to [Search, audit, and organise](/docs/2026-her-waka/tutorial/obsidian-organise/organise) to start exploring your vault.
+</Note>

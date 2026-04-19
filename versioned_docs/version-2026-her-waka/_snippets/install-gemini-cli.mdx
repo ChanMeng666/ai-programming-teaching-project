@@ -1,0 +1,36 @@
+Gemini CLI 是 Google 的免费 AI 助手。它在你的终端中运行，根据你的描述帮助你完成任务。
+
+打开终端并输入：
+
+```bash
+npm install -g @google/gemini-cli
+```
+
+等待安装完成。然后输入以下命令启动它：
+
+```bash
+gemini
+```
+
+第一次运行时，Gemini CLI 会要求你登录：
+- 选择 **"Sign in with Google"**
+- 浏览器窗口会打开 —— 用你的 Google 账号登录
+- 当提示已连接时，返回终端
+
+<Info>
+**免费套餐：** 每分钟 60 次请求，每天 1,000 次请求 —— 对于本教程和日常使用已绰绰有余。
+</Info>
+
+<Accordion title="'npm' 未被识别">
+这意味着 Node.js 没有正确安装。返回重新安装 Node.js。重新安装后，**完全关闭终端并打开一个新的终端**，然后再试一次。
+</Accordion>
+
+<Accordion title="权限被拒绝错误">
+**Windows：** 关闭 PowerShell，右键单击重新打开并选择**"以管理员身份运行"**，然后再次尝试安装命令。
+
+**macOS：** 在命令前加 `sudo`：
+```bash
+sudo npm install -g @google/gemini-cli
+```
+在提示时输入你的电脑密码（输入时不会显示字符 —— 这是正常的）。
+</Accordion>

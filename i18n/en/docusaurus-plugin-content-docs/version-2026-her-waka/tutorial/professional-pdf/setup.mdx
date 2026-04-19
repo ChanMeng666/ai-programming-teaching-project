@@ -1,0 +1,119 @@
+---
+title: "Set Up Your Tools"
+description: "Install Node.js, Gemini CLI, Wispr Flow, and Typst — everything you need before creating professional PDFs."
+---
+
+import InstallWisprFlow from "../../_snippets/install-wispr-flow.mdx";
+import InstallNodejs from "../../_snippets/install-nodejs.mdx";
+import OpenTerminal from "../../_snippets/open-terminal.mdx";
+import InstallGeminiCli from "../../_snippets/install-gemini-cli.mdx";
+
+Before we start building, let's get your tools ready. This page walks you through each step.
+
+<Warning>
+**You will need:** a laptop with internet access. No coding experience is required — we will guide you through every step.
+</Warning>
+
+## Step-by-Step Setup
+
+<Steps>
+  <Step title="Download Wispr Flow (optional)">
+    <InstallWisprFlow />
+  </Step>
+
+  <Step title="Install Node.js">
+    <InstallNodejs />
+  </Step>
+
+  <Step title="Learn to open your terminal">
+    <OpenTerminal />
+  </Step>
+
+  <Step title="Install and test Gemini CLI">
+    <InstallGeminiCli />
+  </Step>
+
+  <Step title="Install Typst CLI">
+    Typst is a free, open-source typesetting system that turns simple text files into beautiful PDFs.
+
+    <Tabs>
+      <Tab title="Windows">
+        Open PowerShell and run:
+
+        ```bash
+        winget install --id Typst.Typst
+        ```
+
+        Wait for the installation to finish. You may need to close and reopen your terminal afterwards.
+      </Tab>
+      <Tab title="macOS">
+        Open Terminal and run:
+
+        ```bash
+        brew install typst
+        ```
+
+        <Accordion title="Don't have Homebrew?">
+        If you see `brew: command not found`, install Homebrew first by running:
+
+        ```bash
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        ```
+
+        Follow the on-screen instructions, then run `brew install typst` again.
+        </Accordion>
+      </Tab>
+    </Tabs>
+
+    <Accordion title="Manual download fallback">
+    If the commands above don't work, you can download Typst directly:
+
+    1. Go to the [Typst releases page](https://github.com/typst/typst/releases/latest)
+    2. Download the file for your system:
+       - **Windows:** `typst-x86_64-pc-windows-msvc.zip`
+       - **macOS (Apple Silicon):** `typst-aarch64-apple-darwin.tar.xz`
+       - **macOS (Intel):** `typst-x86_64-apple-darwin.tar.xz`
+    3. Extract the downloaded file
+    4. Move the `typst` executable to a folder in your system PATH, or run it directly from the extracted folder
+    </Accordion>
+
+    <Accordion title="Verify the installation">
+    Open a new terminal window and type:
+
+    ```bash
+    typst --version
+    ```
+
+    You should see a version number like `typst 0.13.x`. If you see an error, try closing and reopening your terminal first.
+    </Accordion>
+  </Step>
+</Steps>
+
+## Verify Your Setup
+
+Before moving on, check that everything is ready:
+
+<AccordionGroup>
+  <Accordion title="Node.js installed">
+    Run `node --version` in your terminal. You should see a version number.
+  </Accordion>
+  <Accordion title="Terminal works">
+    You can open a terminal window and type commands.
+  </Accordion>
+  <Accordion title="Gemini CLI installed">
+    Run `gemini` in your terminal. It starts up and shows a prompt where you can type.
+  </Accordion>
+  <Accordion title="Signed in to Google">
+    Gemini CLI is connected to your Google account.
+  </Accordion>
+  <Accordion title="Typst CLI installed">
+    Run `typst --version` in your terminal. You should see a version number.
+  </Accordion>
+  <Accordion title="Wispr Flow (optional)">
+    If you installed it, you can dictate text in any application — including your terminal.
+  </Accordion>
+</AccordionGroup>
+
+<Note>
+All set? Head to [Build your first PDF](/docs/2026-her-waka/tutorial/professional-pdf/build-first-pdf) to create your first professional document.
+</Note>

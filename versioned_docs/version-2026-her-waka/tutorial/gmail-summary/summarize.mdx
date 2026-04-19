@@ -1,0 +1,334 @@
+---
+title: "总结你的 Gmail"
+description: "让 AI 读取你的邮件并生成清晰实用的摘要 —— 追赶未读消息、按发件人筛选，尝试不同摘要风格。"
+---
+
+你的 AI 工具已经连接到 Gmail。现在让它开始工作 —— 请它读取你的收件箱并给你一份真正有用的摘要。
+
+## 获取你的第一份摘要
+
+<Tabs>
+  <Tab title="完整教程（CLI + 语音）">
+    确保 Gemini CLI 正在终端中运行。然后用 Wispr Flow 说出或直接输入这条提示词：
+
+    ```text title="说出或复制此提示词"
+    Check my Gmail and summarise all my unread emails. Include the main topics, any action items I need to take, and flag anything urgent.
+    ```
+
+    Gemini CLI 会使用 Gmail 工具获取你的邮件并返回结构化摘要。
+
+    <Tip>
+    **Gemini 请求权限确认？** 如果 Gemini CLI 请求批准工具调用，输入 `y` 并按 **Enter**。
+    </Tip>
+
+    <Tip>
+    **语音或打字，两种方式都行。** 如果你已运行 Wispr Flow，直接开口说就好。否则，复制粘贴提示词或自己输入请求也完全一样。Gemini 能理解自然语言。
+    </Tip>
+  </Tab>
+
+  <Tab title="快速体验（浏览器）">
+    打开 [gemini.google.com](https://gemini.google.com) 并粘贴这条提示词：
+
+    ```text title="复制此提示词"
+    Check my Gmail and summarise all my unread emails.
+
+    For each email, include:
+    - Who it's from
+    - The subject line
+    - A one-sentence summary of what it says
+    - Whether it needs a reply (yes / no / not sure)
+
+    Group them by importance: urgent first, then informational, then newsletters or promotions.
+    ```
+
+    几秒钟内，Gemini 就会读取你的收件箱并返回结构化摘要。
+
+    <Tip>
+    **第一次使用？** Gemini 可能会要求你确认 Gmail 访问权限。出现提示时点击**允许**。
+    </Tip>
+  </Tab>
+</Tabs>
+
+你应该会看到类似这样的摘要：
+
+> **未读邮件（共 12 封）：**
+>
+> **紧急**
+> - **Sarah Chen** —— "需要预算审批" —— 要求在周三前批准 Q2 预算。*需要回复：是*
+> - **IT 支持** —— "密码即将到期提醒" —— 你的密码将在 3 天后到期。*需要回复：否（需要采取行动）*
+>
+> **信息性**
+> - **项目团队** —— "冲刺评审记录" —— 上周冲刺总结，分配给你 3 个待办事项。*需要回复：不确定*
+> - **人力资源** —— "假期政策更新" —— 年假申请新指南。*需要回复：否*
+>
+> **通讯 & 促销**
+> - **LinkedIn 资讯** —— "本周科技动态" —— 每周行业摘要。*需要回复：否*
+> - **Coursera** —— "为你推荐的课程" —— 基于你资料的课程推荐。*需要回复：否*
+
+就是这样 —— 你用几秒钟追上了整个收件箱。
+
+## 按发件人筛选
+
+想看来自某个特定人的所有邮件？试试这个提示词。
+
+<Tabs>
+  <Tab title="完整教程（CLI + 语音）">
+    ```text title="说出或复制此提示词"
+    Find all emails from [person's name] in the last 30 days and give me a summary of what they've been writing about.
+    ```
+  </Tab>
+
+  <Tab title="快速体验（浏览器）">
+    ```text title="复制此提示词 —— 替换姓名"
+    Find all emails from [person's name or email address] in the last 30 days
+    and summarise them.
+
+    Include:
+    - The date of each email
+    - The subject line
+    - A brief summary of what they said or asked
+    - Any action items or requests directed at me
+
+    Put the most recent emails first.
+    ```
+  </Tab>
+</Tabs>
+
+<Info>
+**这在开会前极其有用。** 如果你即将与某人会面，让 AI 总结近期来自他们的所有邮件。你将完全准备好走进会议室。
+</Info>
+
+## 尝试不同的摘要风格
+
+第一份摘要是个很好的开始。但根据你的情况，你可能需要不同的格式。试试这些风格。
+
+<Tabs>
+  <Tab title="快速概览">
+    <Tabs>
+      <Tab title="完整教程（CLI + 语音）">
+        ```text title="说出或复制此提示词"
+        Give me a quick casual catch-up on my unread emails, like a colleague filling me in over coffee. Keep it to five sentences maximum.
+        ```
+      </Tab>
+
+      <Tab title="快速体验（浏览器）">
+        ```text title="复制此提示词"
+        Summarise my unread emails as a quick catch-up for someone who's been
+        away for a few days.
+
+        Write it in a casual, friendly tone — like a colleague filling me in
+        over coffee. Keep it to 5 sentences maximum.
+        ```
+      </Tab>
+    </Tabs>
+  </Tab>
+
+  <Tab title="执行简报">
+    <Tabs>
+      <Tab title="完整教程（CLI + 语音）">
+        ```text title="说出或复制此提示词"
+        Summarise my unread emails as a professional executive briefing I could forward to my manager. Include key decisions needed, action items with deadlines, and any risks.
+        ```
+      </Tab>
+
+      <Tab title="快速体验（浏览器）">
+        ```text title="复制此提示词"
+        Summarise my unread emails as a professional executive briefing.
+
+        Include:
+        - Date range covered
+        - Key decisions or approvals needed
+        - Action items with deadlines (if mentioned)
+        - Risks or escalations
+
+        Format it as a document I could forward to my manager.
+        ```
+      </Tab>
+    </Tabs>
+  </Tab>
+
+  <Tab title="仅待办事项">
+    <Tabs>
+      <Tab title="完整教程（CLI + 语音）">
+        ```text title="说出或复制此提示词"
+        Go through my Gmail and extract only action items — things people are asking me to do or deadlines I need to meet. Ignore newsletters and promotions.
+        ```
+      </Tab>
+
+      <Tab title="快速体验（浏览器）">
+        ```text title="复制此提示词"
+        Read my unread emails and extract only the action items —
+        things I need to do, respond to, or follow up on.
+
+        Ignore newsletters, promotions, and informational emails.
+        List each action item as a bullet point with the sender's name
+        and the deadline (if mentioned).
+        ```
+      </Tab>
+    </Tabs>
+  </Tab>
+
+  <Tab title="会议邀请">
+    <Tabs>
+      <Tab title="完整教程（CLI + 语音）">
+        ```text title="说出或复制此提示词"
+        Check my Gmail for any meeting invitations I haven't responded to. List the date, time, and topic for each one.
+        ```
+      </Tab>
+
+      <Tab title="快速体验（浏览器）">
+        ```text title="复制此提示词"
+        Check my Gmail for any meeting invitations or calendar-related emails.
+
+        List the date, time, topic, and organiser for each.
+        Tell me which ones I haven't responded to yet.
+        ```
+      </Tab>
+    </Tabs>
+  </Tab>
+
+  <Tab title="按主题">
+    <Tabs>
+      <Tab title="完整教程（CLI + 语音）">
+        ```text title="说出或复制此提示词"
+        Search my emails for anything related to [topic or project name] and summarise what's been discussed, what was decided, and what's still pending.
+        ```
+      </Tab>
+
+      <Tab title="快速体验（浏览器）">
+        ```text title="复制此提示词 —— 替换主题"
+        Search my recent emails for anything related to [topic or project name].
+
+        Summarise what's been discussed, any decisions made, and what's
+        still pending. Include who's involved in each thread.
+        ```
+      </Tab>
+    </Tabs>
+  </Tab>
+</Tabs>
+
+<Info>
+**这里的核心技能是提示词写作。** 注意每条提示词如何精确告诉 AI 你想要的格式、需要包含什么和忽略什么。指令越具体，摘要越实用。
+</Info>
+
+## 进一步探索
+
+熟悉基础操作后，试试这些有创意的提示词。两种路径都适用 —— 用 Wispr Flow 说出来、打字输入或粘贴都可以。
+
+```text title="说出或复制此提示词"
+Are there any emails I haven't replied to that are more than 3 days old?
+```
+
+```text title="说出或复制此提示词"
+Summarise all newsletters I received this week.
+```
+
+```text title="说出或复制此提示词"
+Find emails with attachments and list what was attached.
+```
+
+```text title="说出或复制此提示词"
+Find all emails from [person's name] and draft a quick reply to their most recent one.
+```
+
+```text title="说出或复制此提示词"
+Which emails this week mentioned a deadline? List the deadline and who set it.
+```
+
+<Tip>
+**这就是自然语言的魔力。** 你不需要记忆命令或搜索语法 —— 只需描述你想要什么。如果 AI 不确定你的意思，它会请你澄清。
+</Tip>
+
+## 追问
+
+AI 会记住它刚才读取的邮件。你可以不用重新获取邮件直接提出追问。试试这些：
+
+```text title="说出或复制此提示词"
+Were there any emails about [topic]?
+```
+
+```text title="说出或复制此提示词"
+Which emails had attachments? List the sender, subject, and what the attachment seems to be.
+```
+
+```text title="说出或复制此提示词"
+Summarise only emails from the last 24 hours.
+```
+
+```text title="说出或复制此提示词"
+Draft a short, professional reply to [sender's name]'s email about [topic].
+```
+
+<Tip>
+**这正是 AI 真正发光的地方。** 与其在数百封邮件里滚动寻找某条信息，你只需开口问。"这周有人给我发 PDF 吗？" 比自己检查每封邮件要快得多。
+</Tip>
+
+## 保存你的摘要
+
+想保留一份摘要副本？以下是方法。
+
+<Tabs>
+  <Tab title="完整教程（CLI + 语音）">
+    请 Gemini CLI 将其保存为文件：
+
+    ```text title="说出或复制此提示词"
+    Save that summary to a file called email-summary.txt in the current folder.
+    ```
+
+    摘要现在已作为文本文件保存在你的电脑上。
+  </Tab>
+
+  <Tab title="快速体验（浏览器）">
+    - **复制粘贴：** 选中摘要文字，粘贴到文档、邮件或笔记应用中
+    - **分享：** 点击 Gemini 回复上的**分享**图标，获取可分享链接
+  </Tab>
+</Tabs>
+
+## 刚才发生了什么？
+
+让我们回顾一下你做了什么：
+
+1. **连接** AI 工具与你的 Gmail 账户
+2. **获取** 未读邮件 —— AI 自动处理了这一步
+3. **总结** 以结构化、实用的格式呈现你的收件箱
+4. **筛选** 按发件人查看特定人的邮件
+5. **定制** 摘要风格以满足你的需求
+6. **追问** 寻找特定信息
+
+核心洞见：AI 非常擅长阅读大量文本并提取关键信息。你需要花 20 分钟滚动才能完成的任务，AI 只用了约 10 秒。
+
+## 故障排除
+
+<AccordionGroup>
+  <Accordion title="Gemini 说无法访问 Gmail">
+    前往 [gemini.google.com/extensions](https://gemini.google.com/extensions) 检查 Google Workspace 扩展是否已开启。如果显示错误，尝试关闭后重新开启。确保你用正确的 Google 账号登录。
+  </Accordion>
+  <Accordion title="Gemini CLI 说没有 Gmail 工具">
+    在 Gemini CLI 中输入 `/extensions list` 检查 Workspace 扩展是否已安装。如果没有列出，再次运行安装命令：
+    ```bash
+    gemini extensions install https://github.com/gemini-cli-extensions/workspace
+    ```
+    然后退出（`/quit`）并重启 Gemini CLI。
+  </Accordion>
+  <Accordion title="摘要太模糊或太简短">
+    你的收件箱可能没有足够多的未读邮件。尝试更宽泛的搜索范围："Summarise all emails from the last 7 days" 而不是只看未读的。你也可以更具体："Summarise the 20 most recent emails."
+  </Accordion>
+  <Accordion title="AI 只显示少量邮件">
+    默认情况下，AI 可能只获取最近的几封邮件。请求它往更早的时间追溯："Read all emails from the last 30 days and summarise them" 或 "Find the last 50 emails and give me a summary."
+  </Accordion>
+  <Accordion title="我收到认证或权限错误">
+    你的 Gmail 授权可能已过期。请尝试以下步骤：
+    - **Gemini App：** 在设置 → 扩展中将 Workspace 扩展关闭后重新开启
+    - **Gemini CLI：** 退出并重启 Gemini CLI —— 它会提示你重新授权
+  </Accordion>
+  <Accordion title="摘要包含不相关的邮件">
+    在提示词中加入筛选条件。例如："Ignore promotional emails and newsletters"、"Only include emails from real people, not automated systems" 或 "Focus on emails related to [project name]."
+  </Accordion>
+  <Accordion title="语音输入有错误">
+    Wispr Flow 偶尔可能误听技术术语或专有名词。你可以在 Gemini CLI 中按 Enter 之前检查并修正文字。如果语音输入错误过多，改为打字或粘贴提示词即可。
+  </Accordion>
+</AccordionGroup>
+
+<Note>
+做得很好 —— 你为自己的收件箱建立了一个真实的效率工作流。前往[继续探索](/docs/2026-her-waka/tutorial/gmail-summary/keep-going)，了解如何每天使用这个工具。
+</Note>

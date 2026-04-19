@@ -1,0 +1,126 @@
+---
+title: "Set up your tools"
+description: "Install Gemini CLI and Google Workspace CLI — connect AI to your Gmail, Calendar, and Google Docs."
+---
+
+import InstallNodejs from "../../_snippets/install-nodejs.mdx";
+import InstallGeminiCli from "../../_snippets/install-gemini-cli.mdx";
+import InstallGws from "../../_snippets/install-gws.mdx";
+import InstallWisprFlow from "../../_snippets/install-wispr-flow.mdx";
+
+Before we start turning emails into actions, let's get your AI tools connected to Gmail, Calendar, and Google Docs.
+
+<Warning>
+**You will need:** a laptop with internet access and a Google account (Gmail + Calendar + Docs). No coding experience is required — we will guide you through every step.
+</Warning>
+
+<Steps>
+  <Step title="Install Node.js">
+    <Info>
+    **Already have Node.js?** If you installed it for a previous tutorial, skip this step. Run `node --version` in your terminal to check — you should see a version number like `v22.x.x`.
+    </Info>
+
+    <InstallNodejs />
+  </Step>
+
+  <Step title="Install Gemini CLI">
+    <Info>
+    **Already have Gemini CLI?** If you installed it for a previous tutorial, skip this step. Just run `gemini` in your terminal to check it still works.
+    </Info>
+
+    <InstallGeminiCli />
+
+    Type `/quit` to exit Gemini CLI for now. We will start it again after installing the Google Workspace tools.
+  </Step>
+
+  <Step title="Install the Google Workspace CLI (gws)">
+    <InstallGws />
+  </Step>
+
+  <Step title="Connect Gemini CLI to gws">
+    Now let's give Gemini CLI the ability to use your Google Workspace tools. Open your terminal and run:
+
+    ```bash title="Copy this command"
+    gemini extensions install https://github.com/googleworkspace/cli
+    ```
+
+    This connects Gemini CLI to `gws`, so when you give a natural language instruction, Gemini can read your Gmail, create calendar events, and write to Google Docs on your behalf.
+
+    <Info>
+    **What does this do?** It installs an extension that lets Gemini CLI call `gws` commands automatically. Instead of you typing `gws calendar +insert ...`, you can just say "Create a calendar event for Friday" and Gemini handles the rest.
+    </Info>
+
+    <Accordion title="The command fails or hangs">
+    Make sure you have an internet connection and that Node.js is installed correctly. Try running `node --version` first. If that works but the extension install fails, try closing and reopening your terminal, then running the command again.
+    </Accordion>
+  </Step>
+
+  <Step title="Install Wispr Flow (optional)">
+    <InstallWisprFlow />
+  </Step>
+
+  <Step title="Test the connection">
+    Start Gemini CLI and try these two prompts to make sure everything is connected:
+
+    ```bash title="Copy this command"
+    gemini
+    ```
+
+    Then say (with Wispr Flow) or type:
+
+    ```text title="Say this or copy this prompt"
+    Check my Gmail and tell me how many unread emails I have.
+    ```
+
+    You should see Gemini CLI access your Gmail and return information about your inbox. Now try this:
+
+    ```text title="Say this or copy this prompt"
+    What meetings do I have today?
+    ```
+
+    You should see your calendar events listed. If both work, everything is connected and ready.
+
+    <Tip>
+    **Gemini asks for permission?** If Gemini CLI asks to approve a tool call, type `y` and press **Enter**. This is normal — it is asking your permission before accessing your Google apps.
+    </Tip>
+
+    <Accordion title="Gemini says it has no Gmail or Calendar tools">
+    The extension may not have installed correctly. Try running the install command again:
+    ```bash
+    gemini extensions install https://github.com/googleworkspace/cli
+    ```
+    Then exit (`/quit`) and restart Gemini CLI. You can check installed extensions with `/extensions list`.
+    </Accordion>
+
+    <Accordion title="I see a permission or authentication error">
+    Your Google authorisation may have expired. Exit Gemini CLI and run `gws auth login -s gmail,calendar,drive,docs,sheets` again to re-authorise. Then restart Gemini CLI.
+    </Accordion>
+  </Step>
+</Steps>
+
+## Verify your setup
+
+<AccordionGroup>
+  <Accordion title="Node.js installed">
+    Run `node --version` in your terminal. You should see a version number.
+  </Accordion>
+  <Accordion title="Gemini CLI installed and signed in">
+    Run `gemini` in your terminal. It starts up and shows a prompt where you can type.
+  </Accordion>
+  <Accordion title="gws installed and signed in">
+    Run `gws calendar +agenda` in your terminal. You should see your upcoming calendar events.
+  </Accordion>
+  <Accordion title="Gemini CLI extension installed">
+    The extension installed without errors. You can verify with `/extensions list` inside Gemini CLI.
+  </Accordion>
+  <Accordion title="Gmail and Calendar access working">
+    Gemini CLI can tell you about your unread emails and today's meetings when you ask.
+  </Accordion>
+  <Accordion title="Connection tested">
+    Both test prompts returned real results from your Gmail and Calendar.
+  </Accordion>
+</AccordionGroup>
+
+<Note>
+All set? Head to [Automate your workflow](/docs/2026-her-waka/tutorial/email-to-action/automate) to start turning emails into actions.
+</Note>

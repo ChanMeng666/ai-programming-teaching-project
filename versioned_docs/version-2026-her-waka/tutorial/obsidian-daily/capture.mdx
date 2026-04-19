@@ -1,0 +1,207 @@
+---
+title: "记录、追踪与回顾"
+description: "通过 Gemini CLI 使用自然语言记录想法、管理任务、回顾一天 —— 说出或打出提示词，无需任何命令。"
+---
+
+你的工具已就绪。让它们开始工作吧。
+
+<Tabs>
+  <Tab title="语音（Wispr Flow）">
+    Wispr Flow 运行后，直接开口说话。你的话语会自动以文字形式出现在 Gemini CLI 中。自然地说出你需要什么 —— Gemini 会理解并为你运行正确的命令。
+  </Tab>
+  <Tab title="打字或粘贴">
+    从本页复制任意提示词并粘贴到 Gemini CLI 中，或者用自然语言输入你自己的请求。无需特殊语法 —— 只需描述你想要什么。
+  </Tab>
+</Tabs>
+
+## 记录你的第一个想法
+
+<Steps>
+  <Step title="启动 Gemini CLI">
+    打开终端并启动 Gemini CLI。这是本教程中你唯一需要输入的"命令"：
+
+    ```bash title="复制此命令"
+    gemini
+    ```
+
+    从这里开始，一切都是自然语言。
+  </Step>
+
+  <Step title="第一次记录">
+    说出或输入这条提示词：
+
+    ```text title="说出或复制此提示词"
+    Open my daily note in Obsidian, and add this line at the bottom:
+    "Met Sarah at lunch — she mentioned a job opening at Xero"
+    ```
+
+    切换到 Obsidian —— 你的笔记底部现在多了这一行内容。它即时出现，无需任何点击或切换应用。
+
+    <Tip>
+    **刚才发生了什么？** 你用普通语言描述了你想做的事。Gemini CLI 明白你想在每日笔记底部追加文字，找出了正确的 Obsidian 命令并为你执行了它。你完全不需要学习任何命令语法。
+    </Tip>
+  </Step>
+
+  <Step title="添加一个任务">
+    现在添加一个带复选框的任务：
+
+    ```text title="说出或复制此提示词"
+    Add a task to my Obsidian daily note:
+    "Send CV to Sarah by Friday"
+    Make it a checkbox so I can track it.
+    ```
+
+    在 Obsidian 中，你会看到任务旁边出现了一个可勾选的复选框。
+
+    <Tip>
+    **刚才发生了什么？** Gemini 明白"make it a checkbox"意味着使用 Obsidian 的任务语法（`- [ ]`）。你不需要知道这些 —— 你只是描述了你想要什么，Gemini 负责处理格式。
+    </Tip>
+  </Step>
+
+  <Step title="连续记录">
+    再试几条，感受一下有多自然。每条提示词都会在你的每日笔记里添加不同的内容。
+
+    一条会议记录：
+
+    ```text title="说出或复制此提示词"
+    Add to my daily note: Team meeting — new project starting in April, need to review the brief
+    ```
+
+    一个待办事项：
+
+    ```text title="说出或复制此提示词"
+    Add a task to my daily note: Buy groceries — milk, bread, eggs
+    ```
+
+    一个稍后回看的想法：
+
+    ```text title="说出或复制此提示词"
+    Add to my daily note: Idea — start a weekly reflection journal
+    ```
+
+    <Tip>
+    **注意语言有多灵活。** 你可以说 "add to my daily note"、"put this in my daily note"、"append to today's note" —— Gemini 全部都能理解。没有固定的表达方式。
+    </Tip>
+  </Step>
+</Steps>
+
+## 追踪你的任务
+
+你已经添加了一些任务。现在让我们来管理它们 —— 依然只用自然语言。
+
+<Steps>
+  <Step title="列出今天的任务">
+    ```text title="说出或复制此提示词"
+    Show me all the tasks in my Obsidian daily note
+    ```
+
+    你应该会看到任务列表以及它们的当前状态 —— 哪些已完成，哪些还未完成。
+  </Step>
+
+  <Step title="标记任务为完成">
+    ```text title="说出或复制此提示词"
+    Mark the task about sending my CV as done
+    ```
+
+    复选框从空变为已勾选 —— 在终端输出和 Obsidian 中都是如此。
+  </Step>
+
+  <Step title="查看剩余事项">
+    ```text title="说出或复制此提示词"
+    Show me only the tasks I haven't finished yet
+    ```
+
+    这会筛选出只显示未完成事项的任务列表 —— 快速了解你还有什么事情待处理。
+  </Step>
+</Steps>
+
+<Info>
+**注意你不需要知道行号或命令语法。** 只需描述你想要什么 —— "mark the task about sending my CV" —— Gemini 会找出你指的是哪个任务，以及如何更新它。
+</Info>
+
+## 回顾你的一天
+
+在一天结束时（或任何时候），回顾你记录的所有内容。
+
+<Steps>
+  <Step title="读取每日笔记">
+    ```text title="说出或复制此提示词"
+    Read my Obsidian daily note and show me everything I captured today
+    ```
+
+    这会显示今天每日笔记的完整内容 —— 你一天中添加的每个想法、任务和点子。
+  </Step>
+
+  <Step title="按人物搜索">
+    ```text title="说出或复制此提示词"
+    Search my Obsidian vault for any notes that mention Sarah
+    ```
+
+    这会找到每一篇提到"Sarah"的笔记 —— 无论是今天、上周还是上个月的。
+  </Step>
+
+  <Step title="带上下文搜索">
+    ```text title="说出或复制此提示词"
+    Search my Obsidian vault for notes containing the word project, and show me the matching lines
+    ```
+
+    这会显示包含搜索词的实际行内容，让你无需打开每一篇笔记就能快速找到所需信息。
+  </Step>
+</Steps>
+
+<Tip>
+**搜索是最强大的功能之一。** 随着你的笔记库不断增长，你会积累数周乃至数月的笔记。只需提问就能在所有笔记中搜索，意味着你永远不会丢失任何东西 —— 你记录的每一个想法都是可以找到的。
+</Tip>
+
+## 进一步探索 —— 尝试你自己的请求
+
+上面的提示词只是起点。这里有一些创意请求，展示自然语言有多灵活：
+
+```text title="说出或复制此提示词"
+Add a heading called 'Afternoon Goals' to my daily note, then add three empty checkboxes underneath
+```
+
+```text title="说出或复制此提示词"
+Read my daily note and summarise what I did today in 3 bullet points
+```
+
+```text title="说出或复制此提示词"
+Create a new note in Obsidian called 'Meeting Notes - March 25' and add a heading, then add bullet points about the topics we discussed
+```
+
+```text title="说出或复制此提示词"
+How many notes do I have in my Obsidian vault?
+```
+
+```text title="说出或复制此提示词"
+What tags do I use most in my Obsidian vault?
+```
+
+```text title="说出或复制此提示词"
+Open a random note from my vault — surprise me
+```
+
+<Tip>
+**这就是自然语言的魔力。** 你不需要记忆命令 —— 只需描述你想要什么。如果 Gemini 不确定你的意思，它会请你澄清。
+</Tip>
+
+## 故障排除
+
+<AccordionGroup>
+  <Accordion title="Gemini 说无法运行 Obsidian 命令">
+    确保 Obsidian 正在运行且 CLI 已启用。在另一个终端窗口中直接运行 `obsidian help` 测试 CLI。如果那个命令可以运行但 Gemini 仍然无法执行命令，尝试退出 Gemini CLI（`/quit`）后重新启动。
+  </Accordion>
+  <Accordion title="Gemini 请求运行命令的权限">
+    这很正常。输入 `y` 并按 **Enter** 允许命令执行。Gemini CLI 在运行终端命令前会请求你的确认 —— 这是一个安全功能，确保你对它即将执行的操作感到放心。
+  </Accordion>
+  <Accordion title="我的语音输入有错误">
+    Wispr Flow 偶尔可能误听技术术语或专有名词。你可以在 Gemini CLI 中按 Enter 之前检查并修正文字。如果语音输入错误过多，改为打字或粘贴提示词即可。
+  </Accordion>
+  <Accordion title="我的 Obsidian 笔记里什么都没出现">
+    确保 Obsidian 正在运行 —— Gemini CLI 通过 CLI 与 Obsidian 应用通信，所以 Obsidian 必须处于打开状态。如果你有多个 vault，也请确认选择了正确的那个。
+  </Accordion>
+</AccordionGroup>
+
+<Note>
+做得很好 —— 你通过自然语言说话或输入，完成了想法记录、任务管理和笔记搜索。前往[继续探索](/docs/2026-her-waka/tutorial/obsidian-daily/keep-going)，了解如何将这些变成每日习惯。
+</Note>

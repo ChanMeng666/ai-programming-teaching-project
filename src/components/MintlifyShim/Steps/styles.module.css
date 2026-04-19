@@ -1,0 +1,55 @@
+.steps {
+  list-style: none;
+  counter-reset: mintlify-step;
+  padding-left: 0;
+  margin: 1.5rem 0;
+}
+
+.step {
+  counter-increment: mintlify-step;
+  position: relative;
+  padding-left: 3rem;
+  padding-bottom: 1.5rem;
+  border-left: 2px solid var(--ifm-color-emphasis-300);
+  margin-left: 1rem;
+}
+
+.step:last-child {
+  border-left-color: transparent;
+  padding-bottom: 0;
+}
+
+.step::before {
+  content: counter(mintlify-step);
+  position: absolute;
+  left: -1rem;
+  top: 0;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: var(--ifm-color-primary);
+  color: var(--ifm-color-white, #fff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.stepTitle {
+  margin: 0 0 0.75rem 0;
+  font-size: 1.15rem;
+  line-height: 1.3;
+}
+
+.stepBody {
+  margin-top: 0.25rem;
+}
+
+.stepBody > *:first-child {
+  margin-top: 0;
+}
+
+.stepBody > *:last-child {
+  margin-bottom: 0;
+}

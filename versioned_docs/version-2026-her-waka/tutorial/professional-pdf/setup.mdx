@@ -1,0 +1,119 @@
+---
+title: "设置你的工具"
+description: "安装 Node.js、Gemini CLI、Wispr Flow 和 Typst —— 创建专业 PDF 所需的一切准备工作。"
+---
+
+import InstallWisprFlow from "../../_snippets/install-wispr-flow.mdx";
+import InstallNodejs from "../../_snippets/install-nodejs.mdx";
+import OpenTerminal from "../../_snippets/open-terminal.mdx";
+import InstallGeminiCli from "../../_snippets/install-gemini-cli.mdx";
+
+在开始构建之前，先准备好你的工具。本页面将逐步引导你完成每个步骤。
+
+<Warning>
+**你需要准备：** 一台能联网的电脑。无需任何编程经验 —— 我们会一步一步带你完成每个步骤。
+</Warning>
+
+## 逐步设置
+
+<Steps>
+  <Step title="下载 Wispr Flow（可选）">
+    <InstallWisprFlow />
+  </Step>
+
+  <Step title="安装 Node.js">
+    <InstallNodejs />
+  </Step>
+
+  <Step title="学会打开终端">
+    <OpenTerminal />
+  </Step>
+
+  <Step title="安装并测试 Gemini CLI">
+    <InstallGeminiCli />
+  </Step>
+
+  <Step title="安装 Typst CLI">
+    Typst 是一个免费开源的排版系统，将简单的文本文件转化为精美的 PDF。
+
+    <Tabs>
+      <Tab title="Windows">
+        打开 PowerShell 并运行：
+
+        ```bash
+        winget install --id Typst.Typst
+        ```
+
+        等待安装完成。之后你可能需要关闭并重新打开终端。
+      </Tab>
+      <Tab title="macOS">
+        打开 Terminal 并运行：
+
+        ```bash
+        brew install typst
+        ```
+
+        <Accordion title="没有 Homebrew？">
+        如果你看到 `brew: command not found`，先运行以下命令安装 Homebrew：
+
+        ```bash
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        ```
+
+        按照屏幕上的说明操作，然后再次运行 `brew install typst`。
+        </Accordion>
+      </Tab>
+    </Tabs>
+
+    <Accordion title="手动下载备选方案">
+    如果上面的命令不起作用，你可以直接下载 Typst：
+
+    1. 前往 [Typst 发布页面](https://github.com/typst/typst/releases/latest)
+    2. 下载适合你系统的文件：
+       - **Windows：** `typst-x86_64-pc-windows-msvc.zip`
+       - **macOS（Apple Silicon）：** `typst-aarch64-apple-darwin.tar.xz`
+       - **macOS（Intel）：** `typst-x86_64-apple-darwin.tar.xz`
+    3. 解压下载的文件
+    4. 将 `typst` 可执行文件移动到系统 PATH 中的某个文件夹，或直接从解压目录运行
+    </Accordion>
+
+    <Accordion title="验证安装">
+    打开一个新的终端窗口并输入：
+
+    ```bash
+    typst --version
+    ```
+
+    你应该会看到类似 `typst 0.13.x` 的版本号。如果看到错误，先尝试关闭并重新打开终端。
+    </Accordion>
+  </Step>
+</Steps>
+
+## 验证你的设置
+
+继续之前，检查所有工具是否就绪：
+
+<AccordionGroup>
+  <Accordion title="Node.js 已安装">
+    在终端运行 `node --version`，应显示一个版本号。
+  </Accordion>
+  <Accordion title="终端可以正常使用">
+    你可以打开终端窗口并输入命令。
+  </Accordion>
+  <Accordion title="Gemini CLI 已安装">
+    在终端运行 `gemini`，可正常启动并显示一个可输入的提示符。
+  </Accordion>
+  <Accordion title="已登录 Google">
+    Gemini CLI 已连接到你的 Google 账号。
+  </Accordion>
+  <Accordion title="Typst CLI 已安装">
+    在终端运行 `typst --version`，应显示一个版本号。
+  </Accordion>
+  <Accordion title="Wispr Flow（可选）">
+    如果你已安装，可以在任何应用中 —— 包括终端 —— 通过语音输入文字。
+  </Accordion>
+</AccordionGroup>
+
+<Note>
+一切就绪？前往[构建你的第一个 PDF](/docs/2026-her-waka/tutorial/professional-pdf/build-first-pdf)，创建你的第一份专业文档。
+</Note>

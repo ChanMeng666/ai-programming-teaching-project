@@ -1,0 +1,36 @@
+Gemini CLI is Google's free AI assistant. It runs in your terminal and helps you with tasks based on your descriptions.
+
+Open your terminal and type:
+
+```bash
+npm install -g @google/gemini-cli
+```
+
+Wait for the installation to finish. Then start it by typing:
+
+```bash
+gemini
+```
+
+The first time you run it, Gemini CLI will ask you to sign in:
+- Choose **"Sign in with Google"**
+- A browser window will open — sign in with your Google account
+- Come back to the terminal when it says you're connected
+
+<Info>
+**Free tier:** 60 requests per minute, 1,000 requests per day — more than enough for this tutorial and everyday use.
+</Info>
+
+<Accordion title="'npm' is not recognised">
+This means Node.js isn't installed correctly. Go back and reinstall Node.js. After reinstalling, **close your terminal completely and open a new one** before trying again.
+</Accordion>
+
+<Accordion title="Permission denied error">
+**Windows:** Close PowerShell and reopen it by right-clicking and choosing **"Run as Administrator"**. Then try the install command again.
+
+**macOS:** Add `sudo` before the command:
+```bash
+sudo npm install -g @google/gemini-cli
+```
+Enter your computer password when prompted (you won't see characters as you type — that's normal).
+</Accordion>

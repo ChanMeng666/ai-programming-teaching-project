@@ -1,0 +1,84 @@
+`gws` 是一个命令行工具，可以从终端控制你所有的 Google 应用 —— Gmail、Calendar、Drive、Docs、Sheets。它让 AI 无需打开浏览器就能管理你的 Google Workspace。
+
+打开终端并输入：
+
+```bash title="复制此命令"
+npm install -g @googleworkspace/cli
+```
+
+等待安装完成。然后设置你的 Google Cloud 项目：
+
+```bash title="复制此命令"
+gws auth setup
+```
+
+<Info>
+**`gws auth setup` 做什么？** 它为你创建一个 Google Cloud 项目，启用你需要的 API，并为登录做好一切准备。它需要 `gcloud` CLI —— 如果你没有，请参阅下面的故障排除部分。
+</Info>
+
+设置完成后，登录并选择要连接的 Google 服务：
+
+```bash title="复制此命令"
+gws auth login -s gmail,calendar,drive,docs,sheets
+```
+
+浏览器窗口会打开 —— 用你的 Google 账号登录并批准权限。
+
+<Warning>
+**"Google 尚未验证此应用"警告：** 这是正常的。点击**高级** → **转到 \[应用名称\]（不安全）**继续。这对个人使用是安全的 —— Google 对所有尚未通过官方审核流程的应用都会显示此提示。
+</Warning>
+
+<Warning>
+**权限复选框：** 如果你看到权限复选框列表，在点击**继续**之前选择所有选项（或点击**全选**）。这些是 `gws` 读取和管理你的 Google 应用所需的权限。
+</Warning>
+
+通过查看今天的日程来验证安装：
+
+```bash title="复制此命令"
+gws calendar +agenda
+```
+
+你应该在终端中看到你即将到来的日程。如果可以，说明 `gws` 正常工作。
+
+<Info>
+**免费使用：** `gws` 是免费开源的。它使用你自己的 Google 账号连接到 Google 的 API —— 除了 Google 自己的 API 配额之外没有使用限制。
+</Info>
+
+<Accordion title="'gws' 未被识别">
+安装可能没有将 `gws` 添加到你的系统 PATH。尝试完全关闭终端并打开一个新的终端，然后运行 `gws --version`。如果仍然不起作用，尝试重新安装：
+```bash
+npm install -g @googleworkspace/cli
+```
+</Accordion>
+
+<Accordion title="'gcloud' 未安装">
+`gws auth setup` 使用 `gcloud` CLI 自动创建项目。你有两个选项：
+
+1. **安装 gcloud**，从 [cloud.google.com/sdk/docs/install](https://cloud.google.com/sdk/docs/install) 安装，然后再次运行 `gws auth setup`
+2. **跳过 gcloud** —— 在 [Google Cloud Console](https://console.cloud.google.com/) 中手动设置 OAuth 凭据。创建项目，启用所需 API，创建 OAuth Desktop App 客户端，下载 JSON，并将其保存到 `~/.config/gws/client_secret.json`。然后运行 `gws auth login`。
+</Accordion>
+
+<Accordion title="权限被拒绝错误">
+**Windows：** 关闭 PowerShell，右键单击重新打开并选择**"以管理员身份运行"**，然后再次尝试安装命令。
+
+**macOS：** 在命令前加 `sudo`：
+```bash
+sudo npm install -g @googleworkspace/cli
+```
+在提示时输入你的电脑密码（输入时不会显示字符 —— 这是正常的）。
+</Accordion>
+
+<Accordion title="API 未启用错误">
+如果你看到类似"Gmail API has not been used in project..."的错误，需要启用该 API：
+
+1. 在错误消息中找到 `enable_url` 链接
+2. 在浏览器中打开该链接
+3. 点击**启用**
+4. 等待 10 秒，然后重试你的命令
+
+你也可以再次运行 `gws auth setup` —— 它会自动启用所有需要的 API。
+</Accordion>
+
+<Accordion title="登录时出现'访问被阻止'或 403">
+你的 Google 账号未被列为 OAuth 应用的测试用户。在你的 Google Cloud 项目中打开 [OAuth 同意屏幕](https://console.cloud.google.com/apis/credentials/consent) → **测试用户** → **添加用户** → 输入你的 Google 账号邮箱。然后重试 `gws auth login`。
+</Accordion>

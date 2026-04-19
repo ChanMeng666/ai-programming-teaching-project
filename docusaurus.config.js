@@ -125,6 +125,11 @@ const config = {
               path: '2024-winter',
               banner: 'none',
             },
+            '2026-her-waka': {
+              label: '2026 HER WAKA 活动',
+              path: '2026-her-waka',
+              banner: 'none',
+            },
           },
         },
         blog: {
@@ -278,6 +283,10 @@ const config = {
               {
                 label: '2024年冬季课程',
                 to: '/docs/2024-winter/intro',
+              },
+              {
+                label: '2026 HER WAKA 活动',
+                to: '/docs/2026-her-waka/programme/about-her-waka',
               },
             ],
           },

@@ -31,6 +31,10 @@
     "message": "Winter 2024 Program",
     "description": "The label of footer link with label=2024年冬季课程 linking to /docs/2024-winter/intro"
   },
+  "link.item.label.2026 HER WAKA 活动": {
+    "message": "HER WAKA 2026",
+    "description": "The label of footer link with label=2026 HER WAKA 活动 linking to /docs/2026-her-waka/programme/about-her-waka"
+  },
   "link.item.label.博客文章": {
     "message": "Blog Posts",
     "description": "The label of footer link with label=博客文章 linking to /blog"

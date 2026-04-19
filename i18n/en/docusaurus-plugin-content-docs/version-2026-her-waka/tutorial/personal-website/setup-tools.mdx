@@ -1,0 +1,65 @@
+---
+title: "Set Up Your Tools"
+description: "Install Node.js, learn to open your terminal, set up Gemini CLI, and optionally install Wispr Flow for voice input — everything you need before building your website."
+---
+
+import InstallWisprFlow from "../../_snippets/install-wispr-flow.mdx";
+import InstallNodejs from "../../_snippets/install-nodejs.mdx";
+import OpenTerminal from "../../_snippets/open-terminal.mdx";
+import InstallGeminiCli from "../../_snippets/install-gemini-cli.mdx";
+
+Before we start building, let's get your tools ready. This page walks you through each step.
+
+<Warning>
+**You will need:** a laptop with internet access. No coding experience is required — we will guide you through every step.
+</Warning>
+
+## Step-by-Step Setup
+
+<Steps>
+  <Step title="Download Wispr Flow (optional)">
+    <InstallWisprFlow />
+
+    <Tip>
+    **Why voice input?** Throughout this tutorial, you will be giving instructions to Gemini CLI in natural language. With Wispr Flow, you can speak those instructions instead of typing them — it feels like having a conversation with your AI assistant.
+    </Tip>
+  </Step>
+
+  <Step title="Install Node.js">
+    <InstallNodejs />
+  </Step>
+
+  <Step title="Learn to open your terminal">
+    <OpenTerminal />
+  </Step>
+
+  <Step title="Install and test Gemini CLI">
+    <InstallGeminiCli />
+  </Step>
+</Steps>
+
+## Verify Your Setup
+
+Before moving on, check that everything is ready:
+
+<AccordionGroup>
+  <Accordion title="Node.js installed">
+    Run `node --version` in your terminal. You should see a version number.
+  </Accordion>
+  <Accordion title="Terminal works">
+    You can open a terminal window and type commands.
+  </Accordion>
+  <Accordion title="Gemini CLI installed">
+    Run `gemini` in your terminal. It starts up and shows a prompt where you can type.
+  </Accordion>
+  <Accordion title="Signed in to Google">
+    Gemini CLI is connected to your Google account.
+  </Accordion>
+  <Accordion title="Wispr Flow (optional)">
+    If you installed it, you can dictate text in any application. Try speaking a sentence in a text editor to confirm it works.
+  </Accordion>
+</AccordionGroup>
+
+<Note>
+All set? Head to [Set up GitHub](/docs/2026-her-waka/tutorial/personal-website/github-account) to create your GitHub account and install the tools you need for deployment.
+</Note>

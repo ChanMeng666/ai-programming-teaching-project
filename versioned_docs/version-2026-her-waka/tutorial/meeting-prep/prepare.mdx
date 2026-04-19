@@ -1,0 +1,268 @@
+---
+title: "为你的会议做准备"
+description: "AI 汇集你的日历、邮件和文档 —— 几秒钟内获取完整的会议简报。"
+---
+
+你的 AI 工具已连接到日历、Gmail 和 Drive。现在让它们开始工作 —— 让 AI 收集你下次会议所需的一切信息，并生成完整的简报。
+
+## 找到你的下一个会议
+
+<Tabs>
+  <Tab title="Gemini CLI + 语音">
+    确保 Gemini CLI 正在终端中运行。然后用 Wispr Flow 说出或直接输入以下提示词：
+
+    ```text title="说出或复制此提示词"
+    What is my next meeting? Tell me the title, time, attendees, and any description or agenda attached.
+    ```
+
+    Gemini CLI 将使用 `gws` 提取你的日历，并返回会议详情。
+
+    <Tip>
+    **Gemini 要求确认？** 如果 Gemini CLI 要求批准工具调用，输入 `y` 并按 **Enter**。
+    </Tip>
+  </Tab>
+
+  <Tab title="直接使用 gws 命令">
+    你也可以直接在终端中使用 `gws` 检查日历：
+
+    ```bash title="复制此命令"
+    gws calendar +agenda
+    ```
+
+    这会显示你即将到来的事件，包括标题、时间和与会者。
+  </Tab>
+</Tabs>
+
+你应该会看到类似这样的内容：
+
+> **下一个会议：**
+>
+> - **标题：** Q2 Planning Review
+> - **时间：** 今天，下午 2:00 - 3:00
+> - **与会者：** Sarah Chen, Marcus Lee, Priya Patel
+> - **描述：** Review Q2 progress, discuss budget adjustments, and align on next steps for the product launch.
+
+<Info>
+**gws 读取你的日历，一目了然地显示你所需的一切。** 再也不用在浏览器中打开 Google 日历并逐个点击事件了 —— 一条提示词给你完整的信息。
+</Info>
+
+## 查找相关邮件
+
+<Tabs>
+  <Tab title="Gemini CLI + 语音">
+    ```text title="说出或复制此提示词"
+    Search my Gmail for any emails related to Q2 Planning from the last 2 weeks. Summarise what was discussed.
+    ```
+
+    <Tip>
+    **替换话题。** 把"Q2 Planning"换成你的实际会议话题或与会者姓名。你越具体，结果就越好。
+    </Tip>
+  </Tab>
+
+  <Tab title="直接使用 gws 命令">
+    ```bash title="复制此命令"
+    gws gmail messages list --params '{"q": "Q2 Planning newer_than:14d"}'
+    ```
+
+    将 `Q2 Planning` 替换为你的会议话题。这会搜索你 Gmail 中过去 14 天内的相关邮件。
+  </Tab>
+</Tabs>
+
+你应该会看到类似这样的内容：
+
+> **相关邮件（找到 5 封）：**
+>
+> - **Sarah Chen**（3 天前）—— "Q2 budget draft attached"—— 分享了更新的预算电子表格，要求在周五前提供反馈。
+> - **Marcus Lee**（5 天前）—— "Product launch timeline"—— 建议将发布时间推迟到六月中旬，等待批准中。
+> - **Priya Patel**（1 周前）—— "Re: Q2 Planning agenda"—— 建议在议程中增加 10 分钟的客户反馈审查环节。
+> - **Sarah Chen**（10 天前）—— "Q2 goals alignment"—— 列出了本季度三个优先领域。
+> - **Marcus Lee**（12 天前）—— "Design review notes"—— 分享了设计审查记录，其中有两个行动事项分配给了你。
+
+<Info>
+**这对会议前的快速了解极其有用。** 不用手动搜索 Gmail 并逐封打开邮件，AI 帮你读完所有邮件，几秒钟内给出关键要点。
+</Info>
+
+## 查找共享文档
+
+<Tabs>
+  <Tab title="Gemini CLI + 语音">
+    ```text title="说出或复制此提示词"
+    Search my Google Drive for files related to Q2 Planning. List the file names, who shared them, and when they were last modified.
+    ```
+  </Tab>
+
+  <Tab title="直接使用 gws 命令">
+    ```bash title="复制此命令"
+    gws drive files list --params '{"q": "name contains \"Q2 Planning\""}'
+    ```
+
+    将 `Q2 Planning` 替换为你的会议话题。这会搜索你 Google Drive 中的相关文件。
+  </Tab>
+</Tabs>
+
+你应该会看到类似这样的内容：
+
+> **Drive 中的相关文件（找到 3 个）：**
+>
+> - **Q2 Budget Draft.xlsx** —— Sarah Chen 共享，3 天前最后修改
+> - **Q2 Planning Agenda.gdoc** —— Priya Patel 共享，1 周前最后修改
+> - **Product Launch Timeline.gsheet** —— Marcus Lee 共享，5 天前最后修改
+
+<Tip>
+**现在你确切知道会议前需要打开哪些文档了。** 再也不用在 Drive 文件夹里翻找 —— AI 帮你找到相关文件，并告诉你谁共享的、什么时候共享的。
+</Tip>
+
+## 读取电子表格数据（可选）
+
+如果你的会议涉及审查共享电子表格中的数据，AI 可以帮你读取。
+
+<Tabs>
+  <Tab title="Gemini CLI + 语音">
+    ```text title="说出或复制此提示词"
+    Read the data from my spreadsheet called "Q2 Budget Draft" and summarise the key numbers.
+    ```
+  </Tab>
+
+  <Tab title="直接使用 gws 命令">
+    ```bash title="复制此命令"
+    gws sheets +read --spreadsheet SPREADSHEET_ID --range "Sheet1!A1:D10"
+    ```
+
+    将 `SPREADSHEET_ID` 替换为文件 URL 中的实际电子表格 ID。范围 `Sheet1!A1:D10` 提取前 10 行 —— 根据需要调整。
+  </Tab>
+</Tabs>
+
+<Info>
+**如果你的会议涉及审查共享电子表格中的数据，这非常有用。** AI 读取数据并总结关键要点 —— 让你走进会议室时已掌握数据，而不是手忙脚乱地打开文件。
+</Info>
+
+## 完整的会议准备 —— 一条提示词搞定
+
+这就是把所有内容汇聚在一起的时刻。不用分别运行多个查询，直接让 AI 一次性完成所有事情。
+
+<Tabs>
+  <Tab title="Gemini CLI + 语音">
+    ```text title="说出或复制此提示词"
+    I have a meeting about Q2 Planning coming up. Prep me: find the meeting details from my calendar, search my emails for related discussions, check my Drive for shared documents, and give me a one-page briefing with key points and talking suggestions.
+    ```
+  </Tab>
+
+  <Tab title="直接使用 gws 命令">
+    对于一站式方案，Gemini CLI 是最佳选择 —— 它将多个 `gws` 命令组合起来并整合结果。但你也可以按顺序运行各个命令：
+
+    ```bash title="复制这些命令"
+    gws calendar +agenda
+    gws gmail messages list --params '{"q": "Q2 Planning newer_than:14d"}'
+    gws drive files list --params '{"q": "name contains \"Q2 Planning\""}'
+    ```
+  </Tab>
+</Tabs>
+
+<Info>
+**这就是魔法所在 —— AI 充当你的研究助手，同时从日历、Gmail 和 Drive 提取信息。** 一条提示词，一份简报，你已为会议做好准备。
+</Info>
+
+你应该会看到类似这样的完整简报：
+
+> **会议简报：Q2 Planning Review**
+>
+> **时间：** 今天，下午 2:00 - 3:00
+> **与会者：** Sarah Chen, Marcus Lee, Priya Patel
+>
+> **最近邮件中的关键背景：**
+> - Sarah 分享了更新的 Q2 预算草案 —— 她要求在周五前提供反馈
+> - Marcus 建议将产品发布时间推迟到六月中旬 —— 仍在等待批准
+> - Priya 建议在议程中加入客户反馈审查
+> - 你有来自设计审查记录的 2 个未完成行动事项
+>
+> **需要查阅的共享文档：**
+> - Q2 Budget Draft.xlsx（Sarah Chen，3 天前更新）
+> - Q2 Planning Agenda.gdoc（Priya Patel，1 周前更新）
+> - Product Launch Timeline.gsheet（Marcus Lee，5 天前更新）
+>
+> **建议发言要点：**
+> 1. 审查并批准 Q2 预算草案
+> 2. 确定产品发布时间（六月中旬还是原定日期）
+> 3. 讨论客户反馈审查流程
+> 4. 处理设计审查中的未完成行动事项
+
+## 自动生成会议准备
+
+`gws` 有一个内置的会议准备工作流，可以自动完成上述所有步骤。
+
+<Tabs>
+  <Tab title="Gemini CLI + 语音">
+    ```text title="说出或复制此提示词"
+    Use the meeting prep workflow to prepare me for my next meeting.
+    ```
+  </Tab>
+
+  <Tab title="直接使用 gws 命令">
+    ```bash title="复制此命令"
+    gws workflow +meeting-prep
+    ```
+
+    这会运行完整的会议准备流程 —— 日历查询、邮件搜索、Drive 搜索和简报生成 —— 一条命令搞定。
+  </Tab>
+</Tabs>
+
+<Info>
+**最快速的选项。** 内置工作流自动处理一切。当你想要快速简报而不想自定义提示词时，用这个。
+</Info>
+
+## 保存你的简报
+
+想保留简报的副本？方法如下。
+
+<Tabs>
+  <Tab title="保存到文件">
+    让 Gemini CLI 将简报保存到文本文件：
+
+    ```text title="说出或复制此提示词"
+    Save that briefing to a file called meeting-prep.txt in the current folder.
+    ```
+
+    简报现在保存在你的电脑上了，可以打开、打印或分享。
+  </Tab>
+
+  <Tab title="保存到 Google 文档">
+    让 Gemini CLI 创建一个包含简报的 Google 文档：
+
+    ```text title="说出或复制此提示词"
+    Create a Google Doc called "Meeting Prep - Q2 Planning Review" and paste the briefing into it.
+    ```
+
+    现在你的简报在 Google 文档中了 —— 可从任何设备访问，也便于与同事分享。
+  </Tab>
+</Tabs>
+
+## 故障排除
+
+<AccordionGroup>
+  <Accordion title="找不到会议">
+    确保你的 Google 日历中有事件。尝试询问更大范围："What meetings do I have this week?"，而不是"What is my next meeting?"。如果日历是空的，创建一个测试事件后再试。
+  </Accordion>
+  <Accordion title="Drive 搜索没有返回结果">
+    你的 Drive 中可能没有与搜索词匹配的文件。尝试更宽泛的搜索："List my 10 most recently modified files in Drive"，确认 Drive 访问正常。然后用更具体的词语细化搜索。
+  </Accordion>
+  <Accordion title="电子表格访问被拒绝">
+    读取电子表格数据需要有访问权限。确保该文件已与你的 Google 账号共享。如果文件属于他人，请他们与你共享。你也可以先在浏览器中打开电子表格，确认访问权限。
+  </Accordion>
+  <Accordion title="会议准备工作流失败">
+    `gws workflow +meeting-prep` 命令要求 `gws` 已通过日历、Gmail 和 Drive 的身份验证。运行 `gws auth login -s gmail,calendar,drive,docs,sheets` 重新验证。如果工作流仍然失败，改用 Gemini CLI 中的单个提示词 —— 效果完全一样。
+  </Accordion>
+  <Accordion title="Gemini CLI 说它没有日历或 Drive 工具">
+    扩展可能没有正确安装。再次运行安装命令：
+    ```bash
+    gemini extensions install https://github.com/googleworkspace/cli
+    ```
+    然后退出（`/quit`）并重启 Gemini CLI。可在 Gemini CLI 内运行 `/extensions list` 查看已安装的扩展。
+  </Accordion>
+  <Accordion title="简报太模糊或太笼统">
+    在提示词中提供更多细节。与其说"prep me for my next meeting"，不如说"prep me for my Q2 Planning Review at 2 PM — search for emails from Sarah Chen, Marcus Lee, and Priya Patel from the last 2 weeks"。你提供的细节越多，简报就越好。
+  </Accordion>
+</AccordionGroup>
+
+<Note>
+做得很好 —— 你已经构建了完整的会议准备工作流。前往[继续探索](/docs/2026-her-waka/tutorial/meeting-prep/keep-going)，了解如何将它变成每日习惯。
+</Note>

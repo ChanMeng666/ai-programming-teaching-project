@@ -1,0 +1,206 @@
+---
+title: "Set up your tools"
+description: "Connect AI to your Gmail account — install Gemini CLI + Voice (recommended) or try the quick browser preview."
+---
+
+import InstallNodejs from "../../_snippets/install-nodejs.mdx";
+import InstallGeminiCli from "../../_snippets/install-gemini-cli.mdx";
+import InstallWisprFlow from "../../_snippets/install-wispr-flow.mdx";
+
+Before we start summarising, let's get your AI tool connected to Gmail. Choose the path that suits you best.
+
+<Warning>
+**You will need:** a laptop with internet access and a Gmail account. No coding experience is required — we will guide you through every step.
+</Warning>
+
+## Choose your path
+
+<Tabs>
+  <Tab title="Full Tutorial (CLI + Voice)">
+    This path gives you a voice-first experience. You will install Gemini CLI, add the Google Workspace extension, and optionally set up Wispr Flow so you can speak your prompts. This takes about 20 minutes and teaches CLI skills you will use in every tutorial after this one.
+
+    <Steps>
+      <Step title="Install Node.js">
+        <Info>
+        **Already have Node.js?** If you installed it for a previous tutorial, skip this step. Run `node --version` in your terminal to check — you should see a version number like `v22.x.x`.
+        </Info>
+
+        <InstallNodejs />
+      </Step>
+
+      <Step title="Install Gemini CLI">
+        <Info>
+        **Already have Gemini CLI?** If you installed it for a previous tutorial, skip this step. Just run `gemini` in your terminal to check it still works.
+        </Info>
+
+        <InstallGeminiCli />
+
+        Type `/quit` to exit Gemini CLI for now. We will start it again after installing the Gmail extension.
+      </Step>
+
+      <Step title="Install the Google Workspace extension">
+        Open your terminal and run this command:
+
+        ```bash title="Copy this command"
+        gemini extensions install https://github.com/gemini-cli-extensions/workspace
+        ```
+
+        This downloads and installs the Google Workspace extension, which gives Gemini CLI the ability to read your Gmail, Google Calendar, and Google Drive.
+
+        <Info>
+        **What is an extension?** Extensions are plugins that add new capabilities to Gemini CLI. The Workspace extension adds tools for reading and managing Google services like Gmail — similar to how you might install an app on your phone.
+        </Info>
+
+        <Accordion title="The command fails or hangs">
+        Make sure you have an internet connection and that Node.js is installed correctly. Try running `node --version` first. If that works but the extension install fails, try closing and reopening your terminal, then running the command again.
+        </Accordion>
+      </Step>
+
+      <Step title="Authorise Gmail access">
+        1. Start Gemini CLI:
+
+        ```bash
+        gemini
+        ```
+
+        2. The first time Gemini CLI loads with the Workspace extension, it will ask you to authorise access to your Google account
+        3. A browser window will open — sign in with the Google account that has the Gmail you want to summarise
+        4. Review the permissions and click **Allow**
+        5. Return to your terminal — Gemini CLI is now connected to your Gmail
+
+        <Warning>
+        **Review the permissions carefully.** The extension requests access to read your emails, calendar, and drive. Make sure you are comfortable with this before clicking Allow. You can revoke access at any time from your [Google Account security settings](https://myaccount.google.com/permissions).
+        </Warning>
+
+        <Accordion title="The browser window doesn't open">
+        Copy the URL shown in your terminal and paste it into your browser manually. Complete the sign-in there, then return to the terminal.
+        </Accordion>
+
+        <Accordion title="I see a 'This app isn't verified' warning">
+        This is normal for community-built tools. Click **Advanced** → **Go to [app name] (unsafe)** to continue. Google shows this warning for apps that haven't gone through their official review process.
+        </Accordion>
+      </Step>
+
+      <Step title="Install Wispr Flow (optional)">
+        <InstallWisprFlow />
+      </Step>
+
+      <Step title="Test the connection">
+        In Gemini CLI, say (with Wispr Flow) or type this prompt:
+
+        ```text title="Say this or copy this prompt"
+        Check my Gmail and tell me how many unread emails I have.
+        ```
+
+        You should see Gemini CLI access your Gmail and return information about your inbox. If it does, everything is working.
+
+        <Tip>
+        **Gemini asks for permission?** If Gemini CLI asks to approve a tool call, type `y` and press **Enter**. This is normal — it is asking your permission before accessing Gmail.
+        </Tip>
+
+        <Accordion title="Gemini says it has no Gmail tools">
+        The extension may not have installed correctly. Try running the install command again:
+        ```bash
+        gemini extensions install https://github.com/gemini-cli-extensions/workspace
+        ```
+        Then exit (`/quit`) and restart Gemini CLI. You can check installed extensions with `/extensions list`.
+        </Accordion>
+      </Step>
+    </Steps>
+
+    ## Verify your setup
+
+    <AccordionGroup>
+      <Accordion title="Node.js installed">
+        Run `node --version` in your terminal. You should see a version number.
+      </Accordion>
+      <Accordion title="Gemini CLI installed and signed in">
+        Run `gemini` in your terminal. It starts up and shows a prompt where you can type.
+      </Accordion>
+      <Accordion title="Workspace extension installed">
+        The extension installed without errors. You can verify with `/extensions list` inside Gemini CLI.
+      </Accordion>
+      <Accordion title="Gmail authorised">
+        You completed the Google sign-in and granted access.
+      </Accordion>
+      <Accordion title="Connection tested">
+        Gemini CLI can tell you about your unread emails when you ask.
+      </Accordion>
+    </AccordionGroup>
+
+    <Note>
+    All set? Head to [Summarise your Gmail](/docs/2026-her-waka/tutorial/gmail-summary/summarize) to get your first AI-powered email summary.
+    </Note>
+  </Tab>
+
+  <Tab title="Quick Preview (browser)">
+    <Info>
+    **This is a quick preview.** You will get results fast, but you will not learn the CLI skills used in every other tutorial. If you have 20 minutes, we recommend the **Full Tutorial (CLI + Voice)** tab instead.
+    </Info>
+
+    This is the fastest way to get started. You will use the Gemini web app in your browser, turn on the Gmail extension, and be ready to summarise in about 5 minutes. No installation required.
+
+    <Steps>
+      <Step title="Open Gemini">
+        1. Go to [gemini.google.com](https://gemini.google.com) in your browser
+        2. Sign in with the Google account that has the Gmail you want to summarise
+        3. You should see the Gemini chat interface
+
+        <Accordion title="I don't have a Google account">
+        You need a Google account to use both Gemini and Gmail. Go to [accounts.google.com](https://accounts.google.com) and click **Create account** to make one for free.
+        </Accordion>
+      </Step>
+
+      <Step title="Enable the Gmail extension">
+        1. Click the **Settings** icon (gear icon) in the bottom-left of the Gemini sidebar, or go to [gemini.google.com/extensions](https://gemini.google.com/extensions)
+        2. Find **Google Workspace** in the list of extensions
+        3. Toggle it **on**
+        4. If prompted, review the permissions and click **Allow**
+
+        <Info>
+        **What does this do?** It gives Gemini permission to read your Gmail messages, Google Drive files, and Google Docs. Gemini uses this access only when you ask it to — it does not read your emails in the background.
+        </Info>
+
+        <Accordion title="I don't see the Google Workspace extension">
+        The extension may not be available if your Google account is managed by an organisation (like a school or employer). Your admin may need to enable it. Try using a personal Gmail account instead.
+        </Accordion>
+
+        <Accordion title="The extension toggle is greyed out">
+        Make sure you are signed in with a Google account that has Gmail enabled. If you are using a Workspace account, check with your IT admin — they may need to enable Gemini extensions in the Admin console.
+        </Accordion>
+      </Step>
+
+      <Step title="Test the connection">
+        In the Gemini chat, type this prompt:
+
+        ```text title="Copy this prompt"
+        Check my Gmail and tell me how many unread emails I have.
+        ```
+
+        You should see Gemini access your Gmail and return a count of your unread messages. If it does, the connection is working.
+
+        <Tip>
+        **First time?** Gemini may ask you to confirm that it can access your Gmail. Click **Allow** or **Yes** when prompted. This is a one-time authorisation.
+        </Tip>
+      </Step>
+    </Steps>
+
+    ## Verify your setup
+
+    <AccordionGroup>
+      <Accordion title="Signed in to Gemini">
+        You can see the Gemini chat interface at gemini.google.com.
+      </Accordion>
+      <Accordion title="Gmail extension enabled">
+        The Google Workspace extension is toggled on in Settings → Extensions.
+      </Accordion>
+      <Accordion title="Connection tested">
+        Gemini can tell you how many unread emails you have.
+      </Accordion>
+    </AccordionGroup>
+
+    <Note>
+    All set? Head to [Summarise your Gmail](/docs/2026-her-waka/tutorial/gmail-summary/summarize) to get your first AI-powered email summary.
+    </Note>
+  </Tab>
+</Tabs>

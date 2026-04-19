@@ -1,0 +1,327 @@
+---
+title: "Set up your tools"
+description: "Connect AI to your Slack workspace — install Gemini CLI with voice commands (recommended) or try the quick Claude Desktop alternative."
+---
+
+import InstallNodejs from "../../_snippets/install-nodejs.mdx";
+import InstallGeminiCli from "../../_snippets/install-gemini-cli.mdx";
+import InstallWisprFlow from "../../_snippets/install-wispr-flow.mdx";
+
+Before we start summarising, let's get your tools connected to Slack. Choose the path that suits you best.
+
+<Warning>
+**You will need:** a laptop with internet access and a Slack workspace where you are a member. No coding experience is required — we will guide you through every step.
+</Warning>
+
+## Choose your path
+
+<Tabs>
+  <Tab title="Recommended: CLI + Voice">
+    This path gives you a voice-first experience with more control. You will install Gemini CLI, create a Slack App, configure a Model Context Protocol (MCP) server, and optionally set up Wispr Flow for hands-free voice commands. This takes about 30 minutes.
+
+    <Steps>
+      <Step title="Install Node.js">
+        <Info>
+        **Already have Node.js?** If you installed it for a previous tutorial, skip this step. Run `node --version` in your terminal to check — you should see a version number like `v22.x.x`.
+        </Info>
+
+        <InstallNodejs />
+      </Step>
+
+      <Step title="Install and test Gemini CLI">
+        <Info>
+        **Already have Gemini CLI?** If you installed it for a previous tutorial, skip this step. Just run `gemini` in your terminal to check it still works.
+        </Info>
+
+        <InstallGeminiCli />
+
+        Type `/quit` to exit Gemini CLI for now. We will start it again after configuring the Slack connection.
+      </Step>
+
+      <Step title="Create a Slack App">
+        A Slack App is how you give Gemini CLI permission to read messages from your workspace. The app you are creating will only have read-only access — it cannot post, delete, or change anything.
+
+        1. Go to [api.slack.com/apps](https://api.slack.com/apps) and sign in
+        2. Click **Create New App**
+        3. Choose **From scratch**
+        4. Enter a name — for example, `Channel Summariser`
+        5. Select your Slack workspace from the dropdown
+        6. Click **Create App**
+
+        <Accordion title="What is a Slack App?">
+        A Slack App is like giving a programme a key to your workspace. The key only opens the doors you choose — in this case, the ability to read messages in public channels. The app cannot see your direct messages, cannot post anything, and cannot change any settings.
+        </Accordion>
+      </Step>
+
+      <Step title="Add permissions (scopes)">
+        Now you need to tell Slack exactly what the app is allowed to do.
+
+        1. In the left sidebar, click **OAuth & Permissions**
+        2. Scroll down to the **Scopes** section
+        3. Under **Bot Token Scopes**, click **Add an OAuth Scope**
+        4. Add these two scopes:
+           - `channels:history` — lets the app read messages in public channels
+           - `channels:read` — lets the app see which public channels exist
+
+        <Warning>
+        **Only add these two scopes.** They give the app read-only access to public channels. The app cannot read private channels, direct messages, or post anything.
+        </Warning>
+
+        <Accordion title="What are scopes?">
+        Scopes are permissions. They control exactly what your app is allowed to do. Think of them like keys — `channels:history` is the key that opens message history, and `channels:read` is the key that lets the app see channel names. Without these specific keys, the app cannot do anything.
+        </Accordion>
+      </Step>
+
+      <Step title="Install the app and get your bot token">
+        1. Scroll to the top of the **OAuth & Permissions** page
+        2. Click **Install to [Your Workspace Name]**
+        3. Review the permissions and click **Allow**
+        4. You will see a **Bot User OAuth Token** that starts with `xoxb-`
+        5. **Copy this token and save it somewhere safe** — you will need it in Step 7
+
+        <Warning>
+        **This token is like a password.** Anyone who has it can read messages in your workspace. Do not share it publicly or post it online. Save it in a text file or password manager.
+        </Warning>
+
+        <Accordion title="How do I know it worked?">
+        You should see a long token starting with `xoxb-` on the OAuth & Permissions page. If you see an error, check that you added both scopes in Step 4, then try clicking **Install to Workspace** again.
+        </Accordion>
+      </Step>
+
+      <Step title="Get your Team ID">
+        The Team ID identifies your Slack workspace. You need it for the MCP configuration.
+
+        1. Open Slack in your **web browser** (not the desktop app) at [app.slack.com](https://app.slack.com)
+        2. Sign in to your workspace
+        3. Look at the URL in your browser — it will look like: `https://app.slack.com/client/T01234567/...`
+        4. The Team ID is the part that starts with **T** — for example, `T01234567`
+        5. **Copy this ID and save it** alongside your bot token
+
+        <Accordion title="I can't find the Team ID in the URL">
+        Another way: In Slack, click your **workspace name** in the top-left corner → **Settings & administration** → **Workspace settings**. The Workspace ID (which is the same as Team ID) is usually shown on the settings page, or in the URL of the settings page.
+        </Accordion>
+      </Step>
+
+      <Step title="Configure Slack MCP in Gemini CLI">
+        Now you will connect Gemini CLI to Slack by configuring a Model Context Protocol (MCP) server. This tells Gemini CLI how to talk to Slack.
+
+        <Tabs>
+          <Tab title="Windows">
+            1. Open File Explorer
+            2. In the address bar, type `%USERPROFILE%\.gemini` and press **Enter**
+            3. If you see a file called `settings.json`, open it with Notepad
+            4. If the file does not exist, create a new text file and name it `settings.json`
+          </Tab>
+          <Tab title="macOS">
+            1. Open Finder
+            2. Press **Cmd + Shift + G** and type `~/.gemini` then press **Enter**
+            3. If you see a file called `settings.json`, open it with TextEdit
+            4. If the file does not exist, open Terminal and run:
+            ```bash
+            touch ~/.gemini/settings.json && open -e ~/.gemini/settings.json
+            ```
+          </Tab>
+        </Tabs>
+
+        Paste the following into `settings.json`. **Replace the two placeholders** with your actual bot token and Team ID:
+
+        ```json title="~/.gemini/settings.json — replace YOUR_BOT_TOKEN and YOUR_TEAM_ID"
+        {
+          "mcpServers": {
+            "slack": {
+              "command": "npx",
+              "args": ["-y", "@modelcontextprotocol/server-slack"],
+              "env": {
+                "SLACK_BOT_TOKEN": "xoxb-YOUR_BOT_TOKEN",
+                "SLACK_TEAM_ID": "YOUR_TEAM_ID"
+              }
+            }
+          }
+        }
+        ```
+
+        <Tip>
+        **Replace two things:** `xoxb-YOUR_BOT_TOKEN` with your full bot token (e.g., `xoxb-1234-5678-abcdef`) and `YOUR_TEAM_ID` with your Team ID (e.g., `T01234567`). Keep the quotation marks.
+        </Tip>
+
+        <Warning>
+        If `settings.json` already has content from a previous tutorial, you need to merge the configurations. Add the `"slack"` section inside the existing `"mcpServers"` block rather than replacing the entire file.
+        </Warning>
+
+        Save the file.
+
+        <Accordion title="What is MCP?">
+        MCP stands for Model Context Protocol. It is a standard way for AI tools to connect to external services like Slack, GitHub, or databases. Think of it as a universal adapter — instead of each AI tool building its own Slack connection, they all use MCP. You configure it once, and the AI can read your Slack messages.
+        </Accordion>
+      </Step>
+
+      <Step title="Add the bot to a channel">
+        The bot needs to be a member of a channel before it can read messages from it.
+
+        1. Open Slack (desktop app or browser)
+        2. Go to the channel you want to summarise
+        3. Type `/invite @Channel Summariser` (or whatever you named your app) and press **Enter**
+        4. You should see a message confirming the bot has been added
+
+        <Tip>
+        **Choose an active channel** with at least 10–20 recent messages. This gives the AI something meaningful to summarise. You can always add the bot to more channels later.
+        </Tip>
+
+        <Accordion title="The bot doesn't appear when I type /invite">
+        Make sure you spell the app name exactly as you created it. You can also add the bot by clicking the **channel name** at the top → **Integrations** → **Add an App**, then find your app in the list.
+        </Accordion>
+      </Step>
+
+      <Step title="Install Wispr Flow (optional)">
+        Wispr Flow lets you speak your prompts instead of typing them. It works in any application — including your terminal where Gemini CLI runs.
+
+        <InstallWisprFlow />
+      </Step>
+
+      <Step title="Test the connection">
+        Open your terminal and start Gemini CLI:
+
+        ```bash
+        gemini
+        ```
+
+        The first time Gemini CLI loads with MCP configured, it may take a moment to connect to the Slack server. Once it's ready, say (with Wispr Flow) or type this test prompt:
+
+        ```text title="Say this or copy this prompt"
+        Use the Slack tools to check how many messages are in the channel #general.
+        ```
+
+        You should see Gemini CLI access your Slack workspace and report the message count. If it works, everything is connected.
+
+        <Accordion title="Gemini says it has no Slack tools available">
+        Check your `settings.json` file for typos. The most common issues are:
+        - Missing commas between fields
+        - Incorrect quotation marks (use straight quotes `"`, not curly quotes)
+        - Wrong file location — it must be in `~/.gemini/settings.json`
+
+        After fixing, close Gemini CLI (`/quit`) and start it again.
+        </Accordion>
+
+        <Accordion title="Connection error or timeout">
+        Make sure Node.js is installed correctly (`node --version` should show a version number). The MCP server uses `npx` to run, which comes with Node.js. If `npx` is not found, reinstall Node.js.
+        </Accordion>
+
+        <Accordion title="'invalid_auth' error">
+        Your bot token is incorrect. Go back to [api.slack.com/apps](https://api.slack.com/apps), find your app, go to **OAuth & Permissions**, and copy the **Bot User OAuth Token** again. Update your `settings.json` with the correct token.
+        </Accordion>
+      </Step>
+    </Steps>
+
+    ## Verify your setup
+
+    <AccordionGroup>
+      <Accordion title="Node.js installed">
+        Run `node --version` in your terminal. You should see a version number.
+      </Accordion>
+      <Accordion title="Gemini CLI installed and signed in">
+        Run `gemini` in your terminal. It starts up and shows a prompt where you can type.
+      </Accordion>
+      <Accordion title="Slack App created with correct scopes">
+        Your app has `channels:history` and `channels:read` scopes.
+      </Accordion>
+      <Accordion title="Bot token saved">
+        You have a token starting with `xoxb-` saved somewhere safe.
+      </Accordion>
+      <Accordion title="Team ID saved">
+        You have an ID starting with `T` saved alongside your token.
+      </Accordion>
+      <Accordion title="MCP configured">
+        Your `settings.json` file contains the Slack MCP server configuration.
+      </Accordion>
+      <Accordion title="Bot added to a channel">
+        The bot is a member of at least one channel you want to summarise.
+      </Accordion>
+      <Accordion title="Wispr Flow installed (optional)">
+        Wispr Flow is running and you can see the microphone indicator. If you skipped this step, that is perfectly fine — you can type all prompts instead.
+      </Accordion>
+      <Accordion title="Connection tested">
+        Gemini CLI can access your Slack workspace when you ask.
+      </Accordion>
+    </AccordionGroup>
+
+    <Note>
+    All set? Head to [Summarise your Slack channels](/docs/2026-her-waka/tutorial/slack-summary/summarize) to get your first AI-powered summary.
+    </Note>
+  </Tab>
+
+  <Tab title="Alternative: Claude Desktop">
+    <Info>
+    **Quick alternative.** This path gets you results in 10 minutes, but skips the CLI skills used in other tutorials. Claude Desktop is made by Anthropic — the same company behind Claude Code, which you will use in the advanced Vibe Coding tutorial. For the full learning experience, we recommend the **Recommended: CLI + Voice** tab.
+    </Info>
+
+    This is the fastest way to get started. You will download Claude Desktop, connect it to Slack, and be ready to summarise in about 10 minutes.
+
+    <Steps>
+      <Step title="Download Claude Desktop">
+        1. Go to [claude.ai/download](https://claude.ai/download)
+        2. Download the app for your operating system (Windows or macOS)
+        3. Install it by opening the downloaded file and following the prompts
+        4. Open Claude Desktop and create a free account (or sign in if you already have one)
+
+        <Accordion title="Do I need a paid plan?">
+        No. The free plan includes access to Slack connectors. You can start summarising channels right away without paying anything.
+        </Accordion>
+      </Step>
+
+      <Step title="Connect Slack">
+        1. In Claude Desktop, click your **profile icon** in the bottom-left corner
+        2. Click **Customize**
+        3. Click **Connectors**
+        4. Click the **+** button to add a new connector
+        5. Find **Slack** in the list and click it
+        6. A browser window will open — sign in to your Slack workspace
+        7. Review the permissions and click **Allow**
+        8. Return to Claude Desktop — Slack is now connected
+
+        <Info>
+        **What does the connector do?** It gives Claude secure, read-only access to your Slack messages. Claude can search and read messages in channels you have access to, but it cannot post, delete, or modify anything.
+        </Info>
+
+        <Accordion title="I don't see the Connectors option">
+        Make sure you are using the latest version of Claude Desktop. Go to **Help** → **Check for Updates** and install any available updates. If you still don't see it, try signing out and signing back in.
+        </Accordion>
+
+        <Accordion title="The Slack authorisation window won't open">
+        Check that your browser is not blocking pop-ups. Try a different browser if the window still won't appear. You can also try copying the authorisation URL and pasting it directly into your browser.
+        </Accordion>
+      </Step>
+
+      <Step title="Test the connection">
+        In the Claude Desktop chat, type this prompt:
+
+        ```text title="Copy this prompt"
+        List the Slack channels you can see in my workspace.
+        ```
+
+        You should see a list of channel names from your Slack workspace. If you do, the connection is working.
+
+        <Accordion title="Claude says it cannot access Slack">
+        Go back to **Customize** → **Connectors** and check that Slack shows as connected. If it shows an error, remove the connector and add it again. Make sure you authorise the correct workspace.
+        </Accordion>
+      </Step>
+    </Steps>
+
+    ## Verify your setup
+
+    <AccordionGroup>
+      <Accordion title="Claude Desktop installed">
+        The app opens and you can type messages.
+      </Accordion>
+      <Accordion title="Slack connected">
+        The Slack connector shows as active in **Customize** → **Connectors**.
+      </Accordion>
+      <Accordion title="Connection tested">
+        Claude can list your Slack channels when you ask.
+      </Accordion>
+    </AccordionGroup>
+
+    <Note>
+    All set? Head to [Summarise your Slack channels](/docs/2026-her-waka/tutorial/slack-summary/summarize) to get your first AI-powered summary.
+    </Note>
+  </Tab>
+</Tabs>

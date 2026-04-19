@@ -1,0 +1,57 @@
+Obsidian 是一款免费的笔记应用，将你的笔记以纯文本文件的形式存储在你的电脑上。CLI 让你可以从终端控制它。
+
+<Tabs>
+  <Tab title="Windows">
+    1. 前往 [obsidian.md/download](https://obsidian.md/download)，点击 **Download for Windows**
+    2. 运行安装程序并按照提示操作
+    3. 打开 Obsidian —— 如果是第一次使用，点击 **Create new vault**，给它起个名字（例如"My Notes"），然后选择保存位置
+  </Tab>
+  <Tab title="macOS">
+    1. 前往 [obsidian.md/download](https://obsidian.md/download)，点击 **Download for macOS**
+    2. 将 Obsidian 拖到你的**应用程序**文件夹
+    3. 打开 Obsidian —— 如果是第一次使用，点击 **Create new vault**，给它起个名字（例如"My Notes"），然后选择保存位置
+  </Tab>
+</Tabs>
+
+<Info>
+**已有 Obsidian？** 确保你运行的是 **1.12.4 或更高版本**。前往**设置** → **通用** → 查看顶部的版本号。如果需要更新，从 [obsidian.md/download](https://obsidian.md/download) 下载最新安装程序。
+</Info>
+
+现在启用 CLI：
+
+1. 在 Obsidian 中，打开**设置**（左下角的齿轮图标）
+2. 前往**通用**
+3. 找到**命令行界面**并切换为**开启**
+4. 按照提示注册 CLI
+5. **关闭并重新打开终端**使更改生效
+
+通过打开终端并输入以下命令来测试：
+
+```bash
+obsidian help
+```
+
+你应该看到可用命令列表。如果可以，CLI 已准备就绪。
+
+<Accordion title="'obsidian' 命令未找到">
+启用 CLI 后重启终端 —— PATH 更改只在新终端窗口中生效。
+
+**macOS：** 检查你的 `~/.zprofile` 文件是否包含以下行：
+```bash
+export PATH="$PATH:/Applications/Obsidian.app/Contents/MacOS"
+```
+如果缺少，手动添加，然后重启终端。
+
+**Windows：** 确保你使用的是 Obsidian 1.12.4+ 安装程序。安装程序会添加一个允许 CLI 工作的终端重定向器。如果命令仍然找不到，尝试重启电脑。
+</Accordion>
+
+<Accordion title="Obsidian 必须处于运行状态">
+CLI 连接到正在运行的 Obsidian 应用。在运行 CLI 命令之前确保 Obsidian 是打开的。如果 Obsidian 没有运行，第一个 CLI 命令应该会自动启动它 —— 但这可能需要几秒钟。
+</Accordion>
+
+<Accordion title="我有多个知识库">
+默认情况下，CLI 使用当前终端目录中的知识库，或最近活跃的知识库。要指定特定知识库，在命令前加 `vault=<名称>`：
+```bash
+obsidian vault="My Notes" help
+```
+</Accordion>

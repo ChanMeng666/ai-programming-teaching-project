@@ -1,0 +1,146 @@
+---
+title: "Set up your tools"
+description: "Register for the free Auckland Transport API, install Gemini CLI, and optionally set up Wispr Flow — everything you need to start querying real-time commute data by voice or text."
+---
+
+import InstallNodejs from "../../_snippets/install-nodejs.mdx";
+import InstallGeminiCli from "../../_snippets/install-gemini-cli.mdx";
+import InstallWisprFlow from "../../_snippets/install-wispr-flow.mdx";
+
+Before we start checking commute data, let's get your tools ready. There are three things to set up: your Auckland Transport API key (to access the data), Gemini CLI (to ask questions about it), and optionally Wispr Flow (to speak instead of type).
+
+<Warning>
+**You will need:** a laptop with internet access and a Google account (for Gemini CLI). No coding experience is required — we will guide you through every step.
+</Warning>
+
+<Steps>
+  <Step title="Install Node.js">
+    <Info>
+    **Already have Node.js?** If you installed it for a previous tutorial, skip this step. Run `node --version` in your terminal to check — you should see a version number like `v22.x.x`.
+    </Info>
+
+    <InstallNodejs />
+  </Step>
+
+  <Step title="Install Gemini CLI">
+    <Info>
+    **Already have Gemini CLI?** If you installed it for a previous tutorial, skip this step. Just run `gemini` in your terminal to check it still works.
+    </Info>
+
+    <InstallGeminiCli />
+
+    Type `/quit` to exit Gemini CLI for now. We will start it again once everything else is set up.
+  </Step>
+
+  <Step title="Register for the Auckland Transport API">
+    The Auckland Transport API gives you access to real-time data for every bus, train, and ferry in Auckland. It's free — you just need to register.
+
+    1. Go to [dev-portal.at.govt.nz](https://dev-portal.at.govt.nz/)
+    2. Click **Sign Up** (or **Register**) in the top-right corner
+    3. Fill in your name, email, and create a password
+    4. Check your email for a verification link and click it
+    5. Sign in to the developer portal
+    6. Once signed in, look for a **Profile** or **Subscriptions** page
+    7. You may need to subscribe to a product — look for **"GTFS Realtime"** or **"General Transit Feed"** and subscribe (it's free)
+    8. Find your **Primary Key** (also called **Subscription Key**) — it will be a long string of letters and numbers
+    9. **Copy this key and save it somewhere safe** — you will need it in the next section
+
+    <Info>
+    **What is an API key?** Think of it as a library card. The Auckland Transport data is free and public, but they need to know who is using it — mainly to prevent misuse. Your key identifies you as a registered user. It doesn't cost anything and doesn't give access to your personal information.
+    </Info>
+
+    <Accordion title="I can't find my subscription key">
+    After signing in, look for a section called **Profile**, **Subscriptions**, or **API Keys**. Some portals show the key on a "Products" page after you subscribe to a product. Try clicking on "GTFS Realtime" or "General Transit Feed" in the product list, then subscribe (free), and the key will appear.
+    </Accordion>
+
+    <Accordion title="Do I need to subscribe to a specific product?">
+    Yes — you may need to subscribe to the **"General Transit Feed Specification (GTFS)"** product or a similarly named product. This is free. Once subscribed, your subscription key will appear on your profile page.
+    </Accordion>
+
+    <Warning>
+    **Your API key is like a password.** Do not share it publicly, post it on social media, or include it in screenshots. Anyone with your key could use your quota.
+    </Warning>
+  </Step>
+
+  <Step title="Get your API subscription key">
+    Once you have subscribed to the GTFS product, your subscription key will be visible on your profile page. You need this key for every API request.
+
+    1. Go to your **Profile** page on the AT developer portal
+    2. Find your **Primary Key** (or **Subscription Key**)
+    3. Click **Show** to reveal the full key
+    4. Copy it and save it somewhere you can easily access — a text file, a note, or your password manager
+
+    <Tip>
+    **You will paste this key into prompts throughout the tutorial.** Every API URL includes `YOUR_API_KEY` as a placeholder — you will replace it with your actual key each time. Keep it handy.
+    </Tip>
+  </Step>
+
+  <Step title="Install Wispr Flow (optional)">
+    <InstallWisprFlow />
+  </Step>
+
+  <Step title="Test your setup">
+    Let's make sure everything works before we move on. Start Gemini CLI:
+
+    ```bash
+    gemini
+    ```
+
+    Now say (with Wispr Flow) or type this prompt. **Replace `YOUR_API_KEY`** with the subscription key you saved earlier.
+
+    ```text title="Say this or copy this prompt"
+    Can you help me check the Auckland Transport API?
+    Fetch this URL and tell me what you get back:
+    https://api.at.govt.nz/realtime/legacy/servicealerts?subscription-key=YOUR_API_KEY
+
+    If the response contains data, summarise the first 2-3 service alerts in plain English.
+    If you get an error, tell me what went wrong.
+    ```
+
+    <Tip>
+    **Replace `YOUR_API_KEY`** with your actual subscription key. If you are using Wispr Flow, speak the description part naturally, then paste the API URL with your key. Keep the key inside the URL — do not add spaces around the `=` sign.
+    </Tip>
+
+    You should see Gemini describe some current service alerts — for example, "There is a detour on route 123 due to road works near Queen Street." If you see this, your API key is working and you're ready to go.
+
+    <Accordion title="Gemini says 'access denied' or '401 error'">
+    Your API key is incorrect or hasn't been activated yet. Go back to [dev-portal.at.govt.nz](https://dev-portal.at.govt.nz/), check your profile, and copy the key again. Make sure you subscribed to the GTFS product. Some keys take a few minutes to activate after registration.
+    </Accordion>
+
+    <Accordion title="Gemini says 'rate limit exceeded'">
+    This is unlikely on your first try, but if it happens, wait 60 seconds and try again. The free tier allows 600 calls per minute, which is very generous.
+    </Accordion>
+
+    <Accordion title="Gemini returns garbled data or strange characters">
+    The API might be returning Protocol Buffer format instead of JSON. Try asking Gemini: "Fetch this URL with the header Accept: application/json" followed by the full URL. This tells the API to return human-readable JSON format.
+    </Accordion>
+
+    <Accordion title="Gemini says it can't access the URL">
+    Make sure the entire URL is on a single line with no line breaks. Check that `subscription-key=YOUR_API_KEY` has your actual key with no spaces around the `=` sign. Also try asking Gemini to use `curl` to fetch the URL instead.
+    </Accordion>
+  </Step>
+</Steps>
+
+## Verify your setup
+
+<AccordionGroup>
+  <Accordion title="Node.js installed">
+    Run `node --version` in your terminal. You should see a version number.
+  </Accordion>
+  <Accordion title="Gemini CLI installed and signed in">
+    Run `gemini` in your terminal. It starts up and shows a prompt where you can type.
+  </Accordion>
+  <Accordion title="AT API key saved">
+    You have a subscription key from dev-portal.at.govt.nz saved somewhere safe.
+  </Accordion>
+  <Accordion title="API key tested">
+    Gemini CLI successfully fetched and described Auckland Transport service alerts.
+  </Accordion>
+  <Accordion title="Wispr Flow installed (optional)">
+    You can speak into your terminal and see your words appear as text.
+  </Accordion>
+</AccordionGroup>
+
+<Note>
+All set? Head to [Check your commute](/docs/2026-her-waka/tutorial/auckland-commute/check-commute) to start getting real-time commute intelligence.
+</Note>

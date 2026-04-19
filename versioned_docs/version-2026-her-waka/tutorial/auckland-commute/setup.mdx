@@ -1,0 +1,146 @@
+---
+title: "设置你的工具"
+description: "注册免费的 Auckland Transport API、安装 Gemini CLI，以及可选安装 Wispr Flow —— 开始通过语音或文字查询实时通勤数据所需的一切。"
+---
+
+import InstallNodejs from "../../_snippets/install-nodejs.mdx";
+import InstallGeminiCli from "../../_snippets/install-gemini-cli.mdx";
+import InstallWisprFlow from "../../_snippets/install-wispr-flow.mdx";
+
+在开始查询通勤数据之前，先把工具准备好。需要设置三件事：Auckland Transport API 密钥（用于访问数据）、Gemini CLI（用于提问）以及可选的 Wispr Flow（用于语音代替打字）。
+
+<Warning>
+**你需要准备：** 一台能联网的电脑和一个 Google 账号（用于 Gemini CLI）。无需任何编程经验 —— 我们会一步一步带你完成每个步骤。
+</Warning>
+
+<Steps>
+  <Step title="安装 Node.js">
+    <Info>
+    **已有 Node.js？** 如果你在之前的教程中已经安装过，跳过此步骤。在终端运行 `node --version` 检查 —— 你应该会看到类似 `v22.x.x` 的版本号。
+    </Info>
+
+    <InstallNodejs />
+  </Step>
+
+  <Step title="安装 Gemini CLI">
+    <Info>
+    **已有 Gemini CLI？** 如果你在之前的教程中已经安装过，跳过此步骤。只需在终端运行 `gemini` 确认它还能正常运行。
+    </Info>
+
+    <InstallGeminiCli />
+
+    暂时输入 `/quit` 退出 Gemini CLI。等其他一切都设置完成后再重新启动。
+  </Step>
+
+  <Step title="注册 Auckland Transport API">
+    Auckland Transport API 让你能访问奥克兰每辆巴士、火车和轮渡的实时数据。它是免费的 —— 你只需注册。
+
+    1. 前往 [dev-portal.at.govt.nz](https://dev-portal.at.govt.nz/)
+    2. 点击右上角的**注册**（或 **Register**）
+    3. 填写你的姓名、邮箱并创建密码
+    4. 查收邮件中的验证链接并点击
+    5. 登录开发者门户
+    6. 登录后，找到**个人资料**或**订阅**页面
+    7. 你可能需要订阅一个产品 —— 找到 **"GTFS Realtime"** 或 **"General Transit Feed"** 并订阅（免费）
+    8. 找到你的**主密钥**（也叫**订阅密钥**）—— 它是一串由字母和数字组成的长字符串
+    9. **复制这个密钥并保存到安全的地方** —— 你在下一节需要用到它
+
+    <Info>
+    **什么是 API 密钥？** 可以把它理解为图书馆借阅卡。Auckland Transport 的数据是免费公开的，但他们需要知道是谁在使用 —— 主要是为了防止滥用。你的密钥标识你是一个注册用户。它不收费，也不会访问你的个人信息。
+    </Info>
+
+    <Accordion title="我找不到我的订阅密钥">
+    登录后，找到 **Profile**、**Subscriptions** 或 **API Keys** 板块。有些门户在你订阅某个产品后会在"Products"页面显示密钥。尝试在产品列表中点击"GTFS Realtime"或"General Transit Feed"，然后订阅（免费），密钥就会出现。
+    </Accordion>
+
+    <Accordion title="我需要订阅特定的产品吗？">
+    是的 —— 你可能需要订阅 **"General Transit Feed Specification (GTFS)"** 或类似名称的产品。这是免费的。订阅后，你的订阅密钥会出现在个人资料页面上。
+    </Accordion>
+
+    <Warning>
+    **你的 API 密钥就像密码。** 不要公开分享，不要发到社交媒体，不要包含在截图中。任何持有你密钥的人都可以使用你的配额。
+    </Warning>
+  </Step>
+
+  <Step title="获取你的 API 订阅密钥">
+    订阅 GTFS 产品后，你的订阅密钥会显示在个人资料页面上。每次 API 请求都需要这个密钥。
+
+    1. 前往 AT 开发者门户的**个人资料**页面
+    2. 找到你的**主密钥**（或**订阅密钥**）
+    3. 点击**显示**查看完整密钥
+    4. 复制并保存到你容易访问的地方 —— 文本文件、备忘录或密码管理器
+
+    <Tip>
+    **你在整个教程中都需要将这个密钥粘贴到提示词里。** 每个 API URL 都包含 `YOUR_API_KEY` 作为占位符 —— 你每次都需要替换为你的实际密钥。把它放在手边。
+    </Tip>
+  </Step>
+
+  <Step title="安装 Wispr Flow（可选）">
+    <InstallWisprFlow />
+  </Step>
+
+  <Step title="测试你的设置">
+    在继续之前，确保一切正常运行。启动 Gemini CLI：
+
+    ```bash
+    gemini
+    ```
+
+    现在用 Wispr Flow 说出或直接输入这条提示词。**把 `YOUR_API_KEY`** 替换为你之前保存的订阅密钥。
+
+    ```text title="说出或复制此提示词"
+    Can you help me check the Auckland Transport API?
+    Fetch this URL and tell me what you get back:
+    https://api.at.govt.nz/realtime/legacy/servicealerts?subscription-key=YOUR_API_KEY
+
+    If the response contains data, summarise the first 2-3 service alerts in plain English.
+    If you get an error, tell me what went wrong.
+    ```
+
+    <Tip>
+    **替换 `YOUR_API_KEY`** 为你实际的订阅密钥。如果你在使用 Wispr Flow，自然地说出描述部分，然后粘贴包含你的密钥的 API URL。密钥要保留在 URL 内 —— `=` 号两侧不要加空格。
+    </Tip>
+
+    你应该会看到 Gemini 描述一些当前的服务提醒 —— 例如"由于 Queen Street 附近的道路施工，123 路有绕道"。如果看到这样的信息，你的 API 密钥可以正常使用，你已经准备好了。
+
+    <Accordion title="Gemini 说'访问被拒绝'或'401 错误'">
+    你的 API 密钥不正确或尚未激活。返回 [dev-portal.at.govt.nz](https://dev-portal.at.govt.nz/)，检查你的个人资料，重新复制密钥。确保你已订阅 GTFS 产品。一些密钥在注册后需要几分钟才能激活。
+    </Accordion>
+
+    <Accordion title="Gemini 说'超过频率限制'">
+    这在第一次尝试时不太可能发生，但如果发生了，等 60 秒后再试。免费套餐每分钟允许 600 次调用，非常宽裕。
+    </Accordion>
+
+    <Accordion title="Gemini 返回乱码或奇怪的字符">
+    API 可能正在以 Protocol Buffer 格式而不是 JSON 返回数据。尝试请求 Gemini："Fetch this URL with the header Accept: application/json"，然后跟上完整的 URL。这告诉 API 以人类可读的 JSON 格式返回数据。
+    </Accordion>
+
+    <Accordion title="Gemini 说无法访问该 URL">
+    确保整个 URL 在一行上，没有换行符。检查 `subscription-key=YOUR_API_KEY` 中使用的是你的实际密钥，`=` 号两侧没有空格。也可以尝试请求 Gemini 用 `curl` 来获取 URL。
+    </Accordion>
+  </Step>
+</Steps>
+
+## 验证你的设置
+
+<AccordionGroup>
+  <Accordion title="Node.js 已安装">
+    在终端运行 `node --version`。你应该会看到一个版本号。
+  </Accordion>
+  <Accordion title="Gemini CLI 已安装并登录">
+    在终端运行 `gemini`。它能正常启动并显示一个可输入的提示符。
+  </Accordion>
+  <Accordion title="AT API 密钥已保存">
+    你有一个来自 dev-portal.at.govt.nz 的订阅密钥保存在安全的地方。
+  </Accordion>
+  <Accordion title="API 密钥已测试">
+    Gemini CLI 成功获取并描述了 Auckland Transport 服务提醒。
+  </Accordion>
+  <Accordion title="Wispr Flow 已安装（可选）">
+    你可以对着终端说话，看到你的话语以文字形式出现。
+  </Accordion>
+</AccordionGroup>
+
+<Note>
+一切就绪？前往[检查你的通勤](/docs/2026-her-waka/tutorial/auckland-commute/check-commute)，开始获取实时通勤智能。
+</Note>

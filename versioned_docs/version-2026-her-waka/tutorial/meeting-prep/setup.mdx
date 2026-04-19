@@ -1,0 +1,128 @@
+---
+title: "设置你的工具"
+description: "安装 Gemini CLI 和 Google Workspace CLI —— 将 AI 连接到你的 Google 日历、Gmail 和 Drive。"
+---
+
+import InstallNodejs from "../../_snippets/install-nodejs.mdx";
+import InstallGeminiCli from "../../_snippets/install-gemini-cli.mdx";
+import InstallGws from "../../_snippets/install-gws.mdx";
+import InstallWisprFlow from "../../_snippets/install-wispr-flow.mdx";
+
+在开始为会议做准备之前，先让你的 AI 工具连接到 Google 日历、Gmail 和 Drive。
+
+<Warning>
+**你需要准备：** 一台能联网的电脑，以及一个已启用日历、Gmail 和 Drive 的 Google 账号。无需任何编程经验 —— 我们会一步一步带你完成每个步骤。
+</Warning>
+
+<Steps>
+  <Step title="安装 Node.js">
+    <Info>
+    **已有 Node.js？** 如果你在之前的教程中已经安装过，跳过此步骤。在终端运行 `node --version` 检查 —— 你应该会看到类似 `v22.x.x` 的版本号。
+    </Info>
+
+    <InstallNodejs />
+  </Step>
+
+  <Step title="安装 Gemini CLI">
+    <Info>
+    **已有 Gemini CLI？** 如果你在之前的教程中已经安装过，跳过此步骤。只需在终端运行 `gemini` 确认它还能正常运行。
+    </Info>
+
+    <InstallGeminiCli />
+
+    暂时输入 `/quit` 退出 Gemini CLI。安装 Google Workspace CLI 之后再重新启动。
+  </Step>
+
+  <Step title="安装 Google Workspace CLI（gws）">
+    <InstallGws />
+  </Step>
+
+  <Step title="将 Gemini CLI 连接到 gws">
+    现在让 Gemini CLI 获得使用 `gws` 的能力 —— 这样当你提问时，它就能读取你的日历、邮件和 Drive。
+
+    打开终端，运行以下命令：
+
+    ```bash title="复制此命令"
+    gemini extensions install https://github.com/googleworkspace/cli
+    ```
+
+    这告诉 Gemini CLI 将 Google Workspace CLI 作为扩展使用。安装完成后，Gemini 就能提取你的日历事件、搜索邮件、查找共享文档并生成会议简报 —— 全部通过自然语言提示词实现。
+
+    <Info>
+    **什么是扩展？** 扩展是为 Gemini CLI 添加新功能的插件。这个扩展将 Gemini 连接到你的 Google Workspace 应用 —— 类似于在手机上安装一款应用。
+    </Info>
+
+    <Accordion title="命令失败或卡住">
+    确保你有网络连接，且 Node.js 已正确安装。先运行 `node --version` 检查。如果那个可以，但扩展安装失败，试着关闭并重新打开终端，然后再次运行命令。
+    </Accordion>
+  </Step>
+
+  <Step title="安装 Wispr Flow（可选）">
+    <InstallWisprFlow />
+  </Step>
+
+  <Step title="测试连接">
+    启动 Gemini CLI 并让它读取你的日历和 Drive —— 这将确认所有连接都正常。
+
+    ```bash title="复制此命令"
+    gemini
+    ```
+
+    Gemini CLI 运行后，用 Wispr Flow 说出或直接输入以下提示词：
+
+    ```text title="说出或复制此提示词"
+    What meetings do I have this week?
+    ```
+
+    你应该会看到 Gemini CLI 访问你的 Google 日历并返回即将到来的事件列表。如果成功，再试一个测试：
+
+    ```text title="说出或复制此提示词"
+    List my recent Google Drive files.
+    ```
+
+    你应该会看到 Gemini CLI 访问你的 Google Drive 并返回最近文件的列表。如果两个都成功，一切已连接。
+
+    <Tip>
+    **Gemini 要求确认？** 如果 Gemini CLI 要求批准工具调用，输入 `y` 并按 **Enter**。这是正常现象 —— 它在访问你的 Google 数据之前征求你的许可。
+    </Tip>
+
+    <Accordion title="Gemini 说它没有日历或 Drive 工具">
+    扩展可能没有正确安装。再次运行安装命令：
+    ```bash
+    gemini extensions install https://github.com/googleworkspace/cli
+    ```
+    然后退出（`/quit`）并重启 Gemini CLI。你可以在 Gemini CLI 内运行 `/extensions list` 查看已安装的扩展。
+    </Accordion>
+
+    <Accordion title="浏览器窗口没有弹出用于身份验证">
+    复制终端中显示的 URL，手动粘贴到浏览器中。在那里完成登录，然后返回终端。
+    </Accordion>
+  </Step>
+</Steps>
+
+## 验证你的设置
+
+<AccordionGroup>
+  <Accordion title="Node.js 已安装">
+    在终端运行 `node --version`，应显示一个版本号。
+  </Accordion>
+  <Accordion title="Gemini CLI 已安装并登录">
+    在终端运行 `gemini`，可正常启动并显示一个可输入的提示符。
+  </Accordion>
+  <Accordion title="gws 已安装并完成身份验证">
+    在终端运行 `gws calendar +agenda`，应显示你即将到来的事件。
+  </Accordion>
+  <Accordion title="Gemini CLI 扩展已安装">
+    扩展安装时无报错。可在 Gemini CLI 内运行 `/extensions list` 进行验证。
+  </Accordion>
+  <Accordion title="日历连接已测试">
+    当你询问"What meetings do I have this week?"时，Gemini CLI 能够告知你的会议安排。
+  </Accordion>
+  <Accordion title="Drive 连接已测试">
+    当你询问"List my recent Google Drive files."时，Gemini CLI 能够列出最近的文件。
+  </Accordion>
+</AccordionGroup>
+
+<Note>
+一切就绪？前往[为你的会议做准备](/docs/2026-her-waka/tutorial/meeting-prep/prepare)，获取你的第一份 AI 驱动的会议简报。
+</Note>

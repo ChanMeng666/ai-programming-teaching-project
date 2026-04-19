@@ -1,0 +1,119 @@
+---
+title: "Set up your tools"
+description: "Install Gemini CLI and Google Workspace CLI — connect AI to your Google Calendar and Gmail."
+---
+
+import InstallNodejs from "../../_snippets/install-nodejs.mdx";
+import InstallGeminiCli from "../../_snippets/install-gemini-cli.mdx";
+import InstallGws from "../../_snippets/install-gws.mdx";
+import InstallWisprFlow from "../../_snippets/install-wispr-flow.mdx";
+
+Before we start building your morning briefing, let's get your AI tools connected to Google Calendar and Gmail.
+
+<Warning>
+**You will need:** a laptop with internet access and a Google account with Gmail and Calendar. No coding experience is required — we will guide you through every step.
+</Warning>
+
+<Steps>
+  <Step title="Install Node.js">
+    <Info>
+    **Already have Node.js?** If you installed it for a previous tutorial, skip this step. Run `node --version` in your terminal to check — you should see a version number like `v22.x.x`.
+    </Info>
+
+    <InstallNodejs />
+  </Step>
+
+  <Step title="Install Gemini CLI">
+    <Info>
+    **Already have Gemini CLI?** If you installed it for a previous tutorial, skip this step. Just run `gemini` in your terminal to check it still works.
+    </Info>
+
+    <InstallGeminiCli />
+
+    Type `/quit` to exit Gemini CLI for now. We will start it again after installing the Google Workspace CLI.
+  </Step>
+
+  <Step title="Install Google Workspace CLI (gws)">
+    <InstallGws />
+  </Step>
+
+  <Step title="Connect Gemini CLI to gws">
+    Now let's give Gemini CLI the ability to use `gws` — so it can read your calendar and email when you ask.
+
+    Open your terminal and run this command:
+
+    ```bash title="Copy this command"
+    gemini extensions install https://github.com/googleworkspace/cli
+    ```
+
+    This tells Gemini CLI to use the Google Workspace CLI as an extension. Once installed, Gemini can pull your calendar events, triage your inbox, and generate standup summaries — all through natural language prompts.
+
+    <Info>
+    **What is an extension?** Extensions are plugins that add new capabilities to Gemini CLI. This extension connects Gemini to your Google Workspace apps — similar to how you might install an app on your phone.
+    </Info>
+
+    <Accordion title="The command fails or hangs">
+    Make sure you have an internet connection and that Node.js is installed correctly. Try running `node --version` first. If that works but the extension install fails, try closing and reopening your terminal, then running the command again.
+    </Accordion>
+  </Step>
+
+  <Step title="Install Wispr Flow (optional)">
+    <InstallWisprFlow />
+  </Step>
+
+  <Step title="Test the connection">
+    Start Gemini CLI and ask it to read your calendar — this confirms everything is connected.
+
+    ```bash title="Copy this command"
+    gemini
+    ```
+
+    Once Gemini CLI is running, say (with Wispr Flow) or type this prompt:
+
+    ```text title="Say this or copy this prompt"
+    What meetings do I have today?
+    ```
+
+    You should see Gemini CLI access your Google Calendar and return a list of today's events. If it does, everything is working.
+
+    <Tip>
+    **Gemini asks for permission?** If Gemini CLI asks to approve a tool call, type `y` and press **Enter**. This is normal — it is asking your permission before accessing your Google data.
+    </Tip>
+
+    <Accordion title="Gemini says it has no calendar tools">
+    The extension may not have installed correctly. Try running the install command again:
+    ```bash
+    gemini extensions install https://github.com/googleworkspace/cli
+    ```
+    Then exit (`/quit`) and restart Gemini CLI. You can check installed extensions with `/extensions list`.
+    </Accordion>
+
+    <Accordion title="The browser window doesn't open for authentication">
+    Copy the URL shown in your terminal and paste it into your browser manually. Complete the sign-in there, then return to the terminal.
+    </Accordion>
+  </Step>
+</Steps>
+
+## Verify your setup
+
+<AccordionGroup>
+  <Accordion title="Node.js installed">
+    Run `node --version` in your terminal. You should see a version number.
+  </Accordion>
+  <Accordion title="Gemini CLI installed and signed in">
+    Run `gemini` in your terminal. It starts up and shows a prompt where you can type.
+  </Accordion>
+  <Accordion title="gws installed and authenticated">
+    Run `gws calendar +agenda` in your terminal. You should see your upcoming events.
+  </Accordion>
+  <Accordion title="Gemini CLI extension installed">
+    The extension installed without errors. You can verify with `/extensions list` inside Gemini CLI.
+  </Accordion>
+  <Accordion title="Connection tested">
+    Gemini CLI can tell you about your meetings when you ask "What meetings do I have today?"
+  </Accordion>
+</AccordionGroup>
+
+<Note>
+All set? Head to [Get your morning briefing](/docs/2026-her-waka/tutorial/morning-briefing/briefing) to start your first AI-powered morning routine.
+</Note>

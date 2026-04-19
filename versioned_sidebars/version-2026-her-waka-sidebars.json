@@ -1,0 +1,250 @@
+{
+  "tutorialSidebar": [
+    {
+      "type": "category",
+      "label": "📋 项目介绍",
+      "collapsible": true,
+      "collapsed": false,
+      "items": [
+        "programme/about-her-waka",
+        "programme/schedule",
+        "programme/about-shesharp"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "🎓 工作坊",
+      "collapsible": true,
+      "collapsed": false,
+      "link": { "type": "doc", "id": "workshop/index" },
+      "items": [
+        {
+          "type": "category",
+          "label": "Session 1：AI 与未来工作（3 月）",
+          "link": { "type": "doc", "id": "workshop/march-2026/overview" },
+          "items": [
+            "workshop/march-2026/ai-tools-intro",
+            "workshop/march-2026/hands-on-exercises",
+            "workshop/march-2026/resources"
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Session 2：#IAmRemarkable 与 Vibe Coding（4 月）",
+          "link": { "type": "doc", "id": "workshop/april-2026/overview" },
+          "items": []
+        },
+        {
+          "type": "category",
+          "label": "Session 3：就业权益（5 月）",
+          "link": { "type": "doc", "id": "workshop/may-2026/overview" },
+          "items": []
+        },
+        {
+          "type": "category",
+          "label": "Session 4：人脉与职业连接（6 月）",
+          "link": { "type": "doc", "id": "workshop/june-2026/overview" },
+          "items": []
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "📚 自学教程",
+      "collapsible": true,
+      "collapsed": false,
+      "link": { "type": "doc", "id": "tutorial/index" },
+      "items": [
+        {
+          "type": "category",
+          "label": "★ 入门",
+          "collapsed": true,
+          "items": [
+            {
+              "type": "category",
+              "label": "用 AI 总结 Gmail",
+              "link": { "type": "doc", "id": "tutorial/gmail-summary/overview" },
+              "items": [
+                "tutorial/gmail-summary/setup",
+                "tutorial/gmail-summary/summarize",
+                "tutorial/gmail-summary/keep-going"
+              ]
+            },
+            {
+              "type": "category",
+              "label": "用语音控制你的笔记",
+              "link": { "type": "doc", "id": "tutorial/obsidian-daily/overview" },
+              "items": [
+                "tutorial/obsidian-daily/setup",
+                "tutorial/obsidian-daily/capture",
+                "tutorial/obsidian-daily/keep-going"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "label": "★★ 简单",
+          "collapsed": true,
+          "items": [
+            {
+              "type": "category",
+              "label": "搭建你的个人网站",
+              "link": { "type": "doc", "id": "tutorial/personal-website/overview" },
+              "items": [
+                "tutorial/personal-website/setup-tools",
+                "tutorial/personal-website/github-account",
+                "tutorial/personal-website/build-website",
+                "tutorial/personal-website/deploy",
+                "tutorial/personal-website/keep-going"
+              ]
+            },
+            {
+              "type": "category",
+              "label": "奥克兰通勤智能助手",
+              "link": { "type": "doc", "id": "tutorial/auckland-commute/overview" },
+              "items": [
+                "tutorial/auckland-commute/setup",
+                "tutorial/auckland-commute/check-commute",
+                "tutorial/auckland-commute/keep-going"
+              ]
+            },
+            {
+              "type": "category",
+              "label": "和 AI 对话整理笔记",
+              "link": { "type": "doc", "id": "tutorial/obsidian-organise/overview" },
+              "items": [
+                "tutorial/obsidian-organise/setup",
+                "tutorial/obsidian-organise/organise",
+                "tutorial/obsidian-organise/keep-going"
+              ]
+            },
+            {
+              "type": "category",
+              "label": "AI 会议准备助手",
+              "link": { "type": "doc", "id": "tutorial/meeting-prep/overview" },
+              "items": [
+                "tutorial/meeting-prep/setup",
+                "tutorial/meeting-prep/prepare",
+                "tutorial/meeting-prep/keep-going"
+              ]
+            },
+            {
+              "type": "category",
+              "label": "AI 每日晨报",
+              "link": { "type": "doc", "id": "tutorial/morning-briefing/overview" },
+              "items": [
+                "tutorial/morning-briefing/setup",
+                "tutorial/morning-briefing/briefing",
+                "tutorial/morning-briefing/keep-going"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "label": "★★★ 中级",
+          "collapsed": true,
+          "items": [
+            {
+              "type": "category",
+              "label": "用 AI 制作专业 PDF",
+              "link": { "type": "doc", "id": "tutorial/professional-pdf/overview" },
+              "items": [
+                "tutorial/professional-pdf/setup",
+                "tutorial/professional-pdf/build-first-pdf",
+                "tutorial/professional-pdf/explore-templates",
+                "tutorial/professional-pdf/keep-going"
+              ]
+            },
+            {
+              "type": "category",
+              "label": "邮件转行动：跨应用自动化",
+              "link": { "type": "doc", "id": "tutorial/email-to-action/overview" },
+              "items": [
+                "tutorial/email-to-action/setup",
+                "tutorial/email-to-action/automate",
+                "tutorial/email-to-action/keep-going"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "label": "★★★★ 挑战",
+          "collapsed": true,
+          "items": [
+            {
+              "type": "category",
+              "label": "总结 Slack 频道",
+              "link": { "type": "doc", "id": "tutorial/slack-summary/overview" },
+              "items": [
+                "tutorial/slack-summary/setup",
+                "tutorial/slack-summary/summarize",
+                "tutorial/slack-summary/keep-going"
+              ]
+            },
+            {
+              "type": "category",
+              "label": "AI 宣传视频制作",
+              "link": { "type": "doc", "id": "tutorial/promo-video/overview" },
+              "items": [
+                "tutorial/promo-video/setup",
+                "tutorial/promo-video/create-video",
+                "tutorial/promo-video/keep-going"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "label": "★★★★★ 进阶",
+          "collapsed": true,
+          "items": [
+            {
+              "type": "category",
+              "label": "Vibe Coding：Daily Report Bot",
+              "link": { "type": "doc", "id": "tutorial/vibe-coding/overview" },
+              "items": [
+                "tutorial/vibe-coding/setup",
+                "tutorial/vibe-coding/build-with-claude",
+                "tutorial/vibe-coding/deploy-and-test",
+                "tutorial/vibe-coding/whats-next"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "💼 求职资源",
+      "collapsible": true,
+      "collapsed": false,
+      "items": [
+        {
+          "type": "category",
+          "label": "求职",
+          "collapsed": false,
+          "items": [
+            "resources/nz-it-market",
+            "resources/job-search-platforms",
+            "resources/recruitment-agencies",
+            "resources/job-readiness",
+            "resources/ai-tools-learning"
+          ]
+        },
+        {
+          "type": "category",
+          "label": "社区与权益",
+          "collapsed": false,
+          "items": [
+            "resources/networking-guide",
+            "resources/tech-communities",
+            "resources/employment-rights"
+          ]
+        }
+      ]
+    }
+  ]
+}

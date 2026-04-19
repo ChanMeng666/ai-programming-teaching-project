@@ -1,0 +1,84 @@
+`gws` is a command-line tool that controls all your Google apps — Gmail, Calendar, Drive, Docs, Sheets — from the terminal. It's what lets AI manage your Google Workspace without opening a browser.
+
+Open your terminal and type:
+
+```bash title="Copy this command"
+npm install -g @googleworkspace/cli
+```
+
+Wait for the installation to finish. Then set up your Google Cloud project:
+
+```bash title="Copy this command"
+gws auth setup
+```
+
+<Info>
+**What does `gws auth setup` do?** It creates a Google Cloud project for you, enables the APIs you need, and prepares everything for sign-in. It requires the `gcloud` CLI — if you don't have it, see the troubleshooting section below.
+</Info>
+
+Once setup is complete, sign in and choose which Google services to connect:
+
+```bash title="Copy this command"
+gws auth login -s gmail,calendar,drive,docs,sheets
+```
+
+A browser window will open — sign in with your Google account and approve the permissions.
+
+<Warning>
+**"Google hasn't verified this app" warning:** This is normal. Click **Advanced** → **Go to \[app name\] (unsafe)** to continue. This is safe for personal use — Google shows this for all apps that haven't gone through their official review process.
+</Warning>
+
+<Warning>
+**Scope checkboxes:** If you see a list of permission checkboxes, select all of them (or click **Select all**) before clicking **Continue**. These are the permissions `gws` needs to read and manage your Google apps.
+</Warning>
+
+Verify the installation by checking today's calendar:
+
+```bash title="Copy this command"
+gws calendar +agenda
+```
+
+You should see your upcoming events listed in your terminal. If you do, `gws` is working.
+
+<Info>
+**Free to use:** `gws` is free and open-source. It connects to Google's APIs using your own Google account — there are no usage limits beyond Google's own API quotas.
+</Info>
+
+<Accordion title="'gws' is not recognised">
+The installation may not have added `gws` to your system PATH. Try closing your terminal completely and opening a new one, then run `gws --version`. If it still doesn't work, try reinstalling:
+```bash
+npm install -g @googleworkspace/cli
+```
+</Accordion>
+
+<Accordion title="'gcloud' is not installed">
+`gws auth setup` uses the `gcloud` CLI to automate project creation. You have two options:
+
+1. **Install gcloud** from [cloud.google.com/sdk/docs/install](https://cloud.google.com/sdk/docs/install), then run `gws auth setup` again
+2. **Skip gcloud** — set up OAuth credentials manually in the [Google Cloud Console](https://console.cloud.google.com/). Create a project, enable the APIs you need, create an OAuth Desktop App client, download the JSON, and save it to `~/.config/gws/client_secret.json`. Then run `gws auth login`.
+</Accordion>
+
+<Accordion title="Permission denied error">
+**Windows:** Close PowerShell and reopen it by right-clicking and choosing **"Run as Administrator"**. Then try the install command again.
+
+**macOS:** Add `sudo` before the command:
+```bash
+sudo npm install -g @googleworkspace/cli
+```
+Enter your computer password when prompted (you won't see characters as you type — that's normal).
+</Accordion>
+
+<Accordion title="API not enabled error">
+If you see an error like "Gmail API has not been used in project...", the API needs to be enabled:
+
+1. Look for the `enable_url` link in the error message
+2. Open that link in your browser
+3. Click **Enable**
+4. Wait 10 seconds, then retry your command
+
+You can also run `gws auth setup` again — it enables all required APIs automatically.
+</Accordion>
+
+<Accordion title="'Access blocked' or 403 during login">
+Your Google account is not listed as a test user for the OAuth app. Open the [OAuth consent screen](https://console.cloud.google.com/apis/credentials/consent) in your Google Cloud project → **Test users** → **Add users** → enter your Google account email. Then retry `gws auth login`.
+</Accordion>

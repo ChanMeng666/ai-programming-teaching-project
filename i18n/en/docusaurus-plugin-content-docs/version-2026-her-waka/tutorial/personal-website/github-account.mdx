@@ -1,0 +1,103 @@
+---
+title: "Set Up GitHub"
+description: "Create a GitHub account and use Gemini CLI to install git and GitHub CLI — everything you need to publish your website."
+---
+
+GitHub is a free website where your code will live — and where your website will be hosted for free. Let's get you set up.
+
+<Steps>
+  <Step title="Create a GitHub account">
+    1. Go to [github.com](https://github.com)
+    2. Click **Sign up**
+    3. Follow the prompts to create your account (the free plan is all you need)
+
+    <Tip>
+    **Choose your username carefully!** It becomes part of your website address: `yourusername.github.io`. Pick something professional or memorable.
+    </Tip>
+  </Step>
+
+  <Step title="Use Gemini CLI to install git">
+    Git is a tool that tracks changes to your code. Instead of installing it manually, let's ask Gemini CLI to do it for us!
+
+    Open your terminal, type `gemini`, and press Enter. Then say or type this prompt:
+
+    ```text title="Say this or copy this prompt"
+    I need to install git on my computer. Please:
+    1. Check if git is already installed
+    2. If not, download and install it for me
+    3. After installation, verify it works by running "git --version"
+    4. Configure git with a default user name and email — ask me what
+       name and email to use
+
+    I am a complete beginner, so please explain each step as you go.
+    ```
+
+    <Tabs>
+      <Tab title="What Gemini will do on Windows">
+        Gemini CLI will likely download git from [git-scm.com](https://git-scm.com) and run the installer for you. It may ask you to confirm a few installation prompts. After installation, it will set up your name and email for git.
+      </Tab>
+      <Tab title="What Gemini will do on macOS">
+        Gemini CLI will likely use Xcode Command Line Tools or Homebrew to install git. On macOS, git may already be installed. After confirming, it will set up your name and email for git.
+      </Tab>
+    </Tabs>
+
+    **Verify it worked** — in your terminal, type:
+
+    ```bash
+    git --version
+    ```
+
+    You should see a version number like `git version 2.x.x`.
+  </Step>
+
+  <Step title="Use Gemini CLI to install GitHub CLI and log in">
+    GitHub CLI (`gh`) is a tool that lets you interact with GitHub from your terminal. Gemini CLI will install it and help you log in.
+
+    In Gemini CLI, say or type this prompt:
+
+    ```text title="Say this or copy this prompt"
+    Now I need to install the GitHub CLI tool (called "gh") and log in
+    to my GitHub account. Please:
+    1. Install the GitHub CLI on my computer
+    2. Help me log in to my GitHub account using "gh auth login"
+    3. Choose the browser-based login method so I can sign in easily
+    4. After login, verify it works by running "gh auth status"
+
+    I am a complete beginner, so please guide me through each step.
+    ```
+
+    **Verify it worked** — in your terminal, type:
+
+    ```bash
+    gh auth status
+    ```
+
+    You should see a message confirming you're logged in to GitHub.
+  </Step>
+</Steps>
+
+<Warning>
+**GitHub Pages is free but requires public repositories.** This means your website code will be visible to others. This is completely normal for personal websites — most websites on the internet have publicly visible source code.
+</Warning>
+
+<Tip>
+**Setup is done — now the fun part begins.** From here on, you will be speaking or typing natural language to Gemini CLI to build your entire website. No more manual installation steps!
+</Tip>
+
+## Verify Your Setup
+
+<AccordionGroup>
+  <Accordion title="Git installed">
+    Run `git --version` in your terminal. You should see a version number.
+  </Accordion>
+  <Accordion title="GitHub CLI installed">
+    Run `gh --version` in your terminal. You should see a version number.
+  </Accordion>
+  <Accordion title="Logged in to GitHub">
+    Run `gh auth status` in your terminal. It should say you're logged in.
+  </Accordion>
+</AccordionGroup>
+
+<Note>
+All set? Head to [Build your website](/docs/2026-her-waka/tutorial/personal-website/build-website) — the fun part!
+</Note>

@@ -1,0 +1,267 @@
+---
+title: "Summarise your Slack channels"
+description: "Ask AI to read your Slack messages and create a clear, useful summary — by speaking or typing. Try different summary styles and ask follow-up questions."
+---
+
+Your AI tool is connected to Slack. Now let's put it to work — ask it to read a channel and give you a summary you can actually use.
+
+## Get your first summary
+
+<Tabs>
+  <Tab title="Recommended: CLI + Voice">
+    Open your terminal and start Gemini CLI:
+
+    ```bash
+    gemini
+    ```
+
+    Now say (with Wispr Flow) or paste this prompt. Replace `#channel-name` with the name of a real channel in your workspace.
+
+    ```text title="Say this or copy this prompt — replace #channel-name"
+    Read the recent messages in the Slack channel #channel-name and give me a summary. Include the main topics discussed, any decisions that were made, action items, and unanswered questions. Keep it to 10 bullet points.
+    ```
+
+    Gemini CLI will use the Slack MCP tools to fetch the messages and return a structured summary.
+
+    <Tip>
+    **Gemini asks for permission?** If Gemini CLI asks to approve a tool call, type `y` and press **Enter**. This is normal — it is asking your permission before accessing Slack.
+    </Tip>
+  </Tab>
+
+  <Tab title="Alternative: Claude Desktop">
+    Open Claude Desktop and paste this prompt. Replace `#channel-name` with the name of a real channel in your workspace.
+
+    ```text title="Copy this prompt — replace #channel-name"
+    Please read the recent messages in the Slack channel #channel-name and give me a summary.
+
+    Include:
+    - The main topics discussed
+    - Any decisions that were made
+    - Any action items or things people need to do
+    - Any questions that were asked but not answered
+
+    Keep the summary concise — no more than 10 bullet points.
+    ```
+
+    Within a few seconds, Claude will read the channel and return a structured summary.
+
+    <Tip>
+    **First time?** If Claude asks which workspace or channel you mean, just clarify. For example: "The #general channel in my SheSharp workspace."
+    </Tip>
+  </Tab>
+</Tabs>
+
+You should see a summary that looks something like this:
+
+> **Summary of #general (last 7 days):**
+> - The team discussed the upcoming workshop schedule for April
+> - Sarah shared a link to the new resource guide
+> - A decision was made to move the Friday meeting to Thursday
+> - Action item: Everyone needs to submit their feedback by Wednesday
+> - Open question: Who is leading the networking session?
+
+That's it — you just caught up on an entire channel in seconds.
+
+## Try different summary styles
+
+The first summary is a great start. But depending on your situation, you might want a different format. Try these prompts.
+
+<Tabs>
+  <Tab title="Recommended: CLI + Voice">
+    **Quick catch-up:**
+
+    ```text title="Say this or copy this prompt — replace #channel-name"
+    Summarise #channel-name like a colleague filling me in over coffee. Keep it to 5 sentences.
+    ```
+
+    **Meeting notes:**
+
+    ```text title="Say this or copy this prompt — replace #channel-name"
+    Summarise #channel-name as formal meeting notes I could share with my manager. Include dates, decisions, and action items.
+    ```
+
+    **Key highlights only:**
+
+    ```text title="Say this or copy this prompt — replace #channel-name"
+    Read #channel-name and extract only the important stuff — announcements, deadlines, decisions. Ignore small talk.
+    ```
+  </Tab>
+
+  <Tab title="Alternative: Claude Desktop">
+    **Quick catch-up:**
+
+    ```text title="Copy this prompt — replace #channel-name"
+    Summarise the recent messages in #channel-name as a quick catch-up
+    for someone who missed the last few days.
+
+    Write it in a casual, friendly tone — like a colleague filling you in
+    over coffee. Keep it to 5 sentences maximum.
+    ```
+
+    **Meeting notes:**
+
+    ```text title="Copy this prompt — replace #channel-name"
+    Summarise the recent messages in #channel-name as formal meeting notes.
+
+    Include:
+    - Date range of messages
+    - Key discussion points
+    - Decisions made
+    - Action items with who is responsible (if mentioned)
+
+    Format it as a professional document I could share with my manager.
+    ```
+
+    **Key highlights only:**
+
+    ```text title="Copy this prompt — replace #channel-name"
+    Read the recent messages in #channel-name and extract only the most
+    important items — announcements, deadlines, decisions, or urgent requests.
+
+    Ignore small talk and casual messages.
+    List each highlight as a single bullet point.
+    ```
+  </Tab>
+</Tabs>
+
+<Info>
+**The key skill here is prompt writing.** Notice how each prompt tells the AI exactly what format you want, what to include, and what to leave out. The more specific your instructions, the more useful the summary.
+</Info>
+
+## Go further
+
+Once you are comfortable with basic summaries, try these creative prompts. They work with both paths — the voice-friendly versions below are shown for Path B, but you can paste them into Claude Desktop too.
+
+```text title="Say this or copy this prompt — replace channel names"
+Compare what's been happening in #general, #announcements, and #project-updates this week.
+```
+
+```text title="Say this or copy this prompt — replace #channel-name"
+Find any unanswered questions in #channel-name.
+```
+
+```text title="Say this or copy this prompt — replace #channel-name"
+Who has been most active in #channel-name this week?
+```
+
+```text title="Say this or copy this prompt — replace #channel-name"
+Were any links shared in #channel-name? List them all.
+```
+
+<Tip>
+**This is the magic of natural language.** You do not need to memorise commands — just describe what you want. If the AI is not sure what you mean, it will ask you to clarify.
+</Tip>
+
+## Ask follow-up questions
+
+The AI remembers the messages it just read. You can ask follow-up questions without fetching the messages again.
+
+<Tabs>
+  <Tab title="Recommended: CLI + Voice">
+    ```text title="Say this or copy this prompt"
+    Were there any messages about [topic]?
+    ```
+
+    ```text title="Say this or copy this prompt"
+    Were there any links shared? List them all.
+    ```
+
+    ```text title="Say this or copy this prompt"
+    Who was the most active person in the conversation?
+    ```
+
+    ```text title="Say this or copy this prompt"
+    Summarise only messages from the last 24 hours.
+    ```
+
+    ```text title="Say this or copy this prompt"
+    What was the overall mood or tone of the conversation?
+    ```
+  </Tab>
+
+  <Tab title="Alternative: Claude Desktop">
+    ```text title="Search for a topic"
+    Were there any messages about [topic]?
+    ```
+
+    ```text title="Find shared links"
+    Were there any links shared? List them all with a brief description of each.
+    ```
+
+    ```text title="Check who's active"
+    Who was the most active person in the conversation?
+    ```
+
+    ```text title="Filter by time"
+    Summarise only messages from the last 24 hours.
+    ```
+
+    ```text title="Analyse sentiment"
+    What was the overall mood or tone of the conversation?
+    ```
+  </Tab>
+</Tabs>
+
+<Tip>
+**This is where AI really shines.** Instead of scrolling through hundreds of messages looking for one piece of information, you can just ask. "Did anyone mention the budget?" is much faster than reading every message yourself.
+</Tip>
+
+## Save your summary
+
+Want to keep a copy of your summary? Here's how.
+
+<Tabs>
+  <Tab title="Recommended: CLI + Voice">
+    Say or type:
+
+    ```text title="Say this or copy this prompt"
+    Save that summary to a file called summary.txt in the current folder.
+    ```
+
+    The summary is now saved as a text file on your computer.
+  </Tab>
+
+  <Tab title="Alternative: Claude Desktop">
+    - **Copy and paste:** Select the summary text and paste it into a document, email, or notes app
+    - **Download:** Click the **copy** icon at the top of Claude's response to copy the entire message
+  </Tab>
+</Tabs>
+
+## What just happened?
+
+Let's recap what you did:
+
+1. **Connected** an AI tool to your Slack workspace
+2. **Fetched** messages from a channel — the AI handled this automatically
+3. **Summarised** the conversation in a structured, useful format
+4. **Customised** the summary style to match your needs
+5. **Asked follow-up questions** to find specific information
+
+The key insight: AI is excellent at reading large amounts of text and extracting what matters. A task that would take you 20 minutes of scrolling took the AI about 10 seconds.
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Claude says it cannot access Slack">
+    Go to **Customize** → **Connectors** and check that Slack shows as connected. If it shows an error, remove the connector and add it again. Make sure you authorise the correct workspace.
+  </Accordion>
+  <Accordion title="Gemini says it has no Slack tools">
+    Check your `~/.gemini/settings.json` file for typos. Common issues: missing commas, curly quotes instead of straight quotes, or wrong bot token. After fixing, exit Gemini CLI (`/quit`) and restart it.
+  </Accordion>
+  <Accordion title="My voice input has errors">
+    Wispr Flow may occasionally mishear technical terms or channel names. You can review and correct the text in Gemini CLI before pressing Enter. If voice input is causing too many errors, switch to typing or pasting prompts instead.
+  </Accordion>
+  <Accordion title="The summary is too vague or generic">
+    The channel might not have enough messages. Try a busier channel with more activity. You can also be more specific in your prompt — for example, "Summarise only messages from the last 3 days" or "Focus on messages about the upcoming event."
+  </Accordion>
+  <Accordion title="The summary includes irrelevant messages">
+    Add filtering instructions to your prompt. For example: "Ignore messages from bots", "Only include messages related to [project name]", or "Skip casual greetings and small talk."
+  </Accordion>
+  <Accordion title="The AI only summarises a few messages">
+    By default, the AI may only fetch the most recent messages. Ask it to go further back: "Summarise all messages from #channel-name in the last 7 days" or "Read the last 100 messages from #channel-name and summarise them."
+  </Accordion>
+</AccordionGroup>
+
+<Note>
+Nice work — you've built a real productivity workflow. Head to [Keep going](/docs/2026-her-waka/tutorial/slack-summary/keep-going) for ideas on what to try next.
+</Note>

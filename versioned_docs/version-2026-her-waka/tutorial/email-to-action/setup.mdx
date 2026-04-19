@@ -1,0 +1,126 @@
+---
+title: "设置你的工具"
+description: "安装 Gemini CLI 和 Google Workspace CLI —— 将 AI 连接到你的 Gmail、日历和 Google 文档。"
+---
+
+import InstallNodejs from "../../_snippets/install-nodejs.mdx";
+import InstallGeminiCli from "../../_snippets/install-gemini-cli.mdx";
+import InstallGws from "../../_snippets/install-gws.mdx";
+import InstallWisprFlow from "../../_snippets/install-wispr-flow.mdx";
+
+在开始将邮件转化为行动之前，先把你的 AI 工具连接到 Gmail、日历和 Google 文档。
+
+<Warning>
+**你需要准备：** 一台能联网的电脑和一个 Google 账号（Gmail + 日历 + 文档）。无需任何编程经验 —— 我们会一步一步带你完成每个步骤。
+</Warning>
+
+<Steps>
+  <Step title="安装 Node.js">
+    <Info>
+    **已有 Node.js？** 如果你在之前的教程中已经安装过，跳过此步骤。在终端运行 `node --version` 检查 —— 你应该会看到类似 `v22.x.x` 的版本号。
+    </Info>
+
+    <InstallNodejs />
+  </Step>
+
+  <Step title="安装 Gemini CLI">
+    <Info>
+    **已有 Gemini CLI？** 如果你在之前的教程中已经安装过，跳过此步骤。只需在终端运行 `gemini`，确认它仍可正常启动。
+    </Info>
+
+    <InstallGeminiCli />
+
+    输入 `/quit` 暂时退出 Gemini CLI。安装好 Google Workspace 工具后，我们会重新启动它。
+  </Step>
+
+  <Step title="安装 Google Workspace CLI（gws）">
+    <InstallGws />
+  </Step>
+
+  <Step title="将 Gemini CLI 连接到 gws">
+    现在让 Gemini CLI 获得使用 Google Workspace 工具的能力。打开终端并运行：
+
+    ```bash title="复制此命令"
+    gemini extensions install https://github.com/googleworkspace/cli
+    ```
+
+    这将 Gemini CLI 与 `gws` 连接起来，当你发出自然语言指令时，Gemini 可以代你读取 Gmail、创建日历事件并写入 Google 文档。
+
+    <Info>
+    **这是做什么的？** 它安装了一个扩展，让 Gemini CLI 可以自动调用 `gws` 命令。你不用再输入 `gws calendar +insert ...`，只需说"为周五创建一个日历事件"，Gemini 会自动处理。
+    </Info>
+
+    <Accordion title="命令失败或卡住了">
+    确保你有网络连接，且 Node.js 已正确安装。先运行 `node --version` 检查。如果 Node.js 正常但扩展安装失败，尝试关闭并重新打开终端，然后再次运行该命令。
+    </Accordion>
+  </Step>
+
+  <Step title="安装 Wispr Flow（可选）">
+    <InstallWisprFlow />
+  </Step>
+
+  <Step title="测试连接">
+    启动 Gemini CLI，用以下两条提示词确认一切已连接：
+
+    ```bash title="复制此命令"
+    gemini
+    ```
+
+    然后说（通过 Wispr Flow）或输入：
+
+    ```text title="说出或复制此提示词"
+    Check my Gmail and tell me how many unread emails I have.
+    ```
+
+    你应该会看到 Gemini CLI 访问你的 Gmail 并返回收件箱信息。现在试试这条：
+
+    ```text title="说出或复制此提示词"
+    What meetings do I have today?
+    ```
+
+    你应该会看到列出的日历事件。如果两条都正常，说明一切已连接就绪。
+
+    <Tip>
+    **Gemini 要求授权？** 如果 Gemini CLI 要求批准工具调用，输入 `y` 并按 **Enter**。这是正常的 —— 它在访问你的 Google 应用之前请求你的许可。
+    </Tip>
+
+    <Accordion title="Gemini 说没有 Gmail 或日历工具">
+    扩展可能没有正确安装。尝试重新运行安装命令：
+    ```bash
+    gemini extensions install https://github.com/googleworkspace/cli
+    ```
+    然后退出（`/quit`）并重启 Gemini CLI。你可以用 `/extensions list` 查看已安装的扩展。
+    </Accordion>
+
+    <Accordion title="出现权限或认证错误">
+    你的 Google 授权可能已过期。退出 Gemini CLI，再次运行 `gws auth login -s gmail,calendar,drive,docs,sheets` 重新授权，然后重启 Gemini CLI。
+    </Accordion>
+  </Step>
+</Steps>
+
+## 验证你的设置
+
+<AccordionGroup>
+  <Accordion title="Node.js 已安装">
+    在终端运行 `node --version`，应显示一个版本号。
+  </Accordion>
+  <Accordion title="Gemini CLI 已安装并登录">
+    在终端运行 `gemini`，可正常启动并显示一个可输入的提示符。
+  </Accordion>
+  <Accordion title="gws 已安装并登录">
+    在终端运行 `gws calendar +agenda`，应显示你即将到来的日历事件。
+  </Accordion>
+  <Accordion title="Gemini CLI 扩展已安装">
+    扩展安装没有报错。你可以在 Gemini CLI 内用 `/extensions list` 验证。
+  </Accordion>
+  <Accordion title="Gmail 和日历访问正常">
+    当你询问时，Gemini CLI 能告诉你未读邮件数量和今天的会议安排。
+  </Accordion>
+  <Accordion title="连接测试通过">
+    两条测试提示词都从你的 Gmail 和日历返回了真实结果。
+  </Accordion>
+</AccordionGroup>
+
+<Note>
+一切就绪？前往[自动化你的工作流](/docs/2026-her-waka/tutorial/email-to-action/automate)，开始将邮件转化为行动。
+</Note>

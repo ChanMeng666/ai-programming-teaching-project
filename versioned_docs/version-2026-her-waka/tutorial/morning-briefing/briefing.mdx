@@ -1,0 +1,222 @@
+---
+title: "获取你的早晨简报"
+description: "让 AI 读取你的日历和收件箱 —— 几秒钟内获取完整的早晨简报。"
+---
+
+你的 AI 工具已连接到 Google 日历和 Gmail。现在让它们开始工作 —— 请求早晨简报，获取开启新一天所需的一切。
+
+## 今日议程
+
+首先，让我们看看今天日历上有什么。
+
+<Tabs>
+  <Tab title="Gemini CLI + 语音">
+    确保 Gemini CLI 正在终端中运行。然后用 Wispr Flow 说出或直接输入以下提示词：
+
+    ```text title="说出或复制此提示词"
+    Show me my calendar for today. List each meeting with the time, title, and who's attending.
+    ```
+
+    <Tip>
+    **Gemini 要求确认？** 如果 Gemini CLI 要求批准工具调用，输入 `y` 并按 **Enter**。
+    </Tip>
+
+    <Tip>
+    **语音或打字 —— 两种方式都可以。** 如果 Wispr Flow 正在运行，直接开口说就行。否则，复制粘贴提示词或打出你自己的请求。无论哪种方式，Gemini 都能理解自然语言。
+    </Tip>
+  </Tab>
+
+  <Tab title="直接使用 gws 命令">
+    如果你更喜欢直接在终端中使用 `gws`：
+
+    ```bash title="复制此命令"
+    gws calendar +agenda --today
+    ```
+
+    这会直接在终端中打印今天的事件 —— 无需 AI 介入。
+  </Tab>
+</Tabs>
+
+你应该会看到类似这样的内容：
+
+> **今日会议（共 3 个）：**
+>
+> - **上午 9:00** —— 团队站会 · Sarah, James, Priya
+> - **上午 11:30** —— 设计评审 · Alex, Morgan
+> - **下午 2:00** —— 与主管一对一 · Taylor
+
+一目了然地掌握你的一天 —— 无需打开 Google 日历。
+
+## 邮件分类
+
+现在来查看你的收件箱。不用逐条滚动浏览每封邮件，让 AI 按紧急程度为你整理。
+
+<Tabs>
+  <Tab title="Gemini CLI + 语音">
+    ```text title="说出或复制此提示词"
+    Check my Gmail and triage my unread emails. Group them by urgency: needs reply today, informational, and can ignore.
+    ```
+  </Tab>
+
+  <Tab title="直接使用 gws 命令">
+    ```bash title="复制此命令"
+    gws gmail +triage
+    ```
+
+    这会运行内置的分类工作流，按紧急程度对未读邮件进行分组。
+  </Tab>
+</Tabs>
+
+你应该会看到类似这样的内容：
+
+> **邮件分类（14 封未读）：**
+>
+> **今天需要回复**
+> - **Sarah Chen** —— "Budget sign-off needed"—— 要求在今天下班前批准
+> - **招聘方** —— "Interview confirmation"—— 确认你周四下午 2 点的面试时段
+>
+> **仅供参考**
+> - **项目团队** —— "Sprint notes"—— 上周 Sprint 摘要，其中有 2 个行动事项分配给你
+> - **HR** —— "Updated leave policy"—— 年假的新规定
+>
+> **可以忽略**
+> - **LinkedIn** —— "Weekly digest"—— 行业新闻汇总
+> - **Coursera** —— "New courses for you"—— 课程推荐
+
+几秒钟内完成收件箱分类 —— 你清楚地知道哪些事项需要你的注意。
+
+## 站会摘要
+
+现在来根据你真实的日历和邮件数据生成站会更新。
+
+<Tabs>
+  <Tab title="Gemini CLI + 语音">
+    ```text title="说出或复制此提示词"
+    Based on my calendar from yesterday and today, plus my recent emails, give me a standup summary: what I did yesterday, what I'm doing today, and any blockers.
+    ```
+  </Tab>
+
+  <Tab title="直接使用 gws 命令">
+    ```bash title="复制此命令"
+    gws workflow +standup-report
+    ```
+
+    这会根据你的日历和邮件活动生成站会报告。
+  </Tab>
+</Tabs>
+
+你应该会看到类似这样的内容：
+
+> **站会摘要：**
+>
+> **昨天**
+> - 与 Alex 和 Morgan 参加了设计评审
+> - 回复了 Sarah 关于预算的邮件串
+> - 查看了项目团队的 Sprint 记录
+>
+> **今天**
+> - 上午 9:00 团队站会
+> - 上午 11:30 设计评审
+> - 下午 2:00 与 Taylor 一对一
+>
+> **阻碍**
+> - 等待 Sarah 批准预算（昨天已发邮件，今天需要回复）
+
+复制粘贴到 Slack 就完成了 —— 再也不用抓耳挠腮地回忆昨天做了什么了。
+
+## 完整简报
+
+AI 真正大放异彩的时刻。不用分别请求每个部分，把所有内容合并成一条提示词。
+
+<Tabs>
+  <Tab title="Gemini CLI + 语音">
+    ```text title="说出或复制此提示词"
+    Give me a complete morning briefing: today's meetings with times, urgent emails that need replies, and a quick standup summary I can paste into Slack.
+    ```
+  </Tab>
+
+  <Tab title="直接使用 gws 命令">
+    对于综合简报，你会希望使用 Gemini CLI —— 这正是 AI 通过将多个数据源整合成一份摘要来发挥价值的任务。直接使用 `gws` 命令最适合单项任务。
+  </Tab>
+</Tabs>
+
+<Info>
+**这正是 AI 的优势所在。** 不用先查日历、再查收件箱、再尝试写站会更新 —— AI 同时从三个来源提取信息，给你一份单一、结构化的简报。一条提示词替代了 15 分钟的标签切换。
+</Info>
+
+## 保存你的简报
+
+想保留简报的副本？方法如下。
+
+<Tabs>
+  <Tab title="Gemini CLI + 语音">
+    让 Gemini CLI 将简报保存到文件：
+
+    ```text title="说出或复制此提示词"
+    Save that briefing to a file called morning-briefing.txt in the current folder.
+    ```
+
+    简报现在以文本文件形式保存在你的电脑上了。
+  </Tab>
+
+  <Tab title="直接使用 gws 命令">
+    你可以将任何 `gws` 命令的输出重定向到文件：
+
+    ```bash title="复制此命令"
+    gws calendar +agenda --today > morning-briefing.txt
+    ```
+
+    这会将日历输出保存到文本文件。你可以将邮件分类追加到同一个文件：
+
+    ```bash title="复制此命令"
+    gws gmail +triage >> morning-briefing.txt
+    ```
+  </Tab>
+</Tabs>
+
+## 刚才发生了什么？
+
+来回顾一下你做了什么：
+
+1. **查看了日历** —— AI 列出了今天的会议，包括时间和与会者
+2. **对收件箱进行了分类** —— AI 按紧急程度分组邮件，让你知道先处理什么
+3. **生成了站会摘要** —— AI 根据你的真实数据写了一份可直接使用的更新
+4. **整合了所有内容** —— 一条提示词给你一份完整的早晨简报
+
+核心洞见：AI 擅长从多个来源提取数据，并将其整合成有用的东西。需要你切换 15 分钟标签页的任务，AI 大约用 10 秒就完成了。
+
+## 故障排除
+
+<AccordionGroup>
+  <Accordion title="日历没有显示任何事件">
+    确保你的 Google 日历今天确实有事件。尝试询问更大范围："Show me my calendar for this week"，以确认连接正常。如果你看到其他天的事件但没有今天的，说明日历已正常连接 —— 你只是今天有一个空闲日。
+  </Accordion>
+  <Accordion title="Gmail 分类是空的">
+    你可能没有未读邮件。试着询问："Show me all emails from the last 3 days"，而不是只看未读邮件。你也可以通过询问"How many emails do I have in my inbox?"来检查 Gmail 是否已连接。
+  </Accordion>
+  <Accordion title="Gemini 说无法访问日历或 Gmail">
+    扩展可能没有正确安装。在 Gemini CLI 内运行 `/extensions list` 检查。如果 Workspace 扩展未列出，重新安装：
+    ```bash
+    gemini extensions install https://github.com/googleworkspace/cli
+    ```
+    然后退出（`/quit`）并重启 Gemini CLI。
+  </Accordion>
+  <Accordion title="身份验证错误">
+    你的 Google 授权可能已过期。按以下步骤操作：
+    1. 退出 Gemini CLI（`/quit`）
+    2. 用 gws 重新验证：`gws auth login -s gmail,calendar`
+    3. 重启 Gemini CLI 后再试
+
+    如果还是不行，检查你的 [Google 账号安全设置](https://myaccount.google.com/permissions)，确保该应用仍有访问权限。
+  </Accordion>
+  <Accordion title="站会摘要太笼统或不准确">
+    AI 根据你的日历事件和最近邮件构建站会内容。如果昨天日历是空的，就没有太多可汇报的。试着更具体地说："Check my calendar for the last 3 days and my emails from the last 2 days, then write a standup summary."
+  </Accordion>
+  <Accordion title="语音输入有错误">
+    Wispr Flow 有时可能误听技术术语或专有名词。你可以在按 Enter 键之前查看并更正 Gemini CLI 中的文字。如果语音输入错误太多，改为打字或粘贴提示词。
+  </Accordion>
+</AccordionGroup>
+
+<Note>
+做得很好 —— 你已经构建了真实的早晨简报工作流。前往[继续探索](/docs/2026-her-waka/tutorial/morning-briefing/keep-going)，了解如何将它变成每日习惯。
+</Note>

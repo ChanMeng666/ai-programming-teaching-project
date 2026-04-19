@@ -1,0 +1,207 @@
+---
+title: "Capture, track, and review"
+description: "Use natural language through Gemini CLI to capture thoughts, manage tasks, and review your day — by speaking or typing, never raw commands."
+---
+
+Your tools are connected. Let's put them to work.
+
+<Tabs>
+  <Tab title="Voice (Wispr Flow)">
+    With Wispr Flow running, just start speaking. Your words appear as text in Gemini CLI automatically. Say what you need naturally — Gemini understands and runs the right commands for you.
+  </Tab>
+  <Tab title="Type or paste">
+    Copy any prompt from this page and paste it into Gemini CLI. Or type your own request in natural language. No special syntax needed — just describe what you want.
+  </Tab>
+</Tabs>
+
+## Capture your first thought
+
+<Steps>
+  <Step title="Start Gemini CLI">
+    Open your terminal and start Gemini CLI. This is the only raw command you need to type in this entire tutorial:
+
+    ```bash title="Copy this command"
+    gemini
+    ```
+
+    From here on, everything is natural language.
+  </Step>
+
+  <Step title="Your first capture">
+    Say or type this prompt:
+
+    ```text title="Say this or copy this prompt"
+    Open my daily note in Obsidian, and add this line at the bottom:
+    "Met Sarah at lunch — she mentioned a job opening at Xero"
+    ```
+
+    Switch to Obsidian — your note now has that line at the bottom. It appeared instantly, no clicking or switching apps required.
+
+    <Tip>
+    **What just happened?** You described what you wanted in plain language. Gemini CLI understood that you wanted to append text to your daily note, figured out the right Obsidian commands to run, and executed them for you. You never had to learn any command syntax.
+    </Tip>
+  </Step>
+
+  <Step title="Add a task">
+    Now add a task with a checkbox:
+
+    ```text title="Say this or copy this prompt"
+    Add a task to my Obsidian daily note:
+    "Send CV to Sarah by Friday"
+    Make it a checkbox so I can track it.
+    ```
+
+    In Obsidian, you will see a clickable checkbox next to your task.
+
+    <Tip>
+    **What just happened?** Gemini understood that "make it a checkbox" means using Obsidian's task syntax (`- [ ]`). You did not need to know that — you just described what you wanted and Gemini handled the formatting.
+    </Tip>
+  </Step>
+
+  <Step title="Rapid-fire captures">
+    Try a few more to see how natural it feels. Each prompt adds something different to your daily note.
+
+    A meeting note:
+
+    ```text title="Say this or copy this prompt"
+    Add to my daily note: Team meeting — new project starting in April, need to review the brief
+    ```
+
+    A task for later:
+
+    ```text title="Say this or copy this prompt"
+    Add a task to my daily note: Buy groceries — milk, bread, eggs
+    ```
+
+    An idea to come back to:
+
+    ```text title="Say this or copy this prompt"
+    Add to my daily note: Idea — start a weekly reflection journal
+    ```
+
+    <Tip>
+    **Notice how flexible the language is.** You can say "add to my daily note", "put this in my daily note", "append to today's note" — Gemini understands all of these. There is no single right way to phrase it.
+    </Tip>
+  </Step>
+</Steps>
+
+## Track your tasks
+
+You have been adding tasks. Now let's manage them — still using nothing but natural language.
+
+<Steps>
+  <Step title="List today's tasks">
+    ```text title="Say this or copy this prompt"
+    Show me all the tasks in my Obsidian daily note
+    ```
+
+    You should see a list of your tasks with their current status — which ones are done and which are still open.
+  </Step>
+
+  <Step title="Mark a task as done">
+    ```text title="Say this or copy this prompt"
+    Mark the task about sending my CV as done
+    ```
+
+    The checkbox changes from empty to checked — in both the terminal output and in Obsidian.
+  </Step>
+
+  <Step title="See what is left">
+    ```text title="Say this or copy this prompt"
+    Show me only the tasks I haven't finished yet
+    ```
+
+    This filters your task list to show only the incomplete items — a quick way to see what is still on your plate.
+  </Step>
+</Steps>
+
+<Info>
+**Notice you do not need to know line numbers or command syntax.** Just describe what you want — "mark the task about sending my CV" — and Gemini figures out which task you mean and how to update it.
+</Info>
+
+## Review your day
+
+At the end of the day (or any time), review everything you captured.
+
+<Steps>
+  <Step title="Read your daily note">
+    ```text title="Say this or copy this prompt"
+    Read my Obsidian daily note and show me everything I captured today
+    ```
+
+    This shows the full contents of today's daily note — every thought, task, and idea you added throughout the day.
+  </Step>
+
+  <Step title="Search for a person">
+    ```text title="Say this or copy this prompt"
+    Search my Obsidian vault for any notes that mention Sarah
+    ```
+
+    This finds every note that mentions "Sarah" — whether it was today, last week, or last month.
+  </Step>
+
+  <Step title="Search with context">
+    ```text title="Say this or copy this prompt"
+    Search my Obsidian vault for notes containing the word project, and show me the matching lines
+    ```
+
+    This shows the actual lines that contain your search term, so you can quickly find the information you need without opening each note.
+  </Step>
+</Steps>
+
+<Tip>
+**Search is one of the most powerful features.** As your vault grows, you will have weeks and months of notes. Being able to search across all of them by simply asking means you never lose anything — every thought you captured is findable.
+</Tip>
+
+## Go further — try your own requests
+
+The prompts above are just the beginning. Here are some creative requests to show how flexible natural language is:
+
+```text title="Say this or copy this prompt"
+Add a heading called 'Afternoon Goals' to my daily note, then add three empty checkboxes underneath
+```
+
+```text title="Say this or copy this prompt"
+Read my daily note and summarise what I did today in 3 bullet points
+```
+
+```text title="Say this or copy this prompt"
+Create a new note in Obsidian called 'Meeting Notes - March 25' and add a heading, then add bullet points about the topics we discussed
+```
+
+```text title="Say this or copy this prompt"
+How many notes do I have in my Obsidian vault?
+```
+
+```text title="Say this or copy this prompt"
+What tags do I use most in my Obsidian vault?
+```
+
+```text title="Say this or copy this prompt"
+Open a random note from my vault — surprise me
+```
+
+<Tip>
+**This is the magic of natural language.** You do not need to memorise commands — just describe what you want. If Gemini is not sure what you mean, it will ask you to clarify.
+</Tip>
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Gemini says it cannot run obsidian commands">
+    Make sure Obsidian is running and the CLI is enabled. Test the CLI directly by running `obsidian help` in a separate terminal window. If that works but Gemini still cannot run commands, try exiting Gemini CLI (`/quit`) and starting it again.
+  </Accordion>
+  <Accordion title="Gemini asks for permission to run a command">
+    This is normal. Type `y` and press **Enter** to allow the command. Gemini CLI asks for your permission before running terminal commands — this is a safety feature to make sure you are comfortable with what it is about to do.
+  </Accordion>
+  <Accordion title="My voice input has errors">
+    Wispr Flow may occasionally mishear technical terms or proper nouns. You can review and correct the text in Gemini CLI before pressing Enter. If voice input is causing too many errors, switch to typing or pasting prompts instead.
+  </Accordion>
+  <Accordion title="Nothing appears in my Obsidian note">
+    Make sure Obsidian is running — Gemini CLI communicates with the Obsidian app through the CLI, so Obsidian needs to be open. Also check that you have the correct vault selected if you have more than one.
+  </Accordion>
+</AccordionGroup>
+
+<Note>
+Nice work — you have captured thoughts, managed tasks, and searched your notes, all by speaking or typing naturally. Head to [Keep going](/docs/2026-her-waka/tutorial/obsidian-daily/keep-going) for ideas on building this into a daily habit.
+</Note>

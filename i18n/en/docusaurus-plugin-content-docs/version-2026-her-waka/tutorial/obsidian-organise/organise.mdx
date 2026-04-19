@@ -1,0 +1,249 @@
+---
+title: "Search, audit, and organise"
+description: "Find anything in your vault, discover orphan notes and broken links, and tidy up your files — all by talking to Gemini CLI in plain language."
+---
+
+Your tools are ready and you know what is in your vault. Let's explore, find issues, and clean things up — all by describing what you want in natural language.
+
+<Tip>
+**You can either speak your prompts using Wispr Flow, or type/paste them into Gemini CLI. Both work exactly the same way.** Wispr Flow is optional — it just makes the experience hands-free. Every prompt in this tutorial works whether you speak it or type it.
+</Tip>
+
+## Search your vault
+
+<Steps>
+  <Step title="List all files">
+    See every file in your vault at a glance:
+
+    ```text title="Say this or copy this prompt"
+    List all the files in my Obsidian vault
+    ```
+
+    Gemini CLI will show all your notes in a list. Look through and see if anything stands out — files with vague names, notes you forgot about, or duplicates.
+  </Step>
+
+  <Step title="See your folder structure">
+    Understand how your vault is organised:
+
+    ```text title="Say this or copy this prompt"
+    Show me the folder structure of my Obsidian vault
+    ```
+
+    Are your notes spread across too many folders? Are most notes sitting in the root with no folder at all? This gives you a picture of your vault's structure.
+  </Step>
+
+  <Step title="Search for content">
+    Find notes that mention a specific word or phrase:
+
+    ```text title="Say this or copy this prompt"
+    Search my Obsidian vault for any notes that mention the word meeting
+    ```
+
+    Gemini CLI searches the content of every note and returns the ones that mention "meeting". Try replacing "meeting" with any word you are looking for — a project name, a person's name, or a topic.
+  </Step>
+
+  <Step title="Search with context">
+    See the actual matching lines, not just file names:
+
+    ```text title="Say this or copy this prompt"
+    Search my Obsidian vault for notes containing TODO and show me the matching lines, not just file names
+    ```
+
+    This shows you the lines that matched, so you can see exactly what each note says without opening it. Great for finding action items or specific details.
+  </Step>
+</Steps>
+
+<Tip>
+**Search works across your entire vault instantly.** No more opening notes one by one trying to remember where you wrote something. Just describe what you are looking for and Gemini CLI finds it.
+</Tip>
+
+## Audit your tags
+
+<Steps>
+  <Step title="List all tags">
+    See every tag in your vault and how often each one is used:
+
+    ```text title="Say this or copy this prompt"
+    Show me all the tags in my Obsidian vault, with a count of how many times each tag is used
+    ```
+
+    Look for inconsistencies. Do you have both `#meeting` and `#meetings`? What about `#mtg`? Spotting these variations is the first step to cleaning them up.
+  </Step>
+
+  <Step title="Get tag details">
+    See exactly which files use a specific tag:
+
+    ```text title="Say this or copy this prompt"
+    Show me which notes use the tag meeting
+    ```
+
+    This shows every note tagged with `#meeting`. Replace "meeting" with any tag you want to investigate.
+  </Step>
+</Steps>
+
+<Info>
+**Consistent tags make your vault much easier to navigate.** If you spot duplicates or variations, note them down. You can ask Gemini CLI to help fix them, or edit the notes directly in Obsidian. Pick one version of each tag and stick with it.
+</Info>
+
+## Find forgotten notes
+
+<Steps>
+  <Step title="Find orphan notes">
+    Discover notes that nothing links to:
+
+    ```text title="Say this or copy this prompt"
+    Show me all the orphan notes in my Obsidian vault — notes that no other note links to
+    ```
+
+    Orphan notes are notes that exist in your vault but are not connected to anything else. They are often forgotten gems — or notes that need to be linked to related content.
+  </Step>
+
+  <Step title="Find broken links">
+    Spot links that point to notes that do not exist:
+
+    ```text title="Say this or copy this prompt"
+    Find all the broken links in my vault — links that point to notes that don't exist
+    ```
+
+    This happens when you rename or delete a note but other notes still link to the old name. These are easy to fix once you know about them.
+  </Step>
+
+  <Step title="Find dead ends">
+    Find notes that do not link to anything else:
+
+    ```text title="Say this or copy this prompt"
+    Show me dead-end notes — notes that don't link to anything else
+    ```
+
+    Dead-end notes might benefit from connections. Could this note link to a related project, person, or topic?
+  </Step>
+
+  <Step title="Check backlinks">
+    See what links TO a specific note:
+
+    ```text title="Say this or copy this prompt"
+    What notes link to my note called Meeting Notes - March 15?
+    ```
+
+    Backlinks show you the web of connections around a note. If a note has many backlinks, it is an important hub in your vault.
+  </Step>
+</Steps>
+
+<Tip>
+**Orphan notes are not necessarily bad** — but they represent knowledge that is disconnected from the rest of your vault. Consider asking Gemini CLI to link them to related notes so you can find them again naturally.
+</Tip>
+
+## Organise your files
+
+<Warning>
+**Before moving or renaming files,** ask Gemini CLI to read the note first. This helps you avoid accidentally moving the wrong note.
+</Warning>
+
+<Steps>
+  <Step title="Read a note before moving it">
+    Preview a note's contents without opening Obsidian:
+
+    ```text title="Say this or copy this prompt"
+    Read my note called Untitled and show me what's in it
+    ```
+
+    This shows you exactly what is in the note so you can decide what to do with it — rename it, move it, or leave it where it is.
+  </Step>
+
+  <Step title="Rename a note">
+    Give a vague note a meaningful name:
+
+    ```text title="Say this or copy this prompt"
+    Rename my note called Untitled to Quick Notes
+    ```
+
+    The note is renamed and all internal links that pointed to "Untitled" are automatically updated. Nothing breaks.
+  </Step>
+
+  <Step title="Move a note to a folder">
+    Put a note where it belongs:
+
+    ```text title="Say this or copy this prompt"
+    Move my note called Recipe - Banana Bread into a folder called Recipes
+    ```
+
+    Obsidian creates the folder if it does not exist and updates all links that point to this note. Everything stays connected.
+  </Step>
+
+  <Step title="View a note's outline">
+    See the heading structure without reading the whole note:
+
+    ```text title="Say this or copy this prompt"
+    Show me the heading structure of my note called Meeting Notes - March 15
+    ```
+
+    This is useful for long notes — you can quickly see what sections it contains without scrolling through everything.
+  </Step>
+
+  <Step title="Check file info">
+    See the details about a specific note:
+
+    ```text title="Say this or copy this prompt"
+    Give me the file info for my note called Quick Notes — when was it created and how big is it?
+    ```
+
+    This shows the file path, size, and when it was created and last modified. Handy for finding notes you have not touched in a while.
+  </Step>
+</Steps>
+
+<Info>
+**When you move or rename a note, Gemini CLI handles link updates automatically.** It runs the right Obsidian commands behind the scenes, and Obsidian updates all internal links that point to the file. Nothing breaks — your vault stays connected.
+</Info>
+
+## Go further — try your own requests
+
+You are not limited to the prompts above. Gemini CLI understands a wide range of natural language requests about your vault. Try these:
+
+```text title="Say this or copy this prompt"
+Find all notes in my vault that have no tags
+```
+
+```text title="Say this or copy this prompt"
+Which of my notes is the longest? Show me a word count comparison
+```
+
+```text title="Say this or copy this prompt"
+Search my vault for anything related to career and summarise what I've written about it
+```
+
+```text title="Say this or copy this prompt"
+Are there any duplicate note names in my vault?
+```
+
+```text title="Say this or copy this prompt"
+Show me all notes I created this month
+```
+
+```text title="Say this or copy this prompt"
+List all my notes that contain checkbox tasks, and tell me how many are completed vs incomplete
+```
+
+<Tip>
+**The key insight: you do not need to memorise commands.** Just describe what you want in plain language. Gemini CLI figures out which Obsidian commands to run and handles the details for you.
+</Tip>
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Gemini CLI cannot run Obsidian commands">
+    Make sure the Obsidian CLI plugin is installed and enabled. Run `obsidian version` in a separate terminal window to check. If it does not return a version number, go back to the [setup page](/docs/2026-her-waka/tutorial/obsidian-organise/setup) and complete Step 3.
+  </Accordion>
+  <Accordion title="Gemini CLI asks for permission before running commands">
+    This is normal. Gemini CLI asks your permission before running commands on your system. Type `y` and press **Enter** to allow it. You can also type `always` to allow it for the rest of the session.
+  </Accordion>
+  <Accordion title="Voice input mishears technical terms">
+    Wispr Flow may occasionally mishear note names or technical terms. If this happens, try speaking more slowly, or type the prompt instead. You can also correct the transcription before pressing Enter.
+  </Accordion>
+  <Accordion title="File not found">
+    Check the note name spelling. Ask Gemini CLI to list all files in your vault to see exact names. Note names do not need file extensions or full paths — just the note title as it appears in Obsidian.
+  </Accordion>
+</AccordionGroup>
+
+<Note>
+Nice work — your vault is already looking better. Head to [Keep going](/docs/2026-her-waka/tutorial/obsidian-organise/keep-going) for maintenance habits and more prompts to try.
+</Note>

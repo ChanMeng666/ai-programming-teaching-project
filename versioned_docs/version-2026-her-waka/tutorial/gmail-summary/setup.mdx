@@ -1,0 +1,206 @@
+---
+title: "设置你的工具"
+description: "将 AI 连接到你的 Gmail 账户 —— 安装 Gemini CLI + 语音（推荐）或快速体验浏览器版。"
+---
+
+import InstallNodejs from "../../_snippets/install-nodejs.mdx";
+import InstallGeminiCli from "../../_snippets/install-gemini-cli.mdx";
+import InstallWisprFlow from "../../_snippets/install-wispr-flow.mdx";
+
+在开始总结之前，先把你的 AI 工具连接到 Gmail。根据你的情况选择最适合的路径。
+
+<Warning>
+**你需要准备：** 一台能联网的电脑和一个 Gmail 账号。无需任何编程经验 —— 我们会一步一步带你完成每个步骤。
+</Warning>
+
+## 选择你的路径
+
+<Tabs>
+  <Tab title="完整教程（CLI + 语音）">
+    这条路径提供以语音为主的体验。你将安装 Gemini CLI，添加 Google Workspace 扩展，并可选安装 Wispr Flow 以便说出提示词。整个过程约 20 分钟，并且你会学到在后续每个教程中都会用到的 CLI 技能。
+
+    <Steps>
+      <Step title="安装 Node.js">
+        <Info>
+        **已有 Node.js？** 如果你在之前的教程中已经安装过，跳过此步骤。在终端运行 `node --version` 检查 —— 你应该会看到类似 `v22.x.x` 的版本号。
+        </Info>
+
+        <InstallNodejs />
+      </Step>
+
+      <Step title="安装 Gemini CLI">
+        <Info>
+        **已有 Gemini CLI？** 如果你在之前的教程中已经安装过，跳过此步骤。只需在终端运行 `gemini` 确认它还能正常运行。
+        </Info>
+
+        <InstallGeminiCli />
+
+        暂时输入 `/quit` 退出 Gemini CLI。安装 Gmail 扩展后我们再重新启动。
+      </Step>
+
+      <Step title="安装 Google Workspace 扩展">
+        打开终端并运行以下命令：
+
+        ```bash title="复制此命令"
+        gemini extensions install https://github.com/gemini-cli-extensions/workspace
+        ```
+
+        这将下载并安装 Google Workspace 扩展，让 Gemini CLI 能够读取你的 Gmail、Google Calendar 和 Google Drive。
+
+        <Info>
+        **什么是扩展？** 扩展是为 Gemini CLI 添加新功能的插件。Workspace 扩展增加了读取和管理 Gmail 等 Google 服务的工具 —— 类似于在手机上安装一款应用。
+        </Info>
+
+        <Accordion title="命令失败或卡住了">
+        请确保你有网络连接，且 Node.js 已正确安装。先尝试运行 `node --version`。如果那个命令可以运行但扩展安装失败，尝试关闭并重新打开终端，然后再次运行命令。
+        </Accordion>
+      </Step>
+
+      <Step title="授权 Gmail 访问">
+        1. 启动 Gemini CLI：
+
+        ```bash
+        gemini
+        ```
+
+        2. 首次加载带 Workspace 扩展的 Gemini CLI 时，它会要求你授权访问 Google 账户
+        3. 浏览器会自动打开 —— 用你想要总结邮件的 Google 账户登录
+        4. 查看权限并点击**允许**
+        5. 返回终端 —— Gemini CLI 现在已连接到你的 Gmail
+
+        <Warning>
+        **仔细查看权限。** 该扩展申请读取你的邮件、日历和云端硬盘的权限。点击允许前请确认你对此感到放心。你随时可以在 [Google 账户安全设置](https://myaccount.google.com/permissions)中撤销访问权限。
+        </Warning>
+
+        <Accordion title="浏览器窗口没有自动打开">
+        复制终端中显示的 URL，手动粘贴到浏览器中。在那里完成登录，然后返回终端。
+        </Accordion>
+
+        <Accordion title='我看到"此应用未经验证"的警告'>
+        这对社区开发的工具来说很正常。点击**高级** → **前往 [应用名称]（不安全）**继续。Google 对尚未通过官方审核流程的应用都会显示此警告。
+        </Accordion>
+      </Step>
+
+      <Step title="安装 Wispr Flow（可选）">
+        <InstallWisprFlow />
+      </Step>
+
+      <Step title="测试连接">
+        在 Gemini CLI 中，用 Wispr Flow 说出或直接输入这条提示词：
+
+        ```text title="说出或复制此提示词"
+        Check my Gmail and tell me how many unread emails I have.
+        ```
+
+        你应该会看到 Gemini CLI 访问你的 Gmail 并返回收件箱的信息。如果成功，一切正常。
+
+        <Tip>
+        **Gemini 请求权限确认？** 如果 Gemini CLI 请求批准工具调用，输入 `y` 并按 **Enter**。这很正常 —— 它在访问 Gmail 前请求你的确认。
+        </Tip>
+
+        <Accordion title="Gemini 说没有 Gmail 工具">
+        扩展可能没有正确安装。尝试再次运行安装命令：
+        ```bash
+        gemini extensions install https://github.com/gemini-cli-extensions/workspace
+        ```
+        然后退出（`/quit`）并重启 Gemini CLI。你可以用 `/extensions list` 查看已安装的扩展。
+        </Accordion>
+      </Step>
+    </Steps>
+
+    ## 验证你的设置
+
+    <AccordionGroup>
+      <Accordion title="Node.js 已安装">
+        在终端运行 `node --version`。你应该会看到一个版本号。
+      </Accordion>
+      <Accordion title="Gemini CLI 已安装并登录">
+        在终端运行 `gemini`。它能正常启动并显示一个可输入的提示符。
+      </Accordion>
+      <Accordion title="Workspace 扩展已安装">
+        扩展安装时没有报错。你可以在 Gemini CLI 内用 `/extensions list` 确认。
+      </Accordion>
+      <Accordion title="Gmail 已授权">
+        你完成了 Google 登录并授予了访问权限。
+      </Accordion>
+      <Accordion title="连接已测试">
+        当你提问时，Gemini CLI 能告诉你关于未读邮件的信息。
+      </Accordion>
+    </AccordionGroup>
+
+    <Note>
+    一切就绪？前往[总结你的 Gmail](/docs/2026-her-waka/tutorial/gmail-summary/summarize) 获取你第一份 AI 生成的邮件摘要。
+    </Note>
+  </Tab>
+
+  <Tab title="快速体验（浏览器）">
+    <Info>
+    **这只是快速体验。** 你会很快得到结果，但不会学到其他所有教程中使用的 CLI 技能。如果你有 20 分钟，我们建议选择**完整教程（CLI + 语音）**标签页。
+    </Info>
+
+    这是最快的上手方式。你将在浏览器中使用 Gemini 网页版，开启 Gmail 扩展，大约 5 分钟内就可以开始总结。无需任何安装。
+
+    <Steps>
+      <Step title="打开 Gemini">
+        1. 在浏览器中访问 [gemini.google.com](https://gemini.google.com)
+        2. 用你想要总结邮件的 Google 账户登录
+        3. 你应该会看到 Gemini 聊天界面
+
+        <Accordion title="我没有 Google 账号">
+        使用 Gemini 和 Gmail 都需要 Google 账号。前往 [accounts.google.com](https://accounts.google.com) 并点击**创建账号**，免费注册一个。
+        </Accordion>
+      </Step>
+
+      <Step title="启用 Gmail 扩展">
+        1. 点击 Gemini 侧边栏左下角的**设置**图标（齿轮图标），或前往 [gemini.google.com/extensions](https://gemini.google.com/extensions)
+        2. 在扩展列表中找到 **Google Workspace**
+        3. 将其**开启**
+        4. 如果出现权限请求，查看并点击**允许**
+
+        <Info>
+        **这会做什么？** 它授权 Gemini 读取你的 Gmail 消息、Google Drive 文件和 Google Docs。Gemini 只在你请求时才使用这个权限 —— 它不会在后台读取你的邮件。
+        </Info>
+
+        <Accordion title="我看不到 Google Workspace 扩展">
+        如果你的 Google 账号由机构管理（如学校或雇主），扩展可能不可用。你的管理员可能需要先启用它。请尝试使用个人 Gmail 账号。
+        </Accordion>
+
+        <Accordion title="扩展开关是灰色的">
+        请确保你已用启用了 Gmail 的 Google 账号登录。如果你使用的是 Workspace 账号，请联系 IT 管理员 —— 他们可能需要在 Admin console 中启用 Gemini 扩展。
+        </Accordion>
+      </Step>
+
+      <Step title="测试连接">
+        在 Gemini 聊天框中输入这条提示词：
+
+        ```text title="复制此提示词"
+        Check my Gmail and tell me how many unread emails I have.
+        ```
+
+        你应该会看到 Gemini 访问你的 Gmail 并返回未读邮件数量。如果成功，连接正常。
+
+        <Tip>
+        **第一次使用？** Gemini 可能会要求你确认可以访问你的 Gmail。出现提示时点击**允许**或**是**。这是一次性授权。
+        </Tip>
+      </Step>
+    </Steps>
+
+    ## 验证你的设置
+
+    <AccordionGroup>
+      <Accordion title="已登录 Gemini">
+        你可以在 gemini.google.com 看到 Gemini 聊天界面。
+      </Accordion>
+      <Accordion title="Gmail 扩展已启用">
+        在设置 → 扩展中，Google Workspace 扩展已开启。
+      </Accordion>
+      <Accordion title="连接已测试">
+        Gemini 能告诉你有多少封未读邮件。
+      </Accordion>
+    </AccordionGroup>
+
+    <Note>
+    一切就绪？前往[总结你的 Gmail](/docs/2026-her-waka/tutorial/gmail-summary/summarize) 获取你第一份 AI 生成的邮件摘要。
+    </Note>
+  </Tab>
+</Tabs>

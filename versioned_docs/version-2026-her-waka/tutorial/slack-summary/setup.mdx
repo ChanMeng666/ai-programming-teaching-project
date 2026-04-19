@@ -1,0 +1,327 @@
+---
+title: "设置你的工具"
+description: "将 AI 连接到你的 Slack 工作区 —— 使用语音命令安装 Gemini CLI（推荐），或尝试快速的 Claude Desktop 备选方案。"
+---
+
+import InstallNodejs from "../../_snippets/install-nodejs.mdx";
+import InstallGeminiCli from "../../_snippets/install-gemini-cli.mdx";
+import InstallWisprFlow from "../../_snippets/install-wispr-flow.mdx";
+
+在开始摘要之前，先把你的工具连接到 Slack。选择最适合你的路径。
+
+<Warning>
+**你需要准备：** 一台能联网的电脑，以及你所在的一个 Slack 工作区。无需任何编程经验 —— 我们会一步一步带你完成每个步骤。
+</Warning>
+
+## 选择你的路径
+
+<Tabs>
+  <Tab title="推荐：CLI + 语音">
+    这条路径提供以语音为主的体验，并赋予你更多控制权。你将安装 Gemini CLI，创建一个 Slack 应用，配置 Model Context Protocol（MCP）服务器，并可选择设置 Wispr Flow 以获得解放双手的语音命令体验。大约需要 30 分钟。
+
+    <Steps>
+      <Step title="安装 Node.js">
+        <Info>
+        **已有 Node.js？** 如果你在之前的教程中已经安装过，跳过此步骤。在终端运行 `node --version` 检查 —— 你应该会看到类似 `v22.x.x` 的版本号。
+        </Info>
+
+        <InstallNodejs />
+      </Step>
+
+      <Step title="安装并测试 Gemini CLI">
+        <Info>
+        **已有 Gemini CLI？** 如果你在之前的教程中已经安装过，跳过此步骤。只需在终端运行 `gemini`，确认它仍可正常启动。
+        </Info>
+
+        <InstallGeminiCli />
+
+        输入 `/quit` 暂时退出 Gemini CLI。配置好 Slack 连接后，我们会重新启动它。
+      </Step>
+
+      <Step title="创建 Slack 应用">
+        Slack 应用是你授予 Gemini CLI 读取工作区消息权限的方式。你创建的应用只有只读权限 —— 它无法发帖、删除或更改任何内容。
+
+        1. 前往 [api.slack.com/apps](https://api.slack.com/apps) 并登录
+        2. 点击 **Create New App**
+        3. 选择 **From scratch**
+        4. 输入一个名称 —— 例如 `Channel Summariser`
+        5. 从下拉菜单中选择你的 Slack 工作区
+        6. 点击 **Create App**
+
+        <Accordion title="什么是 Slack 应用？">
+        Slack 应用就像给一个程序一把你工作区的钥匙。这把钥匙只能打开你选择的门 —— 在这里，是读取公共频道消息的权限。该应用无法查看你的私信，无法发布任何内容，也无法更改任何设置。
+        </Accordion>
+      </Step>
+
+      <Step title="添加权限（作用域）">
+        现在你需要告诉 Slack 这个应用被允许做什么。
+
+        1. 在左侧边栏，点击 **OAuth & Permissions**
+        2. 向下滚动到 **Scopes** 部分
+        3. 在 **Bot Token Scopes** 下，点击 **Add an OAuth Scope**
+        4. 添加以下两个作用域：
+           - `channels:history` —— 允许应用读取公共频道中的消息
+           - `channels:read` —— 允许应用查看哪些公共频道存在
+
+        <Warning>
+        **只添加这两个作用域。** 它们赋予应用对公共频道的只读访问权限。该应用无法读取私有频道、私信，也无法发布任何内容。
+        </Warning>
+
+        <Accordion title="什么是作用域？">
+        作用域就是权限。它们精确控制你的应用被允许做什么。把它们想象成钥匙 —— `channels:history` 是打开消息历史的钥匙，`channels:read` 是让应用看到频道名称的钥匙。没有这些特定的钥匙，应用什么也做不了。
+        </Accordion>
+      </Step>
+
+      <Step title="安装应用并获取机器人令牌">
+        1. 滚动到 **OAuth & Permissions** 页面顶部
+        2. 点击 **Install to [你的工作区名称]**
+        3. 查看权限并点击 **Allow**
+        4. 你会看到一个以 `xoxb-` 开头的 **Bot User OAuth Token**
+        5. **复制此令牌并保存在安全的地方** —— 你将在第 7 步用到它
+
+        <Warning>
+        **这个令牌就像密码。** 任何拥有它的人都可以读取你工作区的消息。不要公开分享或在网上发布。将其保存在文本文件或密码管理器中。
+        </Warning>
+
+        <Accordion title="怎么知道成功了？">
+        你应该能在 OAuth & Permissions 页面看到一个以 `xoxb-` 开头的长令牌。如果看到错误，检查你是否在第 4 步添加了两个作用域，然后再次尝试点击 **Install to Workspace**。
+        </Accordion>
+      </Step>
+
+      <Step title="获取你的团队 ID">
+        团队 ID 用于标识你的 Slack 工作区。MCP 配置时需要用到它。
+
+        1. 在 **网页浏览器**（不是桌面应用）中打开 Slack，访问 [app.slack.com](https://app.slack.com)
+        2. 登录你的工作区
+        3. 查看浏览器地址栏中的 URL —— 它看起来像：`https://app.slack.com/client/T01234567/...`
+        4. 团队 ID 是以 **T** 开头的部分 —— 例如 `T01234567`
+        5. **复制此 ID 并与机器人令牌一起保存**
+
+        <Accordion title="在 URL 中找不到团队 ID">
+        另一种方法：在 Slack 中，点击左上角的 **工作区名称** → **Settings & administration** → **Workspace settings**。工作区 ID（与团队 ID 相同）通常显示在设置页面上，或显示在设置页面的 URL 中。
+        </Accordion>
+      </Step>
+
+      <Step title="在 Gemini CLI 中配置 Slack MCP">
+        现在你将通过配置 Model Context Protocol（MCP）服务器，将 Gemini CLI 连接到 Slack。这告诉 Gemini CLI 如何与 Slack 通信。
+
+        <Tabs>
+          <Tab title="Windows">
+            1. 打开文件资源管理器
+            2. 在地址栏输入 `%USERPROFILE%\.gemini` 并按 **Enter**
+            3. 如果你看到名为 `settings.json` 的文件，用记事本打开它
+            4. 如果文件不存在，创建一个新文本文件并命名为 `settings.json`
+          </Tab>
+          <Tab title="macOS">
+            1. 打开 Finder
+            2. 按 **Cmd + Shift + G** 并输入 `~/.gemini`，然后按 **Enter**
+            3. 如果你看到名为 `settings.json` 的文件，用 TextEdit 打开它
+            4. 如果文件不存在，打开 Terminal 并运行：
+            ```bash
+            touch ~/.gemini/settings.json && open -e ~/.gemini/settings.json
+            ```
+          </Tab>
+        </Tabs>
+
+        将以下内容粘贴到 `settings.json` 中。**替换两个占位符**，填入你的实际机器人令牌和团队 ID：
+
+        ```json title="~/.gemini/settings.json — 替换 YOUR_BOT_TOKEN 和 YOUR_TEAM_ID"
+        {
+          "mcpServers": {
+            "slack": {
+              "command": "npx",
+              "args": ["-y", "@modelcontextprotocol/server-slack"],
+              "env": {
+                "SLACK_BOT_TOKEN": "xoxb-YOUR_BOT_TOKEN",
+                "SLACK_TEAM_ID": "YOUR_TEAM_ID"
+              }
+            }
+          }
+        }
+        ```
+
+        <Tip>
+        **需要替换两处内容：** 将 `xoxb-YOUR_BOT_TOKEN` 替换为你的完整机器人令牌（例如 `xoxb-1234-5678-abcdef`），将 `YOUR_TEAM_ID` 替换为你的团队 ID（例如 `T01234567`）。保留引号。
+        </Tip>
+
+        <Warning>
+        如果 `settings.json` 中已经有来自之前教程的内容，你需要合并配置。将 `"slack"` 部分添加到现有的 `"mcpServers"` 块内，而不是替换整个文件。
+        </Warning>
+
+        保存文件。
+
+        <Accordion title="什么是 MCP？">
+        MCP 代表 Model Context Protocol（模型上下文协议）。它是 AI 工具连接 Slack、GitHub 或数据库等外部服务的标准方式。可以把它想象成一个通用适配器 —— 不是每个 AI 工具都要自己构建 Slack 连接，而是大家都使用 MCP。你配置一次，AI 就能读取你的 Slack 消息。
+        </Accordion>
+      </Step>
+
+      <Step title="将机器人添加到频道">
+        机器人需要成为频道的成员，才能读取其中的消息。
+
+        1. 打开 Slack（桌面应用或浏览器）
+        2. 前往你想要摘要的频道
+        3. 输入 `/invite @Channel Summariser`（或你给应用起的名字）并按 **Enter**
+        4. 你应该会看到一条确认机器人已添加的消息
+
+        <Tip>
+        **选择一个活跃的频道**，最好有至少 10–20 条近期消息。这样 AI 才有有意义的内容可以摘要。之后你随时可以将机器人添加到更多频道。
+        </Tip>
+
+        <Accordion title="输入 /invite 时机器人没有出现">
+        确保你拼写了与创建时完全相同的应用名称。你也可以通过点击顶部的 **频道名称** → **Integrations** → **Add an App** 来添加机器人，然后在列表中找到你的应用。
+        </Accordion>
+      </Step>
+
+      <Step title="安装 Wispr Flow（可选）">
+        Wispr Flow 让你可以说出提示词，而不用打字。它适用于任何应用 —— 包括 Gemini CLI 运行的终端。
+
+        <InstallWisprFlow />
+      </Step>
+
+      <Step title="测试连接">
+        打开终端并启动 Gemini CLI：
+
+        ```bash
+        gemini
+        ```
+
+        Gemini CLI 首次加载配置了 MCP 时，可能需要一点时间连接到 Slack 服务器。准备就绪后，说（通过 Wispr Flow）或输入这条测试提示词：
+
+        ```text title="说出或复制此提示词"
+        Use the Slack tools to check how many messages are in the channel #general.
+        ```
+
+        你应该会看到 Gemini CLI 访问你的 Slack 工作区并报告消息数量。如果正常，说明一切已连接。
+
+        <Accordion title="Gemini 说没有可用的 Slack 工具">
+        检查你的 `settings.json` 文件是否有拼写错误。最常见的问题是：
+        - 字段之间缺少逗号
+        - 使用了弯引号而非直引号（使用直引号 `"`，而不是弯引号）
+        - 文件路径错误 —— 必须位于 `~/.gemini/settings.json`
+
+        修复后，关闭 Gemini CLI（`/quit`）并重新启动。
+        </Accordion>
+
+        <Accordion title="连接错误或超时">
+        确保 Node.js 已正确安装（`node --version` 应显示版本号）。MCP 服务器使用 `npx` 运行，`npx` 随 Node.js 一起安装。如果找不到 `npx`，请重新安装 Node.js。
+        </Accordion>
+
+        <Accordion title="'invalid_auth' 错误">
+        你的机器人令牌不正确。返回 [api.slack.com/apps](https://api.slack.com/apps)，找到你的应用，前往 **OAuth & Permissions**，再次复制 **Bot User OAuth Token**。用正确的令牌更新你的 `settings.json`。
+        </Accordion>
+      </Step>
+    </Steps>
+
+    ## 验证你的设置
+
+    <AccordionGroup>
+      <Accordion title="Node.js 已安装">
+        在终端运行 `node --version`，应显示一个版本号。
+      </Accordion>
+      <Accordion title="Gemini CLI 已安装并登录">
+        在终端运行 `gemini`，可正常启动并显示一个可输入的提示符。
+      </Accordion>
+      <Accordion title="Slack 应用已创建且作用域正确">
+        你的应用具有 `channels:history` 和 `channels:read` 作用域。
+      </Accordion>
+      <Accordion title="机器人令牌已保存">
+        你有一个以 `xoxb-` 开头的令牌，保存在安全的地方。
+      </Accordion>
+      <Accordion title="团队 ID 已保存">
+        你有一个以 `T` 开头的 ID，与令牌一同保存。
+      </Accordion>
+      <Accordion title="MCP 已配置">
+        你的 `settings.json` 文件包含 Slack MCP 服务器配置。
+      </Accordion>
+      <Accordion title="机器人已添加到频道">
+        机器人已成为你想要摘要的至少一个频道的成员。
+      </Accordion>
+      <Accordion title="Wispr Flow 已安装（可选）">
+        Wispr Flow 正在运行，你可以看到麦克风指示器。如果你跳过了此步骤，完全没问题 —— 你可以打字输入所有提示词。
+      </Accordion>
+      <Accordion title="连接测试通过">
+        当你询问时，Gemini CLI 可以访问你的 Slack 工作区。
+      </Accordion>
+    </AccordionGroup>
+
+    <Note>
+    一切就绪？前往[摘要你的 Slack 频道](/docs/2026-her-waka/tutorial/slack-summary/summarize)，获取你的第一份 AI 驱动的摘要。
+    </Note>
+  </Tab>
+
+  <Tab title="备选：Claude Desktop">
+    <Info>
+    **快速备选方案。** 这条路径可以在 10 分钟内获得结果，但跳过了其他教程所用的 CLI 技能。Claude Desktop 由 Anthropic 制作 —— 也就是 Claude Code 背后的公司，你将在高级 Vibe Coding 教程中使用 Claude Code。如需完整的学习体验，我们建议选择 **推荐：CLI + 语音** 标签页。
+    </Info>
+
+    这是最快的入门方式。你将下载 Claude Desktop，将其连接到 Slack，约 10 分钟即可准备好摘要。
+
+    <Steps>
+      <Step title="下载 Claude Desktop">
+        1. 前往 [claude.ai/download](https://claude.ai/download)
+        2. 下载适合你操作系统（Windows 或 macOS）的应用
+        3. 打开下载的文件并按照提示安装
+        4. 打开 Claude Desktop 并创建一个免费账号（如果你已有账号，直接登录）
+
+        <Accordion title="我需要付费套餐吗？">
+        不需要。免费套餐包含对 Slack 连接器的访问权限。你可以立即开始摘要频道，无需付费。
+        </Accordion>
+      </Step>
+
+      <Step title="连接 Slack">
+        1. 在 Claude Desktop 中，点击左下角的 **个人头像图标**
+        2. 点击 **Customize**
+        3. 点击 **Connectors**
+        4. 点击 **+** 按钮添加新连接器
+        5. 在列表中找到 **Slack** 并点击
+        6. 浏览器窗口将打开 —— 登录你的 Slack 工作区
+        7. 查看权限并点击 **Allow**
+        8. 返回 Claude Desktop —— Slack 现已连接
+
+        <Info>
+        **连接器做什么？** 它授予 Claude 对你 Slack 消息的安全只读访问权限。Claude 可以在你有权访问的频道中搜索和读取消息，但无法发帖、删除或修改任何内容。
+        </Info>
+
+        <Accordion title="我没有看到 Connectors 选项">
+        确保你使用的是最新版本的 Claude Desktop。前往 **Help** → **Check for Updates** 并安装所有可用更新。如果仍然看不到，尝试退出并重新登录。
+        </Accordion>
+
+        <Accordion title="Slack 授权窗口无法打开">
+        检查你的浏览器是否阻止了弹窗。如果窗口仍然无法出现，尝试换一个浏览器。你也可以尝试复制授权 URL 并直接粘贴到浏览器中。
+        </Accordion>
+      </Step>
+
+      <Step title="测试连接">
+        在 Claude Desktop 聊天框中，输入这条提示词：
+
+        ```text title="复制此提示词"
+        List the Slack channels you can see in my workspace.
+        ```
+
+        你应该会看到来自你 Slack 工作区的频道名称列表。如果正常，说明连接正在工作。
+
+        <Accordion title="Claude 说无法访问 Slack">
+        返回 **Customize** → **Connectors**，检查 Slack 是否显示为已连接。如果显示错误，删除连接器并重新添加。确保你授权了正确的工作区。
+        </Accordion>
+      </Step>
+    </Steps>
+
+    ## 验证你的设置
+
+    <AccordionGroup>
+      <Accordion title="Claude Desktop 已安装">
+        应用可以打开，你可以输入消息。
+      </Accordion>
+      <Accordion title="Slack 已连接">
+        Slack 连接器在 **Customize** → **Connectors** 中显示为活跃状态。
+      </Accordion>
+      <Accordion title="连接测试通过">
+        当你询问时，Claude 能列出你的 Slack 频道。
+      </Accordion>
+    </AccordionGroup>
+
+    <Note>
+    一切就绪？前往[摘要你的 Slack 频道](/docs/2026-her-waka/tutorial/slack-summary/summarize)，获取你的第一份 AI 驱动的摘要。
+    </Note>
+  </Tab>
+</Tabs>

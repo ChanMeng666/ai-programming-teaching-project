@@ -1,0 +1,103 @@
+---
+title: "设置 GitHub"
+description: "创建 GitHub 账号，并使用 Gemini CLI 安装 git 和 GitHub CLI —— 发布网站所需的一切。"
+---
+
+GitHub 是一个免费网站，你的代码将存放在这里 —— 你的网站也将在这里免费托管。让我们开始设置。
+
+<Steps>
+  <Step title="创建 GitHub 账号">
+    1. 前往 [github.com](https://github.com)
+    2. 点击**注册**
+    3. 按照提示创建你的账号（免费套餐就够用了）
+
+    <Tip>
+    **用心选择你的用户名！** 它会成为你网站地址的一部分：`yourusername.github.io`。选一个专业或容易记忆的名字。
+    </Tip>
+  </Step>
+
+  <Step title="用 Gemini CLI 安装 git">
+    Git 是一个追踪代码变更的工具。与其手动安装，不如让 Gemini CLI 帮我们完成！
+
+    打开终端，输入 `gemini`，按 Enter。然后说出或输入这条提示词：
+
+    ```text title="说出或复制此提示词"
+    I need to install git on my computer. Please:
+    1. Check if git is already installed
+    2. If not, download and install it for me
+    3. After installation, verify it works by running "git --version"
+    4. Configure git with a default user name and email — ask me what
+       name and email to use
+
+    I am a complete beginner, so please explain each step as you go.
+    ```
+
+    <Tabs>
+      <Tab title="Windows 上 Gemini 会做什么">
+        Gemini CLI 很可能会从 [git-scm.com](https://git-scm.com) 下载 git 并为你运行安装程序。它可能会要求你确认几个安装提示。安装后，它会为你设置 git 的用户名和邮箱。
+      </Tab>
+      <Tab title="macOS 上 Gemini 会做什么">
+        Gemini CLI 很可能会使用 Xcode Command Line Tools 或 Homebrew 来安装 git。在 macOS 上，git 可能已经安装好了。确认后，它会为你设置用户名和邮箱。
+      </Tab>
+    </Tabs>
+
+    **验证是否成功** —— 在终端输入：
+
+    ```bash
+    git --version
+    ```
+
+    你应该会看到类似 `git version 2.x.x` 的版本号。
+  </Step>
+
+  <Step title="用 Gemini CLI 安装 GitHub CLI 并登录">
+    GitHub CLI（`gh`）是一个让你从终端与 GitHub 交互的工具。Gemini CLI 会帮你安装并引导你登录。
+
+    在 Gemini CLI 中说出或输入这条提示词：
+
+    ```text title="说出或复制此提示词"
+    Now I need to install the GitHub CLI tool (called "gh") and log in
+    to my GitHub account. Please:
+    1. Install the GitHub CLI on my computer
+    2. Help me log in to my GitHub account using "gh auth login"
+    3. Choose the browser-based login method so I can sign in easily
+    4. After login, verify it works by running "gh auth status"
+
+    I am a complete beginner, so please guide me through each step.
+    ```
+
+    **验证是否成功** —— 在终端输入：
+
+    ```bash
+    gh auth status
+    ```
+
+    你应该会看到确认你已登录 GitHub 的消息。
+  </Step>
+</Steps>
+
+<Warning>
+**GitHub Pages 是免费的，但需要公开仓库。** 这意味着你的网站代码对其他人可见。这对个人网站来说是完全正常的 —— 互联网上大多数网站的源代码都是公开可见的。
+</Warning>
+
+<Tip>
+**安装完成 —— 接下来才是最有趣的部分。** 从这里开始，你将通过向 Gemini CLI 说话或打字来构建你的整个网站。不再需要手动安装步骤！
+</Tip>
+
+## 验证你的设置
+
+<AccordionGroup>
+  <Accordion title="Git 已安装">
+    在终端运行 `git --version`。你应该会看到一个版本号。
+  </Accordion>
+  <Accordion title="GitHub CLI 已安装">
+    在终端运行 `gh --version`。你应该会看到一个版本号。
+  </Accordion>
+  <Accordion title="已登录 GitHub">
+    在终端运行 `gh auth status`。它应该显示你已登录。
+  </Accordion>
+</AccordionGroup>
+
+<Note>
+一切就绪？前往[构建你的网站](/docs/2026-her-waka/tutorial/personal-website/build-website) —— 最有趣的部分！
+</Note>
