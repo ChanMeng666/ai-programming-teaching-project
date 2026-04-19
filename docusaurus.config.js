@@ -27,7 +27,6 @@ const config = {
   trailingSlash: true,
 
   onBrokenLinks: 'warn',
-  onBrokenMarkdownLinks: 'warn',
 
   // RSS 自动发现 + SEO head tags
   headTags: [
@@ -368,6 +367,9 @@ const config = {
     }),
   markdown: {
     mermaid: true,
+    hooks: {
+      onBrokenMarkdownLinks: 'warn',
+    },
   },
   themes: ['@docusaurus/theme-mermaid'],
 };
