@@ -10,7 +10,7 @@ import {themes as prismThemes} from 'prism-react-renderer';
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'AI Programming',
-  tagline: '通过实践案例学习人工智能开发',
+  tagline: 'Learn AI-assisted programming through hands-on projects',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
@@ -35,7 +35,7 @@ const config = {
       attributes: {
         rel: 'alternate',
         type: 'application/rss+xml',
-        title: 'AI Programming 教学博客 - RSS 2.0',
+        title: 'AI Programming Blog - RSS 2.0',
         href: '/blog/rss.xml',
       },
     },
@@ -44,7 +44,7 @@ const config = {
       attributes: {
         rel: 'alternate',
         type: 'application/atom+xml',
-        title: 'AI Programming 教学博客 - Atom',
+        title: 'AI Programming Blog - Atom',
         href: '/blog/atom.xml',
       },
     },
@@ -53,7 +53,7 @@ const config = {
       attributes: {
         rel: 'alternate',
         type: 'application/feed+json',
-        title: 'AI Programming 教学博客 - JSON Feed',
+        title: 'AI Programming Blog - JSON Feed',
         href: '/blog/feed.json',
       },
     },
@@ -82,10 +82,10 @@ const config = {
     },
   },
 
-  // 国际化配置 - 设置为中文
+  // 国际化配置 - 默认英文，中文通过语言切换器访问
   i18n: {
-    defaultLocale: 'zh-Hans',
-    locales: ['zh-Hans', 'en'],
+    defaultLocale: 'en',
+    locales: ['en', 'zh-Hans'],
     localeConfigs: {
       'zh-Hans': {
         label: '简体中文',
@@ -115,22 +115,22 @@ const config = {
           includeCurrentVersion: false,  // 不包含current版本
           versions: {
             '2026-technest': {
-              label: '2026 TECHNEST 项目',
+              label: 'TECHNEST 2026',
               path: '/',  // 设置为根路径，这样用户访问网站时默认看到这个版本
               banner: 'none',
             },
             '2026-her-waka': {
-              label: '2026 HER WAKA 活动',
+              label: 'HER WAKA 2026',
               path: '2026-her-waka',
               banner: 'none',
             },
             '2025-summer': {
-              label: '2025年夏季她行活动',
+              label: 'Summer 2025 Forward with Her Program',
               path: '2025-summer',  // 从根路径迁移至嵌套路径
               banner: 'none',
             },
             '2024-winter': {
-              label: '2024年冬季她行活动',
+              label: 'Winter 2024 Forward with Her Program',
               path: '2024-winter',
               banner: 'none',
             },
@@ -141,10 +141,10 @@ const config = {
           feedOptions: {
             type: 'all', // 生成所有格式：RSS, Atom, JSON
             xslt: true,
-            title: 'AI Programming 教学博客',
-            description: '通过实践案例学习人工智能开发 - AI编程教育平台的最新文章和教程',
+            title: 'AI Programming Blog',
+            description: 'Learn AI-assisted programming through hands-on projects — latest articles and tutorials from the AI Programming Education Platform',
             copyright: `Copyright © ${new Date().getFullYear()} AI Programming Education. All rights reserved.`,
-            language: 'zh-CN',
+            language: 'en-US',
             limit: 20, // 限制feed中的文章数量
           },
           // Edit this page links to your repository
@@ -171,9 +171,9 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       metadata: [
-        { name: 'keywords', content: 'AI编程, Gemini CLI, AI辅助编程, 零基础编程, 个人网站开发, Vercel部署, AI programming, coding tutorial' },
+        { name: 'keywords', content: 'AI programming, Gemini CLI, AI-assisted coding, beginner coding, personal website, Vercel deploy, coding tutorial, AI编程, AI辅助编程' },
         { name: 'author', content: 'Chan Meng' },
-        { property: 'og:site_name', content: 'AI Programming - Chan Meng 的 AI 编程公开课' },
+        { property: 'og:site_name', content: "AI Programming - Chan Meng's Public AI Coding Course" },
       ],
       // Replace with your project's social card
       image: 'img/docusaurus-social-card.png',
@@ -220,10 +220,10 @@ const config = {
             type: 'docSidebar',
             sidebarId: 'tutorialSidebar',
             position: 'left',
-            label: '教程',
+            label: 'Tutorials',
           },
-          {to: '/blog', label: '博客', position: 'left'},
-          {to: '/message-board/', label: '留言板', position: 'left'},
+          {to: '/blog', label: 'Blog', position: 'left'},
+          {to: '/message-board/', label: 'Message Board', position: 'left'},
           {
             type: 'docsVersionDropdown',
             position: 'left',
@@ -233,6 +233,13 @@ const config = {
             type: 'localeDropdown',
             position: 'right',
             dropdownItemsAfter: [],
+          },
+          {
+            href: 'https://chanmeng.org/#newsletter',
+            label: 'Newsletter',
+            position: 'right',
+            target: '_blank',
+            rel: 'noopener noreferrer',
           },
           {
             href: 'https://github.com/ChanMeng666/ai-programming-teaching-project',
@@ -249,13 +256,13 @@ const config = {
           {
             href: '/feeds',
             className: 'header-rss-link',
-            'aria-label': 'RSS 订阅',
+            'aria-label': 'RSS Feeds',
             position: 'right',
           },
           {
             type: 'html',
             position: 'right',
-            value: '<button class="header-music-link" aria-label="背景音乐" title="背景音乐"></button>',
+            value: '<button class="header-music-link" aria-label="Background Music" title="Background Music"></button>',
           },
         ],
       },
@@ -270,89 +277,89 @@ const config = {
         },
         links: [
           {
-            title: '课程内容',
+            title: 'Curriculum',
             items: [
               {
-                label: '2026 TECHNEST 项目',
+                label: 'TECHNEST 2026',
                 to: '/docs/programme/about-technest',
               },
               {
-                label: 'TECHNEST 课程大纲',
+                label: 'TECHNEST Curriculum Outline',
                 to: '/docs/curriculum-outline',
               },
               {
-                label: '2026 HER WAKA 活动',
+                label: 'HER WAKA 2026',
                 to: '/docs/2026-her-waka/programme/about-her-waka',
               },
               {
-                label: '2025年夏季课程',
+                label: 'Summer 2025 Course',
                 to: '/docs/2025-summer/intro',
               },
               {
-                label: '2024年冬季课程',
+                label: 'Winter 2024 Course',
                 to: '/docs/2024-winter/intro',
               },
             ],
           },
           {
-            title: '学习资源',
+            title: 'Learning Resources',
             items: [
               {
-                label: '博客文章',
+                label: 'Blog Posts',
                 to: '/blog',
               },
               {
-                label: 'AI 编程基础',
+                label: 'AI Programming Basics',
                 to: '/docs/2024-winter/basics/',
               },
               {
-                label: '实践项目案例',
+                label: 'Practical Project Cases',
                 to: '/docs/2024-winter/practice/',
               },
               {
-                label: '进阶开发教程',
+                label: 'Advanced Development Tutorials',
                 to: '/docs/2024-winter/advanced/',
               },
             ],
           },
           {
-            title: '社区互动',
+            title: 'Community',
             items: [
               {
-                label: 'Discord 社区',
+                label: 'Discord Community',
                 href: 'https://discord.gg/T3NJG5n98a',
               },
               {
-                label: 'GitHub 讨论',
+                label: 'GitHub Discussions',
                 href: 'https://github.com/ChanMeng666/ai-programming-teaching-project/discussions',
               },
               {
-                label: '问题反馈',
+                label: 'Report Issues',
                 href: 'https://github.com/ChanMeng666/ai-programming-teaching-project/issues',
               },
               {
-                label: 'RSS 订阅',
+                label: 'RSS Feeds',
                 to: '/feeds',
               },
             ],
           },
           {
-            title: '关于项目',
+            title: 'About',
             items: [
               {
-                label: 'GitHub 仓库',
+                label: 'GitHub Repository',
                 href: 'https://github.com/ChanMeng666/ai-programming-teaching-project',
               },
               {
-                label: '贡献指南',
+                label: 'Contribution Guide',
                 href: 'https://github.com/ChanMeng666/ai-programming-teaching-project/blob/main/CONTRIBUTING.md',
               },
               {
-                label: 'Chan Meng 主页',
+                label: "Chan Meng's Profile",
                 href: 'https://github.com/ChanMeng666',
               },
               {
-                label: '联系开发者',
+                label: 'Contact Developer',
                 href: 'mailto:chanmeng.dev@gmail.com',
               },
             ],

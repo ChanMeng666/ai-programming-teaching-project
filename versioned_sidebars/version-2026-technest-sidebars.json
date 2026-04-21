@@ -2,7 +2,7 @@
   "tutorialSidebar": [
     {
       "type": "category",
-      "label": "📋 项目介绍",
+      "label": "📋 Programme",
       "collapsible": true,
       "collapsed": false,
       "items": [
@@ -14,11 +14,11 @@
     {
       "type": "doc",
       "id": "curriculum-outline",
-      "label": "📖 课程大纲"
+      "label": "📖 Curriculum Outline"
     },
     {
       "type": "category",
-      "label": "🎓 教学阶段（第 1–8 周）",
+      "label": "🎓 Teaching Phase (Weeks 1–8)",
       "collapsible": true,
       "collapsed": false,
       "items": [
@@ -34,7 +34,7 @@
     },
     {
       "type": "category",
-      "label": "🚀 毕业项目（第 9–12 周）",
+      "label": "🚀 Capstone (Weeks 9–12)",
       "collapsible": true,
       "collapsed": false,
       "items": [

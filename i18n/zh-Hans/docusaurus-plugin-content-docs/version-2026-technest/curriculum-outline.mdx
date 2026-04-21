@@ -1,0 +1,166 @@
+---
+title: TECHNEST AI 方向 —— 课程大纲
+description: 12 周 prompt-first AI 工程课程。目标、授权规则、周计划、必备工具、考核方式、毕业项目评估标准。
+sidebar_label: 课程大纲
+slug: /curriculum-outline
+---
+
+# TECHNEST AI 方向课程大纲
+
+> **方向：** 人工智能（Artificial Intelligence）
+
+## 方向目标
+
+12 周结束时，那些入学前只在浏览器里用过 ChatGPT 的学员，将能够：
+
+- **用 Cursor、Claude Code、Gemini CLI 这些 AI 助手构建并上线全栈 AI 应用**，几乎不用手写代码，把自然语言提示词当成主要的编程界面。
+- **完全通过 AI 调度的 CLI 和 MCP 服务器搭起生产基础设施** —— Vercel 做托管、Neon 做 Postgres + Auth、Vercel Blob 做文件存储、GitHub 做版本控制、Slack 做通知、Typst 做 PDF 生成。
+- **拥有一个上线、打磨过、AI 驱动的个人网站**，这个站点同时是他们的作品集、AI 克隆聊天窗、留言簿、博客、联系表单入口，并作为自动生成简历与求职信的"唯一数据源"。
+
+## 毕业项目目标
+
+第 9–12 周，学员结成 2–4 人小队，把自己之前打磨好的个人网站代码演进成一个 **部署上线的多用户 AI SaaS MVP**，在三个赛道中选一个：
+
+- **Campus Life（校园生活）** —— 带 AI 推荐的活动发现、室友匹配、语言交换 app、宿舍家务与账单分摊。
+- **Personal Growth（个人成长）** —— 带每周 AI 复盘的习惯养成、阅读陪伴、日记助手、健身计划。
+- **Creative Tools（创意工具）** —— AI 短篇小说工作室、音乐提示词试验场、漫画面板生成器、简历视频脚本制作。
+
+每一份毕业项目都要部署到 Vercel、调用 LLM API、把状态存入 Neon，并在一场 5 分钟的团队现场 demo 里交付。
+
+## 授权规则（全课程贯穿的主轴）
+
+这一方向只有一条主轴。
+
+<Tip title="自然语言就是源代码。">
+学员只负责描述自己想要什么。AI 来写、来装、来配、来部署、来提交。学员只负责验证。学员只有在**没有任何 CLI、API、MCP 服务器或 Skill 能完成这件事的时候**——也就是在第三方同意页上登录、复制粘贴那种只有人才能看到的 secret——才亲自动手。
+</Tip>
+
+| 操作 | AI 通过什么完成 | 学员的角色 |
+|---|---|---|
+| 开 DB / Auth | Neon MCP、Neon CLI | 验证 |
+| 部署 + 环境变量 | Vercel CLI、Vercel MCP | 验证 |
+| Git 提交 + 推送 | Cursor / Claude Code | 验证 |
+| 安装依赖 | Cursor 跑 `pnpm add` | 验证 |
+| 写 / 改源代码 | AI 改文件 | 验证 + 挑刺 |
+| 数据库 schema 迁移 | AI + Drizzle CLI | 验证 |
+| 生成 PDF | Claude Code 里的 Typst skill | 验证 |
+| 调 Slack webhook | AI 通过 CLI fetch / post | 验证 |
+| OAuth 同意页 | —（只能人做） | **自己做** |
+| 从 provider 站点拿 API key | —（只能人做） | **自己做** |
+| DNS / 域名记录 | —（只能人做） | **自己做** |
+| 没 CLI 可用的 `.env.local` 编辑 | —（只能人做） | **自己做，课程会给出精确到某一行的指示** |
+
+每一周的动手 Lab 都会落地这套规则。第 2 周结束学员会开始识别这个模式，第 4 周结束就能完全内化。
+
+## 8 周教学计划
+
+整个教学阶段围绕 **同一个渐进式演化的个人网站** 展开。每一周都把一个有意义的全栈功能嫁接到同一份代码库上，到第 8 周学员手里是一个完整、连贯、生产级的产品。
+
+### [第 1 周 —— AI 开发者工具包安装](/docs/weeks/week-01-dev-tools-setup)
+
+<AxisBadge axes={["JOB"]} />
+
+**主题。** 装 Cursor、Claude Code、Gemini CLI。装 Skills 和 MCP 服务器（Vercel MCP、Neon MCP、Typst skill）。配好 GitHub 并把它接进 Cursor。试一试 Wispr Flow 做语音转提示词输入。在一个一次性 sandbox 仓库里跑一遍授权规则。
+
+**技能。** 从官方源装开发者工具 · 在 IDE 里用 GitHub 登录 · 装一个 MCP 服务器和一个 Skill · 用语音口述提示词 · 看着 AI 替你调 CLI。
+
+### [第 2 周 —— 部署你的个人网站](/docs/weeks/week-02-portfolio-deploy)
+
+<AxisBadge axes={["JOB", "FUN"]} />
+
+**主题。** Fork 一个 Vercel 个人作品集模板（Magic Portfolio）。用对话告诉 Cursor 改内容。通过 AI 调起的 Vercel CLI 把它发到生产环境。如果自己有域名，把自定义域名接上。
+
+**技能。** 让 AI 替你 fork 模板 · 用自然语言描述网站内容 · 验证 Vercel 部署结果 · 出错时读 Vercel 的 build log。
+
+### [第 3 周 —— 给网站加一个你的 AI 克隆](/docs/weeks/week-03-ai-avatar)
+
+<AxisBadge axes={["FUN", "COOL"]} />
+
+**主题。** 把 Gemini 2.5 Flash 接成一个浮动聊天组件。写一段 persona system prompt，让这个组件用学员自己的口吻（背景、兴趣、项目经历）回答别人。
+
+**技能。** 拿到并妥善存放 API key · 把 system prompt 设计当作学员"第一个正经的 prompt engineering 任务" · 在 Next.js 应用里做流式响应 · 靠与 AI 的协作来迭代提示词。
+
+### [第 4 周 —— 走向全栈：Neon + Auth](/docs/weeks/week-04-fullstack-neon)
+
+<AxisBadge axes={["JOB", "LIFE"]} />
+
+**主题。** 通过 MCP/CLI 开出 Neon Postgres 和 Neon Auth。加一个留言簿，让登录过的访客可以留言。Drizzle ORM 管 schema。
+
+**技能。** 让 AI 开真实数据库 · 理解（而不是手写）Drizzle schema · 把 Google OAuth 同意页当作最经典的"人工环节" · 跨环境的环境变量管道（local + Vercel）。
+
+### [第 5 周 —— 用 Vercel Blob 做图片上传](/docs/weeks/week-05-vercel-blob)
+
+<AxisBadge axes={["FUN", "LIFE"]} />
+
+**主题。** 扩展留言簿，让访客可以在留言旁边附上图片 / 表情包。用 Vercel Blob 做存储。
+
+**技能。** 文件上传 UX · 安全的上传 token · 端到端地验证一次二进制上传的往返 · 思考 Blob 存储的成本和限额。
+
+### [第 6 周 —— 博客系统](/docs/weeks/week-06-blog-system)
+
+<AxisBadge axes={["JOB", "LIFE"]} />
+
+**主题。** 在网站上嫁接一个 `/blog`，参考一个 Vercel 官方博客模板。MDX 文章、语法高亮代码块、RSS 订阅。
+
+**技能。** 写 MDX · Next.js App Router 的路由 · 通过 AI "消化"一个模板的模式，而不是去读它的源代码 · 发布第一篇文章。
+
+### [第 7 周 —— 实时 Slack 通知](/docs/weeks/week-07-slack-notifications)
+
+<AxisBadge axes={["JOB", "COOL"]} />
+
+**主题。** 做一个联系表单。提交时既写入 Neon，也触发 Slack webhook，实时把消息推给你自己。
+
+**技能。** 创建 Slack App 和 webhook · 通过 AI 写一个 Next.js server action · "通知即可观测性"（observability-as-notification）· 思考 PII 保护和防垃圾。
+
+### [第 8 周 —— 面向求职的 Typst PDF 自动化](/docs/weeks/week-08-typst-cv)
+
+<AxisBadge axes={["JOB", "LIFE"]} />
+
+**主题。** 用 Typst CLI 配合 Claude Code 里的 Typst skill，生成像素级精致的简历和求职信。让模板的数据直接从 Neon `profile` 表里来——同一份数据，多种产物。
+
+**技能。** 数据驱动的文档生成 · 用提示词驱动 Typst skill · 网站上的"一键下载简历 / 求职信" · 交付一个求职 ready 的作品集。
+
+## 必备工具 / 技术栈
+
+| 层级 | 工具 | 何时加入 |
+|---|---|---|
+| IDE | Cursor（主力）、Claude Code、Gemini CLI | W1 |
+| Skills / MCP | Vercel MCP、Neon MCP、Typst skill | W1 |
+| 语音输入（可选） | Wispr Flow | W1 |
+| 版本控制 | GitHub（通过 Cursor 驱动） | W1–2 |
+| Web 框架 | Next.js 14 + Tailwind CSS | W2 |
+| 托管 / 部署 | Vercel（CLI 与 MCP） | W2 |
+| 产品里的 LLM | Gemini 2.5 Flash | W3 |
+| 数据库 + Auth | Neon Postgres + Neon Auth + Drizzle ORM | W4 |
+| 文件存储 | Vercel Blob | W5 |
+| 内容 | MDX 博客 | W6 |
+| 通知 | Slack Incoming Webhook / Slack App | W7 |
+| 排版 | Typst CLI + Typst skill | W8 |
+
+## 考核策略
+
+- **每周作业 —— 50%。** 每一周学员都要交 (a) 更新过的线上网站 URL 和 (b) 驱动这次变更的 Cursor / Claude Code 对话截图。截图这一项是故意的——它把"提示词就是学员的工作本身"这个课程主轴钉死。
+- **参与 —— 10%。** 出勤、Q&A 发言、帮同学解卡。
+- **毕业项目 —— 40%。** 功能完成度、部署健康度、团队协作、现场 demo。
+
+## 学习里程碑
+
+**到第 4 周，学员将能够：**
+
+- 在 Cursor 里打开一个 Next.js 项目，用大白话描述一个基于数据库的功能，然后看着 Cursor 开 Neon、配 Drizzle、部署 Vercel、提交 GitHub——从一段对话里端到端完成。
+- 识别出哪些步骤必须人做（OAuth 同意、DNS、provider 那边的凭据），并知道在这些瞬间具体要干什么。
+
+**到第 8 周，学员将能够：**
+
+- 在一场 2 小时的课上就交付一个新功能上线，下课时带着一个可以发给朋友、家人、招聘官的链接走。
+- 把招聘官引到同一个个人网站前——这个站点本身就在证明全栈 AI 能力：auth、数据库、文件存储、博客、实时通知、AI 生成的简历/求职信下载，全部由一个 Next.js 应用承担。
+
+## 毕业项目评估标准
+
+- **功能完成度** —— 承诺的每一个功能都能在生产环境端到端跑通。
+- **代码质量** —— 合理的组件划分，不硬编码 secret；代码是 AI 写的，但团队看懂了、也挑过刺。
+- **UI / UX** —— 清爽、可访问、手机友好。
+- **部署** —— 线上可达、数据库迁移已应用、demo 时日志无错误。
+- **演示** —— 问题陈述、解决方案、技术栈、现场 demo、面对的挑战。
+
+完整的赛道、要求、时间线和 Demo Day 评分细则请看 [毕业项目规范](/docs/capstone/capstone-spec)。

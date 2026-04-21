@@ -5,13 +5,13 @@ import styles from './styles.module.css';
 export default function ChatToggle({ isOpen, onClick }) {
   const closeChatLabel = translate({
     id: 'chatWidget.toggle.close',
-    message: '关闭聊天',
+    message: 'Close chat',
     description: 'Close chat toggle button label',
   });
 
   const openChatLabel = translate({
     id: 'chatWidget.toggle.open',
-    message: '打开 AI 助手',
+    message: 'Open AI Assistant',
     description: 'Open chat toggle button label',
   });
 

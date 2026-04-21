@@ -3,100 +3,112 @@
     "message": "2026 HER WAKA 活动",
     "description": "The label for version 2026-her-waka"
   },
-  "sidebar.tutorialSidebar.category.📋 项目介绍": {
+  "sidebar.tutorialSidebar.category.📋 Programme": {
     "message": "📋 项目介绍",
-    "description": "The label for category '📋 项目介绍' in sidebar 'tutorialSidebar'"
+    "description": "The label for category '📋 Programme' in sidebar 'tutorialSidebar'"
   },
-  "sidebar.tutorialSidebar.category.🎓 工作坊": {
+  "sidebar.tutorialSidebar.category.🎓 Workshops": {
     "message": "🎓 工作坊",
-    "description": "The label for category '🎓 工作坊' in sidebar 'tutorialSidebar'"
+    "description": "The label for category '🎓 Workshops' in sidebar 'tutorialSidebar'"
   },
-  "sidebar.tutorialSidebar.category.Session 1：AI 与未来工作（3 月）": {
+  "sidebar.tutorialSidebar.category.Session 1: AI & The Future of Work (March)": {
     "message": "Session 1：AI 与未来工作（3 月）",
-    "description": "The label for category 'Session 1：AI 与未来工作（3 月）' in sidebar 'tutorialSidebar'"
+    "description": "The label for category 'Session 1: AI & The Future of Work (March)' in sidebar 'tutorialSidebar'"
   },
-  "sidebar.tutorialSidebar.category.📚 自学教程": {
+  "sidebar.tutorialSidebar.category.Session 2: #IAmRemarkable & Vibe Coding (April)": {
+    "message": "Session 2：#IAmRemarkable 与 Vibe Coding（4 月）",
+    "description": "The label for category 'Session 2: #IAmRemarkable & Vibe Coding (April)' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.Session 3: Employment Rights (May)": {
+    "message": "Session 3：就业权益（5 月）",
+    "description": "The label for category 'Session 3: Employment Rights (May)' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.Session 4: Networking & Career Connections (June)": {
+    "message": "Session 4：人脉与职业连接（6 月）",
+    "description": "The label for category 'Session 4: Networking & Career Connections (June)' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.📚 Tutorials": {
     "message": "📚 自学教程",
-    "description": "The label for category '📚 自学教程' in sidebar 'tutorialSidebar'"
+    "description": "The label for category '📚 Tutorials' in sidebar 'tutorialSidebar'"
   },
-  "sidebar.tutorialSidebar.category.★ 入门": {
+  "sidebar.tutorialSidebar.category.★ Getting Started": {
     "message": "★ 入门",
-    "description": "The label for category '★ 入门' in sidebar 'tutorialSidebar'"
+    "description": "The label for category '★ Getting Started' in sidebar 'tutorialSidebar'"
   },
-  "sidebar.tutorialSidebar.category.用 AI 总结 Gmail": {
+  "sidebar.tutorialSidebar.category.Summarise Gmail with AI": {
     "message": "用 AI 总结 Gmail",
-    "description": "The label for category '用 AI 总结 Gmail' in sidebar 'tutorialSidebar'"
+    "description": "The label for category 'Summarise Gmail with AI' in sidebar 'tutorialSidebar'"
   },
-  "sidebar.tutorialSidebar.category.用语音控制你的笔记": {
+  "sidebar.tutorialSidebar.category.Voice-Control Your Notes": {
     "message": "用语音控制你的笔记",
-    "description": "The label for category '用语音控制你的笔记' in sidebar 'tutorialSidebar'"
+    "description": "The label for category 'Voice-Control Your Notes' in sidebar 'tutorialSidebar'"
   },
-  "sidebar.tutorialSidebar.category.★★ 简单": {
+  "sidebar.tutorialSidebar.category.★★ Easy": {
     "message": "★★ 简单",
-    "description": "The label for category '★★ 简单' in sidebar 'tutorialSidebar'"
+    "description": "The label for category '★★ Easy' in sidebar 'tutorialSidebar'"
   },
-  "sidebar.tutorialSidebar.category.搭建你的个人网站": {
+  "sidebar.tutorialSidebar.category.Build Your Personal Website": {
     "message": "搭建你的个人网站",
-    "description": "The label for category '搭建你的个人网站' in sidebar 'tutorialSidebar'"
+    "description": "The label for category 'Build Your Personal Website' in sidebar 'tutorialSidebar'"
   },
-  "sidebar.tutorialSidebar.category.奥克兰通勤智能助手": {
+  "sidebar.tutorialSidebar.category.Smart Commute: Auckland Transport": {
     "message": "奥克兰通勤智能助手",
-    "description": "The label for category '奥克兰通勤智能助手' in sidebar 'tutorialSidebar'"
+    "description": "The label for category 'Smart Commute: Auckland Transport' in sidebar 'tutorialSidebar'"
   },
-  "sidebar.tutorialSidebar.category.和 AI 对话整理笔记": {
+  "sidebar.tutorialSidebar.category.Organise Notes by Talking to AI": {
     "message": "和 AI 对话整理笔记",
-    "description": "The label for category '和 AI 对话整理笔记' in sidebar 'tutorialSidebar'"
+    "description": "The label for category 'Organise Notes by Talking to AI' in sidebar 'tutorialSidebar'"
   },
-  "sidebar.tutorialSidebar.category.AI 会议准备助手": {
+  "sidebar.tutorialSidebar.category.Meeting Prep with AI": {
     "message": "AI 会议准备助手",
-    "description": "The label for category 'AI 会议准备助手' in sidebar 'tutorialSidebar'"
+    "description": "The label for category 'Meeting Prep with AI' in sidebar 'tutorialSidebar'"
   },
-  "sidebar.tutorialSidebar.category.AI 每日晨报": {
+  "sidebar.tutorialSidebar.category.AI Morning Briefing": {
     "message": "AI 每日晨报",
-    "description": "The label for category 'AI 每日晨报' in sidebar 'tutorialSidebar'"
+    "description": "The label for category 'AI Morning Briefing' in sidebar 'tutorialSidebar'"
   },
-  "sidebar.tutorialSidebar.category.★★★ 中级": {
+  "sidebar.tutorialSidebar.category.★★★ Intermediate": {
     "message": "★★★ 中级",
-    "description": "The label for category '★★★ 中级' in sidebar 'tutorialSidebar'"
+    "description": "The label for category '★★★ Intermediate' in sidebar 'tutorialSidebar'"
   },
-  "sidebar.tutorialSidebar.category.用 AI 制作专业 PDF": {
+  "sidebar.tutorialSidebar.category.Create Professional PDFs": {
     "message": "用 AI 制作专业 PDF",
-    "description": "The label for category '用 AI 制作专业 PDF' in sidebar 'tutorialSidebar'"
+    "description": "The label for category 'Create Professional PDFs' in sidebar 'tutorialSidebar'"
   },
-  "sidebar.tutorialSidebar.category.邮件转行动：跨应用自动化": {
+  "sidebar.tutorialSidebar.category.Email to Action: Cross-App Workflows": {
     "message": "邮件转行动：跨应用自动化",
-    "description": "The label for category '邮件转行动：跨应用自动化' in sidebar 'tutorialSidebar'"
+    "description": "The label for category 'Email to Action: Cross-App Workflows' in sidebar 'tutorialSidebar'"
   },
-  "sidebar.tutorialSidebar.category.★★★★ 挑战": {
+  "sidebar.tutorialSidebar.category.★★★★ Challenging": {
     "message": "★★★★ 挑战",
-    "description": "The label for category '★★★★ 挑战' in sidebar 'tutorialSidebar'"
+    "description": "The label for category '★★★★ Challenging' in sidebar 'tutorialSidebar'"
   },
-  "sidebar.tutorialSidebar.category.总结 Slack 频道": {
+  "sidebar.tutorialSidebar.category.Summarise Slack Channels": {
     "message": "总结 Slack 频道",
-    "description": "The label for category '总结 Slack 频道' in sidebar 'tutorialSidebar'"
+    "description": "The label for category 'Summarise Slack Channels' in sidebar 'tutorialSidebar'"
   },
-  "sidebar.tutorialSidebar.category.AI 宣传视频制作": {
+  "sidebar.tutorialSidebar.category.Create AI Promo Videos": {
     "message": "AI 宣传视频制作",
-    "description": "The label for category 'AI 宣传视频制作' in sidebar 'tutorialSidebar'"
+    "description": "The label for category 'Create AI Promo Videos' in sidebar 'tutorialSidebar'"
   },
-  "sidebar.tutorialSidebar.category.★★★★★ 进阶": {
+  "sidebar.tutorialSidebar.category.★★★★★ Advanced": {
     "message": "★★★★★ 进阶",
-    "description": "The label for category '★★★★★ 进阶' in sidebar 'tutorialSidebar'"
+    "description": "The label for category '★★★★★ Advanced' in sidebar 'tutorialSidebar'"
   },
-  "sidebar.tutorialSidebar.category.Vibe Coding：Daily Report Bot": {
+  "sidebar.tutorialSidebar.category.Vibe Coding: Daily Report Bot": {
     "message": "Vibe Coding：Daily Report Bot",
-    "description": "The label for category 'Vibe Coding：Daily Report Bot' in sidebar 'tutorialSidebar'"
+    "description": "The label for category 'Vibe Coding: Daily Report Bot' in sidebar 'tutorialSidebar'"
   },
-  "sidebar.tutorialSidebar.category.💼 求职资源": {
+  "sidebar.tutorialSidebar.category.💼 Resources": {
     "message": "💼 求职资源",
-    "description": "The label for category '💼 求职资源' in sidebar 'tutorialSidebar'"
+    "description": "The label for category '💼 Resources' in sidebar 'tutorialSidebar'"
   },
-  "sidebar.tutorialSidebar.category.求职": {
+  "sidebar.tutorialSidebar.category.Job Search": {
     "message": "求职",
-    "description": "The label for category '求职' in sidebar 'tutorialSidebar'"
+    "description": "The label for category 'Job Search' in sidebar 'tutorialSidebar'"
   },
-  "sidebar.tutorialSidebar.category.社区与权益": {
+  "sidebar.tutorialSidebar.category.Community & Rights": {
     "message": "社区与权益",
-    "description": "The label for category '社区与权益' in sidebar 'tutorialSidebar'"
+    "description": "The label for category 'Community & Rights' in sidebar 'tutorialSidebar'"
   }
 }

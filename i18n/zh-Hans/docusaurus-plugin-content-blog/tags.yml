@@ -1,0 +1,104 @@
+design:
+  label: 设计
+  permalink: /design
+  description: 用户界面和用户体验设计相关的文章
+
+UI-UX:
+  label: UI/UX
+  permalink: /ui-ux
+  description: 用户界面和用户体验设计的最佳实践和指南
+
+documentation:
+  label: 文档
+  permalink: /documentation
+  description: 技术文档、设计规范和指南文档
+
+tutorial:
+  label: 教程
+  permalink: /tutorial
+  description: 各类实用教程和指南
+
+tencent-meeting:
+  label: 腾讯会议
+  permalink: /tencent-meeting
+  description: 关于腾讯会议的使用技巧和教程
+
+video-download:
+  label: 视频下载
+  permalink: /video-download
+  description: 视频下载相关的教程和工具使用指南
+
+study-abroad:
+  label: 留学
+  permalink: /study-abroad
+  description: 留学相关的教程和指南
+
+career-planning:
+  label: 职业规划
+  permalink: /career-planning
+  description: 职业规划相关的教程和指南
+
+overseas-development:
+  label: 海外发展
+  permalink: /overseas-development
+  description: 海外发展相关的教程和指南
+
+video-resources:
+  label: 视频资源
+  permalink: /video-resources
+  description: 各类教学和演讲视频资源
+
+Forward with Her-activity:
+  label: 她行活动
+  permalink: /Forward with Her-activity
+  description: 她行活动相关内容和分享
+
+mentor-qa:
+  label: 导师答疑
+  permalink: /mentor-qa
+  description: 导师答疑会议内容和总结
+
+identity-recognition:
+  label: 身份认知
+  permalink: /identity-recognition
+  description: 关于身份认同和社会认知的讨论
+
+social-identity-theory:
+  label: 社会认同理论
+  permalink: /social-identity-theory
+  description: 社会认同理论相关的学术内容
+
+intersectionality:
+  label: 交叉性
+  permalink: /intersectionality
+  description: 交叉性理论和多重身份研究
+
+gemini-cli:
+  label: Gemini CLI
+  permalink: /gemini-cli
+  description: Google Gemini CLI 工具使用教程和技巧
+
+ai-programming:
+  label: AI编程
+  permalink: /ai-programming
+  description: AI辅助编程相关的教程和实践经验
+
+ai-tools:
+  label: AI工具
+  permalink: /ai-tools
+  description: 各类AI开发工具的使用和比较
+
+beginners-guide:
+  label: 入门指南
+  permalink: /beginners-guide
+  description: 面向初学者的入门教程和指南
+
+cursor-ide:
+  label: Cursor IDE
+  permalink: /cursor-ide
+  description: Cursor IDE 使用教程和技巧
+
+tool-comparison:
+  label: 工具对比
+  permalink: /tool-comparison
+  description: 开发工具的功能对比和选型建议

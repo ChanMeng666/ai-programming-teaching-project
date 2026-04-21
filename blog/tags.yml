@@ -1,104 +1,104 @@
 design:
-  label: 设计
+  label: Design
   permalink: /design
-  description: 用户界面和用户体验设计相关的文章
+  description: Articles about user interface and user experience design
 
 UI-UX:
   label: UI/UX
   permalink: /ui-ux
-  description: 用户界面和用户体验设计的最佳实践和指南
+  description: Best practices and guides for UI and UX design
 
 documentation:
-  label: 文档
+  label: Documentation
   permalink: /documentation
-  description: 技术文档、设计规范和指南文档
+  description: Technical documentation, design specs and guides
 
 tutorial:
-  label: 教程
+  label: Tutorial
   permalink: /tutorial
-  description: 各类实用教程和指南
+  description: Practical tutorials and how-to guides
 
 tencent-meeting:
-  label: 腾讯会议
+  label: Tencent Meeting
   permalink: /tencent-meeting
-  description: 关于腾讯会议的使用技巧和教程
+  description: Tips and tutorials for using Tencent Meeting
 
 video-download:
-  label: 视频下载
+  label: Video Download
   permalink: /video-download
-  description: 视频下载相关的教程和工具使用指南
+  description: Tutorials and tools for downloading videos
 
 study-abroad:
-  label: 留学
+  label: Study Abroad
   permalink: /study-abroad
-  description: 留学相关的教程和指南
+  description: Guides and resources for studying abroad
 
 career-planning:
-  label: 职业规划
+  label: Career Planning
   permalink: /career-planning
-  description: 职业规划相关的教程和指南
+  description: Career planning guides and resources
 
 overseas-development:
-  label: 海外发展
+  label: Overseas Development
   permalink: /overseas-development
-  description: 海外发展相关的教程和指南
+  description: Guides for overseas career development
 
 video-resources:
-  label: 视频资源
+  label: Video Resources
   permalink: /video-resources
-  description: 各类教学和演讲视频资源
+  description: Educational and lecture video resources
 
 Forward with Her-activity:
-  label: 她行活动
+  label: Forward with Her Activity
   permalink: /Forward with Her-activity
-  description: 她行活动相关内容和分享
+  description: Forward with Her activity content and sharing
 
 mentor-qa:
-  label: 导师答疑
+  label: Mentor Q&A
   permalink: /mentor-qa
-  description: 导师答疑会议内容和总结
+  description: Mentor Q&A session summaries
 
 identity-recognition:
-  label: 身份认知
+  label: Identity Recognition
   permalink: /identity-recognition
-  description: 关于身份认同和社会认知的讨论
+  description: Discussions on identity and social cognition
 
 social-identity-theory:
-  label: 社会认同理论
+  label: Social Identity Theory
   permalink: /social-identity-theory
-  description: 社会认同理论相关的学术内容
+  description: Academic content on social identity theory
 
 intersectionality:
-  label: 交叉性
+  label: Intersectionality
   permalink: /intersectionality
-  description: 交叉性理论和多重身份研究
+  description: Intersectionality theory and multiple identity research
 
 gemini-cli:
   label: Gemini CLI
   permalink: /gemini-cli
-  description: Google Gemini CLI 工具使用教程和技巧
+  description: Google Gemini CLI tutorials and tips
 
 ai-programming:
-  label: AI编程
+  label: AI Programming
   permalink: /ai-programming
-  description: AI辅助编程相关的教程和实践经验
+  description: AI-assisted programming tutorials and practices
 
 ai-tools:
-  label: AI工具
+  label: AI Tools
   permalink: /ai-tools
-  description: 各类AI开发工具的使用和比较
+  description: AI development tool usage and comparisons
 
 beginners-guide:
-  label: 入门指南
+  label: Beginners Guide
   permalink: /beginners-guide
-  description: 面向初学者的入门教程和指南
+  description: Beginner-friendly tutorials and getting started guides
 
 cursor-ide:
   label: Cursor IDE
   permalink: /cursor-ide
-  description: Cursor IDE 使用教程和技巧
+  description: Cursor IDE tutorials and tips
 
 tool-comparison:
-  label: 工具对比
+  label: Tool Comparison
   permalink: /tool-comparison
-  description: 开发工具的功能对比和选型建议
+  description: Development tool feature comparisons and selection guides

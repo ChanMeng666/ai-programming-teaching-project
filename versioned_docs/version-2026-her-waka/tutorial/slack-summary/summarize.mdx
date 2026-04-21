@@ -1,37 +1,37 @@
 ---
-title: "摘要你的 Slack 频道"
-description: "让 AI 读取你的 Slack 消息并生成清晰、实用的摘要 —— 通过说话或打字。尝试不同的摘要风格并提问跟进问题。"
+title: "Summarise your Slack channels"
+description: "Ask AI to read your Slack messages and create a clear, useful summary — by speaking or typing. Try different summary styles and ask follow-up questions."
 ---
 
-你的 AI 工具已连接到 Slack。现在让它发挥作用 —— 让它读取一个频道，给你一份真正有用的摘要。
+Your AI tool is connected to Slack. Now let's put it to work — ask it to read a channel and give you a summary you can actually use.
 
-## 获取你的第一份摘要
+## Get your first summary
 
 <Tabs>
-  <Tab title="推荐：CLI + 语音">
-    打开终端并启动 Gemini CLI：
+  <Tab title="Recommended: CLI + Voice">
+    Open your terminal and start Gemini CLI:
 
     ```bash
     gemini
     ```
 
-    现在说（通过 Wispr Flow）或粘贴此提示词。将 `#channel-name` 替换为你工作区中真实频道的名称。
+    Now say (with Wispr Flow) or paste this prompt. Replace `#channel-name` with the name of a real channel in your workspace.
 
-    ```text title="说出或复制此提示词 —— 替换 #channel-name"
+    ```text title="Say this or copy this prompt — replace #channel-name"
     Read the recent messages in the Slack channel #channel-name and give me a summary. Include the main topics discussed, any decisions that were made, action items, and unanswered questions. Keep it to 10 bullet points.
     ```
 
-    Gemini CLI 将使用 Slack MCP 工具获取消息并返回结构化摘要。
+    Gemini CLI will use the Slack MCP tools to fetch the messages and return a structured summary.
 
     <Tip>
-    **Gemini 要求授权？** 如果 Gemini CLI 要求批准工具调用，输入 `y` 并按 **Enter**。这是正常的 —— 它在访问 Slack 之前请求你的许可。
+    **Gemini asks for permission?** If Gemini CLI asks to approve a tool call, type `y` and press **Enter**. This is normal — it is asking your permission before accessing Slack.
     </Tip>
   </Tab>
 
-  <Tab title="备选：Claude Desktop">
-    打开 Claude Desktop 并粘贴此提示词。将 `#channel-name` 替换为你工作区中真实频道的名称。
+  <Tab title="Alternative: Claude Desktop">
+    Open Claude Desktop and paste this prompt. Replace `#channel-name` with the name of a real channel in your workspace.
 
-    ```text title="复制此提示词 —— 替换 #channel-name"
+    ```text title="Copy this prompt — replace #channel-name"
     Please read the recent messages in the Slack channel #channel-name and give me a summary.
 
     Include:
@@ -43,54 +43,54 @@ description: "让 AI 读取你的 Slack 消息并生成清晰、实用的摘要 
     Keep the summary concise — no more than 10 bullet points.
     ```
 
-    几秒钟内，Claude 会读取频道并返回结构化摘要。
+    Within a few seconds, Claude will read the channel and return a structured summary.
 
     <Tip>
-    **第一次使用？** 如果 Claude 询问你指的是哪个工作区或频道，请进一步说明。例如："我的 SheSharp 工作区中的 #general 频道。"
+    **First time?** If Claude asks which workspace or channel you mean, just clarify. For example: "The #general channel in my SheSharp workspace."
     </Tip>
   </Tab>
 </Tabs>
 
-你应该会看到类似这样的摘要：
+You should see a summary that looks something like this:
 
-> **#general 摘要（最近 7 天）：**
-> - 团队讨论了四月份即将举行的工作坊日程
-> - Sarah 分享了新资源指南的链接
-> - 决定将周五的会议改到周四
-> - 待办事项：所有人需在周三前提交反馈
-> - 未解答的问题：谁来主持网络交流环节？
+> **Summary of #general (last 7 days):**
+> - The team discussed the upcoming workshop schedule for April
+> - Sarah shared a link to the new resource guide
+> - A decision was made to move the Friday meeting to Thursday
+> - Action item: Everyone needs to submit their feedback by Wednesday
+> - Open question: Who is leading the networking session?
 
-就这样 —— 你在几秒钟内跟上了整个频道的动态。
+That's it — you just caught up on an entire channel in seconds.
 
-## 尝试不同的摘要风格
+## Try different summary styles
 
-第一份摘要是个好的开始。但根据你的情况，你可能需要不同的格式。试试这些提示词。
+The first summary is a great start. But depending on your situation, you might want a different format. Try these prompts.
 
 <Tabs>
-  <Tab title="推荐：CLI + 语音">
-    **快速回顾：**
+  <Tab title="Recommended: CLI + Voice">
+    **Quick catch-up:**
 
-    ```text title="说出或复制此提示词 —— 替换 #channel-name"
+    ```text title="Say this or copy this prompt — replace #channel-name"
     Summarise #channel-name like a colleague filling me in over coffee. Keep it to 5 sentences.
     ```
 
-    **会议记录：**
+    **Meeting notes:**
 
-    ```text title="说出或复制此提示词 —— 替换 #channel-name"
+    ```text title="Say this or copy this prompt — replace #channel-name"
     Summarise #channel-name as formal meeting notes I could share with my manager. Include dates, decisions, and action items.
     ```
 
-    **仅要点：**
+    **Key highlights only:**
 
-    ```text title="说出或复制此提示词 —— 替换 #channel-name"
+    ```text title="Say this or copy this prompt — replace #channel-name"
     Read #channel-name and extract only the important stuff — announcements, deadlines, decisions. Ignore small talk.
     ```
   </Tab>
 
-  <Tab title="备选：Claude Desktop">
-    **快速回顾：**
+  <Tab title="Alternative: Claude Desktop">
+    **Quick catch-up:**
 
-    ```text title="复制此提示词 —— 替换 #channel-name"
+    ```text title="Copy this prompt — replace #channel-name"
     Summarise the recent messages in #channel-name as a quick catch-up
     for someone who missed the last few days.
 
@@ -98,9 +98,9 @@ description: "让 AI 读取你的 Slack 消息并生成清晰、实用的摘要 
     over coffee. Keep it to 5 sentences maximum.
     ```
 
-    **会议记录：**
+    **Meeting notes:**
 
-    ```text title="复制此提示词 —— 替换 #channel-name"
+    ```text title="Copy this prompt — replace #channel-name"
     Summarise the recent messages in #channel-name as formal meeting notes.
 
     Include:
@@ -112,9 +112,9 @@ description: "让 AI 读取你的 Slack 消息并生成清晰、实用的摘要 
     Format it as a professional document I could share with my manager.
     ```
 
-    **仅要点：**
+    **Key highlights only:**
 
-    ```text title="复制此提示词 —— 替换 #channel-name"
+    ```text title="Copy this prompt — replace #channel-name"
     Read the recent messages in #channel-name and extract only the most
     important items — announcements, deadlines, decisions, or urgent requests.
 
@@ -125,143 +125,143 @@ description: "让 AI 读取你的 Slack 消息并生成清晰、实用的摘要 
 </Tabs>
 
 <Info>
-**这里的关键技能是编写提示词。** 注意每条提示词是如何告诉 AI 你想要的具体格式、包含什么、省略什么的。你的指令越具体，摘要就越有用。
+**The key skill here is prompt writing.** Notice how each prompt tells the AI exactly what format you want, what to include, and what to leave out. The more specific your instructions, the more useful the summary.
 </Info>
 
-## 深入挖掘
+## Go further
 
-熟悉基本摘要后，试试这些进阶提示词。两条路径都适用 —— 以下展示的语音友好版本适用于推荐路径，但也可以粘贴到 Claude Desktop 中。
+Once you are comfortable with basic summaries, try these creative prompts. They work with both paths — the voice-friendly versions below are shown for Path B, but you can paste them into Claude Desktop too.
 
-```text title="说出或复制此提示词 —— 替换频道名称"
+```text title="Say this or copy this prompt — replace channel names"
 Compare what's been happening in #general, #announcements, and #project-updates this week.
 ```
 
-```text title="说出或复制此提示词 —— 替换 #channel-name"
+```text title="Say this or copy this prompt — replace #channel-name"
 Find any unanswered questions in #channel-name.
 ```
 
-```text title="说出或复制此提示词 —— 替换 #channel-name"
+```text title="Say this or copy this prompt — replace #channel-name"
 Who has been most active in #channel-name this week?
 ```
 
-```text title="说出或复制此提示词 —— 替换 #channel-name"
+```text title="Say this or copy this prompt — replace #channel-name"
 Were any links shared in #channel-name? List them all.
 ```
 
 <Tip>
-**这就是自然语言的魔力。** 你不需要记住命令 —— 只需描述你想要什么。如果 AI 不确定你的意思，它会要求你澄清。
+**This is the magic of natural language.** You do not need to memorise commands — just describe what you want. If the AI is not sure what you mean, it will ask you to clarify.
 </Tip>
 
-## 提问跟进问题
+## Ask follow-up questions
 
-AI 记得它刚刚读取的消息。你可以提问跟进问题，而无需重新获取消息。
+The AI remembers the messages it just read. You can ask follow-up questions without fetching the messages again.
 
 <Tabs>
-  <Tab title="推荐：CLI + 语音">
-    ```text title="说出或复制此提示词"
+  <Tab title="Recommended: CLI + Voice">
+    ```text title="Say this or copy this prompt"
     Were there any messages about [topic]?
     ```
 
-    ```text title="说出或复制此提示词"
+    ```text title="Say this or copy this prompt"
     Were there any links shared? List them all.
     ```
 
-    ```text title="说出或复制此提示词"
+    ```text title="Say this or copy this prompt"
     Who was the most active person in the conversation?
     ```
 
-    ```text title="说出或复制此提示词"
+    ```text title="Say this or copy this prompt"
     Summarise only messages from the last 24 hours.
     ```
 
-    ```text title="说出或复制此提示词"
+    ```text title="Say this or copy this prompt"
     What was the overall mood or tone of the conversation?
     ```
   </Tab>
 
-  <Tab title="备选：Claude Desktop">
-    ```text title="搜索某个话题"
+  <Tab title="Alternative: Claude Desktop">
+    ```text title="Search for a topic"
     Were there any messages about [topic]?
     ```
 
-    ```text title="查找分享的链接"
+    ```text title="Find shared links"
     Were there any links shared? List them all with a brief description of each.
     ```
 
-    ```text title="查看谁最活跃"
+    ```text title="Check who's active"
     Who was the most active person in the conversation?
     ```
 
-    ```text title="按时间筛选"
+    ```text title="Filter by time"
     Summarise only messages from the last 24 hours.
     ```
 
-    ```text title="分析语气"
+    ```text title="Analyse sentiment"
     What was the overall mood or tone of the conversation?
     ```
   </Tab>
 </Tabs>
 
 <Tip>
-**这正是 AI 真正闪光的地方。** 不用在数百条消息中寻找一条信息，你可以直接提问。"有人提到预算吗？"比自己读每一条消息快得多。
+**This is where AI really shines.** Instead of scrolling through hundreds of messages looking for one piece of information, you can just ask. "Did anyone mention the budget?" is much faster than reading every message yourself.
 </Tip>
 
-## 保存你的摘要
+## Save your summary
 
-想保留一份摘要副本？方法如下。
+Want to keep a copy of your summary? Here's how.
 
 <Tabs>
-  <Tab title="推荐：CLI + 语音">
-    说出或输入：
+  <Tab title="Recommended: CLI + Voice">
+    Say or type:
 
-    ```text title="说出或复制此提示词"
+    ```text title="Say this or copy this prompt"
     Save that summary to a file called summary.txt in the current folder.
     ```
 
-    摘要现在已保存为你电脑上的一个文本文件。
+    The summary is now saved as a text file on your computer.
   </Tab>
 
-  <Tab title="备选：Claude Desktop">
-    - **复制粘贴：** 选中摘要文字，粘贴到文档、邮件或笔记应用中
-    - **下载：** 点击 Claude 回复顶部的 **复制** 图标，复制整条消息
+  <Tab title="Alternative: Claude Desktop">
+    - **Copy and paste:** Select the summary text and paste it into a document, email, or notes app
+    - **Download:** Click the **copy** icon at the top of Claude's response to copy the entire message
   </Tab>
 </Tabs>
 
-## 刚才发生了什么？
+## What just happened?
 
-回顾你所做的事情：
+Let's recap what you did:
 
-1. **连接**了 AI 工具到你的 Slack 工作区
-2. **获取**了频道中的消息 —— AI 自动处理了这一步
-3. **摘要**了对话，以结构化、实用的格式呈现
-4. **定制**了摘要风格以满足你的需求
-5. **提问了跟进问题**以找到具体信息
+1. **Connected** an AI tool to your Slack workspace
+2. **Fetched** messages from a channel — the AI handled this automatically
+3. **Summarised** the conversation in a structured, useful format
+4. **Customised** the summary style to match your needs
+5. **Asked follow-up questions** to find specific information
 
-核心洞见：AI 非常擅长阅读大量文本并提取重要内容。原本需要你滚动 20 分钟才能完成的任务，AI 只用了约 10 秒。
+The key insight: AI is excellent at reading large amounts of text and extracting what matters. A task that would take you 20 minutes of scrolling took the AI about 10 seconds.
 
-## 故障排除
+## Troubleshooting
 
 <AccordionGroup>
-  <Accordion title="Claude 说无法访问 Slack">
-    前往 **Customize** → **Connectors**，检查 Slack 是否显示为已连接。如果显示错误，删除连接器并重新添加。确保你授权了正确的工作区。
+  <Accordion title="Claude says it cannot access Slack">
+    Go to **Customize** → **Connectors** and check that Slack shows as connected. If it shows an error, remove the connector and add it again. Make sure you authorise the correct workspace.
   </Accordion>
-  <Accordion title="Gemini 说没有 Slack 工具">
-    检查你的 `~/.gemini/settings.json` 文件是否有拼写错误。常见问题：缺少逗号、使用了弯引号而非直引号，或机器人令牌错误。修复后，退出 Gemini CLI（`/quit`）并重新启动。
+  <Accordion title="Gemini says it has no Slack tools">
+    Check your `~/.gemini/settings.json` file for typos. Common issues: missing commas, curly quotes instead of straight quotes, or wrong bot token. After fixing, exit Gemini CLI (`/quit`) and restart it.
   </Accordion>
-  <Accordion title="语音输入有错误">
-    Wispr Flow 有时可能误听技术术语或频道名称。你可以在按 Enter 键之前查看并更正 Gemini CLI 中的文字。如果语音输入错误太多，改为打字或粘贴提示词。
+  <Accordion title="My voice input has errors">
+    Wispr Flow may occasionally mishear technical terms or channel names. You can review and correct the text in Gemini CLI before pressing Enter. If voice input is causing too many errors, switch to typing or pasting prompts instead.
   </Accordion>
-  <Accordion title="摘要太模糊或太笼统">
-    频道可能消息不够多。试试一个活动更频繁的频道。你也可以在提示词中更具体 —— 例如，"只摘要最近 3 天的消息"或"专注于关于即将举行的活动的消息"。
+  <Accordion title="The summary is too vague or generic">
+    The channel might not have enough messages. Try a busier channel with more activity. You can also be more specific in your prompt — for example, "Summarise only messages from the last 3 days" or "Focus on messages about the upcoming event."
   </Accordion>
-  <Accordion title="摘要包含无关消息">
-    在提示词中添加过滤指令。例如："忽略来自机器人的消息"、"只包含与[项目名称]相关的消息"，或"跳过随意的问候和闲聊"。
+  <Accordion title="The summary includes irrelevant messages">
+    Add filtering instructions to your prompt. For example: "Ignore messages from bots", "Only include messages related to [project name]", or "Skip casual greetings and small talk."
   </Accordion>
-  <Accordion title="AI 只摘要了几条消息">
-    默认情况下，AI 可能只获取最近的消息。要求它追溯更早："摘要 #channel-name 最近 7 天的所有消息"或"读取 #channel-name 最近 100 条消息并摘要"。
+  <Accordion title="The AI only summarises a few messages">
+    By default, the AI may only fetch the most recent messages. Ask it to go further back: "Summarise all messages from #channel-name in the last 7 days" or "Read the last 100 messages from #channel-name and summarise them."
   </Accordion>
 </AccordionGroup>
 
 <Note>
-干得漂亮 —— 你构建了一个真正的生产力工作流。前往[继续探索](/docs/2026-her-waka/tutorial/slack-summary/keep-going)，获取接下来可以尝试的创意。
+Nice work — you've built a real productivity workflow. Head to [Keep going](/docs/2026-her-waka/tutorial/slack-summary/keep-going) for ideas on what to try next.
 </Note>

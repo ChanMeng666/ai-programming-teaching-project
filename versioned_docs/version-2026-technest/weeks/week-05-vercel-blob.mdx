@@ -1,197 +1,197 @@
 ---
-title: "第 5 周：用 Vercel Blob 做图片上传"
-description: 把 Vercel Blob 接进留言簿，让访客可以附图。直传 CDN + 签名 token + 内容类型过滤 + 浏览器端压缩。
-sidebar_label: "第 5 周：用 Vercel Blob 做图片上传"
+title: "Week 5: Image Uploads with Vercel Blob"
+description: Wire Vercel Blob into the guestbook so visitors can attach images. Direct-to-CDN uploads with signed tokens, content-type filtering, client-side compression.
+sidebar_label: "Week 5: Image Uploads with Vercel Blob"
 ---
 
 <AxisBadge axes={["FUN", "LIFE"]} />
 
-# 用 Vercel Blob 做图片上传
+# Image Uploads with Vercel Blob
 
-## 学习目标
+## Learning Objectives
 
-到本节课结束，学员应当能够：
+By the end of this session, students should be able to:
 
-- **通过提示词开一个 Vercel Blob 存储**，让 AI 把它端到端接进现有的 Next.js 应用，包含 server-only 的上传 token。
-- **用大白话描述一个上传 UX** —— 拖放、预览、大小上限、内容类型过滤 —— 然后拿到一个能跑的实现。
-- **把"二进制往返验证"当作一项工程必修技能**（选文件 → 上传 → URL 落 Neon → 从 Vercel Blob CDN 渲染）。
+- **Provision a Vercel Blob store by prompt** and have the AI wire it into an existing Next.js app end-to-end, including server-only upload tokens.
+- **Describe a file-upload UX in English** — drag-and-drop, preview, size cap, content-type filter — and get a working implementation back.
+- **Verify a binary round-trip** (pick a file → upload → persist URL in Neon → render from Vercel Blob CDN) as a first-class engineering skill.
 
-## 核心主题
+## Core Topics
 
-- Blob 存储是什么（讲到新手够用就行）：URL 指向文件，不指向 HTML。
-- 为什么浏览器永远 *不* 应该直接把文件传给你的服务器（提示：内存成本 + 攻击面）—— 签名上传 token 怎么解决这两个问题。
-- 提前一周的心智模型：第 7 周你的留言条目会触发 Slack 通知。今天把 schema 弄干净，那时就不痛了。
+- What blob storage is, at the level a beginner needs: URLs that point to files, not to HTML.
+- Why you never let the browser upload directly to your server (hint: memory cost + attack surface) — and why signed upload tokens solve both.
+- The one-week-ahead mental model: by Week 7 your guestbook entries will trigger Slack notifications. Keeping the schema clean today pays off then.
 
-## 工具 / 技术栈
+## Tools / Stack
 
-| 工具 | 本周角色 |
+| Tool | Role this week |
 |---|---|
-| **Vercel Blob** | 文件存储；CDN 背书的 URL；免费额度很大方。 |
-| **`@vercel/blob` SDK** | server action 用它来下发上传 token。 |
-| **Drizzle ORM** | 给现有的 `guestbook_messages` 加一列 `image_url`。 |
-| **Cursor** | 写所有东西；你只描述 + 验证。 |
+| **Vercel Blob** | File storage; CDN-backed URLs; free tier is generous. |
+| **`@vercel/blob` SDK** | What your server action uses to issue upload tokens. |
+| **Drizzle ORM** | Adds a new `image_url` column to existing `guestbook_messages`. |
+| **Cursor** | Writes everything; you describe + verify. |
 
 <SiteEvolution thisWeek={5} />
 
-## 课堂计划
+## Session Plan
 
-| 时间 | 活动 |
+| Time | Activity |
 |---|---|
-| 0 – 15 分钟 | **回顾与 Check-in。** 这周谁有朋友 / 同学注册并在留言簿上发了消息？每人 30 秒：分享一条最喜欢的。 |
-| 15 – 40 分钟 | **概念讲解。** 服务器下发的上传 token。为什么浏览器直接和 Vercel Blob 对话（不经过你服务器）。内容类型过滤作为一层安全防护。"DB 里存 URL"为什么完胜"DB 里存 blob"。 |
-| 40 – 75 分钟 | **现场演示。** 讲师扩展自己的留言簿，让它能接收一张表情包。眼看 5 秒之内，一张 10 MB 的图变成 40 KB 的缩略图 + 800 px 的全图上传。 |
-| 75 – 105 分钟 | **动手 Lab。** 学员扩展自己的留言簿。"发表情包"是整学期到目前为止最好玩的一节——会笑场。 |
-| 105 – 120 分钟 | **Q&A + 收尾。** 谁的上传莫名失败的，当场调一下——通常是 content-type 不对。 |
+| 0 – 15 min | **Recap & Check-in.** Who had a friend / classmate sign up and post a guestbook message this week? 30 seconds each: share a favourite. |
+| 15 – 40 min | **Concept Teaching.** Server-generated upload tokens. Why the browser talks directly to Vercel Blob (not via your server). Content-type filtering as a security layer. How a URL-in-the-DB beats a blob-in-the-DB. |
+| 40 – 75 min | **Live Demo.** Instructor extends her guestbook to accept a meme. Watch a 10 MB image become a 40 KB thumbnail + 800 px full-size upload in under 5 seconds. |
+| 75 – 105 min | **Hands-On Lab.** Students extend their own guestbooks. The "post a meme" moment is the most fun class of the term so far — expect a lot of laughter. |
+| 105 – 120 min | **Q&A + Wrap.** Anyone whose upload silently fails gets debugged live — usually a content-type mismatch. |
 
-## 动手 Lab
+## Hands-On Lab
 
-**任务。** 下课时，登录的访客可以在留言里附一张图。图片在文字上方 inline 显示，点开看全图，你的 Vercel Blob 控制台能看到每一次上传。
+**Task.** By the end of class a signed-in visitor can attach an image to their guestbook message. Photos show up inline above the text, clicking opens full size, and your Vercel Blob dashboard shows each upload.
 
-### 阶段 1 —— 开 Blob 存储 + 扩展 schema
+### Phase 1 — Provision Blob store + extend schema
 
 <PromptStep n={1} audience="Cursor">
-请通过 Vercel CLI 给我 `my-portfolio` 项目启用 **Vercel Blob**。存储建好以后：
+Please enable **Vercel Blob** on my `my-portfolio` project via the Vercel CLI. When the store is created:
 
-1. 把生成的 `BLOB_READ_WRITE_TOKEN` 通过 CLI 加到我 `.env.local` 和 Vercel（production + preview）。
-2. 在我的 Next.js 项目里安装 `@vercel/blob`。
-3. 给现有的 `guestbook_messages` 表加一个新列 `image_url`（text，可空）。生成 Drizzle 迁移，给我看一下，然后 push 到 Neon。
-4. 确认新列在表上、token 在三个环境里都设了。
+1. Add the resulting `BLOB_READ_WRITE_TOKEN` to my `.env.local` and to Vercel (production + preview) via the CLI.
+2. Install `@vercel/blob` in my Next.js project.
+3. Add a new column `image_url` (text, nullable) to my existing `guestbook_messages` table. Generate the Drizzle migration, show it to me, then push it to Neon.
+4. Confirm the new column is on the table and the token is set in all three environments.
 </PromptStep>
 
 <VerifyStep n={2}>
 
-- `.env.local` 里有 `BLOB_READ_WRITE_TOKEN=...`。
-- `vercel env ls` 显示 token 在 production 和 preview 都设了。
-- Drizzle 迁移 SQL 里包含 `ADD COLUMN image_url`。
-- Cursor 跑一条 `SELECT column_name FROM information_schema.columns WHERE table_name = 'guestbook_messages'`（或等价查询）能列出 `image_url`。
+- `.env.local` contains `BLOB_READ_WRITE_TOKEN=...`.
+- `vercel env ls` shows the token for both production and preview.
+- Drizzle migration SQL includes `ADD COLUMN image_url`.
+- A Cursor-run `SELECT column_name FROM information_schema.columns WHERE table_name = 'guestbook_messages'` (or equivalent) lists `image_url`.
 
 </VerifyStep>
 
-### 阶段 2 —— 上传的 server action
+### Phase 2 — Upload server action
 
 <PromptStep n={3} audience="Cursor">
-在 `/api/upload` 加一个 Next.js route handler，用 `@vercel/blob` 的 `handleUpload` 下发 **client upload tokens**。约束：
+Add a Next.js route handler at `/api/upload` that uses `@vercel/blob`'s `handleUpload` to issue **client upload tokens**. Constraints:
 
-- 只允许已登录用户取 token。没 session 一律返回 401。
-- 只接受 `image/png`、`image/jpeg`、`image/webp`、`image/gif` 这几种 content-type。
-- 文件大小最大 4 MB。
-- 生成的文件名前缀带用户 id，方便我以后按用户清理。
+- Only signed-in users can request a token. Reject with 401 if no session.
+- Only accept content types `image/png`, `image/jpeg`, `image/webp`, `image/gif`.
+- Maximum file size: 4 MB.
+- Generated filenames should be prefixed with the user's ID so I can clean up per user later.
 
-不接受浏览器直接把图传给 Next.js 服务器——浏览器拿着你下发的 token，直传 Vercel Blob。
+Do not accept uploads from the browser to the Next.js server directly — the browser uploads straight to Vercel Blob using the token your route issues.
 </PromptStep>
 
 <VerifyStep n={4}>
 
-- Cursor 在聊天里讲清楚两步流程：浏览器问服务器要 token、浏览器上传到 Blob、浏览器把拿到的 URL 再交给第二个 server action。
-- Cursor 用 `curl` 在没 session 的情况下打 `/api/upload`，返回 401。
+- Cursor explains (in chat) the two-step flow: browser asks server for token, browser uploads to Blob, browser sends the resulting URL back to a second server action.
+- `curl` (run by Cursor) against `/api/upload` without a session returns 401.
 
 </VerifyStep>
 
-### 阶段 3 —— 扩展留言表单
+### Phase 3 — Extend the guestbook form
 
 <PromptStep n={5} audience="Cursor">
-扩展第 4 周做的留言簿表单，让它支持可选的图片：
+Extend the guestbook form I built in Week 4 to support an optional image:
 
-- 在 **Post** 按钮旁边加一个小回形针 / 图片图标按钮。
-- 点击打开文件选择器。选完立即显示一张 **预览缩略图**（客户端，上传之前）。用户可以移除并换一张再发。
-- 点 **Post** 时，如果挂了图：先去 `/api/upload` 拿 token，直传到 Vercel Blob，拿到返回的 public URL，然后调消息 server action 把 `body` 和 `imageUrl` 一起提交。
-- 上传中禁用 Post 按钮，在缩略图旁边显示一个小 spinner。
-- 上传失败时，textarea 里的文字保留住（别让用户白写），并显示 toast：**"Image upload failed — try again or post without an image."**
+- Add a small paperclip / image-icon button next to the **Post** button.
+- Clicking opens the file picker. After pick, show a **preview thumbnail** immediately (client-side, before upload). The user can remove the image and pick a different one before posting.
+- On **Post**, if an image is attached: first request a token from `/api/upload`, upload directly to Vercel Blob, get the returned public URL, then submit the message server action with both `body` and `imageUrl`.
+- During upload, disable the Post button and show a small spinner next to the thumbnail.
+- If the upload fails, keep the message text in the textarea (don't lose it) and show an error toast: **"Image upload failed — try again or post without an image."**
 
-server action 里把 `imageUrl` 写到新列。消息列表里把图渲在文字上方，最大高度 240 px，圆角对齐站点主题，加一层淡阴影。点击在 lightbox 里全屏打开，按 Esc 关闭。
+In the server action, persist `imageUrl` into the new column. In the messages list, render the image above the body text with a max height of 240 px, rounded corners matching the site's theme, and a subtle shadow. Clicking opens it full size in a lightbox overlay with Escape to close.
 </PromptStep>
 
 <VerifyStep n={6}>
 
-- localhost：附一张 PNG，看到缩略图，发出去——它带着图出现在列表里。
-- 刷新——还在。
-- 在另一个浏览器（无痕）里看，不登录也能看到这张图（URL 是公开的）。
-- 检查 Vercel Blob 控制台 —— 文件就在那里，前缀是你的 user id。
+- Localhost: attach a PNG, see the thumbnail, post — it appears in the list with the image.
+- Refresh — still there.
+- In another browser (incognito), you can see the image without signing in (the URL is public).
+- Check your Vercel Blob dashboard — the file is there, prefixed with your user ID.
 
 </VerifyStep>
 
-### 阶段 4 —— 边缘情况
+### Phase 4 — Edge cases
 
 <PromptStep n={7} audience="Cursor">
-把上传再加固一些。加三件事：
+Let's harden the upload a little. Add three things:
 
-1. server 端检查到达 token 这一步的文件 *实际* 是允许的 content-type（看 magic bytes，不要只看 `Content-Type` 头）。
-2. 客户端守卫：如果选的文件超过 4 MB，在浏览器里压缩（用 `browser-image-compression` 之类）再上传。提示一个 toast：**"Your 8 MB photo was compressed to 1.2 MB. Tap to post."**
-3. 在 **我自己** 的每条消息上加一个小小的 **删除** 按钮（×）。点击弹确认，然后删除该行 + 删除 blob。别人的消息上不显示删除按钮。
+1. Server-side check that the file reaching the token step is actually one of the allowed content types (inspect the magic bytes, not just the `Content-Type` header).
+2. Client-side guard: if the picked file is over 4 MB, compress it in the browser (using `browser-image-compression` or similar) before upload. Show a toast: **"Your 8 MB photo was compressed to 1.2 MB. Tap to post."**
+3. A tiny **delete** button (×) on each of my **own** messages. Clicking prompts confirm, then removes the row and the blob. Other people's messages don't get a delete button.
 </PromptStep>
 
 <VerifyStep n={8}>
 
-- 试着上传一张 20 MB 的照片——客户端压完，toast 出现，发送成功。
-- 把一个 `.exe` 改名为 `.png` 上传——server 拒掉。
-- 删掉自己一条消息——它消失；查 Blob 控制台确认文件也没了。
-- 在别人的消息上看不到删除按钮。
+- Try to upload a 20 MB photo — client compresses it, toast appears, post succeeds.
+- Rename a `.exe` to `.png` and try to upload — server rejects it.
+- Delete one of your own messages — it disappears; check the Blob dashboard to confirm the file is gone too.
+- You can't see a delete button on someone else's message.
 
 </VerifyStep>
 
-### 阶段 5 —— 上线 & 庆祝
+### Phase 5 — Ship & party
 
 <PromptStep n={9} audience="Cursor">
-按合理的颗粒 commit，push 到 GitHub，让 Vercel 完成部署。上线后，在生产 URL 里登录，发一条带俏皮文案的表情包，确认整套流程在生产端都正常。
+Commit all changes in reasonable chunks, push to GitHub, and let the Vercel deploy complete. When it's live, sign in on the production URL, post a meme with a clever caption, and confirm every part of the flow works in production.
 </PromptStep>
 
 <VerifyStep n={10}>
 
-- 生产留言簿现在支持图片上传。
-- 你的 Vercel Blob 控制台显示生产环境的上传。
-- Neon 控制台显示有行的 `image_url` 列已被填上。
+- Production guestbook now supports image uploads.
+- Your Vercel Blob dashboard shows production uploads.
+- Neon dashboard shows rows with populated `image_url` columns.
 
 </VerifyStep>
 
 <RecoverStep n={11}>
-生产环境的上传报 `403 Forbidden`，但本地是好的。请检查 `BLOB_READ_WRITE_TOKEN` 是不是真在 Vercel production 环境里设了（不仅仅是 preview），如果缺就补上。重新部署，确认。
+The production upload is returning `403 Forbidden` but works locally. Please check whether `BLOB_READ_WRITE_TOKEN` is actually set in Vercel's production environment (not just preview), and fix it if it's missing. Redeploy and confirm.
 </RecoverStep>
 
-<Tip title="上传时把浏览器 console 开着">
-整个上传流程中，打开 DevTools → Network。看两个不同的请求：先是 `POST /api/upload`（很小，只是 metadata），然后是 `POST https://*.blob.vercel-storage.com/...`（真正的文件字节）。理解这种"两步"形状很关键——你接下来的整个职业生涯里，每一个现代上传流程都是这个形状。
+<Tip title="Keep your browser console open during upload">
+For the whole upload flow, open DevTools → Network. Watch the two distinct requests: first `POST /api/upload` (tiny, just metadata) then `POST https://*.blob.vercel-storage.com/...` (the actual file bytes). Understanding this shape matters — you'll see it in every modern upload flow for the rest of your career.
 </Tip>
 
-## 本周作业
+## Weekly Assignment
 
-**做 / 交付。**
+**Build / Implement.**
 
-- 你线上站点的留言簿现在支持图片上传。
-- 至少 5 张真实图片（来自你朋友 / 同学）已上传。
-- 删除只对自己的消息生效。
+- Guestbook on your live site now accepts image uploads.
+- At least five real images uploaded (from your friends / classmates).
+- Delete works on your own messages only.
 
-**要求。**
+**Requirements.**
 
-- 直传 Blob（图片字节不经过你的 Next.js 服务器）。
-- 强制 content-type + 大小上限。
-- 一张 Vercel Blob 控制台截图，显示带前缀的文件名。
-- 一段 30 秒的上传流程屏幕录屏。
+- Direct-to-Blob upload (no image bytes traversing your Next.js server).
+- Content-type + size limits enforced.
+- A screenshot of your Vercel Blob dashboard showing prefixed filenames.
+- A 30-second screen recording of the upload flow.
 
-**提交。** 第 6 周开课前，把线上 URL + 截图 + 录屏发到 Slack。
+**Submission.** Live URL + screenshot + recording in Slack before Week 6.
 
-## 资源
+## Resources
 
-| 文档 | 视频 | 仓库 |
+| Docs | Videos | Repos |
 |---|---|---|
-| Vercel Blob —— 客户端上传 | 讲师 demo："直传 8 分钟搞定" | `vercel/examples/blob` —— 参考模式 |
-| `@vercel/blob` —— `handleUpload` 与 `put` | | |
-| `browser-image-compression` —— npm | | |
+| Vercel Blob — client uploads | Instructor demo: "Direct uploads in 8 minutes" | `vercel/examples/blob` — reference patterns |
+| `@vercel/blob` — `handleUpload` and `put` | | |
+| `browser-image-compression` — npm | | |
 
-## 真实世界应用
+## Real-World Application
 
-文件上传出现在你将来要做的每一个产品里。早早把"直传 bucket"模式刻进肌肉记忆——而不是那种朴素的"字节走我服务器"模式——能帮你避开 90% 的生产事故。Figma、Notion、Linear 这些公司的上传，正是这么搭的。
+File uploads are in every product you'll build. Getting the *direct-to-bucket* pattern into your fingers this early — instead of the naive "ship bytes through my server" pattern — saves you from 90% of outages you'd otherwise cause in production. This is exactly how companies like Figma, Notion, and Linear architect their uploads.
 
 <Note title="Career">
-在简历上加这一行：**"Implemented direct-to-CDN uploads with signed tokens, enforced server-side MIME validation, and client-side compression — handling 20 MB inputs at 1.2 MB payloads."** 这一句在面试里就是金句。
+Add this line to your resume: **"Implemented direct-to-CDN uploads with signed tokens, enforced server-side MIME validation, and client-side compression — handling 20 MB inputs at 1.2 MB payloads."** This sentence is interview gold.
 </Note>
 
-## 踩坑提醒 & 小贴士
+## Challenges & Tips
 
-- *"上传成功，但图在手机上倒了 90°。"* iPhone 在图里嵌了 EXIF 朝向。问 Cursor：**"在压缩里要么 strip EXIF，要么尊重朝向。"**
-- *"`fetch` 到 /api/upload 返回 413。"* Next.js body parser 限制。问 Cursor：**"提高 upload 这条 route 的 body size 上限——只这一条，其它路由保持默认。"**
-- *"留言簿上图片加载特别慢。"* 你直接渲染了原图。问：**"用 Next.js Image 组件，配合合适的 sizes 和 placeholder blur。"**
-- *"删除按钮工作了，但 Blob 文件还在。"* 漏了二步删。说：**"先删 Blob 文件，*再* 删 DB 行；如果 Blob 删除失败，不要删行。"**
-- *"Blob 免费额度爆了。"* 测试文件传太多。问 Cursor：**"清掉所有 24 小时前上传、且对应 DB 行已经没了的 Blob 文件。"**
+- *"The upload works, but the image is rotated 90° on mobile."* iPhones embed EXIF orientation. Ask Cursor **"Strip EXIF or respect orientation during compression."**
+- *"`fetch` to /api/upload returns 413."* Next.js body parser limit. Ask Cursor **"Raise the route's body size limit, but only for the upload route — the rest of the site stays at defaults."**
+- *"Images take forever to load on the guestbook."* You're rendering the original size. Ask **"Add Next.js Image component with appropriate sizes + placeholder blur."**
+- *"The delete button works but the Blob file stays."* Two-step delete was missed. Say **"Delete the Blob file *before* removing the row; if the Blob delete fails, don't remove the row."**
+- *"Blob free tier exhausted."* You uploaded too many test files. Ask Cursor **"Clean up all Blob files older than 24 hours whose DB rows are gone."**
 
-<Info title="如果文件静默失败">
-没报错，就是没出现——加临时日志：**"在上传流程的每一步加 console.log，让我看到具体哪一步把文件丢了。"** Bug 修完把日志删了。
+<Info title="If a file disappears silently">
+No errors, just never shows up — add temporary logging: **"Add console.log calls at every stage of the upload flow so I can see exactly which step drops the file."** Remove the logs once the bug's found.
 </Info>

@@ -3,60 +3,60 @@
     "message": "2025年夏季她行活动",
     "description": "The label for version 2025-summer"
   },
-  "sidebar.tutorialSidebar.category.📚 课程一：Gemini CLI 环境管理": {
+  "sidebar.tutorialSidebar.category.📚 Course 1: Gemini CLI Environment": {
     "message": "📚 课程一：Gemini CLI 环境管理",
-    "description": "The label for category '📚 课程一：Gemini CLI 环境管理' in sidebar 'tutorialSidebar'"
+    "description": "The label for category '📚 Course 1: Gemini CLI Environment' in sidebar 'tutorialSidebar'"
   },
-  "sidebar.tutorialSidebar.category.🌐 课程二：开发并部署个人网站": {
+  "sidebar.tutorialSidebar.category.🌐 Course 2: Build & Deploy Personal Website": {
     "message": "🌐 课程二：开发并部署个人网站",
-    "description": "The label for category '🌐 课程二：开发并部署个人网站' in sidebar 'tutorialSidebar'"
+    "description": "The label for category '🌐 Course 2: Build & Deploy Personal Website' in sidebar 'tutorialSidebar'"
   },
-  "sidebar.tutorialSidebar.category.📊 课程三：绘制专业图表": {
+  "sidebar.tutorialSidebar.category.📊 Course 3: Create Professional Diagrams": {
     "message": "📊 课程三：绘制专业图表",
-    "description": "The label for category '📊 课程三：绘制专业图表' in sidebar 'tutorialSidebar'"
+    "description": "The label for category '📊 Course 3: Create Professional Diagrams' in sidebar 'tutorialSidebar'"
   },
-  "sidebar.tutorialSidebar.doc.🌟 课程介绍": {
+  "sidebar.tutorialSidebar.doc.🌟 Course Introduction": {
     "message": "🌟 课程介绍",
-    "description": "The label for the doc item '🌟 课程介绍' in sidebar 'tutorialSidebar', linking to the doc intro"
+    "description": "The label for the doc item '🌟 Course Introduction' in sidebar 'tutorialSidebar', linking to the doc intro"
   },
-  "sidebar.tutorialSidebar.doc.基础教程": {
+  "sidebar.tutorialSidebar.doc.Basic Tutorial": {
     "message": "基础教程",
-    "description": "The label for the doc item '基础教程' in sidebar 'tutorialSidebar', linking to the doc basics/index"
+    "description": "The label for the doc item 'Basic Tutorial' in sidebar 'tutorialSidebar', linking to the doc basics/index"
   },
-  "sidebar.tutorialSidebar.doc.实践项目": {
+  "sidebar.tutorialSidebar.doc.Practice Project": {
     "message": "实践项目",
-    "description": "The label for the doc item '实践项目' in sidebar 'tutorialSidebar', linking to the doc practice/index"
+    "description": "The label for the doc item 'Practice Project' in sidebar 'tutorialSidebar', linking to the doc practice/index"
   },
-  "sidebar.tutorialSidebar.doc.完整教程": {
+  "sidebar.tutorialSidebar.doc.Complete Tutorial": {
     "message": "完整教程",
-    "description": "The label for the doc item '完整教程' in sidebar 'tutorialSidebar', linking to the doc website/index"
+    "description": "The label for the doc item 'Complete Tutorial' in sidebar 'tutorialSidebar', linking to the doc website/index"
   },
-  "sidebar.tutorialSidebar.doc.课程概览": {
+  "sidebar.tutorialSidebar.doc.Course Overview": {
     "message": "课程概览",
-    "description": "The label for the doc item '课程概览' in sidebar 'tutorialSidebar', linking to the doc diagrams/index"
+    "description": "The label for the doc item 'Course Overview' in sidebar 'tutorialSidebar', linking to the doc diagrams/index"
   },
-  "sidebar.tutorialSidebar.doc.Mermaid 基础": {
+  "sidebar.tutorialSidebar.doc.Mermaid Basics": {
     "message": "Mermaid 基础",
-    "description": "The label for the doc item 'Mermaid 基础' in sidebar 'tutorialSidebar', linking to the doc diagrams/mermaid-basics"
+    "description": "The label for the doc item 'Mermaid Basics' in sidebar 'tutorialSidebar', linking to the doc diagrams/mermaid-basics"
   },
-  "sidebar.tutorialSidebar.doc.Mermaid 高级": {
+  "sidebar.tutorialSidebar.doc.Mermaid Advanced": {
     "message": "Mermaid 高级",
-    "description": "The label for the doc item 'Mermaid 高级' in sidebar 'tutorialSidebar', linking to the doc diagrams/mermaid-advanced"
+    "description": "The label for the doc item 'Mermaid Advanced' in sidebar 'tutorialSidebar', linking to the doc diagrams/mermaid-advanced"
   },
-  "sidebar.tutorialSidebar.doc.Draw.io 设计": {
+  "sidebar.tutorialSidebar.doc.Draw.io Design": {
     "message": "Draw.io 设计",
-    "description": "The label for the doc item 'Draw.io 设计' in sidebar 'tutorialSidebar', linking to the doc diagrams/drawio"
+    "description": "The label for the doc item 'Draw.io Design' in sidebar 'tutorialSidebar', linking to the doc diagrams/drawio"
   },
-  "sidebar.tutorialSidebar.doc.场景应用": {
+  "sidebar.tutorialSidebar.doc.Use Cases": {
     "message": "场景应用",
-    "description": "The label for the doc item '场景应用' in sidebar 'tutorialSidebar', linking to the doc diagrams/use-cases"
+    "description": "The label for the doc item 'Use Cases' in sidebar 'tutorialSidebar', linking to the doc diagrams/use-cases"
   },
-  "sidebar.tutorialSidebar.doc.AI 辅助创作": {
+  "sidebar.tutorialSidebar.doc.AI-Assisted Creation": {
     "message": "AI 辅助创作",
-    "description": "The label for the doc item 'AI 辅助创作' in sidebar 'tutorialSidebar', linking to the doc diagrams/ai-assistance"
+    "description": "The label for the doc item 'AI-Assisted Creation' in sidebar 'tutorialSidebar', linking to the doc diagrams/ai-assistance"
   },
-  "sidebar.tutorialSidebar.doc.实战项目": {
+  "sidebar.tutorialSidebar.doc.Practical Projects": {
     "message": "实战项目",
-    "description": "The label for the doc item '实战项目' in sidebar 'tutorialSidebar', linking to the doc diagrams/projects"
+    "description": "The label for the doc item 'Practical Projects' in sidebar 'tutorialSidebar', linking to the doc diagrams/projects"
   }
 }

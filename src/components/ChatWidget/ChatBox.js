@@ -14,31 +14,31 @@ export default function ChatBox({ messages, isLoading, onSend, onClose, onClear 
 
   const headerTitle = translate({
     id: 'chatWidget.header.title',
-    message: 'AI 助手',
+    message: 'AI Assistant',
     description: 'Chat widget header title',
   });
 
   const clearButtonTitle = translate({
     id: 'chatWidget.button.clear',
-    message: '清空对话',
+    message: 'Clear chat',
     description: 'Clear chat button title',
   });
 
   const closeButtonLabel = translate({
     id: 'chatWidget.button.close',
-    message: '关闭聊天',
+    message: 'Close chat',
     description: 'Close chat button aria label',
   });
 
   const welcomeTitle = translate({
     id: 'chatWidget.welcome.title',
-    message: '你好！我是 AI 助手',
+    message: "Hi! I'm your AI Assistant",
     description: 'Welcome message title',
   });
 
   const welcomeText = translate({
     id: 'chatWidget.welcome.text',
-    message: '有任何关于 AI 编程的问题都可以问我哦~',
+    message: 'Feel free to ask me anything about AI programming!',
     description: 'Welcome message text',
   });
 

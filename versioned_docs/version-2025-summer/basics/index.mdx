@@ -1,6 +1,6 @@
 ---
-title: 基础教程
-description: "Gemini CLI安装配置教程 - 零基础学习AI辅助开发环境搭建，包含GitHub、Vercel账号注册指南"
+title: Basic Tutorial
+description: "Gemini CLI setup tutorial - Learn AI-assisted development environment setup from scratch, including GitHub and Vercel account registration guide"
 sidebar_position: 1
 ---
 
@@ -9,416 +9,409 @@ import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
 import Admonition from '@theme/Admonition';
 
-# 基础教程：环境准备与工具安装
+# Basic Tutorial: Environment Setup and Tool Installation
 
-:::info 学习目标
-完成本章学习后，您将能够：
-- 成功注册所需的开发账号
-- 在本地安装并配置 Gemini CLI
-- 使用 AI 管理您的开发环境
-- 掌握基本的 AI 辅助开发流程
+:::info Learning Objectives
+After completing this chapter, you will be able to:
+- Successfully register required development accounts
+- Install and configure Gemini CLI locally
+- Use AI to manage your development environment
+- Master basic AI-assisted development workflows
 :::
 
-## 课程视频
+## Course Video
 
-观看课程一和课程二的完整教学视频：
+Watch the complete teaching video for Lessons 1 and 2:
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/ft1tRrgUy9I?si=3o_xHXbiHsN4yMAi" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-## 必备账号注册
+## Required Account Registration
 
-在开始使用 Gemini CLI 之前，我们需要准备三个重要的账号。这些账号将贯穿整个开发流程。
+Before we start using Gemini CLI, we need to prepare three important accounts. These accounts will be used throughout the entire development process.
 
 <Tabs>
-<TabItem value="github" label="GitHub 账号" default>
+<TabItem value="github" label="GitHub Account" default>
 
-### 为什么需要 GitHub？
+### Why Do You Need GitHub?
 
-GitHub 是全球最大的代码托管平台，我们将用它来：
-- 存储和管理代码
-- 与他人协作开发
-- 展示个人项目作品集
+GitHub is the world's largest code hosting platform. We'll use it to:
+- Store and manage code
+- Collaborate with others on development
+- Showcase personal project portfolio
 
-### 注册步骤
+### Registration Steps
 
-1. 访问 [GitHub.com](https://github.com)
-2. 点击右上角的 "Sign up"
-3. 填写注册信息：
-   - **Username**：选择一个专业的用户名（建议使用真实姓名或昵称）
-   - **Email**：使用常用邮箱
-   - **Password**：设置强密码
+1. Visit [GitHub.com](https://github.com)
+2. Click "Sign up" in the top right corner
+3. Fill in registration information:
+   - **Username**: Choose a professional username (recommended to use real name or nickname)
+   - **Email**: Use your regular email address
+   - **Password**: Set a strong password
 
-<Admonition type="tip" title="专业建议">
-选择用户名时要慎重，因为它将出现在您所有的项目 URL 中。建议使用：
-- 真实姓名：`john-smith`
-- 专业昵称：`webdev-pro`
-- 避免使用数字结尾：~~`coder123`~~
+<Admonition type="tip" title="Professional Advice">
+Choose your username carefully, as it will appear in all your project URLs. Recommended:
+- Real name: `john-smith`
+- Professional nickname: `webdev-pro`
+- Avoid ending with numbers: ~~`coder123`~~
 </Admonition>
 
-### 初始配置
+### Initial Configuration
 
-注册完成后，建议完成以下配置：
+After registration, it's recommended to complete the following configuration:
 
 <CodeBlock language="bash">
-{`# 配置 Git 全局用户信息
-git config --global user.name "您的姓名"
+{`# Configure Git global user information
+git config --global user.name "Your Name"
 git config --global user.email "your-email@example.com"`}
 </CodeBlock>
 
 </TabItem>
-<TabItem value="vercel" label="Vercel 账号">
+<TabItem value="vercel" label="Vercel Account">
 
-### 为什么选择 Vercel？
+### Why Choose Vercel?
 
-Vercel 是现代化的部署平台，特别适合：
-- 一键部署前端项目
-- 自动化 CI/CD 流程
-- 免费的 HTTPS 和全球 CDN
+Vercel is a modern deployment platform, particularly suitable for:
+- One-click deployment of frontend projects
+- Automated CI/CD workflows
+- Free HTTPS and global CDN
 
-### 注册流程
+### Registration Process
 
-1. 访问 [Vercel.com](https://vercel.com)
-2. 点击 "Sign Up"
-3. **推荐**：选择 "Continue with GitHub" 使用 GitHub 账号登录
-4. 授权 Vercel 访问您的 GitHub 仓库
+1. Visit [Vercel.com](https://vercel.com)
+2. Click "Sign Up"
+3. **Recommended**: Choose "Continue with GitHub" to log in with your GitHub account
+4. Authorize Vercel to access your GitHub repositories
 
-### 优势特性
+### Advantage Features
 
-- **极速部署**：推送代码后自动部署，秒级生效
-- **全球加速**：内置 CDN，让您的网站在全球都能快速访问
-- **分析面板**：实时监控网站性能和访问数据
+- **Lightning-Fast Deployment**: Automatic deployment after code push, takes effect in seconds
+- **Global Acceleration**: Built-in CDN allows your website to be accessed quickly worldwide
+- **Analytics Dashboard**: Real-time monitoring of website performance and visitor data
 
 </TabItem>
-<TabItem value="google" label="Google 账号">
+<TabItem value="google" label="Google Account">
 
-### Google 账号的重要性
+### Importance of Google Account
 
-Google 账号是使用 Gemini CLI 的核心要求：
-- 登录 Gemini CLI
-- 访问 Google 的 AI 服务
-- 同步配置和偏好设置
+A Google account is a core requirement for using Gemini CLI:
+- Log in to Gemini CLI
+- Access Google's AI services
+- Sync configurations and preferences
 
-### 创建账号
+### Create Account
 
-1. 访问 [accounts.google.com](https://accounts.google.com)
-2. 点击 "创建账号"
-3. 选择 "个人用途"
-4. 填写基本信息
+1. Visit [accounts.google.com](https://accounts.google.com)
+2. Click "Create account"
+3. Select "For personal use"
+4. Fill in basic information
 
-<Admonition type="warning" title="安全提醒">
-请务必：
-- 启用两步验证
-- 使用强密码
-- 定期检查账号活动
+<Admonition type="warning" title="Security Reminder">
+Be sure to:
+- Enable two-factor authentication
+- Use a strong password
+- Regularly check account activity
 </Admonition>
 
 </TabItem>
 </Tabs>
 
-## Gemini CLI 安装配置
+## Gemini CLI Installation and Configuration
 
-### 系统要求
+### System Requirements
 
 <Tabs groupId="operating-systems">
 <TabItem value="windows" label="Windows">
 
-**最低要求：**
+**Minimum Requirements**
 
-- Windows 10 版本 1903 或更高
-- Node.js 16.0 或更高版本
-- 4GB RAM（推荐 8GB）
+- Windows 10 version 1903 or higher
+- Node.js 16.0 or higher
+- 4GB RAM (8GB recommended)
 
-**推荐配置：**
+**Recommended Configuration**
 
 - Windows 11
 - Node.js 18.x LTS
-- 使用 Windows Terminal
+- Use Windows Terminal
 
 </TabItem>
 <TabItem value="macos" label="macOS">
 
-**最低要求：**
+**Minimum Requirements**
 
-- macOS 10.15 (Catalina) 或更高
-- Node.js 16.0 或更高版本
+- macOS 10.15 (Catalina) or higher
+- Node.js 16.0 or higher
 - 4GB RAM
 
-**推荐配置：**
+**Recommended Configuration**
 
-- macOS 12.0 (Monterey) 或更高
+- macOS 12.0 (Monterey) or higher
 - Node.js 18.x LTS
-- 使用 iTerm2 或原生 Terminal
+- Use iTerm2 or native Terminal
 
 </TabItem>
 <TabItem value="linux" label="Linux">
 
-**支持的发行版：**
+**Supported Distributions**
 
-- Ubuntu 20.04 LTS 或更高
-- Debian 10 或更高
-- Fedora 34 或更高
-- 其他主流发行版
+- Ubuntu 20.04 LTS or higher
+- Debian 10 or higher
+- Fedora 34 or higher
+- Other mainstream distributions
 
-**依赖要求：**
+**Dependencies**
 
-- Node.js 16.0 或更高版本
-- npm 或 yarn
+- Node.js 16.0 or higher
+- npm or yarn
 
 </TabItem>
 </Tabs>
 
-### 安装步骤
+### Installation Steps
 
-#### 步骤 1：检查 Node.js 版本
+#### Step 1: Check Node.js Version
 
 <CodeBlock language="bash">
-{`# 检查 Node.js 是否已安装
+{`# Check if Node.js is installed
 node --version
 
-# 如果未安装或版本过低，请访问 nodejs.org 下载安装`}
+# If not installed or version is too low, visit nodejs.org to download and install`}
 </CodeBlock>
 
-#### 步骤 2：全局安装 Gemini CLI
+#### Step 2: Install Gemini CLI Globally
 
 <CodeBlock language="bash">
-{`# 使用 npm 安装（推荐）
+{`# Install using npm (recommended)
 npm install -g @google/gemini-cli
 
-# 或使用 yarn
+# Or use yarn
 yarn global add @google/gemini-cli
 
-# 或使用 pnpm
+# Or use pnpm
 pnpm add -g @google/gemini-cli`}
 </CodeBlock>
 
-<Admonition type="info" title="安装提示">
-如果遇到权限问题，请：
-- **Windows**：以管理员身份运行命令提示符
-- **macOS/Linux**：使用 `sudo npm install -g @google/gemini-cli`
+<Admonition type="info" title="Installation Tips">
+If you encounter permission issues:
+- **Windows**: Run command prompt as administrator
+- **macOS/Linux**: Use `sudo npm install -g @google/gemini-cli`
 </Admonition>
 
-#### 步骤 3：验证安装
+#### Step 3: Verify Installation
 
 <CodeBlock language="bash">
-{`# 检查安装是否成功
+{`# Check if installation was successful
 gemini --version
 
-# 查看可用命令
+# View available commands
 gemini --help`}
 </CodeBlock>
 
-### 首次配置
+### Initial Configuration
 
-安装完成后，需要进行初始配置：
+After installation, you need to perform initial configuration:
 
 <CodeBlock language="bash">
-{`# 1. 登录 Google 账号
+{`# 1. Log in to your Google account
 gemini auth login
 
-# 2. 系统将打开浏览器，请登录您的 Google 账号
-# 3. 授权 Gemini CLI 访问必要的权限
-# 4. 返回终端，您应该看到 "Successfully authenticated!" 的提示`}
+# 2. The system will open a browser, please log in to your Google account
+# 3. Authorize Gemini CLI to access necessary permissions
+# 4. Return to the terminal, you should see "Successfully authenticated!" message`}
 </CodeBlock>
 
-### 配置选项
+### Configuration Options
 
 <Tabs>
-<TabItem value="basic" label="基础配置" default>
+<TabItem value="basic" label="Basic Configuration" default>
 
 <CodeBlock language="bash">
-{`# 设置默认项目路径
+{`# Set default project path
 gemini config set default-path ~/projects
 
-# 设置语言偏好
-gemini config set language zh-CN
+# Set language preference
+gemini config set language en-US
 
-# 查看当前配置
+# View current configuration
 gemini config list`}
 </CodeBlock>
 
 </TabItem>
-<TabItem value="advanced" label="高级配置">
+<TabItem value="advanced" label="Advanced Configuration">
 
 <CodeBlock language="bash">
-{`# 设置 API 超时时间（毫秒）
+{`# Set API timeout (milliseconds)
 gemini config set timeout 30000
 
-# 启用调试模式
+# Enable debug mode
 gemini config set debug true
 
-# 设置代理（如需要）
+# Set proxy (if needed)
 gemini config set proxy http://proxy.example.com:8080
 
-# 导出配置文件
+# Export configuration file
 gemini config export > gemini-config.json`}
 </CodeBlock>
 
 </TabItem>
 </Tabs>
 
-## 基础使用示例
+## Basic Usage Examples
 
-### 您的第一次对话
+### Your First Conversation
 
-现在让我们开始使用 Gemini CLI。
+Now let's start using Gemini CLI!
 
 <CodeBlock language="bash">
-{`# 启动交互式对话
+{`# Start interactive conversation
 gemini chat
 
-# Gemini 会回应：
-# "你好！我是 Gemini，您的 AI 编程助手。有什么可以帮助您的吗？"`}
+# Gemini will respond:
+# "Hello! I'm Gemini, your AI programming assistant. How can I help you?"`}
 </CodeBlock>
 
-### 实用对话示例
-
-#### 环境配置
-
+### Practical Conversation Examples
+#### Environment Configuration
 <CodeBlock language="text">
-{`您：你好，我想开发web应用，请问我需要安装哪些必须的开发环境？
+{`You: Hello, I want to develop a web application. What development environment do I need to install?
 
-Gemini：我来帮您配置 Web 开发环境。建议安装以下工具：
+Gemini: I'll help you configure a web development environment. I recommend installing the following tools:
 
-1. Node.js 和 npm - JavaScript 运行环境
-2. VS Code - 代码编辑器
-3. Git - 版本控制
-4. Chrome DevTools - 调试工具
+1. Node.js and npm - JavaScript runtime environment
+2. VS Code - Code editor
+3. Git - Version control
+4. Chrome DevTools - Debugging tools
 
-需要我帮您自动安装这些工具吗？`}
+Would you like me to help you automatically install these tools?`}
 </CodeBlock>
-
-#### 依赖管理
-
+#### Dependency Management
 <CodeBlock language="text">
-{`您：请帮我检查本地有哪些 Node.js 全局包，并建议哪些可以删除
+{`You: Please help me check what Node.js global packages I have locally, and suggest which ones can be removed
 
-Gemini：正在扫描您的全局 npm 包...
+Gemini: Scanning your global npm packages...
 
-找到以下包：
-- create-react-app (v4.0.3) - 建议删除，使用 npx 代替
-- nodemon (v2.0.15) - 保留，开发常用
-- typescript (v4.5.2) - 建议删除，项目级安装更好
-- pm2 (v5.1.0) - 保留，进程管理工具
+Found the following packages:
+- create-react-app (v4.0.3) - Recommend removal, use npx instead
+- nodemon (v2.0.15) - Keep, commonly used for development
+- typescript (v4.5.2) - Recommend removal, better to install at project level
+- pm2 (v5.1.0) - Keep, process management tool
 
-需要我帮您清理这些包吗？`}
+Would you like me to help clean up these packages?`}
 </CodeBlock>
-
-#### PATH 管理
-
+#### PATH Management
 <CodeBlock language="text">
-{`您：帮我查看并整理系统 PATH
+{`You: Help me view and organize the system PATH
 
-Gemini：检测到您的 PATH 中有以下条目：
+Gemini: Detected the following entries in your PATH:
 
-重复项：
-- /usr/local/bin (出现 3 次)
-- ~/.npm-global/bin (出现 2 次)
+Duplicates:
+- /usr/local/bin (appears 3 times)
+- ~/.npm-global/bin (appears 2 times)
 
-无效路径：
-- /opt/old-software/bin (不存在)
+Invalid paths:
+- /opt/old-software/bin (does not exist)
 
-建议优化后的 PATH 顺序：
+Recommended optimized PATH order:
 1. ~/.local/bin
 2. /usr/local/bin
 3. ~/.npm-global/bin
 4. /usr/bin
 
-要应用这些更改吗？`}
+Would you like to apply these changes?`}
 </CodeBlock>
 
-## 告别繁琐的传统方式
+## Say Goodbye to Traditional Cumbersome Methods
 
-### 不再需要的工具
+### Tools No Longer Needed
 
-| 传统工具 | 被 Gemini CLI 替代的原因 |
+| Traditional Tool | Why Replaced by Gemini CLI |
 |---------|------------------------|
-| **Cursor** | 中国大陆锁区；Pro 额度性价比低；Gemini CLI 完全免费可用 |
-| **GitHub Desktop** | 无需 GUI 工具；Gemini 可以执行所有 Git 操作；更灵活的命令行交互 |
-| **Git 命令** | 不用记忆任何 Git 命令；自然语言描述即可；AI 自动处理复杂操作 |
+| **Cursor** | • Blocked in mainland China<br/>• Low cost-effectiveness of Pro quota<br/>• Gemini CLI is completely free to use |
+| **GitHub Desktop** | • No need for GUI tools<br/>• Gemini can execute all Git operations<br/>• More flexible command-line interaction |
+| **Git Commands** | • No need to memorize any Git commands<br/>• Natural language description is enough<br/>• AI automatically handles complex operations |
 
-### 新旧对比
+### Old vs New Comparison
 
 <Tabs>
-<TabItem value="old" label="传统方式">
+<TabItem value="old" label="Traditional Way">
 
 <CodeBlock language="bash">
-{`# 需要记忆和输入的命令
+{`# Commands to memorize and type
 git add .
 git commit -m "feat: add new feature"
 git push origin main
 
-# 解决冲突
+# Resolve conflicts
 git fetch origin
 git merge origin/main
-# 手动解决冲突...
+# Manually resolve conflicts...
 git add .
 git commit
 git push
 
-# 查看历史
+# View history
 git log --oneline --graph --all`}
 </CodeBlock>
 
 </TabItem>
-<TabItem value="new" label="Gemini CLI 方式" default>
+<TabItem value="new" label="Gemini CLI Way" default>
 
 <CodeBlock language="text">
-{`您：提交我的更改，描述是"添加了新功能"
-Gemini：好的，我帮您提交更改...
-[执行 git add, commit, push]
-成功提交到 main 分支
+{`You: Commit my changes, description is "added new feature"
+Gemini: Sure, I'll commit your changes...
+[Executing git add, commit, push]
+✓ Successfully committed to main branch
 
-您：有冲突了，帮我解决
-Gemini：检测到合并冲突，我来帮您：
-1. 分析冲突文件...
-2. 基于代码逻辑建议解决方案...
-3. 要接受我的建议吗？
+You: There's a conflict, help me resolve it
+Gemini: Merge conflict detected, I'll help you:
+1. Analyzing conflict files...
+2. Suggesting resolution based on code logic...
+3. Would you like to accept my suggestion?
 
-您：查看最近的提交历史
-Gemini：最近 5 次提交：
-- 2分钟前: 添加了新功能 (您)
-- 1小时前: 修复了登录问题 (张三)
-- 3小时前: 更新了文档 (李四)
+You: View recent commit history
+Gemini: Last 5 commits:
+• 2 minutes ago: Added new feature (You)
+• 1 hour ago: Fixed login issue (Zhang San)
+• 3 hours ago: Updated documentation (Li Si)
 ...`}
 </CodeBlock>
 
 </TabItem>
 </Tabs>
 
-## 最佳实践建议
+## Best Practice Recommendations
 
-### 日常工作流程
+### Daily Workflow
 
-1. **每日开始**
+1. **Start of Day**
    ```text
-   您：早上好，帮我检查项目状态
-   Gemini：为您检查项目状态...
+   You: Good morning, help me check the project status
+   Gemini: Checking your project status...
    ```
 
-2. **开发过程**
+2. **Development Process**
    ```text
-   您：我要开始开发用户认证功能
-   Gemini：我来帮您准备...
+   You: I want to start developing user authentication feature
+   Gemini: I'll help you prepare...
    ```
 
-3. **问题解决**
+3. **Problem Solving**
    ```text
-   您：npm install 报错了，帮我看看
-   Gemini：我来分析错误...
+   You: npm install is showing an error, help me check it
+   Gemini: I'll analyze the error...
    ```
 
-### 效率提升技巧
+### Efficiency Improvement Tips
 
-- **明确表达**：清晰描述您的需求，AI 会更准确地帮助您
-- **持续对话**：保持上下文，让 AI 更好地理解您的项目
-- **善用历史**：使用 `gemini history` 查看之前的对话
+- **Clear Expression**: Clearly describe your needs, AI will help you more accurately
+- **Continuous Conversation**: Maintain context, letting AI better understand your project
+- **Use History Well**: Use `gemini history` to view previous conversations
 
-## 下一步
+## Next Steps
 
-恭喜您完成了基础环境的配置。现在您已经拥有了：
+Congratulations on completing the basic environment configuration! Now you have:
+- Three necessary development accounts
+- Locally installed Gemini CLI
+- Basic knowledge of AI-assisted development
 
-- 三个必要的开发账号
-- 本地安装的 Gemini CLI
-- AI 辅助开发的基础知识
-
-[继续学习实践项目](/docs/2025-summer/practice)
+[Continue to Practical Projects](/docs/2025-summer/practice)

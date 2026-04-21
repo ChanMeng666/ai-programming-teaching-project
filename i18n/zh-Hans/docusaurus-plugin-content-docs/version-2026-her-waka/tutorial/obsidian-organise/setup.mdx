@@ -1,0 +1,121 @@
+---
+title: "设置你的工具"
+description: "安装 Gemini CLI、带 CLI 插件的 Obsidian，以及可选的 Wispr Flow 语音输入。然后通过与笔记库对话验证一切正常。"
+---
+
+import InstallNodejs from "../../_snippets/install-nodejs.mdx";
+import InstallGeminiCli from "../../_snippets/install-gemini-cli.mdx";
+import InstallObsidianCli from "../../_snippets/install-obsidian-cli.mdx";
+import InstallWisprFlow from "../../_snippets/install-wispr-flow.mdx";
+
+在开始整理之前，确保所有工具都已安装并正常运行。
+
+<Warning>
+**你需要准备：** 一台电脑和已安装并启用了 CLI 插件的 Obsidian。无需任何编程经验 —— 我们会一步一步带你完成每个步骤。
+</Warning>
+
+<Tip>
+**已经设置好了？** 如果你已完成[用语音控制你的笔记](/docs/2026-her-waka/tutorial/obsidian-daily/overview)教程，你已经设置好了！跳到第 5 步检查你的笔记库。
+</Tip>
+
+<Steps>
+  <Step title="安装 Node.js">
+    <Info>
+    **已有 Node.js？** 如果你在之前的教程中已经安装过，跳过此步骤。在终端运行 `node --version` 检查 —— 你应该会看到类似 `v22.x.x` 的版本号。
+    </Info>
+
+    <InstallNodejs />
+  </Step>
+
+  <Step title="安装 Gemini CLI">
+    <Info>
+    **已有 Gemini CLI？** 如果你在之前的教程中已经安装过，跳过此步骤。只需在终端运行 `gemini` 确认它还能正常运行。
+    </Info>
+
+    <InstallGeminiCli />
+  </Step>
+
+  <Step title="安装 Obsidian 并启用 CLI">
+    <Info>
+    **已经完成了？** 如果你在之前的教程中安装了 Obsidian CLI 插件，跳过此步骤。在终端运行 `obsidian version` 检查 —— 你应该会看到一个版本号。
+    </Info>
+
+    <InstallObsidianCli />
+  </Step>
+
+  <Step title="安装 Wispr Flow（可选）">
+    <InstallWisprFlow />
+  </Step>
+
+  <Step title="检查你的笔记库">
+    让我们确保 Gemini CLI 可以与你的 Obsidian 笔记库对话。启动 Gemini CLI：
+
+    ```bash title="复制此命令"
+    gemini
+    ```
+
+    然后说出或输入这条提示词：
+
+    ```text title="说出或复制此提示词"
+    How many files and folders are in my Obsidian vault?
+    ```
+
+    Gemini CLI 应该会返回关于你笔记库的信息 —— 文件数量、文件夹数量，可能还有笔记库名称和路径。如果成功，一切都已连接。
+
+    <Info>
+    **有多个笔记库？** 如果你有不止一个笔记库，Obsidian CLI 使用你的默认笔记库。你可以在 Obsidian 应用设置中切换笔记库。
+    </Info>
+  </Step>
+
+  <Step title="如果你的笔记库是空的，创建示例笔记">
+    如果你的笔记库是全新的、没有笔记，请逐一给 Gemini CLI 以下提示词。这会创建示例笔记，让教程有内容可以操作。
+
+    ```text title="说出或复制此提示词"
+    Create a note in Obsidian called 'Meeting Notes - March 15' with a heading Team Meeting, some discussion points about the project timeline, two checkbox tasks about reviewing the budget and sending an update to Sarah, and tag it with meeting and work
+    ```
+
+    ```text title="说出或复制此提示词"
+    Create a note called 'Recipe - Banana Bread' with ingredients list and tag it recipe and baking
+    ```
+
+    ```text title="说出或复制此提示词"
+    Create a note called 'Book Notes' with a reading list of Atomic Habits and The Lean Startup, tagged books and reading
+    ```
+
+    ```text title="说出或复制此提示词"
+    Create a note called 'Project Ideas' with three career-related ideas, tagged ideas and career
+    ```
+
+    ```text title="说出或复制此提示词"
+    Create a note called 'Untitled' with some random unstructured text and no tags
+    ```
+
+    <Info>
+    **已经有笔记了？** 跳过此步骤。这些示例笔记仅供从空笔记库开始的人使用，让教程有内容可以操作。
+    </Info>
+  </Step>
+</Steps>
+
+## 验证你的设置
+
+<AccordionGroup>
+  <Accordion title="Node.js 已安装">
+    在终端运行 `node --version` 显示一个版本号。
+  </Accordion>
+  <Accordion title="Gemini CLI 已安装并登录">
+    在终端运行 `gemini` 启动 AI 助手并显示一个可输入的提示符。
+  </Accordion>
+  <Accordion title="Obsidian CLI 正常工作">
+    在终端运行 `obsidian version` 显示一个版本号。
+  </Accordion>
+  <Accordion title="笔记库信息可见">
+    向 Gemini CLI 提问关于笔记库的问题，返回文件和文件夹数量。
+  </Accordion>
+  <Accordion title="Wispr Flow 已安装（可选）">
+    你可以说话并看到文字出现在终端中。
+  </Accordion>
+</AccordionGroup>
+
+<Note>
+一切就绪？前往[搜索、审查和整理](/docs/2026-her-waka/tutorial/obsidian-organise/organise)，开始探索你的笔记库。
+</Note>

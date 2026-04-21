@@ -3,7 +3,7 @@
     "intro",
     {
       "type": "category",
-      "label": "🚀 快速开始",
+      "label": "🚀 Quick Start",
       "link": {
         "type": "doc",
         "id": "setup/index"
@@ -18,7 +18,7 @@
     },
     {
       "type": "category",
-      "label": "📚 基础知识",
+      "label": "📚 Fundamentals",
       "link": {
         "type": "doc",
         "id": "basics/index"
@@ -32,7 +32,7 @@
     },
     {
       "type": "category",
-      "label": "🛠️ 开发工具",
+      "label": "🛠️ Development Tools",
       "link": {
         "type": "doc",
         "id": "tools/index"
@@ -48,12 +48,12 @@
     },
     {
       "type": "category",
-      "label": "📖 教程与实战",
+      "label": "📖 Tutorials & Practice",
       "collapsed": true,
       "items": [
         {
           "type": "category",
-          "label": "基础教程",
+          "label": "Basic Tutorials",
           "link": {
             "type": "doc",
             "id": "tutorials/index"
@@ -64,7 +64,7 @@
         },
         {
           "type": "category",
-          "label": "实战项目",
+          "label": "Practical Projects",
           "link": {
             "type": "doc",
             "id": "practice/index"
@@ -81,7 +81,7 @@
     },
     {
       "type": "category",
-      "label": "🎯 进阶应用",
+      "label": "🎯 Advanced Applications",
       "link": {
         "type": "doc",
         "id": "advanced/index"
@@ -90,7 +90,7 @@
       "items": [
         {
           "type": "category",
-          "label": "AI系统开发",
+          "label": "AI System Development",
           "link": {
             "type": "doc",
             "id": "advanced/ai-systems/index"
@@ -102,7 +102,7 @@
         },
         {
           "type": "category",
-          "label": "优秀案例",
+          "label": "Outstanding Examples",
           "link": {
             "type": "doc",
             "id": "advanced/cases/index"

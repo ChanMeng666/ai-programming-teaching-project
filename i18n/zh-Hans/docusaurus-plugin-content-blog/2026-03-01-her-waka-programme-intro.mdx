@@ -1,0 +1,43 @@
+---
+slug: her-waka-2026-programme-intro
+title: "HER WAKA 2026：为奥克兰女性准备的 AI × 就业赋能项目"
+description: "SheSharp × MSD × AcademyEX 联合推出的 HER WAKA 2026 —— 四场线下工作坊、10 个自学 AI 教程、完整求职资源库。现已作为新版本并入本站。"
+authors: chanmeng
+tags: [Forward with Her-activity, ai-programming, tutorial]
+image: /img/her-waka/banners/her-waka-banner-landscape.jpg
+---
+
+我们把 **HER WAKA 2026** 项目的全部教学内容并入了本站，作为一个全新的版本 —— [2026 HER WAKA 活动](/docs/2026-her-waka/programme/about-her-waka) —— 与已有的「2024 年冬季她行活动」「2025 年夏季她行活动」并列。
+
+{/* truncate */}
+
+## 这是什么？
+
+HER WAKA 是由 **SheSharp** 与 **Ministry of Social Development（MSD，新西兰社会发展部）** 合作、**academyEX** 承办、**RCSA** 提供招聘视角的综合就业赋能项目。面向奥克兰地区准备重返职场的女性 MSD 客户，2026 年 3 月至 6 月每月一场工作坊，全部线下在 academyEX Pikopiko 举办。
+
+项目核心有三块：
+
+1. **四场线下工作坊** —— AI 与未来工作、#IAmRemarkable 与 Vibe Coding、就业权益、Networking 与职业连接
+2. **10 个自学 AI 教程** —— 按 ★ 到 ★★★★★ 五个难度编排，从「用 AI 总结 Gmail」到「用 Claude Code 打造 Daily Report Bot」
+3. **完整求职资源库** —— 新西兰 IT 市场、求职平台、招聘机构、CV/LinkedIn、就业权益、AI 学习工具、科技社区
+
+## 为什么要并进本站？
+
+HER WAKA 原本是一个独立的 Mintlify 站点。把它合并到本站之后：
+
+- **一套导航，三届活动** —— 通过右上角版本下拉可以无缝切换 2024 冬、2025 夏、2026 HER WAKA
+- **共享搜索与博客** —— Algolia 索引一次性覆盖三届内容，博客持续更新
+- **双语支持** —— 中文为默认；切换到 English 可看原版英文教学（原生为 MSD 客户设计）
+
+## 快速入口
+
+- 👉 [项目介绍](/docs/2026-her-waka/programme/about-her-waka)
+- 👉 [四场工作坊日程](/docs/2026-her-waka/programme/schedule)
+- 👉 [10 个自学教程总览](/docs/2026-her-waka/tutorial/)
+- 👉 [求职资源库](/docs/2026-her-waka/resources/job-readiness)
+
+## 技术笔记（为好奇的同学）
+
+原站使用 Mintlify 专有组件（`<Card>`/`<Tabs>`/`<Steps>`/`<Accordion>` 等）。为避免 1000+ 处 MDX 手动改写，本次迁移通过一个轻量的 **MintlifyShim 兼容层** 把这些组件映射到 Docusaurus 原生能力（`@theme/Tabs`、`@theme/Admonition`、原生 `<details>` 等），并通过 swizzle `MDXComponents.js` 全局注入，MDX 文件几乎零改动。这套兼容层未来也可以复用到任何从 Mintlify 迁来的项目。
+
+祝学习愉快 🌸

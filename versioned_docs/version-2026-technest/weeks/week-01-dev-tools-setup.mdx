@@ -1,189 +1,189 @@
 ---
-title: "第 1 周：AI 开发者工具包安装"
-description: 装好 Cursor、Claude Code、Gemini CLI 和 MCP 服务器。跑完第一次"AI 驱动的 Vercel 部署"，并把授权规则刻进脑子。
-sidebar_label: "第 1 周：AI 开发者工具包安装"
+title: "Week 1: AI Developer Toolkit Setup"
+description: Install Cursor, Claude Code, Gemini CLI, and MCP servers. Run your first AI-driven Vercel deploy and internalise the Delegation Rules.
+sidebar_label: "Week 1: AI Developer Toolkit Setup"
 ---
 
 <AxisBadge axes={["JOB"]} />
 
-# AI 开发者工具包安装
+# AI Developer Toolkit Setup
 
-## 学习目标
+## Learning Objectives
 
-到本节课结束，学员应当能够：
+By the end of this session, students should be able to:
 
-- **装好并登录整学期要用的三套 AI 编码环境** —— Cursor（主力 IDE）、Claude Code（终端原生 AI）、Gemini CLI（免费额度的脚本型 AI）—— 并知道什么时候该用哪一个。
-- **给 Claude Code / Cursor 装上一个 Skill 和一个 MCP 服务器**，并能用一句话说清每个扩展让 AI 能替学员做什么。
-- **识别并应用授权规则** —— 知道哪些操作该通过 CLI 或 MCP 交给 AI，哪些（OAuth、DNS、provider 侧凭据）必须自己动手。
+- **Install and sign into the three AI coding environments we will use all term** — Cursor (primary IDE), Claude Code (terminal-native AI), and Gemini CLI (free-tier scripting AI) — and know when to reach for each one.
+- **Install a Skill and an MCP server into Claude Code / Cursor** and describe, in one sentence, what each extension lets the AI do on the student's behalf.
+- **Recognise and apply the Delegation Rules** — know which operations to hand off to AI through a CLI or MCP server, and which (OAuth, DNS, provider-side credentials) the student must do with their own hands.
 
-## 核心主题
+## Core Topics
 
-- "自然语言就是源代码"为什么是这门课的主轴——以及它如何改变学员对编程的思考方式。
-- 三套 AI 环境：Cursor、Claude Code、Gemini CLI —— 分别在什么场景下用。
-- MCP 服务器和 Skills 是什么，它们如何把一个 AI 聊天变成会用工具的 agent。
-- Voice-first 提示词（可选但强烈推荐）—— Wispr Flow。
-- GitHub 作为"唯一真实数据源"那一层，后面每一周的部署链路都依赖它。
+- Why "natural language is the source code" — course doctrine and how it changes the way students think about programming.
+- The three AI environments: Cursor, Claude Code, Gemini CLI — when to use each.
+- What MCP servers and Skills are, and how they turn an AI chat into a tool-using agent.
+- Voice-first prompting with Wispr Flow (optional but strongly recommended).
+- GitHub as the source-of-truth layer that every later week's deploy flow depends on.
 
-## 工具 / 技术栈
+## Tools / Stack
 
-| 工具 | 在本学期的作用 |
+| Tool | Purpose this term |
 |---|---|
-| **Cursor** | 主力 IDE；内置 AI 聊天；整学期的周课工作都在这里发生 |
-| **Claude Code** | 终端原生的 AI，带 MCP + Skills；第 8 周 PDF 流程的首选 |
-| **Gemini CLI** | 免费额度的 AI，适合一次性脚本和快速探索 |
-| **Wispr Flow** | 语音转文字；不用敲字就能口述长提示词 |
-| **GitHub** | 唯一真实数据源；自动触发每一次 Vercel 部署 |
-| **Vercel CLI** | AI 调它来部署、读日志、管理环境变量 |
-| **Neon CLI + Neon MCP** | AI 调它来开数据库和 Auth（从第 4 周开始） |
-| **Typst skill** | AI 调它生成像素级精致的 PDF（第 8 周会用到） |
+| **Cursor** | Primary IDE; built-in AI chat; all weekly work lives here |
+| **Claude Code** | Terminal-native AI with MCP + Skills; preferred for W8 PDF flow |
+| **Gemini CLI** | Free-tier AI for throwaway scripts and quick explorations |
+| **Wispr Flow** | Voice-to-text; dictate long prompts without typing |
+| **GitHub** | Source of truth; auto-triggers every Vercel deploy |
+| **Vercel CLI** | AI invokes it to deploy, read logs, manage env vars |
+| **Neon CLI + Neon MCP** | AI invokes them to provision databases and auth (from W4) |
+| **Typst skill** | AI invokes it to generate pixel-perfect PDFs (used in W8) |
 
 <SiteEvolution thisWeek={1} />
 
-## 课堂计划
+## Session Plan
 
-| 时间 | 活动 |
+| Time | Activity |
 |---|---|
-| 0 – 15 分钟 | **回顾与 Check-in。** 第一节课——没有回顾。10 分钟破冰：每个人讲一讲他们在看过 Cursor demo **之前** 和 **之后** 对"编程"这件事的理解。 |
-| 15 – 40 分钟 | **概念讲解。** 授权规则。我们为什么让 AI 去跑 CLI。MCP 服务器是什么。声音 + AI 如何改变那些"非常吃键盘"的活儿。现场比一比：同一个任务，Cursor vs Claude Code vs Gemini CLI。 |
-| 40 – 75 分钟 | **现场演示。** 讲师从零打开 Cursor，装上 Vercel MCP，然后对 Cursor 说："把一个空的 Next.js 站点部署到我的 Vercel 账号。"全班看着 AI 调 Vercel CLI、审批、部署、返回一个活的 URL。 |
-| 75 – 105 分钟 | **动手 Lab。** 每位学员在自己笔记本上把这遍演示复现一遍，结束时拿到一个可以分享的 `*.vercel.app` URL。 |
-| 105 – 120 分钟 | **Q&A + 收尾。** 全班一起排错。所有人下课时都带着能工作的工具走。 |
+| 0 – 15 min | **Recap & Check-in.** First class — no recap. 10-min icebreaker: everyone says what they think "programming" means before and after watching a Cursor demo. |
+| 15 – 40 min | **Concept Teaching.** The Delegation Rules. Why we let AI drive CLIs. What MCP servers are. How voice + AI changes keyboard-heavy work. Live comparison: Cursor vs Claude Code vs Gemini CLI on the same task. |
+| 40 – 75 min | **Live Demo.** Instructor opens Cursor from scratch, installs the Vercel MCP, and tells Cursor to "deploy an empty Next.js site to my Vercel". Class watches the AI call the Vercel CLI, approve, deploy, and return a live URL. |
+| 75 – 105 min | **Hands-On Lab.** Each student repeats the demo on their own laptop and ends with a live `*.vercel.app` URL they can share. |
+| 105 – 120 min | **Q&A + Wrap.** Troubleshooting as a group. Everyone leaves with working tools. |
 
-## 动手 Lab
+## Hands-On Lab
 
-**任务。** 从"什么开发者工具都没装"走到"Cursor 刚刚在我 Vercel 账号里部署了一个空的 Next.js 站点，而且整个过程我是亲眼看着它发生的"。这是整学期唯一一堂"手动配置多于平常"的课——从第 2 周开始，几乎每一步都只是一句口述。
+**Task.** Get from "no dev tools installed" to "Cursor just deployed an empty Next.js site to Vercel under my account, and I watched it happen". This is the only lecture with heavier-than-usual manual setup — from Week 2 onwards, almost every step is a single spoken prompt.
 
-<Note title="给学员的节奏提示">
-如果你在第 1–4 步（安装）落后了，**别慌**。目标是在下课前走完第 7 步（你的第一次 AI 驱动的 Vercel 部署）。安装可以继续挂在后台——Claude Code 可以一边在后台下载，一边 AI 已经能开始干活。
+<Note title="Pacing note for students">
+If you fall behind during steps 1–4 (installations), **don't stress**. The goal is to finish Step 7 (your first AI-driven Vercel deploy) before we wrap. Installers can finish while we continue — AI can start working even while Claude Code is still downloading in the background.
 </Note>
 
-### 阶段 1 —— 装好三套 AI 环境
+### Phase 1 — Install the three AI environments
 
-<ManualStep n={1} why="Cursor 的安装器 + GitHub OAuth 需要点击和同意页，任何 CLI 都代替不了你。">
-从 [cursor.com](https://cursor.com) 下载安装 **Cursor**。打开它，用 GitHub 登录，接受条款。当 Cursor 问你 "Would you like to import VS Code settings?" 时选 **Skip** —— 我们要一个干净的环境。
+<ManualStep n={1} why="Cursor's installer + GitHub OAuth require clicks and consent screens that no CLI can perform for you.">
+Install **Cursor** from [cursor.com](https://cursor.com). Open it, sign in with GitHub, and accept the terms. When Cursor asks "Would you like to import VS Code settings?" choose **Skip** — we want a clean slate.
 </ManualStep>
 
-<ManualStep n={2} why="Anthropic 的登录流程会打开浏览器走同意，必须人参与。">
-按 [官方快速开始](https://docs.anthropic.com/claude/docs/claude-code) 的步骤安装 **Claude Code**。在 Windows 上运行安装器，一路用默认值。当它提示登录时，用你的 Anthropic 账号登录。
+<ManualStep n={2} why="Anthropic's login flow opens a browser for consent — human required.">
+Install **Claude Code** by following [the official quickstart](https://docs.anthropic.com/claude/docs/claude-code). On Windows, run the installer and accept defaults. When it prompts for login, sign in with your Anthropic account.
 </ManualStep>
 
-<ManualStep n={3} why="装 Node + 登录 Google 两步都需要同意页。">
-按 [Google 的 readme](https://github.com/google-gemini/gemini-cli) 安装 **Gemini CLI**。在任何终端（Cursor 自带的终端也行）里跑 `npm install -g @google/gemini-cli`，然后 `gemini login`，用 Google 账号登录。
+<ManualStep n={3} why="Installing Node + signing into Google both require consent screens.">
+Install **Gemini CLI** by following [Google's readme](https://github.com/google-gemini/gemini-cli). Run `npm install -g @google/gemini-cli` in any terminal (Cursor's built-in terminal works), then `gemini login` and sign in with your Google account.
 </ManualStep>
 
-<Tip title="如果你有兴趣，现在顺手装上 Wispr Flow">
-Wispr Flow（[wisprflow.ai](https://wisprflow.ai)）让你用口述代替敲字。从第 5 步往后，每一步都是一句口述——Wispr Flow 会让你这学期剩下的时间都舒服不少。
+<Tip title="Install Wispr Flow now if you're game">
+Wispr Flow ([wisprflow.ai](https://wisprflow.ai)) lets you dictate prompts instead of typing. Everything from Step 5 onwards is a spoken sentence — Wispr Flow makes the rest of this term significantly faster.
 </Tip>
 
-### 阶段 2 —— 证明 AI 会动手
+### Phase 2 — Prove the AI can act
 
 <PromptStep n={4} audience="Cursor">
-我刚装好你。你能不能做个自我介绍，告诉我你现在能调用哪些工具（比如能不能在终端跑 shell 命令、能不能读写硬盘上的文件、能不能打开网页？），然后在我 home 目录下新建一个叫 `technest-week-1` 的空文件夹？建好以后，把它作为 Cursor 工作区打开。
+I just installed you. Can you introduce yourself, tell me what tools you have access to (for example, can you run shell commands in a terminal, edit files on disk, and open URLs?), and create a brand-new empty folder called `technest-week-1` in my home directory? After creating it, open that folder as the Cursor workspace.
 </PromptStep>
 
 <VerifyStep n={5}>
 
-- Cursor 用它自己的话报告了它的能力——花一点时间读一读。
-- 你的 home 目录下出现了一个叫 `technest-week-1` 的文件夹。
-- Cursor 窗口现在就在这个文件夹里（左侧文件树看得到）。
+- Cursor reports its capabilities in its own words — take a moment to read them.
+- A folder `technest-week-1` exists in your home directory.
+- The Cursor window is now inside that folder (the file-tree pane shows it).
 
 </VerifyStep>
 
-### 阶段 3 —— 装一个 MCP 服务器，让 AI 能操作 Vercel
+### Phase 3 — Install an MCP server so the AI can drive Vercel
 
 <PromptStep n={6} audience="Cursor">
-请给我装上 **Vercel MCP 服务器**，这样你能替我调 Vercel 的 API。把它加到我的 Cursor 配置里。装好以后，告诉我它给你带来了哪些工具——我想看一看这张清单。如果 MCP 服务器需要我粘一个 Vercel token，请先停下来，告诉我这个 token 具体去哪里取，再继续。
+Please install the **Vercel MCP server** so you can call Vercel's API on my behalf. Add it to my Cursor configuration. Once installed, tell me which tools it gives you — I want to see the list. If the MCP server needs me to paste a Vercel token, pause and tell me exactly where to get the token before continuing.
 </PromptStep>
 
-<ManualStep n={7} why="Vercel 不通过任何 API 暴露账号级 token——只能在网页控制台里手动建。">
-当 Cursor 暂停并问你要 Vercel token 时，在浏览器里打开 [vercel.com/account/tokens](https://vercel.com/account/tokens)，登录，点 **Create Token**，名字起作 `cursor-mcp`，复制 token，粘回 Cursor 的聊天窗。
+<ManualStep n={7} why="Vercel never exposes account-creation tokens through any API — only the web dashboard.">
+When Cursor pauses and asks for a Vercel token, open [vercel.com/account/tokens](https://vercel.com/account/tokens) in your browser, sign in, click **Create Token**, name it `cursor-mcp`, copy the token, and paste it back into Cursor's chat.
 </ManualStep>
 
 <VerifyStep n={8}>
 
-- Cursor 打印出它现在拥有的 Vercel 工具列表（创建部署、读日志、管环境变量等等）。
-- 没有报错。
+- Cursor prints the list of Vercel tools it now has (create deployment, read logs, manage env vars, etc.).
+- No error messages.
 
 </VerifyStep>
 
-### 阶段 4 —— "哇哦"时刻
+### Phase 4 — The "wow" moment
 
 <PromptStep n={9} audience="Cursor">
-现在向我证明这个"授权模型"真的能跑通。在这个文件夹里新建一个全新的空 Next.js 项目（叫它 `hello-technest`），初始化 git 仓库，把它推到我 GitHub 账号下一个**新的**公开仓库，然后通过 Vercel MCP 部署到 Vercel。部署上线后，在我浏览器里打开生产 URL。整个过程中请合理地 commit 并写清楚的 commit message。我只负责看。
+Now prove to me that the delegation model works. Create a brand-new empty Next.js project inside this folder (call it `hello-technest`), initialise a git repo, push it to a **new** public GitHub repo under my account, and deploy it to Vercel using the Vercel MCP. When the deployment is live, open the production URL in my browser. Commit along the way with sensible messages. I'll just watch.
 </PromptStep>
 
 <VerifyStep n={10}>
 
-- 你的浏览器打开了一个线上 `hello-technest-*.vercel.app` URL，显示 Next.js 默认的 starter 页。
-- 你的 GitHub 账号里出现了一个新仓库。
-- 本地文件夹里有 Cursor 替你写的一串合理的 commit 历史。
+- Your browser opens a live `hello-technest-*.vercel.app` URL showing the default Next.js starter page.
+- A new repo appears on your GitHub account.
+- Your local folder has a commit history Cursor wrote for you.
 
 </VerifyStep>
 
 <RecoverStep n={11}>
-部署失败了，有个 build error。你能不能通过 MCP 读一下 Vercel 的 build log，找到根因，修一下，再重新部署？在我们进行下一步之前，我希望那个生产 URL 能无报错地打开。
+The deployment failed with a build error. Can you read the Vercel build logs through the MCP, find the root cause, fix it, and redeploy? I want the production URL to load without errors before we move on.
 </RecoverStep>
 
-### 阶段 5 —— 换一个 AI 试试手感
+### Phase 5 — A second AI for variety
 
 <PromptStep n={12} audience="Claude Code">
-打开一个终端，`cd` 进 `hello-technest`，确认你能看到这个项目。然后从 Anthropic skills registry 里装上 **Typst skill**。装好以后告诉我，你现在能处理哪些类型的提示词。
+Open a terminal, `cd` into `hello-technest`, and confirm you can see the project. Then install the **Typst skill** from the Anthropic skills registry. When installed, tell me what prompts the skill is now able to handle.
 </PromptStep>
 
 <VerifyStep n={13}>
 
-- Claude Code 确认 Typst skill 已安装。
-- 它列出了几条它现在能响应的提示词，比如 "generate a PDF"、"compile a typst file"。我们在第 8 周会用到这一条。
+- Claude Code confirms the Typst skill is installed.
+- It lists a handful of prompts like "generate a PDF", "compile a typst file". We'll use this in Week 8.
 
 </VerifyStep>
 
-### 阶段 6 —— 把授权规则内化掉
+### Phase 6 — Internalise the Delegation Rules
 
-<Note title="Career · 记住这张表——每一周你都会用到">
-**让 AI 去做**：开资源、环境变量管道、git、装依赖、改代码、迁移 schema、部署、生成 PDF——全部通过 CLI、API、MCP、Skill。**只有你自己能做的事**：OAuth 同意页、在 provider 站点建 API key、DNS、以及偶尔某行 `.env.local`（因为没有任何 CLI 能设它）。拿不准的时候，**直接问 AI 这件事属于哪一类** —— 这是一个完美的提示词：*"这件事你能通过 CLI 做，还是需要我自己来？"*
+<Note title="Career · Remember this table — you'll apply it every week">
+**Let the AI drive** provisioning, env-var plumbing, git, installs, edits, migrations, deploys, and PDF generation — all through CLIs, APIs, MCP servers, and Skills. **Do it yourself** only for OAuth consent screens, provider-side API-key creation, DNS, and the rare `.env.local` line where no CLI exists to set it. If you're ever unsure, **ask the AI which category a task falls into** — this is a perfectly good prompt: *"Is this something you can do via a CLI, or do I need to do it myself?"*
 </Note>
 
-## 本周作业
+## Weekly Assignment
 
-**做 / 交付。**
+**Build / Implement.**
 
-- 一个全程由 AI 调 CLI 部署出来的 `*.vercel.app` 线上 URL。
-- 一张 Cursor 对话截图，展示你用哪一句提示词触发了部署。
-- 第二张截图，展示 Vercel MCP 的 tool-call 输出。
+- One live `*.vercel.app` URL deployed entirely through AI-invoked CLIs.
+- A screenshot of your Cursor conversation showing the prompt that kicked off the deploy.
+- A second screenshot showing the Vercel MCP tool-call output.
 
-**要求。**
+**Requirements.**
 
-- 仓库必须在你自己的 GitHub 账号下。
-- 部署必须是 AI 触发的，而不是你自己手动跑 `vercel deploy`（这是整学期的重点）。
-- Cursor 和 Claude Code 必须都装好，而且 Claude Code 里已经加载了 Typst skill。
+- The repo must exist on your GitHub account.
+- The deploy must have been triggered by AI, not by you running `vercel deploy` by hand. (This is the whole point of the term.)
+- You must have both Cursor and Claude Code installed, and the Typst skill loaded in Claude Code.
 
-**提交。** 在第 2 周开课前，把这三样（线上 URL + 两张截图）发到课程 Slack 频道里。
+**Submission.** Post the three artifacts (live URL + two screenshots) in the course Slack channel before the start of Week 2.
 
-## 资源
+## Resources
 
-| 文档 | 视频 | 仓库 |
+| Docs | Videos | Repos |
 |---|---|---|
-| Cursor 官方文档 —— 入门 | 讲师的 "first AI deploy" 演示录屏 | `her-waka/tutorial/vibe-coding` —— 给好奇学员的深入版 |
-| Claude Code —— quickstart | Fireship —— "Cursor in 100 seconds" | `anthropics/skills` —— Skill registry |
-| Vercel MCP server —— readme | | |
-| Wispr Flow —— setup | | |
+| Cursor docs — getting started | The instructor's recorded "first AI deploy" demo | `her-waka/tutorial/vibe-coding` — deeper dive for curious students |
+| Claude Code — quickstart | Fireship — "Cursor in 100 seconds" | `anthropics/skills` — the Skill registry |
+| Vercel MCP server — readme | | |
+| Wispr Flow — setup | | |
 
-## 真实世界应用
+## Real-World Application
 
-2026 年任何一家做 AI 工程的公司，在面试时都会让你 **演示一次工作流**，而不是背语法。招聘经理想看到的是：候选人打开 Cursor，描述一个功能，10 分钟后一个线上 URL 就出来了——因为他们团队里的资深工程师已经是这种工作方式。今天的 Lab 就是那段面试素材：你用一句口述拿到了一个线上 URL。请把屏幕录屏存好。
+Every modern AI-engineering job interview expects you to **demo a workflow**, not recite syntax. Hiring managers in 2026 want to see a candidate open Cursor, describe a feature, and ship it live in 10 minutes — because that's how senior engineers on their teams already work. Today's lab is exactly that interview artefact: a clip of you dictating a sentence and getting a live URL. Save the screen recording.
 
 <Note title="Career">
-下一周可以更新的 LinkedIn bio：**"Full-stack AI developer · I prompt, I ship · vercel.app/my-project"**。
+LinkedIn bio upgrade for next week: **"Full-stack AI developer · I prompt, I ship · vercel.app/my-project"**.
 </Note>
 
-## 踩坑提醒 & 小贴士
+## Challenges & Tips
 
-- *"Cursor 每条 shell 命令都让我确认。"* 这是好事——课堂环境下保留手动审批。第 3 周之后如果你想迭代更快，可以给低风险命令开自动批准。
-- *"MCP 服务器说 'authentication required'。"* 你的 Vercel token 丢了或过期了。从 `vercel.com/account/tokens` 重新生成一个并粘回来。
-- *"Gemini CLI 提示我超了 rate limit。"* 本节课剩下的时间用 Cursor 或 Claude Code。Gemini 免费额度每小时重置。
-- *"我搞不清这一步该我做还是该问 AI。"* 直接问：**"这件事你能通过工具做，还是需要我自己做？"** AI 会如实回答。
-- *"我的提示词不够具体——AI 总在追问。"* 仔细看这堂课讲师用的提示词。好的提示词会写明：AI 应该用哪个**工具**、手里有哪些**输入**、以及**什么信号表示任务完成**。
+- *"Cursor is asking me to confirm each shell command."* Good — in a classroom setting keep manual approvals on. By Week 3 you can enable auto-approve for low-risk commands if you want faster iteration.
+- *"The MCP server says 'authentication required'."* Your Vercel token is missing or expired. Re-paste a fresh token from `vercel.com/account/tokens`.
+- *"Gemini CLI says I've hit a rate limit."* Use Cursor or Claude Code for the rest of the class. Gemini's free tier resets hourly.
+- *"I can't tell whether I should do the step myself or ask the AI."* Ask: **"Can you do this through your tools, or do I need to do it?"** The AI will answer honestly.
+- *"My prompts aren't specific enough — the AI keeps asking follow-ups."* Watch the instructor's prompts in this lecture carefully. Good prompts name the **tool** the AI should use, the **inputs** it has, and the **signal that the task is done**.
 
-<Info title="如果彻底卡住了">
-把你最后一条提示词 **加上** AI 最后一条回复，粘到一个全新的 Claude Code 窗口里，说：**"这条没跑通。最可能的下一步是什么，为什么？"** 把卡住的 AI 会话当成一个可以重启、可以检视、可以重定向的调试对象——这是这门课最重要的一个能力。
+<Info title="If you're completely stuck">
+Paste your last prompt **and** the AI's last response into a fresh Claude Code window and say: **"This didn't work. What's the most likely next step to try, and why?"** Treating a stuck AI session like a debuggable object — that you can restart, inspect, and redirect — is the most important skill of this course.
 </Info>

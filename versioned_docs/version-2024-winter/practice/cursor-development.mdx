@@ -1,46 +1,46 @@
 ---
 sidebar_position: 2
-title: 使用Cursor开发
-description: 学习如何使用Cursor和AI助手进行博客开发
+title: Developing with Cursor
+description: Learn how to develop a blog using Cursor and AI assistants
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# 使用Cursor开发博客
+# Developing a Blog with Cursor
 
-## 项目初始化
+## Project Initialization
 
-### 创建Next.js项目
+### Creating a Next.js Project
 
-#### 1. 使用create-next-app
+#### 1. Using create-next-app
 
-```bash title="终端命令"
+```bash title="Terminal Command"
 npx create-next-app@latest my-blog --typescript --tailwind --eslint
 cd my-blog
 ```
 
-#### 2. 安装依赖
+#### 2. Install Dependencies
 
-```bash title="安装核心依赖" showLineNumbers
+```bash title="Install Core Dependencies" showLineNumbers
 npm install @headlessui/react @heroicons/react
 npm install @mdx-js/react @mdx-js/loader
 npm install gray-matter next-mdx-remote
 npm install date-fns
 ```
 
-#### 3. 配置项目结构
+#### 3. Configure Project Structure
 
-```bash title="创建项目目录结构"
+```bash title="Create Project Directory Structure"
 mkdir -p src/{components,layouts,lib,styles,types}
 mkdir -p content/{posts,pages}
 ```
 
-## 基础组件开发
+## Basic Component Development
 
-### 布局组件
+### Layout Components
 
-#### Layout组件
+#### Layout Component
 
 ```tsx title="src/components/Layout.tsx" showLineNumbers {3,9-11,17-19}
 // src/components/Layout.tsx
@@ -56,23 +56,21 @@ interface LayoutProps {
 
 export default function Layout({ children, title, description }: LayoutProps) {
   return (
-    <div className="min-h-screen flex flex-col">
-      {/* 顶部导航 */}
+      {/* Top Navigation */}
       <Header />
-      
-      {/* 主要内容区域 */}
+
+      {/* Main Content Area */}
       <main className="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {children}
       </main>
-      
-      {/* 底部信息 */}
+
+      {/* Footer Information */}
       <Footer />
-    </div>
   );
 }
 ```
 
-#### Header组件
+#### Header Component
 
 ```tsx title="src/components/Header.tsx" showLineNumbers {12-14,20-22}
 import Link from 'next/link';
@@ -83,24 +81,19 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navigation = [
-    { name: '首页', href: '/' },
-    { name: '文章', href: '/posts' },
-    { name: '关于', href: '/about' },
-    { name: '联系', href: '/contact' },
+    { name: 'Home', href: '/' },
+    { name: 'Posts', href: '/posts' },
+    { name: 'About', href: '/about' },
+    { name: 'Contact', href: '/contact' },
   ];
 
   return (
     <header className="bg-white shadow-sm">
       <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16">
-          <div className="flex items-center">
             <Link href="/" className="text-xl font-bold text-gray-900">
-              我的博客
+              My Blog
             </Link>
-          </div>
-          
-          {/* 桌面端导航 */}
-          <div className="hidden sm:flex sm:items-center sm:space-x-8">
+          {/* Desktop Navigation */}
             {navigation.map((item) => (
               <Link
                 key={item.name}
@@ -110,10 +103,7 @@ export default function Header() {
                 {item.name}
               </Link>
             ))}
-          </div>
-
-          {/* 移动端菜单按钮 */}
-          <div className="sm:hidden">
+          {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100"
@@ -124,13 +114,8 @@ export default function Header() {
                 <Bars3Icon className="h-6 w-6" />
               )}
             </button>
-          </div>
-        </div>
-
-        {/* 移动端菜单 */}
+        {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="sm:hidden">
-            <div className="pt-2 pb-3 space-y-1">
               {navigation.map((item) => (
                 <Link
                   key={item.name}
@@ -141,8 +126,6 @@ export default function Header() {
                   {item.name}
                 </Link>
               ))}
-            </div>
-          </div>
         )}
       </nav>
     </header>
@@ -150,24 +133,22 @@ export default function Header() {
 }
 ```
 
-#### 使用AI优化样式
+#### Using AI to Optimize Styles
 
-:::tip AI提示
-使用以下提示让AI帮助优化样式：
-
+:::tip[AI Prompt]
+Use the following prompt to have AI help optimize styles:
 ```
-为这个Layout组件添加响应式样式，包括：
-1. 合适的内容最大宽度
-2. 良好的间距和边距
-3. 移动端适配
-4. 深色模式支持
+Add responsive styles to this Layout component, including:
+1. Appropriate maximum content width
+2. Good spacing and margins
+3. Mobile responsiveness
+4. Dark mode support
 ```
-
 :::
 
-### 文章列表组件
+### Post List Component
 
-#### PostList组件
+#### PostList Component
 
 ```tsx title="src/components/PostList.tsx" showLineNumbers {5-7,15-17,25-27}
 import { useState } from 'react';
@@ -188,32 +169,23 @@ export default function PostList({ posts, showExcerpt = true }: PostListProps) {
   );
 
   return (
-    <div className="space-y-6">
-      {/* 搜索框 */}
-      <div className="relative">
+      {/* Search Box */}
         <input
           type="text"
-          placeholder="搜索文章..."
+          placeholder="Search posts..."
           className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-      </div>
-
-      {/* 文章列表 */}
-      <div className="space-y-4">
+      {/* Post List */}
         {filteredPosts.map((post) => (
           <article key={post.slug} className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200">
-            <div className="p-6">
-              <div className="flex items-center justify-between mb-2">
                 <time className="text-sm text-gray-500">
                   {new Date(post.date).toLocaleDateString()}
                 </time>
                 <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
                   {post.category}
                 </span>
-              </div>
-              
               <h2 className="text-xl font-semibold text-gray-900 mb-2">
                 <Link href={`/posts/${post.slug}`} className="hover:text-blue-600">
                   {post.title}
@@ -225,40 +197,28 @@ export default function PostList({ posts, showExcerpt = true }: PostListProps) {
                   {post.excerpt}
                 </p>
               )}
-              
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-4">
                   <span className="text-sm text-gray-500">
-                    阅读时间: {post.readTime}分钟
+                    Read time: {post.readTime} min
                   </span>
                   <span className="text-sm text-gray-500">
-                    {post.views} 次浏览
+                    {post.views} views
                   </span>
-                </div>
-                
                 <Link
                   href={`/posts/${post.slug}`}
                   className="text-blue-600 hover:text-blue-800 text-sm font-medium"
                 >
-                  阅读更多 →
+                  Read more →
                 </Link>
-              </div>
-            </div>
           </article>
         ))}
-      </div>
-      
       {filteredPosts.length === 0 && (
-        <div className="text-center py-12">
-          <p className="text-gray-500">没有找到匹配的文章</p>
-        </div>
+No matching posts found
       )}
-    </div>
   );
 }
 ```
 
-#### 类型定义
+#### Type Definitions
 
 ```typescript title="src/types/index.ts" showLineNumbers
 export interface Post {
@@ -287,9 +247,9 @@ export interface Tag {
 }
 ```
 
-## 页面组件开发
+## Page Component Development
 
-### 首页组件
+### Homepage Component
 
 ```tsx title="src/pages/index.tsx" showLineNumbers {10-12,20-22,35-37}
 import { GetStaticProps } from 'next';
@@ -305,64 +265,55 @@ interface HomeProps {
 
 export default function Home({ posts, featuredPosts }: HomeProps) {
   return (
-    <Layout title="首页" description="我的技术博客">
-      <div className="space-y-12">
-        {/* 欢迎区域 */}
+    <Layout title="Home" description="My Tech Blog">
+        {/* Welcome Section */}
         <section className="text-center py-12">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            欢迎来到我的博客
+            Welcome to My Blog
           </h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            分享前端开发、技术思考和个人成长的故事
+            Sharing frontend development, technical insights, and personal growth stories
           </p>
         </section>
 
-        {/* 精选文章 */}
+        {/* Featured Posts */}
         {featuredPosts.length > 0 && (
           <section>
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">精选文章</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">Featured Posts</h2>
               {featuredPosts.map((post) => (
                 <article key={post.slug} className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200">
-                  <div className="p-6">
-                    <div className="flex items-center justify-between mb-2">
                       <time className="text-sm text-gray-500">
                         {new Date(post.date).toLocaleDateString()}
                       </time>
                       <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
-                        精选
+                        Featured
                       </span>
-                    </div>
-                    
                     <h3 className="text-lg font-semibold text-gray-900 mb-2">
                       <Link href={`/posts/${post.slug}`} className="hover:text-blue-600">
                         {post.title}
                       </Link>
                     </h3>
-                    
+
                     <p className="text-gray-600 text-sm line-clamp-3 mb-4">
                       {post.excerpt}
                     </p>
-                    
+
                     <Link
                       href={`/posts/${post.slug}`}
                       className="text-blue-600 hover:text-blue-800 text-sm font-medium"
                     >
-                      阅读更多 →
+                      Read more →
                     </Link>
-                  </div>
                 </article>
               ))}
-            </div>
           </section>
         )}
 
-        {/* 最新文章 */}
+        {/* Latest Posts */}
         <section>
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">最新文章</h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-6">Latest Posts</h2>
           <PostList posts={posts.slice(0, 6)} />
         </section>
-      </div>
     </Layout>
   );
 }
@@ -380,7 +331,7 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 ```
 
-### 文章详情页
+### Post Detail Page
 
 ```tsx title="src/pages/posts/[slug].tsx" showLineNumbers {15-17,25-27,40-42}
 import { GetStaticPaths, GetStaticProps } from 'next';
@@ -418,25 +369,17 @@ export default function PostPage({ post, source }: PostPageProps) {
   return (
     <Layout title={post.title} description={post.excerpt}>
       <article className="max-w-4xl mx-auto">
-        {/* 文章头部 */}
+        {/* Article Header */}
         <header className="mb-8">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
             {post.title}
           </h1>
-          
-          <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
-            <div className="flex items-center space-x-4">
               <time>{new Date(post.date).toLocaleDateString()}</time>
-              <span>阅读时间: {post.readTime}分钟</span>
-              <span>{post.views} 次浏览</span>
-            </div>
-            
+              <span>Read time: {post.readTime} min</span>
+              <span>{post.views} views</span>
             <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
               {post.category}
             </span>
-          </div>
-          
-          <div className="flex flex-wrap gap-2">
             {post.tags.map((tag) => (
               <span
                 key={tag}
@@ -445,13 +388,10 @@ export default function PostPage({ post, source }: PostPageProps) {
                 #{tag}
               </span>
             ))}
-          </div>
         </header>
 
-        {/* 文章内容 */}
-        <div className="prose prose-lg max-w-none">
+        {/* Article Content */}
           <MDXRemote {...source} components={components} />
-        </div>
       </article>
     </Layout>
   );
@@ -482,9 +422,9 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 };
 ```
 
-## 工具函数开发
+## Utility Function Development
 
-### 文章处理工具
+### Post Processing Utilities
 
 ```typescript title="src/lib/posts.ts" showLineNumbers {8-10,20-22,35-37}
 import fs from 'fs';
@@ -510,7 +450,7 @@ export function getAllPosts(): Post[] {
         title: data.title || '',
         excerpt: data.excerpt || '',
         date: data.date || '',
-        category: data.category || '未分类',
+        category: data.category || 'Uncategorized',
         tags: data.tags || [],
         readTime: calculateReadTime(content),
         views: data.views || 0,
@@ -577,14 +517,14 @@ export function getTags(): { name: string; count: number }[] {
 }
 ```
 
-### 样式工具
+### Styling Utilities
 
 ```css title="src/styles/globals.css" showLineNumbers {5-7,15-17,25-27}
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* 自定义样式 */
+/* Custom Styles */
 @layer base {
   html {
     scroll-behavior: smooth;
@@ -651,42 +591,40 @@ export function getTags(): { name: string; count: number }[] {
 }
 ```
 
-:::tip AI提示
-使用以下提示让AI帮助优化代码：
-
+:::tip[AI Prompt]
+Use the following prompt to have AI help optimize the code:
 ```
-请审查这些代码，提供以下方面的改进建议：
-1. 性能优化
-2. 代码结构
-3. 错误处理
-4. 可访问性
-5. SEO优化
+Please review this code and provide improvement suggestions for:
+1. Performance optimization
+2. Code structure
+3. Error handling
+4. Accessibility
+5. SEO optimization
 ```
-
 :::
 
-## 配置文件
+## Configuration Files
 
-### Next.js配置
+### Next.js Configuration
 
 ```javascript title="next.config.js" showLineNumbers {5-7,15-17}
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-  
-  // 图片优化配置
+
+  // Image optimization configuration
   images: {
     domains: ['example.com'],
     formats: ['image/webp', 'image/avif'],
   },
-  
-  // 实验性功能
+
+  // Experimental features
   experimental: {
     appDir: false,
   },
-  
-  // 自定义Webpack配置
+
+  // Custom Webpack configuration
   webpack: (config, { isServer }) => {
     if (!isServer) {
       config.resolve.fallback = {
@@ -701,7 +639,7 @@ const nextConfig = {
 module.exports = nextConfig;
 ```
 
-### Tailwind配置
+### Tailwind Configuration
 
 ```javascript title="tailwind.config.js" showLineNumbers {8-10,20-22}
 /** @type {import('tailwindcss').Config} */
@@ -742,15 +680,13 @@ module.exports = {
 };
 ```
 
-:::tip AI提示
-使用以下提示让AI帮助优化部署：
-
+:::tip[AI Prompt]
+Use the following prompt to have AI help optimize deployment:
 ```
-请提供这个Next.js博客应用的部署指南，包括：
-1. Vercel部署配置
-2. 环境变量设置
-3. 构建优化
-4. 性能监控
+Please provide a deployment guide for this Next.js blog application, including:
+1. Vercel deployment configuration
+2. Environment variable setup
+3. Build optimization
+4. Performance monitoring
 ```
-
 :::

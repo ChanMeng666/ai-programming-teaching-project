@@ -1,5 +1,5 @@
 ---
-title: Mermaid 基础教程
+title: Mermaid Basics Tutorial
 sidebar_position: 2
 ---
 
@@ -8,72 +8,68 @@ import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
 import Admonition from '@theme/Admonition';
 
-# Mermaid 基础教程
+# Mermaid Basics Tutorial
 
-## 什么是 Mermaid
+## What is Mermaid?
 
-Mermaid 是一个基于文本的图表生成工具，通过简单的文本描述就能生成各种专业图表。它的核心理念是"代码即图表"，让图表的创建和维护变得像编写代码一样简单。
+Mermaid is a text-based diagram generation tool that creates various professional diagrams through simple text descriptions. Its core concept is "code as diagram," making diagram creation and maintenance as simple as writing code.
 
-### 核心优势
+### Core Advantages
 
-- **版本控制友好**：纯文本格式，可以使用 Git 管理
-- **易于维护**：修改图表只需编辑文本
-- **平台通用**：支持 GitHub、GitLab、Notion、Obsidian 等多个平台
-- **实时预览**：编写即可见，所见即所得
-- **无需设计技能**：专注于内容，样式自动处理
+- **Version Control Friendly**: Plain text format, manageable with Git
+- **Easy to Maintain**: Modifying diagrams only requires editing text
+- **Platform Universal**: Supports GitHub, GitLab, Notion, Obsidian, and many other platforms
+- **Real-time Preview**: Write and see immediately, what you see is what you get
+- **No Design Skills Required**: Focus on content, styles are handled automatically
 
-## 环境配置
+## Environment Setup
 
 <Tabs>
 <TabItem value="vscode" label="VS Code" default>
-
-#### 安装 Mermaid 插件
+#### Install Mermaid Plugin
 
 <CodeBlock language="text">
-{`您：请帮我在 VS Code 中配置 Mermaid 环境
+{`You: Please help me set up the Mermaid environment in VS Code
 
-Gemini：我来帮您配置 VS Code 的 Mermaid 开发环境。
+Gemini: I'll help you configure the Mermaid development environment in VS Code.
 
-需要安装的扩展：
+📦 Extensions to install:
 
 1. Mermaid Preview
-   - 扩展 ID: bierner.markdown-mermaid
-   - 功能：在 Markdown 中预览 Mermaid 图表
+   - Extension ID: bierner.markdown-mermaid
+   - Function: Preview Mermaid diagrams in Markdown
 
 2. Mermaid Editor
-   - 扩展 ID: tomoyukim.vscode-mermaid-editor
-   - 功能：专门的 Mermaid 编辑器
+   - Extension ID: tomoyukim.vscode-mermaid-editor
+   - Function: Dedicated Mermaid editor
 
-安装命令：
+Installation commands:
 code --install-extension bierner.markdown-mermaid
 code --install-extension tomoyukim.vscode-mermaid-editor
 
-配置完成！现在您可以：
-- 在 .md 文件中使用 \`\`\`mermaid 代码块
-- 使用 Ctrl+Shift+V 预览图表
-- 右键选择 "Preview Mermaid" 查看图表`}
+✅ Configuration complete! Now you can:
+- Use \`\`\`mermaid code blocks in .md files
+- Use Ctrl+Shift+V to preview diagrams
+- Right-click and select "Preview Mermaid" to view diagrams`}
 </CodeBlock>
 
 </TabItem>
-<TabItem value="online" label="在线编辑器">
-
+<TabItem value="online" label="Online Editor">
 #### Mermaid Live Editor
 
-访问 [Mermaid Live Editor](https://mermaid.live) 即可开始使用，无需任何配置。
+Visit [Mermaid Live Editor](https://mermaid.live) to start using immediately, no configuration needed.
 
-特点：
-
-- 实时预览
-- 导出 SVG/PNG
-- 分享链接
-- 主题切换
+Features:
+- Real-time preview
+- Export SVG/PNG
+- Share links
+- Theme switching
 
 </TabItem>
 <TabItem value="github" label="GitHub">
+#### GitHub Native Support
 
-#### GitHub 原生支持
-
-GitHub 自动渲染 Mermaid 代码块，只需在 Markdown 中使用：
+GitHub automatically renders Mermaid code blocks, just use in Markdown:
 
 <CodeBlock language="markdown">
 {`\`\`\`mermaid
@@ -86,22 +82,22 @@ graph TD
 </TabItem>
 </Tabs>
 
-## 流程图（Flowchart）
+## Flowchart
 
-流程图是最常用的图表类型，用于展示过程、算法或工作流程。
+Flowcharts are the most commonly used diagram type, used to display processes, algorithms, or workflows.
 
-### 基础语法
+### Basic Syntax
 
-#### 图表方向
+#### Chart Direction
 
 <CodeBlock language="mermaid">
-{`graph TD  %% Top Down - 从上到下
-graph LR  %% Left to Right - 从左到右
-graph BT  %% Bottom to Top - 从下到上
-graph RL  %% Right to Left - 从右到左`}
+{`graph TD  %% Top Down - from top to bottom
+graph LR  %% Left to Right - from left to right
+graph BT  %% Bottom to Top - from bottom to top
+graph RL  %% Right to Left - from right to left`}
 </CodeBlock>
 
-#### 节点形状
+#### Node Shapes
 
 <CodeBlock language="mermaid">
 {`graph LR
@@ -131,16 +127,16 @@ graph LR
     J[\反向平行四边形\]
 ```
 
-#### 连接线样式
+#### Connection Line Styles
 
 <CodeBlock language="mermaid">
 {`graph LR
-    A --> B     %% 实线箭头
-    C --- D     %% 实线
-    E -.-> F    %% 虚线箭头
-    G -.- H     %% 虚线
-    I ==> J     %% 粗线箭头
-    K === L     %% 粗线`}
+    A --> B     %% Solid arrow
+    C --- D     %% Solid line
+    E -.-> F    %% Dashed arrow
+    G -.- H     %% Dashed line
+    I ==> J     %% Thick arrow
+    K === L     %% Thick line`}
 </CodeBlock>
 
 ```mermaid
@@ -153,9 +149,9 @@ graph LR
     K === L
 ```
 
-### 实战示例
+### Practical Examples
 
-#### 用户登录流程
+#### User Login Flow
 
 <CodeBlock language="mermaid">
 {`graph TD
@@ -179,13 +175,13 @@ graph TD
     E --> G[结束]
 ```
 
-<Admonition type="tip" title="AI 辅助创建">
-使用 Gemini CLI 可以通过自然语言快速生成流程图：
+<Admonition type="tip" title="AI-Assisted Creation">
+Use Gemini CLI to quickly generate flowcharts through natural language:
 
 <CodeBlock language="text">
-{`您：帮我生成一个订单处理流程图，包括下单、支付、发货、收货
+{`You: Help me generate an order processing flowchart, including ordering, payment, shipping, and delivery
 
-Gemini：我来为您生成订单处理流程图：
+Gemini: I'll generate an order processing flowchart for you:
 
 \`\`\`mermaid
 graph TD
@@ -208,11 +204,11 @@ graph TD
 </CodeBlock>
 </Admonition>
 
-## 时序图（Sequence Diagram）
+## Sequence Diagram
 
-时序图用于展示对象之间的交互顺序，特别适合描述系统组件间的通信过程。
+Sequence diagrams are used to show the interaction order between objects, particularly suitable for describing communication processes between system components.
 
-### 基础语法
+### Basic Syntax
 
 <CodeBlock language="mermaid">
 {`sequenceDiagram
@@ -242,9 +238,9 @@ sequenceDiagram
     Note over A,B: 跨参与者注释
 ```
 
-### 高级特性
+### Advanced Features
 
-#### 循环和条件
+#### Loops and Conditions
 
 <CodeBlock language="mermaid">
 {`sequenceDiagram
@@ -290,7 +286,7 @@ sequenceDiagram
     end
 ```
 
-### 实战示例：API 调用流程
+### Practical Example: API Call Flow
 
 <CodeBlock language="mermaid">
 {`sequenceDiagram
@@ -328,9 +324,9 @@ sequenceDiagram
     G-->>C: HTTP响应
 ```
 
-## 样式和主题
+## Styles and Themes
 
-### 自定义节点样式
+### Custom Node Styles
 
 <CodeBlock language="mermaid">
 {`graph TD
@@ -358,10 +354,10 @@ graph TD
     classDef endClass fill:#e8f5e9,stroke:#1b5e20,stroke-width:2px
 ```
 
-### 主题配置
+### Theme Configuration
 
 <Tabs>
-<TabItem value="default" label="默认主题" default>
+<TabItem value="default" label="Default Theme" default>
 
 <CodeBlock language="mermaid">
 {`%%{init: {'theme':'default'}}%%
@@ -371,7 +367,7 @@ graph TD
 </CodeBlock>
 
 </TabItem>
-<TabItem value="dark" label="暗色主题">
+<TabItem value="dark" label="Dark Theme">
 
 <CodeBlock language="mermaid">
 {`%%{init: {'theme':'dark'}}%%
@@ -381,7 +377,7 @@ graph TD
 </CodeBlock>
 
 </TabItem>
-<TabItem value="forest" label="森林主题">
+<TabItem value="forest" label="Forest Theme">
 
 <CodeBlock language="mermaid">
 {`%%{init: {'theme':'forest'}}%%
@@ -393,29 +389,27 @@ graph TD
 </TabItem>
 </Tabs>
 
-## 最佳实践
+## Best Practices
+#### Naming Conventions
+    - Use meaningful node IDs
+- Keep labels concise and clear
+- Avoid overly long text
+#### Layout Optimization
+    - Choose appropriate chart direction
+- Control diagram complexity
+- Use subgraph grouping appropriately
+#### Visual Design
+    - Maintain style consistency
+- Use colors to distinguish categories
+- Avoid over-decoration
+## Next Steps
 
-**命名规范**：
+Congratulations on mastering the basics of Mermaid! Next you can:
 
-- 使用有意义的节点ID
-- 保持标签简洁明了
-- 避免过长的文本
+  <a href="../mermaid-advanced" className="next-button">
+    Learn Mermaid Advanced Features →
+  </a>
+  <a href="../ai-assistance" className="next-button secondary">
+    Explore AI-Assisted Creation →
+  </a>
 
-**布局优化**：
-
-- 选择合适的图表方向
-- 控制图表复杂度
-- 合理使用子图分组
-
-**视觉设计**：
-
-- 保持样式一致性
-- 使用颜色区分类别
-- 避免过度装饰
-
-## 下一步
-
-恭喜您掌握了 Mermaid 的基础知识。接下来可以：
-
-- [学习 Mermaid 高级特性](../mermaid-advanced)
-- [探索 AI 辅助创作](../ai-assistance)

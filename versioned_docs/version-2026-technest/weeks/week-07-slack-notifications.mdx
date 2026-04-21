@@ -1,208 +1,208 @@
 ---
-title: "第 7 周：实时 Slack 通知"
-description: 做一个带 rate limit + honeypot + IP hashing 的联系表单。提交时既写入 Neon，也触发 Slack webhook。
-sidebar_label: "第 7 周：实时 Slack 通知"
+title: "Week 7: Real-Time Slack Notifications"
+description: Build a contact form with rate limiting + honeypot + IP hashing. Persist to Neon and ping a Slack webhook on every submission.
+sidebar_label: "Week 7: Real-Time Slack Notifications"
 ---
 
 <AxisBadge axes={["JOB", "COOL"]} />
 
-# 实时 Slack 通知
+# Real-Time Slack Notifications
 
-## 学习目标
+## Learning Objectives
 
-到本节课结束，学员应当能够：
+By the end of this session, students should be able to:
 
-- **创建一个 Slack App 并拿到 incoming webhook URL** —— 人需要做的最少功——然后把其它一切交给 Cursor。
-- **做一个联系表单，让它在一个 server action 里既写 Neon 也调 Slack webhook**，全部通过一句端到端描述功能的提示词搞定。
-- **把"通知即可观测性"刻进脑子**：为什么"每个真实事件都触发一条小小的 Slack ping"是资深工程师 *实际* 监控小型生产产品的方式。
+- **Create a Slack App and obtain an incoming webhook URL** — the minimum human work — then hand everything else to Cursor.
+- **Build a contact form that writes to Neon and fires a Slack webhook in one server action**, through a single prompt describing the feature end-to-end.
+- **Think about notification-as-observability**: why a tiny Slack ping on every real event is how senior engineers *actually* monitor small products in production.
 
-## 核心主题
+## Core Topics
 
-- Slack Apps、Incoming Webhooks，以及为什么这是世界上最便宜的实时管道。
-- Server action 作为 webhook 调用的"信任边界"——webhook URL 是 secret。
-- Fan-out 模式：一个事件 → 两个目的地（数据库 + Slack）。其中一个失败时怎么决定重试 / 记日志 / 丢弃。
-- 反垃圾：rate limit、honeypot 字段、内容过滤——保护你的 Slack 不被一个无聊的 bot 打 400 次。
+- Slack Apps, Incoming Webhooks, and why this is the cheapest real-time pipe in the world.
+- Server actions as the right "trust boundary" for webhook calls — the webhook URL is a secret.
+- Fan-out pattern: one event, two destinations (database + Slack). What happens when one of them fails and how to decide whether to retry, log, or drop.
+- Spam defence: rate limiting, honeypot fields, content filtering — protecting your Slack from getting pinged 400 times by a bored bot.
 
-## 工具 / 技术栈
+## Tools / Stack
 
-| 工具 | 本周角色 |
+| Tool | Role this week |
 |---|---|
-| **Slack** | 通知落地的地方 —— 你自己的 workspace。 |
-| **Slack Incoming Webhooks** | 最简单的"HTTP-POST-到-Slack"机制。 |
-| **Next.js server actions** | 表单 handler 所在地；secret 只能 server 端看到。 |
-| **Drizzle + Neon** | 新表 `contact_submissions` 持久化每一次提交。 |
-| **`@upstash/ratelimit`**（可选） | 滑动窗口 rate limit。 |
+| **Slack** | Where notifications land — your own workspace. |
+| **Slack Incoming Webhooks** | The simplest HTTP-POST-to-Slack mechanism. |
+| **Next.js server actions** | Where the form handler lives; server-only secrets. |
+| **Drizzle + Neon** | New `contact_submissions` table persists every form. |
+| **`@upstash/ratelimit`** (optional) | Sliding-window rate limit for the form. |
 
 <SiteEvolution thisWeek={7} />
 
-## 课堂计划
+## Session Plan
 
-| 时间 | 活动 |
+| Time | Activity |
 |---|---|
-| 0 – 15 分钟 | **回顾与 Check-in。** 谁拿到了第一个博客订阅者？有没有意外的回复？ |
-| 15 – 40 分钟 | **概念讲解。** Slack incoming webhook 在 HTTP 层是怎么工作的（让 Cursor 用 `curl` 演示一下）。为什么 webhook URL 是 secret。Fan-out 与失败模式。为什么你"第一次的生产监控"应该是一个 Slack 频道。 |
-| 40 – 75 分钟 | **现场演示。** 讲师在自己的站上加联系表单，看着一位同学提交它——Slack 消息实时弹在投影仪上。全班鼓掌。 |
-| 75 – 105 分钟 | **动手 Lab。** 学员搭自己的联系表单；每个人给某一位同学的表单提交一条消息，互相测试实时 ping。 |
-| 105 – 120 分钟 | **Q&A + 收尾。** 谁的 Slack ping 没到，当场调——通常是 URL 写错或环境变量没设。 |
+| 0 – 15 min | **Recap & Check-in.** Who got their first blog subscriber? Any surprising replies? |
+| 15 – 40 min | **Concept Teaching.** How Slack incoming webhooks work at the HTTP level (show Cursor `curl`-ing the webhook). Why the webhook URL is a secret. Fan-out + failure modes. Why your first "production monitoring" should be a Slack channel. |
+| 40 – 75 min | **Live Demo.** Instructor adds a contact form to her site and watches a classmate submit it — a Slack message pops up on the projector in real time. Class claps. |
+| 75 – 105 min | **Hands-On Lab.** Students build their own contact form; everyone submits *one* message to *one* classmate's form to test the real-time pings. |
+| 105 – 120 min | **Q&A + Wrap.** Anyone whose Slack ping didn't arrive gets debugged — usually a bad URL or missing env var. |
 
-## 动手 Lab
+## Hands-On Lab
 
-**任务。** 下课时，你的线上站有 *Contact* 页，带表单。提交时，消息存到 Neon **并且** 实时触发一条 Slack 消息到你 workspace 里 `#my-site` 频道——2 秒以内到达，附带发件人姓名、邮箱、消息正文。
+**Task.** By the end of class your live site has a *Contact* page with a form. When someone submits it, the message is saved to Neon **and** a real-time Slack message arrives in a `#my-site` channel in your own Slack workspace — within two seconds, with the sender's name, email, and message.
 
-### 阶段 1 —— 配 Slack
+### Phase 1 — Set up Slack
 
-<ManualStep n={1} why="Slack 的 app 创建和 workspace 安装流程在多个步骤上需要人同意。Slack 明确不暴露任何能替用户创建 app 的 API——是它故意这样设计的。">
-在浏览器打开 [api.slack.com/apps](https://api.slack.com/apps)：
+<ManualStep n={1} why="Slack's app-creation and workspace-installation flows require human consent at several steps. Slack explicitly does not expose an API that can create apps on a user's behalf — by design.">
+Open [api.slack.com/apps](https://api.slack.com/apps) in a browser and:
 
-1. 点 **Create New App → From scratch**。命名 `My Portfolio Contact`。选择你想让通知落地的 workspace（用你个人的就行——没有就新建一个）。
-2. 在 app 设置里点 **Incoming Webhooks** → 把 **Activate Incoming Webhooks** 打开。
-3. 点 **Add New Webhook to Workspace**。选（或新建）一个频道叫 `#my-site-contact`。同意。
-4. 复制生成的 webhook URL（形如 `https://hooks.slack.com/services/T.../B.../...`）。这个 tab 别关。
+1. Click **Create New App → From scratch**. Name it `My Portfolio Contact`. Select the workspace you want notifications to land in (your personal one is fine — create a new workspace if you don't have one).
+2. In the app settings, click **Incoming Webhooks** → toggle **Activate Incoming Webhooks** on.
+3. Click **Add New Webhook to Workspace**. Choose (or create) a channel called `#my-site-contact`. Approve.
+4. Copy the resulting webhook URL (it looks like `https://hooks.slack.com/services/T.../B.../...`). Keep this tab open.
 </ManualStep>
 
-### 阶段 2 —— 把 webhook 接进项目
+### Phase 2 — Wire the webhook into the project
 
 <PromptStep n={2} audience="Cursor">
-这是我的 Slack incoming webhook URL：**\[粘贴\]**。
+Here is my Slack incoming webhook URL: **\[paste\]**.
 
-请：
+Please:
 
-1. 把 `SLACK_CONTACT_WEBHOOK_URL` 通过 Vercel CLI 加到 `.env.local` 和 Vercel 的 production + preview 环境。
-2. 装上 `zod` 做输入校验，以及 `@upstash/ratelimit` + `@upstash/redis` 做 rate limit（如果我还没配 Upstash，先跳过 rate limit——下一步用更简单的办法）。
-3. 加一张新的 Drizzle 表 `contact_submissions`，列：`id`（serial 主键）、`name`（text，1–80 字符）、`email`（text，得像 email，用 zod 校验）、`message`（text，10–2000 字符）、`user_agent`（text，可空）、`ip_hash`（text，可空——我们 hash IP，永不存原文）、`created_at`（timestamp 默认 now）。
-4. 生成并 push 迁移。
+1. Add `SLACK_CONTACT_WEBHOOK_URL` to `.env.local` and to Vercel's production and preview environments via the Vercel CLI.
+2. Install `zod` for input validation and `@upstash/ratelimit` + `@upstash/redis` for rate limiting (if I don't have Upstash set up yet, skip rate limiting for now — we'll add a simpler approach).
+3. Add a new Drizzle table `contact_submissions` with columns: `id` (serial PK), `name` (text, 1–80 chars), `email` (text, must look like an email, validated with zod), `message` (text, 10–2000 chars), `user_agent` (text, nullable), `ip_hash` (text, nullable — we'll hash the IP, never store raw), `created_at` (timestamp default now).
+4. Generate and push the migration.
 
-继续之前，确认 webhook URL 看起来是合法的 Slack URL，而不是我可能粘错的别的 URL。（regex 检查：必须以 `https://hooks.slack.com/services/` 开头。）
+Before continuing, confirm the webhook URL is a valid-looking Slack URL and not any other URL I might have pasted by mistake. (Regex check: it must start with `https://hooks.slack.com/services/`.)
 </PromptStep>
 
 <VerifyStep n={3}>
 
-- Cursor 确认 webhook URL 格式正确。
-- `contact_submissions` 表存在于 Neon（Cursor 查 `information_schema` 证明）。
-- `SLACK_CONTACT_WEBHOOK_URL` 在 `.env.local` 和 Vercel 的 prod + preview 都设了。
+- Cursor confirms the webhook URL format is correct.
+- `contact_submissions` table exists in Neon (Cursor queries `information_schema` to prove it).
+- `SLACK_CONTACT_WEBHOOK_URL` is in `.env.local` and Vercel's prod + preview.
 
 </VerifyStep>
 
-### 阶段 3 —— 做联系表单 + server action
+### Phase 3 — Build the contact form + server action
 
 <PromptStep n={4} audience="Cursor">
-做 `/contact` 页和它的 server action：
+Build a `/contact` page and its server action:
 
-**UI（`/contact`）：**
+**UI (`/contact`):**
 
-- 干净的表单：Name、Email、Message textarea、*Send* 按钮。匹配站点 design tokens 和强调色。
-- message 字段实时字符计数（10 最少 / 2000 最多）。
-- 一个**可见的隐藏蜜罐字段**叫 `website` —— label 起一个无聊的名字 *Your website (optional)*，用 CSS 视觉上隐藏（不要用 `hidden` 属性），server 端拒绝任何这个字段被填的提交。
-- 提交后：显示成功状态 **"Thanks! I'll be in touch within 48 hours."**。不要跳走。
+- Clean form: Name, Email, Message textarea, *Send* button. Match the site's design tokens and accent colour.
+- Real-time character count on the message field (10 min / 2000 max).
+- A visible **hidden honeypot field** named `website` — label it something boring like *Your website (optional)*, hide it visually with CSS (not with `hidden`), and the server rejects any submission where this is filled.
+- After submit: show a success state **"Thanks! I'll be in touch within 48 hours."** Don't navigate away.
 
-**server action（`app/contact/actions.ts`）：**
+**Server action (`app/contact/actions.ts`):**
 
-- 用 zod 校验输入。蜜罐被填的提交静默拒绝（返回成功 UI 但不持久化、不通知——这能迷惑 bot）。
-- 把请求 IP 用 SHA-256 hash，提取 `user-agent`；两者都存。
-- INSERT 到 `contact_submissions`。
-- 通过 `fetch(POST)` 触发 Slack webhook，消息形如：
+- Validate inputs with zod. Reject honeypot-filled submissions silently (return success UI but don't persist and don't notify — this confuses bots).
+- Hash the request IP (SHA-256) and extract `user-agent`; store both.
+- INSERT into `contact_submissions`.
+- Fire the Slack webhook via `fetch(POST)` with a message that looks like:
 
   > **New contact form submission**
   > **From:** \[name\] (`\[email\]`)
-  > **Message:** \[message, 前 400 字符\]
+  > **Message:** \[message, first 400 chars\]
   > _received \[ISO timestamp\]_
 
-- 如果 Slack 调用失败，仍然写 DB 行 + 记日志——绝不因为 Slack 抽风而丢用户的消息。
-- 给表单 UI 返回合适的 success / error shape。
+- If the Slack call fails, still persist the DB row and log the failure — never drop the user's message because Slack hiccupped.
+- Return an appropriate success / error shape to the form UI.
 </PromptStep>
 
 <VerifyStep n={5}>
 
-- localhost：用合法数据提交表单。出现成功状态。
-- ~2 秒内 Slack 消息到达 `#my-site-contact`。
-- Neon 里有这一行。
-- 蜜罐被填提交——表单显示成功状态，但 Slack 和 Neon 都没东西到（静默丢）。
-- message 长度 5 提交——表单报校验错，不提交。
+- Localhost: submit the form with valid data. Success state appears.
+- A Slack message arrives in `#my-site-contact` within ~2 seconds.
+- The row is in Neon.
+- Submit with the honeypot filled — form shows success state but nothing arrives in Slack or Neon (silent drop).
+- Submit with message length 5 — form shows validation error, no submission.
 
 </VerifyStep>
 
-### 阶段 4 —— 给 bot 设阻力，不给人设
+### Phase 4 — Friction for bots, not humans
 
 <PromptStep n={6} audience="Cursor">
-加两层便宜的反垃圾：
+Add two cheap spam defences:
 
-1. **按 IP hash rate limit：** 每小时 5 次。用一个内存 LRU（带 TTL 的 Map）就行——我们没装 Upstash，课堂用够了。超额时返回 429，显示 **"You've sent a lot of messages recently — try again in an hour."**
-2. **内容启发式：** message 里超过 3 个 URL，或者 message 和最近 10 分钟内某次提交完全相同，则静默丢（同蜜罐 UX）。
+1. **Rate limit per IP hash:** 5 submissions per hour. Use an in-memory LRU (simple Map with TTL) since we haven't set up Upstash — that's fine for class. When exceeded, return a 429 and show **"You've sent a lot of messages recently — try again in an hour."**
+2. **Content heuristic:** if the message contains more than 3 URLs, or if the message is identical to the previous submission in the last 10 minutes, silently drop it (same UX as honeypot).
 
-如果我配了第二个 webhook 到 `#my-site-spam`，每次 drop 给一条小通知；否则只在 server 端记日志。
+Add tiny Slack notifications for each drop reason to a separate `#my-site-spam` channel if I set up a second webhook, otherwise just log server-side.
 </PromptStep>
 
 <VerifyStep n={7}>
 
-- 同一个浏览器一连发 6 次 —— 第 6 次 rate-limited。
-- 10 分钟内同一条消息提交两次——第二次静默丢。
-- 一条 5 个 URL 的消息——静默丢。
+- Submit 6 times in a row from your browser — 6th is rate-limited.
+- Submit the same message twice within 10 minutes — second is silently dropped.
+- Submit a message with 5 URLs — silently dropped.
 
 </VerifyStep>
 
-### 阶段 5 —— 上线
+### Phase 5 — Ship
 
 <PromptStep n={8} audience="Cursor">
-全部 commit，push，等 Vercel 部署。线上后，自己从生产 URL 提交一次测试表单，确认 Slack webhook 在 prod 也工作（环境变量有时会被错加到 `preview`）。再做一件事：在站点 header 里 *Blog* 旁边加一个小 *Contact* 链接。
+Commit everything, push, wait for the Vercel deploy. Once live, submit a test form from the production URL yourself to verify the Slack webhook works in prod (env vars sometimes only get added to `preview` by mistake). Also, add a small *Contact* link to the site header next to *Blog*.
 </PromptStep>
 
 <VerifyStep n={9}>
 
-- header 里现在有 *Blog* · *Contact* 在已有 nav 旁边。
-- 一条生产环境的提交在 2 秒内出现在 Slack 里。
-- Neon 行里 IP 是 hashed 的（不是原文）。
+- Header now has *Blog* · *Contact* next to existing nav items.
+- A production submission arrives in Slack within 2 seconds.
+- The Neon row shows a hashed IP (not raw).
 
 </VerifyStep>
 
 <RecoverStep n={10}>
-20 分钟前 Slack 消息停了，但表单仍然返回成功。请检查 Vercel 上 contact action 的 function 日志，找到 Slack POST 在哪里挂掉，并引导我修。优先级：除非我们明确决定可以这样，否则不要在 **没有** Slack 投递的情况下继续存用户消息。
+Slack messages stopped arriving 20 minutes ago, but the form still returns success. Please check the Vercel function logs for the contact action, identify where the Slack POST is failing, and walk me through fixing it. Prioritise: do not start storing users' messages **without** Slack delivery unless we explicitly decide that's OK.
 </RecoverStep>
 
-<Warning title="你的 webhook URL 等价于密码">
-任何拿到你 Slack webhook URL 的人都可以往你频道里发任意内容，包括垃圾或冒犯内容。**永远不要** 把它 commit 到 GitHub、永远不要在公开截图里露出来、永远不要在 DM 里 "给你看个链接" 的方式发。一旦泄露，立即在 Slack app 设置里 rotate —— 拿到新 URL 后，Cursor 一句话就能更新你 `.env` + Vercel env vars。
+<Warning title="Your webhook URL is a password-equivalent">
+Anyone with your Slack webhook URL can post anything into your channel, including spam or abusive content. **Never** commit it to GitHub, never paste it into public screenshots, never send it in a DM as "here's a link". If it ever leaks, rotate it in the Slack app settings immediately — Cursor can update your `.env` + Vercel env vars in one prompt once you have the new URL.
 </Warning>
 
-## 本周作业
+## Weekly Assignment
 
-**做 / 交付。**
+**Build / Implement.**
 
-- 线上 `/contact` 页，存 Neon 并通知你的 Slack。
-- rate limit + 蜜罐 + 重复内容防护都工作。
+- Live `/contact` page that saves to Neon and notifies your Slack.
+- Rate limit + honeypot + duplicate-content defences working.
 
-**要求。**
+**Requirements.**
 
-- 蜜罐字段在正常 UI 里看不见，但在 DOM 里存在。
-- IP 都 hash，不存原文。
-- 同学的电脑上提交一条，3 秒内你的 Slack 收到 ping。
-- 一张你 Slack 频道截图，至少 3 条来自同学的提交。
+- Honeypot field invisible in the normal UI but present in the DOM.
+- IPs are hashed, never stored raw.
+- Live submission from a classmate's computer triggers a Slack ping within 3 seconds.
+- Screenshot of your Slack channel showing at least three classmate submissions.
 
-**提交。** 第 8 周开课前，把线上 URL + Slack 截图发到课程频道。
+**Submission.** Live URL + Slack screenshot in the course channel before Week 8.
 
-## 资源
+## Resources
 
-| 文档 | 视频 | 仓库 |
+| Docs | Videos | Repos |
 |---|---|---|
-| Slack Incoming Webhooks —— 文档 | 讲师 demo："实时 Slack ping，12 分钟" | `vercel/next.js/examples/with-server-actions` |
-| Slack Block Kit —— 让消息更好看（可选） | | |
-| `zod` —— schema 校验 | | |
-| Next.js server actions —— docs | | |
+| Slack Incoming Webhooks — docs | Instructor demo: "Real-time Slack pings in 12 minutes" | `vercel/next.js/examples/with-server-actions` |
+| Slack Block Kit — for nicer messages (optional) | | |
+| `zod` — schema validation | | |
+| Next.js server actions — docs | | |
 
-## 真实世界应用
+## Real-World Application
 
-每一个独立产品和早期创业公司的"可观测性"之旅都从同一种方式起步：**一个 Slack 频道，对每个重要事件做自动 ping**。在 Grafana 之前、Datadog 之前、PagerDuty 之前——只是一个叫 `#ops` 或 `#events` 的 Slack 频道。现在就把这个习惯刻进肌肉记忆，意味着你交付第一个生产产品时，已经知道怎么"摸到它的脉搏"——一分钱工具费都不花。
+Every indie product and early-stage startup begins its observability journey the same way: **a Slack channel with automated pings for every important event**. Before Grafana, before Datadog, before PagerDuty — just one Slack channel called `#ops` or `#events`. Getting this habit into your fingers now means that when you ship your first production product, you'll already know how to feel its pulse without spending a cent on tooling.
 
 <Note title="Career">
-下课后，再加一个 webhook 给 guestbook 提交（10 分钟的提示词）。现在每当有人登录你站点并留言，你都会收到通知——你会亲身体会到 *我的产品在 alive，真有人在用* 这种感觉。这种感觉是上瘾的。保护它的方式是：永远别让你 Slack 频道吵到你必须 mute。
+After class, add a second webhook for guestbook posts (cheap 10-minute prompt). Now you're notified when anyone signs in and leaves a message on your site — and you've experienced the feeling of *my product is alive and real people are using it*. That feeling is addictive. Protect it by never letting your Slack channel become so noisy you mute it.
 </Note>
 
-## 踩坑提醒 & 小贴士
+## Challenges & Tips
 
-- *"Slack 说我 webhook URL 不合法。"* 你大概复制时带了尾随空格，或者拿成了 docs URL 而不是你自己的 webhook。粘到 Cursor 让它检查格式。
-- *"消息到 Slack 了，但很丑。"* 默认纯文本足够了；Slack Block Kit 能生成更好看的 JSON。问 Cursor：**"把 Slack 消息切成 Block Kit 风格：彩色 sidebar、字段化每个值、muted 时间戳。"**
-- *"rate limit 把每次提交算了两次。"* 客户端 revalidate 触发了两次。问 Cursor：**"给表单提交 handler 加防抖，并确保 server action 只按真实 insert 算一次。"**
-- *"在 Vercel 上 Slack 里时区不对。"* 问：**"所有时间戳格式化为 user-local 或显式传一个 IANA TZ，比如 `Asia/Shanghai`。"**
-- *"我已经收到垃圾了。"* 好事——真的 bot 找到你了，说明你的站可被索引。收紧：rate-limit 窗口缩到每小时 2 次，加一个关键字黑名单。
+- *"Slack says my webhook URL is invalid."* You probably copied with a trailing space, or grabbed the docs URL instead of your specific webhook. Paste into Cursor and ask it to verify the format.
+- *"Messages arrive in Slack but look ugly."* Default plain-text is fine for now, but Slack's Block Kit builder generates prettier JSON. Ask Cursor **"Switch the Slack message to Block Kit with a coloured sidebar, fields for each value, and a muted timestamp."**
+- *"Rate limit counts every submission twice."* Client revalidation fired twice. Ask Cursor **"Debounce the form submission handler and ensure the server action only counts once per actual insert."**
+- *"On Vercel the timezone in Slack is wrong."* Ask **"Format all timestamps as user-local time in `Asia/Shanghai` or pass an explicit IANA TZ."**
+- *"I'm getting spam already."* Good — real bots found you, which means your site is indexable. Tighten: shorten the rate-limit window to 2 per hour, add a keyword blocklist.
 
-<Info title="如果表单静默成功但 Slack 没东西、Neon 也没东西">
-蜜罐字段大概人也能看见。问 Cursor：**"看一下我 `website` 蜜罐字段的 computed styles —— 它真的在视觉上隐藏了吗？"**
+<Info title="If the form silently succeeds but nothing arrives in Slack and nothing is in Neon">
+The honeypot field is probably visible to humans too. Ask Cursor **"Check the computed styles of my `website` honeypot field — is it actually hidden visually?"**
 </Info>

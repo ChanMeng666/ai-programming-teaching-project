@@ -1,20 +1,19 @@
 ---
 sidebar_position: 5
-title: 博客维护和优化
-description: 学习如何持续改进和维护你的博客项目
+title: Blog Maintenance and Optimization
+description: Learn how to continuously improve and maintain your blog project
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# 博客维护和优化
+# Blog Maintenance and Optimization
 
-## 持续集成/持续部署
+## Continuous Integration/Continuous Deployment
 
-### 自动化测试
+### Automated Testing
 
-#### 单元测试
-
+#### Unit Testing
 ```typescript
 // __tests__/components/PostList.test.tsx
 import { render, screen, fireEvent } from '@testing-library/react';
@@ -38,15 +37,14 @@ describe('PostList Component', () => {
 
   it('filters posts based on search', () => {
     render(<PostList posts={mockPosts} />);
-    const searchInput = screen.getByPlaceholderText('搜索文章...');
+    const searchInput = screen.getByPlaceholderText('Search posts...');
     fireEvent.change(searchInput, { target: { value: 'nonexistent' } });
     expect(screen.queryByText('Test Post')).not.toBeInTheDocument();
   });
 });
 ```
 
-#### E2E测试
-
+#### E2E Testing
 ```typescript
 // cypress/e2e/blog.cy.ts
 describe('Blog', () => {
@@ -67,10 +65,9 @@ describe('Blog', () => {
 });
 ```
 
-### 部署流水线
+### Deployment Pipeline
 
-#### GitHub Actions配置
-
+#### GitHub Actions Configuration
 ```yaml
 # .github/workflows/ci.yml
 name: CI/CD Pipeline
@@ -85,22 +82,22 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Setup Node.js
+- uses: actions/checkout@v2
+- name: Setup Node.js
         uses: actions/setup-node@v2
         with:
           node-version: '18'
       
-      - name: Install dependencies
+- name: Install dependencies
         run: npm ci
       
-      - name: Run linter
+- name: Run linter
         run: npm run lint
       
-      - name: Run tests
+- name: Run tests
         run: npm test
       
-      - name: Run E2E tests
+- name: Run E2E tests
         run: npm run test:e2e
         
   deploy:
@@ -108,18 +105,17 @@ jobs:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy to Vercel
+- name: Deploy to Vercel
         uses: amondnet/vercel-action@v20
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
 ```
 
-## 性能优化
+## Performance Optimization
 
-### 图片优化
+### Image Optimization
 
-#### 图片组件
-
+#### Image Component
 ```typescript
 // components/OptimizedImage.tsx
 import Image from 'next/image';
@@ -136,7 +132,6 @@ export function OptimizedImage({ src, alt, width, height }: OptimizedImageProps)
   const [isLoading, setIsLoading] = useState(true);
 
   return (
-    <div className="relative">
       <Image
         src={src}
         alt={alt}
@@ -153,13 +148,11 @@ export function OptimizedImage({ src, alt, width, height }: OptimizedImageProps)
       {isLoading && (
         <div className="absolute inset-0 bg-gray-200 animate-pulse" />
       )}
-    </div>
   );
 }
 ```
 
-#### 图片处理工具
-
+#### Image Processing Utilities
 ```typescript
 // lib/imageUtils.ts
 import sharp from 'sharp';
@@ -175,10 +168,9 @@ export async function optimizeImage(buffer: Buffer) {
 }
 ```
 
-### 代码优化
+### Code Optimization
 
-#### 代码分割
-
+#### Code Splitting
 ```typescript
 // pages/posts/[slug].tsx
 import dynamic from 'next/dynamic';
@@ -193,8 +185,7 @@ const RelatedPosts = dynamic(() => import('@/components/RelatedPosts'), {
 });
 ```
 
-#### 性能监控
-
+#### Performance Monitoring
 ```typescript
 // lib/analytics.ts
 export function reportWebVitals(metric: any) {
@@ -214,12 +205,11 @@ export function reportWebVitals(metric: any) {
 }
 ```
 
-## 内容管理
+## Content Management
 
-### 文章管理系统
+### Article Management System
 
-#### 文章编辑器
-
+#### Article Editor
 ```typescript
 // components/MDXEditor.tsx
 import { MDXEditor, MDXEditorMethods } from '@mdxeditor/editor';
@@ -241,7 +231,6 @@ export function Editor({ initialContent, onSave }: EditorProps) {
   };
 
   return (
-    <div className="editor-container">
       <MDXEditor
         ref={editorRef}
         markdown={initialContent}
@@ -250,13 +239,11 @@ export function Editor({ initialContent, onSave }: EditorProps) {
           // 添加所需插件
         ]}
       />
-    </div>
   );
 }
 ```
 
-#### 草稿系统
-
+#### Draft System
 ```typescript
 // lib/drafts.ts
 import { prisma } from './prisma';
@@ -294,10 +281,9 @@ export async function publishDraft(postId: string) {
 }
 ```
 
-### SEO优化
+### SEO Optimization
 
-#### Meta标签管理
-
+#### Meta Tag Management
 ```typescript
 // components/SEO.tsx
 import { NextSeo } from 'next-seo';
@@ -334,8 +320,7 @@ export function SEO({ title, description, canonical, openGraph }: SEOProps) {
 }
 ```
 
-#### 站点地图生成
-
+#### Sitemap Generation
 ```typescript
 // scripts/generate-sitemap.ts
 import { SitemapStream, streamToPromise } from 'sitemap';
@@ -372,12 +357,11 @@ async function generateSitemap() {
 }
 ```
 
-## 安全维护
+## Security Maintenance
 
-### 安全更新
+### Security Updates
 
-#### 依赖检查
-
+#### Dependency Checks
 ```typescript
 // scripts/check-dependencies.ts
 import { exec } from 'child_process';
@@ -401,8 +385,7 @@ async function checkDependencies() {
 }
 ```
 
-#### 安全中间件
-
+#### Security Middleware
 ```typescript
 // middleware/security.ts
 import { NextResponse } from 'next/server';
@@ -427,10 +410,9 @@ export function middleware(request: NextRequest) {
 }
 ```
 
-### 备份策略
+### Backup Strategy
 
-#### 数据备份
-
+#### Data Backup
 ```typescript
 // scripts/backup.ts
 import { exec } from 'child_process';
@@ -457,8 +439,7 @@ async function backupDatabase() {
 }
 ```
 
-#### 自动备份配置
-
+#### Automatic Backup Configuration
 ```yaml
 # .github/workflows/backup.yml
 name: Database Backup
@@ -471,15 +452,15 @@ jobs:
   backup:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+- uses: actions/checkout@v2
       
-      - name: Configure AWS credentials
+- name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           
-      - name: Run backup script
+- name: Run backup script
         run: npm run backup
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}

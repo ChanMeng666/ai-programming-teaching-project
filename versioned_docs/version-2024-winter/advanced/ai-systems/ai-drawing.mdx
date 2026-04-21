@@ -1,22 +1,22 @@
 ---
 sidebar_position: 3
-title: AI绘图应用开发
-description: 学习使用AI工具进行图像设计和3D模型生成
+title: AI Drawing Application Development
+description: Learn to use AI tools for image design and 3D model generation
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import ReactPlayer from 'react-player';
 
-# AI绘图应用开发
+# AI Drawing Application Development
 
-在这个章节中，你将学习如何使用各种AI工具进行图像设计和3D模型制作。
+In this chapter, you will learn how to use various AI tools for image design and 3D model creation.
 
-## LOGO设计基础
+## LOGO Design Basics
 
-### 教程视频
+### Tutorial Videos
 
-**LOGO设计教程 1**
+**LOGO Design Tutorial 1**
 
 <ReactPlayer
   url="https://www.youtube.com/embed/JKTXXC1qt5o"
@@ -24,7 +24,7 @@ import ReactPlayer from 'react-player';
   width="100%"
 />
 
-**LOGO设计教程 2**
+**LOGO Design Tutorial 2**
 
 <ReactPlayer
   url="https://www.youtube.com/embed/n8JVcE5YEi4"
@@ -32,48 +32,44 @@ import ReactPlayer from 'react-player';
   width="100%"
 />
 
-### AI LOGO设计平台
+### AI LOGO Design Platform
 
-#### ailogomaker.io使用指南
+#### ailogomaker.io Usage Guide
+1. Visit [ailogomaker.io](https://ailogomaker.io/zh-CN)
+2. Enter brand name and keywords
+3. Select preferred style
+4. Generate LOGO design
 
-1. 访问 [ailogomaker.io](https://ailogomaker.io/zh-CN)
-2. 输入品牌名称和关键词
-3. 选择喜欢的风格
-4. 生成LOGO设计
-
-:::tip 设计建议
-- 使用简洁明了的关键词
-- 尝试不同的风格组合
-- 注意色彩搭配
-- 考虑品牌调性
+:::tip Design Suggestions
+- Use simple and clear keywords
+- Try different style combinations
+- Pay attention to color matching
+- Consider brand tone
 :::
 
-#### Figma优化流程
+#### Figma Optimization Process
+1. Export SVG file
+2. Open in Figma
+3. Adjust details:
+   - Modify colors
+   - Adjust proportions
+   - Optimize fonts
+   - Fine-tune shapes
 
-1. 导出SVG文件
-2. 在Figma中打开
-3. 调整细节：
-   - 修改颜色
-   - 调整比例
-   - 优化字体
-   - 微调形状
+## Image Generation Techniques
 
-## 图像生成技巧
+### Using Recraft Platform
 
-### Recraft平台使用
+#### Basic Features
+1. Visit [Recraft](https://www.recraft.ai/projects)
+2. Create new project
+3. Select generation type:
+   - Text-to-image
+   - Image-to-image
+   - Batch generation
+   - LOGO overlay
 
-#### 基础功能
-
-1. 访问 [Recraft](https://www.recraft.ai/projects)
-2. 创建新项目
-3. 选择生成类型：
-   - 文生图
-   - 图生图
-   - 批量生成
-   - LOGO贴图
-
-#### 扩图技巧
-
+#### Image Extension Techniques
 ```typescript
 interface ImagePrompt {
   baseImage: string;
@@ -82,10 +78,10 @@ interface ImagePrompt {
   variations: number;
 }
 
-// 示例提示词
+// Example prompt
 const promptExample = {
-  baseImage: '个人IP形象',
-  style: '赛博朋克',
+  baseImage: 'Personal IP character',
+  style: 'Cyberpunk',
   ratio: '1:1',
   variations: 4
 };
@@ -93,88 +89,79 @@ const promptExample = {
 
 ### Hugging Face Spaces
 
-#### Flux模型使用
+#### Using Flux Model
+1. Visit [Hugging Face Spaces](https://huggingface.co/spaces)
+2. Search for "flux" keyword
+3. Use Kolors-Character-With-Flux:
+   - Upload reference image
+   - Adjust parameters
+   - Generate new image
 
-1. 访问 [Hugging Face Spaces](https://huggingface.co/spaces)
-2. 搜索"flux"关键词
-3. 使用 Kolors-Character-With-Flux：
-   - 上传参考图片
-   - 调整参数
-   - 生成新图像
+#### Lora Model Exploration
+- Search for "lora" keyword
+- Try different models
+- Compare effect differences
+- Record best practices
 
-#### Lora模型探索
+### LiblibAI Platform
 
-- 搜索"lora"关键词
-- 尝试不同模型
-- 比较效果差异
-- 记录最佳实践
+#### 3D Trendy Character Generation
+1. Visit [LiblibAI](https://www.liblib.art/)
+2. Select 3D character generation model
+3. Set parameters:
+   - Style selection
+   - Pose adjustment
+   - Outfit matching
+   - Scene settings
 
-### 哩布哩布AI平台
-
-#### 3D潮流形象生成
-
-1. 访问 [哩布哩布AI](https://www.liblib.art/)
-2. 选择3D形象生成模型
-3. 设置参数：
-   - 风格选择
-   - 姿势调整
-   - 服装搭配
-   - 场景设置
-
-#### 工作流程
-
+#### Workflow
 ```mermaid
 graph LR
-    A[上传参考图] --> B[选择风格]
-    B --> C[调整参数]
-    C --> D[生成预览]
-    D --> E[微调优化]
-    E --> F[最终导出]
+    A[Upload Reference Image] --> B[Select Style]
+    B --> C[Adjust Parameters]
+    C --> D[Generate Preview]
+    D --> E[Fine-tune Optimization]
+    E --> F[Final Export]
 ```
 
-## 3D模型制作
+## 3D Model Creation
 
-### Tripo3D平台
+### Tripo3D Platform
 
-#### 基础使用
+#### Basic Usage
+1. Visit [Tripo3D](https://www.tripo3d.ai/app/home)
+2. Create account
+3. Start new project
 
-1. 访问 [Tripo3D](https://www.tripo3d.ai/app/home)
-2. 创建账号
-3. 开始新项目
+#### Features
+- Image to 3D model conversion
+- Automatic material generation
+- Pose adjustment
+- Real-time preview
 
-#### 功能特点
+### Workflow
 
-- 图片转3D模型
-- 材质自动生成
-- 姿态调整
-- 实时预览
-
-### 工作流程
-
-#### 准备工作
-
+#### Preparation
 ```mermaid
 graph TD
-    A[准备参考图片] --> B[选择模型类型]
-    B --> C[设置参数]
-    C --> D[生成模型]
-    D --> E[优化调整]
+    A[Prepare Reference Images] --> B[Select Model Type]
+    B --> C[Set Parameters]
+    C --> D[Generate Model]
+    D --> E[Optimize and Adjust]
 ```
 
-#### 模型生成
+#### Model Generation
+1. Upload reference images
+2. Select model type
+3. Adjust parameters:
+   - Detail level
+   - Material quality
+   - Pose settings
+   - Scale adjustment
 
-1. 上传参考图片
-2. 选择模型类型
-3. 调整参数：
-   - 细节程度
-   - 材质质量
-   - 姿态设置
-   - 比例调整
+### Optimization Techniques
 
-### 优化技巧
-
-#### 模型优化
-
+#### Model Optimization
 ```typescript
 interface ModelSettings {
   detail: number;  // 1-10
@@ -188,7 +175,7 @@ interface ModelSettings {
   };
 }
 
-// 推荐设置
+// Recommended settings
 const recommendedSettings: ModelSettings = {
   detail: 8,
   texture: {
@@ -202,109 +189,100 @@ const recommendedSettings: ModelSettings = {
 };
 ```
 
-#### 常见问题解决
+#### Common Issues and Solutions
+- **Model Deformation**: Check reference image quality, adjust generation parameters
+- **Material Issues**: Optimize texture resolution, adjust material parameters
+- **Missing Details**: Increase detail level settings, use multi-angle references
 
-- **模型变形**：检查参考图片质量，调整生成参数
-- **材质问题**：优化贴图分辨率，调整材质参数
-- **细节缺失**：提高细节程度设置，使用多角度参考
+## Practical Tips
 
-## 实用技巧
+### Prompt Optimization
 
-### 提示词优化
-
-#### 基础结构
-
+#### Basic Structure
 ```
-主体 + 风格 + 场景 + 光效 + 构图
+Subject + Style + Scene + Lighting + Composition
 ```
 
-#### 示例
-
+#### Example
 ```
-赛博朋克风格的年轻女性，霓虹街道背景，侧光打射，低角度拍摄
+Young woman in cyberpunk style, neon street background, side lighting, low angle shot
 ```
 
-### 参数调优
+### Parameter Tuning
 
 <Tabs>
-<TabItem value="sampling" label="采样设置" default>
-    - 采样方法选择
-    - 步数设置 (20-50)
+<TabItem value="sampling" label="Sampling Settings" default>
+    - Sampling method selection
+    - Step count (20-50)
     - CFG Scale (7-15)
-    - 种子值固定
+    - Fixed seed value
 </TabItem>
-<TabItem value="prompts" label="提示词权重">
-    - 使用括号增强：(keyword:1.2)
-    - 使用方括号减弱：[keyword:0.8]
-    - 负面提示词设置
-    - 关键词顺序调整
+<TabItem value="prompts" label="Prompt Weights">
+    - Use parentheses to enhance: (keyword:1.2)
+    - Use brackets to weaken: [keyword:0.8]
+    - Negative prompt settings
+    - Keyword order adjustment
 </TabItem>
 </Tabs>
 
-### 后期处理
+### Post-Processing
 
-1. **图像优化**
-   - 色彩调整
-   - 对比度增强
-   - 锐化处理
+1. **Image Optimization**
+   - Color adjustment
+   - Contrast enhancement
+   - Sharpening
 
-2. **细节修复**
-   - 瑕疵修复
-   - 边缘优化
-   - 背景处理
+2. **Detail Fixes**
+   - Flaw correction
+   - Edge optimization
+   - Background processing
 
-3. **风格统一**
-   - 色调一致
-   - 风格匹配
-   - 系列化处理
+3. **Style Unification**
+   - Consistent tones
+   - Style matching
+   - Series processing
 
-## 实战项目
+## Practical Projects
 
-### 个人IP形象设计
+### Personal IP Character Design
 
-#### 工作流程
+#### Workflow
+1. Use LiblibAI to generate base character
+2. Extend scenes with Recraft
+3. Add text and branding
+4. Generate series works
 
-1. 使用哩布哩布AI生成基础形象
-2. Recraft扩展场景
-3. 添加文字和标识
-4. 生成系列作品
-
-#### 实践步骤
-
+#### Practice Steps
 ```mermaid
 graph TD
-    A[形象设计] --> B[场景扩展]
-    B --> C[风格统一]
-    C --> D[系列创作]
-    D --> E[作品集整理]
+    A[Character Design] --> B[Scene Extension]
+    B --> C[Style Unification]
+    C --> D[Series Creation]
+    D --> E[Portfolio Organization]
 ```
 
-### 品牌视觉设计
+### Brand Visual Design
 
-#### LOGO设计
+#### LOGO Design
+1. Generate basic LOGO with ailogomaker
+2. Optimize and adjust in Figma
+3. Create brand guidelines
 
-1. 使用ailogomaker生成基础LOGO
-2. Figma优化调整
-3. 生成品牌规范
+#### Application Scenarios
+- Social media covers
+- Product packaging
+- Promotional materials
+- Website design
 
-#### 应用场景
+### 3D Character Modeling
 
-- 社交媒体封面
-- 产品包装
-- 宣传材料
-- 网站设计
+#### Model Creation
+1. Prepare reference images
+2. Generate model using Tripo3D
+3. Adjust and optimize
+4. Export and use
 
-### 3D角色建模
-
-#### 模型制作
-
-1. 准备参考图片
-2. 使用Tripo3D生成模型
-3. 调整优化
-4. 导出使用
-
-#### 应用示例
-
+#### Application Examples
 ```typescript
 interface ProjectWorkflow {
   stage: string;
@@ -315,49 +293,47 @@ interface ProjectWorkflow {
 
 const workflow: ProjectWorkflow[] = [
   {
-    stage: '概念设计',
-    tools: ['哩布哩布AI', 'Recraft'],
-    output: '角色概念图',
-    timeEstimate: '2-3小时'
+    stage: 'Concept Design',
+    tools: ['LiblibAI', 'Recraft'],
+    output: 'Character concept art',
+    timeEstimate: '2-3 hours'
   },
   {
-    stage: '3D建模',
+    stage: '3D Modeling',
     tools: ['Tripo3D'],
-    output: '3D模型文件',
-    timeEstimate: '4-6小时'
+    output: '3D model files',
+    timeEstimate: '4-6 hours'
   },
   {
-    stage: '后期优化',
+    stage: 'Post-production Optimization',
     tools: ['Blender', 'Substance Painter'],
-    output: '最终模型',
-    timeEstimate: '3-4小时'
+    output: 'Final model',
+    timeEstimate: '3-4 hours'
   }
 ];
 ```
 
-## 设计原则
+## Design Principles
 
-### 品牌定位
-
+### Brand Positioning
 ```mermaid
 graph TD
-    A[品牌定位] --> B[目标受众]
-    A --> C[行业特点]
-    A --> D[竞品分析]
-    B --> E[设计风格]
+    A[Brand Positioning] --> B[Target Audience]
+    A --> C[Industry Characteristics]
+    A --> D[Competitor Analysis]
+    B --> E[Design Style]
     C --> E
     D --> E
 ```
 
-### 设计理念
+### Design Philosophy
+- **Simplicity**: Easy to recognize and remember
+- **Uniqueness**: Distinct from competitors
+- **Adaptability**: Usable in various scenarios
+- **Timelessness**: Avoid outdated elements
 
-- **简单性**：易识别、好记忆
-- **独特性**：区别于竞品
-- **适应性**：各种场景使用
-- **永恒性**：避免过时元素
-
-:::info 学习建议
-AI绘图需要大量实践和尝试，建议从简单的LOGO设计开始，逐步深入到复杂的3D建模。
+:::info Learning Suggestions
+AI drawing requires extensive practice and experimentation. It's recommended to start with simple LOGO design and gradually progress to complex 3D modeling.
 :::
 
-这个AI绘图应用展示了如何使用各种AI工具进行创意设计，从基础的图像生成到复杂的3D建模都有涉及。
+This AI drawing application demonstrates how to use various AI tools for creative design, covering everything from basic image generation to complex 3D modeling. 

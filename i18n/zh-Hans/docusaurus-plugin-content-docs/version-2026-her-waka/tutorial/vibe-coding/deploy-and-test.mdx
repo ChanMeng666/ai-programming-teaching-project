@@ -1,0 +1,273 @@
+---
+title: 部署并测试你的机器人
+description: "设置 GitHub Actions 让机器人自动运行，配置 Secrets，并端到端测试所有内容。"
+---
+
+你的机器人已经构建好了。现在让我们使用 GitHub Actions 让它每天早上自动运行。
+
+## 什么是 GitHub Actions？
+
+GitHub Actions 是一个内置的自动化服务，替你运行任务。你告诉它*何时*运行（例如每个工作日早上 9 点）和*做什么*（例如运行你的机器人脚本），它处理其余的一切 —— 无需服务器。
+
+<Accordion title="它在幕后是如何工作的？">
+当你推送一个工作流文件（`.github/workflows/` 中的 YAML 文件）时，GitHub 会监视你定义的触发器。当触发器触发 —— 计划时间、推送，或手动按钮 —— GitHub 会启动一个虚拟机，检出你的代码，安装依赖，然后运行你的命令。这就像云端有一台免费的电脑，只做一件事然后关机。
+</Accordion>
+
+---
+
+## 提示词 7：创建 GitHub Actions 工作流
+
+让 Claude Code 创建自动化 —— 说出或粘贴此提示词：
+
+```text title="说出或复制此提示词"
+Create a GitHub Actions workflow file at .github/workflows/daily-report.yml
+that:
+
+1. Runs every weekday at 9:00 am NZST (that's around 8 PM or 9 PM UTC
+   depending on daylight saving — use 20:00 UTC as a reasonable default)
+2. Can also be triggered manually using workflow_dispatch
+3. Checks out the repository with full git history (fetch-depth: 0)
+4. Sets up Node.js 20
+5. Installs dependencies with npm ci
+6. Runs the daily report script with these environment variables from
+   GitHub secrets: OPENAI_API_KEY, SLACK_WEBHOOK_TEST, SLACK_WEBHOOK_PROD
+7. After the script runs, commits and pushes any changes to state.json
+   with the message "chore: update commit bank state [skip ci]"
+8. The commit should use a bot identity for the git author
+
+Add comments explaining each section of the workflow file.
+```
+
+**会发生什么：** Claude Code 创建包含 cron 调度、checkout、setup 和运行步骤的完整工作流文件。
+
+<Note>
+**关于 cron 时间：** GitHub Actions cron 使用 UTC。新西兰是 UTC+12（夏令时期间是 UTC+13）。调度 `0 20 * * 1-5` 表示"UTC 时间晚上 8 点，周一到周五"，大约对应新西兰标准时间早上 9 点。cron 触发器在繁忙时段可能延迟最多 15 分钟 —— 这是正常现象。
+</Note>
+
+<Accordion title="[skip ci] 是什么意思？">
+当机器人提交更新的 `state.json` 时，提交消息包含 `[skip ci]`。这告诉 GitHub Actions 不要为该提交触发另一次工作流运行 —— 否则你会陷入机器人不断触发自身的无限循环。
+</Accordion>
+
+<Accordion title="为什么需要 fetch-depth: 0？">
+默认情况下，GitHub Actions 只检出最新提交（浅克隆）。你的机器人需要读取完整的 git 历史来查找最近的提交。设置 `fetch-depth: 0` 确保整个历史都可用。
+</Accordion>
+
+<Accordion title="查看生成的工作流">
+```yaml
+# .github/workflows/daily-report.yml
+name: Daily Report Bot
+
+on:
+  schedule:
+    # Run at 8 PM UTC (approx 9 AM NZST), Monday to Friday
+    - cron: '0 20 * * 1-5'
+  workflow_dispatch: # Allow manual triggering
+
+jobs:
+  daily-report:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Check out the full repository history
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      # Set up Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # Install dependencies
+      - name: Install dependencies
+        run: npm ci
+
+      # Run the daily report bot
+      - name: Run daily report
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          SLACK_WEBHOOK_TEST: ${{ secrets.SLACK_WEBHOOK_TEST }}
+          SLACK_WEBHOOK_PROD: ${{ secrets.SLACK_WEBHOOK_PROD }}
+          SLACK_CHANNEL: prod
+        run: node src/index.js
+
+      # Commit updated state.json so the commit bank persists
+      - name: Commit state changes
+        run: |
+          git config user.name "daily-report-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add state.json
+          git diff --staged --quiet || git commit -m "chore: update commit bank state [skip ci]"
+          git push
+```
+</Accordion>
+
+---
+
+## 配置 GitHub Secrets
+
+你的机器人需要三个 Secrets。永远不要将这些提交到代码中 —— 将它们存储在 GitHub 的加密 Secrets 中。
+
+<Warning>
+**永远不要将 API 密钥、Webhook URL 或其他机密提交到代码中。** 任何能看到你仓库的人都可以窃取它们。GitHub Secrets 会加密它们，只在工作流运行期间使其可用。
+</Warning>
+
+<Tabs>
+  <Tab title="使用命令行（gh CLI）">
+    如果你安装了 [GitHub CLI](https://cli.github.com)：
+
+    ```bash title="复制此命令"
+    gh secret set OPENAI_API_KEY
+    gh secret set SLACK_WEBHOOK_TEST
+    gh secret set SLACK_WEBHOOK_PROD
+    ```
+
+    每个命令都会提示你粘贴值。
+  </Tab>
+  <Tab title="使用 GitHub 网站">
+    <Steps>
+      <Step title="前往你的仓库设置">
+        在 GitHub 上打开你的仓库 → **Settings** → **Secrets and variables** → **Actions**
+      </Step>
+      <Step title="添加 OPENAI_API_KEY">
+        点击 **New repository secret**。名称：`OPENAI_API_KEY`。值：粘贴你的 OpenAI API 密钥。点击 **Add secret**。
+      </Step>
+      <Step title="添加 SLACK_WEBHOOK_TEST">
+        点击 **New repository secret**。名称：`SLACK_WEBHOOK_TEST`。值：粘贴你的测试频道 Webhook URL。点击 **Add secret**。
+      </Step>
+      <Step title="添加 SLACK_WEBHOOK_PROD">
+        点击 **New repository secret**。名称：`SLACK_WEBHOOK_PROD`。值：粘贴你的生产频道 Webhook URL。点击 **Add secret**。
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+---
+
+## 推送和部署
+
+<Steps>
+  <Step title="暂存并提交你的代码">
+    ```bash title="复制此命令"
+    git add -A
+    git commit -m "feat: add daily report bot"
+    ```
+  </Step>
+  <Step title="推送到 GitHub">
+    ```bash title="复制此命令"
+    git push origin main
+    ```
+  </Step>
+  <Step title="在 GitHub 上验证">
+    前往你在 GitHub 上的仓库 → **Actions** 标签页。你应该看到"Daily Report Bot"工作流已列出。它将在下一个计划时间自动运行，或者你可以手动触发它。
+  </Step>
+</Steps>
+
+---
+
+## 测试工作流
+
+<Steps>
+  <Step title="干运行（不发布到 Slack）">
+    手动触发工作流进行干运行，检查一切是否正常，而不发布到 Slack：
+
+    ```bash title="复制此命令"
+    gh workflow run daily-report.yml
+    ```
+
+    或者在 GitHub 网站上：**Actions** → **Daily Report Bot** → **Run workflow**。
+
+    检查日志查看输出。你应该看到提交收集、库处理和摘要步骤成功完成。
+  </Step>
+  <Step title="真实测试（发布到测试频道）">
+    如果干运行看起来正常，触发一次真实运行，发布到你的测试 Slack 频道。检查工作流文件中的 `SLACK_CHANNEL` 环境变量是否设置为 `test`，然后再次触发。
+
+    前往你的测试 Slack 频道 —— 你应该看到类似这样的消息：
+
+    ```
+    Daily Update — Tuesday, 11 March 2026
+
+    - Set up the daily report bot project structure and core modules
+    - Built the commit banking system to distribute updates across the week
+    - Integrated OpenAI for natural language summaries
+
+    Blockers: None
+    ```
+  </Step>
+  <Step title="庆祝一下">
+    你的机器人能用了！它现在将在每个工作日早上自动运行。
+  </Step>
+</Steps>
+
+---
+
+## 提示词 8：故障排除
+
+事情并不总是第一次就能成功。以下是使用 Claude Code 进行调试的模式：
+
+```text title="说出或复制此提示词"
+I'm getting this error when the GitHub Actions workflow runs:
+
+[paste the exact error message here]
+
+The workflow is supposed to collect git commits, summarise them with
+OpenAI, and post to Slack. Can you help me figure out what went wrong
+and fix it?
+```
+
+<Tip>
+**沟通技巧：描述错误。** 始终粘贴准确的错误消息。告诉 Claude Code 你期望发生什么以及实际发生了什么。背景信息越多，修复越快。如果你在使用 Wispr Flow，你可以说出问题 —— "我遇到了一个错误，它说……" —— 然后粘贴实际的错误文本。
+</Tip>
+
+### 常见问题
+
+<AccordionGroup>
+  <Accordion title="工作流没有触发">
+    **可能的原因：**
+    - 工作流文件不在默认分支（通常是 `main`）。计划工作流只从默认分支运行。
+    - cron 调度使用 UTC，不是你的本地时间。仔细检查时间转换。
+    - GitHub Actions 在繁忙时段可能将 cron 触发器延迟最多 15 分钟。
+  </Accordion>
+  <Accordion title="Slack webhook 返回 403 或 404">
+    **可能的原因：**
+    - Webhook URL 已被撤销或不正确。前往你的 Slack 应用设置检查。
+    - 工作流中的 Secret 名称与你在 GitHub Secrets 中设置的名称不匹配。
+    - 你在使用测试 Webhook URL，但环境变量指向生产（或反之亦然）。
+  </Accordion>
+  <Accordion title="提交消息为空或乱码输出">
+    **可能的原因：** git log 分隔符与 shell 运算符冲突。将 `||` 或 `&&` 用作分隔符会出错，因为 shell 会将其解释为逻辑运算符。改用安全的分隔符，例如 `<SEP>`。
+  </Accordion>
+  <Accordion title="state 推送冲突">
+    **可能的原因：** 如果有人在机器人尝试提交 `state.json` 的同时向仓库推送，你会遇到冲突。`[skip ci]` 标签防止级联运行，但时间冲突仍然可能发生。这在实践中很少见。
+  </Accordion>
+  <Accordion title="找不到提交记录">
+    **可能的原因：**
+    - 时间窗口太短。默认是 24 小时，但如果工作流在稍微不同的时间运行，某些提交可能落在窗口之外。
+    - checkout 步骤中缺少 `fetch-depth: 0`，所以 git 历史不可用。
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## 切换到生产环境
+
+一旦你对测试输出满意，切换到生产频道：
+
+1. 在你的工作流文件（`.github/workflows/daily-report.yml`）中，将 `SLACK_CHANNEL: test` 改为 `SLACK_CHANNEL: prod`
+2. 提交并推送
+
+或者让 Claude Code 来做：
+
+```text title="说出或复制此提示词"
+Change the default Slack channel in the GitHub Actions workflow from
+"test" to "prod" so the daily reports go to the production channel.
+```
+
+完成了 —— 你的机器人已上线。
+
+<Note>
+你的机器人已部署并在运行！前往[接下来做什么](/docs/2026-her-waka/tutorial/vibe-coding/whats-next)，了解扩展它的想法、学到的经验教训和反思问题。
+</Note>

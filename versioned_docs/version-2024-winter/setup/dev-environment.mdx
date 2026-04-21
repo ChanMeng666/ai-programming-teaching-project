@@ -1,110 +1,102 @@
 ---
 sidebar_position: 4
-title: 配置开发环境
-description: 配置Node.js和包管理器等开发环境
+title: Configure Development Environment
+description: Configure Node.js, package managers, and other development environment components
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# 配置开发环境
+# Configure Development Environment
 
-## 安装Node.js环境
+## Install Node.js Environment
 
-### 使用nvm安装Node.js
+### Install Node.js Using nvm
 
-#### 1. 安装nvm
-
+#### 1. Install nvm
 ```bash
-# 输入以下命令并回车
+# Enter the following command and press Enter
 curl -o nvm-setup.exe https://github.com/coreybutler/nvm-windows/releases/download/1.1.11/nvm-setup.exe
 ```
 
-1. 等待下载完成
-2. 找到下载的nvm-setup.exe（一般在下载文件夹）
-3. 双击运行安装程序
-4. 全部选择默认设置，一路点Next
-5. 安装完成后关闭Cursor
-6. 重新打开Cursor和终端
+1. Wait for download to complete
+2. Find the downloaded nvm-setup.exe (usually in Downloads folder)
+3. Double-click to run the installer
+4. Select all default settings and click Next throughout
+5. Close Cursor after installation completes
+6. Reopen Cursor and terminal
 
-#### 2. 安装Node.js
-
+#### 2. Install Node.js
 ```bash
-# 安装最新的稳定版Node.js
+# Install the latest stable version of Node.js
 nvm install --lts
 
-# 使用安装的版本
+# Use the installed version
 nvm use --lts
 
-# 验证安装是否成功
+# Verify installation was successful
 node --version
 ```
 
-## 安装包管理器
+## Install Package Manager
 
-### npm和yarn配置
+### npm and yarn Configuration
 
-#### 安装yarn
-
+#### Install yarn
 ```bash
-# 安装yarn
+# Install yarn
 npm install -g yarn
 
-# 安装npx工具
+# Install npx tool
 npm install -g npx
 ```
 
-#### 配置镜像源
-
+#### Configure Registry Mirrors
 ```bash
-# 设置npm镜像
+# Set npm registry
 npm config set registry https://registry.npmmirror.com
 
-# 设置yarn镜像
+# Set yarn registry
 yarn config set registry https://registry.npmmirror.com
 ```
 
-## 常见问题解决
+## Common Issues Resolution
 
-### 权限问题
+### Permission Issues
+- Run Cursor as administrator
+- Right-click Cursor icon → Select "Run as administrator"
 
-- 以管理员身份运行Cursor
-- 右键Cursor图标 → 选择"以管理员身份运行"
-
-### 网络问题
-
-1. 检查梯子工具是否正常工作
-2. 确认是否能访问GitHub网站
-3. 尝试清理缓存：
-
+### Network Issues
+1. Check if VPN tool is working properly
+2. Verify you can access the GitHub website
+3. Try clearing cache:
 ```bash
-# 清理npm缓存
+# Clear npm cache
 npm cache clean --force
 
-# 清理yarn缓存
+# Clear yarn cache
 yarn cache clean
 ```
 
-### 环境验证
-
+### Environment Verification
 ```bash
-# 检查Node.js版本
+# Check Node.js version
 node --version
 
-# 检查npm版本
+# Check npm version
 npm --version
 
-# 检查yarn版本
+# Check yarn version
 yarn --version
 
-# 检查Git版本
+# Check Git version
 git --version
 ```
 
-:::tip 注意事项
-- 每条命令输入完必须按回车才能执行
-- 命令执行过程中如果出现卡住，可以按 `Ctrl+C` 中断
-- 复制命令到终端可以使用 `Ctrl+V` 或右键点击"粘贴"
-- 路径中不要包含中文字符
-- 确保每条命令执行完毕后再输入下一条
+:::tip Important Notes
+- You must press Enter after typing each command to execute it
+- If a command appears stuck during execution, you can press `Ctrl+C` to interrupt
+- To paste commands into terminal, use `Ctrl+V` or right-click and select "Paste"
+- Avoid Chinese characters in paths
+- Make sure each command completes before entering the next one
 :::

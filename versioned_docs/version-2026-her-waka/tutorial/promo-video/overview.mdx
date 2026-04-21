@@ -1,131 +1,131 @@
 ---
-title: "用 AI 创建带配音的宣传视频"
-description: "描述你想要的视频 —— 通过说话或打字 —— AI 就会创建一段带有专业配音和音效的短宣传视频。无需任何视频剪辑技能。"
+title: "Create AI Promo Videos with Voiceover"
+description: "Describe the video you want — by speaking or typing — and AI creates a short promotional video with professional voiceover and sound effects. No video editing skills required."
 ---
 
 <Tip>
-**难度：★★★★☆ 有挑战性** · 预计时间：约 1.5 到 2 小时
+**Difficulty: ★★★★☆ Challenging** · Estimated time: ~1.5 to 2 hours
 </Tip>
 
-你需要一段 30 秒的 LinkedIn 自我介绍视频。你可以花好几个小时学习视频剪辑软件，看关键帧和时间轴的教程，结果做出来的东西依然显得业余。或者你只需描述你想要什么 —— "深色渐变背景、我的名字淡入、专业配音、每次切换时的呼啸音效" —— 然后让 AI 为你构建。
+You need a 30-second video introducing yourself for LinkedIn. You could spend hours learning video editing software, watching tutorials about keyframes and timelines, and still end up with something that looks amateur. Or you could just describe what you want — "a dark gradient background, my name fading in, a professional voiceover, a swoosh sound on each transition" — and let AI build it for you.
 
-**这就是我们要构建的工作流。** 你用普通语言描述一个视频，AI 就能创建它 —— 完整包含动态文字、专业配音和音效。最终成果是一个真实的 MP4 文件，你可以上传到 LinkedIn、Instagram 或任何地方。
+**That's what we're building.** A workflow where you describe a video in plain English, and AI creates it — complete with animated text, professional voiceover, and sound effects. The result is a real MP4 file you can upload to LinkedIn, Instagram, or anywhere.
 
 <Info>
-**教程由 [Chan Meng](https://chanmeng.org/) 主导** —— 高级 AI/ML 工程师、开源贡献者、前字节跳动开发者。Chan 搭建了 30+ 个真实应用，专注于 AI 驱动的解决方案，也是本次活动的圆桌嘉宾和本网站的开发者。
+**Tutorial led by [Chan Meng](https://chanmeng.org/)** — Senior AI/ML Engineer, open-source contributor, and former ByteDance developer. Chan has built 30+ live applications and specialises in AI-powered solutions. She is also a panel speaker at this event and the developer behind this website.
 </Info>
 
-## 你将构建什么
+## What you will build
 
 <CardGroup cols={3}>
-  <Card title="描述你的视频" icon="microphone">
-    用自然语言告诉 AI 你想要什么 —— 文字、颜色、动画、配音脚本
+  <Card title="Describe Your Video" icon="microphone">
+    Tell AI what you want — text, colours, animations, voiceover script — using natural language
   </Card>
-  <Card title="AI 构建它" icon="wand-magic-sparkles">
-    AI 创建视频构图，生成专业的配音音频和音效
+  <Card title="AI Builds It" icon="wand-magic-sparkles">
+    AI creates the video composition, generates professional voiceover audio and sound effects
   </Card>
-  <Card title="导出为 MP4" icon="film">
-    渲染最终视频，在 LinkedIn、Instagram、TikTok 或任何地方分享
+  <Card title="Export to MP4" icon="film">
+    Render the final video and share it on LinkedIn, Instagram, TikTok, or anywhere
   </Card>
 </CardGroup>
 
-## 工作原理
+## How it works
 
 ```mermaid
 flowchart LR
-    A["你描述\n视频内容"] --> B["AI 助手\n（Gemini/Claude）"]
-    B --> C["生成\n配音 + 音效"]
-    C --> D["创建视频\n构图"]
-    D --> E["渲染\nMP4 文件"]
-    E --> F["随处\n分享"]
+    A["You describe\nthe video"] --> B["AI assistant\n(Gemini / Claude)"]
+    B --> C["Generates\nvoiceover + SFX"]
+    C --> D["Creates video\ncomposition"]
+    D --> E["Renders\nMP4 file"]
+    E --> F["Share it\nanywhere"]
 ```
 
-你描述你想要的视频效果。你的 AI 助手（Gemini CLI 或 Claude Code）调用 ElevenLabs API 生成配音和音效，然后创建包含动态文字和音频的 Remotion 视频构图。你预览、优化，再渲染最终 MP4。
+You describe what you want your video to look like. Your AI assistant (Gemini CLI or Claude Code) calls the ElevenLabs API to generate a voiceover and sound effects, then creates a Remotion video composition with animated text and audio. You preview it, refine it, and render the final MP4.
 
-## 你将学到
+## What you will learn
 
-- 用自然语言描述视频，让 AI 为你构建
-- 获取并使用 API 密钥 —— 这是整个科技行业通用的专业技能
-- 将任何文字生成 AI 配音音频，支持 32 种语言
-- 从文字描述创建音效（呼啸声、铃声、打字声）
-- 掌握描述—预览—优化循环 —— 专业人士使用的同款工作流
-- 渲染完成的 MP4 视频，可在任何地方分享
+- Describe a video in natural language and have AI build it for you
+- Get and use an API key — a transferable professional skill used across the tech industry
+- Generate AI voiceover audio from any text, in any of 32 supported languages
+- Create sound effects from text descriptions (swooshes, chimes, typing sounds)
+- Work with the describe-preview-refine loop — the same workflow professionals use
+- Render a finished MP4 video you can share anywhere
 
 <Note>
-**无需任何视频剪辑技能。** 你不会打开任何视频编辑软件。你的工作是描述你想要什么 —— AI 处理其余的一切。如果你能向朋友描述一个视频，你就能做到这一点。
+**No video editing skills required.** You will not open any video editing software. Your job is to describe what you want — the AI handles the rest. If you can describe a video to a friend, you can do this.
 </Note>
 
-## 你可以制作什么类型的视频？
+## What kind of videos can you make?
 
-以下是一些真实示例 —— 为本教程选一个，或自己想一个。
+Here are real examples — pick one for the tutorial, or come up with your own.
 
 <CardGroup cols={3}>
-  <Card title="个人品牌介绍" icon="user">
-    一段 30 秒的"嗨，我是[姓名]"视频，适合 LinkedIn 或作品集。你的名字、标语、核心优势，加上专业配音。
+  <Card title="Personal Brand Intro" icon="user">
+    A 30-second "Hi, I'm [Name]" video for LinkedIn or your portfolio. Your name, tagline, key strengths, and a professional voiceover.
   </Card>
-  <Card title="活动邀请" icon="calendar">
-    宣传聚会、工作坊或社区活动。带动画的日期、地点和行动号召，配上铃声音效。
+  <Card title="Event Invitation" icon="calendar">
+    Promote a meetup, workshop, or community event. Animated date, venue, and call-to-action with a chime sound effect.
   </Card>
-  <Card title="作品集展示" icon="briefcase">
-    展示一个已完成的项目。动态列出你构建的内容、使用的工具和成果 —— 配有解说词。
+  <Card title="Portfolio Showcase" icon="briefcase">
+    Walk through a completed project. Animated bullet points listing what you built, tools used, and the outcome — with narration.
   </Card>
-  <Card title="社交媒体技巧" icon="lightbulb">
-    一段简短有力的短视频，分享技术技巧或励志信息。大胆的动态文字配上配音 —— 非常适合 Instagram 或 TikTok。
+  <Card title="Social Media Tip" icon="lightbulb">
+    A short, punchy reel sharing a tech tip or motivational message. Bold animated text with voiceover — perfect for Instagram or TikTok.
   </Card>
-  <Card title="自由职业服务宣传" icon="handshake">
-    推广你的自由职业业务。服务名称、你做什么，以及专业配音的联系信息。
+  <Card title="Freelance Service Pitch" icon="handshake">
+    Promote a freelance offering. Service name, what you do, and contact info with a professional voiceover.
   </Card>
-  <Card title="感谢视频" icon="heart">
-    求职面试或参加网络活动后的个性化跟进。温暖的配音、你的名字和联系方式。
+  <Card title="Thank-You Video" icon="heart">
+    A personalised follow-up after a job interview or networking event. Warm voiceover, your name, and contact details.
   </Card>
 </CardGroup>
 
-## 工具
+## Tools
 
 <CardGroup cols={3}>
-  <Card title="Gemini CLI 或 Claude Code" icon="terminal">
-    在终端运行的 AI 助手。Gemini CLI 免费（每日 1,000 次请求）。Claude Code 是 Remotion 推荐的付费替代方案 —— 功能更强大，工作流相同。
+  <Card title="Gemini CLI or Claude Code" icon="terminal">
+    Your AI assistant that runs in the terminal. Gemini CLI is free (1,000 requests/day). Claude Code is a paid alternative recommended by Remotion — more capable, same workflow.
   </Card>
   <Card title="Remotion" icon="video">
-    从代码创建视频的框架。你永远不需要自己编写代码 —— AI 替你完成。个人使用免费。
+    A framework that creates videos from code. You never write the code yourself — AI does it. Free for personal use.
   </Card>
   <Card title="ElevenLabs" icon="volume-high">
-    AI 语音和音效平台。将任何文字转化为专业配音，或从描述生成音效。包含免费套餐。
+    AI voice and sound effects. Turn any text into professional voiceover or generate sound effects from descriptions. Free tier included.
   </Card>
   <Card title="Node.js" icon="node-js">
-    运行 Gemini CLI、Remotion 和 ElevenLabs 脚本所需的工具。一次性设置步骤。
+    Required to run Gemini CLI, Remotion, and the ElevenLabs scripts. A one-time setup step.
   </Card>
-  <Card title="Wispr Flow（可选）" icon="microphone">
-    说话代替打字。在任何应用中均可使用，包括终端。
+  <Card title="Wispr Flow (optional)" icon="microphone">
+    Speak your prompts instead of typing them. Works in any application, including your terminal.
   </Card>
 </CardGroup>
 
-## 费用
+## Cost
 
-| 工具 | 费用 | 备注 |
-|------|------|------|
-| Gemini CLI | 免费 | 每日 1,000 次请求 |
-| Claude Code | 付费 | 需要 Max 或 Pro 订阅。可选替代方案。 |
-| Node.js | 免费 | |
-| Remotion | 免费 | 个人使用免费 |
-| ElevenLabs | 免费套餐 | 每月 10,000 字符（约 5–8 分钟语音） |
-| Wispr Flow（可选） | 免费试用 | [邀请链接可获一个月 Pro 版免费试用](https://wisprflow.ai/r?CHAN115) |
-| **合计** | **$0** | 使用 Gemini CLI + 免费套餐 |
+| Tool | Cost | Notes |
+|------|------|-------|
+| Gemini CLI | Free | 1,000 requests/day |
+| Claude Code | Paid | Requires Max or Pro subscription. Optional alternative. |
+| Node.js | Free | |
+| Remotion | Free | Free for personal use |
+| ElevenLabs | Free tier | 10,000 characters/month (~5–8 min of speech) |
+| Wispr Flow (optional) | Free trial | [Invite link for a free month of Pro](https://wisprflow.ai/r?CHAN115) |
+| **Total** | **$0** | Using Gemini CLI + free tiers |
 
-## 前置要求
+## Prerequisites
 
 <CardGroup cols={3}>
-  <Card title="一台能联网的电脑" icon="laptop">
-    Windows 或 macOS 均可。无需特殊硬件 —— 渲染在你自己的电脑上完成。
+  <Card title="A laptop with internet" icon="laptop">
+    Windows or macOS. No special hardware needed — rendering happens on your machine.
   </Card>
-  <Card title="1.5 到 2 小时" icon="clock">
-    大部分时间是一次性设置。实际视频创建只需几分钟。慢慢来 —— 不用着急。
+  <Card title="1.5 to 2 hours" icon="clock">
+    Most of that is one-time setup. The actual video creation takes minutes. Take your time — there's no rush.
   </Card>
-  <Card title="好奇心" icon="sparkles">
-    无需编程或视频剪辑经验。如果你完成了本系列的任何之前的教程，你已经准备充分。
+  <Card title="Curiosity" icon="sparkles">
+    No coding or video editing experience needed. If you have completed any earlier tutorial in this series, you are well prepared.
   </Card>
 </CardGroup>
 
 <Note>
-准备好了吗？前往[设置你的工具](/docs/2026-her-waka/tutorial/promo-video/setup)，安装你所需的一切。
+Ready to get started? Head to [Set up your tools](/docs/2026-her-waka/tutorial/promo-video/setup) to install everything you need.
 </Note>

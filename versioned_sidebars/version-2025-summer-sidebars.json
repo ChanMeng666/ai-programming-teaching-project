@@ -3,79 +3,79 @@
     {
       "type": "doc",
       "id": "intro",
-      "label": "🌟 课程介绍"
+      "label": "🌟 Course Introduction"
     },
     {
       "type": "category",
-      "label": "📚 课程一：Gemini CLI 环境管理",
+      "label": "📚 Course 1: Gemini CLI Environment",
       "collapsible": true,
       "collapsed": false,
       "items": [
         {
           "type": "doc",
           "id": "basics/index",
-          "label": "基础教程"
+          "label": "Basic Tutorial"
         },
         {
           "type": "doc",
           "id": "practice/index",
-          "label": "实践项目"
+          "label": "Practice Project"
         }
       ]
     },
     {
       "type": "category",
-      "label": "🌐 课程二：开发并部署个人网站",
+      "label": "🌐 Course 2: Build & Deploy Personal Website",
       "collapsible": true,
       "collapsed": false,
       "items": [
         {
           "type": "doc",
           "id": "website/index",
-          "label": "完整教程"
+          "label": "Complete Tutorial"
         }
       ]
     },
     {
       "type": "category",
-      "label": "📊 课程三：绘制专业图表",
+      "label": "📊 Course 3: Create Professional Diagrams",
       "collapsible": true,
       "collapsed": false,
       "items": [
         {
           "type": "doc",
           "id": "diagrams/index",
-          "label": "课程概览"
+          "label": "Course Overview"
         },
         {
           "type": "doc",
           "id": "diagrams/mermaid-basics",
-          "label": "Mermaid 基础"
+          "label": "Mermaid Basics"
         },
         {
           "type": "doc",
           "id": "diagrams/mermaid-advanced",
-          "label": "Mermaid 高级"
+          "label": "Mermaid Advanced"
         },
         {
           "type": "doc",
           "id": "diagrams/drawio",
-          "label": "Draw.io 设计"
+          "label": "Draw.io Design"
         },
         {
           "type": "doc",
           "id": "diagrams/use-cases",
-          "label": "场景应用"
+          "label": "Use Cases"
         },
         {
           "type": "doc",
           "id": "diagrams/ai-assistance",
-          "label": "AI 辅助创作"
+          "label": "AI-Assisted Creation"
         },
         {
           "type": "doc",
           "id": "diagrams/projects",
-          "label": "实战项目"
+          "label": "Practical Projects"
         }
       ]
     }

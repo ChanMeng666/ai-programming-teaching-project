@@ -18,36 +18,36 @@ const sidebars = {
     {
       type: 'doc',
       id: 'intro',
-      label: '🌟 课程介绍',
+      label: '🌟 Course Introduction',
     },
     {
       type: 'category',
-      label: '📚 课程一：Gemini CLI 环境管理',
+      label: '📚 Course 1: Gemini CLI Environment',
       collapsible: true,
       collapsed: false,
       items: [
         {
           type: 'doc',
           id: 'basics/index',
-          label: '基础教程',
+          label: 'Basic Tutorial',
         },
         {
           type: 'doc',
           id: 'practice/index',
-          label: '实践项目',
+          label: 'Practice Project',
         },
       ],
     },
     {
       type: 'category',
-      label: '🌐 课程二：开发并部署个人网站',
+      label: '🌐 Course 2: Build & Deploy Personal Website',
       collapsible: true,
       collapsed: false,
       items: [
         {
           type: 'doc',
           id: 'website/index',
-          label: '完整教程',
+          label: 'Complete Tutorial',
         },
       ],
     },

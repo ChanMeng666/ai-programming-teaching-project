@@ -9,10 +9,10 @@ const CATEGORIES = ['心得体会', '经验分享', '教程讨论', '其他'];
 
 function useCategoryLabels() {
   return {
-    '心得体会': translate({ id: 'messageBoard.category.experience', message: '心得体会' }),
-    '经验分享': translate({ id: 'messageBoard.category.sharing', message: '经验分享' }),
-    '教程讨论': translate({ id: 'messageBoard.category.discussion', message: '教程讨论' }),
-    '其他': translate({ id: 'messageBoard.category.other', message: '其他' }),
+    '心得体会': translate({ id: 'messageBoard.category.experience', message: 'Reflections' }),
+    '经验分享': translate({ id: 'messageBoard.category.sharing', message: 'Tips & Tricks' }),
+    '教程讨论': translate({ id: 'messageBoard.category.discussion', message: 'Tutorial Discussion' }),
+    '其他': translate({ id: 'messageBoard.category.other', message: 'Other' }),
   };
 }
 
@@ -59,15 +59,15 @@ function MessageForm({ onSubmitted }) {
       });
       const data = await res.json();
       if (!res.ok) {
-        onSubmitted(false, data.error || translate({ id: 'messageBoard.submitFailed', message: '提交失败' }));
+        onSubmitted(false, data.error || translate({ id: 'messageBoard.submitFailed', message: 'Submission failed' }));
         return;
       }
-      onSubmitted(true, translate({ id: 'messageBoard.submitSuccess', message: '留言已提交，等待审核后将会显示' }));
+      onSubmitted(true, translate({ id: 'messageBoard.submitSuccess', message: 'Message submitted! It will appear after review.' }));
       setNickname('');
       setContent('');
       setCategory('心得体会');
     } catch {
-      onSubmitted(false, translate({ id: 'messageBoard.networkError', message: '网络错误，请稍后重试' }));
+      onSubmitted(false, translate({ id: 'messageBoard.networkError', message: 'Network error, please try again later' }));
     } finally {
       setSubmitting(false);
     }
@@ -77,20 +77,20 @@ function MessageForm({ onSubmitted }) {
     <div className={styles.formSection}>
       <div className={styles.formCard}>
         <h2 className={styles.formTitle}>
-          {translate({ id: 'messageBoard.formTitle', message: '写下你的留言' })}
+          {translate({ id: 'messageBoard.formTitle', message: 'Leave a Message' })}
         </h2>
         <form onSubmit={handleSubmit}>
           <div className={styles.formRow}>
             <div className={styles.formGroup}>
               <label htmlFor="mb-nickname">
-                {translate({ id: 'messageBoard.nicknameLabel', message: '昵称' })} *
+                {translate({ id: 'messageBoard.nicknameLabel', message: 'Nickname' })} *
               </label>
               <input
                 id="mb-nickname"
                 className={styles.formInput}
                 type="text"
                 maxLength={30}
-                placeholder={translate({ id: 'messageBoard.nicknamePlaceholder', message: '你的昵称' })}
+                placeholder={translate({ id: 'messageBoard.nicknamePlaceholder', message: 'Your nickname' })}
                 value={nickname}
                 onChange={(e) => setNickname(e.target.value)}
                 required
@@ -98,7 +98,7 @@ function MessageForm({ onSubmitted }) {
             </div>
             <div className={styles.formGroup}>
               <label htmlFor="mb-category">
-                {translate({ id: 'messageBoard.categoryLabel', message: '分类' })}
+                {translate({ id: 'messageBoard.categoryLabel', message: 'Category' })}
               </label>
               <select
                 id="mb-category"
@@ -116,7 +116,7 @@ function MessageForm({ onSubmitted }) {
           </div>
           <div className={styles.formGroup}>
             <label htmlFor="mb-content">
-              {translate({ id: 'messageBoard.contentLabel', message: '留言内容' })} *
+              {translate({ id: 'messageBoard.contentLabel', message: 'Message' })} *
             </label>
             <div className={styles.textareaWrapper}>
               <textarea
@@ -124,7 +124,7 @@ function MessageForm({ onSubmitted }) {
                 className={styles.formTextarea}
                 maxLength={500}
                 rows={4}
-                placeholder={translate({ id: 'messageBoard.contentPlaceholder', message: '分享你的 AI 编程学习心得、经验或想法...' })}
+                placeholder={translate({ id: 'messageBoard.contentPlaceholder', message: 'Share your AI programming experiences, insights or ideas...' })}
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
                 required
@@ -148,8 +148,8 @@ function MessageForm({ onSubmitted }) {
             disabled={submitting || !nickname.trim() || !content.trim()}
           >
             {submitting
-              ? translate({ id: 'messageBoard.submitting', message: '提交中...' })
-              : translate({ id: 'messageBoard.submit', message: '提交留言' })}
+              ? translate({ id: 'messageBoard.submitting', message: 'Submitting...' })
+              : translate({ id: 'messageBoard.submit', message: 'Submit' })}
           </button>
         </form>
       </div>
@@ -194,7 +194,7 @@ export default function MessageBoardPage() {
   const [toast, setToast] = useState(null);
   const categoryLabels = useCategoryLabels();
 
-  const filterAllLabel = translate({ id: 'messageBoard.filterAll', message: '全部' });
+  const filterAllLabel = translate({ id: 'messageBoard.filterAll', message: 'All' });
 
   const fetchMessages = useCallback(async (cursor) => {
     const params = new URLSearchParams({ pageSize: '20' });
@@ -248,8 +248,8 @@ export default function MessageBoardPage() {
 
   return (
     <Layout
-      title={translate({ id: 'messageBoard.pageTitle', message: '留言板' })}
-      description={translate({ id: 'messageBoard.pageDescription', message: '分享你的 AI 编程学习心得和经验' })}
+      title={translate({ id: 'messageBoard.pageTitle', message: 'Message Board' })}
+      description={translate({ id: 'messageBoard.pageDescription', message: 'Share your AI programming learning experiences' })}
     >
       <div className={styles.pageWrapper}>
         <div className={styles.bgImage} />
@@ -264,10 +264,10 @@ export default function MessageBoardPage() {
 
           <div className={styles.heroSection}>
             <h1 className={styles.title}>
-              {translate({ id: 'messageBoard.heroTitle', message: '留言板' })}
+              {translate({ id: 'messageBoard.heroTitle', message: 'Message Board' })}
             </h1>
             <p className={styles.subtitle}>
-              {translate({ id: 'messageBoard.heroSubtitle', message: '在这里分享你的 AI 编程学习心得、经验与想法，和大家一起交流成长' })}
+              {translate({ id: 'messageBoard.heroSubtitle', message: 'Share your AI programming experiences, insights and ideas here, and grow together with the community' })}
             </p>
           </div>
 
@@ -302,7 +302,7 @@ export default function MessageBoardPage() {
                 <span />
                 <span />
               </div>
-              <p>{translate({ id: 'messageBoard.loading', message: '加载留言中...' })}</p>
+              <p>{translate({ id: 'messageBoard.loading', message: 'Loading messages...' })}</p>
             </div>
           ) : filteredMessages.length === 0 ? (
             <div className={styles.emptyState}>
@@ -312,10 +312,10 @@ export default function MessageBoardPage() {
               <p>
                 {activeFilter !== '__all__'
                   ? translate(
-                      { id: 'messageBoard.emptyCategory', message: '暂无「{category}」分类的留言' },
+                      { id: 'messageBoard.emptyCategory', message: 'No messages in "{category}" category' },
                       { category: categoryLabels[activeFilter] || activeFilter }
                     )
-                  : translate({ id: 'messageBoard.emptyAll', message: '还没有留言，来做第一个分享的人吧！' })}
+                  : translate({ id: 'messageBoard.emptyAll', message: 'No messages yet. Be the first to share!' })}
               </p>
             </div>
           ) : (
@@ -333,8 +333,8 @@ export default function MessageBoardPage() {
                     disabled={loadingMore}
                   >
                     {loadingMore
-                      ? translate({ id: 'messageBoard.loadingMore', message: '加载中...' })
-                      : translate({ id: 'messageBoard.loadMore', message: '加载更多' })}
+                      ? translate({ id: 'messageBoard.loadingMore', message: 'Loading...' })
+                      : translate({ id: 'messageBoard.loadMore', message: 'Load More' })}
                   </button>
                 </div>
               )}

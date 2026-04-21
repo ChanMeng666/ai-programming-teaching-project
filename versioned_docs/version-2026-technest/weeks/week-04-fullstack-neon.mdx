@@ -1,222 +1,222 @@
 ---
-title: "第 4 周：走向全栈 —— Neon + Auth"
-description: 通过 MCP 开 Neon Postgres + Neon Auth，上线一个 Drizzle 驱动、支持 Google 登录的留言簿。这是从静态站走到真产品的拐点周。
-sidebar_label: "第 4 周：走向全栈 —— Neon + Auth"
+title: "Week 4: Go Full-Stack — Neon + Auth"
+description: Provision Neon Postgres + Neon Auth via MCP, ship a Drizzle-backed guestbook with Google sign-in. The hinge week from static site to real product.
+sidebar_label: "Week 4: Go Full-Stack — Neon + Auth"
 ---
 
 <AxisBadge axes={["JOB", "LIFE"]} />
 
-# 走向全栈 —— Neon + Auth
+# Go Full-Stack — Neon + Auth
 
-## 学习目标
+## Learning Objectives
 
-到本节课结束，学员应当能够：
+By the end of this session, students should be able to:
 
-- **通过提示词开一个生产级 Postgres 数据库 + 一套 Auth 系统** —— Neon MCP 创建 DB，Drizzle 定义 schema，Neon Auth 接通 Google 登录，全部在一段对话里发生。
-- **识别并落地 OAuth 同意页这一步**——这是 AI 唯一帮不了你的步骤——做到不慌、不跳过。
-- **在一节 2 小时的课里端到端交付一个全栈功能**（登录用户在你网站上留言），即便你写过零行后端代码。
+- **Provision a production Postgres database and an auth system by prompt** — Neon MCP creates the DB, Drizzle defines the schema, and Neon Auth wires Google login, all through one conversation.
+- **Recognise and execute the OAuth-consent manual moment** — the one step the AI cannot do for you — without panicking or skipping ahead.
+- **Ship a full-stack feature end-to-end** (signed-in visitors leaving messages on your site) in a single 2-hour class, even though you've written zero lines of server code.
 
-## 核心主题
+## Core Topics
 
-- 当 AI 来写整套 stack 时，"走向全栈"到底意味着什么：数据库、Auth 层、server action、UI——一次性全打齐。
-- Drizzle ORM 作为 AI 能推理的、类型安全的 schema 定义。
-- Neon Auth —— 它为什么存在；为什么对新手来说，它是从"没有登录"走到"用户可以登录"最快的路径。
-- 跨三套环境（local、preview、production）的环境变量管道；为什么"AI 替你做这件事"是超能力。
-- OAuth 信任探戈：为什么 Google 必须人来同意；callback URL 必须严格匹配。
+- What "going full-stack" actually means when the AI writes the stack: a database, an auth layer, server actions, and a UI — all at once.
+- Drizzle ORM as a type-safe schema definition the AI can reason about.
+- Neon Auth — why it exists and why it's the fastest path from "no login" to "signed-in users" for beginners.
+- Env-var plumbing across three environments (local, preview, production) and why AI doing this is a superpower.
+- The OAuth trust dance: why Google requires human consent and where the callback URL must match.
 
-## 工具 / 技术栈
+## Tools / Stack
 
-| 工具 | 本周角色 |
+| Tool | Role this week |
 |---|---|
-| **Neon Postgres**（通过 MCP） | Serverless Postgres；AI 通过 Neon MCP 开。 |
-| **Neon Auth** | 开箱即用的 Auth，带 Google provider；AI 接线。 |
-| **Drizzle ORM** | 类型安全的 schema，AI 读得懂、能扩展。 |
-| **Vercel CLI** | 在 Neon → 本地 → 生产之间同步环境变量。 |
-| **Google Cloud Console** | 唯一一个需要人打开的 OAuth 同意页所在地。 |
+| **Neon Postgres** (via MCP) | Serverless Postgres; AI provisions via Neon MCP. |
+| **Neon Auth** | Drop-in auth with Google provider; AI wires it. |
+| **Drizzle ORM** | Type-safe schema definition AI reads and extends. |
+| **Vercel CLI** | Syncs env vars between Neon → local → production. |
+| **Google Cloud Console** | The one place a human opens the OAuth consent screen. |
 
 <SiteEvolution thisWeek={4} />
 
-## 课堂计划
+## Session Plan
 
-| 时间 | 活动 |
+| Time | Activity |
 |---|---|
-| 0 – 15 分钟 | **回顾与 Check-in。** 这周谁的聊天组件挂了？快速分诊。另外：有没有人已经被陌生人用过 AI 克隆？ |
-| 15 – 40 分钟 | **概念讲解。** Postgres 是什么——讲到新手够用就行。ORM 干什么、不干什么。Auth provider 和 callback URL。为什么"环境变量管道"是 20 年的老痛点，而我们现在可以跳过它。 |
-| 40 – 75 分钟 | **现场演示。** 讲师在自己的站上加一个完整的留言簿——开 Neon、配 Drizzle schema、接 Google 登录、保护 UI——18 分钟的提示词搞定。全班看完整流程。 |
-| 75 – 105 分钟 | **动手 Lab。** 学员在自己站上复现。OAuth 这一步是唯一真正"人参与"的瞬间——预演两遍，没人会慌。 |
-| 105 – 120 分钟 | **Q&A + 收尾。** 最常见的失败：callback URL 不匹配。我们当场调一个。 |
+| 0 – 15 min | **Recap & Check-in.** Anyone's chat widget break this week? Quick triage. Also: who's had a stranger use their AI-clone yet? |
+| 15 – 40 min | **Concept Teaching.** What Postgres *is*, at the level a beginner needs. What an ORM does and doesn't do. Auth providers and callback URLs. Why env-var plumbing is a 20-year-old engineering pain we can now skip. |
+| 40 – 75 min | **Live Demo.** Instructor adds a full guestbook to her own site — Neon provisioning, Drizzle schema, Google login, protected UI — in 18 minutes of prompting. Class watches the whole flow. |
+| 75 – 105 min | **Hands-On Lab.** Students replicate on their site. The OAuth step is the only true human moment — rehearse it twice so nobody panics. |
+| 105 – 120 min | **Q&A + Wrap.** Common failure: callback URL mismatch. We'll debug one live. |
 
-## 动手 Lab
+## Hands-On Lab
 
-**任务。** 下课时，你的站会有一个留言簿。访客点 *Sign in with Google*，写一条消息，立即就能在 About 页看到（带名字 + 头像）。刷新——消息还在。这是一个真正的全栈功能：数据库、Auth、server action、UI。
+**Task.** By the end of class your site has a guestbook. Visitors click *Sign in with Google*, write a message, and see it appear (with their name + avatar) instantly on your About page. Refresh — the messages persist. This is a full-stack feature: database, auth, server action, UI.
 
-### 阶段 1 —— 开数据库
+### Phase 1 — Provision the database
 
 <PromptStep n={1} audience="Cursor">
-请给这个项目开一个新的 Neon Postgres 数据库。用 Neon MCP 服务器。项目名 `my-portfolio-db`。建好以后：
+Please provision a new Neon Postgres database for this project. Use the Neon MCP server. Name the project `my-portfolio-db`. When it's created:
 
-1. 把 pooled 连接串作为 `DATABASE_URL` 存到我的 `.env.local`。
-2. 通过 Vercel CLI 把同一个 `DATABASE_URL` 加到我的 Vercel 生产环境 *和* 预览环境。
-3. 在我的 Next.js 项目里安装 Drizzle ORM（`drizzle-orm`、`drizzle-kit`、`pg`）。
-4. 创建 `drizzle.config.ts` 和 `db/schema.ts`，准备好让我下一步加表。
+1. Save the pooled connection string as `DATABASE_URL` in my `.env.local`.
+2. Add the same `DATABASE_URL` to my Vercel production *and* preview environments via the Vercel CLI.
+3. Install Drizzle ORM (`drizzle-orm`, `drizzle-kit`, `pg`) in my Next.js project.
+4. Create `drizzle.config.ts` and a `db/schema.ts` file, ready for me to add tables.
 
-先别建任何表——我下一步要做这件事。回报告时告诉我数据库的 region 和你设了哪些环境变量。
+Do not create any tables yet — I want to do that in the next step. Report back with the database's region and the list of env vars you set.
 </PromptStep>
 
 <VerifyStep n={2}>
 
-- Cursor 确认 Neon 项目已创建，并打印出 region。
-- 你的 `.env.local` 里有 `DATABASE_URL=postgresql://...` 这一行。
-- 跑 `vercel env ls`（Cursor 会跑）显示 `production` 和 `preview` 都有 `DATABASE_URL`。
-- `drizzle.config.ts` 和 `db/schema.ts` 都存在。
+- Cursor confirms the Neon project is created and prints its region.
+- Your `.env.local` has a `DATABASE_URL=postgresql://...` line.
+- Running `vercel env ls` (Cursor will do this) shows `DATABASE_URL` for both `production` and `preview`.
+- `drizzle.config.ts` and `db/schema.ts` exist.
 
 </VerifyStep>
 
-### 阶段 2 —— 定义 schema + 跑迁移
+### Phase 2 — Define schema + run migration
 
 <PromptStep n={3} audience="Cursor">
-现在用 Drizzle 定义留言簿的 schema。我要两张表：
+Now define the guestbook schema in Drizzle. I want two tables:
 
-- **`users`** —— 一张极简的 profile 表，让 Neon Auth 来 own。列：`id`（主键，text）、`name`（text）、`email`（text，unique）、`image`（text，可空）、`created_at`（timestamp 默认 now）。
-- **`guestbook_messages`** —— 列：`id`（主键，serial）、`user_id`（text，外键 → `users.id`，cascade on delete）、`body`（text，not null，1–500 字符）、`created_at`（timestamp 默认 now）。
+- **`users`** — a minimal profile table that Neon Auth can own. Columns: `id` (primary key, text), `name` (text), `email` (text, unique), `image` (text, nullable), `created_at` (timestamp default now).
+- **`guestbook_messages`** — columns: `id` (primary key, serial), `user_id` (text, FK → `users.id`, cascade on delete), `body` (text, not null, 1–500 chars), `created_at` (timestamp default now).
 
-用 `drizzle-kit generate` 生成迁移 SQL，先把它在聊天里给我看一下，然后用 `drizzle-kit push` 推到 Neon 数据库上。完成后对两张表都跑一个等价于 `SELECT 1` 的查询，确认两张表都存在。
+Generate the migration SQL with `drizzle-kit generate`, show it to me in chat, then run `drizzle-kit push` to apply it against the Neon database. Confirm both tables exist by running a `SELECT 1` equivalent against each.
 </PromptStep>
 
 <VerifyStep n={4}>
 
-- Cursor 在执行前把迁移 SQL 给你看了。
-- push 成功，没报错。
-- 验证查询对两张表都返回 0 行。
+- Cursor shows you the migration SQL before running it.
+- The push completes without error.
+- A verification query against both tables returns zero rows.
 
 </VerifyStep>
 
-### 阶段 3 —— 接通 Neon Auth（人工环节就在中间）
+### Phase 3 — Wire Neon Auth (the manual moment is in the middle)
 
 <PromptStep n={5} audience="Cursor">
-在这个项目里安装 **Neon Auth**。配成只用 Google 作为登录 provider，并把已认证用户写到我刚才定义的 `users` 表里。加一个 `Sign in with Google` 按钮组件，我能放到任何地方。先别填 Google 凭据——那个等会儿要我给你。告诉我具体要从 Google Cloud Console 取哪些值。
+Install **Neon Auth** in this project. Configure it to use Google as the only sign-in provider, and to write authenticated users into my `users` table (the one we just defined). Add a `Sign in with Google` button component I can drop anywhere. Don't fill in the Google credentials yet — you'll need me to give you those in a moment. Tell me exactly what values to fetch from Google Cloud Console.
 </PromptStep>
 
-<ManualStep n={6} why="Google 要求人接受 OAuth 条款，并手动把 redirect URI 粘进它的网页控制台。任何 API、CLI、MCP、skill 都做不了——是 Google 故意这么设计的。">
-Cursor 会让你打开 [Google Cloud Console](https://console.cloud.google.com/)。在里面：
+<ManualStep n={6} why="Google requires a human to accept OAuth terms and manually paste redirect URIs into its web console. No API, CLI, MCP, or skill can do this — by Google's design.">
+Cursor will tell you to open [Google Cloud Console](https://console.cloud.google.com/). In it:
 
-1. 新建一个项目，叫 `my-portfolio-auth`（或者用已有的）。
-2. 如果提示，启用 **Google+ API** / **People API**。
-3. 进 **APIs & Services → OAuth consent screen**。选 **External**，应用名填 `My Portfolio`，user support email 填你的邮箱，保存。
-4. 进 **Credentials → Create Credentials → OAuth client ID**。Application type 选 **Web application**。把 Cursor 刚才打印出来的 **Authorised redirect URIs** 加进去（会有两条——一条 localhost，一条 production）。
-5. 复制生成的 **Client ID** 和 **Client secret**。
+1. Create a new project called `my-portfolio-auth` (or use an existing one).
+2. Enable the **Google+ API** / **People API** if prompted.
+3. Go to **APIs & Services → OAuth consent screen**. Choose **External**, fill in app name = `My Portfolio`, user support email = your email, save.
+4. Go to **Credentials → Create Credentials → OAuth client ID**. Application type = **Web application**. Add the **Authorised redirect URIs** Cursor just printed (there will be two — one for localhost, one for production).
+5. Copy the resulting **Client ID** and **Client secret**.
 </ManualStep>
 
 <PromptStep n={7} audience="Cursor">
-这里是 Google OAuth 凭据：
+Here are the Google OAuth credentials:
 
-- Client ID：**\[粘贴\]**
-- Client secret：**\[粘贴\]**
+- Client ID: **\[paste\]**
+- Client secret: **\[paste\]**
 
-请：
+Please:
 
-1. 通过 CLI 把 `GOOGLE_CLIENT_ID` 和 `GOOGLE_CLIENT_SECRET` 加到 `.env.local` 和 Vercel（production + preview）。
-2. 接到 Neon Auth 的 Google provider 配置里。
-3. 同时生成一个强随机的 `AUTH_SECRET`，三个环境里都设上。
-4. 重启 dev server，确认 `http://localhost:3000` 上的 *Sign in with Google* 按钮现在能端到端启动 Google 流程。
+1. Add `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET` to both `.env.local` and Vercel (production + preview) via the CLI.
+2. Wire them into Neon Auth's Google provider config.
+3. Also generate a strong `AUTH_SECRET` and set it in all three environments.
+4. Restart the dev server and confirm the *Sign in with Google* button on `http://localhost:3000` now starts the Google flow end-to-end.
 </PromptStep>
 
 <VerifyStep n={8}>
 
-- 在 localhost 点 *Sign in with Google* 跳到 Google 同意页；登录后回到你的站，已是登录态。
-- `users` 表里出现一行带你 Google 名字 + 邮箱的记录。
-- 任何 commit 进去的文件里都没有 `GOOGLE_CLIENT_SECRET` 或 `AUTH_SECRET` 字样（`git status` 确认 `.env.local` 是 ignored）。
+- Clicking *Sign in with Google* on localhost takes you to Google's consent screen; signing in redirects back to your site, signed in.
+- A row appears in the `users` table with your Google name + email.
+- No `GOOGLE_CLIENT_SECRET` or `AUTH_SECRET` references show up in any committed file (`git status` confirms `.env.local` is ignored).
 
 </VerifyStep>
 
 <RecoverStep n={9}>
-登录回跳报 `Error 400: redirect_uri_mismatch`。请告诉我 Neon Auth 当前请求的具体 redirect URI 是什么，跟 Google Cloud Console 里登记的对一下，引导我在 Google 控制台里修。我负责复制粘贴。
+The sign-in redirect returns `Error 400: redirect_uri_mismatch`. Can you tell me the exact redirect URI Neon Auth is requesting, compare it to what's registered in Google Cloud Console, and walk me through fixing the mismatch in Google's dashboard? I'll copy-paste anything you need.
 </RecoverStep>
 
-### 阶段 4 —— 做留言簿 UI + server action
+### Phase 4 — Build the guestbook UI + server action
 
 <PromptStep n={10} audience="Cursor">
-现在在我的 `/about` 页上做留言簿功能：
+Now build the guestbook feature on my `/about` page:
 
-- 用户 **未** 登录：在消息列表上方显示一个小的 *Sign in with Google to leave a message* 按钮。
-- 用户 **已** 登录：显示一个紧凑的表单：textarea（最多 500 字符，可见的字符计数）、*Post* 按钮、一个小标签 "posting as {`{user.name}`}"。
-- 表单（或按钮）下方按"最新在前"渲染所有消息。每条显示发帖人头像、名字、相对时间（"3 minutes ago"）。我自己发的消息有一条淡淡的 accent 边框。
-- 用 Next.js **server action** 做 post。在 server 端校验长度 + 去掉首尾空白。返回一次乐观更新，让消息瞬间出现。
-- post 成功后 revalidate `/about` 页面，让别人来访问也能看到新消息。
+- If the user is **not** signed in, show a small *Sign in with Google to leave a message* button above the messages list.
+- If the user **is** signed in, show a compact form: a textarea (max 500 chars, character counter visible), a *Post* button, and a tiny "posting as {`{user.name}`}" label.
+- Below the form (or button), render all messages newest-first. Each message shows the poster's avatar, name, and a relative time ("3 minutes ago"). My own messages get a subtle accent border.
+- Use a Next.js **server action** for posting. Validate length + trim whitespace on the server. Return an optimistic UI update so the message appears instantly.
+- Revalidate the `/about` page on successful post so anyone else visiting sees the new message.
 
-用站点已有的 Tailwind tokens 和强调色。分两条 commit：一条是 server action，一条是 UI。
+Use the site's existing Tailwind tokens and accent colour. Commit in two commits: one for the server action, one for the UI.
 </PromptStep>
 
 <VerifyStep n={11}>
 
-- 在 localhost 未登录态下，看到登录按钮。
-- 登录后表单出现。post **"Hello from the future"**。
-- 消息瞬间出现在表单上方，带你的头像和 **"just now"**。
-- 刷新。还在。
-- 开一个无痕窗口，用另一个 Google 账号登录，post 一条。回到原窗口刷新——能看到对方的消息。
+- On localhost, when signed out, you see the sign-in button.
+- After signing in, the form appears. Post **"Hello from the future"**.
+- The message appears instantly above the form with your avatar and **"just now"**.
+- Refresh. The message is still there.
+- Open an incognito window, sign in with a different Google account, post again. Switch back to your original window, refresh — the other user's message is visible.
 
 </VerifyStep>
 
-### 阶段 5 —— 上线
+### Phase 5 — Ship
 
 <PromptStep n={12} audience="Cursor">
-部署到生产。确认 Vercel prod 环境变量都设了，把 commit 推上去，等部署完。然后：打开生产 URL，用 Google 登录，发一条消息。确认消息出现在线上站。再用一个无痕窗口看一下 —— 消息还在（证明 Neon 在生产环境也通了）。
+Deploy to production. Confirm all env vars are set on Vercel prod, push the commits, and wait for the deploy to finish. Then: open the production URL, sign in with Google, and post a message. Confirm the message appears on the live site. Also check that visiting the live site in a private window shows the message (proving the Neon connection works in prod).
 </PromptStep>
 
 <VerifyStep n={13}>
 
-- 生产部署成功。
-- 线上站点显示留言簿。
-- 你在第 11 步本地发的那条消息 **不** 在生产上（数据不同）。在生产新发的一条立即出现。
-- 你的 Neon 控制台显示 `users` 和 `guestbook_messages` 两张表里都有行。
+- Production deploy succeeds.
+- Live site shows the guestbook.
+- The message you posted during Step 11 locally is **not** on production (different data). A new one you post on prod appears immediately.
+- Your Neon dashboard shows rows in both `users` and `guestbook_messages` tables.
 
 </VerifyStep>
 
-<Warning title="任何时候都不要把 secret commit 进去">
-任何时候你看到 Cursor 准备把 `GOOGLE_CLIENT_SECRET = "..."` 写进源代码文件，立即拦下：**"别把 secret 放在源代码里。只能进 `.env.local`，并通过 Vercel CLI 设置。"** 这是要练成肌肉记忆的——很多真实的生产泄露事件，起点都是 IDE 自动补全把 secret 补进了错误的文件。
+<Warning title="Don't commit secrets — ever">
+If at any point you see Cursor about to write `GOOGLE_CLIENT_SECRET = "..."` into a source file, stop it: **"Don't put the secret in a source file. Put it in `.env.local` and set it via Vercel CLI only."** This is a muscle to build — many real-world production leaks start with an IDE autocompleting a secret into the wrong file.
 </Warning>
 
-## 本周作业
+## Weekly Assignment
 
-**做 / 交付。**
+**Build / Implement.**
 
-- 你线上站点上一个能用的留言簿：用 Google 登录、发消息、刷新和换浏览器都能看到。
+- A working guestbook on your live site: sign in with Google, post a message, see it persist across refresh and across browsers.
 
-**要求。**
+**Requirements.**
 
-- Neon Postgres 是唯一真实数据源。不准用内存数组。
-- Drizzle schema 进 repo。
-- Google OAuth callback URL 在 `localhost` 和生产环境都能跑通。
-- 提交时线上留言簿至少有 3 条消息（让同学帮你 post 一些，作为真实数据）。
-- 一张 Neon 控制台截图，显示 `users` 和 `guestbook_messages` 两张表都有行。
+- Neon Postgres is the source of truth. No in-memory arrays.
+- Drizzle schema committed to the repo.
+- Google OAuth callback URLs work in both `localhost` and production.
+- At least three messages on the live guestbook by submission time (ask classmates to post so you have real data).
+- Screenshot of your Neon dashboard showing the `users` and `guestbook_messages` tables with rows.
 
-**提交。** 第 5 周开课前，把线上 URL + Neon 截图发到 Slack。
+**Submission.** Live URL + Neon screenshot in Slack before Week 5.
 
-## 资源
+## Resources
 
-| 文档 | 视频 | 仓库 |
+| Docs | Videos | Repos |
 |---|---|---|
-| Neon —— MCP server + CLI | 讲师 demo："一段对话搞定全栈" | `drizzle-team/drizzle-orm` —— 示例 |
-| Neon Auth —— Next.js 集成 | | `neondatabase/neon` —— docs repo |
-| Drizzle ORM —— schema 基础 + 迁移 | | |
-| Vercel 环境变量 —— 按环境管理 | | |
+| Neon — MCP server + CLI | Instructor demo: "Full-stack in one conversation" | `drizzle-team/drizzle-orm` — examples |
+| Neon Auth — Next.js integration | | `neondatabase/neon` — docs repo |
+| Drizzle ORM — schema basics + migrations | | |
+| Vercel env vars — per-environment management | | |
 
-## 真实世界应用
+## Real-World Application
 
-**这是整学期的拐点周。** 第 4 周之前你只是在发带 LLM 调用的静态站。第 4 周之后你在发 *真正的产品* —— 登录用户把状态持久化到真实数据库。今天学的这套 stack（Next.js + Neon + Drizzle + 一个 Auth provider），就是 2026 年大多数 AI 创业公司的生产栈。你现在可以毫无伪装焦虑地在 LinkedIn 上写 *full-stack developer* 了。
+**This is the hinge class of the term.** Before Week 4 you were shipping static sites with LLM calls. After Week 4 you're shipping *actual products* — signed-in users persisting state to a real database. The stack you learned today (Next.js + Neon + Drizzle + an auth provider) is what most AI startups in 2026 are running in production. You can now claim *full-stack developer* on LinkedIn without a shred of imposter syndrome.
 
 <Note title="Career">
-扫你 LinkedIn 的招聘官在 "guestbook with OAuth + Postgres + Drizzle, deployed to Vercel" 这一行停下来，心想："这个人能做出功能。" —— 这正是你想要的信号。
+Recruiter skimming your LinkedIn pauses on "guestbook with OAuth + Postgres + Drizzle, deployed to Vercel" and thinks: **this person can ship features.** That's exactly the signal you want.
 </Note>
 
-## 踩坑提醒 & 小贴士
+## Challenges & Tips
 
-- *"`drizzle-kit push` 让我确认一个破坏性变更。"* 读一下 Cursor 输出里的 diff。如果是缩列、删表，停下来问 Cursor：**"为什么这次迁移要删 X？有没有更安全的路径？"** 在课堂数据库里通常无所谓，但读迁移 diff 的习惯本身才是重点。
-- *"OAuth 在 localhost 可以，生产挂了。"* Google Cloud Console 里 callback URL 是按环境分的。你需要 *两条* 都注册：`localhost:3000/api/auth/callback/google` 和 `your-project.vercel.app/api/auth/callback/google`。让 Cursor 把两条都列出来，然后在 Google 控制台里修。
-- *"刷新后我的 session 没了。"* auth cookie 没设到生产域名上。问 Cursor：**"看一下我 Neon Auth 的 cookie 配置——为什么 session 在线上没保持？"**
-- *"我发了消息但没显示。"* server action 的 revalidate 漏了。说：**"在 server action insert 成功后加上 `revalidatePath('/about')`。"**
-- *"我的 Neon 免费额度到 80% 了。"* 你存了一堆带表情包的消息，或者忘了清测试表。问 Cursor：**"显示我 Neon 的存储用量，帮我删掉所有没用的测试表。"**
+- *"`drizzle-kit push` asks me to confirm a destructive change."* Read the diff in Cursor's output. If it's shrinking a column or dropping a table, stop and ask Cursor **"Why does this migration want to delete X? Is there a safer path?"** In a classroom DB it's usually fine; the habit of reading migration diffs is what matters.
+- *"OAuth works on localhost but breaks in production."* The callback URL in Google Cloud Console is environment-specific. You need *both* `localhost:3000/api/auth/callback/google` *and* `your-project.vercel.app/api/auth/callback/google` registered. Ask Cursor to list both and fix them in the Google dashboard.
+- *"My session disappears on refresh."* The auth cookie isn't being set on the production domain. Ask Cursor **"Check my Neon Auth cookie configuration — why isn't the session persisting on the live site?"**
+- *"I posted a message but it doesn't show up."* Server-action revalidation missed. Say **"Add `revalidatePath('/about')` to the server action after the insert succeeds."**
+- *"My Neon free tier is at 80%."* You're storing emoji-heavy messages or forgot to clean up a test table. Ask Cursor **"Show me my Neon storage usage and help me drop any unused test tables."**
 
-<Info title="如果 auth 以你看不懂的方式失败">
-把浏览器地址栏里的 **完整** 错误粘到 Cursor。95% 的 OAuth 错误都编码在那串 query string 里——Cursor 能解码并修。
+<Info title="If auth fails in a way you don't understand">
+Paste the **exact** error from the browser URL bar into Cursor. 95% of OAuth errors are encoded in that query string — Cursor can decode and fix.
 </Info>

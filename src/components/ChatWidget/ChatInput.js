@@ -8,13 +8,13 @@ export default function ChatInput({ onSend, isLoading }) {
 
   const placeholder = translate({
     id: 'chatWidget.input.placeholder',
-    message: '输入你的问题...',
+    message: 'Type your question...',
     description: 'Chat input placeholder text',
   });
 
   const sendButtonLabel = translate({
     id: 'chatWidget.button.send',
-    message: '发送消息',
+    message: 'Send message',
     description: 'Send message button aria label',
   });
 

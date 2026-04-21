@@ -1,32 +1,32 @@
 ---
-title: Mermaid 高级应用
+title: Mermaid Advanced Applications
 sidebar_position: 3
 ---
 
 import CodeBlock from '@theme/CodeBlock';
 import Admonition from '@theme/Admonition';
 
-# Mermaid 高级应用
+# Mermaid Advanced Applications
 
-## 甘特图（Gantt Chart）
+## Gantt Chart
 
-甘特图是项目管理的重要工具，用于展示项目进度和时间安排。
+Gantt charts are an important tool for project management, used to display project progress and timelines.
 
-### 基础语法
+### Basic Syntax
 
 <CodeBlock language="mermaid">
 {`gantt
     title 项目开发计划
     dateFormat YYYY-MM-DD
-    
+
     section 需求分析
     需求调研           :done,    des1, 2024-01-01, 7d
     需求文档编写       :done,    des2, after des1, 5d
-    
+
     section 开发阶段
     前端开发           :active,  dev1, 2024-01-13, 15d
     后端开发           :         dev2, after des2, 20d
-    
+
     section 测试部署
     集成测试           :         test1, after dev2, 7d
     上线部署           :         deploy, after test1, 3d`}
@@ -36,38 +36,38 @@ import Admonition from '@theme/Admonition';
 gantt
     title 项目开发计划
     dateFormat YYYY-MM-DD
-    
+
     section 需求分析
     需求调研           :done,    des1, 2024-01-01, 7d
     需求文档编写       :done,    des2, after des1, 5d
-    
+
     section 开发阶段
     前端开发           :active,  dev1, 2024-01-13, 15d
     后端开发           :         dev2, after des2, 20d
-    
+
     section 测试部署
     集成测试           :         test1, after dev2, 7d
     上线部署           :         deploy, after test1, 3d
 ```
 
-### 高级配置
+### Advanced Configuration
 
 <CodeBlock language="mermaid">
 {`gantt
     title 季度产品路线图
     dateFormat YYYY-MM-DD
     axisFormat %m月
-    
+
     section 产品规划
     市场调研            :crit, done, 2024-01-01, 30d
     竞品分析            :done, after a1, 20d
     产品设计            :active, 2024-02-20, 30d
-    
+
     section 功能开发
     核心功能开发        :crit, 2024-03-20, 45d
     扩展功能开发        :2024-05-04, 30d
     性能优化            :2024-06-03, 20d
-    
+
     section 市场推广
     营销方案制定        :2024-05-01, 15d
     预热活动            :2024-05-16, 20d
@@ -79,28 +79,28 @@ gantt
     title 季度产品路线图
     dateFormat YYYY-MM-DD
     axisFormat %m月
-    
+
     section 产品规划
     市场调研            :crit, done, 2024-01-01, 30d
     竞品分析            :done, after a1, 20d
     产品设计            :active, 2024-02-20, 30d
-    
+
     section 功能开发
     核心功能开发        :crit, 2024-03-20, 45d
     扩展功能开发        :2024-05-04, 30d
     性能优化            :2024-06-03, 20d
-    
+
     section 市场推广
     营销方案制定        :2024-05-01, 15d
     预热活动            :2024-05-16, 20d
     正式发布            :milestone, 2024-06-05, 0d
 ```
 
-## 类图（Class Diagram）
+## Class Diagram
 
-类图用于展示系统的静态结构，包括类、属性、方法和类之间的关系。
+Class diagrams are used to show the static structure of a system, including classes, attributes, methods, and relationships between classes.
 
-### 基础语法
+### Basic Syntax
 
 <CodeBlock language="mermaid">
 {`classDiagram
@@ -110,28 +110,28 @@ gantt
         +makeSound() void
         +move() void
     }
-    
+
     class Dog {
         +String breed
         +bark() void
         +wagTail() void
     }
-    
+
     class Cat {
         +String color
         +meow() void
         +scratch() void
     }
-    
+
     Animal <|-- Dog : 继承
     Animal <|-- Cat : 继承
-    
+
     class Person {
         +String name
         +Pet pet
         +feedPet() void
     }
-    
+
     Person --> Animal : 拥有`}
 </CodeBlock>
 
@@ -143,32 +143,32 @@ classDiagram
         +makeSound() void
         +move() void
     }
-    
+
     class Dog {
         +String breed
         +bark() void
         +wagTail() void
     }
-    
+
     class Cat {
         +String color
         +meow() void
         +scratch() void
     }
-    
+
     Animal <|-- Dog : 继承
     Animal <|-- Cat : 继承
-    
+
     class Person {
         +String name
         +Pet pet
         +feedPet() void
     }
-    
+
     Person --> Animal : 拥有
 ```
 
-### 关系类型
+### Relationship Types
 
 <CodeBlock language="mermaid">
 {`classDiagram
@@ -182,7 +182,7 @@ classDiagram
     classO .. classP : 虚线链接`}
 </CodeBlock>
 
-### 实战示例：电商系统类图
+### Practical Example: E-commerce System Class Diagram
 
 <CodeBlock language="mermaid">
 {`classDiagram
@@ -194,21 +194,21 @@ classDiagram
         +logout() void
         +updateProfile() void
     }
-    
+
     class Customer {
         -String shippingAddress
         -List~Order~ orders
         +placeOrder() Order
         +viewOrders() List~Order~
     }
-    
+
     class Admin {
         -String role
         -String permissions
         +manageProducts() void
         +viewReports() void
     }
-    
+
     class Product {
         -String productId
         -String name
@@ -217,7 +217,7 @@ classDiagram
         +updateStock() void
         +getDetails() ProductInfo
     }
-    
+
     class Order {
         -String orderId
         -Date orderDate
@@ -226,13 +226,13 @@ classDiagram
         +calculateTotal() decimal
         +updateStatus() void
     }
-    
+
     class OrderItem {
         -int quantity
         -decimal price
         +getSubtotal() decimal
     }
-    
+
     User <|-- Customer
     User <|-- Admin
     Customer "1" --> "*" Order : places
@@ -250,21 +250,21 @@ classDiagram
         +logout() void
         +updateProfile() void
     }
-    
+
     class Customer {
         -String shippingAddress
         -List~Order~ orders
         +placeOrder() Order
         +viewOrders() List~Order~
     }
-    
+
     class Admin {
         -String role
         -String permissions
         +manageProducts() void
         +viewReports() void
     }
-    
+
     class Product {
         -String productId
         -String name
@@ -273,7 +273,7 @@ classDiagram
         +updateStock() void
         +getDetails() ProductInfo
     }
-    
+
     class Order {
         -String orderId
         -Date orderDate
@@ -282,13 +282,13 @@ classDiagram
         +calculateTotal() decimal
         +updateStatus() void
     }
-    
+
     class OrderItem {
         -int quantity
         -decimal price
         +getSubtotal() decimal
     }
-    
+
     User <|-- Customer
     User <|-- Admin
     Customer "1" --> "*" Order : places
@@ -296,11 +296,11 @@ classDiagram
     OrderItem "*" --> "1" Product : refers to
 ```
 
-## 状态图（State Diagram）
+## State Diagram
 
-状态图展示对象在其生命周期中的各种状态以及状态之间的转换。
+State diagrams show the various states of an object throughout its lifecycle and transitions between states.
 
-### 基础语法
+### Basic Syntax
 
 <CodeBlock language="mermaid">
 {`stateDiagram-v2
@@ -311,7 +311,7 @@ classDiagram
     配送中 --> 已完成 : 确认收货
     已完成 --> [*]
     已取消 --> [*]
-    
+
     已完成 --> 售后中 : 申请售后
     售后中 --> 已完成 : 售后完成
     售后中 --> 已退款 : 退款成功
@@ -327,19 +327,19 @@ stateDiagram-v2
     配送中 --> 已完成 : 确认收货
     已完成 --> [*]
     已取消 --> [*]
-    
+
     已完成 --> 售后中 : 申请售后
     售后中 --> 已完成 : 售后完成
     售后中 --> 已退款 : 退款成功
     已退款 --> [*]
 ```
 
-### 复合状态
+### Composite States
 
 <CodeBlock language="mermaid">
 {`stateDiagram-v2
     [*] --> 用户认证
-    
+
     state 用户认证 {
         [*] --> 未登录
         未登录 --> 登录中 : 输入凭证
@@ -347,9 +347,9 @@ stateDiagram-v2
         登录中 --> 未登录 : 验证失败
         已登录 --> [*]
     }
-    
+
     用户认证 --> 用户操作
-    
+
     state 用户操作 {
         [*] --> 浏览
         浏览 --> 编辑 : 选择编辑
@@ -357,14 +357,14 @@ stateDiagram-v2
         保存中 --> 浏览 : 保存成功
         保存中 --> 编辑 : 保存失败
     }
-    
+
     用户操作 --> [*] : 退出登录`}
 </CodeBlock>
 
 ```mermaid
 stateDiagram-v2
     [*] --> 用户认证
-    
+
     state 用户认证 {
         [*] --> 未登录
         未登录 --> 登录中 : 输入凭证
@@ -372,9 +372,9 @@ stateDiagram-v2
         登录中 --> 未登录 : 验证失败
         已登录 --> [*]
     }
-    
+
     用户认证 --> 用户操作
-    
+
     state 用户操作 {
         [*] --> 浏览
         浏览 --> 编辑 : 选择编辑
@@ -382,13 +382,13 @@ stateDiagram-v2
         保存中 --> 浏览 : 保存成功
         保存中 --> 编辑 : 保存失败
     }
-    
+
     用户操作 --> [*] : 退出登录
 ```
 
-## 饼图（Pie Chart）
+## Pie Chart
 
-饼图用于展示数据的组成比例。
+Pie charts are used to show the composition and proportion of data.
 
 <CodeBlock language="mermaid">
 {`pie title 技术栈使用比例
@@ -408,9 +408,9 @@ pie title 技术栈使用比例
     "其他" : 10
 ```
 
-## 用户旅程图（User Journey）
+## User Journey
 
-用户旅程图展示用户在使用产品或服务过程中的体验。
+User journey diagrams show the user's experience throughout the process of using a product or service.
 
 <CodeBlock language="mermaid">
 {`journey
@@ -454,9 +454,9 @@ journey
       分享体验: 5: 用户
 ```
 
-## Git 图（Git Graph）
+## Git Graph
 
-Git 图用于展示版本控制的分支和合并历史。
+Git graphs are used to show version control branch and merge history.
 
 <CodeBlock language="mermaid">
 {`gitGraph
@@ -502,9 +502,9 @@ gitGraph
     commit
 ```
 
-## 高级样式定制
+## Advanced Style Customization
 
-### 自定义主题
+### Custom Themes
 
 <CodeBlock language="mermaid">
 {`%%{init: {
@@ -524,13 +524,13 @@ graph TD
     C --> D[视觉优化]`}
 </CodeBlock>
 
-<Admonition type="tip" title="AI 辅助生成复杂图表">
-对于复杂的图表，可以使用 Gemini CLI 来辅助生成：
+<Admonition type="tip" title="AI-Assisted Complex Diagram Generation">
+For complex diagrams, you can use Gemini CLI for assistance:
 
 <CodeBlock language="text">
-{`您：帮我创建一个微服务架构的类图，包括网关、认证服务、业务服务
+{`You: Help me create a microservices architecture class diagram, including gateway, authentication service, and business services
 
-Gemini：我来为您创建微服务架构类图：
+Gemini: I'll create a microservices architecture class diagram for you:
 
 \`\`\`mermaid
 classDiagram
@@ -542,7 +542,7 @@ classDiagram
         +authenticate(Token) boolean
         +applyRateLimit() void
     }
-    
+
     class AuthService {
         -TokenManager tokenManager
         -UserRepository userRepo
@@ -551,7 +551,7 @@ classDiagram
         +refreshToken(token) Token
         +logout(token) void
     }
-    
+
     class UserService {
         -UserRepository repository
         +createUser(userData) User
@@ -559,7 +559,7 @@ classDiagram
         +updateUser(userId, data) User
         +deleteUser(userId) boolean
     }
-    
+
     class OrderService {
         -OrderRepository repository
         -PaymentClient paymentClient
@@ -568,7 +568,7 @@ classDiagram
         +processPayment(orderId) PaymentResult
         +updateOrderStatus(orderId, status) void
     }
-    
+
     class NotificationService {
         -EmailSender emailSender
         -SMSSender smsSender
@@ -576,7 +576,7 @@ classDiagram
         +sendSMS(phone, message) void
         +sendBatchNotifications() void
     }
-    
+
     APIGateway --> AuthService : validates with
     APIGateway --> UserService : routes to
     APIGateway --> OrderService : routes to
@@ -587,9 +587,14 @@ classDiagram
 </CodeBlock>
 </Admonition>
 
-## 下一步
+## Next Steps
 
-掌握了 Mermaid 的高级特性后，您可以：
+After mastering Mermaid's advanced features, you can:
 
-- [学习 Draw.io 设计](../drawio)
-- [查看场景应用](../use-cases)
+  <a href="../drawio" className="next-button">
+    Learn Draw.io Design →
+  </a>
+  <a href="../use-cases" className="next-button secondary">
+    View Scenario Applications →
+  </a>
+

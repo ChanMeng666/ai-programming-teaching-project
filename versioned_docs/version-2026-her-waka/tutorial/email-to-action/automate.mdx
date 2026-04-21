@@ -1,237 +1,237 @@
 ---
-title: "自动化你的工作流"
-description: "将邮件转化为日历事件和文档 —— AI 读取收件箱，提取重要信息，并在 Google 应用间采取行动。"
+title: "Automate your workflow"
+description: "Turn emails into calendar events and documents — AI reads your inbox, extracts what matters, and takes action across Google apps."
 ---
 
-你的 AI 工具已连接到 Gmail、日历和 Google 文档。现在让它们发挥作用 —— 读取一封邮件，从中创建日历事件，并写一份摘要文档。这一切都不需要打开浏览器。
+Your AI tools are connected to Gmail, Calendar, and Google Docs. Now let's put them to work — read an email, create a calendar event from it, and write a summary doc. All without opening your browser.
 
-## 读取和提取邮件信息
+## Read and extract from email
 
-首先，让 AI 读取一封邮件并提取关键信息。
+First, let's get AI to read an email and pull out the key information.
 
 <Tabs>
-  <Tab title="Gemini CLI + 语音">
-    确保 Gemini CLI 在终端中运行。然后说（通过 Wispr Flow）或输入：
+  <Tab title="Gemini CLI + Voice">
+    Make sure Gemini CLI is running in your terminal. Then say (with Wispr Flow) or type:
 
-    ```text title="说出或复制此提示词"
+    ```text title="Say this or copy this prompt"
     Check my Gmail for the most recent email about an invoice or payment. Summarise what it says, who sent it, and what action is needed.
     ```
 
-    Gemini CLI 将使用 Gmail 工具获取你的邮件，找到相关信息，并给你一个结构化的摘要。
+    Gemini CLI will use the Gmail tools to fetch your emails, find the relevant message, and give you a structured summary.
 
     <Tip>
-    **Gemini 要求授权？** 如果 Gemini CLI 要求批准工具调用，输入 `y` 并按 **Enter**。
+    **Gemini asks for permission?** If Gemini CLI asks to approve a tool call, type `y` and press **Enter**.
     </Tip>
   </Tab>
 
-  <Tab title="直接使用 gws 命令">
-    如果你更喜欢直接使用 `gws`，先对收件箱进行分类：
+  <Tab title="Direct gws Commands">
+    If you prefer to use `gws` directly, start by triaging your inbox:
 
-    ```bash title="复制此命令"
+    ```bash title="Copy this command"
     gws gmail +triage
     ```
 
-    这会显示你最近的邮件及其 ID。要读取某封具体邮件，使用：
+    This shows your recent emails with IDs. To read a specific message, use:
 
-    ```bash title="复制此命令"
+    ```bash title="Copy this command"
     gws gmail +read --id MESSAGE_ID
     ```
 
-    用分类列表中的 ID 替换 `MESSAGE_ID`。这会在终端中显示完整的邮件内容。
+    Replace `MESSAGE_ID` with the ID from the triage list. This displays the full email content in your terminal.
   </Tab>
 </Tabs>
 
-你应该会看到类似这样的输出：
+You should see something like this:
 
-> **发件人：** Alex Kim (alex.kim@company.com)
+> **From:** Alex Kim (alex.kim@company.com)
 >
-> **主题：** 发票 #4821 —— 需在周五前跟进
+> **Subject:** Invoice #4821 — follow-up needed by Friday
 >
-> **摘要：** Alex 请你审核来自设计外包商的发票 #4821，金额为 $2,400。他需要你在周五前批准，这样财务部才能在月末前处理付款。
+> **Summary:** Alex is asking you to review invoice #4821 from the design contractor. The amount is $2,400. He needs your approval before Friday so finance can process the payment before month-end.
 >
-> **待办事项：** 在周五前审核并批准发票 #4821。
+> **Action needed:** Review and approve invoice #4821 by Friday.
 
 <Tip>
-**将"发票"替换成与你相关的任何主题。** 试试"会议"、"项目进展"、"截止日期"，或某个具体人的名字。提示词的效果是一样的 —— AI 会找到并摘要最相关的邮件。
+**Replace "invoice" with any topic relevant to you.** Try "meeting", "project update", "deadline", or a specific person's name. The prompt works the same way — AI will find and summarise the most relevant email.
 </Tip>
 
-## 从邮件创建日历事件
+## Create a calendar event from the email
 
-现在把这封邮件转化为一个日历事件 —— 设置一个跟进提醒，这样你就不会忘记。
+Now let's turn that email into a calendar event — a follow-up reminder so you don't forget.
 
 <Tabs>
-  <Tab title="Gemini CLI + 语音">
-    说出或输入：
+  <Tab title="Gemini CLI + Voice">
+    Say or type:
 
-    ```text title="说出或复制此提示词"
+    ```text title="Say this or copy this prompt"
     Based on that email, create a Google Calendar event for Thursday at 2 PM called "Follow up: Invoice review". Set it for 30 minutes.
     ```
 
-    Gemini CLI 会在你的 Google 日历上创建该事件。你应该会看到带有事件详情的确认信息。
+    Gemini CLI will create the event on your Google Calendar. You should see a confirmation with the event details.
   </Tab>
 
-  <Tab title="直接使用 gws 命令">
-    ```bash title="复制此命令"
+  <Tab title="Direct gws Commands">
+    ```bash title="Copy this command"
     gws calendar +insert --summary "Follow up: Invoice review" --start "2026-03-26T14:00:00" --end "2026-03-26T14:30:00"
     ```
 
-    这会在周四下午 2 点创建一个 30 分钟的事件。请根据你的需要调整日期和时间。
+    This creates a 30-minute event on Thursday at 2 PM. Adjust the date and time to suit your needs.
   </Tab>
 </Tabs>
 
-你应该会看到类似这样的确认：
+You should see a confirmation like:
 
-> **事件已创建：** "Follow up: Invoice review"
+> **Event created:** "Follow up: Invoice review"
 >
-> **时间：** 2026 年 3 月 26 日（周四）下午 2:00 - 2:30
+> **When:** Thursday, 26 March 2026, 2:00 PM - 2:30 PM
 >
-> **日历：** 主日历
+> **Calendar:** Primary
 
 <Info>
-**你刚刚从读取邮件到安排跟进，全程没有打开浏览器。** AI 理解了邮件的上下文并为你创建了事件。这就是跨应用工作流的样子。
+**You just went from reading an email to scheduling a follow-up — without opening your browser.** The AI understood the context from the email and created the event for you. This is what cross-app workflows look like.
 </Info>
 
-## 将摘要写入 Google 文档
+## Write a summary to Google Docs
 
-接下来，把重要细节记录到一个 Google 文档里 —— 这样你就有了书面记录。
+Next, let's capture the important details in a Google Doc — so you have a written record.
 
 <Tabs>
-  <Tab title="Gemini CLI + 语音">
-    说出或输入：
+  <Tab title="Gemini CLI + Voice">
+    Say or type:
 
-    ```text title="说出或复制此提示词"
+    ```text title="Say this or copy this prompt"
     Create a new Google Doc called "Invoice Follow-up Notes" and write a summary of that email in it, including the key details and next steps.
     ```
 
-    Gemini CLI 会在你的 Google 云端硬盘中创建一个新文档，并将摘要写入其中。
+    Gemini CLI will create a new document in your Google Drive and write the summary into it.
   </Tab>
 
-  <Tab title="直接使用 gws 命令">
-    首先创建文档：
+  <Tab title="Direct gws Commands">
+    First, create the document:
 
-    ```bash title="复制此命令"
+    ```bash title="Copy this command"
     gws docs +create --title "Invoice Follow-up Notes"
     ```
 
-    然后写入内容：
+    Then write content to it:
 
-    ```bash title="复制此命令"
+    ```bash title="Copy this command"
     gws docs +write --title "Invoice Follow-up Notes" --body "Invoice #4821 from design contractor. Amount: $2,400. Requested by Alex Kim. Action: Review and approve by Friday for month-end processing."
     ```
   </Tab>
 </Tabs>
 
-你应该会看到类似这样的确认：
+You should see a confirmation like:
 
-> **文档已创建：** "Invoice Follow-up Notes"
+> **Document created:** "Invoice Follow-up Notes"
 >
-> **内容已写入：** 包含关键细节和后续步骤的邮件摘要。
+> **Content written:** Summary of invoice email with key details and next steps.
 >
-> **位置：** Google 云端硬盘（我的云端硬盘）
+> **Location:** Google Drive (My Drive)
 
 <Tip>
-**文档会出现在你的 Google 云端硬盘中。** 打开 [drive.google.com](https://drive.google.com)，你会在最近文件中找到"Invoice Follow-up Notes"。你可以分享、编辑或稍后添加内容。
+**The document appears in your Google Drive.** Open [drive.google.com](https://drive.google.com) and you'll find "Invoice Follow-up Notes" in your recent files. You can share it, edit it, or add to it later.
 </Tip>
 
-## 上传文件到 Google 云端硬盘（进阶）
+## Upload a file to Google Drive (bonus)
 
-你还可以将电脑上的文件上传到 Google 云端硬盘 —— 适合将报告或文件附加到工作流中。
+You can also upload files from your computer to Google Drive — useful for attaching reports or documents to your workflow.
 
 <Tabs>
-  <Tab title="Gemini CLI + 语音">
-    说出或输入：
+  <Tab title="Gemini CLI + Voice">
+    Say or type:
 
-    ```text title="说出或复制此提示词"
+    ```text title="Say this or copy this prompt"
     Upload the file report.pdf from my current folder to Google Drive.
     ```
 
-    Gemini CLI 会上传文件并在完成后确认。
+    Gemini CLI will upload the file and confirm when it's done.
   </Tab>
 
-  <Tab title="直接使用 gws 命令">
-    ```bash title="复制此命令"
+  <Tab title="Direct gws Commands">
+    ```bash title="Copy this command"
     gws drive +upload ./report.pdf --name "Q1 Report"
     ```
 
-    这会将当前文件夹中的 `report.pdf` 以"Q1 Report"为名上传到 Google 云端硬盘。
+    This uploads `report.pdf` from your current folder to Google Drive with the name "Q1 Report".
   </Tab>
 </Tabs>
 
 <Info>
-**没有文件可上传？** 没关系 —— 跳过此步骤。它只是向你展示了可能性。你随时可以用电脑上的任何文件回来尝试。
+**No file to upload?** That's fine — skip this step. It's here to show you what's possible. You can always come back and try it later with any file on your computer.
 </Info>
 
-## 用一条提示词完成完整工作流
+## The complete workflow in one prompt
 
-这就是一切汇聚的地方。不用分步操作，给 AI 一条指令，触发三个 Google 应用的行动：
+Here's where it all comes together. Instead of doing each step separately, give AI one instruction that triggers actions across three Google apps:
 
 <Tabs>
-  <Tab title="Gemini CLI + 语音">
-    说出或输入：
+  <Tab title="Gemini CLI + Voice">
+    Say or type:
 
-    ```text title="说出或复制此提示词"
+    ```text title="Say this or copy this prompt"
     Read my most recent email about the project deadline. Create a calendar event for the follow-up. Write a summary into a new Google Doc. Tell me when everything is done.
     ```
 
-    Gemini CLI 会读取邮件、创建日历事件、写入文档，然后汇报 —— 全部来自一条提示词。
+    Gemini CLI will read the email, create the calendar event, write the doc, and report back — all from one prompt.
   </Tab>
 
-  <Tab title="直接使用 gws 命令">
-    用直接命令，你需要分别运行每个步骤：
+  <Tab title="Direct gws Commands">
+    With direct commands, you would need to run each step separately:
 
-    ```bash title="复制这些命令"
+    ```bash title="Copy these commands"
     gws gmail +triage
     gws calendar +insert --summary "Project deadline follow-up" --start "2026-03-27T10:00:00" --end "2026-03-27T10:30:00"
     gws docs +create --title "Project Deadline Notes"
     ```
 
-    这就是为什么 Gemini CLI 如此强大 —— 它从一条自然语言指令自动串联这些步骤。
+    This is why Gemini CLI is so powerful — it chains these steps together automatically from a single natural language instruction.
   </Tab>
 </Tabs>
 
 <Info>
-**这才是真正的力量 —— 一条自然语言指令触发三个 Google 应用的行动。** 你没有写代码，没有打开任何网站。你告诉 AI 你需要什么，它替你处理了 Gmail、日历和文档。
+**This is the real power — one natural language instruction triggers actions across three Google apps.** You didn't write code. You didn't open any websites. You told AI what you needed, and it handled Gmail, Calendar, and Docs for you.
 </Info>
 
-## 刚才发生了什么？
+## What just happened?
 
-回顾你所做的事情：
+Let's recap what you did:
 
-1. **读取**了一封邮件 —— AI 从 Gmail 获取并提取了关键细节
-2. **创建**了一个日历事件 —— 基于邮件内容的跟进提醒
-3. **写入**了一个 Google 文档 —— 包含后续步骤的摘要记录
-4. **上传**了一个文件到 Google 云端硬盘（进阶步骤）
-5. **整合**了三个动作到一条自然语言提示词中
+1. **Read** an email — AI fetched it from Gmail and extracted the key details
+2. **Created** a calendar event — a follow-up reminder based on the email content
+3. **Wrote** a Google Doc — a summary with next steps for your records
+4. **Uploaded** a file to Google Drive (bonus step)
+5. **Combined** all three actions into a single natural language prompt
 
-核心洞见：AI 可以跨越通常需要分别登录、分别打开标签页、分别操作的多个应用。一条指令替代了五分钟的切换点击。
+The key insight: AI can bridge multiple apps that normally require separate logins, separate tabs, and separate workflows. One instruction replaces five minutes of clicking between apps.
 
-## 故障排除
+## Troubleshooting
 
 <AccordionGroup>
-  <Accordion title="日历事件未创建">
-    确保你的 Google 日历访问已授权。运行 `gws calendar +agenda` 检查 —— 如果显示你的事件，说明连接正常。如果不行，运行 `gws auth login -s gmail,calendar,drive,docs,sheets` 重新授权。同时检查当 Gemini CLI 询问时你是否输入了 `y` 并按了 Enter 批准。
+  <Accordion title="Calendar event not created">
+    Make sure your Google Calendar access is authorised. Run `gws calendar +agenda` to check — if it shows your events, the connection is working. If not, run `gws auth login -s gmail,calendar,drive,docs,sheets` to re-authorise. Also check that you gave Gemini CLI permission when it asked (type `y` and press Enter).
   </Accordion>
-  <Accordion title="Google 文档找不到">
-    文档创建在你的 Google 云端硬盘中。打开 [drive.google.com](https://drive.google.com) 搜索文档标题。如果找不到，可能是文档 API 未启用 —— 运行 `gws auth setup` 检查并启用所有需要的 API。
+  <Accordion title="Google Doc not found">
+    The document is created in your Google Drive. Open [drive.google.com](https://drive.google.com) and search for the document title. If it's not there, the Docs API may not be enabled — run `gws auth setup` to check and enable all required APIs.
   </Accordion>
-  <Accordion title="权限错误">
-    你的 Google 授权可能已过期或不包含所有必要的权限范围。退出 Gemini CLI 并运行：
+  <Accordion title="Permission errors">
+    Your Google authorisation may have expired or may not include all the required scopes. Exit Gemini CLI and run:
     ```bash
     gws auth login -s gmail,calendar,drive,docs,sheets
     ```
-    确保在浏览器窗口打开时选中所有权限复选框，然后重启 Gemini CLI。
+    Make sure to select all permission checkboxes when the browser window opens. Then restart Gemini CLI.
   </Accordion>
-  <Accordion title="Gemini 找不到邮件">
-    尝试在提示词中更具体。不要说"关于发票的最新邮件"，而是说"Alex 发来的关于发票 4821 的邮件"或"本周主题含'发票'字样的邮件"。如果你的收件箱是空的或没有匹配的邮件，Gemini 会告诉你 —— 尝试换一个主题。
+  <Accordion title="Gemini can't find the email">
+    Try being more specific in your prompt. Instead of "the most recent email about an invoice", try "the email from Alex about invoice 4821" or "emails from this week with the word invoice in the subject line". If your inbox is empty or has no matching emails, Gemini will tell you — try a different topic.
   </Accordion>
-  <Accordion title="AI 只执行了一个动作而不是全部三个">
-    有些提示词对于一次处理来说可能过于复杂。将其拆成两条提示词：先让 AI 读取并摘要邮件，再让它根据摘要创建日历事件和写入文档。这样 AI 对每个步骤都有更清晰的上下文。
+  <Accordion title="The AI only does one action instead of all three">
+    Some prompts may be too complex for a single pass. Break it into two prompts: first ask AI to read and summarise the email, then ask it to create the calendar event and write the doc based on that summary. This gives AI clearer context for each step.
   </Accordion>
-  <Accordion title="语音输入有错误">
-    Wispr Flow 有时可能误听技术术语或专有名词。你可以在按 Enter 键之前查看并更正 Gemini CLI 中的文字。如果语音输入错误太多，改为打字或粘贴提示词。
+  <Accordion title="My voice input has errors">
+    Wispr Flow may occasionally mishear technical terms or proper nouns. You can review and correct the text in Gemini CLI before pressing Enter. If voice input is causing too many errors, switch to typing or pasting prompts instead.
   </Accordion>
 </AccordionGroup>
 
 <Note>
-干得漂亮 —— 你构建了一个将邮件转化为真实行动的跨应用工作流。前往[继续探索](/docs/2026-her-waka/tutorial/email-to-action/keep-going)，获取日常使用习惯建议和更高级的提示词。
+Nice work — you've built a cross-app workflow that turns emails into real actions. Head to [Keep going](/docs/2026-her-waka/tutorial/email-to-action/keep-going) for daily habit ideas and more advanced prompts.
 </Note>

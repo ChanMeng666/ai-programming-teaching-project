@@ -1,36 +1,36 @@
-Gemini CLI 是 Google 的免费 AI 助手。它在你的终端中运行，根据你的描述帮助你完成任务。
+Gemini CLI is Google's free AI assistant. It runs in your terminal and helps you with tasks based on your descriptions.
 
-打开终端并输入：
+Open your terminal and type:
 
 ```bash
 npm install -g @google/gemini-cli
 ```
 
-等待安装完成。然后输入以下命令启动它：
+Wait for the installation to finish. Then start it by typing:
 
 ```bash
 gemini
 ```
 
-第一次运行时，Gemini CLI 会要求你登录：
-- 选择 **"Sign in with Google"**
-- 浏览器窗口会打开 —— 用你的 Google 账号登录
-- 当提示已连接时，返回终端
+The first time you run it, Gemini CLI will ask you to sign in:
+- Choose **"Sign in with Google"**
+- A browser window will open — sign in with your Google account
+- Come back to the terminal when it says you're connected
 
 <Info>
-**免费套餐：** 每分钟 60 次请求，每天 1,000 次请求 —— 对于本教程和日常使用已绰绰有余。
+**Free tier:** 60 requests per minute, 1,000 requests per day — more than enough for this tutorial and everyday use.
 </Info>
 
-<Accordion title="'npm' 未被识别">
-这意味着 Node.js 没有正确安装。返回重新安装 Node.js。重新安装后，**完全关闭终端并打开一个新的终端**，然后再试一次。
+<Accordion title="'npm' is not recognised">
+This means Node.js isn't installed correctly. Go back and reinstall Node.js. After reinstalling, **close your terminal completely and open a new one** before trying again.
 </Accordion>
 
-<Accordion title="权限被拒绝错误">
-**Windows：** 关闭 PowerShell，右键单击重新打开并选择**"以管理员身份运行"**，然后再次尝试安装命令。
+<Accordion title="Permission denied error">
+**Windows:** Close PowerShell and reopen it by right-clicking and choosing **"Run as Administrator"**. Then try the install command again.
 
-**macOS：** 在命令前加 `sudo`：
+**macOS:** Add `sudo` before the command:
 ```bash
 sudo npm install -g @google/gemini-cli
 ```
-在提示时输入你的电脑密码（输入时不会显示字符 —— 这是正常的）。
+Enter your computer password when prompted (you won't see characters as you type — that's normal).
 </Accordion>

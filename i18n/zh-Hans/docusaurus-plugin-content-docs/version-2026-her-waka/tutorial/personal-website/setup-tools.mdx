@@ -1,0 +1,65 @@
+---
+title: "设置你的工具"
+description: "安装 Node.js、学会打开终端、设置 Gemini CLI，以及可选安装 Wispr Flow 语音输入 —— 搭建网站前的所有准备。"
+---
+
+import InstallWisprFlow from "../../_snippets/install-wispr-flow.mdx";
+import InstallNodejs from "../../_snippets/install-nodejs.mdx";
+import OpenTerminal from "../../_snippets/open-terminal.mdx";
+import InstallGeminiCli from "../../_snippets/install-gemini-cli.mdx";
+
+在开始构建之前，先把你的工具准备好。本页将带你逐步完成每个步骤。
+
+<Warning>
+**你需要准备：** 一台能联网的电脑。无需任何编程经验 —— 我们会一步一步带你完成每个步骤。
+</Warning>
+
+## 分步安装
+
+<Steps>
+  <Step title="下载 Wispr Flow（可选）">
+    <InstallWisprFlow />
+
+    <Tip>
+    **为什么要用语音输入？** 在本教程中，你将用自然语言向 Gemini CLI 发出指令。有了 Wispr Flow，你可以说出这些指令而不是打出来 —— 感觉就像在和你的 AI 助手对话。
+    </Tip>
+  </Step>
+
+  <Step title="安装 Node.js">
+    <InstallNodejs />
+  </Step>
+
+  <Step title="学会打开终端">
+    <OpenTerminal />
+  </Step>
+
+  <Step title="安装并测试 Gemini CLI">
+    <InstallGeminiCli />
+  </Step>
+</Steps>
+
+## 验证你的设置
+
+继续之前，检查一切是否就绪：
+
+<AccordionGroup>
+  <Accordion title="Node.js 已安装">
+    在终端运行 `node --version`。你应该会看到一个版本号。
+  </Accordion>
+  <Accordion title="终端正常工作">
+    你可以打开终端窗口并输入命令。
+  </Accordion>
+  <Accordion title="Gemini CLI 已安装">
+    在终端运行 `gemini`。它能正常启动并显示一个可输入的提示符。
+  </Accordion>
+  <Accordion title="已登录 Google">
+    Gemini CLI 已连接到你的 Google 账户。
+  </Accordion>
+  <Accordion title="Wispr Flow（可选）">
+    如果你已安装，可以在任何应用中进行语音输入。尝试在文本编辑器中说一句话，确认它能正常工作。
+  </Accordion>
+</AccordionGroup>
+
+<Note>
+一切就绪？前往[设置 GitHub](/docs/2026-her-waka/tutorial/personal-website/github-account)，创建你的 GitHub 账号并安装部署所需的工具。
+</Note>

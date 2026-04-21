@@ -3,40 +3,40 @@
     "message": "2024年冬季她行活动",
     "description": "The label for version 2024-winter"
   },
-  "sidebar.tutorialSidebar.category.🚀 快速开始": {
+  "sidebar.tutorialSidebar.category.🚀 Quick Start": {
     "message": "🚀 快速开始",
-    "description": "The label for category '🚀 快速开始' in sidebar 'tutorialSidebar'"
+    "description": "The label for category '🚀 Quick Start' in sidebar 'tutorialSidebar'"
   },
-  "sidebar.tutorialSidebar.category.📚 基础知识": {
+  "sidebar.tutorialSidebar.category.📚 Fundamentals": {
     "message": "📚 基础知识",
-    "description": "The label for category '📚 基础知识' in sidebar 'tutorialSidebar'"
+    "description": "The label for category '📚 Fundamentals' in sidebar 'tutorialSidebar'"
   },
-  "sidebar.tutorialSidebar.category.🛠️ 开发工具": {
+  "sidebar.tutorialSidebar.category.🛠️ Development Tools": {
     "message": "🛠️ 开发工具",
-    "description": "The label for category '🛠️ 开发工具' in sidebar 'tutorialSidebar'"
+    "description": "The label for category '🛠️ Development Tools' in sidebar 'tutorialSidebar'"
   },
-  "sidebar.tutorialSidebar.category.📖 教程与实战": {
+  "sidebar.tutorialSidebar.category.📖 Tutorials & Practice": {
     "message": "📖 教程与实战",
-    "description": "The label for category '📖 教程与实战' in sidebar 'tutorialSidebar'"
+    "description": "The label for category '📖 Tutorials & Practice' in sidebar 'tutorialSidebar'"
   },
-  "sidebar.tutorialSidebar.category.基础教程": {
+  "sidebar.tutorialSidebar.category.Basic Tutorials": {
     "message": "基础教程",
-    "description": "The label for category '基础教程' in sidebar 'tutorialSidebar'"
+    "description": "The label for category 'Basic Tutorials' in sidebar 'tutorialSidebar'"
   },
-  "sidebar.tutorialSidebar.category.实战项目": {
+  "sidebar.tutorialSidebar.category.Practical Projects": {
     "message": "实战项目",
-    "description": "The label for category '实战项目' in sidebar 'tutorialSidebar'"
+    "description": "The label for category 'Practical Projects' in sidebar 'tutorialSidebar'"
   },
-  "sidebar.tutorialSidebar.category.🎯 进阶应用": {
+  "sidebar.tutorialSidebar.category.🎯 Advanced Applications": {
     "message": "🎯 进阶应用",
-    "description": "The label for category '🎯 进阶应用' in sidebar 'tutorialSidebar'"
+    "description": "The label for category '🎯 Advanced Applications' in sidebar 'tutorialSidebar'"
   },
-  "sidebar.tutorialSidebar.category.AI系统开发": {
+  "sidebar.tutorialSidebar.category.AI System Development": {
     "message": "AI系统开发",
-    "description": "The label for category 'AI系统开发' in sidebar 'tutorialSidebar'"
+    "description": "The label for category 'AI System Development' in sidebar 'tutorialSidebar'"
   },
-  "sidebar.tutorialSidebar.category.优秀案例": {
+  "sidebar.tutorialSidebar.category.Outstanding Examples": {
     "message": "优秀案例",
-    "description": "The label for category '优秀案例' in sidebar 'tutorialSidebar'"
+    "description": "The label for category 'Outstanding Examples' in sidebar 'tutorialSidebar'"
   }
 }

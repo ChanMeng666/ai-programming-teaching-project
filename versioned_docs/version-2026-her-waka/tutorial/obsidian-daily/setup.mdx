@@ -1,6 +1,6 @@
 ---
-title: "设置你的工具"
-description: "安装 Gemini CLI、Obsidian，以及可选的 Wispr Flow —— 用自然语言控制笔记所需的一切。"
+title: "Set up your tools"
+description: "Install Gemini CLI, Obsidian, and optionally Wispr Flow — everything you need to control your notes with natural language."
 ---
 
 import InstallNodejs from "../../_snippets/install-nodejs.mdx";
@@ -8,106 +8,106 @@ import InstallGeminiCli from "../../_snippets/install-gemini-cli.mdx";
 import InstallObsidianCli from "../../_snippets/install-obsidian-cli.mdx";
 import InstallWisprFlow from "../../_snippets/install-wispr-flow.mdx";
 
-在开始记录之前，先把所有工具安装好并连接起来。
+Before we start capturing, let's get all your tools installed and connected.
 
 <Warning>
-**你需要准备：** 一台能联网的电脑。无需任何编程经验 —— 我们会一步一步带你完成每个步骤。
+**You will need:** a laptop with internet access. No coding experience is required — we will guide you through every step.
 </Warning>
 
 <Steps>
-  <Step title="安装 Node.js">
+  <Step title="Install Node.js">
     <Info>
-    **已有 Node.js？** 如果你在之前的教程中已经安装过，跳过此步骤。在终端运行 `node --version` 检查 —— 你应该会看到类似 `v22.x.x` 的版本号。
+    **Already have Node.js?** If you installed it for a previous tutorial, skip this step. Run `node --version` in your terminal to check — you should see a version number like `v22.x.x`.
     </Info>
 
     <InstallNodejs />
   </Step>
 
-  <Step title="安装 Gemini CLI">
+  <Step title="Install Gemini CLI">
     <Info>
-    **已有 Gemini CLI？** 如果你在之前的教程中已经安装过，跳过此步骤。只需在终端运行 `gemini` 确认它还能正常运行。
+    **Already have Gemini CLI?** If you installed it for a previous tutorial, skip this step. Just run `gemini` in your terminal to check it still works.
     </Info>
 
     <InstallGeminiCli />
 
-    暂时输入 `/quit` 退出 Gemini CLI。等其他一切都设置完成后再重新启动。
+    Type `/quit` to exit Gemini CLI for now. We will start it again once everything else is set up.
   </Step>
 
-  <Step title="安装 Obsidian 并启用 CLI">
+  <Step title="Install Obsidian and enable the CLI">
     <InstallObsidianCli />
   </Step>
 
-  <Step title="启用每日笔记">
-    每日笔记为你的每一天提供一张新页面 —— 就像一本自动生成的数字日记。
+  <Step title="Enable Daily Notes">
+    Daily notes give you a fresh page for each day — like a digital journal that creates itself.
 
-    1. 打开 Obsidian
-    2. 点击左下角的**设置**图标（齿轮图标）
-    3. 在左侧边栏，点击**核心插件**
-    4. 在列表中找到**每日笔记**
-    5. 将其**开启**
+    1. Open Obsidian
+    2. Click the **Settings** icon (gear icon) in the bottom-left corner
+    3. In the left sidebar, click **Core plugins**
+    4. Find **Daily notes** in the list
+    5. Toggle it **on**
 
     <Info>
-    **什么是每日笔记？** 每天，Obsidian 都会以今天的日期为标题创建一篇新笔记。它成为你一天的记录日志 —— 你记录的所有内容都在这里。第二天，你会自动获得一篇新笔记。
+    **What are daily notes?** Each day, Obsidian can create a new note with today's date as the title. It becomes your running log for the day — everything you capture goes here. Tomorrow, you get a fresh note automatically.
     </Info>
 
-    <Accordion title="我在列表中找不到每日笔记">
-    请确保你查看的是**核心插件**，而不是社区插件。核心插件内置于 Obsidian 中，始终可用。滚动查看列表 —— 每日笔记应该在里面。
+    <Accordion title="I can't find Daily notes in the list">
+    Make sure you are looking under **Core plugins**, not Community plugins. Core plugins are built into Obsidian and are always available. Scroll through the list — Daily notes should be there.
     </Accordion>
   </Step>
 
-  <Step title="安装 Wispr Flow（可选）">
+  <Step title="Install Wispr Flow (optional)">
     <InstallWisprFlow />
   </Step>
 
-  <Step title="测试所有工具的协同">
-    让我们确认 Gemini CLI 可以控制 Obsidian。确保 Obsidian 已打开，然后在终端启动 Gemini CLI：
+  <Step title="Test everything together">
+    Let's make sure Gemini CLI can control Obsidian. Make sure Obsidian is open, then start Gemini CLI in your terminal:
 
-    ```bash title="复制此命令"
+    ```bash title="Copy this command"
     gemini
     ```
 
-    现在用 Wispr Flow 说出或直接输入这条提示词：
+    Now say (with Wispr Flow) or type this prompt:
 
-    ```text title="说出或复制此提示词"
+    ```text title="Say this or copy this prompt"
     Run the command obsidian daily to open today's note in Obsidian
     ```
 
-    Gemini CLI 应该会为你运行 `obsidian daily` 命令，Obsidian 应该会打开今天的每日笔记。如果 Gemini 询问是否可以运行命令，输入 `y` 并按 **Enter** —— 这很正常。
+    Gemini CLI should run the `obsidian daily` command for you, and Obsidian should open today's daily note. If Gemini asks for permission to run the command, type `y` and press **Enter** — this is normal.
 
     <Tip>
-    **刚才发生了什么？** 你用普通语言要求 Gemini CLI 打开你的每日笔记。它理解了你的请求，运行了正确的命令，Obsidian 也做出了响应。这就是核心工作流 —— 你描述你想要什么，Gemini 负责处理剩下的事情。
+    **What just happened?** You asked Gemini CLI in plain language to open your daily note. It understood your request, ran the right command, and Obsidian responded. This is the core workflow — you describe what you want, and Gemini handles the rest.
     </Tip>
 
-    <Accordion title="Gemini 说无法运行命令">
-    确保 Obsidian 正在运行且 CLI 已启用。在另一个终端窗口中直接运行 `obsidian help` 测试 CLI。如果那个命令可以运行，再次尝试 Gemini 提示词。
+    <Accordion title="Gemini says it cannot run the command">
+    Make sure Obsidian is running and the CLI is enabled. Test the CLI directly by running `obsidian help` in a separate terminal window. If that works, try the Gemini prompt again.
     </Accordion>
 
-    <Accordion title="我看到关于 vault 的错误">
-    确保 Obsidian 已打开并且你至少设置了一个 vault。Vault 就是 Obsidian 存储笔记的文件夹。如果你还没有创建，打开 Obsidian 并按照提示创建你的第一个 vault。
+    <Accordion title="I see an error about the vault">
+    Make sure Obsidian is open and you have at least one vault set up. A vault is simply a folder where Obsidian stores your notes. If you have not created one yet, open Obsidian and follow the prompts to create your first vault.
     </Accordion>
   </Step>
 </Steps>
 
-## 验证你的设置
+## Verify your setup
 
 <AccordionGroup>
-  <Accordion title="Node.js 已安装">
-    在终端运行 `node --version`。你应该会看到一个版本号。
+  <Accordion title="Node.js installed">
+    Run `node --version` in your terminal. You should see a version number.
   </Accordion>
-  <Accordion title="Gemini CLI 已安装并登录">
-    在终端运行 `gemini`。它能正常启动并显示一个可输入的提示符。
+  <Accordion title="Gemini CLI installed and signed in">
+    Run `gemini` in your terminal. It starts up and shows a prompt where you can type.
   </Accordion>
-  <Accordion title="Obsidian 已安装且 CLI 正常工作">
-    应用已打开，你可以在终端运行 `obsidian help` 而不报错。
+  <Accordion title="Obsidian installed and CLI working">
+    The app opens and you can run `obsidian help` in your terminal without errors.
   </Accordion>
-  <Accordion title="每日笔记已启用">
-    每日笔记核心插件已在设置 → 核心插件中开启。
+  <Accordion title="Daily notes enabled">
+    The Daily notes core plugin is toggled on in Settings → Core plugins.
   </Accordion>
-  <Accordion title="Gemini CLI 可以控制 Obsidian">
-    请求 Gemini 打开每日笔记能正常工作 —— 它运行命令，Obsidian 做出响应。
+  <Accordion title="Gemini CLI can control Obsidian">
+    Asking Gemini to open your daily note works — it runs the command and Obsidian responds.
   </Accordion>
 </AccordionGroup>
 
 <Note>
-一切就绪？前往[记录、追踪与回顾](/docs/2026-her-waka/tutorial/obsidian-daily/capture)，开始用自然语言使用每日笔记。
+All set? Head to [Capture, track, and review](/docs/2026-her-waka/tutorial/obsidian-daily/capture) to start using your daily notes with natural language.
 </Note>

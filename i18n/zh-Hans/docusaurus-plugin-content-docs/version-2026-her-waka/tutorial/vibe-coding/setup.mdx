@@ -1,0 +1,171 @@
+---
+title: 设置你的工具
+description: "在构建每日报告机器人之前，准备好所有账号和工具。"
+---
+
+import InstallWisprFlow from "../../_snippets/install-wispr-flow.mdx";
+
+在开始构建之前，先确保你已准备好所需的一切。本页将逐步引导你完成每个账号和工具的设置。
+
+<Warning>
+**你需要准备：** 一台能联网的笔记本电脑。无需任何编程经验 —— 我们会一步一步带你完成每个步骤。
+</Warning>
+
+## 分步设置
+
+<Steps>
+  <Step title="创建或登录你的 GitHub 账号">
+    GitHub 是你的代码存放的地方，也是机器人每天早上自动运行的地方。
+
+    1. 前往 [github.com](https://github.com)
+    2. 如果没有账号，点击 **Sign up**；如果已有账号，点击 **Sign in**
+    3. 按照提示创建账号（免费套餐即可）
+
+    <Tip>
+    选择一个专业的用户名 —— 雇主和同事都能看到它。
+    </Tip>
+  </Step>
+
+  <Step title="安装 Claude Code">
+    Claude Code 是为我们编写所有代码的 AI 编程助手。它在你的终端中运行。
+
+    打开终端（Mac 上是 Terminal，Windows 上是 PowerShell 或 Git Bash），然后运行：
+
+    ```bash title="复制此命令"
+    npm install -g @anthropic-ai/claude-code
+    ```
+
+    然后输入以下命令启动它：
+
+    ```bash title="复制此命令"
+    claude
+    ```
+
+    按照屏幕上的说明登录你的 Anthropic 账号。
+
+    <Accordion title="如果我没有 npm 怎么办？">
+    `npm` 随 Node.js 一起提供。从 [nodejs.org](https://nodejs.org) 下载并安装 Node.js（选择 LTS 版本）。安装后，关闭并重新打开终端，然后再试安装命令。
+    </Accordion>
+  </Step>
+
+  <Step title="安装 Claude in Chrome">
+    Claude in Chrome 是一个浏览器扩展，帮助你研究文档和调试错误，无需离开浏览器。
+
+    1. 打开 Chrome，前往 [Chrome Web Store](https://chromewebstore.google.com)
+    2. 搜索 Anthropic 的 **"Claude"**
+    3. 点击 **Add to Chrome**
+    4. 将其固定到工具栏以便快速访问
+  </Step>
+
+  <Step title="获取 OpenAI API 密钥">
+    机器人使用 OpenAI 的 API 将你的 git 提交记录转化为人类可读的每日更新。
+
+    1. 前往 [platform.openai.com](https://platform.openai.com)
+    2. 注册或登录
+    3. 导航到 **API keys**（在左侧边栏或个人资料下）
+    4. 点击 **Create new secret key**
+    5. 给它起个名字，例如 `daily-report-bot`
+    6. **立即复制密钥** —— 你以后将无法再次看到它
+    7. 将其保存在安全的地方（密码管理器是理想选择）
+
+    <Accordion title="什么是 API 密钥？">
+    API 密钥就像一个密码，让你的代码能与外部服务通信。当你的机器人需要 OpenAI 来摘要你的提交记录时，它会将 API 密钥一起发送，这样 OpenAI 就知道是谁在请求并能向正确的账号收费。保管好你的 API 密钥 —— 任何拥有它的人都可以使用你的账号。
+    </Accordion>
+
+    <Note>
+    OpenAI 为新账号提供少量免费额度。对于这个项目，你每月只会花几分钱 —— 每份每日报告大约花费 $0.01。
+    </Note>
+  </Step>
+
+  <Step title="创建 Slack 应用和 Webhook">
+    Webhook 是你的机器人发送消息的地址。我们将创建两个：一个用于测试，一个用于生产。
+
+    <Accordion title="什么是 Webhook？">
+    Webhook 是一个接收传入消息的 URL。当你的机器人向这个 URL 发送数据时，Slack 会自动将其作为消息发布到你选择的频道。把它想象成一个信箱 —— 你的机器人投入信件，Slack 将其投递到正确的房间。
+    </Accordion>
+
+    **创建 Slack 应用：**
+
+    1. 前往 [api.slack.com/apps](https://api.slack.com/apps)
+    2. 点击 **Create New App** → **From scratch**
+    3. 命名为 `Daily Report Bot`
+    4. 选择你的工作区
+    5. 点击 **Create App**
+
+    **添加 Incoming Webhooks：**
+
+    1. 在应用设置中，点击左侧边栏的 **Incoming Webhooks**
+    2. 将 **Activate Incoming Webhooks** 切换为 **On**
+    3. 点击 **Add New Webhook to Workspace**
+    4. 选择一个**测试频道**（例如 `#bot-testing`），点击 **Allow**
+    5. 复制 Webhook URL —— 这是你的**测试 Webhook**
+    6. 重复步骤 3–5，但选择你的**生产频道**（例如 `#daily-standup`）—— 这是你的**生产 Webhook**
+
+    将两个 URL 保存在安全的地方。
+
+    <Warning>
+    永远不要将 Webhook URL 提交到代码中。我们稍后会将它们存储为 GitHub Secrets。
+    </Warning>
+  </Step>
+
+  <Step title="创建 GitHub 仓库">
+    这是你的机器人代码存放的地方。
+
+    1. 前往 [github.com/new](https://github.com/new)
+    2. 命名为 `daily-report-bot`
+    3. 设置为 **Private**（推荐，因为它将包含你的工作提交记录）
+    4. 勾选 **Add a README file**
+    5. 点击 **Create repository**
+
+    然后将其克隆到你的电脑：
+
+    ```bash title="复制此命令"
+    git clone https://github.com/YOUR-USERNAME/daily-report-bot.git
+    cd daily-report-bot
+    ```
+
+    将 `YOUR-USERNAME` 替换为你的实际 GitHub 用户名。
+  </Step>
+
+  <Step title="安装 Wispr Flow（可选 —— 语音输入）">
+    Wispr Flow 让你可以对 Claude Code 说话而不是打字。你的声音会被转换成文字，直接传入终端 —— Claude Code 看到的方式与键盘输入完全相同。
+
+    <InstallWisprFlow />
+
+    <Tip>
+    **为什么为编程使用语音输入？** 当你向 Claude Code 描述功能、业务逻辑或调试问题时，说话通常比打字更快、更自然。你可以像向同事解释一样说出你想要什么 —— Wispr Flow 负责转录，Claude Code 负责编码。
+    </Tip>
+  </Step>
+</Steps>
+
+## 验证你的设置
+
+继续之前，检查一切是否就绪：
+
+<AccordionGroup>
+  <Accordion title="GitHub 账号">
+    你可以登录 [github.com](https://github.com) 并看到你的新 `daily-report-bot` 仓库。
+  </Accordion>
+  <Accordion title="Claude Code">
+    在终端运行 `claude --version`，应看到版本号。
+  </Accordion>
+  <Accordion title="Claude in Chrome">
+    你能在 Chrome 工具栏看到 Claude 图标，点击它会打开扩展。
+  </Accordion>
+  <Accordion title="OpenAI API 密钥">
+    你有一个保存在安全地方的 API 密钥（以 `sk-` 开头）。
+  </Accordion>
+  <Accordion title="Slack Webhooks">
+    你保存了两个 Webhook URL：一个用于测试频道，一个用于生产频道。
+  </Accordion>
+  <Accordion title="仓库已克隆">
+    你的电脑上有 `daily-report-bot` 文件夹，可以 `cd` 进入。
+  </Accordion>
+  <Accordion title="Wispr Flow（可选）">
+    Wispr Flow 正在运行，你可以在任何应用中看到说出的话变成文字。
+  </Accordion>
+</AccordionGroup>
+
+<Note>
+全部就绪？前往[用 Claude Code 构建](/docs/2026-her-waka/tutorial/vibe-coding/build-with-claude) —— 开始有趣的部分。
+</Note>

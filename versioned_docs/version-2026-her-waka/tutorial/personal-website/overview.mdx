@@ -1,97 +1,97 @@
 ---
-title: "用 AI 搭建你的个人网站"
-description: "搭建并上线你自己的个人网站 —— 无需学习编程。只需描述你想要什么样的网站，说出来或打出来，AI 替你构建。"
+title: "Build Your Personal Website with AI"
+description: "Build and deploy your own personal website — without learning to code. Just describe what you want your website to look like, by speaking or typing, and AI builds it for you."
 ---
 
 <Tip>
-**难度：★★☆☆☆ 简单** · 预计时间：约 1 小时
+**Difficulty: ★★☆☆☆ Easy** · Estimated time: ~1 hour
 </Tip>
 
-想象一下，你自己搭建了一个真实上线的网站 —— 不用学编程。只需描述你想要什么样的网站 —— 说出来或打出来 —— AI 替你构建。
+Imagine having your own website, live on the internet, that you built yourself — without learning to code. Just describe what you want your website to look like — by speaking or typing — and AI builds it for you.
 
 <Info>
-**教程由 [Chan Meng](https://chanmeng.org/) 设计** —— 高级 AI/ML 工程师、开源贡献者、前字节跳动开发者。Chan 搭建了 30+ 个真实应用，专注于 AI 驱动的解决方案，也是本次活动的圆桌嘉宾和本网站的开发者。
+**Tutorial led by [Chan Meng](https://chanmeng.org/)** — Senior AI/ML Engineer, open-source contributor, and former ByteDance developer. Chan has built 30+ live applications and specialises in AI-powered solutions. She is also a panel speaker at this event and the developer behind this website.
 </Info>
 
-## 你将构建什么
+## What You Will Build
 
 <CardGroup cols={3}>
-  <Card title="描述" icon="microphone">
-    用普通语言说出或打出你理想中的网站样子
+  <Card title="Describe" icon="microphone">
+    Say or type what your dream website should look like — in plain language
   </Card>
-  <Card title="构建" icon="terminal">
-    Gemini CLI 为你编写所有 HTML 和 CSS
+  <Card title="Build" icon="terminal">
+    Gemini CLI writes all the HTML and CSS for you
   </Card>
-  <Card title="部署" icon="rocket">
-    在 GitHub Pages 上免费发布
+  <Card title="Deploy" icon="rocket">
+    Publish it for free on GitHub Pages
   </Card>
 </CardGroup>
 
-## 工作原理
+## How It Works
 
 ```mermaid
 flowchart LR
-    A["你描述\n想要什么"] -->|"说出或打出"| B["Gemini CLI\n编写代码"]
-    B -->|"你审查"| C{"满意吗？"}
-    C -->|"还不够好"| A
-    C -->|"是的！"| D["部署到\nGitHub Pages"]
+    A["You describe\nwhat you want"] -->|"speak or type"| B["Gemini CLI\nwrites the code"]
+    B -->|"you review"| C{"Happy?"}
+    C -->|"Not quite"| A
+    C -->|"Yes!"| D["Deploy to\nGitHub Pages"]
 ```
 
-你用普通语言描述你想要什么 —— 用 Wispr Flow 说出来或在终端打出来。Gemini CLI 编写代码。你查看结果并反复调整，直到满意为止。然后你免费将它部署到互联网上。
+You describe what you want in plain language — by speaking with Wispr Flow or typing into the terminal. Gemini CLI writes the code. You review the result and refine until you love it. Then you deploy it to the internet — for free.
 
 <Tip>
-**你可以用 Wispr Flow 说出提示词，也可以打字或粘贴到 Gemini CLI 中。两种方式效果完全一样。** Wispr Flow 是可选项 —— 它只是让体验更加解放双手。本教程中的每条提示词，无论你说出来还是打出来都同样有效。
+**You can either speak your prompts using Wispr Flow, or type/paste them into Gemini CLI. Both work exactly the same way.** Wispr Flow is optional — it just makes the experience hands-free. Every prompt in this tutorial works whether you speak it or type it.
 </Tip>
 
-## 你将学到
+## What You Will Learn
 
-本教程专注于**与 AI 的沟通技巧**，而非编程知识。你将学到如何：
+This tutorial focuses on **communication skills with AI**, not coding knowledge. You will learn how to:
 
-- 清晰描述你的需求，让 AI 能够构建它 —— 通过语音或文字
-- 使用终端运行命令（比你想象的要简单）
-- 在发布前在你的电脑上预览网站
-- 使用 GitHub 存储代码并托管网站
-- 迭代和优化 —— 与 AI 协作的核心技能
+- Describe what you want clearly so AI can build it — by voice or text
+- Use the terminal to run commands (it's easier than you think)
+- Preview a website on your computer before publishing
+- Use GitHub to store your code and host your website
+- Iterate and refine — the core skill of working with AI
 
 <Note>
-**无需任何编程基础。** Gemini CLI 负责编写代码 —— 你只需描述你想要什么。如果你能向朋友解释一个想法，你就能搭建一个网站。
+**No coding required.** Gemini CLI writes the code — your job is to describe what you want. If you can explain an idea to a friend, you can build a website.
 </Note>
 
-## 工具
+## Tools
 
 <CardGroup cols={3}>
   <Card title="Gemini CLI" icon="terminal">
-    谷歌的免费 AI 助手，在终端中运行。它理解你的自然语言请求并将其转换为代码。
+    Google's free AI assistant that runs in your terminal. It understands your natural language requests and translates them into code.
   </Card>
   <Card title="Wispr Flow" icon="microphone">
-    可选语音输入工具 —— 说话代替打字。在任何应用中均可使用，包括终端。
+    Optional voice input tool — speak instead of type. Works in any application, including your terminal.
   </Card>
   <Card title="Node.js" icon="node-js">
-    安装 Gemini CLI 所需的免费工具。一次性安装。
+    A free tool needed to install Gemini CLI. One-time setup.
   </Card>
 </CardGroup>
 
-## 费用
+## Cost
 
-| 工具 | 费用 |
+| Tool | Cost |
 |------|------|
-| Gemini CLI | 免费（每日 1,000 次请求） |
-| Node.js | 免费 |
-| GitHub Pages | 免费（公开仓库） |
-| Wispr Flow（可选） | 免费试用（[邀请链接可获一个月 Pro 版免费试用](https://wisprflow.ai/r?CHAN115)） |
-| **合计** | **$0** |
+| Gemini CLI | Free (1,000 requests/day) |
+| Node.js | Free |
+| GitHub Pages | Free (public repos) |
+| Wispr Flow (optional) | Free trial ([invite link for a free month of Pro](https://wisprflow.ai/r?CHAN115)) |
+| **Total** | **$0** |
 
-## 前置要求
+## Prerequisites
 
 <CardGroup cols={2}>
-  <Card title="一台能上网的电脑" icon="laptop">
-    Windows 或 macOS 均可。无需特殊硬件。
+  <Card title="A laptop with internet" icon="laptop">
+    Windows or macOS. No special hardware needed.
   </Card>
-  <Card title="约 1 小时" icon="clock">
-    慢慢来，不用着急。你可以随时暂停，之后再继续。
+  <Card title="About 1 hour" icon="clock">
+    Take your time — there's no rush. You can pause and come back anytime.
   </Card>
 </CardGroup>
 
 <Note>
-准备好了吗？前往[设置你的工具](/docs/2026-her-waka/tutorial/personal-website/setup-tools)安装所需的一切。
+Ready to get started? Head to [Set up your tools](/docs/2026-her-waka/tutorial/personal-website/setup-tools) to install everything you need.
 </Note>

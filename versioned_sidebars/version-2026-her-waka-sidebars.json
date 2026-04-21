@@ -2,7 +2,7 @@
   "tutorialSidebar": [
     {
       "type": "category",
-      "label": "📋 项目介绍",
+      "label": "📋 Programme",
       "collapsible": true,
       "collapsed": false,
       "items": [
@@ -13,14 +13,14 @@
     },
     {
       "type": "category",
-      "label": "🎓 工作坊",
+      "label": "🎓 Workshops",
       "collapsible": true,
       "collapsed": false,
       "link": { "type": "doc", "id": "workshop/index" },
       "items": [
         {
           "type": "category",
-          "label": "Session 1：AI 与未来工作（3 月）",
+          "label": "Session 1: AI & The Future of Work (March)",
           "link": { "type": "doc", "id": "workshop/march-2026/overview" },
           "items": [
             "workshop/march-2026/ai-tools-intro",
@@ -30,19 +30,19 @@
         },
         {
           "type": "category",
-          "label": "Session 2：#IAmRemarkable 与 Vibe Coding（4 月）",
+          "label": "Session 2: #IAmRemarkable & Vibe Coding (April)",
           "link": { "type": "doc", "id": "workshop/april-2026/overview" },
           "items": []
         },
         {
           "type": "category",
-          "label": "Session 3：就业权益（5 月）",
+          "label": "Session 3: Employment Rights (May)",
           "link": { "type": "doc", "id": "workshop/may-2026/overview" },
           "items": []
         },
         {
           "type": "category",
-          "label": "Session 4：人脉与职业连接（6 月）",
+          "label": "Session 4: Networking & Career Connections (June)",
           "link": { "type": "doc", "id": "workshop/june-2026/overview" },
           "items": []
         }
@@ -50,19 +50,19 @@
     },
     {
       "type": "category",
-      "label": "📚 自学教程",
+      "label": "📚 Tutorials",
       "collapsible": true,
       "collapsed": false,
       "link": { "type": "doc", "id": "tutorial/index" },
       "items": [
         {
           "type": "category",
-          "label": "★ 入门",
+          "label": "★ Getting Started",
           "collapsed": true,
           "items": [
             {
               "type": "category",
-              "label": "用 AI 总结 Gmail",
+              "label": "Summarise Gmail with AI",
               "link": { "type": "doc", "id": "tutorial/gmail-summary/overview" },
               "items": [
                 "tutorial/gmail-summary/setup",
@@ -72,7 +72,7 @@
             },
             {
               "type": "category",
-              "label": "用语音控制你的笔记",
+              "label": "Voice-Control Your Notes",
               "link": { "type": "doc", "id": "tutorial/obsidian-daily/overview" },
               "items": [
                 "tutorial/obsidian-daily/setup",
@@ -84,12 +84,12 @@
         },
         {
           "type": "category",
-          "label": "★★ 简单",
+          "label": "★★ Easy",
           "collapsed": true,
           "items": [
             {
               "type": "category",
-              "label": "搭建你的个人网站",
+              "label": "Build Your Personal Website",
               "link": { "type": "doc", "id": "tutorial/personal-website/overview" },
               "items": [
                 "tutorial/personal-website/setup-tools",
@@ -101,7 +101,7 @@
             },
             {
               "type": "category",
-              "label": "奥克兰通勤智能助手",
+              "label": "Smart Commute: Auckland Transport",
               "link": { "type": "doc", "id": "tutorial/auckland-commute/overview" },
               "items": [
                 "tutorial/auckland-commute/setup",
@@ -111,7 +111,7 @@
             },
             {
               "type": "category",
-              "label": "和 AI 对话整理笔记",
+              "label": "Organise Notes by Talking to AI",
               "link": { "type": "doc", "id": "tutorial/obsidian-organise/overview" },
               "items": [
                 "tutorial/obsidian-organise/setup",
@@ -121,7 +121,7 @@
             },
             {
               "type": "category",
-              "label": "AI 会议准备助手",
+              "label": "Meeting Prep with AI",
               "link": { "type": "doc", "id": "tutorial/meeting-prep/overview" },
               "items": [
                 "tutorial/meeting-prep/setup",
@@ -131,7 +131,7 @@
             },
             {
               "type": "category",
-              "label": "AI 每日晨报",
+              "label": "AI Morning Briefing",
               "link": { "type": "doc", "id": "tutorial/morning-briefing/overview" },
               "items": [
                 "tutorial/morning-briefing/setup",
@@ -143,12 +143,12 @@
         },
         {
           "type": "category",
-          "label": "★★★ 中级",
+          "label": "★★★ Intermediate",
           "collapsed": true,
           "items": [
             {
               "type": "category",
-              "label": "用 AI 制作专业 PDF",
+              "label": "Create Professional PDFs",
               "link": { "type": "doc", "id": "tutorial/professional-pdf/overview" },
               "items": [
                 "tutorial/professional-pdf/setup",
@@ -159,7 +159,7 @@
             },
             {
               "type": "category",
-              "label": "邮件转行动：跨应用自动化",
+              "label": "Email to Action: Cross-App Workflows",
               "link": { "type": "doc", "id": "tutorial/email-to-action/overview" },
               "items": [
                 "tutorial/email-to-action/setup",
@@ -171,12 +171,12 @@
         },
         {
           "type": "category",
-          "label": "★★★★ 挑战",
+          "label": "★★★★ Challenging",
           "collapsed": true,
           "items": [
             {
               "type": "category",
-              "label": "总结 Slack 频道",
+              "label": "Summarise Slack Channels",
               "link": { "type": "doc", "id": "tutorial/slack-summary/overview" },
               "items": [
                 "tutorial/slack-summary/setup",
@@ -186,7 +186,7 @@
             },
             {
               "type": "category",
-              "label": "AI 宣传视频制作",
+              "label": "Create AI Promo Videos",
               "link": { "type": "doc", "id": "tutorial/promo-video/overview" },
               "items": [
                 "tutorial/promo-video/setup",
@@ -198,12 +198,12 @@
         },
         {
           "type": "category",
-          "label": "★★★★★ 进阶",
+          "label": "★★★★★ Advanced",
           "collapsed": true,
           "items": [
             {
               "type": "category",
-              "label": "Vibe Coding：Daily Report Bot",
+              "label": "Vibe Coding: Daily Report Bot",
               "link": { "type": "doc", "id": "tutorial/vibe-coding/overview" },
               "items": [
                 "tutorial/vibe-coding/setup",
@@ -218,13 +218,13 @@
     },
     {
       "type": "category",
-      "label": "💼 求职资源",
+      "label": "💼 Resources",
       "collapsible": true,
       "collapsed": false,
       "items": [
         {
           "type": "category",
-          "label": "求职",
+          "label": "Job Search",
           "collapsed": false,
           "items": [
             "resources/nz-it-market",
@@ -236,7 +236,7 @@
         },
         {
           "type": "category",
-          "label": "社区与权益",
+          "label": "Community & Rights",
           "collapsed": false,
           "items": [
             "resources/networking-guide",

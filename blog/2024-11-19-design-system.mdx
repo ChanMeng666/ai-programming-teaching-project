@@ -1,6 +1,6 @@
 ---
 slug: design-system-guide
-title: 设计系统：AI编程教育平台指南
+title: "Design System: AI Programming Education Platform Guide"
 authors: [chanmeng]
 tags: [design, UI-UX, documentation]
 ---
@@ -8,7 +8,7 @@ tags: [design, UI-UX, documentation]
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-{/* 创意样式块 */}
+{/* Creative style block */}
 export const ColorBox = ({color, name}) => (
   <div style={{
     backgroundColor: color,
@@ -26,70 +26,70 @@ export const ColorBox = ({color, name}) => (
   </div>
 );
 
-# 设计系统：AI编程教育平台
+# Design System: AI Programming Education Platform
 
-## 设计理念
-受极简几何艺术家的启发，我们的设计系统强调：
-- 清晰的线条和基本几何形状（方形、圆形、三角形）
-- 有限但对比鲜明的配色方案
-- 基于网格的布局
-- 将负空间作为设计元素
-- 视觉元素的系统性重复
-- 注重功能性和可读性
+## Design Philosophy
+Inspired by minimalist geometric artists, our design system emphasizes:
+- Clean lines and basic geometric shapes (squares, circles, triangles)
+- Limited but high-contrast color palette
+- Grid-based layouts
+- Negative space as a design element
+- Systematic repetition of visual elements
+- Focus on functionality and readability
 
 {/* truncate */}
 
-## 色彩系统
+## Color System
 
-### 主色
+### Primary Colors
 <div style={{display: 'flex', flexWrap: 'wrap', gap: '10px'}}>
-  <ColorBox color="#1a237e" name="深海军蓝" />
-  <ColorBox color="#ffffff" name="纯白" />
-  <ColorBox color="#121212" name="几何黑" />
+  <ColorBox color="#1a237e" name="Deep Navy" />
+  <ColorBox color="#ffffff" name="Pure White" />
+  <ColorBox color="#121212" name="Geometric Black" />
 </div>
 
-### 辅助色
+### Secondary Colors
 <div style={{display: 'flex', flexWrap: 'wrap', gap: '10px'}}>
-  <ColorBox color="#4a5fc1" name="柔和蓝" />
-  <ColorBox color="#f5f6f7" name="浅灰" />
-  <ColorBox color="#ef5350" name="强调红" />
+  <ColorBox color="#4a5fc1" name="Soft Blue" />
+  <ColorBox color="#f5f6f7" name="Light Gray" />
+  <ColorBox color="#ef5350" name="Accent Red" />
 </div>
 
-## 字体系统
+## Typography System
 
 <Tabs>
-<TabItem value="base" label="基础字体">
+<TabItem value="base" label="Base Font">
     ```css
     --ifm-font-family-base: 'Space Grotesk', system-ui, -apple-system;
     ```
 </TabItem>
-<TabItem value="mono" label="等宽字体">
+<TabItem value="mono" label="Monospace Font">
     ```css
     --ifm-font-family-monospace: 'JetBrains Mono', SFMono-Regular, Monaco;
     ```
 </TabItem>
 </Tabs>
 
-### 字体大小
-- 标题:
+### Font Sizes
+- Headings:
   - h1: 2.5rem (40px)
   - h2: 2rem (32px)
   - h3: 1.5rem (24px)
-- 正文: 1rem (16px)
-- 代码: 0.9375rem (15px)
+- Body: 1rem (16px)
+- Code: 0.9375rem (15px)
 
-## 布局指南
+## Layout Guidelines
 
-### 网格系统
-- 12列网格
-- 槽宽: 24px
-- 最大内容宽度: 1200px
-- 响应式断点:
-  - 移动端: 320px
-  - 平板: 768px
-  - 桌面: 1024px
+### Grid System
+- 12-column grid
+- Gutter width: 24px
+- Maximum content width: 1200px
+- Responsive breakpoints:
+  - Mobile: 320px
+  - Tablet: 768px
+  - Desktop: 1024px
 
-### 间距比例
+### Spacing Scale
 ```css
 --space-xs: 0.25rem;  /* 4px */
 --space-sm: 0.5rem;   /* 8px */
@@ -98,15 +98,15 @@ export const ColorBox = ({color, name}) => (
 --space-xl: 2rem;     /* 32px */
 ```
 
-## 组件设计
+## Component Design
 
-### 导航栏
-- 固定头部与几何logo
-- 桌面端水平菜单
-- 移动端汉堡菜单
-- 使用几何形状作为激活状态指示器
+### Navigation Bar
+- Fixed header with geometric logo
+- Horizontal menu for desktop
+- Hamburger menu for mobile
+- Geometric shapes as active state indicators
 
-### Hero区块
+### Hero Section
 ```css
 .hero {
   background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
@@ -115,13 +115,13 @@ export const ColorBox = ({color, name}) => (
 }
 ```
 
-### 代码块
-- 深色背景: `#1e1e1e`
-- 受几何图案启发的语法高亮
-- 圆角: 4px
-- 内边距: 1.5rem
+### Code Blocks
+- Dark background: `#1e1e1e`
+- Syntax highlighting inspired by geometric patterns
+- Border radius: 4px
+- Padding: 1.5rem
 
-### 卡片
+### Cards
 ```css
 .card {
   border: none;
@@ -135,9 +135,9 @@ export const ColorBox = ({color, name}) => (
 }
 ```
 
-## 实现指南
+## Implementation Guide
 
-### 1. 更新 docusaurus.config.js
+### 1. Update docusaurus.config.js
 ```javascript
 module.exports = {
   themeConfig: {
@@ -148,7 +148,7 @@ module.exports = {
         src: 'img/logo.svg',
       },
       items: [
-        // 导航项
+        // Navigation items
       ],
     },
     prism: {
@@ -158,8 +158,8 @@ module.exports = {
 };
 ```
 
-### 2. 自定义CSS变量
-在 `src/css/custom.css` 中:
+### 2. Custom CSS Variables
+In `src/css/custom.css`:
 ```css
 :root {
   --ifm-color-primary: #1a237e;
@@ -169,7 +169,7 @@ module.exports = {
   --ifm-color-primary-light: #1d2893;
   --ifm-color-primary-lighter: #1f2a99;
   --ifm-color-primary-lightest: #232fab;
-  
+
   --ifm-code-font-size: 0.9375rem;
   --ifm-font-size-base: 16px;
   --ifm-line-height-base: 1.5;
@@ -177,8 +177,8 @@ module.exports = {
 }
 ```
 
-### 3. 首页结构
-在 `src/pages/index.js` 中:
+### 3. Homepage Structure
+In `src/pages/index.js`:
 ```javascript
 import React from 'react';
 import Layout from '@theme/Layout';
@@ -202,12 +202,12 @@ export default function Home() {
           </div>
         </div>
       </header>
-      
-      {/* 特性部分 */}
+
+      {/* Features section */}
       <main>
         <section className="features">
           <div className="container">
-            {/* 特性卡片 */}
+            {/* Feature cards */}
           </div>
         </section>
       </main>
@@ -216,28 +216,28 @@ export default function Home() {
 }
 ```
 
-## 动画指南
-- 使用细微的过渡效果 (0.2-0.3s)
-- 倾向于使用transform而非opacity变化
-- 实现几何展示动画
-- 保持交互流畅且有目的性
+## Animation Guidelines
+- Use subtle transition effects (0.2-0.3s)
+- Prefer transform over opacity changes
+- Implement geometric reveal animations
+- Keep interactions smooth and purposeful
 
-## 响应式设计
-- 移动优先方法
-- 流式排版
-- 可维护的网格系统
-- 在断点处进行自适应布局更改
+## Responsive Design
+- Mobile-first approach
+- Fluid typography
+- Flexible grid system
+- Adaptive layout changes at breakpoints
 
-## 无障碍设计
-- 符合WCAG 2.1 AA标准
-- 高对比度
-- 清晰的焦点状态
-- 语义化HTML结构
-- 适配屏幕阅读器
+## Accessibility
+- WCAG 2.1 AA compliant
+- High contrast ratios
+- Clear focus states
+- Semantic HTML structure
+- Screen reader optimized
 
-## 性能优化
-- 图片优化
-- 实现懒加载
-- 最小化CSS/JS包
-- 尽可能使用系统字体
-- 缓存静态资源 
+## Performance Optimization
+- Optimized images
+- Lazy loading implementation
+- Minimized CSS/JS bundles
+- System fonts when possible
+- Static asset caching

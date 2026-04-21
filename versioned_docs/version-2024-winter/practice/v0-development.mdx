@@ -1,47 +1,43 @@
 ---
 sidebar_position: 3
-title: 在v0上继续开发
-description: 学习如何使用v0平台进行团队协作开发
+title: Continue Development on v0
+description: Learn how to use the v0 platform for team collaboration development
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# 在v0上继续开发
+# Continue Development on v0
 
-## 导入Cursor项目
+## Import Cursor Project
 
-### 准备工作
+### Preparation
 
-#### 1. 提交本地更改
-
+#### 1. Commit Local Changes
 ```bash
-# 确保所有更改已提交
+# Ensure all changes are committed
 git add .
 git commit -m "Complete initial development in Cursor"
 git push origin main
 ```
 
-#### 2. 项目清理
+#### 2. Project Cleanup
+- Remove unnecessary temporary files
+- Organize project structure
+- Update .gitignore file
 
-- 删除不必要的临时文件
-- 整理项目结构
-- 更新.gitignore文件
-
-#### 3. 检查依赖
-
+#### 3. Check Dependencies
 ```bash
-# 确保package.json中的依赖是最新的
+# Ensure dependencies in package.json are up to date
 npm outdated
 npm update
 ```
 
-## 在v0上开发新功能
+## Develop New Features on v0
 
-### 评论系统实现
+### Comment System Implementation
 
-#### 评论组件
-
+#### Comment Component
 ```tsx
 // components/Comments.tsx
 import { useState } from 'react';
@@ -87,33 +83,29 @@ export function Comments({ postId }: { postId: string }) {
   };
 
   return (
-    <div className="space-y-6">
-      <h3 className="text-xl font-bold">评论</h3>
-      
+      <h3 className="text-xl font-bold">Comments</h3>
+
       {session ? (
         <form onSubmit={handleSubmit} className="space-y-4">
           <textarea
             value={newComment}
             onChange={(e) => setNewComment(e.target.value)}
             className="w-full p-2 border rounded-lg"
-            placeholder="写下你的评论..."
+            placeholder="Write your comment..."
             rows={4}
           />
           <button
             type="submit"
             className="px-4 py-2 bg-blue-500 text-white rounded-lg"
           >
-            发表评论
+            Post Comment
           </button>
         </form>
       ) : (
-        <p>请登录后发表评论</p>
+Please log in to post a comment
       )}
-
-      <div className="space-y-4">
         {comments.map((comment) => (
           <div key={comment.id} className="border p-4 rounded-lg">
-            <div className="flex items-center space-x-2 mb-2">
               <img
                 src={comment.author.avatar}
                 alt={comment.author.name}
@@ -121,18 +113,13 @@ export function Comments({ postId }: { postId: string }) {
               />
               <span className="font-medium">{comment.author.name}</span>
               <span className="text-gray-500">{comment.createdAt}</span>
-            </div>
-            <p>{comment.content}</p>
-          </div>
+{comment.content}
         ))}
-      </div>
-    </div>
   );
 }
 ```
 
-#### API路由
-
+#### API Routes
 ```typescript
 // pages/api/comments.ts
 import { NextApiRequest, NextApiResponse } from 'next';
@@ -144,7 +131,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const session = await getSession({ req });
-  
+
   if (!session) {
     return res.status(401).json({ message: 'Unauthorized' });
   }
@@ -180,10 +167,9 @@ export default async function handler(
 }
 ```
 
-### 标签系统优化
+### Tag System Optimization
 
-#### 标签组件
-
+#### Tag Component
 ```tsx
 // components/TagCloud.tsx
 import { useState, useEffect } from 'react';
@@ -206,9 +192,7 @@ export function TagCloud() {
   }, []);
 
   return (
-    <div className="p-4 bg-gray-50 rounded-lg">
-      <h3 className="text-lg font-semibold mb-4">标签云</h3>
-      <div className="flex flex-wrap gap-2">
+      <h3 className="text-lg font-semibold mb-4">Tag Cloud</h3>
         {tags.map(tag => (
           <Link
             key={tag.name}
@@ -223,14 +207,11 @@ export function TagCloud() {
             {tag.name} ({tag.count})
           </Link>
         ))}
-      </div>
-    </div>
   );
 }
 ```
 
-#### 标签API
-
+#### Tag API
 ```typescript
 // pages/api/tags.ts
 import { NextApiRequest, NextApiResponse } from 'next';
@@ -266,17 +247,16 @@ export default async function handler(
 }
 ```
 
-## 团队协作
+## Team Collaboration
 
-### 代码审查
+### Code Review
 
-#### 创建Pull Request
-
+#### Create Pull Request
 ```bash
-# 创建功能分支
+# Create feature branch
 git checkout -b feature/comment-system
 
-# 提交更改
+# Commit changes
 git add .
 git commit -m "feat: add comment system
 - Add comment component
@@ -284,83 +264,76 @@ git commit -m "feat: add comment system
 - Add authentication check
 - Style comment section"
 
-# 推送到远程
+# Push to remote
 git push origin feature/comment-system
 ```
 
-#### 审查清单
+#### Review Checklist
+:::tip Code Review Points
+1. Code Quality
+   - Follow project coding standards
+   - Proper error handling
+   - Performance considerations
 
-:::tip 代码审查要点
+2. Feature Completeness
+   - All features working properly
+   - Edge case handling
+   - User experience considerations
 
-1. 代码质量
-   - 遵循项目代码规范
-   - 适当的错误处理
-   - 性能考虑
-
-2. 功能完整性
-   - 所有功能正常工作
-   - 边缘情况处理
-   - 用户体验考虑
-
-3. 安全性
-   - 输入验证
-   - 权限检查
-   - 数据安全
-
+3. Security
+   - Input validation
+   - Permission checks
+   - Data security
 :::
 
-### 实时协作
+### Real-time Collaboration
 
-#### 使用v0的实时编辑功能
+#### Using v0's Real-time Editing Features
+- Edit the same file simultaneously
+- View teammates' changes in real-time
+- Resolve conflicts
 
-- 同时编辑同一文件
-- 实时查看队友的更改
-- 解决冲突
-
-#### 团队沟通
-
+#### Team Communication
 ```typescript
-// 在代码中添加协作注释
+// Add collaboration comments in code
 /**
- * @todo: 需要添加评论分页功能
+ * @todo: Need to add comment pagination feature
  * @author: Alice
  * @assignee: Bob
  * @priority: high
  */
 ```
 
-## 性能优化
+## Performance Optimization
 
-### 代码分割
+### Code Splitting
 
-#### 动态导入
-
+#### Dynamic Imports
 ```typescript
-// 动态导入评论组件
+// Dynamically import comment component
 const CommentSection = dynamic(() => import('@/components/Comments'), {
   loading: () => <CommentSkeleton />,
   ssr: false
 });
 
-// 动态导入标签云组件
+// Dynamically import tag cloud component
 const TagCloud = dynamic(() => import('@/components/TagCloud'), {
   loading: () => <TagCloudSkeleton />,
   ssr: true
 });
 ```
 
-#### 路由分割
-
+#### Route Splitting
 ```typescript
-// 页面级代码分割
+// Page-level code splitting
 export default function BlogPost() {
   const [showComments, setShowComments] = useState(false);
 
   return (
     <article>
-      {/* 文章内容 */}
+      {/* Article content */}
       <button onClick={() => setShowComments(true)}>
-        显示评论
+        Show Comments
       </button>
       {showComments && <CommentSection />}
     </article>
@@ -368,10 +341,9 @@ export default function BlogPost() {
 }
 ```
 
-### 缓存优化
+### Caching Optimization
 
-#### API缓存
-
+#### API Caching
 ```typescript
 // lib/cache.ts
 import { Redis } from '@upstash/redis';
@@ -392,8 +364,7 @@ export async function setCachedData(key: string, data: any, ttl = 3600) {
 }
 ```
 
-#### 使用SWR
-
+#### Using SWR
 ```typescript
 // hooks/useComments.ts
 import useSWR from 'swr';

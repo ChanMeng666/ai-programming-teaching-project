@@ -1,0 +1,205 @@
+---
+title: "设置你的工具"
+description: "安装 Node.js、AI 助手、Remotion，并获取你的 ElevenLabs API 密钥 —— 创建 AI 宣传视频所需的一切准备工作。"
+---
+
+import InstallNodejs from "../../_snippets/install-nodejs.mdx";
+import InstallGeminiCli from "../../_snippets/install-gemini-cli.mdx";
+import InstallWisprFlow from "../../_snippets/install-wispr-flow.mdx";
+import OpenTerminal from "../../_snippets/open-terminal.mdx";
+import GetElevenlabsApiKey from "../../_snippets/get-elevenlabs-api-key.mdx";
+
+在开始创建视频之前，先安装并连接好所有工具。这次需要的工具比平时多一些 —— 但我们会带你完成每一步。
+
+<Warning>
+**你需要准备：** 一台能联网的电脑。无需任何编程或视频剪辑经验 —— 我们会一步一步带你完成每个步骤。
+</Warning>
+
+<Steps>
+  <Step title="安装 Wispr Flow（可选）">
+    <InstallWisprFlow />
+  </Step>
+
+  <Step title="打开终端">
+    <OpenTerminal />
+  </Step>
+
+  <Step title="安装 Node.js">
+    <Info>
+    **已有 Node.js？** 如果你在之前的教程中已经安装过，跳过此步骤。在终端运行 `node --version` 检查 —— 你应该会看到类似 `v22.x.x` 的版本号。
+    </Info>
+
+    <InstallNodejs />
+  </Step>
+
+  <Step title="安装你的 AI 助手">
+    你有两个选择。Gemini CLI 是免费的，效果很好。Claude Code 是 Remotion 官方推荐的付费替代方案 —— 功能更强大，但需要订阅。
+
+    <Tabs>
+      <Tab title="Gemini CLI（免费）">
+        <Info>
+        **已有 Gemini CLI？** 如果你在之前的教程中已经安装过，跳过此步骤。只需在终端运行 `gemini`，确认它仍可正常启动。
+        </Info>
+
+        <InstallGeminiCli />
+
+        输入 `/quit` 暂时退出 Gemini CLI。设置好视频项目后，我们会重新启动它。
+      </Tab>
+
+      <Tab title="Claude Code（付费）">
+        Claude Code 是 Anthropic 的 AI 编程助手。需要从 [claude.ai](https://claude.ai) 购买 **Max 或 Pro 订阅**。Remotion 的官方文档推荐使用 Claude Code 进行 AI 视频创作。
+
+        运行以下命令安装：
+
+        ```bash title="复制此命令"
+        npm install -g @anthropic-ai/claude-code
+        ```
+
+        然后启动它：
+
+        ```bash title="复制此命令"
+        claude
+        ```
+
+        第一次运行时，Claude Code 会要求你通过浏览器登录。按照屏幕上的说明操作。
+
+        输入 `/exit` 暂时退出 Claude Code。
+
+        <Accordion title="'npm' 未被识别">
+        这意味着 Node.js 没有正确安装。返回重新安装 Node.js。重新安装后，**完全关闭终端并打开一个新的终端**，然后再试一次。
+        </Accordion>
+
+        <Accordion title="权限被拒绝错误">
+        **Windows：** 关闭 PowerShell，右键单击重新打开并选择**"以管理员身份运行"**，然后再次尝试安装命令。
+
+        **macOS：** 在命令前加 `sudo`：`sudo npm install -g @anthropic-ai/claude-code`，并在提示时输入密码。
+        </Accordion>
+      </Tab>
+    </Tabs>
+  </Step>
+
+  <Step title="获取你的 ElevenLabs API 密钥">
+    <GetElevenlabsApiKey />
+  </Step>
+
+  <Step title="创建你的视频项目">
+    现在让我们创建一个新的 Remotion 项目 —— 这是将你的描述转化为真实视频文件的框架。
+
+    在终端中运行此命令：
+
+    ```bash title="复制此命令"
+    npx create-video@latest
+    ```
+
+    当系统提示时，选择以下设置：
+    - **项目名称：** `my-promo-video`（或你喜欢的任何名称）
+    - **模板：** 选择 **Blank**
+    - **TailwindCSS：** Yes
+    - **Install Skills：** Yes
+
+    <Info>
+    **刚才发生了什么？** 你在电脑上创建了一个新的视频项目。Remotion 是一个从代码创建视频的框架 —— 但你永远不需要自己编写代码。你的 AI 助手会替你读取和编写所有代码。你安装的"Skills"是帮助 AI 理解 Remotion 工作原理的文档文件。
+    </Info>
+
+    然后进入项目文件夹并安装依赖：
+
+    ```bash title="复制此命令"
+    cd my-promo-video
+    ```
+
+    ```bash title="复制此命令"
+    npm install
+    ```
+
+    <Accordion title="'npx' 未被识别或命令失败">
+    确保 Node.js 已正确安装 —— 运行 `node --version` 检查。如果 Node.js 正常但 `npx` 失败，尝试关闭并重新打开终端。在 Windows 上，你可能需要以管理员身份运行终端。
+    </Accordion>
+
+    <Accordion title="项目名称已存在">
+    选择一个不同的名称，或先删除现有文件夹。你可以使用任何你喜欢的名称 —— 只需记住在本教程剩余部分用该名称替换 `my-promo-video`。
+    </Accordion>
+  </Step>
+
+  <Step title="启动视频预览">
+    启动 Remotion 预览服务器，这样你就可以在构建视频时实时查看效果：
+
+    ```bash title="复制此命令"
+    npm run dev
+    ```
+
+    这会在浏览器中打开一个预览窗口（通常在 `http://localhost:3000`）。你应该会看到一个空的视频画布。
+
+    <Tip>
+    **保持这个终端窗口运行。** 预览服务器需要在你构建视频时保持活跃。在下一步中，你将打开**第二个终端窗口**来运行 AI 助手。
+    </Tip>
+
+    <Accordion title="浏览器没有自动打开">
+    手动打开浏览器并访问 `http://localhost:3000`。如果看到错误，确保终端显示"Server running"或类似内容 —— 可能需要一点时间启动。
+    </Accordion>
+  </Step>
+
+  <Step title="在项目中启动你的 AI 助手">
+    打开一个**新的终端窗口**（保持第一个窗口中的预览服务器运行）。导航到你的项目文件夹并启动 AI 助手：
+
+    <Tabs>
+      <Tab title="Gemini CLI（免费）">
+        ```bash title="复制此命令"
+        cd my-promo-video
+        ```
+
+        ```bash title="复制此命令"
+        gemini
+        ```
+
+        Gemini CLI 现在在你的视频项目内运行。它可以读取所有项目文件，并在你描述想要的内容时创建视频构图。
+      </Tab>
+
+      <Tab title="Claude Code（付费）">
+        ```bash title="复制此命令"
+        cd my-promo-video
+        ```
+
+        ```bash title="复制此命令"
+        claude
+        ```
+
+        Claude Code 现在在你的视频项目内运行。它可以读取所有项目文件 —— 包括 Remotion Skills 文档 —— 并在你描述想要的内容时创建视频构图。
+
+        <Tip>
+        **Claude Code + Remotion Skills：** 因为你在项目创建时安装了 Skills，Claude Code 内置了 Remotion 工作原理的知识。这是 [Remotion 官方文档](https://www.remotion.dev/docs/ai/claude-code)推荐的工作流。
+        </Tip>
+      </Tab>
+    </Tabs>
+
+    <Info>
+    **同时运行两个终端：** 这是正常且预期的情况。终端 1 运行预览服务器（这样你可以看到你的视频）。终端 2 运行你的 AI 助手（这样你可以描述你想要的内容）。它们协同工作 —— AI 编写代码，预览实时显示结果。
+    </Info>
+  </Step>
+</Steps>
+
+## 验证你的设置
+
+<AccordionGroup>
+  <Accordion title="Node.js 已安装">
+    在终端运行 `node --version`，应显示一个版本号。
+  </Accordion>
+  <Accordion title="AI 助手已安装">
+    在终端运行 `gemini` 或 `claude`，可正常启动并显示一个可输入的提示符。
+  </Accordion>
+  <Accordion title="ElevenLabs API 密钥已保存">
+    你已复制并将 API 密钥保存在安全的地方 —— 文本文件、笔记或密码管理器。
+  </Accordion>
+  <Accordion title="Remotion 项目已创建">
+    `my-promo-video` 文件夹存在于你的电脑上，其中包含项目文件。
+  </Accordion>
+  <Accordion title="预览服务器正在运行">
+    终端 1 正在运行 `npm run dev`，你可以在 `http://localhost:3000` 看到 Remotion 预览。
+  </Accordion>
+  <Accordion title="AI 助手在项目中运行">
+    终端 2 的 AI 助手（Gemini CLI 或 Claude Code）正在 `my-promo-video` 文件夹内运行。
+  </Accordion>
+</AccordionGroup>
+
+<Note>
+一切就绪？前往[创建你的第一个宣传视频](/docs/2026-her-waka/tutorial/promo-video/create-video)，开始构建。
+</Note>

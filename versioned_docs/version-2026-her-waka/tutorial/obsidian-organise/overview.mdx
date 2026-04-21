@@ -1,106 +1,106 @@
 ---
-title: "和 AI 对话整理笔记"
-description: "通过 Gemini CLI 使用自然语言搜索、审查和整理你的 Obsidian 笔记库。说出或打出你想要什么 —— AI 负责处理剩下的事情。可选使用 Wispr Flow 语音输入。"
+title: "Organise Your Notes by Talking to AI"
+description: "Use natural language through Gemini CLI to search, audit, and organise your Obsidian vault. Speak or type what you want — AI handles the rest. Optionally use Wispr Flow for voice input."
 ---
 
 <Tip>
-**难度：★★☆☆☆ 简单** · 预计时间：约 30 到 45 分钟
+**Difficulty: ★★☆☆☆ Easy** · Estimated time: ~30 to 45 minutes
 </Tip>
 
-你的笔记库里有 50+ 篇笔记，却什么都找不到。标签不统一，一半笔记在错误的文件夹里，你知道某处有一个食谱，但在文件夹里翻找是找不到的。
+You have 50+ notes in your vault but you cannot find anything. Your tags are inconsistent, half your notes are in the wrong folder, and you know there is a recipe somewhere but scrolling through folders is not going to find it.
 
-不用一篇一篇打开笔记，只需说**"找出我所有关于会议的笔记"** 或 **"给我看没有任何笔记链接到的孤儿笔记"** —— AI 负责处理剩下的事情。
+Instead of opening notes one by one, you just say **"Find all my notes about meetings"** or **"Show me notes that nothing links to"** — and AI does the rest.
 
-**这就是我们要做的事。** 一个自然语言工作流 —— 你描述你想要什么，Gemini CLI 为你搜索、审查和整理你的笔记库 —— 不需要记忆任何命令。
+**That is what we are building.** A natural language workflow where you describe what you want and Gemini CLI searches, audits, and organises your vault for you — no commands to memorise.
 
 <Info>
-**教程由 [Chan Meng](https://chanmeng.org/) 设计** —— 高级 AI/ML 工程师、开源贡献者、前字节跳动开发者。Chan 搭建了 30+ 个真实应用，专注于 AI 驱动的解决方案，也是本次活动的圆桌嘉宾和本网站的开发者。
+**Tutorial led by [Chan Meng](https://chanmeng.org/)** — Senior AI/ML Engineer, open-source contributor, and former ByteDance developer. Chan has built 30+ live applications and specialises in AI-powered solutions. She is also a panel speaker at this event and the developer behind this website.
 </Info>
 
-## 你将构建什么
+## What you will build
 
 <CardGroup cols={3}>
-  <Card title="搜索" icon="magnifying-glass">
-    查询任何内容 —— 关于某个主题的笔记、带有特定标签的文件，或匹配某个短语的内容
+  <Card title="Search" icon="magnifying-glass">
+    Ask for anything — notes about a topic, files with a certain tag, or content matching a phrase
   </Card>
-  <Card title="审查" icon="clipboard-check">
-    发现隐藏的问题 —— 孤儿笔记、断开的链接、不一致的标签和遗忘的文件
+  <Card title="Audit" icon="clipboard-check">
+    Discover hidden issues — orphan notes, broken links, inconsistent tags, and forgotten files
   </Card>
-  <Card title="整理" icon="folder-open">
-    让 AI 移动、重命名和整理你的笔记库 —— 它处理细节
+  <Card title="Organise" icon="folder-open">
+    Tell AI to move, rename, and tidy your vault — it handles the details
   </Card>
 </CardGroup>
 
-## 工作原理
+## How it works
 
 ```mermaid
 flowchart LR
-    A["你描述\n问题所在"] --> B["Gemini CLI\n找到它"]
-    B --> C["Gemini CLI\n修复它"]
-    C --> D["笔记库\n变得更好"]
+    A["You describe\nthe problem"] --> B["Gemini CLI\nfinds it"]
+    B --> C["Gemini CLI\nfixes it"]
+    C --> D["Vault\nimproves"]
 ```
 
-你用普通语言描述你想要什么（通过说话或打字）。Gemini CLI 理解你的请求，在后台运行正确的 Obsidian 命令，你的笔记库就变得更整洁了。你永远不需要学习或输入任何原始命令。
+You describe what you want in plain language (by speaking or typing). Gemini CLI understands your request, runs the right Obsidian commands behind the scenes, and your vault gets cleaner. You never need to learn or type a single raw command.
 
 <Tip>
-**你可以用 Wispr Flow 说出提示词，也可以打字或粘贴到 Gemini CLI 中。两种方式效果完全一样。** Wispr Flow 是可选项 —— 它只是让体验更加解放双手。本教程中的每条提示词，无论你说出来还是打出来都同样有效。
+**You can either speak your prompts using Wispr Flow, or type/paste them into Gemini CLI. Both work exactly the same way.** Wispr Flow is optional — it just makes the experience hands-free. Every prompt in this tutorial works whether you speak it or type it.
 </Tip>
 
-## 你将学到
+## What you will learn
 
-- 如何通过用普通语言提问即时搜索整个笔记库
-- 如何通过描述你想查找的内容来审查标签、孤儿笔记和断开的链接
-- 如何通过告诉 AI 做什么来移动和重命名文件
-- 如何检查反向链接，了解你的笔记是如何关联的
-- 如何使用 Wispr Flow 语音输入实现解放双手的工作流
-- 如何建立可以每月重复的笔记库维护习惯
+- How to search your entire vault instantly by asking in plain language
+- How to audit tags, orphan notes, and broken links by describing what you want to find
+- How to move and rename files by telling AI what to do
+- How to check backlinks and understand how your notes are connected
+- How to use voice input with Wispr Flow for a hands-free workflow
+- How to build a vault maintenance habit you can repeat monthly
 
 <Note>
-**无需任何编程基础。** 本教程中的每条提示词都是你说出来或复制粘贴的。如果你能描述你想要什么，你就能做到这一切。
+**No coding required.** Every prompt in this tutorial is something you say or copy. If you can describe what you want, you can do this.
 </Note>
 
-## 工具
+## Tools
 
 <CardGroup cols={2}>
   <Card title="Gemini CLI" icon="terminal">
-    谷歌的免费 AI 助手，在终端中运行。它理解你的自然语言请求并将其转换为 Obsidian 操作。
+    Google's free AI assistant that runs in your terminal. It understands your natural language requests and translates them into Obsidian actions.
   </Card>
   <Card title="Wispr Flow" icon="microphone">
-    可选语音输入工具 —— 说话代替打字。在任何应用中均可使用，包括终端。
+    Optional voice input tool — speak instead of type. Works in any application, including your terminal.
   </Card>
   <Card title="Obsidian" icon="notebook">
-    免费的笔记应用，将你的笔记以纯文本文件形式存储在电脑上。你的数据由你掌控。
+    A free note-taking app that stores your notes as plain text files on your computer. Your data stays with you.
   </Card>
   <Card title="Node.js" icon="node-js">
-    安装 Gemini CLI 所需。免费，安装快捷。
+    Required to install Gemini CLI. Free and quick to set up.
   </Card>
 </CardGroup>
 
-## 费用
+## Cost
 
-| 工具 | 费用 |
+| Tool | Cost |
 |------|------|
-| Gemini CLI | 免费（每日 1,000 次请求） |
-| Wispr Flow | 免费试用（[邀请链接可获一个月 Pro 版免费试用](https://wisprflow.ai/r?CHAN115)） |
-| Obsidian | 免费 |
-| Node.js | 免费 |
-| 终端 | 免费（内置在你的电脑里） |
-| **合计** | **$0** |
+| Gemini CLI | Free (1,000 requests/day) |
+| Wispr Flow | Free trial ([invite link for a free month of Pro](https://wisprflow.ai/r?CHAN115)) |
+| Obsidian | Free |
+| Node.js | Free |
+| Terminal | Free (built into your computer) |
+| **Total** | **$0** |
 
-## 前置要求
+## Prerequisites
 
 <CardGroup cols={3}>
-  <Card title="一台电脑" icon="laptop">
-    Windows 或 macOS 均可。无需特殊硬件。
+  <Card title="A laptop" icon="laptop">
+    Windows or macOS. No special hardware needed.
   </Card>
-  <Card title="30 到 45 分钟" icon="clock">
-    慢慢来，不用着急。你可以随时暂停，之后再继续。
+  <Card title="30 to 45 minutes" icon="clock">
+    Take your time — there is no rush. You can pause and come back.
   </Card>
-  <Card title="已启用 CLI 的 Obsidian" icon="notebook">
-    如果你已完成[用语音控制你的笔记](/docs/2026-her-waka/tutorial/obsidian-daily/overview)教程，你已经设置好了。否则，我们会带你完成。
+  <Card title="Obsidian with CLI enabled" icon="notebook">
+    If you completed the [Voice-Control Your Notes](/docs/2026-her-waka/tutorial/obsidian-daily/overview) tutorial, you are already set up. Otherwise, we will walk you through it.
   </Card>
 </CardGroup>
 
 <Note>
-准备好了吗？前往[设置你的工具](/docs/2026-her-waka/tutorial/obsidian-organise/setup)，为一切做好准备。
+Ready to get started? Head to [Set up your tools](/docs/2026-her-waka/tutorial/obsidian-organise/setup) to get everything ready.
 </Note>

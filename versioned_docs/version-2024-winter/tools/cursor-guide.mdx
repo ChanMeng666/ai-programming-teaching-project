@@ -1,142 +1,138 @@
 ---
 sidebar_position: 1
-title: Cursor使用指南
-description: 学习如何使用Cursor编辑器进行AI辅助开发
+title: Cursor Usage Guide
+description: Learn how to use Cursor editor for AI-assisted development
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Cursor使用指南
+# Cursor Usage Guide
 
-## Cursor简介
+## Introduction to Cursor
 
-Cursor是一款革新性的代码编辑器，它集成了强大的AI功能，旨在提高开发者的工作效率。
+Cursor is a revolutionary code editor that integrates powerful AI features designed to improve developer productivity.
 
-**AI辅助编码**
+### AI-Assisted Coding
+- Real-time code completion
+- Error detection and fix suggestions
+- Intelligent code generation
 
-- 实时代码补全
-- 错误检测和修复建议
-- 智能代码生成
+### Code Explanation and Refactoring
+- Explain complex code
+- Provide refactoring suggestions
+- Code optimization recommendations
 
-**代码解释和重构**
+### Multi-Language Support
+- Support for mainstream programming languages
+- Framework-aware suggestions
+- Syntax highlighting
 
-- 解释复杂代码
-- 提供重构建议
-- 代码优化建议
+### Integrated Development Environment
+- Built-in terminal
+- Git integration
+- Debugging tools
 
-**多语言支持**
+## Installation and Setup
 
-- 支持主流编程语言
-- 框架智能提示
-- 语法高亮
+### Download and Installation Steps
 
-**集成开发环境**
+#### 1. Download the Installer
 
-- 内置终端
-- Git集成
-- 调试工具
+Visit [Cursor official website](https://cursor.sh/) and click the "Download" button.
 
-## 安装和设置
+#### 2. Run the Installer
 
-### 下载和安装步骤
-
-#### 1. 下载安装包
-
-访问 [Cursor官网](https://cursor.sh/) 并点击"Download"按钮。
-
-#### 2. 运行安装程序
-
-根据你的操作系统选择合适的版本：
+Choose the appropriate version for your operating system:
 
 <Tabs>
 <TabItem value="windows" label="Windows" default>
     ```bash
-    # 运行下载的.exe文件
+    # Run the downloaded .exe file
     cursor-setup.exe
     ```
 </TabItem>
 <TabItem value="mac" label="macOS">
     ```bash
-    # 打开.dmg文件并拖动到Applications文件夹
-    # 或使用Homebrew安装
+    # Open the .dmg file and drag to Applications folder
+    # Or install using Homebrew
     brew install --cask cursor
     ```
 </TabItem>
 <TabItem value="linux" label="Linux">
     ```bash
-    # 下载.AppImage文件
+    # Download the .AppImage file
     chmod +x cursor.AppImage
     ./cursor.AppImage
     ```
 </TabItem>
 </Tabs>
 
-#### 3. 初始配置
+#### 3. Initial Configuration
 
-1. 首次运行时登录或创建账号
-2. 选择你喜欢的主题和字体
-3. 配置常用编程语言
-4. 设置AI功能（可能需要API密钥）
+1. Log in or create an account on first run
+2. Choose your preferred theme and font
+3. Configure commonly used programming languages
+4. Set up AI features (may require API key)
 
-## 常用快捷键
+## Common Keyboard Shortcuts
 
-:::tip 提高效率的关键
-掌握这些快捷键可以显著提升你的开发效率。建议打印出来放在手边，直到完全熟悉为止。
+:::tip Key to Efficiency
+Mastering these shortcuts can significantly improve your development efficiency. It's recommended to print them out and keep them handy until you're fully familiar.
 :::
 
-### 文件操作快捷键
+### File Operation Shortcuts
 
-| 操作 | Windows/Linux | macOS |
+| Operation | Windows/Linux | macOS |
 |------|--------------|-------|
-| 新建文件 | `Ctrl + N` | `Cmd + N` |
-| 打开文件 | `Ctrl + O` | `Cmd + O` |
-| 保存文件 | `Ctrl + S` | `Cmd + S` |
-| 关闭文件 | `Ctrl + W` | `Cmd + W` |
+| New File | `Ctrl + N` | `Cmd + N` |
+| Open File | `Ctrl + O` | `Cmd + O` |
+| Save File | `Ctrl + S` | `Cmd + S` |
+| Close File | `Ctrl + W` | `Cmd + W` |
 
-### 编辑操作快捷键
+### Editing Operation Shortcuts
 
-| 操作 | Windows/Linux | macOS |
+| Operation | Windows/Linux | macOS |
 |------|--------------|-------|
-| 复制 | `Ctrl + C` | `Cmd + C` |
-| 剪切 | `Ctrl + X` | `Cmd + X` |
-| 粘贴 | `Ctrl + V` | `Cmd + V` |
-| 撤销 | `Ctrl + Z` | `Cmd + Z` |
-| 重做 | `Ctrl + Y` | `Cmd + Shift + Z` |
-| 查找 | `Ctrl + F` | `Cmd + F` |
-| 替换 | `Ctrl + H` | `Cmd + H` |
+| Copy | `Ctrl + C` | `Cmd + C` |
+| Cut | `Ctrl + X` | `Cmd + X` |
+| Paste | `Ctrl + V` | `Cmd + V` |
+| Undo | `Ctrl + Z` | `Cmd + Z` |
+| Redo | `Ctrl + Y` | `Cmd + Shift + Z` |
+| Find | `Ctrl + F` | `Cmd + F` |
+| Replace | `Ctrl + H` | `Cmd + H` |
 
-### AI辅助功能快捷键
+### AI Assistant Feature Shortcuts
 
-| 操作 | Windows/Linux | macOS |
+| Operation | Windows/Linux | macOS |
 |------|--------------|-------|
-| 激活AI助手 | `Ctrl + K` | `Cmd + K` |
-| AI代码注释 | `Ctrl + /` | `Cmd + /` |
-| AI代码解释 | `Alt + [` | `Option + [` |
-| AI优化建议 | `Alt + ]` | `Option + ]` |
+| Activate AI Assistant | `Ctrl + K` | `Cmd + K` |
+| AI Code Comment | `Ctrl + /` | `Cmd + /` |
+| AI Code Explanation | `Alt + [` | `Option + [` |
+| AI Optimization Suggestions | `Alt + ]` | `Option + ]` |
 
-## 与AI协作开发
+## Collaborative Development with AI
 
-### 代码补全和建议
+### Code Completion and Suggestions
 
-#### 自动代码补全示例
+#### Auto Code Completion Example
 
 ```python
 def calculate_average(numbers):
-    # 开始输入'return'，AI会提供完整的平均值计算代码
+    # Start typing 'return', AI will provide complete average calculation code
     return sum(numbers) / len(numbers)
 ```
 
-:::note 使用技巧
-- 使用Tab键或Enter键接受建议
-- 使用上下箭头键在多个建议间切换
-- 按Esc键取消建议
+:::note Usage Tips
+- Use Tab or Enter key to accept suggestions
+- Use up/down arrow keys to switch between multiple suggestions
+- Press Esc to cancel suggestions
 :::
 
-### 代码解释和重构
+### Code Explanation and Refactoring
 
 <Tabs>
-<TabItem value="original" label="原始代码">
+<TabItem value="original" label="Original Code">
     ```python
     def fibonacci(n):
         if n <= 1:
@@ -145,15 +141,15 @@ def calculate_average(numbers):
             return fibonacci(n-1) + fibonacci(n-2)
     ```
 </TabItem>
-<TabItem value="explanation" label="AI解释">
+<TabItem value="explanation" label="AI Explanation">
     ```
-    这是一个递归实现的斐波那契数列函数：
-    1. 基本情况：当n<=1时直接返回n
-    2. 递归情况：返回前两个数的和
-    3. 注意：这种实现方式时间复杂度为O(2^n)
+    This is a recursive implementation of the Fibonacci sequence function:
+    1. Base case: When n<=1, directly return n
+    2. Recursive case: Return the sum of the previous two numbers
+    3. Note: This implementation has a time complexity of O(2^n)
     ```
 </TabItem>
-<TabItem value="optimized" label="AI优化建议">
+<TabItem value="optimized" label="AI Optimization Suggestion">
     ```python
     def fibonacci(n):
         if n <= 1:
@@ -166,29 +162,29 @@ def calculate_average(numbers):
 </TabItem>
 </Tabs>
 
-### 错误诊断和修复
+### Error Diagnosis and Fixing
 
-#### 示例：语法错误修复
+#### Example: Syntax Error Fix
 
 ```python
-# 有语法错误的代码
+# Code with syntax error
 def greet(name)
     print("Hello, " + name + "!")
 
-# Cursor会检测到缺少冒号，并提供修复建议：
+# Cursor will detect the missing colon and provide a fix suggestion:
 def greet(name):
     print("Hello, " + name + "!")
 ```
 
-### 使用自然语言生成代码
+### Generate Code Using Natural Language
 
-#### 示例：通过注释生成代码
+#### Example: Generate Code Through Comments
 
 ```python
-# 创建一个函数，接受一个字符串列表，返回所有长度大于5的字符串
+# Create a function that takes a list of strings and returns all strings with length greater than 5
 ```
 
-按下 `Ctrl + K`，AI会生成：
+Press `Ctrl + K`, and AI will generate:
 
 ```python
 def filter_long_strings(string_list):

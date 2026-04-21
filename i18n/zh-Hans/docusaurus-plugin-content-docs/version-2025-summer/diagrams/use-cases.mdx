@@ -1,0 +1,289 @@
+---
+title: 场景应用指南
+sidebar_position: 5
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import Admonition from '@theme/Admonition';
+
+# 图表在不同场景的应用指南
+
+## 学术论文图表规范
+
+### 期刊投稿要求
+
+<Admonition type="important" title="通用学术规范">
+- **矢量格式**：使用 SVG 或 EPS 格式，确保打印质量
+- **字体规范**：Times New Roman 或 Arial，大小不小于 8pt
+- **编号规则**：Figure 1, Figure 2... 连续编号
+- **引用格式**：在正文中使用 "如图 1 所示" 或 "见图 1"
+- **分辨率要求**：位图至少 300 DPI
+- **颜色模式**：打印用 CMYK，电子版用 RGB
+</Admonition>
+
+### IEEE 论文图表规范
+
+**尺寸要求**：
+
+- 单栏：3.5 英寸宽
+- 双栏：7.16 英寸宽
+- 高度：不超过 9.5 英寸
+
+**标注规范**：
+
+- 图题：图下方，居中
+- 字体：8-10pt
+- 线宽：0.5-1pt
+
+### LaTeX 集成
+
+<CodeBlock language="latex">
+{`% 在 LaTeX 中嵌入矢量图
+\\usepackage{graphicx}
+\\usepackage{svg}
+
+\\begin{figure}[htbp]
+  \\centering
+  \\includesvg[width=0.8\\textwidth]{figures/architecture.svg}
+  \\caption{System Architecture Overview}
+  \\label{fig:architecture}
+\\end{figure}
+
+% 引用图表
+As shown in Figure~\\ref{fig:architecture}...`}
+</CodeBlock>
+
+### Mermaid 图表转换为学术格式
+
+<CodeBlock language="text">
+{`您：将我的 Mermaid 流程图转换为适合 IEEE 论文的格式
+
+Gemini：我来帮您转换为学术论文格式：
+
+1. 导出为 SVG：
+   - Mermaid Live Editor → Actions → Download SVG
+   - 保存为 figure1_flowchart.svg
+
+2. 优化 SVG：
+   - 使用 Inkscape 打开
+   - 设置文档大小为 3.5 英寸（单栏）
+   - 字体改为 Arial 10pt
+   - 线宽调整为 0.75pt
+   - 导出为 EPS 格式
+
+3. LaTeX 代码：
+\\begin{figure}[t]
+  \\centering
+  \\includegraphics[width=\\columnwidth]{figure1_flowchart.eps}
+  \\caption{Proposed Algorithm Workflow}
+  \\label{fig:workflow}
+\\end{figure}`}
+</CodeBlock>
+
+## 技术文档最佳实践
+
+### README 文档图表
+
+<CodeBlock language="markdown">
+{`# 项目架构
+
+## 系统概览
+
+\`\`\`mermaid
+graph TB
+    subgraph "前端应用"
+        A[React App]
+        B[Redux Store]
+    end
+
+    subgraph "后端服务"
+        C[API Gateway]
+        D[Auth Service]
+        E[Business Logic]
+    end
+
+    subgraph "数据层"
+        F[(PostgreSQL)]
+        G[(Redis Cache)]
+    end
+
+    A --> C
+    C --> D
+    C --> E
+    E --> F
+    E --> G
+\`\`\`
+
+## API 流程
+
+![API Flow](./docs/api-flow.png)
+
+## 部署架构
+
+详见 [部署文档](./docs/deployment.md) 中的架构图。`}
+</CodeBlock>
+
+### API 文档图表
+
+**推荐图表类型**：
+
+- **时序图**：展示 API 调用流程，适合认证流程、支付流程
+- **流程图**：说明业务逻辑，适合数据处理、决策流程
+- **状态图**：描述资源状态变化，适合订单状态、任务状态
+
+### 系统设计文档
+
+<Admonition type="tip" title="图表组织建议">
+1. **分层展示**：从高层架构到详细设计逐层深入
+2. **统一风格**：保持配色、字体、图标风格一致
+3. **版本管理**：图表源文件纳入 Git 管理
+4. **更新同步**：代码变更时及时更新图表
+</Admonition>
+
+## PPT 演示优化
+
+### 分步展示技巧
+
+**渐进式展示**：
+
+1. 第 1 页：核心概念
+2. 第 2 页：添加细节
+3. 第 3 页：完整架构
+4. 第 4 页：关键点强调
+
+**动画效果**：
+
+- 淡入：新增组件
+- 路径动画：数据流向
+- 颜色变化：状态改变
+- 缩放：焦点切换
+
+### PowerPoint 集成
+
+<CodeBlock language="text">
+{`导出设置：
+1. Draw.io：
+   - File → Export as → PNG
+   - 分辨率：300 DPI
+   - 背景：透明
+   - 边距：20px
+
+2. Mermaid：
+   - 下载 SVG
+   - 在 PowerPoint 中：插入 → 图片 → SVG
+   - 右键 → 转换为形状（可编辑）
+
+3. 优化技巧：
+   - 使用母版统一样式
+   - 设置图表动画顺序
+   - 添加标注和指引线`}
+</CodeBlock>
+
+### 商务演示配色
+
+- **专业蓝**：#003366、#0066CC、#3399FF、#99CCFF
+- **科技感**：#2C3E50、#34495E、#7F8C8D、#95A5A6
+
+## Web 集成
+
+### 在线文档嵌入
+
+<CodeBlock language="html">
+{`<!-- Mermaid 图表嵌入 -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({ startOnLoad: true });
+</script>
+
+<div class="mermaid">
+graph LR
+    A[开始] --> B[处理]
+    B --> C[结束]
+</div>
+
+<!-- Draw.io 图表嵌入 -->
+<iframe
+  frameborder="0"
+  style="width:100%;height:400px;"
+  src="https://viewer.diagrams.net/?highlight=0000ff&edit=_blank&layers=1&nav=1">
+</iframe>`}
+</CodeBlock>
+
+### Markdown 平台支持
+
+**原生支持 Mermaid**：
+
+- GitHub
+- GitLab
+- Notion
+- Obsidian
+
+**需要插件**：
+
+- Confluence
+- WordPress
+- Ghost
+- Hugo
+
+## 响应式设计
+
+### 移动端优化
+
+<Admonition type="tip" title="移动端图表设计原则">
+- **简化内容**：减少节点数量，突出核心信息
+- **增大元素**：确保触摸目标至少 44×44 像素
+- **垂直布局**：优先使用从上到下的布局
+- **可缩放**：使用 SVG 格式支持缩放
+- **分段展示**：复杂图表拆分为多个简单图表
+</Admonition>
+
+## 品牌一致性
+
+### 企业 VI 应用
+
+<CodeBlock language="text">
+{`您：帮我创建符合公司 VI 规范的图表样式
+
+Gemini：我来帮您创建企业 VI 规范的图表样式：
+
+Draw.io 样式配置：
+
+1. 创建企业样式库：
+   - File → New Library
+   - 命名：CompanyVI_Shapes
+
+2. 定义颜色规范：
+   主色：#1E40AF (企业蓝)
+   辅色：#10B981 (成功绿)
+   警告：#F59E0B (警告橙)
+   错误：#EF4444 (错误红)
+
+3. 字体规范：
+   标题：Helvetica Bold 14pt
+   正文：Helvetica Regular 11pt
+   注释：Helvetica Light 9pt
+
+4. 元素样式：
+   圆角：8px
+   线宽：2px
+   阴影：0 2px 4px rgba(0,0,0,0.1)
+
+5. Mermaid 主题配置：
+   %%{init: {
+     'theme': 'base',
+     'themeVariables': {
+       'primaryColor': '#1E40AF',
+       'primaryTextColor': '#FFFFFF',
+       'primaryBorderColor': '#1E40AF',
+       'lineColor': '#64748B',
+       'secondaryColor': '#10B981'
+     }
+   }}%%`}
+</CodeBlock>
+
+## 下一步
+
+学习更多高级技巧：
+
+- [AI 辅助创作](../ai-assistance)
+- [实战项目](../projects)

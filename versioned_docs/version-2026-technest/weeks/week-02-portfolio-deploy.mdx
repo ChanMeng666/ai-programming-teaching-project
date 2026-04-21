@@ -1,197 +1,197 @@
 ---
-title: "第 2 周：部署你的个人网站"
-description: 通过 Cursor fork Magic Portfolio 模板，用描述把内容改成你的，再通过 Vercel MCP 部署上线。
-sidebar_label: "第 2 周：部署你的个人网站"
+title: "Week 2: Deploy Your Personal Website"
+description: Fork the Magic Portfolio template through Cursor, customise content by description, and ship to production via the Vercel MCP.
+sidebar_label: "Week 2: Deploy Your Personal Website"
 ---
 
 <AxisBadge axes={["JOB", "FUN"]} />
 
-# 部署你的个人网站
+# Deploy Your Personal Website
 
-## 学习目标
+## Learning Objectives
 
-到本节课结束，学员应当能够：
+By the end of this session, students should be able to:
 
-- **通过自然语言请求 fork 一个生产级的 Vercel 模板**，整个过程不用自己手动 clone 仓库，也不用敲一句 `git clone`。
-- **用大白话描述网站内容** —— bio、项目、链接、主题色 —— 然后看着 Cursor 把这段描述翻译成干净、已 commit 的源代码改动。
-- **用一句提示词触发 Vercel 部署**，出错时能读 build log，并通过把错误描述给 AI 来恢复。
+- **Fork a production-ready Vercel template through natural-language requests**, without ever cloning a repo with their own hands or running `git clone`.
+- **Describe website content in plain English** — bio, projects, links, theme — and watch Cursor translate that description into clean, committed source changes.
+- **Trigger a Vercel deploy by prompt**, read the deployment's build log when something goes wrong, and recover by describing the failure to the AI.
 
-## 核心主题
+## Core Topics
 
-- 一个 Vercel 模板如何在一段对话里就变成"你的"网站。
-- "用英文描述内容，让 AI 写 MDX/TSX"——这套模式贯穿第 2–6 周。
-- Deploy-preview 循环：每次 commit 都触发一个预览 URL，可以审完再推到生产环境。
-- 第一次部署故意要"无聊"——刺激的 AI 部分下周再加。
+- How a Vercel template becomes your own site in one conversation.
+- The "describe content in English, let AI write the MDX/TSX" pattern that powers Weeks 2–6 of this course.
+- The deploy-preview loop: every commit triggers a preview URL you can review before promoting to production.
+- Why the first site deploy should be boring on purpose — we'll add the exciting AI bits next week.
 
-## 工具 / 技术栈
+## Tools / Stack
 
-| 工具 | 本周角色 |
+| Tool | Role this week |
 |---|---|
-| **Cursor** | 一个聊天窗，所有事都在这里发生。 |
-| **Vercel MCP** | AI 创建项目、部署、读日志、设置环境变量。 |
-| **GitHub** | 每次 commit 推送；Vercel 自动重建。 |
-| **Next.js 14** | Magic Portfolio 模板基于的框架。 |
-| **Tailwind CSS** | 样式；当你描述视觉变化时，AI 改 class。 |
-| **Magic Portfolio** | 我们 fork 的起点 —— [Vercel 模板](https://vercel.com/templates/next.js/magic-portfolio)。 |
+| **Cursor** | The one chat window where everything happens. |
+| **Vercel MCP** | AI creates the project, deploys, reads logs, sets env vars. |
+| **GitHub** | Every commit pushes; Vercel rebuilds automatically. |
+| **Next.js 14** | The framework the Magic Portfolio template ships on. |
+| **Tailwind CSS** | Styling; AI edits classes when you describe visual changes. |
+| **Magic Portfolio** | [Vercel template](https://vercel.com/templates/next.js/magic-portfolio) we fork as the starting point. |
 
 <SiteEvolution thisWeek={2} />
 
-## 课堂计划
+## Session Plan
 
-| 时间 | 活动 |
+| Time | Activity |
 |---|---|
-| 0 – 15 分钟 | **回顾与 Check-in。** 第 1 周第一次拿到 Vercel URL 的同学举手。还卡住的——给两分钟和同学结对解一下。 |
-| 15 – 40 分钟 | **概念讲解。** "模板优先"模式。为什么 fork 一个好模板比从零开始更划算。一个 next.js 模板的结构是怎样的（内容 vs 代码）。AI **应该** 碰什么（内容文件、配置）、**不该** 碰什么（构建管道）。 |
-| 40 – 75 分钟 | **现场演示。** 讲师对 Cursor 只发一句提示词："Fork Magic Portfolio，把它改成关于我，然后部署。"全班看着整套流程——fork、clone、改、commit、部署——在一段对话里发生。 |
-| 75 – 105 分钟 | **动手 Lab。** 每位学员上线自己的作品集 URL。每个人挑一种不同的强调色，整个教室会有差异性可供互评。 |
-| 105 – 120 分钟 | **Q&A + 收尾。** Show-and-tell：三位学员把自己的线上 URL 贴出来，全班反应一下。 |
+| 0 – 15 min | **Recap & Check-in.** Who got their first Vercel URL working in Week 1? Show of hands. Anyone still stuck — 2 minutes pairing with a classmate. |
+| 15 – 40 min | **Concept Teaching.** The "template-first" pattern. Why forking a good template beats starting from scratch. How `next.js` templates are structured (content vs code). What the AI *should* touch (content files, config) and what it shouldn't (build plumbing). |
+| 40 – 75 min | **Live Demo.** Instructor asks Cursor one prompt: "Fork Magic Portfolio, make it about me, deploy it." Class watches the whole flow — fork, clone, edit, commit, deploy — happen as a single conversation. |
+| 75 – 105 min | **Hands-On Lab.** Each student ships their own personal portfolio URL. Everyone picks a different accent colour so the classroom has variety to critique. |
+| 105 – 120 min | **Q&A + Wrap.** Show-and-tell: three students paste their live URLs and the class reacts. |
 
-## 动手 Lab
+## Hands-On Lab
 
-**任务。** 下课时你应该有一个 `yourname-portfolio-*.vercel.app` URL，上面有你的照片、一段简介、两个真实项目（或学习项目）和你的邮箱——所有东西都在一个响应式、支持深色模式的站点里。
+**Task.** By the end of class you should have a `yourname-portfolio-*.vercel.app` URL that features your photo, short bio, two real projects (or study projects), and your email — all on a responsive, dark-mode-capable site.
 
-### 阶段 1 —— Fork & 搭骨架
+### Phase 1 — Fork & scaffold
 
 <PromptStep n={1} audience="Cursor">
-请把 Vercel 上叫 **Magic Portfolio** 的那个模板（Next.js 那个）fork 到我 GitHub 账号下一个新的公开仓库，叫 `my-portfolio`。把它 clone 进当前工作区，用 pnpm 装依赖，然后启动 dev server。dev server 起来以后，在我浏览器里打开 `http://localhost:3000`。先别改任何代码——我想先看看模板原样长什么样。
+Please fork the Vercel template called **Magic Portfolio** (the Next.js one) into a new public GitHub repo on my account called `my-portfolio`. Clone it into this workspace, install dependencies with pnpm, and start the dev server. When the server is ready, open `http://localhost:3000` in my browser. Do not change any code yet — I just want to see the template running first.
 </PromptStep>
 
 <VerifyStep n={2}>
 
-- 浏览器打开 `http://localhost:3000`，显示 Magic Portfolio 的 demo 站。
-- 你的 GitHub 账号下出现了 `my-portfolio` 仓库。
-- 你的文件树里现在有一个 `my-portfolio` 文件夹，里面是 Next.js 的标准结构。
+- Browser opens `http://localhost:3000` and shows the Magic Portfolio demo site.
+- A `my-portfolio` repo appears on your GitHub account.
+- Your file-tree pane now has a `my-portfolio` folder with Next.js structure.
 
 </VerifyStep>
 
-### 阶段 2 —— 内容定制
+### Phase 2 — Content customisation
 
 <PromptStep n={3} audience="Cursor">
-现在把这个站改成关于我的。下面是我的资料——请仔细读，把所有 demo 内容（名字、bio、"about" 页、社交链接、photo credit）替换成我的真实信息：
+Now I want to make this site about me. Here's who I am — read this carefully and replace all the demo content (name, bio, "about" page, social links, photo credit) with my real details:
 
-- 姓名：**\[你的全名\]**
-- 一句话简介：**\[一句话——比如 "在 \[学校\] 学 CS，正在学怎么把 AI 产品做出来。"\]**
-- 长简介：**\[3–4 句话——你是谁、对什么感兴趣、本学期在做什么\]**
-- 邮箱：**\[你的邮箱\]**
-- GitHub：**\[你的 GitHub URL\]**
-- LinkedIn（可选）：**\[你的 LinkedIn URL\]**
-- 强调色：**\[挑一个——比如 "深青色 #0e7490" 或 "柔珊瑚 #fb7185"\]**
+- Name: **\[your full name\]**
+- One-line bio: **\[one sentence — e.g., "CS student at \[university\] learning to ship AI products."\]**
+- Longer bio: **\[3–4 sentences — who you are, what you're interested in, what you're building this term\]**
+- Email: **\[your email\]**
+- GitHub: **\[your GitHub URL\]**
+- LinkedIn (optional): **\[your LinkedIn URL\]**
+- Accent colour: **\[pick one — e.g., "deep teal #0e7490" or "soft coral #fb7185"\]**
 
-更新主题配置去用我的强调色。任何模板里现成的占位图片你都可以用——真实照片我后面再换。改完以后用一条清楚的 commit message 提交。
+Update the theme config to use my accent colour. Use any of the template's existing image placeholders — I'll swap real photos in a later step. Commit the change with a clear message.
 </PromptStep>
 
 <VerifyStep n={4}>
 
-- 你的姓名、简介、邮箱出现在了首页和 About 页。
-- 强调色（按钮、链接、hover 状态）和你要求的对得上。
-- `git log` 能看到 Cursor 替你写的一条带合理 message 的 commit。
+- Your name, bio, and email now show up on the homepage and About page.
+- The accent colour (buttons, links, hover states) matches what you asked for.
+- `git log` shows a commit Cursor wrote with a sensible message.
 
 </VerifyStep>
 
-### 阶段 3 —— 加项目卡片
+### Phase 3 — Add project cards
 
 <PromptStep n={5} audience="Cursor">
-Projects 那一栏还在显示 demo 项目。把它们换成我的两个真实项目：
+The Projects section is still showing demo projects. Replace them with these two real projects of mine:
 
-1. **\[项目 1 名字\]** —— **\[一句话描述\]**。链接：**\[URL 或 GitHub 仓库\]**。如果你有缩略图，用模板自带的占位图。
-2. **\[项目 2 名字\]** —— **\[一句话描述\]**。链接：**\[URL 或 GitHub 仓库\]**。
+1. **\[Project 1 name\]** — **\[one-sentence description\]**. Link: **\[URL or GitHub repo\]**. If you have a thumbnail image, place one from the existing placeholders.
+2. **\[Project 2 name\]** — **\[one-sentence description\]**. Link: **\[URL or GitHub repo\]**.
 
-如果我只有一个真实项目，第二个就用本课程的学习项目——比如 "Hello TECHNEST —— 我的第一次 AI 驱动部署"，配第 1 周拿到的线上 URL。Commit 然后 push。
+If I only have one real project, make the second a study project from this course — for example, "Hello TECHNEST — my first AI-driven deploy" with the live URL from Week 1. Commit and push.
 </PromptStep>
 
 <VerifyStep n={6}>
 
-- 首页 Projects 这一栏显示你两个项目，链接点进去能打开。
-- commit 已经 push 到 GitHub 了——在浏览器里打开你的仓库确认。
+- Projects section on your homepage shows your two projects with links that actually work.
+- The commit is pushed to GitHub — check your repo in the browser.
 
 </VerifyStep>
 
-### 阶段 4 —— 部署到生产环境
+### Phase 4 — Production deploy
 
 <PromptStep n={7} audience="Cursor">
-现在把这个站作为生产站点部署到 Vercel。用 Vercel MCP。把项目和我 GitHub 上的 `my-portfolio` 仓库挂钩，让以后每一次 push 都自动部署。部署完成后在我浏览器里打开生产 URL，并把 URL 给我让我复制。
+Now deploy this to Vercel as a production site. Use the Vercel MCP. Link the project to my `my-portfolio` GitHub repo so every future push auto-deploys. When the deployment finishes, open the production URL in my browser and give me the URL to copy.
 </PromptStep>
 
-<ManualStep n={8} why="GitHub 的 App-install 同意页需要人点确认——任何 CLI 都没法替你接受仓库权限。">
-如果 Vercel 让你授权它的 GitHub App 去访问这个仓库（仅在新仓库的第一次会出现），在弹出的浏览器窗口里点同意。
+<ManualStep n={8} why="GitHub's App-install consent screen requires a human click — no CLI can accept repo permissions for you.">
+If Vercel asks you to authorise its GitHub App on the repo (only happens the first time for a new repo), approve it in the browser window that pops up.
 </ManualStep>
 
 <VerifyStep n={9}>
 
-- 类似 `my-portfolio-*.vercel.app` 的生产 URL 在浏览器里打开。
-- 你的姓名、简介、强调色、项目都在线上正确渲染。
-- 在手机上打开这个 URL——移动端也得正常。
+- A production URL like `my-portfolio-*.vercel.app` opens in your browser.
+- Your name, bio, accent colour, and projects all render correctly on the live site.
+- Visit the URL on your phone — it should look fine on mobile too.
 
 </VerifyStep>
 
 <RecoverStep n={10}>
-生产构建挂了，报错我看不懂。你能不能通过 MCP 读一下 Vercel 的 build log，找到根因，把源码里需要修的地方修了，commit 并 push 一遍，然后确认下一次部署成功？
+The production build failed with an error I don't understand. Can you read the Vercel build log through the MCP, find the root cause, fix whatever needs fixing in the source, commit and push again, and confirm the next deploy succeeds?
 </RecoverStep>
 
-### 阶段 5 —— 通过对话打磨细节
+### Phase 5 — Polish via conversation
 
 <PromptStep n={11} audience="Cursor">
-站点还行，但有点泛泛。请做三轮小打磨：
+The site looks fine but a bit generic. Please do three small polish passes:
 
-1. 把 hero 大标题加粗一点、字距稍微撑开一点，让我的名字更有"自信感"。
-2. 给项目卡片加一个加载时的 fade-in 动画——别花哨，能让站点"活起来"就行。
-3. 加一个跟强调色搭配的 OG image / favicon，这样我把链接发到聊天里时预览卡片看起来是有设计过的。
+1. Increase the hero title weight and give it a tiny bit more letter-spacing so my name feels more confident.
+2. Add a subtle fade-in animation on the project cards when the page loads — nothing fancy, just enough that the site feels alive.
+3. Add an OG image / favicon using the same accent colour so when I share the URL in a chat, the preview looks intentional.
 
-每一轮单独一个 commit，方便我读差异。
+Commit each pass as a separate commit so I can read what changed.
 </PromptStep>
 
 <VerifyStep n={12}>
 
-- 刷新线上站点，确认这三轮打磨都上线了。
-- 你的仓库新增了三条带描述性 message 的 commit。
-- 把 URL 粘到 Slack / WhatsApp / 微信里——预览卡片应该显示你的名字和强调色。
+- Refresh the live site and confirm each of the three polish passes shipped.
+- Your repo now has three new commits with descriptive messages.
+- Paste the URL into a Slack / WhatsApp / WeChat chat — the preview card should show your name and the accent colour.
 
 </VerifyStep>
 
-<Tip title="如果你有真实照片，赶紧用上">
-如果你电脑上有头像和两张项目截图，把它们直接拖进 Cursor 聊天窗，然后说：**"用这三张图——头像放 About 页，截图分别放在两张项目卡片上。提交前压缩到合理的 web 尺寸。"** Cursor 会把文件放进 `public/`，再把它们接到正确的组件里。
+<Tip title="Use real photos if you have them">
+If you have a headshot and two project screenshots on your laptop, drag them into Cursor's chat and say: **"Use these three images — headshot for the About page, screenshots for the two project cards. Compress them to reasonable web sizes before committing."** Cursor will place the files in `public/` and wire them into the right components.
 </Tip>
 
-## 本周作业
+## Weekly Assignment
 
-**做 / 交付。**
+**Build / Implement.**
 
-- 你的线上作品集 URL，包含真实姓名、简介、两个项目、联系方式。
-- URL 必须在桌面端和移动端都能正常显示。
+- Your live portfolio URL, featuring your real name, bio, two projects, and contact info.
+- The URL must render correctly on both desktop and mobile.
 
-**要求。**
+**Requirements.**
 
-- 仓库必须在你自己的 GitHub。
-- 至少 4 条 commit，全部由 AI 在你的指挥下创作。
-- 生产 URL 必须由 Vercel 提供（即 `*.vercel.app` 域名，或者指向 Vercel 的自定义域名）。
-- 一张你描述自己 bio（第 3 步）的 Cursor 对话截图——证明你没手改源代码。
+- The repo must be on your GitHub.
+- At least four commits, all authored by AI at your direction.
+- The production URL must be served from Vercel (i.e., a `*.vercel.app` domain, or a custom domain pointing at Vercel).
+- A screenshot of the Cursor conversation where you described your bio (Step 3) — this proves you didn't hand-edit the source.
 
-**提交。** 第 3 周开课前把 URL + 截图发到课程 Slack 频道。
+**Submission.** Post the URL + screenshot in the course Slack channel before the start of Week 3.
 
-## 资源
+## Resources
 
-| 文档 | 视频 | 仓库 |
+| Docs | Videos | Repos |
 |---|---|---|
-| Vercel 模板：Magic Portfolio | 讲师 demo："从模板到线上 URL，20 分钟" | `vercel/templates/magic-portfolio` |
-| Vercel CLI —— 项目管理 | | `ai-programming-teaching-project/docs/website/` |
-| Next.js 14 App Router —— 基础 | | |
+| Vercel template: Magic Portfolio | Instructor demo: "From template to live URL in 20 minutes" | `vercel/templates/magic-portfolio` |
+| Vercel CLI — project management | | `ai-programming-teaching-project/docs/website/` |
+| Next.js 14 App Router — basics | | |
 
-## 真实世界应用
+## Real-World Application
 
-2026 年你将面试的每一位工程师、设计师、创始人，在 Google 你的名字后的最初 5 秒内，都期望能找到一个个人网站。作品集不是 *锦上添花*，而是基本款。好消息是——它也是你两小时内能造出来的、ROI 最高的东西，而且整学期你每周都会给它升级。
+Every engineer, designer, and founder you'll interview with in 2026 expects a personal site within the first five seconds of Googling your name. Your portfolio is not a *nice-to-have* — it's table stakes. The good news: it's also the single highest-ROI artefact you can build in two hours, and you're going to upgrade it every week for the rest of the term.
 
 <Note title="Career">
-下课后：把线上 URL 贴到 LinkedIn 标题行，再贴到 GitHub profile README 里。在 LinkedIn 上 @TECHNEST 一下——讲师会转发前 5 个这么做的同学。
+After class: copy your live URL and add it to your LinkedIn headline and your GitHub profile README. Tag **@TECHNEST** on LinkedIn when you post — your instructor will reshare the first five students to do this.
 </Note>
 
-## 踩坑提醒 & 小贴士
+## Challenges & Tips
 
-- *"模板挺好但我想要完全不同的风格。"* 对 Cursor 说：**"把当前设计换成 \[参考站点\] 的那种感觉。"** 让 AI 先提案，再迭代。别手改 CSS。
-- *"Vercel 报 'Build error: module not found'。"* 把完整错误粘进 Cursor（用第 1 周的 `[RECOVER]` 模式）。第一次部署 90% 的报错都是 Vercel 找不到某个 package——Cursor 一句话就能修。
-- *"我的照片被拉伸了。"* 对 Cursor 说：**"把我的 hero 照片裁成正方形，重新导出 600 × 600，不要损失画质。"** 描述结果，不要描述 CSS。
-- *"Vercel 部署时显示 'Unauthorized'。"* 你第 1 周的 token 可能过期了。在 Cursor 里说：**"我的 Vercel MCP token 过期了。引导我生成新的并更新你的配置。"**
-- *"预览 URL 跟生产 URL 看起来不一样。"* Preview 部署和 Production 部署可能用不同的环境变量。让 Cursor 比一下：**"对比我 preview 和 production 部署的环境变量，列出所有差异。"**
+- *"The template looks good but I want a totally different vibe."* Ask Cursor **"Replace the current design with something inspired by \[reference site\]."** Let the AI propose, then iterate. Resist hand-editing CSS.
+- *"Vercel says 'Build error: module not found'."* Paste the full error into Cursor (use the `[RECOVER]` pattern from Week 1). 90% of first-deploy errors are a missing package Vercel can't find — Cursor fixes them in one prompt.
+- *"My photo looks stretched."* Ask Cursor **"Crop my hero photo to a square and re-export at 600 × 600. Don't lose quality."** Describe the outcome, not the CSS.
+- *"Vercel shows 'Unauthorized' when I try to deploy."* Your token from Week 1 may have expired. In Cursor, say **"My Vercel MCP token is expired. Walk me through generating a new one and updating your config."**
+- *"The preview URL looks different from the production URL."* Preview deploys and production deploys can use different env vars. Ask Cursor to diff them: **"Compare the env vars on my preview vs production deployment and list any differences."**
 
-<Info title="如果新 commit 后线上没更新">
-问：**"Vercel 的 GitHub 集成还连着吗？看一下最近一次部署时间和 webhook delivery log。"** 如果 webhook 坏了，Cursor 会引导你重新挂上。
+<Info title="If nothing updates after a new commit">
+Ask: **"Is Vercel's GitHub integration still connected? Check the last deploy time and the webhook delivery log."** If the webhook is broken, Cursor will walk you through re-linking.
 </Info>

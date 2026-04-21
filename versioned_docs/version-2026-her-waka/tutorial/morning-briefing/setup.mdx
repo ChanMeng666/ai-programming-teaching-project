@@ -1,6 +1,6 @@
 ---
-title: "设置你的工具"
-description: "安装 Gemini CLI 和 Google Workspace CLI —— 将 AI 连接到你的 Google 日历和 Gmail。"
+title: "Set up your tools"
+description: "Install Gemini CLI and Google Workspace CLI — connect AI to your Google Calendar and Gmail."
 ---
 
 import InstallNodejs from "../../_snippets/install-nodejs.mdx";
@@ -8,112 +8,112 @@ import InstallGeminiCli from "../../_snippets/install-gemini-cli.mdx";
 import InstallGws from "../../_snippets/install-gws.mdx";
 import InstallWisprFlow from "../../_snippets/install-wispr-flow.mdx";
 
-在开始构建你的早晨简报之前，先让你的 AI 工具连接到 Google 日历和 Gmail。
+Before we start building your morning briefing, let's get your AI tools connected to Google Calendar and Gmail.
 
 <Warning>
-**你需要准备：** 一台能联网的电脑，以及一个已启用 Gmail 和日历的 Google 账号。无需任何编程经验 —— 我们会一步一步带你完成每个步骤。
+**You will need:** a laptop with internet access and a Google account with Gmail and Calendar. No coding experience is required — we will guide you through every step.
 </Warning>
 
 <Steps>
-  <Step title="安装 Node.js">
+  <Step title="Install Node.js">
     <Info>
-    **已有 Node.js？** 如果你在之前的教程中已经安装过，跳过此步骤。在终端运行 `node --version` 检查 —— 你应该会看到类似 `v22.x.x` 的版本号。
+    **Already have Node.js?** If you installed it for a previous tutorial, skip this step. Run `node --version` in your terminal to check — you should see a version number like `v22.x.x`.
     </Info>
 
     <InstallNodejs />
   </Step>
 
-  <Step title="安装 Gemini CLI">
+  <Step title="Install Gemini CLI">
     <Info>
-    **已有 Gemini CLI？** 如果你在之前的教程中已经安装过，跳过此步骤。只需在终端运行 `gemini` 确认它还能正常运行。
+    **Already have Gemini CLI?** If you installed it for a previous tutorial, skip this step. Just run `gemini` in your terminal to check it still works.
     </Info>
 
     <InstallGeminiCli />
 
-    暂时输入 `/quit` 退出 Gemini CLI。安装 Google Workspace CLI 之后再重新启动。
+    Type `/quit` to exit Gemini CLI for now. We will start it again after installing the Google Workspace CLI.
   </Step>
 
-  <Step title="安装 Google Workspace CLI（gws）">
+  <Step title="Install Google Workspace CLI (gws)">
     <InstallGws />
   </Step>
 
-  <Step title="将 Gemini CLI 连接到 gws">
-    现在让 Gemini CLI 获得使用 `gws` 的能力 —— 这样当你提问时，它就能读取你的日历和邮件。
+  <Step title="Connect Gemini CLI to gws">
+    Now let's give Gemini CLI the ability to use `gws` — so it can read your calendar and email when you ask.
 
-    打开终端，运行以下命令：
+    Open your terminal and run this command:
 
-    ```bash title="复制此命令"
+    ```bash title="Copy this command"
     gemini extensions install https://github.com/googleworkspace/cli
     ```
 
-    这告诉 Gemini CLI 将 Google Workspace CLI 作为扩展使用。安装完成后，Gemini 就能提取你的日历事件、对收件箱进行分类并生成站会摘要 —— 全部通过自然语言提示词实现。
+    This tells Gemini CLI to use the Google Workspace CLI as an extension. Once installed, Gemini can pull your calendar events, triage your inbox, and generate standup summaries — all through natural language prompts.
 
     <Info>
-    **什么是扩展？** 扩展是为 Gemini CLI 添加新功能的插件。这个扩展将 Gemini 连接到你的 Google Workspace 应用 —— 类似于在手机上安装一款应用。
+    **What is an extension?** Extensions are plugins that add new capabilities to Gemini CLI. This extension connects Gemini to your Google Workspace apps — similar to how you might install an app on your phone.
     </Info>
 
-    <Accordion title="命令失败或卡住">
-    确保你有网络连接，且 Node.js 已正确安装。先运行 `node --version` 检查。如果那个可以，但扩展安装失败，试着关闭并重新打开终端，然后再次运行命令。
+    <Accordion title="The command fails or hangs">
+    Make sure you have an internet connection and that Node.js is installed correctly. Try running `node --version` first. If that works but the extension install fails, try closing and reopening your terminal, then running the command again.
     </Accordion>
   </Step>
 
-  <Step title="安装 Wispr Flow（可选）">
+  <Step title="Install Wispr Flow (optional)">
     <InstallWisprFlow />
   </Step>
 
-  <Step title="测试连接">
-    启动 Gemini CLI 并让它读取你的日历 —— 这将确认所有连接都正常。
+  <Step title="Test the connection">
+    Start Gemini CLI and ask it to read your calendar — this confirms everything is connected.
 
-    ```bash title="复制此命令"
+    ```bash title="Copy this command"
     gemini
     ```
 
-    Gemini CLI 运行后，用 Wispr Flow 说出或直接输入以下提示词：
+    Once Gemini CLI is running, say (with Wispr Flow) or type this prompt:
 
-    ```text title="说出或复制此提示词"
+    ```text title="Say this or copy this prompt"
     What meetings do I have today?
     ```
 
-    你应该会看到 Gemini CLI 访问你的 Google 日历并返回今天的事件列表。如果成功，一切都已正常运行。
+    You should see Gemini CLI access your Google Calendar and return a list of today's events. If it does, everything is working.
 
     <Tip>
-    **Gemini 要求确认？** 如果 Gemini CLI 要求批准工具调用，输入 `y` 并按 **Enter**。这是正常现象 —— 它在访问你的 Google 数据之前征求你的许可。
+    **Gemini asks for permission?** If Gemini CLI asks to approve a tool call, type `y` and press **Enter**. This is normal — it is asking your permission before accessing your Google data.
     </Tip>
 
-    <Accordion title="Gemini 说它没有日历工具">
-    扩展可能没有正确安装。再次运行安装命令：
+    <Accordion title="Gemini says it has no calendar tools">
+    The extension may not have installed correctly. Try running the install command again:
     ```bash
     gemini extensions install https://github.com/googleworkspace/cli
     ```
-    然后退出（`/quit`）并重启 Gemini CLI。你可以在 Gemini CLI 内运行 `/extensions list` 查看已安装的扩展。
+    Then exit (`/quit`) and restart Gemini CLI. You can check installed extensions with `/extensions list`.
     </Accordion>
 
-    <Accordion title="浏览器窗口没有弹出用于身份验证">
-    复制终端中显示的 URL，手动粘贴到浏览器中。在那里完成登录，然后返回终端。
+    <Accordion title="The browser window doesn't open for authentication">
+    Copy the URL shown in your terminal and paste it into your browser manually. Complete the sign-in there, then return to the terminal.
     </Accordion>
   </Step>
 </Steps>
 
-## 验证你的设置
+## Verify your setup
 
 <AccordionGroup>
-  <Accordion title="Node.js 已安装">
-    在终端运行 `node --version`，应显示一个版本号。
+  <Accordion title="Node.js installed">
+    Run `node --version` in your terminal. You should see a version number.
   </Accordion>
-  <Accordion title="Gemini CLI 已安装并登录">
-    在终端运行 `gemini`，可正常启动并显示一个可输入的提示符。
+  <Accordion title="Gemini CLI installed and signed in">
+    Run `gemini` in your terminal. It starts up and shows a prompt where you can type.
   </Accordion>
-  <Accordion title="gws 已安装并完成身份验证">
-    在终端运行 `gws calendar +agenda`，应显示即将到来的事件。
+  <Accordion title="gws installed and authenticated">
+    Run `gws calendar +agenda` in your terminal. You should see your upcoming events.
   </Accordion>
-  <Accordion title="Gemini CLI 扩展已安装">
-    扩展安装时无报错。可在 Gemini CLI 内运行 `/extensions list` 进行验证。
+  <Accordion title="Gemini CLI extension installed">
+    The extension installed without errors. You can verify with `/extensions list` inside Gemini CLI.
   </Accordion>
-  <Accordion title="连接已测试">
-    当你询问"What meetings do I have today?"时，Gemini CLI 能够告知你的会议安排。
+  <Accordion title="Connection tested">
+    Gemini CLI can tell you about your meetings when you ask "What meetings do I have today?"
   </Accordion>
 </AccordionGroup>
 
 <Note>
-一切就绪？前往[获取你的早晨简报](/docs/2026-her-waka/tutorial/morning-briefing/briefing)，开始你的第一次 AI 驱动的早晨例程。
+All set? Head to [Get your morning briefing](/docs/2026-her-waka/tutorial/morning-briefing/briefing) to start your first AI-powered morning routine.
 </Note>

@@ -1,60 +1,60 @@
 ---
-title: "构建你的第一个 PDF"
-description: "使用 Typst 模板和 Gemini CLI 创建专业求职信 PDF —— 通过说话或打字描述你想要什么，AI 为你构建。"
+title: "Build Your First PDF"
+description: "Use a Typst template and Gemini CLI to create a professional cover letter PDF — describe what you want by speaking or typing, and AI builds it for you."
 ---
 
-这是最有趣的部分。你将从一个专业设计的模板开始，使用 Gemini CLI 进行自定义，并将其编译成精美的 PDF。无需任何编程经验 —— 只需清晰的描述，说出来或打出来都行。
+This is the fun part. You'll start from a professionally designed template, use Gemini CLI to customise it, and compile it into a polished PDF. No coding required — just clear descriptions, spoken or typed.
 
 <Tip>
-**你可以用 Wispr Flow 说出提示词，也可以打字或粘贴到 Gemini CLI 中。两种方式效果完全一样。** Wispr Flow 是可选项 —— 它只是让体验更加解放双手。本教程中的每条提示词，无论你说出来还是打出来都同样有效。
+**You can either speak your prompts using Wispr Flow, or type/paste them into Gemini CLI. Both work exactly the same way.** Wispr Flow is optional — it just makes the experience hands-free. Every prompt in this tutorial works whether you speak it or type it.
 </Tip>
 
-## Vibe Coding 循环
+## The Vibe Coding Loop
 
-每个步骤都遵循同样的模式：
+Every step follows the same pattern:
 
 ```mermaid
 flowchart LR
-    A["你说话\n或打字"] -->|"Wispr Flow\n（可选）"| B["Gemini CLI\n自定义模板"]
-    B -->|"编译"| C["Typst 创建\n你的 PDF"]
-    C -->|"审查"| D{"满意了吗？"}
-    D -->|"还不够"| B
-    D -->|"是的！"| E["完成！"]
+    A["You speak\nor type"] -->|"Wispr Flow\n(optional)"| B["Gemini CLI\ncustomises it"]
+    B -->|"compile"| C["Typst creates\nyour PDF"]
+    C -->|"review"| D{"Happy?"}
+    D -->|"Not quite"| B
+    D -->|"Yes!"| E["Done!"]
 ```
 
-描述你想要什么。Gemini CLI 自定义模板。Typst 将其编译成 PDF。审查并重复，直到完美。
+Describe what you want. Gemini CLI customises the template. Typst compiles it to PDF. Review and repeat until it's perfect.
 
 ---
 
 <Steps>
-  <Step title="创建项目文件夹">
+  <Step title="Create a project folder">
     <Tabs>
       <Tab title="Windows">
-        1. 打开**文件资源管理器**
-        2. 前往**文档**文件夹
-        3. 在空白处右键单击 → **新建** → **文件夹**
-        4. 命名为 `my-pdfs`
+        1. Open **File Explorer**
+        2. Go to your **Documents** folder
+        3. Right-click in an empty space → **New** → **Folder**
+        4. Name it `my-pdfs`
       </Tab>
       <Tab title="macOS">
-        1. 打开 **Finder**
-        2. 前往**文稿**文件夹
-        3. 在空白处右键单击 → **新建文件夹**
-        4. 命名为 `my-pdfs`
+        1. Open **Finder**
+        2. Go to your **Documents** folder
+        3. Right-click in an empty space → **New Folder**
+        4. Name it `my-pdfs`
       </Tab>
     </Tabs>
 
     <Tip>
-    起一个简单的名字，比如 `my-pdfs`。使用小写字母，不要有空格。
+    Name it something simple like `my-pdfs`. Use lowercase letters with no spaces.
     </Tip>
   </Step>
 
-  <Step title="在项目文件夹中打开终端">
+  <Step title="Open terminal in your project folder">
     <Tabs>
       <Tab title="Windows">
-        在文件资源管理器中打开你的 `my-pdfs` 文件夹。点击顶部的**地址栏**，输入 `powershell`，然后按 **Enter**。
+        Open your `my-pdfs` folder in File Explorer. Click the **address bar** at the top, type `powershell`, and press **Enter**.
       </Tab>
       <Tab title="macOS">
-        在 Finder 中右键单击 `my-pdfs` 文件夹，选择**"在文件夹中打开终端"**。如果没有这个选项，打开 Terminal 并输入：
+        Right-click the `my-pdfs` folder in Finder and select **"Open Terminal at Folder"**. If you don't see this option, open Terminal and type:
         ```bash
         cd ~/Documents/my-pdfs
         ```
@@ -62,46 +62,46 @@ flowchart LR
     </Tabs>
   </Step>
 
-  <Step title="初始化求职信模板">
-    Typst 有一个由社区制作的免费模板库，叫做 [Typst Universe](https://typst.app/universe)。我们从 **fireside** 开始 —— 一个简洁、现代的求职信模板。
+  <Step title="Initialise a cover letter template">
+    Typst has a library of free, community-made templates called [Typst Universe](https://typst.app/universe). We'll start with **fireside** — a clean, modern cover letter template.
 
-    在终端中运行：
+    In your terminal, run:
 
-    ```bash title="复制此命令"
+    ```bash title="Copy this command"
     typst init @preview/fireside:1.0.0
     ```
 
-    这会下载模板并创建一个即用的项目文件夹，其中包含一个 `.typ` 文件。
+    This downloads the template and creates a ready-to-use project folder with a `.typ` file inside.
 
     <Info>
-    **刚才发生了什么？** `typst init` 命令从 Typst Universe 下载了一个专业设计的模板，并为你设置了一个项目文件夹。模板已经有了精美的布局 —— 你只需填入你的详情。
+    **What just happened?** The `typst init` command pulled a professionally designed template from Typst Universe and set up a project folder for you. The template already has a polished layout — you just need to fill in your details.
     </Info>
 
-    <Accordion title="'typst init' 不起作用？">
-    如果看到错误，尝试以下解决方法：
+    <Accordion title="'typst init' not working?">
+    If you see an error, try these fixes:
 
-    - **"typst: command not found"** —— 返回[设置页面](/docs/2026-her-waka/tutorial/professional-pdf/setup)并安装 Typst CLI
-    - **网络错误** —— 检查网络连接；`typst init` 从网上下载模板
-    - **权限错误** —— 在 Windows 上，尝试以管理员身份运行 PowerShell；在 macOS 上，尝试在命令前加 `sudo`
+    - **"typst: command not found"** — Go back to the [setup page](/docs/2026-her-waka/tutorial/professional-pdf/setup) and install Typst CLI
+    - **Network error** — Check your internet connection; `typst init` downloads the template from the web
+    - **Permission error** — On Windows, try running PowerShell as Administrator. On macOS, try adding `sudo` before the command
     </Accordion>
   </Step>
 
-  <Step title="启动 Gemini CLI">
-    进入模板文件夹并启动 Gemini CLI：
+  <Step title="Start Gemini CLI">
+    Navigate into the template folder and start Gemini CLI:
 
-    ```bash title="复制此命令"
+    ```bash title="Copy this command"
     gemini
     ```
 
-    按 Enter。你应该会看到 Gemini CLI 启动，显示一个等待输入的提示符。如果 Wispr Flow 正在运行，你可以直接说出提示词 —— 否则，打字或粘贴即可。
+    Press Enter. You should see Gemini CLI start up with a prompt ready for your input. If you have Wispr Flow running, you can speak your prompts directly — otherwise, type or paste them.
   </Step>
 
-  <Step title="使用 Gemini CLI 进行自定义">
-    现在告诉 Gemini CLI 你想要什么。选择一种你喜欢的风格 —— 说出来或复制粘贴：
+  <Step title="Customise with Gemini CLI">
+    Now tell Gemini CLI what you want. Pick the style that appeals to you — say it out loud or copy and paste:
 
     <Tabs>
-      <Tab title="简洁风格">
-        ```text title="说出或复制此提示词"
+      <Tab title="Simple">
+        ```text title="Say this or copy this prompt"
         I have a Typst cover letter template (fireside) in this folder.
         Please customise it with:
         - Placeholder name and contact details at the top
@@ -113,8 +113,8 @@ flowchart LR
         Then compile it to PDF using typst compile.
         ```
       </Tab>
-      <Tab title="创意风格">
-        ```text title="说出或复制此提示词"
+      <Tab title="Creative">
+        ```text title="Say this or copy this prompt"
         I have a Typst cover letter template (fireside) in this folder.
         Please customise it with:
         - Placeholder name and contact details
@@ -127,8 +127,8 @@ flowchart LR
         Then compile it to PDF using typst compile.
         ```
       </Tab>
-      <Tab title="正式风格">
-        ```text title="说出或复制此提示词"
+      <Tab title="Formal">
+        ```text title="Say this or copy this prompt"
         I have a Typst cover letter template (fireside) in this folder.
         Please customise it with:
         - Placeholder name and contact details, right-aligned at the top
@@ -144,53 +144,53 @@ flowchart LR
     </Tabs>
 
     <Tip>
-    **不用担心第一次能不能做到完美。** 你会在接下来的步骤中不断改进设计 —— 这正是 Vibe Coding 的意义所在！
+    **Don't worry about getting it perfect on the first try.** You'll refine the design in the next steps — that's the whole point of vibe coding!
     </Tip>
   </Step>
 
-  <Step title="审查你的 PDF">
-    在文件资源管理器中双击编译好的 PDF 打开它，它会在你的默认 PDF 查看器中打开。
+  <Step title="Review your PDF">
+    Open the compiled PDF by double-clicking it in your file explorer. It will open in your default PDF viewer.
 
     <Info>
-    **从模板开始意味着你的第一个结果就已经很专业了。** 模板处理布局、排版和间距 —— Gemini CLI 只是根据你的喜好自定义内容和样式。
+    **Starting from a template means your first result already looks professional.** The template handles layout, typography, and spacing — Gemini CLI just customises the content and styling to your taste.
     </Info>
   </Step>
 
-  <Step title="迭代和改进">
-    对结果不满意？这很正常 —— 这正是关键所在！在 Gemini CLI 中说出或复制以下任何跟进提示词：
+  <Step title="Iterate and improve">
+    Not happy with the result? That's normal — and that's the whole point! Say or copy any of these follow-up prompts into Gemini CLI:
 
-    ```text title="说出或复制此提示词"
+    ```text title="Say this or copy this prompt"
     Change the font to a modern sans-serif font. Keep everything else the same.
     Then recompile to PDF.
     ```
 
-    ```text title="说出或复制此提示词"
+    ```text title="Say this or copy this prompt"
     Add a subtle colour accent — use a dark teal or navy blue for headings
     and a thin coloured line under my name. Keep the overall design professional.
     Then recompile to PDF.
     ```
 
-    ```text title="说出或复制此提示词"
+    ```text title="Say this or copy this prompt"
     The margins feel too wide. Reduce the margins to 2cm on all sides
     and tighten the line spacing slightly so the letter feels more compact.
     Then recompile to PDF.
     ```
 
-    ```text title="说出或复制此提示词"
+    ```text title="Say this or copy this prompt"
     Add a small footer at the bottom of the page with "Page 1 of 1" centred
     and my email address on the right side.
     Then recompile to PDF.
     ```
 
     <Tip>
-    **Vibe Coding 循环：** 描述 → 编译 → 审查 → 改进。一直迭代，直到你满意为止！你可以向 Gemini CLI 发送任意数量的提示词 —— 说出来或打出来都行。
+    **The vibe coding loop:** describe → compile → review → refine. Keep going until you love it! You can send as many prompts to Gemini CLI as you want — speak them or type them.
     </Tip>
   </Step>
 
-  <Step title="为真实职位申请个性化内容">
-    准备好创建一封真实的求职信了吗？说出或复制此模板提示词，并填入你的详情：
+  <Step title="Personalise for a real job">
+    Ready to create a real cover letter? Say or copy this template prompt and fill in your details:
 
-    ```text title="说出或复制此提示词"
+    ```text title="Say this or copy this prompt"
     Update my cover letter for a real application:
     - My name: [Your Name]
     - My email: [your.email@example.com]
@@ -206,64 +206,64 @@ flowchart LR
     ```
 
     <Tip>
-    **保存你的提示词！** 把个人详情保存在一个文本文件里，这样你就可以快速为不同工作生成求职信。每次更换公司名称、职位和关键技能即可。
+    **Save your prompts!** Keep a text file with your personal details so you can quickly generate cover letters for different jobs. Change the company name, role, and key skills each time.
     </Tip>
   </Step>
 </Steps>
 
-## 刚才发生了什么？
+## What Just Happened?
 
-以下是你每一步所做的事情：
+Here's what you did, step by step:
 
-1. **初始化**了一个来自 Typst Universe 的专业模板（通过 `typst init`）
-2. **描述**了你想要什么 —— 通过说话或打字 —— Gemini CLI 自定义了模板
-3. **Typst 编译**代码成为像素级精准的 PDF
-4. **迭代**了 —— 请求设计更改、重新编译、审查，直到效果满意
+1. **You initialised** a professional template from Typst Universe with `typst init`
+2. **You described** what you wanted — by speaking or typing — and Gemini CLI customised the template
+3. **Typst compiled** the code into a pixel-perfect PDF
+4. **You iterated** — asking for design changes, recompiling, and reviewing until it looked right
 
-核心洞见：你从专业设计的模板开始，而不是空白页面。模板给了你坚实的基础，AI 处理了自定义工作。你从来不需要学习 Typst 语法 —— 你描述你想要什么，Gemini CLI 让它实现。
+The key insight: you started from a professionally designed template instead of a blank page. The template gave you a solid foundation, and AI handled the customisation. You never had to learn Typst syntax — you described what you wanted, and Gemini CLI made it happen.
 
-## 故障排除
+## Troubleshooting
 
 <AccordionGroup>
-  <Accordion title="PDF 是空白的">
-    `.typ` 文件可能是空的或有错误。在 Gemini CLI 中说出或输入：
-    ```text title="说出或复制此提示词"
+  <Accordion title="The PDF is blank">
+    The `.typ` file might be empty or have an error. Say or type this in Gemini CLI:
+    ```text title="Say this or copy this prompt"
     The PDF is blank. Can you check the .typ file for errors and fix them?
     Then recompile it to PDF.
     ```
   </Accordion>
-  <Accordion title="Typst 编译错误">
-    如果编译时看到错误，将错误信息粘贴到 Gemini CLI 中：
-    ```text title="说出或复制此提示词"
+  <Accordion title="Typst compile error">
+    If you see an error when compiling, paste the error message into Gemini CLI:
+    ```text title="Say this or copy this prompt"
     I got this error when compiling: [paste the error message here]
     Can you fix the Typst code and recompile?
     ```
-    Typst 的错误信息清晰具体 —— 它们会告诉你确切是哪一行有问题。
+    Typst error messages are clear and specific — they tell you exactly which line has the problem.
   </Accordion>
-  <Accordion title="布局看起来不对">
-    在 Gemini CLI 中说出或输入：
-    ```text title="说出或复制此提示词"
+  <Accordion title="The layout looks wrong">
+    Say or type this in Gemini CLI:
+    ```text title="Say this or copy this prompt"
     The layout doesn't look right — [describe what's wrong, e.g. "the text
     is too close to the edges" or "the spacing between paragraphs is too large"].
     Can you fix it and recompile?
     ```
   </Accordion>
-  <Accordion title="我想从头开始">
-    你可以重新初始化模板：
-    ```bash title="复制此命令"
+  <Accordion title="I want to start over completely">
+    You can re-initialise the template:
+    ```bash title="Copy this command"
     typst init @preview/fireside:1.0.0
     ```
-    或者告诉 Gemini CLI 从头开始：
-    ```text title="说出或复制此提示词"
+    Or tell Gemini CLI to start from scratch:
+    ```text title="Say this or copy this prompt"
     I want to start fresh. Create a new cover letter from scratch as a .typ
     file — don't use the template. [Then describe what you want]
     ```
   </Accordion>
-  <Accordion title="语音输入有错误">
-    Wispr Flow 有时可能误听技术术语或专有名词。你可以在按 Enter 键之前查看并更正 Gemini CLI 中的文字。如果语音输入错误太多，改为打字或粘贴提示词。
+  <Accordion title="My voice input has errors">
+    Wispr Flow may occasionally mishear technical terms or proper nouns. You can review and correct the text in Gemini CLI before pressing Enter. If voice input is causing too many errors, switch to typing or pasting prompts instead.
   </Accordion>
 </AccordionGroup>
 
 <Note>
-对你的求职信满意了吗？前往[探索模板](/docs/2026-her-waka/tutorial/professional-pdf/explore-templates)，发现更多可以创建的文档类型 —— 发票、报告、清单等等。
+Happy with your cover letter? Head to [Explore templates](/docs/2026-her-waka/tutorial/professional-pdf/explore-templates) to discover more document types you can create — invoices, reports, checklists, and more.
 </Note>

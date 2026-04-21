@@ -1,249 +1,249 @@
 ---
-title: "搜索、审查和整理"
-description: "在笔记库中查找任何内容、发现孤儿笔记和断开的链接，并整理文件 —— 全程只需用普通语言与 Gemini CLI 对话。"
+title: "Search, audit, and organise"
+description: "Find anything in your vault, discover orphan notes and broken links, and tidy up your files — all by talking to Gemini CLI in plain language."
 ---
 
-你的工具已就绪，你也了解了笔记库的内容。让我们来探索、发现问题并整理笔记 —— 全程只需描述你想要什么。
+Your tools are ready and you know what is in your vault. Let's explore, find issues, and clean things up — all by describing what you want in natural language.
 
 <Tip>
-**你可以用 Wispr Flow 说出提示词，也可以打字或粘贴到 Gemini CLI 中。两种方式效果完全一样。** Wispr Flow 是可选项 —— 它只是让体验更加解放双手。本教程中的每条提示词，无论你说出来还是打出来都同样有效。
+**You can either speak your prompts using Wispr Flow, or type/paste them into Gemini CLI. Both work exactly the same way.** Wispr Flow is optional — it just makes the experience hands-free. Every prompt in this tutorial works whether you speak it or type it.
 </Tip>
 
-## 搜索你的笔记库
+## Search your vault
 
 <Steps>
-  <Step title="列出所有文件">
-    一览笔记库中的所有文件：
+  <Step title="List all files">
+    See every file in your vault at a glance:
 
-    ```text title="说出或复制此提示词"
+    ```text title="Say this or copy this prompt"
     List all the files in my Obsidian vault
     ```
 
-    Gemini CLI 会以列表形式显示你的所有笔记。浏览一下，看看有没有什么值得注意的 —— 名称模糊的文件、被遗忘的笔记，或者重复的内容。
+    Gemini CLI will show all your notes in a list. Look through and see if anything stands out — files with vague names, notes you forgot about, or duplicates.
   </Step>
 
-  <Step title="查看文件夹结构">
-    了解笔记库的组织方式：
+  <Step title="See your folder structure">
+    Understand how your vault is organised:
 
-    ```text title="说出或复制此提示词"
+    ```text title="Say this or copy this prompt"
     Show me the folder structure of my Obsidian vault
     ```
 
-    笔记是否分散在太多文件夹里？大多数笔记是否直接堆在根目录下、没有任何文件夹？这可以让你看清笔记库的整体结构。
+    Are your notes spread across too many folders? Are most notes sitting in the root with no folder at all? This gives you a picture of your vault's structure.
   </Step>
 
-  <Step title="搜索内容">
-    找出提到特定词语或短语的笔记：
+  <Step title="Search for content">
+    Find notes that mention a specific word or phrase:
 
-    ```text title="说出或复制此提示词"
+    ```text title="Say this or copy this prompt"
     Search my Obsidian vault for any notes that mention the word meeting
     ```
 
-    Gemini CLI 会搜索每篇笔记的内容，并返回提到"meeting"的笔记。试着把"meeting"换成你正在查找的任何词语 —— 项目名称、人名或某个话题。
+    Gemini CLI searches the content of every note and returns the ones that mention "meeting". Try replacing "meeting" with any word you are looking for — a project name, a person's name, or a topic.
   </Step>
 
-  <Step title="带上下文搜索">
-    查看实际匹配的行，而不仅仅是文件名：
+  <Step title="Search with context">
+    See the actual matching lines, not just file names:
 
-    ```text title="说出或复制此提示词"
+    ```text title="Say this or copy this prompt"
     Search my Obsidian vault for notes containing TODO and show me the matching lines, not just file names
     ```
 
-    这会显示匹配的具体行，让你无需打开笔记就能看到每篇笔记的内容。非常适合查找待办事项或具体细节。
+    This shows you the lines that matched, so you can see exactly what each note says without opening it. Great for finding action items or specific details.
   </Step>
 </Steps>
 
 <Tip>
-**搜索可以即时覆盖整个笔记库。** 再也不用逐篇打开笔记、苦苦回忆你把什么写在哪里了。只需描述你在找什么，Gemini CLI 就会帮你找到。
+**Search works across your entire vault instantly.** No more opening notes one by one trying to remember where you wrote something. Just describe what you are looking for and Gemini CLI finds it.
 </Tip>
 
-## 审查标签
+## Audit your tags
 
 <Steps>
-  <Step title="列出所有标签">
-    查看笔记库中的每个标签以及每个标签的使用次数：
+  <Step title="List all tags">
+    See every tag in your vault and how often each one is used:
 
-    ```text title="说出或复制此提示词"
+    ```text title="Say this or copy this prompt"
     Show me all the tags in my Obsidian vault, with a count of how many times each tag is used
     ```
 
-    留意不一致的地方。你是否同时有 `#meeting` 和 `#meetings`？还有 `#mtg`？发现这些变体是整理标签的第一步。
+    Look for inconsistencies. Do you have both `#meeting` and `#meetings`? What about `#mtg`? Spotting these variations is the first step to cleaning them up.
   </Step>
 
-  <Step title="获取标签详情">
-    查看哪些文件使用了特定标签：
+  <Step title="Get tag details">
+    See exactly which files use a specific tag:
 
-    ```text title="说出或复制此提示词"
+    ```text title="Say this or copy this prompt"
     Show me which notes use the tag meeting
     ```
 
-    这会显示所有带有 `#meeting` 标签的笔记。把"meeting"替换成你想查看的任何标签。
+    This shows every note tagged with `#meeting`. Replace "meeting" with any tag you want to investigate.
   </Step>
 </Steps>
 
 <Info>
-**统一的标签让笔记库更易于浏览。** 如果发现重复或变体，记下来。你可以让 Gemini CLI 帮你修复，也可以直接在 Obsidian 中编辑笔记。选定每个标签的统一写法，坚持使用。
+**Consistent tags make your vault much easier to navigate.** If you spot duplicates or variations, note them down. You can ask Gemini CLI to help fix them, or edit the notes directly in Obsidian. Pick one version of each tag and stick with it.
 </Info>
 
-## 找出被遗忘的笔记
+## Find forgotten notes
 
 <Steps>
-  <Step title="找出孤儿笔记">
-    发现没有任何笔记链接到的笔记：
+  <Step title="Find orphan notes">
+    Discover notes that nothing links to:
 
-    ```text title="说出或复制此提示词"
+    ```text title="Say this or copy this prompt"
     Show me all the orphan notes in my Obsidian vault — notes that no other note links to
     ```
 
-    孤儿笔记是存在于笔记库中、但与其他任何内容都没有关联的笔记。它们往往是被遗忘的宝藏 —— 或者是需要与相关内容建立链接的笔记。
+    Orphan notes are notes that exist in your vault but are not connected to anything else. They are often forgotten gems — or notes that need to be linked to related content.
   </Step>
 
-  <Step title="找出断开的链接">
-    找出指向不存在笔记的链接：
+  <Step title="Find broken links">
+    Spot links that point to notes that do not exist:
 
-    ```text title="说出或复制此提示词"
+    ```text title="Say this or copy this prompt"
     Find all the broken links in my vault — links that point to notes that don't exist
     ```
 
-    当你重命名或删除一篇笔记，但其他笔记仍然链接到旧名称时，就会出现这种情况。一旦发现，修复起来很容易。
+    This happens when you rename or delete a note but other notes still link to the old name. These are easy to fix once you know about them.
   </Step>
 
-  <Step title="找出死胡同笔记">
-    找出没有链接到任何其他内容的笔记：
+  <Step title="Find dead ends">
+    Find notes that do not link to anything else:
 
-    ```text title="说出或复制此提示词"
+    ```text title="Say this or copy this prompt"
     Show me dead-end notes — notes that don't link to anything else
     ```
 
-    死胡同笔记可能需要建立连接。这篇笔记能否链接到相关的项目、人物或话题？
+    Dead-end notes might benefit from connections. Could this note link to a related project, person, or topic?
   </Step>
 
-  <Step title="检查反向链接">
-    查看哪些笔记链接到了某篇特定笔记：
+  <Step title="Check backlinks">
+    See what links TO a specific note:
 
-    ```text title="说出或复制此提示词"
+    ```text title="Say this or copy this prompt"
     What notes link to my note called Meeting Notes - March 15?
     ```
 
-    反向链接展示了围绕某篇笔记的连接网络。如果一篇笔记有很多反向链接，它就是笔记库中的重要枢纽。
+    Backlinks show you the web of connections around a note. If a note has many backlinks, it is an important hub in your vault.
   </Step>
 </Steps>
 
 <Tip>
-**孤儿笔记不一定是坏事** —— 但它们代表着与笔记库其余内容脱节的知识。考虑让 Gemini CLI 将它们链接到相关笔记，这样你就能自然地再次找到它们。
+**Orphan notes are not necessarily bad** — but they represent knowledge that is disconnected from the rest of your vault. Consider asking Gemini CLI to link them to related notes so you can find them again naturally.
 </Tip>
 
-## 整理文件
+## Organise your files
 
 <Warning>
-**在移动或重命名文件之前，** 先让 Gemini CLI 读取笔记。这有助于避免误操作。
+**Before moving or renaming files,** ask Gemini CLI to read the note first. This helps you avoid accidentally moving the wrong note.
 </Warning>
 
 <Steps>
-  <Step title="移动前先读取笔记">
-    无需打开 Obsidian 即可预览笔记内容：
+  <Step title="Read a note before moving it">
+    Preview a note's contents without opening Obsidian:
 
-    ```text title="说出或复制此提示词"
+    ```text title="Say this or copy this prompt"
     Read my note called Untitled and show me what's in it
     ```
 
-    这会显示笔记中的确切内容，让你决定如何处理它 —— 重命名、移动，还是保持原样。
+    This shows you exactly what is in the note so you can decide what to do with it — rename it, move it, or leave it where it is.
   </Step>
 
-  <Step title="重命名笔记">
-    给一篇模糊的笔记起一个有意义的名字：
+  <Step title="Rename a note">
+    Give a vague note a meaningful name:
 
-    ```text title="说出或复制此提示词"
+    ```text title="Say this or copy this prompt"
     Rename my note called Untitled to Quick Notes
     ```
 
-    笔记被重命名，所有指向"Untitled"的内部链接也会自动更新。没有任何东西会损坏。
+    The note is renamed and all internal links that pointed to "Untitled" are automatically updated. Nothing breaks.
   </Step>
 
-  <Step title="将笔记移动到文件夹">
-    把笔记放到它应该在的地方：
+  <Step title="Move a note to a folder">
+    Put a note where it belongs:
 
-    ```text title="说出或复制此提示词"
+    ```text title="Say this or copy this prompt"
     Move my note called Recipe - Banana Bread into a folder called Recipes
     ```
 
-    如果文件夹不存在，Obsidian 会自动创建，并更新所有指向该笔记的链接。一切保持连通。
+    Obsidian creates the folder if it does not exist and updates all links that point to this note. Everything stays connected.
   </Step>
 
-  <Step title="查看笔记大纲">
-    无需阅读整篇笔记即可查看标题结构：
+  <Step title="View a note's outline">
+    See the heading structure without reading the whole note:
 
-    ```text title="说出或复制此提示词"
+    ```text title="Say this or copy this prompt"
     Show me the heading structure of my note called Meeting Notes - March 15
     ```
 
-    这对长篇笔记很有用 —— 你可以快速查看它包含哪些章节，而无需滚动浏览全文。
+    This is useful for long notes — you can quickly see what sections it contains without scrolling through everything.
   </Step>
 
-  <Step title="查看文件信息">
-    查看特定笔记的详细信息：
+  <Step title="Check file info">
+    See the details about a specific note:
 
-    ```text title="说出或复制此提示词"
+    ```text title="Say this or copy this prompt"
     Give me the file info for my note called Quick Notes — when was it created and how big is it?
     ```
 
-    这会显示文件路径、大小，以及创建和最后修改的时间。非常适合查找久未更新的笔记。
+    This shows the file path, size, and when it was created and last modified. Handy for finding notes you have not touched in a while.
   </Step>
 </Steps>
 
 <Info>
-**当你移动或重命名笔记时，Gemini CLI 会自动处理链接更新。** 它在后台运行正确的 Obsidian 命令，Obsidian 会更新所有指向该文件的内部链接。没有任何东西会损坏 —— 你的笔记库始终保持连通。
+**When you move or rename a note, Gemini CLI handles link updates automatically.** It runs the right Obsidian commands behind the scenes, and Obsidian updates all internal links that point to the file. Nothing breaks — your vault stays connected.
 </Info>
 
-## 进一步探索 —— 尝试你自己的请求
+## Go further — try your own requests
 
-你并不局限于上面的提示词。Gemini CLI 能理解各种关于笔记库的自然语言请求。试试这些：
+You are not limited to the prompts above. Gemini CLI understands a wide range of natural language requests about your vault. Try these:
 
-```text title="说出或复制此提示词"
+```text title="Say this or copy this prompt"
 Find all notes in my vault that have no tags
 ```
 
-```text title="说出或复制此提示词"
+```text title="Say this or copy this prompt"
 Which of my notes is the longest? Show me a word count comparison
 ```
 
-```text title="说出或复制此提示词"
+```text title="Say this or copy this prompt"
 Search my vault for anything related to career and summarise what I've written about it
 ```
 
-```text title="说出或复制此提示词"
+```text title="Say this or copy this prompt"
 Are there any duplicate note names in my vault?
 ```
 
-```text title="说出或复制此提示词"
+```text title="Say this or copy this prompt"
 Show me all notes I created this month
 ```
 
-```text title="说出或复制此提示词"
+```text title="Say this or copy this prompt"
 List all my notes that contain checkbox tasks, and tell me how many are completed vs incomplete
 ```
 
 <Tip>
-**核心洞见：你不需要记忆任何命令。** 只需用普通语言描述你想要什么，Gemini CLI 会自行判断该运行哪些 Obsidian 命令，并为你处理所有细节。
+**The key insight: you do not need to memorise commands.** Just describe what you want in plain language. Gemini CLI figures out which Obsidian commands to run and handles the details for you.
 </Tip>
 
-## 故障排除
+## Troubleshooting
 
 <AccordionGroup>
-  <Accordion title="Gemini CLI 无法运行 Obsidian 命令">
-    确保 Obsidian CLI 插件已安装并启用。在单独的终端窗口中运行 `obsidian version` 进行检查。如果没有返回版本号，请回到[设置页面](/docs/2026-her-waka/tutorial/obsidian-organise/setup)，完成第 3 步。
+  <Accordion title="Gemini CLI cannot run Obsidian commands">
+    Make sure the Obsidian CLI plugin is installed and enabled. Run `obsidian version` in a separate terminal window to check. If it does not return a version number, go back to the [setup page](/docs/2026-her-waka/tutorial/obsidian-organise/setup) and complete Step 3.
   </Accordion>
-  <Accordion title="Gemini CLI 在运行命令前要求确认">
-    这是正常现象。Gemini CLI 在系统上运行命令之前会征求你的许可。输入 `y` 并按 **Enter** 键允许。你也可以输入 `always` 以在本次会话中始终允许。
+  <Accordion title="Gemini CLI asks for permission before running commands">
+    This is normal. Gemini CLI asks your permission before running commands on your system. Type `y` and press **Enter** to allow it. You can also type `always` to allow it for the rest of the session.
   </Accordion>
-  <Accordion title="语音输入误听了技术术语">
-    Wispr Flow 有时可能误听笔记名称或技术术语。如果发生这种情况，试着说慢一点，或者改为打字输入。你也可以在按 Enter 键之前更正转录文字。
+  <Accordion title="Voice input mishears technical terms">
+    Wispr Flow may occasionally mishear note names or technical terms. If this happens, try speaking more slowly, or type the prompt instead. You can also correct the transcription before pressing Enter.
   </Accordion>
-  <Accordion title="找不到文件">
-    检查笔记名称的拼写。让 Gemini CLI 列出笔记库中的所有文件，查看确切名称。笔记名称不需要文件扩展名或完整路径 —— 只需 Obsidian 中显示的笔记标题即可。
+  <Accordion title="File not found">
+    Check the note name spelling. Ask Gemini CLI to list all files in your vault to see exact names. Note names do not need file extensions or full paths — just the note title as it appears in Obsidian.
   </Accordion>
 </AccordionGroup>
 
 <Note>
-做得很好 —— 你的笔记库已经变得更整洁了。前往[继续探索](/docs/2026-her-waka/tutorial/obsidian-organise/keep-going)，了解维护习惯和更多可以尝试的提示词。
+Nice work — your vault is already looking better. Head to [Keep going](/docs/2026-her-waka/tutorial/obsidian-organise/keep-going) for maintenance habits and more prompts to try.
 </Note>

@@ -1,236 +1,236 @@
 ---
-title: "第 8 周：面向求职的 Typst PDF 自动化"
-description: 通过 Claude Code 里的 Typst skill，把 Neon profile 里的结构化数据转成一份简历 + 定制求职信 PDF。教学阶段的收官之作。
-sidebar_label: "第 8 周：Typst PDF 自动化"
+title: "Week 8: Typst PDF Automation for Job Applications"
+description: Drive a one-page CV and tailored cover letter through the Typst skill in Claude Code, sourced from your Neon profile row. The grand finale of the teaching phase.
+sidebar_label: "Week 8: Typst PDF Automation"
 ---
 
 <AxisBadge axes={["JOB", "LIFE"]} />
 
-# 面向求职的 Typst PDF 自动化
+# Typst PDF Automation for Job Applications
 
-## 学习目标
+## Learning Objectives
 
-到本节课结束，学员应当能够：
+By the end of this session, students should be able to:
 
-- **通过 Claude Code 调用 Typst skill**，把 Neon 里结构化的 profile 数据转成一份像素级精致、可下载的 PDF —— 一行 Typst 都不用自己写。
-- **让 Neon `profile` 成为一个数据源，驱动两种产物** —— 作品集站和简历 / 求职信 PDF —— 证明 **数据在前、文档在后** 是一种资深工程师的习惯。
-- **在线上作品集上交付两个按钮**：一键 "Download CV"，以及 "Generate cover letter for \[job description\]" —— 按需产生定制 PDF。
+- **Invoke the Typst skill through Claude Code** to turn structured profile data in Neon into a pixel-perfect, downloadable PDF — without writing a single line of Typst by hand.
+- **Unify one data source (Neon `profile`) across two outputs** — the portfolio site and the CV / cover letter PDFs — proving that **data first, documents later** is a senior engineering habit.
+- **Ship one-click "Download CV" and "Generate cover letter for \[job description\]" buttons** on your live portfolio that produce custom PDFs on demand.
 
-## 核心主题
+## Core Topics
 
-- 一句话说 Typst：像"带超能力的 Markdown，能编译成 PDF"。这堂课的讲义就是用它编出来的。
-- Claude Code 里的 Skills —— Typst skill 是 Anthropic 出的，懂如何从结构化输入生成常见文档。
-- 数据驱动的文档：为什么把 CV 字段存在 Neon（而不是 Google Docs）能让它被 AI 编辑一辈子。
-- 求职信是 LLM 的完美任务：结构化输入（你的 profile + JD）+ 结构化输出（格式化的 PDF）。
-- Meta 时刻：学员意识到这节讲义和他们的简历是同一种工具做出来的。
+- Typst, in one paragraph: think "Markdown with superpowers that compiles to PDF". Same tool this lecture handout is compiled with.
+- Skills in Claude Code — the Typst skill is shipped by Anthropic and knows how to generate common documents from structured input.
+- Data-driven documents: why storing your CV fields in Neon (not Google Docs) makes the CV AI-editable forever.
+- Cover letters are the perfect LLM task: structured input (your profile + a job description) + structured output (a formatted PDF).
+- The meta moment: students realise this lecture and their CV are both made with the same tool.
 
-## 工具 / 技术栈
+## Tools / Stack
 
-| 工具 | 本周角色 |
+| Tool | Role this week |
 |---|---|
-| **Typst CLI** | 把 `.typ` 文件编译成 PDF —— 快且确定。 |
-| **Typst skill**（Claude Code） | AI 写 `.typ` 模板并驱动编译。 |
-| **Neon Postgres + Drizzle** | 你 `profile` 行的存放地：一个数据源。 |
-| **Claude API**（可选） | 根据 JD 生成定制求职信文本。 |
-| **Vercel serverless function** | 按需跑 Typst 编译并流式返回 PDF。 |
+| **Typst CLI** | Compiles `.typ` files to PDFs — fast and deterministic. |
+| **Typst skill** (Claude Code) | AI writes the `.typ` template and drives the compile. |
+| **Neon Postgres + Drizzle** | Stores your `profile` row: one source of truth. |
+| **Claude API (optional)** | Generates tailored cover-letter prose from a JD. |
+| **Vercel serverless function** | Runs Typst compilation on demand and streams PDF. |
 
 <SiteEvolution thisWeek={8} />
 
-## 课堂计划
+## Session Plan
 
-| 时间 | 活动 |
+| Time | Activity |
 |---|---|
-| 0 – 15 分钟 | **回顾与 Check-in。** 这周谁从班级以外的人收到了联系表单提交？（通常至少会有一条。） |
-| 15 – 40 分钟 | **概念讲解。** 为什么对"生成式文档"来说，Typst 比 Word / Pages / Docs 都好。为什么你的 CV 应该住在 Postgres 里。Typst skill 如何工作——你描述、它写 `.typ`、CLI 渲染、你验证。一个好的"求职信 system prompt"长什么样。 |
-| 40 – 75 分钟 | **现场演示。** 讲师通过 Claude Code 实时从自己 Neon profile 行生成 CV。然后喂一段假 JD，看着一份定制求职信在 15 秒内出现。 |
-| 75 – 105 分钟 | **动手 Lab。** 学员用自己的数据做同样的事。福利：定制求职信这个按钮会永远留在他们站点上，每一次真实求职都能用。 |
-| 105 – 120 分钟 | **Q&A + 收尾。** 每位学员展示生成的 CV。友好互评一轮。 |
+| 0 – 15 min | **Recap & Check-in.** Who got a real contact form submission this week from someone outside the class? (There's usually at least one.) |
+| 15 – 40 min | **Concept Teaching.** Why Typst is better than Word / Pages / Docs for generated documents. Why your CV should live in Postgres. How the Typst skill works — you describe, it writes `.typ`, CLI renders, you verify. What makes a good system prompt for cover-letter generation. |
+| 40 – 75 min | **Live Demo.** Instructor generates her own CV from her Neon profile row in real time via Claude Code. Then feeds a fake job description and watches a tailored cover letter appear in 15 seconds. |
+| 75 – 105 min | **Hands-On Lab.** Students do the same with their own data. Bonus: the tailored-cover-letter button stays on their site forever, ready for every real job application. |
+| 105 – 120 min | **Q&A + Wrap.** Every student shows their generated CV. Friendly critique round. |
 
-## 动手 Lab
+## Hands-On Lab
 
-**任务。** 下课时你的作品集多出两个按钮：**Download CV**（按 Neon profile 生成一份打磨过的一页 CV）和 **Generate cover letter**（粘一段 JD，拿一份定制 PDF）。两者都通过 Typst skill 编译。
+**Task.** By the end of class your portfolio site has two new buttons: **Download CV** (produces a polished one-page CV from your Neon profile data) and **Generate cover letter** (paste a job description, get a custom PDF). Both compile via the Typst skill.
 
-### 阶段 1 —— 设计 profile 数据模型
+### Phase 1 — Design the profile data model
 
 <PromptStep n={1} audience="Cursor">
-在 Neon 里加一张 `profile` 表，它将作为我 CV 数据的唯一真实数据源。帮我设计 Drizzle schema。**每个用户一行 profile**——也就是我会是唯一那个有数据的 row，但未来的多用户版本要支持更多。包含：
+Let's add a `profile` table to Neon that will be the source of truth for my CV data. Design the Drizzle schema for this. A **single** profile row per user — meaning I'll be the only populated row, but future multi-user versions should support more. Include:
 
-- `user_id`（外键 → users.id，unique）—— 和 user 一对一
-- `headline`（text，一行，如 "CS undergrad building AI agents"）
-- `summary`（text，3–5 句）
-- `email`、`phone`（可空）、`location_city`、`location_country`、`website`、`github`、`linkedin`（都是 text，都可空）
-- `education`（JSON：`{school, degree, start, end, notes}` 数组）
-- `experience`（JSON：`{org, role, start, end, highlights: []}` 数组）
-- `projects`（JSON：`{name, url, one_liner, stack: []}` 数组）
-- `skills`（JSON：字符串数组）
-- `updated_at`（timestamp 自动更新）
+- `user_id` (FK → users.id, unique) — one-to-one with a user
+- `headline` (text, 1 line, e.g., "CS undergrad building AI agents")
+- `summary` (text, 3–5 sentences)
+- `email`, `phone` (nullable), `location_city`, `location_country`, `website`, `github`, `linkedin` (all text, nullable)
+- `education` (JSON: array of `{school, degree, start, end, notes}`)
+- `experience` (JSON: array of `{org, role, start, end, highlights: []}`)
+- `projects` (JSON: array of `{name, url, one_liner, stack: []}`)
+- `skills` (JSON: array of strings)
+- `updated_at` (timestamp auto-updates)
 
-生成并 push 迁移。再在站点上加一个 admin-only 的 `/edit-profile` 页，让我能用 textarea 或 JSON 编辑器改每个字段。只有登录后的我能访问这页。
+Generate + push the migration. Also add an admin-only `/edit-profile` page on my site where I can edit each field with a textarea or JSON editor. Only my signed-in user can access this page.
 </PromptStep>
 
 <VerifyStep n={2}>
 
-- 迁移已应用；`profile` 表存在。
-- 以我登录状态访问 localhost `/edit-profile` 能看到编辑器。
-- 未登录 —— 或以别的用户登录 —— 重定向回首页。
-- 存一份最小 profile（headline + summary + 一条 education + 一条 experience）。确认 row 在 Neon。
+- Migration applied; `profile` table exists.
+- Visiting `/edit-profile` on localhost while signed in as you shows the editor.
+- Visiting while signed out — or as a different user — redirects to home.
+- Save a minimal profile (headline + summary + one education + one experience). Confirm the row is in Neon.
 
 </VerifyStep>
 
-### 阶段 2 —— 在 Claude Code 里装 Typst skill
+### Phase 2 — Install Typst skill in Claude Code
 
 <PromptStep n={3} audience="Claude Code">
-请确认 Typst skill 已安装。列出它处理的提示词种类。如果没装，从官方 Anthropic skills registry 装上，然后跑 `typst --version` 确认 Typst CLI（`typst`）在我 PATH 里。
+Please confirm the Typst skill is installed. List the kinds of prompts it handles. If it's not installed, install it from the official Anthropic skills registry, then confirm Typst CLI (`typst`) is on my PATH by running `typst --version`.
 </PromptStep>
 
 <VerifyStep n={4}>
 
-- Claude Code 确认 Typst skill 已安装。
-- `typst --version` 打印版本号。
+- Claude Code confirms the Typst skill is installed.
+- `typst --version` prints a version number.
 
 </VerifyStep>
 
-### 阶段 3 —— 从 profile 生成 CV
+### Phase 3 — Generate the CV from the profile data
 
 <PromptStep n={5} audience="Claude Code">
-我想从 Neon 的 profile 行生成一页 CV。请：
+I want to generate a one-page CV from my Neon profile row. Please:
 
-1. 读我的 `profile` 行（用 `.env.local` 里的 `DATABASE_URL`）。
-2. 用 Typst skill 写一个干净的单列 CV 模板，放在 `cv/template.typ`：header 里是姓名 + headline、一段 summary、然后是 Education、Experience、Projects、Skills 区。用得体的 serif 正文 + sans 标题。强调色用我第 2 周挑的那个。
-3. 在 `cv/build.ts` 写一个小 Node 脚本，读 DB 行、填 Typst 模板，然后 shell out 跑 `typst compile cv/template.typ cv/my-cv.pdf`。
-4. 跑一次脚本。打开结果 PDF，把它的样子贴一段描述 / 截图给我。有任何不对劲的地方就迭代——但迭代通过 skill 做，永远不要手改 `.typ`。
+1. Read my `profile` row from the database (use the `DATABASE_URL` from my `.env.local`).
+2. Use the Typst skill to write a clean single-column CV template at `cv/template.typ` with: name + headline in the header, summary paragraph, then sections for Education, Experience, Projects, Skills. Use a tasteful serif body + sans headings. Match the accent colour I chose in Week 2.
+3. Write a small Node script at `cv/build.ts` that reads the DB row, fills the Typst template, and shells out to `typst compile cv/template.typ cv/my-cv.pdf`.
+4. Run the script once. Open the resulting PDF and paste me a screenshot / description of how it looks. If anything feels off, iterate — but do the iteration through the skill, never by hand-editing the `.typ`.
 </PromptStep>
 
 <VerifyStep n={6}>
 
-- `cv/my-cv.pdf` 存在、一页、里面是你真实 profile 数据。
-- 标题、间距、字体都专业。
-- 强调色和你的站点一致。
+- `cv/my-cv.pdf` exists, is one page, and contains your real profile data.
+- Headings, spacing, typography all look professional.
+- The accent colour matches your site.
 
 </VerifyStep>
 
-### 阶段 4 —— 线上站点的 "Download CV" 按钮
+### Phase 4 — The "Download CV" button on the live site
 
 <PromptStep n={7} audience="Cursor">
-现在把它接到站里：
+Now wire this into the site:
 
-1. 在 `/api/cv` 加一个 serverless function，按需重新生成我的 CV PDF —— 逻辑和 Node 脚本一致，但跑在 Vercel function 里。流式返回 PDF 响应，`Content-Type: application/pdf`、`Content-Disposition: attachment; filename="ChanMeng-CV.pdf"`（把我的真实名字从 profile 行里替换进去）。
-2. 在首页 hero 区现有社交链接旁边加一个 **Download CV** 按钮。点击触发下载。
-3. 这个路由按 IP 限速每小时 20 次 —— CV 生成便宜但别浪费算力。复用第 7 周联系表单那套 rate-limit 模式。
-4. 确保 Vercel function runtime 里有 `typst`。默认是没有的 —— 用 Typst skill 推荐的做法，可能是在 bundle 里带一个预编译二进制，或者走一个 fly.io / Railway 侧服务。
+1. Add a serverless function at `/api/cv` that regenerates my CV PDF on demand — same flow as the Node script, but running inside a Vercel function. Stream the PDF response back with `Content-Type: application/pdf` and `Content-Disposition: attachment; filename="ChanMeng-CV.pdf"` (substitute my real name from the profile row).
+2. Add a **Download CV** button on the homepage hero next to my existing social links. Click triggers the download.
+3. Rate-limit the route to 20 requests per hour per IP — CV generation is cheap but let's not waste compute. Use the same rate-limit pattern we set up for the contact form in Week 7.
+4. Make sure `typst` is available in the Vercel function runtime. If it's not (it's not by default), use the approach the Typst skill recommends — likely shipping a pre-built binary or using a fly.io / Railway side-service.
 </PromptStep>
 
 <VerifyStep n={8}>
 
-- localhost：点 **Download CV** —— PDF 下载下来，带你的真实数据。
-- 部署后生产：同一个按钮，同一个结果。
-- 连点 21 次：第 21 次返回 429。
+- Localhost: click **Download CV** — a PDF downloads with your real data.
+- Production after deploy: same button, same result.
+- Click it 21 times in quick succession: 21st returns 429.
 
 </VerifyStep>
 
-### 阶段 5 —— 求职信生成
+### Phase 5 — Cover letter generation
 
 <PromptStep n={9} audience="Claude Code">
-现在做求职信生成器。我要在站上有一个表单：粘进 JD、可选填公司名、点 **Generate cover letter**。它产出一份一页的定制 PDF，用我的声音（以 `content/persona.md` 为 voice guide）写，引用我 profile 里 experience 和 projects 数组里的 **真实** 条目。
+Now the cover letter generator. I want a form on my site where I paste a job description, optionally a company name, and click **Generate cover letter**. It produces a custom one-page PDF, written in my voice (using `content/persona.md` as the voice guide), referencing **actual** items from my profile's experience and projects arrays.
 
-具体步骤：
+Here's how to build it:
 
-1. 在 `cv/cover-letter.typ` 写一个 Typst 模板——一页信布局：发件人 block（我）、收件人 block（公司名 + 未知则 "Dear Hiring Manager"）、正文段落、落款。字体语言与 CV 一致。
-2. 写一个 server action：
-   1. 接受 JD + 公司名 +（可选）具体岗位。
-   2. 调用 Claude API，system prompt 写成：**"You write a crisp one-page cover letter in the voice of \[persona.md\]. Use only facts from the profile JSON provided — don't fabricate experience. Structure: opening hook, why this role, two specific project / experience references relevant to the JD, sign-off."** 返回结构化 JSON：`{ opening, body1, body2, body3, signoff }`。
-   3. 把这个 JSON 填进 Typst 模板。
-   4. 用 `typst compile` 编译，流式返回 PDF。
-3. 在 `/edit-profile`（仅登录可见）加一个 **Generate cover letter** 区块：两个输入（公司、JD），一个 textarea，一个 **Generate** 按钮。成功后 PDF 下载。
-4. 每次生成都记到一张新表 `cover_letters`（公司、岗位、created_at、正文长度）。我想以后回看自己申请过哪些。
+1. Write a Typst template at `cv/cover-letter.typ` — a one-page letter layout: sender block (me), recipient block (company name + "Dear Hiring Manager" if unknown), body paragraphs, sign-off. Same typography language as the CV.
+2. Write a server action that:
+   1. Takes the JD + company name + (optional) specific role.
+   2. Calls the Claude API with a system prompt: **"You write a crisp one-page cover letter in the voice of \[persona.md\]. Use only facts from the profile JSON provided — don't fabricate experience. Structure: opening hook, why this role, two specific project / experience references relevant to the JD, sign-off."** Return structured JSON: `{ opening, body1, body2, body3, signoff }`.
+   3. Fills the Typst template with this JSON.
+   4. Compiles with `typst compile` and streams the PDF back.
+3. Add a **Generate cover letter** section on `/edit-profile` (signed-in only): two inputs (company, JD), one textarea, a **Generate** button. After success, the PDF downloads.
+4. Log every generation to a new `cover_letters` table (company, role, created_at, body length). I want to be able to look back at what I applied to.
 
-在 `.env.local` 和 Vercel prod 里都设 `ANTHROPIC_API_KEY`。
+Set `ANTHROPIC_API_KEY` in both `.env.local` and Vercel prod.
 </PromptStep>
 
-<ManualStep n={10} why="Anthropic 的 console 要求人登录 + 接受条款后才能生成 key —— 每家主流 LLM provider 都一样。">
-打开 [console.anthropic.com/settings/keys](https://console.anthropic.com/settings/keys)，登录，点 **Create Key**，命名 `technest-cover-letter`，复制，粘回 Claude Code / Cursor。
+<ManualStep n={10} why="Anthropic's console requires human login + terms acceptance before key generation — standard for every major LLM provider.">
+Open [console.anthropic.com/settings/keys](https://console.anthropic.com/settings/keys), sign in, click **Create Key**, name it `technest-cover-letter`, copy, and paste back to Claude Code / Cursor.
 </ManualStep>
 
 <VerifyStep n={11}>
 
-- 粘一段真实 JD（比如 LinkedIn 上一条你可能真会投的）。
-- 点 **Generate cover letter**。~20 秒后下载一页 PDF。
-- 信里引用了你 profile 的真实内容（没有编）。
-- 声音和 `persona.md` 一致。
-- `cover_letters` 表里出现一行。
+- Paste a real job description (e.g., one from LinkedIn you might actually apply to).
+- Click **Generate cover letter**. Within ~20 seconds, a 1-page PDF downloads.
+- The letter references real items from your profile (not invented).
+- The voice matches your `persona.md`.
+- A row appears in `cover_letters` table.
 
 </VerifyStep>
 
 <RecoverStep n={12}>
-求职信生成了，但排版挤得慌 —— 正文溢到第二页。你能不能配合 Typst skill 微调模板，让内容总在一页内，即使 JD 较长？优先压缩段落，而不是把字号调到 10 pt 以下。
+The cover letter generates but the typography is cramped — the body text bleeds to a second page. Can you work with the Typst skill to tweak the template so everything stays on one page, even for longer JDs? Prefer condensing paragraphs over shrinking fonts below 10 pt.
 </RecoverStep>
 
-### 阶段 6 —— 全部上线
+### Phase 6 — Ship everything
 
 <PromptStep n={13} audience="Cursor">
-按合理颗粒 commit（profile schema、CV 生成、cover letter 生成分成三组），push 并确认 Vercel 部署成功。在生产 URL 上测 CV 下载和求职信生成。最后：在 header 里 **Blog · Contact** 旁边加一个 **CV / Cover Letter** 链接。
+Commit everything in logical chunks (profile schema, CV generation, cover letter generation as three separate commit groups), push, and confirm the Vercel deploy succeeds. Test both the CV download and the cover letter generation on the live production URL. Final check: add a **CV / Cover Letter** link to the site header next to **Blog · Contact**.
 </PromptStep>
 
 <VerifyStep n={14}>
 
-- 线上站 header 显示 **Blog · Contact · CV / Cover Letter**。
-- 线上 **Download CV** 产出你的真实 PDF。
-- 线上 **Generate cover letter** 配一段真 JD 产出一份真实、写得好、你声音的一页 PDF。
-- 你 Neon 控制台显示 `profile` 行，以及你测试留下的 `cover_letters` 行。
+- Live site shows **Blog · Contact · CV / Cover Letter** in the header.
+- Live **Download CV** produces your real PDF.
+- Live **Generate cover letter** with a real JD produces a real, well-written, 1-page PDF in your voice.
+- Your Neon dashboard shows the `profile` row and any `cover_letters` rows from your tests.
 
 </VerifyStep>
 
-<Note title="Career · 你刚做了一个真正的求职工具。">
-这门课大多数学员都会在接下来一年里 **用这个按钮几十次**。每次要投岗时——粘 JD、点 Generate、改一段、投出去。每次申请从 60 分钟变成 10 分钟。
+<Note title="Career · You just built a real job-search tool.">
+Most students in this course will use this button **dozens of times** over the next year. Every time you apply to a role, paste the JD, click **Generate**, tweak one paragraph, submit. That's 10 minutes per application, not 60.
 </Note>
 
-<Tip title="Meta 时刻">
-注意：你手上这份讲义也是用 Typst CLI 编出来的——是你讲师通过同一个你刚用过的 Typst skill 做的。**教会工具的工具，本身就是那把工具。** 当你以后要做自己的教学材料时，记住这个对称性。
+<Tip title="The meta moment">
+Notice that this lecture handout you're reading was also compiled with the Typst CLI — by your instructor, through the same Typst skill you just used. **The tool that teaches the tool is the tool.** Remember this symmetry when you build your own teaching material later.
 </Tip>
 
-## 本周作业
+## Weekly Assignment
 
-**做 / 交付。**
+**Build / Implement.**
 
-- 线上 **Download CV** 按钮，从你 Neon profile 产出 PDF。
-- 线上 **Generate cover letter** 流程，从粘入的 JD 产出定制 PDF。
-- 至少一份你真会发出去的求职信，作为你的交付物。
+- Live **Download CV** button that produces a PDF from your Neon profile.
+- Live **Generate cover letter** flow that produces a custom PDF from a pasted JD.
+- At least one real cover letter you'd actually send, submitted as your deliverable.
 
-**要求。**
+**Requirements.**
 
-- profile 数据住在 Neon 里，不是手写的 `.typ`。
-- Typst 模板进版本控制。
-- 一张生成的 CV 截图。
-- 一张生成的求职信截图（敏感的话把公司名遮掉）。
-- 一段 30 秒屏幕录屏，展示线上端到端的求职信生成流程。
+- Your profile data lives in Neon, not in a hand-written `.typ` file.
+- The Typst template is under version control.
+- A screenshot of the generated CV.
+- A screenshot of a generated cover letter (redact company name if sensitive).
+- 30-second screen recording of the end-to-end cover-letter flow on your live site.
 
-**提交。** 第 9 周毕业项目 kickoff 前，把线上 URL + 三样交付物发到 Slack。
+**Submission.** Live URL + all three artifacts in Slack before the Week 9 capstone kickoff.
 
-## 资源
+## Resources
 
-| 文档 | 视频 | 仓库 |
+| Docs | Videos | Repos |
 |---|---|---|
-| Typst —— 入门 + 语言参考 | 讲师 demo："把你的 CV 当作代码，20 分钟" | `typst/typst` —— compiler 源码 |
-| Anthropic Skills —— Typst skill | | `anthropics/skills` —— Typst skill 示例 |
-| Anthropic Claude API —— getting started | | `her-waka/tutorial/professional-pdf` —— 原始教程 |
-| Vercel serverless function —— 二进制依赖 | | |
+| Typst — getting started + language reference | Instructor demo: "Your CV as code in 20 minutes" | `typst/typst` — compiler source |
+| Anthropic Skills — Typst skill | | `anthropics/skills` — Typst skill examples |
+| Anthropic Claude API — getting started | | `her-waka/tutorial/professional-pdf` — original tutorial |
+| Vercel serverless functions — binary dependencies | | |
 
-## 真实世界应用
+## Real-World Application
 
-招聘时间线还会继续被压缩。那个能在看到岗位后 1 小时内，发出一份**具体、有思考、排版清爽**的求职信的候选人，每一次都会赢过那个花两天写的人。你现在手里就是这台机器。留住它、打磨它，以后再也别给"CV builder SaaS"付钱。
+Hiring will keep compressing timelines. The candidate who can send a **specific, thoughtful, typographically clean** cover letter within an hour of seeing a job post will out-compete the candidate who spends two days on it — every time. You now have that machine. Keep it. Refine it. Never pay for a CV builder SaaS again.
 
 <Note title="Career">
-今天在你线上站点里，**CV / Cover Letter** 这个链接本身就是金子。来访的招聘官点进去，拿到一份基于你真实、实时数据的一页 PDF——而且他们粘上自己的 JD，20 秒内就能看到一份 *关于他们这个岗位* 的求职信。这是非对称招聘信号。用它。
+On your live site today, the **CV / Cover Letter** link is gold. Recruiters who visit and click it get a one-page PDF of your real, current data — and if they paste their JD, they can see a cover letter from you written **about their role** in 20 seconds. That's an asymmetric hiring signal. Use it.
 </Note>
 
-## 踩坑提醒 & 小贴士
+## Challenges & Tips
 
-- *"Vercel function runtime 里没有 Typst。"* 两条路——(a) 把预编译二进制打进 function bundle（~5 MB），(b) 把编译外置到一个 tiny Fly.io / Railway 侧服务。Typst skill 知道这两种模式——让它按你 Vercel 套餐挑合适的那一种。
-- *"求职信臆造了我没待过的公司。"* 加强 system prompt：**"Cite only items explicitly present in `experience` or `projects` arrays. If there's nothing relevant, say 'While I haven't worked at X directly, …' and pivot to the closest real item."**
-- *"PDF 字体怪怪的。"* Vercel runtime 可能没有 Inter / 你选的字体。Typst skill 会把字体嵌进 bundle —— 问它：**"Ensure the CV uses an embedded font so it renders identically on my machine and on Vercel."**
-- *"我求职信在 Vercel 上强调色不对。"* 你在两个地方硬编码了主题值。问：**"Factor the theme into one Typst variable and reference it from both CV and cover-letter templates."**
-- *"10 次测试后 Claude 太贵了。"* 让 Cursor 对相同的 (JD, 公司) 组合做 24 小时缓存——你测试时大多是同样的输入。
+- *"Typst isn't available in the Vercel function runtime."* Two options — (a) ship a pre-built binary in the function bundle (~5 MB), (b) offload compile to a tiny Fly.io / Railway side-service. The Typst skill knows both patterns — ask it to pick the one that fits your Vercel plan.
+- *"The cover letter hallucinated a company I didn't work for."* Strengthen the system prompt: **"Cite only items explicitly present in `experience` or `projects` arrays. If there's nothing relevant, say 'While I haven't worked at X directly, …' and pivot to the closest real item."**
+- *"The PDF has a weird font."* Vercel's runtime may not have Inter / your chosen font. The Typst skill handles this by embedding fonts in the bundle — ask it: **"Ensure the CV uses an embedded font so it renders identically on my machine and on Vercel."**
+- *"My cover letter has the wrong accent colour on Vercel."* You hardcoded a theme value in two places. Ask **"Factor the theme into one Typst variable and reference it from both CV and cover-letter templates."**
+- *"Claude is too expensive after 10 test generations."* Ask Cursor to cache identical (JD, company) pairs for 24 hours — most of your testing is with the same inputs.
 
-<Info title="如果 Typst 在生产环境编译挂了、报错又看不懂">
-在本地用完全相同的输入再跑一遍 —— 95% 的情况 Typst 本地会出同样的错，你能让 Claude Code（带 Typst skill）修。如果只在 Vercel 挂，那是 runtime / 字体 / 二进制问题，skill 知道怎么诊断。
+<Info title="If Typst compilation fails in production with a cryptic error">
+Re-run the exact same input locally — 95% of the time Typst produces the same error locally and you can ask Claude Code (with the Typst skill) to fix it. If it only fails on Vercel, it's a runtime / font / binary issue and the skill knows how to diagnose.
 </Info>

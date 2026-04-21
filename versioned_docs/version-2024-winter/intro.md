@@ -2,71 +2,71 @@
 sidebar_position: 1
 ---
 
-# 课程介绍
+# Course Introduction
 
-欢迎来到AI辅助开发教程！在这个系列课程中，你将学习如何利用现代AI工具提升开发效率。
+Welcome to the AI-Assisted Development Tutorial! In this course series, you will learn how to leverage modern AI tools to improve development efficiency.
 
-## 课程概述
+## Course Overview
 
-本课程分为以下主要部分：
+This course is divided into the following main parts:
 
-### 1. 环境配置
-- 系统环境准备
-- Cursor编辑器安装
-- 必要账号注册
-- 开发环境配置
+### 1. Environment Setup
+- System environment preparation
+- Cursor editor installation
+- Necessary account registration
+- Development environment configuration
 
-### 2. 基础知识
-- 提示词工程基础
-- Markdown格式介绍
-- 高效AI沟通技巧
+### 2. Fundamentals
+- Basics of prompt engineering
+- Markdown format introduction
+- Efficient AI communication techniques
 
-### 3. 开发工具
-- Cursor编辑器使用指南
-- v0平台介绍
-- Vercel部署指南
-- 工作流集成
-- Coze工作流开发
+### 3. Development Tools
+- Cursor editor usage guide
+- v0 platform introduction
+- Vercel deployment guide
+- Workflow integration
+- Coze workflow development
 
-### 4. 基础教程
-- Docusaurus网站开发教程
+### 4. Basic Tutorials
+- Docusaurus website development tutorial
 
-### 5. 实战项目
-- 博客项目规划
-- 使用Cursor开发
-- 在v0上继续开发
-- 博客维护和优化
-- 总结和进阶建议
+### 5. Practical Projects
+- Blog project planning
+- Development with Cursor
+- Continued development on v0
+- Blog maintenance and optimization
+- Summary and advanced suggestions
 
-### 6. 进阶应用
-- AI系统开发（对话系统、绘图应用）
-- 优秀案例展示
+### 6. Advanced Applications
+- AI system development (conversational systems, drawing applications)
+- Excellent case showcases
 
-## 学习目标
+## Learning Objectives
 
-完成本课程后，你将能够：
+Upon completing this course, you will be able to:
 
-- 掌握与AI助手高效沟通的技巧
-- 熟练使用现代开发工具提升效率
-- 独立完成一个完整的博客项目
-- 建立适合自己的AI辅助开发工作流
+- Master techniques for efficient communication with AI assistants
+- Proficiently use modern development tools to improve efficiency
+- Independently complete a full blog project
+- Establish an AI-assisted development workflow that suits you
 
-## 适合人群
+## Target Audience
 
-本课程适合：
+This course is suitable for:
 
-- 想要提高开发效率的程序员
-- 对AI辅助开发感兴趣的开发者
-- 希望学习现代开发工具的学习者
-- 想要建立个人博客的技术爱好者
+- Programmers who want to improve development efficiency
+- Developers interested in AI-assisted development
+- Learners who want to learn modern development tools
+- Technology enthusiasts who want to build a personal blog
 
-## 准备工作
+## Prerequisites
 
-开始学习前，你需要：
+Before starting, you will need:
 
-- 基本的编程知识
-- 一台可以上网的电脑
-- GitHub账号
-- 安装Node.js环境
+- Basic programming knowledge
+- A computer with internet access
+- GitHub account
+- Node.js environment installed
 
-让我们开始学习吧！
+Let's get started!

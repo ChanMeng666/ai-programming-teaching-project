@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
-title: Docusaurus博客搭建完整教程
-description: 从零开始，用Docusaurus搭建一个现代化的技术博客网站
+title: Complete Docusaurus Blog Building Tutorial
+description: Build a modern technical blog website with Docusaurus from scratch
 toc_min_heading_level: 2
 toc_max_heading_level: 4
 ---
@@ -10,62 +10,65 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import TOCInline from '@theme/TOCInline';
 
-# Docusaurus博客搭建完整教程
+# Complete Docusaurus Blog Building Tutorial
 
-## 教程概述
+## Tutorial Overview
 
-:::tip 教程目标
+:::tip[🎯 Tutorial Objectives]
 
-通过本教程，您将学会：
-
-- 搭建一个现代化的技术博客
-- 配置多语言和版本控制
-- 实现自动部署和持续集成
-- 优化SEO和性能表现
+Through this tutorial, you will learn:
+- Build a modern technical blog
+- Configure multi-language and version control
+- Implement automated deployment and continuous integration
+- Optimize SEO and performance
 
 :::
 
-### 本教程目录
+### Table of Contents
 
 <TOCInline toc={toc} minHeadingLevel={2} maxHeadingLevel={3} />
 
-### 项目开发流程
+### Project Development Workflow
 
 ```mermaid
 graph TD
-    A[项目需求分析] --> B[环境搭建]
-    B --> C[项目初始化]
-    C --> D[基础配置]
-    D --> E[内容编写]
-    E --> F[样式定制]
-    F --> G[功能扩展]
-    G --> H[测试优化]
-    H --> I[部署上线]
-    I --> J[维护更新]
+    A[Requirements Analysis] --> B[Environment Setup]
+    B --> C[Project Initialization]
+    C --> D[Basic Configuration]
+    D --> E[Content Writing]
+    E --> F[Style Customization]
+    F --> G[Feature Extension]
+    G --> H[Testing Optimization]
+    H --> I[Deployment Launch]
+    I --> J[Maintenance Updates]
+
+    style A fill:#e1f5fe
+    style I fill:#e8f5e8
+    style J fill:#fff3e0
 ```
 
-### 技术架构图
+### Technical Architecture Diagram
 
 ```mermaid
 graph TB
-    subgraph "前端展示层"
-        A[React组件]
-        B[MDX文档]
-        C[静态资源]
+    subgraph "Frontend Display Layer"
+        A[React Components]
+        B[MDX Documents]
+        C[Static Assets]
     end
-    
-    subgraph "核心框架层"
-        D[Docusaurus核心]
-        E[插件系统]
-        F[主题系统]
+
+    subgraph "Core Framework Layer"
+        D[Docusaurus Core]
+        E[Plugin System]
+        F[Theme System]
     end
-    
-    subgraph "构建部署层"
-        G[Webpack打包]
-        H[静态文件生成]
-        I[Vercel部署]
+
+    subgraph "Build Deployment Layer"
+        G[Webpack Packaging]
+        H[Static File Generation]
+        I[Vercel Deployment]
     end
-    
+
     A --> D
     B --> D
     C --> D
@@ -75,83 +78,86 @@ graph TB
     F --> G
     G --> H
     H --> I
+
+    style D fill:#e1f5fe
+    style I fill:#e8f5e8
 ```
 
-## 环境准备
+## Environment Preparation
 
-### 系统要求
+### System Requirements
 
-- Node.js 18.0 或更高版本
-- npm 或 yarn 包管理器
-- Git 版本控制
-- 现代浏览器（Chrome、Firefox、Safari、Edge）
+- Node.js 18.0 or higher
+- npm or yarn package manager
+- Git version control
+- Modern browser (Chrome, Firefox, Safari, Edge)
 
-### 安装流程
+### Installation Process
 
 ```mermaid
 sequenceDiagram
-    participant User as 用户
-    participant System as 系统
-    participant NPM as NPM仓库
-    participant Git as Git仓库
-    
-    User->>System: 检查Node.js版本
-    System->>User: 返回版本信息
-    
-    User->>NPM: 创建Docusaurus项目
-    NPM->>System: 下载依赖包
-    System->>User: 项目创建完成
-    
-    User->>Git: 初始化Git仓库
-    Git->>System: 创建.git目录
-    System->>User: Git初始化完成
-    
-    User->>System: 启动开发服务器
-    System->>User: 本地服务器运行
+    participant User as User
+    participant System as System
+    participant NPM as NPM Repository
+    participant Git as Git Repository
+
+    User->>System: Check Node.js version
+    System->>User: Return version info
+
+    User->>NPM: Create Docusaurus project
+    NPM->>System: Download dependencies
+    System->>User: Project created
+
+    User->>Git: Initialize Git repository
+    Git->>System: Create .git directory
+    System->>User: Git initialized
+
+    User->>System: Start development server
+    System->>User: Local server running
 ```
 
-## 项目搭建
+## Project Setup
 
-### 创建项目
+### Create Project
 
-```bash title="创建Docusaurus项目"
+```bash title="Create Docusaurus Project"
 npx create-docusaurus@latest my-blog classic --typescript
 cd my-blog
 ```
 
-### 项目结构
+### Project Structure
 
 ```
 my-blog/
-├── blog/                  # 博客文章
-├── docs/                  # 文档内容
+├── blog/                  # Blog posts
+├── docs/                  # Documentation content
 ├── src/
-│   ├── components/        # 自定义组件
-│   ├── css/              # 样式文件
-│   └── pages/            # 自定义页面
-├── static/               # 静态资源
-├── docusaurus.config.js  # 配置文件
-├── sidebars.js           # 侧边栏配置
-└── package.json          # 项目依赖
+│   ├── components/        # Custom components
+│   ├── css/              # Style files
+│   └── pages/            # Custom pages
+├── static/               # Static assets
+├── docusaurus.config.js  # Configuration file
+├── sidebars.js           # Sidebar configuration
+└── package.json          # Project dependencies
 ```
 
-### 启动项目
+### Start Project
 
-```bash title="启动开发服务器"
+```bash title="Start Development Server"
 npm start
 ```
 
-## 基础配置
+## Basic Configuration
 
-### 网站信息配置
+### Website Information Configuration
 
 ```javascript title="docusaurus.config.js" showLineNumbers {6-10,15-20}
 import {themes as prismThemes} from 'prism-react-renderer';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: '我的技术博客',
-  tagline: '分享前端开发经验和技术思考',
+  title: 'My Tech Blog',
+  tagline: 'Sharing frontend development experience and technical insights',
   favicon: 'img/favicon.ico',
   url: 'https://my-blog.vercel.app',
   baseUrl: '/',
@@ -162,8 +168,8 @@ const config = {
   onBrokenMarkdownLinks: 'warn',
 
   i18n: {
-    defaultLocale: 'zh-Hans',
-    locales: ['zh-Hans', 'en'],
+    defaultLocale: 'en',
+    locales: ['en', 'zh-Hans'],
   },
 
   presets: [
@@ -189,16 +195,16 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-      // 全局目录配置
+      // Global table of contents configuration
       tableOfContents: {
         minHeadingLevel: 2,
         maxHeadingLevel: 4,
       },
       image: 'img/docusaurus-social-card.jpg',
       navbar: {
-        title: '我的博客',
+        title: 'My Blog',
         logo: {
-          alt: '我的博客Logo',
+          alt: 'My Blog Logo',
           src: 'img/logo.svg',
         },
         items: [
@@ -206,9 +212,9 @@ const config = {
             type: 'docSidebar',
             sidebarId: 'tutorialSidebar',
             position: 'left',
-            label: '教程',
+            label: 'Tutorial',
           },
-          {to: '/blog', label: '博客', position: 'left'},
+          {to: '/blog', label: 'Blog', position: 'left'},
           {
             href: 'https://github.com/username/my-blog',
             label: 'GitHub',
@@ -220,16 +226,16 @@ const config = {
         style: 'dark',
         links: [
           {
-            title: '文档',
+            title: 'Docs',
             items: [
               {
-                label: '教程',
+                label: 'Tutorial',
                 to: '/docs/intro',
               },
             ],
           },
           {
-            title: '社区',
+            title: 'Community',
             items: [
               {
                 label: 'Stack Overflow',
@@ -257,27 +263,27 @@ const config = {
 export default config;
 ```
 
-### 配置优化流程
+### Configuration Optimization Process
 
 ```mermaid
 flowchart TD
-    A[基础配置] --> B[网站信息]
-    A --> C[导航配置]
-    A --> D[主题配置]
-    
-    B --> B1[标题和描述]
-    B --> B2[URL配置]
-    B --> B3[多语言设置]
-    
-    C --> C1[导航栏]
-    C --> C2[侧边栏]
-    C --> C3[页脚]
-    
-    D --> D1[颜色主题]
-    D --> D2[代码高亮]
-    D --> D3[字体设置]
-    
-    B1 --> E[测试验证]
+    A[Basic Configuration] --> B[Website Information]
+    A --> C[Navigation Configuration]
+    A --> D[Theme Configuration]
+
+    B --> B1[Title and Description]
+    B --> B2[URL Configuration]
+    B --> B3[Multi-language Settings]
+
+    C --> C1[Navbar]
+    C --> C2[Sidebar]
+    C --> C3[Footer]
+
+    D --> D1[Color Theme]
+    D --> D2[Code Highlighting]
+    D --> D3[Font Settings]
+
+    B1 --> E[Testing Validation]
     B2 --> E
     B3 --> E
     C1 --> E
@@ -286,104 +292,108 @@ flowchart TD
     D1 --> E
     D2 --> E
     D3 --> E
-    
-    E --> F{配置正确?}
-    F -->|是| G[保存配置]
-    F -->|否| H[调整配置]
+
+    E --> F{Configuration Correct?}
+    F -->|Yes| G[Save Configuration]
+    F -->|No| H[Adjust Configuration]
     H --> E
+
+    style A fill:#e1f5fe
+    style G fill:#e8f5e8
+    style H fill:#fff3e0
 ```
 
-## 内容创建
+## Content Creation
 
-### 文档结构规划
+### Documentation Structure Planning
 
 ```mermaid
 mindmap
-  root((博客内容))
-    技术文章
-      前端开发
+  root((Blog Content))
+    Technical Articles
+      Frontend Development
         React
         Vue
         TypeScript
-      后端开发
+      Backend Development
         Node.js
         Python
-        数据库
-      工具使用
+        Database
+      Tool Usage
         Git
         VS Code
         Docker
-    学习笔记
-      读书笔记
-      课程总结
-      实践心得
-    项目展示
-      个人项目
-      开源贡献
-      作品集
-    生活分享
-      技术感悟
-      职业发展
-      行业观察
+    Learning Notes
+      Reading Notes
+      Course Summary
+      Practice Insights
+    Project Showcase
+      Personal Projects
+      Open Source Contributions
+      Portfolio
+    Life Sharing
+      Technical Insights
+      Career Development
+      Industry Observations
 ```
 
-### 创建博客文章
+### Creating Blog Posts
 
 ```markdown title="blog/2024-01-01-welcome.md" showLineNumbers
 ---
 slug: welcome
-title: 欢迎来到我的技术博客
+title: Welcome to My Tech Blog
 authors: [your-name]
 tags: [welcome, blog, introduction]
 ---
 
-# 欢迎来到我的技术博客
+# Welcome to My Tech Blog
 
-这是我的第一篇博客文章，在这里我将分享：
+This is my first blog post. Here I will share:
 
-- 前端开发经验
-- 技术学习心得
-- 项目实践总结
-- 行业观察思考
+- Frontend development experience
+- Technical learning insights
+- Project practice summaries
+- Industry observations and thoughts
 
-希望这些内容能对大家有所帮助！
+Hope this content is helpful to everyone!
 
 {/* truncate */}
 
-## 博客内容规划
+## Blog Content Plan
 
-### 技术文章系列
+### Technical Article Series
 
-我计划写以下系列文章：
+I plan to write the following series:
 
-1. **React深度学习系列**
-   - React Hooks详解
-   - 状态管理最佳实践
-   - 性能优化技巧
+1. **React Deep Dive Series**
+   - React Hooks Explained
+   - State Management Best Practices
+   - Performance Optimization Tips
 
-2. **前端工程化系列**
-   - 构建工具配置
-   - 代码质量保证
-   - 自动化部署
+2. **Frontend Engineering Series**
+   - Build Tool Configuration
+   - Code Quality Assurance
+   - Automated Deployment
 
-3. **项目实战系列**
-   - 从零搭建博客系统
-   - 电商网站开发
-   - 移动端应用开发
+3. **Project Practice Series**
+   - Building Blog System from Scratch
+   - E-commerce Website Development
+   - Mobile App Development
 
-### 学习方法分享
+### Learning Method Sharing
 
-我也会分享一些学习方法和心得：
+I will also share some learning methods and insights:
 
-- 如何高效学习新技术
-- 技术文档的阅读技巧
-- 开源项目的参与方式
-- 技术面试的准备方法
+- How to efficiently learn new technologies
+- Technical documentation reading skills
+- Ways to participate in open source projects
+- Technical interview preparation methods
 
-欢迎大家关注我的博客，一起学习成长！
+Welcome everyone to follow my blog and grow together!
 ```
 
-### 创建文档页面
+### Creating Documentation Pages
 
 ```markdown title="docs/intro.md" showLineNumbers
 ---
@@ -392,40 +402,65 @@ toc_min_heading_level: 2
 toc_max_heading_level: 3
 ---
 
-# 教程介绍
+# Tutorial Introduction
 
-让我们在**不到5分钟**的时间内发现**Docusaurus**。
+Let's discover **Docusaurus in less than 5 minutes**.
 
-## 开始使用
+## Getting Started
 
-通过**创建新站点**开始使用。
+Get started by **creating a new site**.
 
-或者**立即尝试Docusaurus**：
+Or **try Docusaurus immediately**:
 
-\`\`\`bash
+```bash
 npx create-docusaurus@latest my-website classic
-\`\`\`
-
-### 你需要什么
-
-- [Node.js](https://nodejs.org/en/download/) 版本 18.0 或以上：
-  - 安装 Node.js 时，建议勾选所有与依赖项相关的复选框。
-
-## 生成新站点
-
-使用**经典模板**生成新的 Docusaurus 站点。
 ```
 
-## 样式定制
+### What you'll need
 
-### 自定义CSS
+- [Node.js](https://nodejs.org/en/download/) version 18.0 or above:
+  - When installing Node.js, it's recommended to check all checkboxes related to dependencies.
+
+## Generate a new site
+
+Generate a new Docusaurus site using the **classic template**.
+
+The classic template will automatically be added to your project after you run the command:
+
+```bash
+npx create-docusaurus@latest my-website classic
+```
+
+You can type this command into Command Prompt, Powershell, Terminal, or any other integrated terminal of your code editor.
+
+The command also installs all necessary dependencies you need to run Docusaurus.
+
+## Start your site
+
+Run the development server:
+
+```bash
+cd my-website
+npm run start
+```
+
+The `cd` command changes the directory you're working with. In order to work with your newly created Docusaurus site, you'll need to navigate the terminal there.
+
+The `npm run start` command builds your website locally and serves it through a development server, ready for you to view at http://localhost:3000.
+
+Open `docs/intro.md` (this page) and edit some lines: the site **reloads automatically** and displays your changes.
+```
+
+## Style Customization
+
+### Custom CSS
 
 ```css title="src/css/custom.css" showLineNumbers {5-10,15-20,25-30}
 /**
- * 自定义CSS变量
+ * Custom CSS variables
  */
 
-/* 亮色主题 */
+/* Light theme */
 :root {
   --ifm-color-primary: #2e8555;
   --ifm-color-primary-dark: #29784c;
@@ -438,7 +473,7 @@ npx create-docusaurus@latest my-website classic
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
 }
 
-/* 暗色主题 */
+/* Dark theme */
 [data-theme='dark'] {
   --ifm-color-primary: #25c2a0;
   --ifm-color-primary-dark: #21af90;
@@ -450,7 +485,7 @@ npx create-docusaurus@latest my-website classic
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
 
-/* 自定义样式 */
+/* Custom styles */
 .hero {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
@@ -466,7 +501,7 @@ npx create-docusaurus@latest my-website classic
   margin-top: 1rem;
 }
 
-/* 卡片样式 */
+/* Card styles */
 .card {
   border-radius: 12px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -478,57 +513,61 @@ npx create-docusaurus@latest my-website classic
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
-/* 响应式设计 */
+/* Responsive design */
 @media (max-width: 768px) {
   .hero__title {
     font-size: 2rem;
   }
-  
+
   .hero__subtitle {
     font-size: 1.2rem;
   }
 }
 ```
 
-### 样式定制流程
+### Style Customization Process
 
 ```mermaid
 graph LR
-    A[设计需求] --> B[CSS变量定义]
-    B --> C[组件样式编写]
-    C --> D[响应式适配]
-    D --> E[浏览器测试]
-    E --> F{效果满意?}
-    F -->|是| G[样式确认]
-    F -->|否| H[调整样式]
+    A[Design Requirements] --> B[CSS Variable Definition]
+    B --> C[Component Style Writing]
+    C --> D[Responsive Adaptation]
+    D --> E[Browser Testing]
+    E --> F{Effect Satisfactory?}
+    F -->|Yes| G[Style Confirmation]
+    F -->|No| H[Adjust Styles]
     H --> C
+
+    style A fill:#e1f5fe
+    style G fill:#e8f5e8
+    style H fill:#fff3e0
 ```
 
-## 功能扩展
+## Feature Extension
 
-### 插件系统
+### Plugin System
 
 ```mermaid
 graph TB
-    subgraph "核心插件"
-        A[内容插件]
-        B[主题插件]
-        C[搜索插件]
+    subgraph "Core Plugins"
+        A[Content Plugins]
+        B[Theme Plugins]
+        C[Search Plugins]
     end
-    
-    subgraph "社区插件"
-        D[SEO插件]
-        E[分析插件]
-        F[评论插件]
+
+    subgraph "Community Plugins"
+        D[SEO Plugins]
+        E[Analytics Plugins]
+        F[Comment Plugins]
     end
-    
-    subgraph "自定义插件"
-        G[图片优化]
-        H[代码高亮]
-        I[数据统计]
+
+    subgraph "Custom Plugins"
+        G[Image Optimization]
+        H[Code Highlighting]
+        I[Data Statistics]
     end
-    
-    A --> J[Docusaurus核心]
+
+    A --> J[Docusaurus Core]
     B --> J
     C --> J
     D --> J
@@ -537,14 +576,16 @@ graph TB
     G --> J
     H --> J
     I --> J
+
+    style J fill:#e1f5fe
 ```
 
-### 添加搜索功能
+### Adding Search Functionality
 
 ```javascript title="docusaurus.config.js" showLineNumbers {5-10}
 const config = {
-  // ... 其他配置
-  
+  // ... other configuration
+
   themes: [
     [
       require.resolve("@easyops-cn/docusaurus-search-local"),
@@ -555,33 +596,33 @@ const config = {
       },
     ],
   ],
-  
-  // ... 其他配置
+
+  // ... other configuration
 };
 ```
 
-## 部署配置
+## Deployment Configuration
 
-### 部署流程
+### Deployment Process
 
 ```mermaid
 sequenceDiagram
-    participant Dev as 开发者
-    participant Git as Git仓库
-    participant Vercel as Vercel平台
-    participant CDN as CDN网络
-    participant User as 用户
-    
-    Dev->>Git: 推送代码
-    Git->>Vercel: 触发构建
-    Vercel->>Vercel: 自动构建
-    Vercel->>CDN: 部署到CDN
-    CDN->>User: 提供访问服务
-    
-    Note over Vercel: 构建过程包括:<br/>npm install<br/>npm run build<br/>静态文件生成
+    participant Dev as Developer
+    participant Git as Git Repository
+    participant Vercel as Vercel Platform
+    participant CDN as CDN Network
+    participant User as User
+
+    Dev->>Git: Push code
+    Git->>Vercel: Trigger build
+    Vercel->>Vercel: Auto build
+    Vercel->>CDN: Deploy to CDN
+    CDN->>User: Provide access service
+
+    Note over Vercel: Build process includes:<br/>npm install<br/>npm run build<br/>Static file generation
 ```
 
-### Vercel部署配置
+### Vercel Deployment Configuration
 
 ```json title="vercel.json" showLineNumbers
 {
@@ -604,7 +645,7 @@ sequenceDiagram
 }
 ```
 
-### GitHub Actions自动部署
+### GitHub Actions Automated Deployment
 
 ```yaml title=".github/workflows/deploy.yml" showLineNumbers
 name: Deploy to Vercel
@@ -618,22 +659,22 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    
+
     steps:
     - uses: actions/checkout@v3
-    
+
     - name: Setup Node.js
       uses: actions/setup-node@v3
       with:
         node-version: '18'
         cache: 'npm'
-    
+
     - name: Install dependencies
       run: npm ci
-    
+
     - name: Build
       run: npm run build
-    
+
     - name: Deploy to Vercel
       uses: amondnet/vercel-action@v20
       with:
@@ -643,45 +684,49 @@ jobs:
         working-directory: ./
 ```
 
-:::info 小贴士
+:::info[💡 Tips]
 
-在部署前请确保：
-
-- 所有依赖都已正确安装
-- 构建过程没有错误
-- 静态资源路径正确
+Before deployment, please ensure:
+- All dependencies are properly installed
+- Build process has no errors
+- Static asset paths are correct
 
 :::
 
-## 性能优化
+## Performance Optimization
 
-### 优化策略
+### Optimization Strategies
 
 ```mermaid
 graph TD
-    A[性能优化] --> B[构建优化]
-    A --> C[资源优化]
-    A --> D[加载优化]
-    
-    B --> B1[代码分割]
+    A[Performance Optimization] --> B[Build Optimization]
+    A --> C[Resource Optimization]
+    A --> D[Loading Optimization]
+
+    B --> B1[Code Splitting]
     B --> B2[Tree Shaking]
-    B --> B3[压缩优化]
-    
-    C --> C1[图片优化]
-    C --> C2[字体优化]
-    C --> C3[CSS优化]
-    
-    D --> D1[懒加载]
-    D --> D2[预加载]
-    D --> D3[缓存策略]
+    B --> B3[Compression Optimization]
+
+    C --> C1[Image Optimization]
+    C --> C2[Font Optimization]
+    C --> C3[CSS Optimization]
+
+    D --> D1[Lazy Loading]
+    D --> D2[Preloading]
+    D --> D3[Caching Strategy]
+
+    style A fill:#e1f5fe
+    style B fill:#f3e5f5
+    style C fill:#e8f5e9
+    style D fill:#fff3e0
 ```
 
-### 图片优化配置
+### Image Optimization Configuration
 
 ```javascript title="docusaurus.config.js" showLineNumbers {10-15}
 const config = {
-  // ... 其他配置
-  
+  // ... other configuration
+
   plugins: [
     [
       '@docusaurus/plugin-ideal-image',
@@ -694,57 +739,56 @@ const config = {
       },
     ],
   ],
-  
-  // ... 其他配置
+
+  // ... other configuration
 };
 ```
 
-:::success 部署成功
+:::success[🎉 Deployment Successful]
 
-恭喜！您已经成功搭建了一个功能完整的Docusaurus博客。
+Congratulations! You have successfully built a fully functional Docusaurus blog.
 
-接下来可以：
-
-- 添加更多内容
-- 定制个性化样式
-- 集成第三方服务
-- 优化SEO设置
+Next you can:
+- Add more content
+- Customize personal styles
+- Integrate third-party services
+- Optimize SEO settings
 
 :::
 
-## 进阶功能
+## Advanced Features
 
-### 国际化配置
+### Internationalization Configuration
 
 ```javascript title="docusaurus.config.js" showLineNumbers {5-10}
 const config = {
-  // ... 其他配置
-  
+  // ... other configuration
+
   i18n: {
-    defaultLocale: 'zh-Hans',
-    locales: ['zh-Hans', 'en'],
+    defaultLocale: 'en',
+    locales: ['en', 'zh-Hans'],
     localeConfigs: {
-      'zh-Hans': {
-        label: '中文',
-        direction: 'ltr',
-      },
       en: {
         label: 'English',
         direction: 'ltr',
       },
+      'zh-Hans': {
+        label: '中文',
+        direction: 'ltr',
+      },
     },
   },
-  
-  // ... 其他配置
+
+  // ... other configuration
 };
 ```
 
-### 版本控制
+### Version Control
 
 ```javascript title="docusaurus.config.js" showLineNumbers {8-12}
 const config = {
-  // ... 其他配置
-  
+  // ... other configuration
+
   presets: [
     [
       'classic',
@@ -753,7 +797,7 @@ const config = {
           sidebarPath: './sidebars.js',
           versions: {
             current: {
-              label: '当前版本',
+              label: 'Current Version',
               path: 'current',
             },
           },
@@ -761,43 +805,42 @@ const config = {
       },
     ],
   ],
-  
-  // ... 其他配置
+
+  // ... other configuration
 };
 ```
 
-### 学习路径规划
+### Learning Path Planning
 
 ```mermaid
 journey
-    title Docusaurus学习路径
-    section 基础阶段
-      了解基本概念: 5: 初学者
-      搭建第一个项目: 4: 初学者
-      掌握基本配置: 3: 初学者
-    section 进阶阶段
-      自定义主题: 4: 进阶者
-      添加插件功能: 5: 进阶者
-      优化性能表现: 4: 进阶者
-    section 高级阶段
-      开发自定义插件: 5: 专家
-      深度定制主题: 4: 专家
-      贡献开源项目: 5: 专家
+    title Docusaurus Learning Path
+    section Basic Stage
+      Understand basic concepts: 5: Beginner
+      Build first project: 4: Beginner
+      Master basic configuration: 3: Beginner
+    section Advanced Stage
+      Customize themes: 4: Advanced
+      Add plugin features: 5: Advanced
+      Optimize performance: 4: Advanced
+    section Expert Stage
+      Develop custom plugins: 5: Expert
+      Deep theme customization: 4: Expert
+      Contribute to open source: 5: Expert
 ```
 
-:::warning 注意事项
+:::warning[⚠️ Important Notes]
 
-在开发过程中请注意：
-
-- 定期备份重要数据
-- 测试多种浏览器兼容性
-- 优化移动端显示效果
-- 关注安全性最佳实践
+During development, please note:
+- Regularly backup important data
+- Test multiple browser compatibility
+- Optimize mobile display
+- Follow security best practices
 
 :::
 
-## 总结
+## Summary
 
-通过本教程，您已经掌握了Docusaurus博客搭建的完整流程。从项目初始化到部署上线，每个步骤都配有详细说明和代码示例。
+Through this tutorial, you have mastered the complete process of building a Docusaurus blog. From project initialization to deployment launch, each step is accompanied by detailed explanations and code examples.
 
-继续探索Docusaurus的更多可能性，打造属于您的独特博客平台！
+Continue exploring more possibilities with Docusaurus and create your unique blog platform!

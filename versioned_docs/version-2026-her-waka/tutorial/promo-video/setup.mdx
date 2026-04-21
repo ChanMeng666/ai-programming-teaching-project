@@ -1,6 +1,6 @@
 ---
-title: "设置你的工具"
-description: "安装 Node.js、AI 助手、Remotion，并获取你的 ElevenLabs API 密钥 —— 创建 AI 宣传视频所需的一切准备工作。"
+title: "Set up your tools"
+description: "Install Node.js, your AI assistant, Remotion, and get your ElevenLabs API key — everything you need before creating AI-powered promo videos."
 ---
 
 import InstallNodejs from "../../_snippets/install-nodejs.mdx";
@@ -9,197 +9,197 @@ import InstallWisprFlow from "../../_snippets/install-wispr-flow.mdx";
 import OpenTerminal from "../../_snippets/open-terminal.mdx";
 import GetElevenlabsApiKey from "../../_snippets/get-elevenlabs-api-key.mdx";
 
-在开始创建视频之前，先安装并连接好所有工具。这次需要的工具比平时多一些 —— 但我们会带你完成每一步。
+Before we start creating videos, let's get all your tools installed and connected. There are a few more tools than usual — but we will guide you through each one.
 
 <Warning>
-**你需要准备：** 一台能联网的电脑。无需任何编程或视频剪辑经验 —— 我们会一步一步带你完成每个步骤。
+**You will need:** a laptop with internet access. No coding or video editing experience is required — we will guide you through every step.
 </Warning>
 
 <Steps>
-  <Step title="安装 Wispr Flow（可选）">
+  <Step title="Install Wispr Flow (optional)">
     <InstallWisprFlow />
   </Step>
 
-  <Step title="打开终端">
+  <Step title="Open your terminal">
     <OpenTerminal />
   </Step>
 
-  <Step title="安装 Node.js">
+  <Step title="Install Node.js">
     <Info>
-    **已有 Node.js？** 如果你在之前的教程中已经安装过，跳过此步骤。在终端运行 `node --version` 检查 —— 你应该会看到类似 `v22.x.x` 的版本号。
+    **Already have Node.js?** If you installed it for a previous tutorial, skip this step. Run `node --version` in your terminal to check — you should see a version number like `v22.x.x`.
     </Info>
 
     <InstallNodejs />
   </Step>
 
-  <Step title="安装你的 AI 助手">
-    你有两个选择。Gemini CLI 是免费的，效果很好。Claude Code 是 Remotion 官方推荐的付费替代方案 —— 功能更强大，但需要订阅。
+  <Step title="Install your AI assistant">
+    You have two options. Gemini CLI is free and works well. Claude Code is a paid alternative that Remotion officially recommends — it is more capable but requires a subscription.
 
     <Tabs>
-      <Tab title="Gemini CLI（免费）">
+      <Tab title="Gemini CLI (Free)">
         <Info>
-        **已有 Gemini CLI？** 如果你在之前的教程中已经安装过，跳过此步骤。只需在终端运行 `gemini`，确认它仍可正常启动。
+        **Already have Gemini CLI?** If you installed it for a previous tutorial, skip this step. Just run `gemini` in your terminal to check it still works.
         </Info>
 
         <InstallGeminiCli />
 
-        输入 `/quit` 暂时退出 Gemini CLI。设置好视频项目后，我们会重新启动它。
+        Type `/quit` to exit Gemini CLI for now. We will start it again after setting up the video project.
       </Tab>
 
-      <Tab title="Claude Code（付费）">
-        Claude Code 是 Anthropic 的 AI 编程助手。需要从 [claude.ai](https://claude.ai) 购买 **Max 或 Pro 订阅**。Remotion 的官方文档推荐使用 Claude Code 进行 AI 视频创作。
+      <Tab title="Claude Code (Paid)">
+        Claude Code is Anthropic's AI coding assistant. It requires a **Max or Pro subscription** from [claude.ai](https://claude.ai). Remotion's official documentation recommends Claude Code for AI video creation.
 
-        运行以下命令安装：
+        Install it by running:
 
-        ```bash title="复制此命令"
+        ```bash title="Copy this command"
         npm install -g @anthropic-ai/claude-code
         ```
 
-        然后启动它：
+        Then start it:
 
-        ```bash title="复制此命令"
+        ```bash title="Copy this command"
         claude
         ```
 
-        第一次运行时，Claude Code 会要求你通过浏览器登录。按照屏幕上的说明操作。
+        The first time you run it, Claude Code will ask you to sign in via your browser. Follow the instructions on screen.
 
-        输入 `/exit` 暂时退出 Claude Code。
+        Type `/exit` to exit Claude Code for now.
 
-        <Accordion title="'npm' 未被识别">
-        这意味着 Node.js 没有正确安装。返回重新安装 Node.js。重新安装后，**完全关闭终端并打开一个新的终端**，然后再试一次。
+        <Accordion title="'npm' is not recognised">
+        This means Node.js is not installed correctly. Go back and reinstall Node.js. After reinstalling, **close your terminal completely and open a new one** before trying again.
         </Accordion>
 
-        <Accordion title="权限被拒绝错误">
-        **Windows：** 关闭 PowerShell，右键单击重新打开并选择**"以管理员身份运行"**，然后再次尝试安装命令。
+        <Accordion title="Permission denied error">
+        **Windows:** Close PowerShell and reopen it by right-clicking and choosing **"Run as Administrator"**. Then try the install command again.
 
-        **macOS：** 在命令前加 `sudo`：`sudo npm install -g @anthropic-ai/claude-code`，并在提示时输入密码。
+        **macOS:** Add `sudo` before the command: `sudo npm install -g @anthropic-ai/claude-code` and enter your password when prompted.
         </Accordion>
       </Tab>
     </Tabs>
   </Step>
 
-  <Step title="获取你的 ElevenLabs API 密钥">
+  <Step title="Get your ElevenLabs API key">
     <GetElevenlabsApiKey />
   </Step>
 
-  <Step title="创建你的视频项目">
-    现在让我们创建一个新的 Remotion 项目 —— 这是将你的描述转化为真实视频文件的框架。
+  <Step title="Create your video project">
+    Now let's create a new Remotion project — this is the framework that turns your descriptions into real video files.
 
-    在终端中运行此命令：
+    Run this command in your terminal:
 
-    ```bash title="复制此命令"
+    ```bash title="Copy this command"
     npx create-video@latest
     ```
 
-    当系统提示时，选择以下设置：
-    - **项目名称：** `my-promo-video`（或你喜欢的任何名称）
-    - **模板：** 选择 **Blank**
-    - **TailwindCSS：** Yes
-    - **Install Skills：** Yes
+    When prompted, choose these settings:
+    - **Project name:** `my-promo-video` (or any name you like)
+    - **Template:** Select **Blank**
+    - **TailwindCSS:** Yes
+    - **Install Skills:** Yes
 
     <Info>
-    **刚才发生了什么？** 你在电脑上创建了一个新的视频项目。Remotion 是一个从代码创建视频的框架 —— 但你永远不需要自己编写代码。你的 AI 助手会替你读取和编写所有代码。你安装的"Skills"是帮助 AI 理解 Remotion 工作原理的文档文件。
+    **What just happened?** You created a new video project on your computer. Remotion is a framework that creates videos from code — but you will never write code yourself. Your AI assistant reads and writes all the code for you. The "Skills" you installed are documentation files that help the AI understand how Remotion works.
     </Info>
 
-    然后进入项目文件夹并安装依赖：
+    Then go into the project folder and install dependencies:
 
-    ```bash title="复制此命令"
+    ```bash title="Copy this command"
     cd my-promo-video
     ```
 
-    ```bash title="复制此命令"
+    ```bash title="Copy this command"
     npm install
     ```
 
-    <Accordion title="'npx' 未被识别或命令失败">
-    确保 Node.js 已正确安装 —— 运行 `node --version` 检查。如果 Node.js 正常但 `npx` 失败，尝试关闭并重新打开终端。在 Windows 上，你可能需要以管理员身份运行终端。
+    <Accordion title="'npx' is not recognised or the command fails">
+    Make sure Node.js is installed correctly — run `node --version` to check. If that works but `npx` fails, try closing and reopening your terminal. On Windows, you may need to run the terminal as Administrator.
     </Accordion>
 
-    <Accordion title="项目名称已存在">
-    选择一个不同的名称，或先删除现有文件夹。你可以使用任何你喜欢的名称 —— 只需记住在本教程剩余部分用该名称替换 `my-promo-video`。
+    <Accordion title="The project name already exists">
+    Choose a different name, or delete the existing folder first. You can use any name you like — just remember to use that name instead of `my-promo-video` in the rest of this tutorial.
     </Accordion>
   </Step>
 
-  <Step title="启动视频预览">
-    启动 Remotion 预览服务器，这样你就可以在构建视频时实时查看效果：
+  <Step title="Start the video preview">
+    Start the Remotion preview server so you can see your video as you build it:
 
-    ```bash title="复制此命令"
+    ```bash title="Copy this command"
     npm run dev
     ```
 
-    这会在浏览器中打开一个预览窗口（通常在 `http://localhost:3000`）。你应该会看到一个空的视频画布。
+    This opens a preview window in your browser (usually at `http://localhost:3000`). You should see an empty video canvas.
 
     <Tip>
-    **保持这个终端窗口运行。** 预览服务器需要在你构建视频时保持活跃。在下一步中，你将打开**第二个终端窗口**来运行 AI 助手。
+    **Keep this terminal window running.** The preview server needs to stay active while you build your video. You will open a **second terminal window** in the next step for your AI assistant.
     </Tip>
 
-    <Accordion title="浏览器没有自动打开">
-    手动打开浏览器并访问 `http://localhost:3000`。如果看到错误，确保终端显示"Server running"或类似内容 —— 可能需要一点时间启动。
+    <Accordion title="The browser does not open automatically">
+    Open your browser manually and go to `http://localhost:3000`. If you see an error, make sure the terminal shows "Server running" or similar — it may take a moment to start.
     </Accordion>
   </Step>
 
-  <Step title="在项目中启动你的 AI 助手">
-    打开一个**新的终端窗口**（保持第一个窗口中的预览服务器运行）。导航到你的项目文件夹并启动 AI 助手：
+  <Step title="Start your AI assistant in the project">
+    Open a **new terminal window** (keep the preview server running in the first one). Navigate to your project folder and start your AI assistant:
 
     <Tabs>
-      <Tab title="Gemini CLI（免费）">
-        ```bash title="复制此命令"
+      <Tab title="Gemini CLI (Free)">
+        ```bash title="Copy this command"
         cd my-promo-video
         ```
 
-        ```bash title="复制此命令"
+        ```bash title="Copy this command"
         gemini
         ```
 
-        Gemini CLI 现在在你的视频项目内运行。它可以读取所有项目文件，并在你描述想要的内容时创建视频构图。
+        Gemini CLI is now running inside your video project. It can read all the project files and create video compositions when you describe what you want.
       </Tab>
 
-      <Tab title="Claude Code（付费）">
-        ```bash title="复制此命令"
+      <Tab title="Claude Code (Paid)">
+        ```bash title="Copy this command"
         cd my-promo-video
         ```
 
-        ```bash title="复制此命令"
+        ```bash title="Copy this command"
         claude
         ```
 
-        Claude Code 现在在你的视频项目内运行。它可以读取所有项目文件 —— 包括 Remotion Skills 文档 —— 并在你描述想要的内容时创建视频构图。
+        Claude Code is now running inside your video project. It can read all the project files — including the Remotion Skills documentation — and create video compositions when you describe what you want.
 
         <Tip>
-        **Claude Code + Remotion Skills：** 因为你在项目创建时安装了 Skills，Claude Code 内置了 Remotion 工作原理的知识。这是 [Remotion 官方文档](https://www.remotion.dev/docs/ai/claude-code)推荐的工作流。
+        **Claude Code + Remotion Skills:** Because you installed Skills during project creation, Claude Code has built-in knowledge of how Remotion works. This is the workflow recommended in [Remotion's official documentation](https://www.remotion.dev/docs/ai/claude-code).
         </Tip>
       </Tab>
     </Tabs>
 
     <Info>
-    **同时运行两个终端：** 这是正常且预期的情况。终端 1 运行预览服务器（这样你可以看到你的视频）。终端 2 运行你的 AI 助手（这样你可以描述你想要的内容）。它们协同工作 —— AI 编写代码，预览实时显示结果。
+    **Two terminals running at once:** This is normal and expected. Terminal 1 runs the preview server (so you can see your video). Terminal 2 runs your AI assistant (so you can describe what you want). They work together — the AI writes code, and the preview shows the result in real time.
     </Info>
   </Step>
 </Steps>
 
-## 验证你的设置
+## Verify your setup
 
 <AccordionGroup>
-  <Accordion title="Node.js 已安装">
-    在终端运行 `node --version`，应显示一个版本号。
+  <Accordion title="Node.js installed">
+    Run `node --version` in your terminal. You should see a version number.
   </Accordion>
-  <Accordion title="AI 助手已安装">
-    在终端运行 `gemini` 或 `claude`，可正常启动并显示一个可输入的提示符。
+  <Accordion title="AI assistant installed">
+    Run `gemini` or `claude` in your terminal. It starts up and shows a prompt where you can type.
   </Accordion>
-  <Accordion title="ElevenLabs API 密钥已保存">
-    你已复制并将 API 密钥保存在安全的地方 —— 文本文件、笔记或密码管理器。
+  <Accordion title="ElevenLabs API key saved">
+    You have your API key copied and saved somewhere safe — a text file, a note, or your password manager.
   </Accordion>
-  <Accordion title="Remotion 项目已创建">
-    `my-promo-video` 文件夹存在于你的电脑上，其中包含项目文件。
+  <Accordion title="Remotion project created">
+    The folder `my-promo-video` exists on your computer with project files inside.
   </Accordion>
-  <Accordion title="预览服务器正在运行">
-    终端 1 正在运行 `npm run dev`，你可以在 `http://localhost:3000` 看到 Remotion 预览。
+  <Accordion title="Preview server running">
+    Terminal 1 is running `npm run dev` and you can see the Remotion preview at `http://localhost:3000`.
   </Accordion>
-  <Accordion title="AI 助手在项目中运行">
-    终端 2 的 AI 助手（Gemini CLI 或 Claude Code）正在 `my-promo-video` 文件夹内运行。
+  <Accordion title="AI assistant running in the project">
+    Terminal 2 has your AI assistant (Gemini CLI or Claude Code) running inside the `my-promo-video` folder.
   </Accordion>
 </AccordionGroup>
 
 <Note>
-一切就绪？前往[创建你的第一个宣传视频](/docs/2026-her-waka/tutorial/promo-video/create-video)，开始构建。
+All set? Head to [Create your first promo video](/docs/2026-her-waka/tutorial/promo-video/create-video) to start building.
 </Note>

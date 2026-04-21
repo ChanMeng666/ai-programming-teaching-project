@@ -154,7 +154,7 @@ export default function ChatWidget() {
       console.error('Chat error:', error);
       const errorMessage = translate({
         id: 'chatWidget.error.message',
-        message: '抱歉，发生了错误。请稍后重试。',
+        message: 'Sorry, an error occurred. Please try again later.',
         description: 'Error message when chat fails',
       });
       // Update message with error

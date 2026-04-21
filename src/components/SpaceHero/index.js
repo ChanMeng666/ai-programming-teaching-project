@@ -33,17 +33,17 @@ export default function SpaceHero() {
         <GlassPanel highlight className={styles.heroPanel} padding="large">
           {/* 主标题 */}
           <h1 className={styles.title}>
-            <Translate id="homepage.hero.welcome">欢迎来到</Translate>
+            <Translate id="homepage.hero.welcome">Welcome to</Translate>
             <span className={styles.highlightText}>
-              <Translate id="homepage.hero.platform">AI 编程宇宙</Translate>
+              <Translate id="homepage.hero.platform">AI Programming Universe</Translate>
             </span>
           </h1>
 
           {/* 描述 */}
           <p className={styles.subtitle}>
             <Translate id="homepage.hero.description2">
-              在这里，你将踏上一段星际编程之旅。无论你是编程新手还是经验开发者，
-              AI 都将成为你最强大的副驾驶，带你探索代码宇宙的无限可能。
+              Embark on a journey through the programming galaxy. Whether you're a beginner or an experienced developer,
+              AI will be your co-pilot, helping you explore the infinite possibilities of the code universe.
             </Translate>
           </p>
 
@@ -51,10 +51,10 @@ export default function SpaceHero() {
           <div className={styles.actions}>
             <Link to="/docs/curriculum-outline" className={styles.primaryButton}>
               <RocketIcon />
-              <Translate id="homepage.hero.startButton">开始探索</Translate>
+              <Translate id="homepage.hero.startButton">Start Exploring</Translate>
             </Link>
             <Link to="/blog" className={styles.secondaryButton}>
-              <Translate id="homepage.hero.blogButton">最新动态</Translate>
+              <Translate id="homepage.hero.blogButton">Latest Updates</Translate>
             </Link>
           </div>
         </GlassPanel>

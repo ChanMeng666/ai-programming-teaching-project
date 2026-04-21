@@ -1,25 +1,25 @@
 ---
-title: 部署并测试你的机器人
-description: "设置 GitHub Actions 让机器人自动运行，配置 Secrets，并端到端测试所有内容。"
+title: Deploy and Test Your Bot
+description: "Set up GitHub Actions to run your bot automatically, configure secrets, and test everything end to end."
 ---
 
-你的机器人已经构建好了。现在让我们使用 GitHub Actions 让它每天早上自动运行。
+Your bot is built. Now let's make it run automatically every morning using GitHub Actions.
 
-## 什么是 GitHub Actions？
+## What Is GitHub Actions?
 
-GitHub Actions 是一个内置的自动化服务，替你运行任务。你告诉它*何时*运行（例如每个工作日早上 9 点）和*做什么*（例如运行你的机器人脚本），它处理其余的一切 —— 无需服务器。
+GitHub Actions is a built-in automation service that runs tasks for you. You tell it *when* to run (e.g. every weekday at 9 am) and *what* to do (e.g. run your bot script), and it handles the rest — no server needed.
 
-<Accordion title="它在幕后是如何工作的？">
-当你推送一个工作流文件（`.github/workflows/` 中的 YAML 文件）时，GitHub 会监视你定义的触发器。当触发器触发 —— 计划时间、推送，或手动按钮 —— GitHub 会启动一个虚拟机，检出你的代码，安装依赖，然后运行你的命令。这就像云端有一台免费的电脑，只做一件事然后关机。
+<Accordion title="How does it work under the hood?">
+When you push a workflow file (a YAML file in `.github/workflows/`), GitHub watches for the trigger you defined. When the trigger fires — a scheduled time, a push, or a manual button press — GitHub spins up a virtual machine, checks out your code, installs dependencies, and runs your commands. It's like having a free computer in the cloud that does one job and shuts down.
 </Accordion>
 
 ---
 
-## 提示词 7：创建 GitHub Actions 工作流
+## Prompt 7: Create the GitHub Actions Workflow
 
-让 Claude Code 创建自动化 —— 说出或粘贴此提示词：
+Ask Claude Code to create the automation — say this or paste it:
 
-```text title="说出或复制此提示词"
+```text title="Say this or copy this prompt"
 Create a GitHub Actions workflow file at .github/workflows/daily-report.yml
 that:
 
@@ -38,21 +38,21 @@ that:
 Add comments explaining each section of the workflow file.
 ```
 
-**会发生什么：** Claude Code 创建包含 cron 调度、checkout、setup 和运行步骤的完整工作流文件。
+**What happens:** Claude Code creates a complete workflow file with the cron schedule, checkout, setup, and run steps.
 
 <Note>
-**关于 cron 时间：** GitHub Actions cron 使用 UTC。新西兰是 UTC+12（夏令时期间是 UTC+13）。调度 `0 20 * * 1-5` 表示"UTC 时间晚上 8 点，周一到周五"，大约对应新西兰标准时间早上 9 点。cron 触发器在繁忙时段可能延迟最多 15 分钟 —— 这是正常现象。
+**About cron timing:** GitHub Actions cron uses UTC. New Zealand is UTC+12 (or UTC+13 during daylight saving). The schedule `0 20 * * 1-5` means "8 PM UTC, Monday to Friday" which is approximately 9 AM NZST. Cron triggers can be delayed by up to 15 minutes during busy periods — this is normal.
 </Note>
 
-<Accordion title="[skip ci] 是什么意思？">
-当机器人提交更新的 `state.json` 时，提交消息包含 `[skip ci]`。这告诉 GitHub Actions 不要为该提交触发另一次工作流运行 —— 否则你会陷入机器人不断触发自身的无限循环。
+<Accordion title="What does [skip ci] mean?">
+When the bot commits the updated `state.json`, the commit message includes `[skip ci]`. This tells GitHub Actions not to trigger another workflow run for that commit — otherwise you'd get an infinite loop of the bot triggering itself.
 </Accordion>
 
-<Accordion title="为什么需要 fetch-depth: 0？">
-默认情况下，GitHub Actions 只检出最新提交（浅克隆）。你的机器人需要读取完整的 git 历史来查找最近的提交。设置 `fetch-depth: 0` 确保整个历史都可用。
+<Accordion title="Why fetch-depth: 0?">
+By default, GitHub Actions checks out only the latest commit (shallow clone). Your bot needs to read the full git history to find recent commits. Setting `fetch-depth: 0` ensures the entire history is available.
 </Accordion>
 
-<Accordion title="查看生成的工作流">
+<Accordion title="View the generated workflow">
 ```yaml
 # .github/workflows/daily-report.yml
 name: Daily Report Bot
@@ -107,39 +107,39 @@ jobs:
 
 ---
 
-## 配置 GitHub Secrets
+## Configure GitHub Secrets
 
-你的机器人需要三个 Secrets。永远不要将这些提交到代码中 —— 将它们存储在 GitHub 的加密 Secrets 中。
+Your bot needs three secrets. Never commit these to your code — store them in GitHub's encrypted secrets.
 
 <Warning>
-**永远不要将 API 密钥、Webhook URL 或其他机密提交到代码中。** 任何能看到你仓库的人都可以窃取它们。GitHub Secrets 会加密它们，只在工作流运行期间使其可用。
+**Never commit API keys, webhook URLs, or other secrets to your code.** Anyone who can see your repository could steal them. GitHub Secrets encrypts them and makes them available only during workflow runs.
 </Warning>
 
 <Tabs>
-  <Tab title="使用命令行（gh CLI）">
-    如果你安装了 [GitHub CLI](https://cli.github.com)：
+  <Tab title="Using the command line (gh CLI)">
+    If you have the [GitHub CLI](https://cli.github.com) installed:
 
-    ```bash title="复制此命令"
+    ```bash title="Copy this command"
     gh secret set OPENAI_API_KEY
     gh secret set SLACK_WEBHOOK_TEST
     gh secret set SLACK_WEBHOOK_PROD
     ```
 
-    每个命令都会提示你粘贴值。
+    Each command will prompt you to paste the value.
   </Tab>
-  <Tab title="使用 GitHub 网站">
+  <Tab title="Using the GitHub website">
     <Steps>
-      <Step title="前往你的仓库设置">
-        在 GitHub 上打开你的仓库 → **Settings** → **Secrets and variables** → **Actions**
+      <Step title="Go to your repository settings">
+        Open your repository on GitHub → **Settings** → **Secrets and variables** → **Actions**
       </Step>
-      <Step title="添加 OPENAI_API_KEY">
-        点击 **New repository secret**。名称：`OPENAI_API_KEY`。值：粘贴你的 OpenAI API 密钥。点击 **Add secret**。
+      <Step title="Add OPENAI_API_KEY">
+        Click **New repository secret**. Name: `OPENAI_API_KEY`. Value: paste your OpenAI API key. Click **Add secret**.
       </Step>
-      <Step title="添加 SLACK_WEBHOOK_TEST">
-        点击 **New repository secret**。名称：`SLACK_WEBHOOK_TEST`。值：粘贴你的测试频道 Webhook URL。点击 **Add secret**。
+      <Step title="Add SLACK_WEBHOOK_TEST">
+        Click **New repository secret**. Name: `SLACK_WEBHOOK_TEST`. Value: paste your test channel webhook URL. Click **Add secret**.
       </Step>
-      <Step title="添加 SLACK_WEBHOOK_PROD">
-        点击 **New repository secret**。名称：`SLACK_WEBHOOK_PROD`。值：粘贴你的生产频道 Webhook URL。点击 **Add secret**。
+      <Step title="Add SLACK_WEBHOOK_PROD">
+        Click **New repository secret**. Name: `SLACK_WEBHOOK_PROD`. Value: paste your production channel webhook URL. Click **Add secret**.
       </Step>
     </Steps>
   </Tab>
@@ -147,45 +147,45 @@ jobs:
 
 ---
 
-## 推送和部署
+## Push and Deploy
 
 <Steps>
-  <Step title="暂存并提交你的代码">
-    ```bash title="复制此命令"
+  <Step title="Stage and commit your code">
+    ```bash title="Copy this command"
     git add -A
     git commit -m "feat: add daily report bot"
     ```
   </Step>
-  <Step title="推送到 GitHub">
-    ```bash title="复制此命令"
+  <Step title="Push to GitHub">
+    ```bash title="Copy this command"
     git push origin main
     ```
   </Step>
-  <Step title="在 GitHub 上验证">
-    前往你在 GitHub 上的仓库 → **Actions** 标签页。你应该看到"Daily Report Bot"工作流已列出。它将在下一个计划时间自动运行，或者你可以手动触发它。
+  <Step title="Verify on GitHub">
+    Go to your repository on GitHub → **Actions** tab. You should see the "Daily Report Bot" workflow listed. It will run automatically on the next scheduled time, or you can trigger it manually.
   </Step>
 </Steps>
 
 ---
 
-## 测试工作流
+## Test the Workflow
 
 <Steps>
-  <Step title="干运行（不发布到 Slack）">
-    手动触发工作流进行干运行，检查一切是否正常，而不发布到 Slack：
+  <Step title="Dry run (no Slack post)">
+    Trigger the workflow manually with a dry run to check everything works without posting to Slack:
 
-    ```bash title="复制此命令"
+    ```bash title="Copy this command"
     gh workflow run daily-report.yml
     ```
 
-    或者在 GitHub 网站上：**Actions** → **Daily Report Bot** → **Run workflow**。
+    Or on the GitHub website: **Actions** → **Daily Report Bot** → **Run workflow**.
 
-    检查日志查看输出。你应该看到提交收集、库处理和摘要步骤成功完成。
+    Check the logs to see the output. You should see the commit collection, banking, and summary steps complete successfully.
   </Step>
-  <Step title="真实测试（发布到测试频道）">
-    如果干运行看起来正常，触发一次真实运行，发布到你的测试 Slack 频道。检查工作流文件中的 `SLACK_CHANNEL` 环境变量是否设置为 `test`，然后再次触发。
+  <Step title="Real test (post to test channel)">
+    If the dry run looks good, trigger a real run that posts to your test Slack channel. Check the `SLACK_CHANNEL` environment variable is set to `test` in the workflow file, then trigger again.
 
-    前往你的测试 Slack 频道 —— 你应该看到类似这样的消息：
+    Go to your test Slack channel — you should see a message like this:
 
     ```
     Daily Update — Tuesday, 11 March 2026
@@ -197,18 +197,18 @@ jobs:
     Blockers: None
     ```
   </Step>
-  <Step title="庆祝一下">
-    你的机器人能用了！它现在将在每个工作日早上自动运行。
+  <Step title="Celebrate">
+    Your bot works! It will now run automatically every weekday morning.
   </Step>
 </Steps>
 
 ---
 
-## 提示词 8：故障排除
+## Prompt 8: Troubleshoot
 
-事情并不总是第一次就能成功。以下是使用 Claude Code 进行调试的模式：
+Things don't always work on the first try. Here's the pattern for debugging with Claude Code:
 
-```text title="说出或复制此提示词"
+```text title="Say this or copy this prompt"
 I'm getting this error when the GitHub Actions workflow runs:
 
 [paste the exact error message here]
@@ -219,55 +219,55 @@ and fix it?
 ```
 
 <Tip>
-**沟通技巧：描述错误。** 始终粘贴准确的错误消息。告诉 Claude Code 你期望发生什么以及实际发生了什么。背景信息越多，修复越快。如果你在使用 Wispr Flow，你可以说出问题 —— "我遇到了一个错误，它说……" —— 然后粘贴实际的错误文本。
+**Communication skill: Describing errors.** Always paste the exact error message. Tell Claude Code what you expected to happen and what actually happened. The more context, the faster the fix. If you're using Wispr Flow, you can speak through the issue — "I'm getting an error that says..." — and then paste the actual error text.
 </Tip>
 
-### 常见问题
+### Common Issues
 
 <AccordionGroup>
-  <Accordion title="工作流没有触发">
-    **可能的原因：**
-    - 工作流文件不在默认分支（通常是 `main`）。计划工作流只从默认分支运行。
-    - cron 调度使用 UTC，不是你的本地时间。仔细检查时间转换。
-    - GitHub Actions 在繁忙时段可能将 cron 触发器延迟最多 15 分钟。
+  <Accordion title="Workflow not triggering">
+    **Possible causes:**
+    - The workflow file isn't on the default branch (usually `main`). Scheduled workflows only run from the default branch.
+    - The cron schedule is in UTC, not your local time. Double-check the conversion.
+    - GitHub Actions can delay cron triggers by up to 15 minutes during busy periods.
   </Accordion>
-  <Accordion title="Slack webhook 返回 403 或 404">
-    **可能的原因：**
-    - Webhook URL 已被撤销或不正确。前往你的 Slack 应用设置检查。
-    - 工作流中的 Secret 名称与你在 GitHub Secrets 中设置的名称不匹配。
-    - 你在使用测试 Webhook URL，但环境变量指向生产（或反之亦然）。
+  <Accordion title="Slack webhook returns 403 or 404">
+    **Possible causes:**
+    - The webhook URL has been revoked or is incorrect. Go to your Slack app settings and check.
+    - The secret name in your workflow doesn't match what you set in GitHub Secrets.
+    - You're using the test webhook URL but the environment variable points to prod (or vice versa).
   </Accordion>
-  <Accordion title="提交消息为空或乱码输出">
-    **可能的原因：** git log 分隔符与 shell 运算符冲突。将 `||` 或 `&&` 用作分隔符会出错，因为 shell 会将其解释为逻辑运算符。改用安全的分隔符，例如 `<SEP>`。
+  <Accordion title="Empty commit messages or garbled output">
+    **Possible cause:** The git log separator conflicts with shell operators. Using `||` or `&&` as separators will break because the shell interprets them. Use a safe separator like `<SEP>` instead.
   </Accordion>
-  <Accordion title="state 推送冲突">
-    **可能的原因：** 如果有人在机器人尝试提交 `state.json` 的同时向仓库推送，你会遇到冲突。`[skip ci]` 标签防止级联运行，但时间冲突仍然可能发生。这在实践中很少见。
+  <Accordion title="State push conflicts">
+    **Possible cause:** If someone pushes to the repository at the same time as the bot tries to commit `state.json`, you'll get a conflict. The `[skip ci]` tag prevents cascading runs, but timing conflicts can still happen. This is rare in practice.
   </Accordion>
-  <Accordion title="找不到提交记录">
-    **可能的原因：**
-    - 时间窗口太短。默认是 24 小时，但如果工作流在稍微不同的时间运行，某些提交可能落在窗口之外。
-    - checkout 步骤中缺少 `fetch-depth: 0`，所以 git 历史不可用。
+  <Accordion title="No commits found">
+    **Possible causes:**
+    - The time window is too short. The default is 24 hours, but if the workflow runs at a slightly different time, some commits might fall outside the window.
+    - `fetch-depth: 0` is missing from the checkout step, so the git history isn't available.
   </Accordion>
 </AccordionGroup>
 
 ---
 
-## 切换到生产环境
+## Switch to Production
 
-一旦你对测试输出满意，切换到生产频道：
+Once you're happy with the test output, switch to the production channel:
 
-1. 在你的工作流文件（`.github/workflows/daily-report.yml`）中，将 `SLACK_CHANNEL: test` 改为 `SLACK_CHANNEL: prod`
-2. 提交并推送
+1. In your workflow file (`.github/workflows/daily-report.yml`), change `SLACK_CHANNEL: test` to `SLACK_CHANNEL: prod`
+2. Commit and push
 
-或者让 Claude Code 来做：
+Or ask Claude Code:
 
-```text title="说出或复制此提示词"
+```text title="Say this or copy this prompt"
 Change the default Slack channel in the GitHub Actions workflow from
 "test" to "prod" so the daily reports go to the production channel.
 ```
 
-完成了 —— 你的机器人已上线。
+That's it — your bot is live.
 
 <Note>
-你的机器人已部署并在运行！前往[接下来做什么](/docs/2026-her-waka/tutorial/vibe-coding/whats-next)，了解扩展它的想法、学到的经验教训和反思问题。
+Your bot is deployed and running! Head to [What's next](/docs/2026-her-waka/tutorial/vibe-coding/whats-next) for ideas to extend it, lessons learned, and reflection questions.
 </Note>

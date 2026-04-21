@@ -1,46 +1,46 @@
 ---
-title: 用 Claude Code 构建
-description: "核心构建环节 —— 六个提示词将你的想法变成一个真正能用的 Slack 机器人，每一步都有沟通技巧指导。"
+title: Build It with Claude Code
+description: "The core build — six prompts that turn your idea into a working Slack bot, with communication tips for every step."
 ---
 
-这是教程的核心。你将向 Claude Code 发送六个提示词，完成后你将拥有一个完全能用的每日报告机器人。无需编程 —— 只需清晰的沟通。
+This is the heart of the tutorial. You will send six prompts to Claude Code, and by the end, you will have a fully working daily report bot. No coding required — just clear communication.
 
 <Tabs>
-  <Tab title="语音（Wispr Flow）">
-    打开 Wispr Flow 后，直接开始说话。你的话语会自动以文字形式出现在 Claude Code 中。自然地描述你想要什么 —— Claude Code 理解你的意思并为你编写代码。说话在描述长而详细的提示词时特别有效，因为你可以像向同事解释一样说出需求。
+  <Tab title="Voice (Wispr Flow)">
+    With Wispr Flow running, just start speaking. Your words appear as text in Claude Code automatically. Describe what you want naturally — Claude Code understands and writes the code for you. Speaking works especially well for long, descriptive prompts because you can talk through the requirements as if explaining to a colleague.
   </Tab>
-  <Tab title="打字或粘贴">
-    从本页复制任何提示词并粘贴到 Claude Code 中。或者用自然语言打出你自己的请求。不需要特殊语法 —— 只需描述你想要什么。
+  <Tab title="Type or paste">
+    Copy any prompt from this page and paste it into Claude Code. Or type your own request in natural language. No special syntax needed — just describe what you want.
   </Tab>
 </Tabs>
 
-## 如何与 Claude Code 对话
+## How to Talk to Claude Code
 
 <Tip>
-把 Claude Code 想象成一个能编写任何代码的出色同事，但需要你清晰地解释目标。你描述得越好，结果就越好。无论你是说话还是打字，方法都是一样的 —— 只需说出你需要什么。
+Think of Claude Code as a brilliant colleague who can code anything, but needs you to explain the goal clearly. The better you describe what you want, the better the result. Whether you speak or type, the approach is the same — just say what you need.
 </Tip>
 
-对话循环始终是一样的：
+The conversation loop is always the same:
 
 ```mermaid
 flowchart LR
-    A["说出或打出\n你想要什么"] -->|"提示词"| B["Claude Code\n构建它"]
-    B -->|"审查"| C{"对吗？"}
-    C -->|"还不太对"| A
-    C -->|"对！"| D["继续"]
+    A["Speak or type\nwhat you want"] -->|"prompt"| B["Claude Code\nbuilds it"]
+    B -->|"review"| C{"Right?"}
+    C -->|"Not quite"| A
+    C -->|"Yes!"| D["Move on"]
 ```
 
-让我们开始构建。
+Let's start building.
 
 ---
 
-## 提示词 1：描述整个项目
+## Prompt 1: Describe the Whole Project
 
-在编写任何代码之前，给 Claude Code 呈现大局。这有助于它在每一步都做出更好的决策。
+Before writing any code, give Claude Code the big picture. This helps it make better decisions at every step.
 
-**打开终端，`cd` 进入你的 `daily-report-bot` 文件夹，输入 `claude` 启动 Claude Code。然后说出或发送此提示词：**
+**Open your terminal, `cd` into your `daily-report-bot` folder, and type `claude` to start Claude Code. Then say or send this prompt:**
 
-```text title="说出或复制此提示词"
+```text title="Say this or copy this prompt"
 I want to build a daily work report bot. Here's what it should do:
 
 1. Run every weekday morning via GitHub Actions
@@ -60,37 +60,37 @@ the main entry point? Don't write the full logic yet — just set up the
 skeleton.
 ```
 
-**会发生什么：** Claude Code 创建一个 `package.json`、一个主脚本文件（例如 `index.js` 或 `src/index.js`），可能还有一个配置文件。它搭建基本的项目结构，而不填充具体逻辑。
+**What happens:** Claude Code creates a `package.json`, a main script file (e.g. `index.js` or `src/index.js`), and possibly a config file. It sets up the basic project structure without filling in the logic.
 
 <Tip>
-**沟通技巧：设定背景。** 注意提示词是如何从大局开始的（"每日工作报告机器人"），然后列出具体需求，最后要求第一个具体步骤。这给了 Claude Code 足够的背景，让它能就项目结构、命名和依赖做出明智的选择。
+**Communication skill: Setting context.** Notice how the prompt starts with the big picture ("daily work report bot"), then lists specific requirements, then asks for a specific first step. This gives Claude Code enough context to make smart choices about project structure, naming, and dependencies.
 </Tip>
 
-<Accordion title="查看生成的项目结构">
-Claude Code 通常会创建类似这样的结构：
+<Accordion title="View the generated project structure">
+Claude Code will typically create something like:
 
 ```
 daily-report-bot/
   package.json
   src/
-    index.js          # 主入口点
-    commits.js        # 将收集 git 提交
-    summarise.js      # 将调用 OpenAI
-    slack.js          # 将发布到 Slack
-    bank.js           # 将处理提交库
-  .env.example        # 环境变量模板
+    index.js          # Main entry point
+    commits.js        # Will collect git commits
+    summarise.js      # Will call OpenAI
+    slack.js          # Will post to Slack
+    bank.js           # Will handle commit banking
+  .env.example        # Template for environment variables
 ```
 
-具体结构可能有所不同 —— 没关系。Claude Code 正在根据你的描述做出合理的决策。
+The exact structure may vary — that's fine. Claude Code is making reasonable decisions based on your description.
 </Accordion>
 
 ---
 
-## 提示词 2：构建提交收集器
+## Prompt 2: Build the Commit Collector
 
-现在让我们构建第一个真实的部分 —— 读取你的 git 提交记录的脚本。
+Now let's build the first real piece — the script that reads your git commits.
 
-```text title="说出或复制此提示词"
+```text title="Say this or copy this prompt"
 Now build the commit collector. It should:
 
 1. Use git log to read commits from the last 24 hours (or a configurable time window)
@@ -102,17 +102,17 @@ Now build the commit collector. It should:
 Export the function so other parts of the project can use it.
 ```
 
-**会发生什么：** Claude Code 编写一个函数，用正确的格式字符串运行 `git log`，解析输出，并返回一个干净的提交对象数组。
+**What happens:** Claude Code writes a function that runs `git log` with the right format string, parses the output, and returns a clean array of commit objects.
 
 <Tip>
-**沟通技巧：将工作拆解为步骤。** 我们没有让 Claude Code 一次性构建所有内容，而是一次处理一个部分。这让每个步骤更容易审查，如果出了问题，你能确切知道在哪里。
+**Communication skill: Breaking work into steps.** Instead of asking Claude Code to build everything at once, we're doing one piece at a time. This makes each step easier to review, and if something goes wrong, you know exactly where.
 </Tip>
 
 <Note>
-**说出技术提示词效果很好。** Wispr Flow 能准确处理"git log"、"API"和"环境变量"等技术术语。如果它听错了什么，你可以在按 Enter 之前快速修正文字。
+**Speaking technical prompts works well.** Wispr Flow handles technical terms like "git log", "API", and "environment variable" accurately. If it mishears something, you can quickly correct the text before pressing Enter.
 </Note>
 
-<Accordion title="查看生成的代码">
+<Accordion title="View the generated code">
 ```javascript
 // src/commits.js
 const { execSync } = require('child_process');
@@ -146,11 +146,11 @@ module.exports = { getRecentCommits };
 
 ---
 
-## 提示词 3：添加智能分配（提交库）
+## Prompt 3: Add the Smart Distribution (Commit Banking)
 
-这是机器人最聪明的部分。如果你周一完成了所有工作，你不希望周二到周五报告"什么都没做"。提交库将你的提交分配到整个一周。
+This is the cleverest part of the bot. If you do all your work on Monday, you don't want Tuesday through Friday to report "nothing done." Commit banking spreads your commits across the week.
 
-```text title="说出或复制此提示词"
+```text title="Say this or copy this prompt"
 Now build the commit banking feature. Here's how it should work:
 
 - Keep a "bank" of unposted commits in a local JSON file called state.json
@@ -167,27 +167,27 @@ Make sure state.json can be committed to git so GitHub Actions can
 persist it between runs.
 ```
 
-**会发生什么：** Claude Code 创建含有加载、保存和分配提交到工作日函数的库逻辑。
+**What happens:** Claude Code creates the banking logic with functions to load, save, and distribute commits across weekdays.
 
 <Tip>
-**沟通技巧：用通俗语言描述业务逻辑。** 你没有写任何算法 —— 你描述了你想要的*行为*。"除以剩余工作日，向上取整，周五清空。" Claude Code 将这个描述转化为可工作的代码。这正是语音大显身手的地方 —— 只需像解释给别人听一样说出逻辑。
+**Communication skill: Describing business logic in plain language.** You didn't write any algorithm — you described the *behaviour* you wanted. "Divide by remaining weekdays, round up, empty on Friday." Claude Code translates this into working code. This is where voice really shines — just talk through the logic as if explaining it to someone.
 </Tip>
 
-<Accordion title="提交库在实际中的工作方式">
-以下是真实一周内会发生的情况：
+<Accordion title="How commit banking works in practice">
+Here's what happens in a real week:
 
-| 天 | 新提交 | 存储总计 | 今天的批次 | 剩余 |
+| Day | New commits | Banked total | Today's batch | Remaining |
 |-----|------------|--------------|---------------|-----------|
-| 周一 | 10 | 10 | 2（10 / 5 天） | 8 |
-| 周二 | 0 | 8 | 2（8 / 4 天） | 6 |
-| 周三 | 3 | 9 | 3（9 / 3 天） | 6 |
-| 周四 | 0 | 6 | 3（6 / 2 天） | 3 |
-| 周五 | 2 | 5 | 5（全部剩余） | 0 |
+| Monday | 10 | 10 | 2 (10 / 5 days) | 8 |
+| Tuesday | 0 | 8 | 2 (8 / 4 days) | 6 |
+| Wednesday | 3 | 9 | 3 (9 / 3 days) | 6 |
+| Thursday | 0 | 6 | 3 (6 / 2 days) | 3 |
+| Friday | 2 | 5 | 5 (all remaining) | 0 |
 
-每天都有内容可以报告，即使你那天没有提交。
+Every day has something to report, even if you didn't commit that day.
 </Accordion>
 
-<Accordion title="查看生成的代码">
+<Accordion title="View the generated code">
 ```javascript
 // src/bank.js
 const fs = require('fs');
@@ -237,11 +237,11 @@ module.exports = { getTodaysBatch, loadState, saveState };
 
 ---
 
-## 提示词 4：添加 AI 摘要生成器
+## Prompt 4: Add the AI Summariser
 
-现在我们连接到 OpenAI，将原始提交消息转化为友好的每日更新。
+Now we connect to OpenAI to turn raw commit messages into a friendly daily update.
 
-```text title="说出或复制此提示词"
+```text title="Say this or copy this prompt"
 Now build the summariser. It should:
 
 1. Take an array of commit objects (message, author, date)
@@ -258,22 +258,22 @@ Now build the summariser. It should:
 Use the OPENAI_API_KEY environment variable for authentication.
 ```
 
-**会发生什么：** Claude Code 创建一个函数，将提交格式化为提示词，调用 OpenAI API，并返回摘要文字。
+**What happens:** Claude Code creates a function that formats commits into a prompt, calls the OpenAI API, and returns the summary text.
 
 <Tabs>
-  <Tab title="你请求了什么">
-    你描述了*行为* —— 输入提交，输出友好摘要。你指定了模型、语气、格式以及身份验证的工作方式。
+  <Tab title="What you asked">
+    You described the *behaviour* — take commits in, get a friendly summary out. You specified the model, tone, format, and how authentication works.
   </Tab>
-  <Tab title="Claude Code 构建了什么">
-    Claude Code 编写了 API 调用，设计了系统提示词，处理了错误，并返回了干净的文本。它做出了关于温度、token 限制和错误处理的决策，你不需要自己考虑这些。
+  <Tab title="What Claude Code built">
+    Claude Code wrote the API call, crafted the system prompt, handled errors, and returned clean text. It made decisions about temperature, token limits, and error handling that you didn't need to think about.
   </Tab>
 </Tabs>
 
 <Tip>
-**沟通技巧：指定集成方式和输出格式。** 连接外部服务时，告诉 Claude Code 使用哪个 API、什么模型，以及输出应该是什么样子。对结果描述得越具体，需要迭代的次数就越少。
+**Communication skill: Specifying integrations and output format.** When connecting to external services, tell Claude Code which API to use, what model, and what the output should look like. The more specific you are about the result, the less you'll need to iterate.
 </Tip>
 
-<Accordion title="查看生成的代码">
+<Accordion title="View the generated code">
 ```javascript
 // src/summarise.js
 const OpenAI = require('openai');
@@ -315,11 +315,11 @@ module.exports = { summariseCommits };
 
 ---
 
-## 提示词 5：添加 Slack 发布功能
+## Prompt 5: Add Slack Posting
 
-将输出连接到 Slack。
+Time to connect the output to Slack.
 
-```text title="说出或复制此提示词"
+```text title="Say this or copy this prompt"
 Now build the Slack posting module. It should:
 
 1. Take the summary text from the summariser
@@ -332,13 +332,13 @@ Now build the Slack posting module. It should:
 Use the native https module or fetch — no need for a Slack SDK.
 ```
 
-**会发生什么：** Claude Code 创建一个小函数，向 Slack Webhook 发送带有格式化消息的 POST 请求。
+**What happens:** Claude Code creates a small function that sends a POST request to the Slack webhook with a formatted message.
 
 <Tip>
-**沟通技巧：增量构建。** 注意我们没有在提示词 1 中尝试构建 Slack 发布功能。到这一步，Claude Code 已经了解了整个项目。它知道摘要生成器返回文本，并自然地连接各个部分。
+**Communication skill: Building incrementally.** Notice we didn't try to build Slack posting in Prompt 1. By this point, Claude Code understands the whole project. It knows the summariser returns text, and it connects the pieces naturally.
 </Tip>
 
-<Accordion title="查看生成的代码">
+<Accordion title="View the generated code">
 ```javascript
 // src/slack.js
 async function postToSlack(summary) {
@@ -388,11 +388,11 @@ module.exports = { postToSlack };
 
 ---
 
-## 提示词 6：整合所有部分并本地测试
+## Prompt 6: Wire It All Together and Test Locally
 
-最后的构建步骤 —— 连接所有部分并添加安全测试的干运行模式。
+The last build step — connect all the pieces and add a dry-run mode for safe testing.
 
-```text title="说出或复制此提示词"
+```text title="Say this or copy this prompt"
 Now wire everything together in the main entry point. It should:
 
 1. Collect recent commits using the commit collector
@@ -413,17 +413,17 @@ Add helpful console.log messages at each step so I can follow what's
 happening when it runs.
 ```
 
-**会发生什么：** Claude Code 创建主脚本，编排所有部分，支持命令行标志和环境变量。
+**What happens:** Claude Code creates the main script that orchestrates all the pieces, with command-line flags and environment variable support.
 
 <Warning>
-**保管好你的 API 密钥。** 永远不要将 `.env` 文件、API 密钥或 Webhook URL 提交到 git。我们将在下一部分将它们存储为 GitHub Secrets。
+**Keep your API keys safe.** Never commit `.env` files, API keys, or webhook URLs to git. We'll store them as GitHub secrets in the next section.
 </Warning>
 
 <Tip>
-**沟通技巧：请求集成和测试。** 这个提示词将所有内容整合在一起，并要求提供测试支持（干运行模式）。在连接到真实服务之前，始终要求一种安全的测试方式。
+**Communication skill: Requesting integration and testing.** This prompt brings everything together and asks for testing support (dry-run mode). Always ask for a way to test safely before connecting to real services.
 </Tip>
 
-<Accordion title="查看生成的代码">
+<Accordion title="View the generated code">
 ```javascript
 // src/index.js
 const { getRecentCommits } = require('./commits');
@@ -488,75 +488,75 @@ main().catch(error => {
 
 ---
 
-## 使用 Claude in Chrome 进行研究
+## Using Claude in Chrome to Research
 
-有时你需要查找一些信息 —— Slack 的 Webhook 格式、GitHub Actions 语法，或者错误消息。这就是 Claude in Chrome 派上用场的地方。
+Sometimes you need to look something up — Slack's webhook format, GitHub Actions syntax, or an error message. That's where Claude in Chrome comes in.
 
 <Tabs>
-  <Tab title="用 Claude in Chrome 研究">
-    1. 在 Chrome 中打开 Slack API 文档或任何文档页面
-    2. 点击 Claude in Chrome 扩展图标
-    3. 让它解释你正在阅读的内容，例如："What format does Slack expect for incoming webhook messages?"
-    4. 利用答案来优化你发给 Claude Code 的下一个提示词
+  <Tab title="Research with Claude in Chrome">
+    1. Open the Slack API docs or any documentation page in Chrome
+    2. Click the Claude in Chrome extension icon
+    3. Ask it to explain what you're reading, e.g.: *"What format does Slack expect for incoming webhook messages?"*
+    4. Use the answer to refine your next prompt to Claude Code
   </Tab>
-  <Tab title="用 Claude Code 应用">
-    将你的研究成果反馈给 Claude Code：
+  <Tab title="Apply with Claude Code">
+    Take what you learned from your research and feed it back to Claude Code:
 
-    ```text title="说出或复制此提示词"
+    ```text title="Say this or copy this prompt"
     I looked up the Slack webhook format. It supports blocks with
     "mrkdwn" type for rich formatting. Can you update the Slack
     module to use blocks instead of a plain text payload?
     ```
 
-    Claude Code 根据你的研究更新代码。
+    Claude Code updates the code based on your research.
   </Tab>
 </Tabs>
 
 ---
 
-## 沟通技巧总结
+## Communication Tips Summary
 
 <AccordionGroup>
-  <Accordion title="对你想要的内容具体说明">
-    不要说"构建一个 Slack 机器人"，而是说"构建一个函数，使用 blocks 格式向 Slack 传入 Webhook 发送 POST 请求。"越具体，需要迭代的次数就越少。
+  <Accordion title="Be specific about what you want">
+    Instead of "build a Slack bot", say "build a function that sends a POST request to a Slack incoming webhook with a formatted message using blocks." The more specific, the fewer iterations.
   </Accordion>
-  <Accordion title="提供你的背景情况">
-    从大局开始。告诉 Claude Code 项目是什么、为谁而做、你使用什么工具。背景信息帮助它在架构、命名和依赖方面做出更好的决策。
+  <Accordion title="Give context about your situation">
+    Start with the big picture. Tell Claude Code what the project is, who it's for, and what tools you're using. Context helps it make better decisions about architecture, naming, and dependencies.
   </Accordion>
-  <Accordion title="说话很适合描述功能">
-    使用 Wispr Flow 时，不用担心说出技术术语 —— 它能准确处理"API"、"webhook"、"JSON"和"环境变量"等词汇。说话在描述业务逻辑和期望行为时尤其自然。
+  <Accordion title="Speaking works well for describing features">
+    When using Wispr Flow, don't worry about speaking technical terms — it handles words like "API", "webhook", "JSON", and "environment variable" accurately. Speaking is especially natural for describing business logic and desired behaviour.
   </Accordion>
-  <Accordion title="让 Claude Code 解释它做了什么">
-    如果你不理解代码，可以问："Can you explain what this function does in plain language?" 理解代码有助于你发现问题并写出更好的后续提示词。
+  <Accordion title="Ask Claude Code to explain what it did">
+    If you don't understand the code, ask: *"Can you explain what this function does in plain language?"* Understanding the code helps you spot issues and write better follow-up prompts.
   </Accordion>
-  <Accordion title="如果出了问题，描述错误">
-    复制粘贴准确的错误消息。告诉 Claude Code 你期望发生什么以及实际发生了什么。不要自己尝试诊断问题 —— 让 AI 来帮助解决。
+  <Accordion title="If something breaks, describe the error">
+    Copy and paste the exact error message. Tell Claude Code what you expected to happen and what actually happened. Don't try to diagnose the problem yourself — let the AI help.
   </Accordion>
-  <Accordion title="迭代 —— 逐步优化你的请求">
-    你的第一个提示词很少能产生完美的结果。这很正常。审查 Claude Code 构建的内容，找出不太对的地方，然后发送后续提示词。每次迭代都会让你更接近目标。
+  <Accordion title="Iterate — refine your request step by step">
+    Your first prompt rarely produces the perfect result. That's normal. Review what Claude Code built, identify what's not quite right, and send a follow-up prompt. Each iteration gets you closer.
   </Accordion>
 </AccordionGroup>
 
 ---
 
-## 完整数据流
+## Full Data Flow
 
-以下是所有内容的连接方式：
+Here's how everything connects:
 
 ```mermaid
 flowchart TD
-    A["GitHub Actions 在早上 9 点触发"] --> B["脚本读取 git log"]
-    B --> C{"有新提交？"}
-    C -->|"有"| D["加入提交库"]
-    C -->|"没有"| E["使用已存储的提交"]
-    D --> F["计算今天的批次"]
+    A["GitHub Actions triggers at 9 am"] --> B["Script reads git log"]
+    B --> C{"New commits?"}
+    C -->|"Yes"| D["Add to commit bank"]
+    C -->|"No"| E["Use banked commits"]
+    D --> F["Calculate today's batch"]
     E --> F
-    F --> G["将批次发送给 OpenAI"]
-    G --> H["OpenAI 返回摘要"]
-    H --> I["通过 Webhook 发布到 Slack"]
-    I --> J["将剩余提交\n保存到 state.json"]
+    F --> G["Send batch to OpenAI"]
+    G --> H["OpenAI returns summary"]
+    H --> I["Post to Slack via webhook"]
+    I --> J["Save remaining commits\nto state.json"]
 ```
 
 <Note>
-你的机器人构建好了！前往[部署和测试](/docs/2026-her-waka/tutorial/vibe-coding/deploy-and-test)，设置 GitHub Actions，看它真正运行起来。
+Your bot is built! Head to [Deploy and test](/docs/2026-her-waka/tutorial/vibe-coding/deploy-and-test) to set up GitHub Actions and see it run for real.
 </Note>

@@ -7,16 +7,20 @@
     "message": "AI Programming Logo",
     "description": "The alt text of navbar logo"
   },
-  "item.label.教程": {
+  "item.label.Tutorials": {
     "message": "教程",
-    "description": "Navbar item with label 教程"
+    "description": "Navbar item with label Tutorials"
   },
-  "item.label.博客": {
+  "item.label.Blog": {
     "message": "博客",
-    "description": "Navbar item with label 博客"
+    "description": "Navbar item with label Blog"
   },
-  "item.label.留言板": {
+  "item.label.Message Board": {
     "message": "留言板",
-    "description": "Navbar item with label 留言板"
+    "description": "Navbar item with label Message Board"
+  },
+  "item.label.Newsletter": {
+    "message": "Newsletter",
+    "description": "Navbar item with label Newsletter"
   }
 }

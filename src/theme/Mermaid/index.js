@@ -42,7 +42,7 @@ export default function Mermaid(props) {
             onClick={() => setView('diagram')}
           >
             <Translate id="theme.Mermaid.viewDiagram" description="Mermaid view toggle: diagram">
-              图表
+              Diagram
             </Translate>
           </button>
           <button
@@ -53,7 +53,7 @@ export default function Mermaid(props) {
             onClick={() => setView('code')}
           >
             <Translate id="theme.Mermaid.viewCode" description="Mermaid view toggle: code">
-              代码
+              Code
             </Translate>
           </button>
         </div>
@@ -65,11 +65,11 @@ export default function Mermaid(props) {
         >
           {copied ? (
             <Translate id="theme.Mermaid.copied" description="Mermaid copy success label">
-              已复制
+              Copied
             </Translate>
           ) : (
             <Translate id="theme.Mermaid.copy" description="Mermaid copy button">
-              复制
+              Copy
             </Translate>
           )}
         </button>

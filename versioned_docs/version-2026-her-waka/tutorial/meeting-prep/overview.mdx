@@ -1,99 +1,99 @@
 ---
-title: "AI 辅助会议准备"
-description: "再也不用毫无准备地走进会议室 —— AI 将你的日历议程、相关邮件和共享文档整合成一份简报。无需任何编程经验。"
+title: "Meeting Prep with AI"
+description: "Never walk into a meeting unprepared — AI gathers your calendar agenda, related emails, and shared documents into a single briefing. No coding required."
 ---
 
 <Tip>
-**难度：★★☆☆☆ 简单** · 预计时间：约 25 到 30 分钟
+**Difficulty: ★★☆☆☆ Easy** · Estimated time: ~25 to 30 minutes
 </Tip>
 
-你的客户会议 30 分钟后开始。你依稀记得有关这个项目的邮件，但找不到了。某个地方有一个共享文档 —— 也许在 Drive 里，也许附在几周前归档的邮件里。你可以花 20 分钟疯狂搜索 Gmail 和 Drive，或者让 AI 在 60 秒内帮你备好一切。
+Your client meeting starts in 30 minutes. You vaguely remember emails about the project, but you can't find them. There was a shared doc somewhere — maybe in Drive, maybe attached to an email thread you archived weeks ago. You could spend 20 minutes frantically searching Gmail and Drive, or you could ask AI to prep you in 60 seconds.
 
-**这就是我们要构建的东西。** 一个读取你的 Google 日历、从 Gmail 中提取相关邮件、在 Drive 中查找共享文档，并生成完整会议简报的工作流 —— 全部来自一条提示词。
+**That's what we're building.** A workflow that reads your Google Calendar, pulls related emails from Gmail, finds shared documents in Drive, and delivers a complete meeting briefing — all from a single prompt.
 
 <Info>
-**教程由 [Chan Meng](https://chanmeng.org/) 主导** —— 高级 AI/ML 工程师、开源贡献者、前字节跳动开发者。Chan 搭建了 30+ 个真实应用，专注于 AI 驱动的解决方案，也是本次活动的圆桌嘉宾和本网站的开发者。
+**Tutorial led by [Chan Meng](https://chanmeng.org/)** — Senior AI/ML Engineer, open-source contributor, and former ByteDance developer. Chan has built 30+ live applications and specialises in AI-powered solutions. She is also a panel speaker at this event and the developer behind this website.
 </Info>
 
-## 你将构建什么
+## What you will build
 
 <CardGroup cols={3}>
-  <Card title="收集" icon="magnifying-glass">
-    AI 在日历、Gmail 和 Drive 中查找你的会议详情、相关邮件和共享文档
+  <Card title="Gather" icon="magnifying-glass">
+    AI finds your meeting details, related emails, and shared documents across Calendar, Gmail, and Drive
   </Card>
-  <Card title="整合" icon="sparkles">
-    将所有内容整合成一份单页简报 —— 不再需要在多个标签之间切换
+  <Card title="Synthesise" icon="sparkles">
+    Combines everything into a one-page briefing — no more switching between tabs
   </Card>
-  <Card title="准备" icon="clipboard-list">
-    在你走进会议室之前，关键要点、与会者名单和发言建议已一应俱全
+  <Card title="Prepare" icon="clipboard-list">
+    Key points, attendee list, and talking suggestions ready to go before you walk in
   </Card>
 </CardGroup>
 
-## 工作原理
+## How it works
 
 ```mermaid
 flowchart LR
-    A["你说话\n或打字"] --> B["Gemini CLI"]
-    B --> C["gws 读取\n日历 + Gmail + Drive"]
-    C -->|"整合"| D["单页\n会议简报"]
+    A["You speak\nor type"] --> B["Gemini CLI"]
+    B --> C["gws reads\nCalendar + Gmail + Drive"]
+    C -->|"synthesises"| D["One-page\nmeeting briefing"]
 ```
 
-你说出（或打出）一条提示词。Gemini CLI 使用 Google Workspace CLI（`gws`）提取你的日历事件、搜索邮件并查找共享文档。AI 将所有内容整合成一份清晰、结构化的简报，你可以在 60 秒内读完。
+You speak (or type) a single prompt. Gemini CLI uses the Google Workspace CLI (`gws`) to pull your calendar events, search your emails, and find shared documents. AI combines everything into a clear, structured briefing you can read in 60 seconds.
 
-## 你将学到
+## What you will learn
 
-- 使用 `gws` 将 AI 连接到你的 Google 日历、Gmail 和 Drive
-- 通过自然语言提示词提取会议详情 —— 时间、与会者、议程
-- 搜索 Gmail 中与特定会议或与会者相关的邮件
-- 在 Google Drive 中按话题或文件名查找共享文档
-- 将多个数据源整合成一份 AI 驱动的简报
-- 将简报保存为文件或 Google 文档以便随时查阅
+- Connect AI to your Google Calendar, Gmail, and Drive using `gws`
+- Pull meeting details — time, attendees, agenda — with a natural language prompt
+- Search Gmail for emails related to a specific meeting or attendee
+- Find shared documents in Google Drive by topic or file name
+- Combine multiple data sources into a single AI-powered briefing
+- Save your briefing as a file or Google Doc for easy reference
 
 <Note>
-**无需任何编程经验。** AI 处理所有事情 —— 你只需描述你需要为哪个会议做准备。如果你能向同事解释你需要什么，你就能做到这一切。
+**No coding required.** The AI handles everything — your job is to describe what meeting you need to prepare for. If you can explain what you need to a colleague, you can do this.
 </Note>
 
-## 工具
+## Tools
 
 <CardGroup cols={2}>
   <Card title="Gemini CLI" icon="terminal">
-    谷歌免费的终端 AI 助手，支持 Google Workspace 扩展 —— 可按需读取你的日历、邮件和 Drive。
+    Google's free AI assistant that runs in your terminal. Supports extensions for Google Workspace — reads your calendar, email, and drive on command.
   </Card>
-  <Card title="gws（Google Workspace CLI）" icon="google">
-    从终端控制 Gmail、日历、Drive 等服务的命令行工具。正是它让 AI 能够访问你的 Google 数据。
+  <Card title="gws (Google Workspace CLI)" icon="google">
+    A command-line tool that controls Gmail, Calendar, Drive, and more from your terminal. It's what lets AI access your Google data.
   </Card>
-  <Card title="Wispr Flow（可选）" icon="microphone">
-    可选的语音输入工具 —— 说话代替打字。在任何应用中均可使用，包括终端。解放双手准备会议。
+  <Card title="Wispr Flow (optional)" icon="microphone">
+    Optional voice input tool — speak instead of type. Works in any application, including your terminal. Hands-free meeting prep.
   </Card>
   <Card title="Node.js" icon="node-js">
-    安装 Gemini CLI 和 gws 所需，一次性设置步骤。
+    Required to install Gemini CLI and gws. A one-time setup step.
   </Card>
 </CardGroup>
 
-## 费用
+## Cost
 
-| 工具 | 费用 |
+| Tool | Cost |
 |------|------|
-| Gemini CLI | 免费（每日 1,000 次请求） |
-| gws | 免费开源 |
-| Wispr Flow | 免费试用（[邀请链接可获一个月 Pro 版免费试用](https://wisprflow.ai/r?CHAN115)） |
-| Node.js | 免费 |
-| **合计** | **$0** |
+| Gemini CLI | Free (1,000 requests/day) |
+| gws | Free and open-source |
+| Wispr Flow | Free trial ([invite link for a free month of Pro](https://wisprflow.ai/r?CHAN115)) |
+| Node.js | Free |
+| **Total** | **$0** |
 
-## 前置要求
+## Prerequisites
 
 <CardGroup cols={3}>
-  <Card title="一台能联网的电脑" icon="laptop">
-    Windows 或 macOS 均可。无需特殊硬件。
+  <Card title="A laptop with internet" icon="laptop">
+    Windows or macOS. No special hardware needed.
   </Card>
-  <Card title="25 到 30 分钟" icon="clock">
-    其中大部分是一次性设置。慢慢来，不用着急。
+  <Card title="25 to 30 minutes" icon="clock">
+    Most of that is one-time setup. Take your time — there's no rush.
   </Card>
-  <Card title="一个 Google 账号" icon="envelope">
-    已启用日历、Gmail 和 Drive 的任何个人或工作 Google 账号。
+  <Card title="A Google account" icon="envelope">
+    Any personal or work Google account with Calendar, Gmail, and Drive enabled.
   </Card>
 </CardGroup>
 
 <Note>
-准备好了吗？前往[设置你的工具](/docs/2026-her-waka/tutorial/meeting-prep/setup)，完成所有连接。
+Ready to get started? Head to [Set up your tools](/docs/2026-her-waka/tutorial/meeting-prep/setup) to get everything connected.
 </Note>

@@ -1,191 +1,191 @@
 ---
-title: "第 3 周：给网站加一个你的 AI 克隆"
-description: 把 Gemini 2.5 Flash 接进作品集，做成一个用你口吻回答的流式聊天组件。这是你的第一个正经的 prompt engineering 任务。
-sidebar_label: "第 3 周：给网站加一个你的 AI 克隆"
+title: "Week 3: Add an AI Clone of Yourself"
+description: Wire Gemini 2.5 Flash into your portfolio as a streaming chat widget that answers in your voice. Your first serious prompt-engineering task.
+sidebar_label: "Week 3: Add an AI Clone of Yourself"
 ---
 
 <AxisBadge axes={["FUN", "COOL"]} />
 
-# 给网站加一个你的 AI 克隆
+# Add an AI Clone of Yourself
 
-## 学习目标
+## Learning Objectives
 
-到本节课结束，学员应当能够：
+By the end of this session, students should be able to:
 
-- **从 Google AI Studio 拿到 API key 并把它接到本地 `.env.local` 和 Vercel 生产环境变量里** —— AI 来做管道工作，学员只负责那个"只能人做"的 OAuth 瞬间。
-- **写一段 persona system prompt**，让 Gemini 2.5 Flash 用 *你* 的声音、带着你的背景、像你一样回答——这是学员第一段正经的 prompt engineering。
-- **用大白话描述一个流式聊天 UI**，然后让 Cursor 用 Vercel AI SDK 把它写出来，自己一行 React 都不写。
+- **Obtain an API key from Google AI Studio and wire it into both local `.env.local` and Vercel's production env** — with the AI doing the plumbing and the student doing only the human-only OAuth moment.
+- **Write a persona system prompt** that makes Gemini 2.5 Flash answer as *you*, in your voice, with your background — the student's first serious piece of prompt engineering.
+- **Describe a streaming chat UI in English** and have Cursor implement it using the Vercel AI SDK, with no hand-written React.
 
-## 核心主题
+## Core Topics
 
-- System prompt vs user prompt：为什么 *看不见的* 指令比 *看得见的* 那段更重要。
-- 流式响应——为什么"token 一颗颗到达"是现代聊天 UI 的默认形态。
-- Secret 管理：API key 该放在哪里、**不该** 放在哪里、AI 如何帮你避免提交 key。
-- "Persona 文件"模式——把 AI-self 的定义放在一个可编辑的 Markdown 文件里。
+- System prompts vs user prompts: why the *invisible* instructions matter more than the visible ones.
+- Streaming responses — why "tokens arrive one by one" is the default mode for modern chat UIs.
+- Secret management: where API keys go, where they *don't* go, and how the AI helps you not commit them.
+- The "persona file" pattern — keeping your AI-self definition in one editable Markdown file.
 
-## 工具 / 技术栈
+## Tools / Stack
 
-| 工具 | 本周角色 |
+| Tool | Role this week |
 |---|---|
-| **Cursor** | 你说话的地方；AI 写聊天组件。 |
-| **Gemini 2.5 Flash** | 以你 AI 克隆身份回答的模型。快、便宜、够用。 |
-| **Google AI Studio** | 取免费 API key 的地方。这是唯一一个"只能人做"的瞬间。 |
-| **Vercel AI SDK** | 抹平流式、状态、provider 之间的差异。 |
-| **`.env.local` + Vercel env** | 你的 API key 在两个地方都要——都由 AI 通过 CLI 设置。 |
+| **Cursor** | Where you talk; AI writes the chat component. |
+| **Gemini 2.5 Flash** | The model answering as your AI-clone. Fast, cheap, good enough. |
+| **Google AI Studio** | Where you fetch the free API key. One manual moment. |
+| **Vercel AI SDK** | Abstracts streaming, state, and provider differences. |
+| **`.env.local` + Vercel env** | Two places your API key lives — both set by AI via CLI. |
 
 <SiteEvolution thisWeek={3} />
 
-## 课堂计划
+## Session Plan
 
-| 时间 | 活动 |
+| Time | Activity |
 |---|---|
-| 0 – 15 分钟 | **回顾与 Check-in。** 快速一轮：每个人念出自己第 2 周的网站 URL。注意一下谁的站最像"他自己"——今天我们要把这种感觉再放大一些。 |
-| 15 – 40 分钟 | **概念讲解。** system prompt 是什么、为什么重要。流式为什么"活"、批量回复为什么"死"。环境变量在 Next.js server actions 里怎么流。 |
-| 40 – 75 分钟 | **现场演示。** 讲师在自己的站上一气呵成地加上聊天组件——从"没有聊天"到"和我的 AI 克隆流式对话"，12 分钟。 |
-| 75 – 105 分钟 | **动手 Lab。** 学员把这个组件加到第 2 周的站上。最有意思的是写 persona prompt——下课前我们会分享几个最妙的。 |
-| 105 – 120 分钟 | **Q&A + 收尾。** 每位学员让自己的 AI 克隆回答一个同学提的问题。 |
+| 0 – 15 min | **Recap & Check-in.** Quick round: everyone reads their Week 2 site URL out loud. Note whose site feels the most "them" — we're going to make that feeling louder today. |
+| 15 – 40 min | **Concept Teaching.** What a system prompt is and why it matters. Why streaming feels alive and batch replies feel dead. How env vars flow through Next.js server actions. |
+| 40 – 75 min | **Live Demo.** Instructor adds the chat widget to her own site in one sitting — from "no chat" to "chat with my AI-clone streaming live" in twelve minutes. |
+| 75 – 105 min | **Hands-On Lab.** Students add the widget to their Week 2 site. The fun part is writing their persona prompt — we'll share favourites at the end. |
+| 105 – 120 min | **Q&A + Wrap.** Each student demos their AI-clone answering one question from a classmate. |
 
-## 动手 Lab
+## Hands-On Lab
 
-**任务。** 下课时，你的作品集站右下角会有一个浮动聊天组件。任何人打开都能问 "tell me about yourself" —— 答案以流式到达，用你的口吻，扎根于你真实的背景。
+**Task.** By the end of class your portfolio site will have a floating chat widget in the bottom-right corner. Anyone can open it and ask "tell me about yourself" — the answer arrives streaming, in your voice, grounded in your real background.
 
-### 阶段 1 —— 取 API key
+### Phase 1 — Get the API key
 
-<ManualStep n={1} why="Google 的 API key 创建需要人接受使用条款。任何 CLI 或 MCP 都按不了 'Agree' 这个按钮。">
-打开 [aistudio.google.com/apikey](https://aistudio.google.com/apikey)，用 Google 账号登录，点 **Create API key**，复制下来。这个 tab 别关——下一步要把 key 粘进 Cursor。
+<ManualStep n={1} why="Google's API-key creation requires a human to accept their usage terms. No CLI or MCP can press 'Agree' for you.">
+Open [aistudio.google.com/apikey](https://aistudio.google.com/apikey), sign in with your Google account, click **Create API key**, and copy it. Keep the tab open — you'll paste the key into Cursor in the next step.
 </ManualStep>
 
-### 阶段 2 —— 把 key 交给 AI
+### Phase 2 — Give the key to AI
 
 <PromptStep n={2} audience="Cursor">
-这是我的 Gemini API key：**\[在这里粘 key\]**。请：
+Here is my Gemini API key: **\[paste key here\]**. Please:
 
-1. 把它作为 `GOOGLE_GENERATIVE_AI_API_KEY` 加到我的 `.env.local`（如果文件不存在就建一个）。确保 `.env.local` 在 `.gitignore` 里——这个 key 我永远不想推到 GitHub。
-2. 用 Vercel CLI 把同一个 key 也加到我的 Vercel 生产环境。
-3. 装上 Vercel AI SDK 和 Google provider（`ai`、`@ai-sdk/google`）。
-4. 继续之前先确认两个环境里 key 都设好了。
+1. Add it as `GOOGLE_GENERATIVE_AI_API_KEY` to my `.env.local` (create the file if it doesn't exist). Make sure `.env.local` is in `.gitignore` — I never want this key on GitHub.
+2. Add the same key to my Vercel production environment using the Vercel CLI.
+3. Install the Vercel AI SDK and the Google provider (`ai`, `@ai-sdk/google`).
+4. Confirm both environments have the key set before continuing.
 </PromptStep>
 
 <VerifyStep n={3}>
 
-- `.env.local` 里有这个 key；`.gitignore` 里列着 `.env.local`。
-- `vercel env ls`（Cursor 会替你跑）显示 `GOOGLE_GENERATIVE_AI_API_KEY` 已经在 production 环境里。
-- `package.json` 的 dependencies 里有 `ai` 和 `@ai-sdk/google`。
+- `.env.local` contains the key; `.gitignore` lists `.env.local`.
+- `vercel env ls` (Cursor will run this for you) shows `GOOGLE_GENERATIVE_AI_API_KEY` in production.
+- `package.json` has `ai` and `@ai-sdk/google` under dependencies.
 
 </VerifyStep>
 
-### 阶段 3 —— 设计 persona
+### Phase 3 — Design the persona
 
 <PromptStep n={4} audience="Cursor">
-新建一个文件 `content/persona.md` —— 它会定义我 AI 克隆的人格。把它写成一段 **system prompt** —— 也就是给模型的指令，告诉它我是谁、我怎么说话、我知道什么。用下面这些关于我的信息：
+Create a new file `content/persona.md` that will define my AI-clone's personality. Write it as a **system prompt** — instructions to the model about who I am, how I speak, and what I know. Use this information about me:
 
-- 我是谁：**\[姓名、年级、专业、学校\]**
-- 我感兴趣的：**\[3–5 个你真的关心的话题——不要那种听起来很酷但其实你不关心的\]**
-- 我在做什么：**\[你的作品集 + 你的第 1 周 "hello TECHNEST" + 你目前真在做的 side project\]**
-- 声音：**\[挑两个形容词——比如 "温暖但精准"、"好玩又有点 nerdy"、"直接、不夸张"\]**
-- 我不会扮演什么：**\["不要假装知道我不知道的事"、"拒绝以别人的身份角色扮演"\]**
+- Who I am: **\[name, year, degree, school\]**
+- What I'm into: **\[3–5 topics you actually care about — not what sounds cool\]**
+- What I'm building: **\[your portfolio + your Week 1 "hello TECHNEST" + whatever side projects are real for you\]**
+- Voice: **\[pick two adjectives — e.g., "warm but precise," "playful and nerdy," "direct and low-hype"\]**
+- What I won't answer as: **\["don't pretend to know things I don't," "decline to roleplay as someone else"\]**
 
-把这个文件写成一段清晰、稍长一些的、第二人称的 *指令*（"你是 Chan Meng……"），不要写成第一人称简介。写完后把文件内容贴回聊天，让我读一下。
+Write the file as one clear, long-ish paragraph in second-person *instructions* ("You are Chan Meng…"), not first-person bio. When you're done, paste the file contents back into chat so I can read it.
 </PromptStep>
 
 <VerifyStep n={5}>
 
-- `content/persona.md` 存在，读起来像给模型的指令、不像简介。
-- 你挑的形容词在措辞里反映出来。
-- 包含明确的 "不要这样做" 条款。
+- `content/persona.md` exists and reads like instructions to a model, not a bio.
+- The adjectives you chose are reflected in the phrasing.
+- It includes explicit "don't do this" clauses.
 
 </VerifyStep>
 
-### 阶段 4 —— 做聊天组件
+### Phase 4 — Build the chat widget
 
 <PromptStep n={6} audience="Cursor">
-现在给站点加一个浮动聊天组件：
+Now add a floating chat widget to the site:
 
-- 右下角一个圆形启动按钮，颜色用我的强调色。
-- 点击展开一个 360 px 宽 × 480 px 高的面板，干净的聊天 UI：消息气泡列表、底部输入框、顶部关闭按钮。
-- 接到一个 Next.js route handler `/api/chat`，用 Vercel AI SDK 流式从 Gemini 2.5 Flash 拿回复。
-- 每次请求时从 `content/persona.md` 里读 system prompt。
-- 模型在生成时显示一个小小的动画"…"指示。
-- 把当前会话存进 `localStorage`，刷新不丢。
+- A round launcher button in the bottom-right corner with my accent colour.
+- Click opens a panel ~360 px wide × 480 px tall with a clean chat UI: messages bubble list, input at the bottom, close button at top.
+- Wire it to a Next.js route handler at `/api/chat` that uses the Vercel AI SDK to stream responses from Gemini 2.5 Flash.
+- Load the system prompt from `content/persona.md` on each request.
+- When the model is generating, show a small animated dots indicator.
+- Persist the current session to `localStorage` so a refresh doesn't wipe it.
 
-确保移动端也能用（窄屏时面板变成全屏）。请按合理的小颗粒 commit——一条管 API route，一条管 UI，一条管 localStorage 接线。
+Make sure it works on mobile (the panel becomes full-screen on narrow viewports). Commit in small logical commits — one for the API route, one for the UI, one for the localStorage wiring.
 </PromptStep>
 
 <VerifyStep n={7}>
 
-- 在 `http://localhost:3000` 打开站点。右下角出现启动按钮。
-- 点开。输入 **"What are you building this term?"**。回复以 token-by-token 的方式流式到达，用你的声音。
-- 刷新。会话还在。
-- 在手机上打开同一个页面——面板变全屏；输入框可以点。
+- Open your site at `http://localhost:3000`. A launcher button appears bottom-right.
+- Click it. Type **"What are you building this term?"**. The reply streams in token-by-token in your voice.
+- Refresh. The conversation persists.
+- Open the same page on your phone — the panel becomes full-screen; input is tappable.
 
 </VerifyStep>
 
-### 阶段 5 —— 部署 & 演示
+### Phase 5 — Deploy & demo
 
 <PromptStep n={8} audience="Cursor">
-把这个推到生产。提交所有剩下的改动，push 到 GitHub，确认 Vercel 自动部署成功。生产 URL 上线后打开它，从线上站点测试聊天——同一个问题再问一次，确认环境变量带过去了。
+Ship this to production. Commit all remaining changes, push to GitHub, and confirm the Vercel auto-deploy succeeds. When the production URL is live, open it and test the chat from the live site — same question as before to make sure the env vars carried over.
 </PromptStep>
 
 <VerifyStep n={9}>
 
-- 你的生产站点现在有聊天组件。
-- 线上聊天能正确从生产 URL 流式回复。
-- 任何 commit 进去的文件里都不出现 `GOOGLE_GENERATIVE_AI_API_KEY` 字符串。
+- Your production site now has the chat widget.
+- The live chat streams responses correctly from the production URL.
+- No `GOOGLE_GENERATIVE_AI_API_KEY` references in any file that got committed.
 
 </VerifyStep>
 
 <RecoverStep n={10}>
-聊天在线上报 **"500 internal server error"**，但本地是好的。请读一下 Vercel function 日志，找到根因（最大概率是生产环境少了某个环境变量），通过 Vercel CLI 修了，触发重新部署，确认聊天恢复。
+The chat says **"500 internal server error"** on the live site but works locally. Please read the Vercel function logs, find the root cause (most likely a missing env var in production), fix it through the Vercel CLI, trigger a redeploy, and confirm the chat works.
 </RecoverStep>
 
-<Tip title="迭代 persona，不要去改组件">
-当 AI 克隆说出某句不像你的话时，**不要** 去改组件。打开 `content/persona.md`，用大白话描述新约束：**"别用 'passionate' 这个词"** 或 **"除非我特别要细节，否则回复一律 80 词以内。"** 保存重载。Persona 文件就是你 prompt engineering 落地的地方。
+<Tip title="Iterate the persona, not the code">
+When your AI-clone says something off-brand, **don't** edit the component. Open `content/persona.md` and describe the new constraint in plain English: **"Don't use the word 'passionate'"** or **"Always answer in under 80 words unless I ask for detail."** Save and reload. The persona file is where your prompt engineering lives.
 </Tip>
 
-<Note title="Career · 给你的 AI 克隆录个屏">
-录一段 20 秒的小片段——你打开聊天，问 **"What's something you're working on right now?"**。这段 clip 是 LinkedIn 帖子和招聘对话的金子——它具体证明了你能端到端做一个流式 LLM 功能。
+<Note title="Career · Screen-record your AI-clone">
+Record a 20-second clip of you opening the chat and asking **"What's something you're working on right now?"** This clip is gold for LinkedIn posts and hiring conversations — it's concrete proof you can build a streaming LLM feature end to end.
 </Note>
 
-## 本周作业
+## Weekly Assignment
 
-**做 / 交付。**
+**Build / Implement.**
 
-- 在你的线上站点里浮动一个由 Gemini 2.5 Flash 驱动的聊天组件。
-- 把 `content/persona.md` commit 到你的 repo（是的，你的 persona 进入版本控制——未来的你会感谢现在的你）。
+- Floating chat widget on your live site powered by Gemini 2.5 Flash.
+- A `content/persona.md` file committed to your repo (yes, your persona lives in source control — future-you will thank present-you).
 
-**要求。**
+**Requirements.**
 
-- 组件以流式回复（不是结尾一次性 dump）。
-- 会话刷新后还在。
-- API key 在 Vercel 生产环境变量里，任何 commit 的文件里都没有。
-- 一段 20 秒的屏幕录屏，展示线上聊天回答一个问题。
+- The widget streams responses (not a single dump at the end).
+- Session persists across page refresh.
+- API key is in Vercel production env, not in any committed file.
+- 20-second screen recording of the live chat answering one question.
 
-**提交。** 第 4 周开课前把线上 URL + 短录屏发到课程 Slack。
+**Submission.** Live URL + short recording in the course Slack channel before Week 4.
 
-## 资源
+## Resources
 
-| 文档 | 视频 | 仓库 |
+| Docs | Videos | Repos |
 |---|---|---|
-| Vercel AI SDK —— Google provider 流式 | 讲师 demo："Persona + 流式接线，12 分钟" | `vercel/ai` —— SDK 源码 |
-| Google AI Studio —— API key + 速率 | | `her-waka/tutorial/vibe-coding/build-with-claude.mdx` —— 进阶版 |
-| Next.js route handlers —— 流式响应 | | |
+| Vercel AI SDK — streaming with Google provider | Instructor demo: "Wiring persona + streaming in 12 minutes" | `vercel/ai` — SDK source |
+| Google AI Studio — API keys + rate limits | | `her-waka/tutorial/vibe-coding/build-with-claude.mdx` — deeper dive |
+| Next.js route handlers — streaming responses | | |
 
-## 真实世界应用
+## Real-World Application
 
-你将来要做的每一个 AI 产品，背后都会有一段 system prompt。给模型写清楚指令——约束声音、约束范围、约束失败模式——这是最耐用的 AI 工程能力。"AI 克隆"这个框架让它具体化了：你是通过调一个 *像你* 的东西来学 prompt engineering，而不是看教科书。
+Every AI product you'll build in your career has a system prompt somewhere. The skill of writing clear instructions to a model — constraining voice, scope, and failure modes — is the single most durable AI-engineering skill. The "AI-clone" framing makes it concrete: you learn prompt engineering by tuning a thing that sounds like *you*, not by reading a textbook.
 
 <Note title="Career">
-访问你作品集的招聘官，现在能在你的站点上和一个用你声音回答 "Why should I hire this person?" 的聊天窗对话——而且是凌晨 2 点他们时区。这不是花活儿——这是非对称优势。
+Recruiters who visit your portfolio will now have a chat widget that answers "Why should I hire this person?" in your voice, at 2 AM their time. That's not a gimmick — that's an asymmetric advantage.
 </Note>
 
-## 踩坑提醒 & 小贴士
+## Challenges & Tips
 
-- *"AI 在说一些我没让它说的话。"* 把 persona 文件收紧。加一行：**"如果你不知道答案，就说 'I haven't talked about that yet — ask me next week.'"** 模型尊重明确的 fallback。
-- *"流式什么也没显示，最后一次性 dump 出来。"* 你大概是在 return response，没把流 pipe 出去。对 Cursor 说：**"回复没有流式——它是一整块到达的。请用 Vercel AI SDK 的 `toDataStreamResponse`。"**
-- *"我在生产环境拿到 `API_KEY_INVALID`。"* key 没加到 Vercel env。说：**"列出我 Vercel 项目当前所有环境变量，并确认 `GOOGLE_GENERATIVE_AI_API_KEY` 在 Production 环境是设了的。"**
-- *"组件在我手机上很丑。"* 用具体语言描述坏掉的布局：**"我 iPhone 上输入框被键盘挡住了。"** Cursor 知道 viewport-fit 那套修法。
-- *"模型回答太长 / 太正式。"* 在 persona 里加约束：**"默认回复长度：最多两段短文。避免企业话术。"**
+- *"The AI says things I didn't tell it to."* Tighten the persona file. Add a line: **"If you don't know the answer, say 'I haven't talked about that yet — ask me next week.'"** Models respect explicit fallbacks.
+- *"Streaming shows nothing, then the whole reply drops at once."* You're probably returning the response instead of piping the stream. Say to Cursor: **"The response isn't streaming — it arrives as a single chunk. Use `toDataStreamResponse` from the Vercel AI SDK."**
+- *"I get `API_KEY_INVALID` on production."* The key wasn't added to Vercel env. Say: **"Show me which env vars are set on my Vercel project, and make sure `GOOGLE_GENERATIVE_AI_API_KEY` is set for the Production environment specifically."**
+- *"The widget looks ugly on my phone."* Describe the broken layout in specific terms: **"On my iPhone the input gets hidden behind the keyboard."** Cursor knows the viewport-fit pattern to fix it.
+- *"The model's answers are too long / too formal."* Add constraints to the persona: **"Default reply length: 2 short paragraphs max. Avoid corporate phrasing."**
 
-<Info title="如果聊天本地能跑，部署后挂掉">
-对 Cursor 说：**"对比我的 `.env.local` 和 Vercel 生产环境变量，列出每一处差异。"** 这一招能解决 90% 的部署期 AI bug。
+<Info title="If chat works locally but breaks in production after deploy">
+Say to Cursor: **"Compare my `.env.local` with my Vercel production env vars and list every difference."** This catches 90% of deploy-time AI bugs.
 </Info>
