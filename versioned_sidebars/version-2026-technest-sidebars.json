@@ -17,6 +17,11 @@
       "label": "📖 Curriculum Outline"
     },
     {
+      "type": "doc",
+      "id": "videos/index",
+      "label": "🎥 Video Tutorials"
+    },
+    {
       "type": "category",
       "label": "🎓 Teaching Phase (Weeks 1–8)",
       "collapsible": true,

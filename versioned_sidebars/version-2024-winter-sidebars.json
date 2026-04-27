@@ -2,6 +2,11 @@
   "tutorialSidebar": [
     "intro",
     {
+      "type": "doc",
+      "id": "videos/index",
+      "label": "🎥 Video Tutorials"
+    },
+    {
       "type": "category",
       "label": "🚀 Quick Start",
       "link": {

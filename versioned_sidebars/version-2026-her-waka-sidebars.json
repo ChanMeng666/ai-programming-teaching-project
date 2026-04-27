@@ -12,6 +12,11 @@
       ]
     },
     {
+      "type": "doc",
+      "id": "videos/index",
+      "label": "🎥 Video Tutorials"
+    },
+    {
       "type": "category",
       "label": "🎓 Workshops",
       "collapsible": true,

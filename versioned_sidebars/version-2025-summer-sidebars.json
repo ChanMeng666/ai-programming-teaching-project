@@ -6,6 +6,11 @@
       "label": "🌟 Course Introduction"
     },
     {
+      "type": "doc",
+      "id": "videos/index",
+      "label": "🎥 Video Tutorials"
+    },
+    {
       "type": "category",
       "label": "📚 Course 1: Gemini CLI Environment",
       "collapsible": true,
