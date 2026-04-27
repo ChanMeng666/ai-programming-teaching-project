@@ -8,3 +8,4 @@ export { default as ManualStep } from './ManualStep/ManualStep';
 export { default as RecoverStep } from './RecoverStep/RecoverStep';
 export { default as AxisBadge } from './AxisBadge/AxisBadge';
 export { default as SiteEvolution } from './SiteEvolution/SiteEvolution';
+export { default as PdfDownload } from './PdfDownload/PdfDownload';
