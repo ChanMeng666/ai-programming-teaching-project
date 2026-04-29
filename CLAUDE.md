@@ -10,7 +10,7 @@ This is an AI Programming Education Platform built with Docusaurus 3.8.1. It's a
 
 - **Framework**: Docusaurus 3.8.1 with React 18
 - **Content**: MDX-based documentation with versioning support (2024-winter, 2025-summer)
-- **Deployment**: Vercel static site deployment
+- **Deployment**: Cloudflare Pages (auto-deploys on push to `main`)
 - **Localization**: Chinese (zh-Hans) language support
 - **Search**: Algolia integration
 - **Analytics**: Vercel Analytics
@@ -129,6 +129,6 @@ npm run serve
 
 1. **Docusaurus Choice**: Selected for excellent documentation features, versioning, and educational content management
 2. **MDX Usage**: Enables interactive components within documentation
-3. **Vercel Deployment**: Chosen for automatic deployments and analytics
+3. **Cloudflare Pages Deployment**: Chosen for fast global CDN, automatic deploys on `git push origin main`, and generous free tier. Production URL: `https://programming.chanmeng.org`
 4. **No Testing**: Focus on content creation over code quality automation
 5. **Experimental Features**: Using @docusaurus/faster and Rspack for improved build performance
