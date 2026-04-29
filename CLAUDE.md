@@ -13,7 +13,7 @@ This is an AI Programming Education Platform built with Docusaurus 3.8.1. It's a
 - **Deployment**: Cloudflare Pages (auto-deploys on push to `main`)
 - **Localization**: Chinese (zh-Hans) language support
 - **Search**: Algolia integration
-- **Analytics**: Vercel Analytics
+- **Analytics**: Custom `AITracker` component in `src/components/AITracker/` — detects AI-platform referrers (claude.ai, chat.openai.com, gemini.google.com, etc.) and is wired to send events to `window.va` / `window.gtag` / a custom `/api/analytics/ai-traffic` endpoint **if any of those are present at runtime**. None are currently configured, so the tracker is effectively dormant in production.
 
 ## Essential Commands
 

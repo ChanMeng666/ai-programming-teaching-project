@@ -105,40 +105,46 @@ cargo install --locked typst-cli
 这个 skill 住在公开 GitHub 仓库：[`ChanMeng666/typst-claude-skill`](https://github.com/ChanMeng666/typst-claude-skill)。下面四种安装方式**任挑一种**——能力上完全等价。
 
 <Tabs>
-  <Tab title="1. Git clone（推荐）">
-直接把 skill 克隆进 Claude Code 的用户级 skills 目录。一条命令，macOS / Linux / Windows（Git Bash 或 WSL）通用：
-
-```bash
-git clone https://github.com/ChanMeng666/typst-claude-skill.git ~/.claude/skills/typst
-```
-
-> Windows PowerShell 用户：把 `~` 替换成 `$env:USERPROFILE`，目标路径就是 `$env:USERPROFILE\.claude\skills\typst`。
-  </Tab>
-  <Tab title="2. Plugin marketplace">
-在 Claude Code 内跑：
+  <Tab title="1. Plugin marketplace（推荐）">
+在 Claude Code 内跑两条 slash 命令：
 
 ```text
 /plugin marketplace add ChanMeng666/typst-claude-skill
 /plugin install typst@chan-typst
 ```
 
-这条路径在 plugin `version` 字段升级时会自动更新。marketplace 名字（`chan-typst`）和 plugin 名字（`typst`）声明在仓库的 `.claude-plugin/marketplace.json` 与 `.claude-plugin/plugin.json` 里。
+plugin `version` 字段升级时会自动更新。marketplace 名字（`chan-typst`）和 plugin 名字（`typst`）声明在仓库的 `.claude-plugin/marketplace.json` 与 `.claude-plugin/plugin.json` 里。
+  </Tab>
+  <Tab title="2. Git clone（适合想 hack skill 的同学）">
+直接走 git。仓库里真正的 skill 内容住在 `skills/typst/` 子目录，所以要先把仓库克隆到临时位置，再把那个子目录搬到 skills 文件夹：
+
+```bash
+# macOS / Linux / Windows（Git Bash 或 WSL）
+git clone --depth 1 https://github.com/ChanMeng666/typst-claude-skill.git /tmp/_typst-src \
+  && mv /tmp/_typst-src/skills/typst ~/.claude/skills/typst \
+  && rm -rf /tmp/_typst-src
+```
+
+> Windows PowerShell：用 `$env:USERPROFILE` 替代 `~`，用 `Move-Item` 替代 `mv`，用 `Remove-Item -Recurse -Force` 替代 `rm -rf`。
   </Tab>
   <Tab title="3. 手动 ZIP">
 机器上没有 Git 的同学：
 
 1. 打开 [`github.com/ChanMeng666/typst-claude-skill`](https://github.com/ChanMeng666/typst-claude-skill)，点 **Code → Download ZIP**。
 2. 解压。
-3. 把解压出来的整个文件夹移动并改名为 `~/.claude/skills/typst`（macOS / Linux）或 `%USERPROFILE%\.claude\skills\typst`（Windows）。
-4. 确认 `SKILL.md` 在该文件夹的根。
+3. 进到解压出来的文件夹里，找到 `skills/typst/` 子目录 —— 这个子目录**就是** skill。
+4. 把 `skills/typst/` 移动并重命名为 `~/.claude/skills/typst`（macOS / Linux）或 `%USERPROFILE%\.claude\skills\typst`（Windows）。
+5. 确认 `SKILL.md` 在目标文件夹的根。
   </Tab>
   <Tab title="4. 项目级（per-project）">
-当 skill 应该**只**在这个项目内可用时使用（你可以把它和项目一起 commit，让 clone 的人都自动拿到）：
+当 skill 应该**只**在这个项目内可用时使用（和项目一起 commit，让 clone 的人都自动拿到）：
 
 ```bash
 # 从项目根目录跑
-mkdir -p .claude/skills
-git clone https://github.com/ChanMeng666/typst-claude-skill.git .claude/skills/typst
+git clone --depth 1 https://github.com/ChanMeng666/typst-claude-skill.git /tmp/_typst-src \
+  && mkdir -p .claude/skills \
+  && mv /tmp/_typst-src/skills/typst .claude/skills/typst \
+  && rm -rf /tmp/_typst-src
 ```
 
 skill 只在 Claude Code 从这个项目目录启动时激活，其他项目里完全静默。

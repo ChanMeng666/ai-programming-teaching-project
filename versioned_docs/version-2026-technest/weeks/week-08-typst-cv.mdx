@@ -112,40 +112,46 @@ Verify with `typst --version` — you should see `typst 0.14.x` or newer.
 The skill lives in a public GitHub repo: [`ChanMeng666/typst-claude-skill`](https://github.com/ChanMeng666/typst-claude-skill). Pick **one** of the four installation methods below — they are equivalent in capability.
 
 <Tabs>
-  <Tab title="1. Git clone (recommended)">
-Clones the skill straight into Claude Code's user-level skills directory. One command, works on macOS, Linux, and Windows (Git Bash or WSL):
-
-```bash
-git clone https://github.com/ChanMeng666/typst-claude-skill.git ~/.claude/skills/typst
-```
-
-> Windows PowerShell users: replace `~` with `$env:USERPROFILE`, so the destination is `$env:USERPROFILE\.claude\skills\typst`.
-  </Tab>
-  <Tab title="2. Plugin marketplace">
-Inside Claude Code, run:
+  <Tab title="1. Plugin marketplace (recommended)">
+Two slash commands inside Claude Code:
 
 ```text
 /plugin marketplace add ChanMeng666/typst-claude-skill
 /plugin install typst@chan-typst
 ```
 
-This route auto-updates whenever the plugin's `version` field bumps. The marketplace name (`chan-typst`) and plugin name (`typst`) are declared in the repo's `.claude-plugin/marketplace.json` and `.claude-plugin/plugin.json`.
+Auto-updates whenever the plugin's `version` field bumps. The marketplace name (`chan-typst`) and plugin name (`typst`) are declared in `.claude-plugin/marketplace.json` and `.claude-plugin/plugin.json` in the repo.
+  </Tab>
+  <Tab title="2. Git clone (for hackers)">
+Direct skill install via git. The repo's actual skill content lives at `skills/typst/`, so we clone the repo to a temporary location and move just that subdirectory:
+
+```bash
+# macOS / Linux / Windows (Git Bash or WSL)
+git clone --depth 1 https://github.com/ChanMeng666/typst-claude-skill.git /tmp/_typst-src \
+  && mv /tmp/_typst-src/skills/typst ~/.claude/skills/typst \
+  && rm -rf /tmp/_typst-src
+```
+
+> Windows PowerShell: substitute `$env:USERPROFILE` for `~`, `Move-Item` for `mv`, and `Remove-Item -Recurse -Force` for `rm -rf`.
   </Tab>
   <Tab title="3. Manual ZIP">
-For users without Git on their machine:
+For users without Git:
 
 1. Visit [`github.com/ChanMeng666/typst-claude-skill`](https://github.com/ChanMeng666/typst-claude-skill), click **Code → Download ZIP**.
 2. Extract the archive.
-3. Move and rename the extracted folder to `~/.claude/skills/typst` (macOS / Linux) or `%USERPROFILE%\.claude\skills\typst` (Windows).
-4. Confirm `SKILL.md` exists at the top of that folder.
+3. Inside the extracted folder, navigate to `skills/typst/` — that subdirectory **is** the skill.
+4. Move and rename `skills/typst/` to `~/.claude/skills/typst` (macOS / Linux) or `%USERPROFILE%\.claude\skills\typst` (Windows).
+5. Confirm `SKILL.md` exists at the top of that destination folder.
   </Tab>
   <Tab title="4. Project-level (per-project)">
-Use this when the skill should be available **only** inside this project (you can commit it alongside the project so anyone who clones gets it):
+Use when the skill should be available **only** inside this project (commit it alongside so anyone who clones gets it):
 
 ```bash
 # Run from the project root
-mkdir -p .claude/skills
-git clone https://github.com/ChanMeng666/typst-claude-skill.git .claude/skills/typst
+git clone --depth 1 https://github.com/ChanMeng666/typst-claude-skill.git /tmp/_typst-src \
+  && mkdir -p .claude/skills \
+  && mv /tmp/_typst-src/skills/typst .claude/skills/typst \
+  && rm -rf /tmp/_typst-src
 ```
 
 The skill activates whenever Claude Code runs from this directory and is silent everywhere else.
