@@ -26,7 +26,7 @@ By the end of this session, students should be able to:
 ## Core Topics
 
 - Typst, in one paragraph: think "Markdown with superpowers that compiles to PDF". Same tool this lecture handout is compiled with.
-- Skills in Claude Code — the Typst skill is shipped by Anthropic and knows how to generate common documents from structured input.
+- Skills in Claude Code — the Typst skill is an **open-source skill** we install ourselves in Phase 2 (Claude Code does not auto-discover skills). Once installed, it teaches Claude Code how to generate common documents from structured input.
 - Data-driven documents: why storing your CV fields in Neon (not Google Docs) makes the CV AI-editable forever.
 - Cover letters are the perfect LLM task: structured input (your profile + a job description) + structured output (a formatted PDF).
 - The meta moment: students realise this lecture and their CV are both made with the same tool.
@@ -84,23 +84,96 @@ Generate + push the migration. Also add an admin-only `/edit-profile` page on my
 
 </VerifyStep>
 
-### Phase 2 — Install Typst skill in Claude Code
+### Phase 2 — Install the Typst CLI and the Typst skill in Claude Code
+
+<Note title="Two things to install — and they are different">
+The Typst **CLI** is the binary that compiles `.typ` files into PDFs. The Typst **skill** is a package of instructions, references and examples that teaches Claude Code *how to drive* that CLI. Claude Code does **not** auto-discover skills from any "Anthropic registry" — you install them yourself, the same way you install a VS Code extension. Phase 2 installs both.
+</Note>
+
+#### Step 2a — Install the Typst CLI
+
+Pick the line that matches your machine and run it once:
+
+```bash
+# Windows
+winget install --id Typst.Typst
+
+# macOS
+brew install typst
+
+# Any platform with Rust toolchain
+cargo install --locked typst-cli
+```
+
+Verify with `typst --version` — you should see `typst 0.14.x` or newer.
+
+#### Step 2b — Install the Typst skill
+
+The skill lives in a public GitHub repo: [`ChanMeng666/typst-claude-skill`](https://github.com/ChanMeng666/typst-claude-skill). Pick **one** of the four installation methods below — they are equivalent in capability.
+
+<Tabs>
+  <Tab title="1. Git clone (recommended)">
+Clones the skill straight into Claude Code's user-level skills directory. One command, works on macOS, Linux, and Windows (Git Bash or WSL):
+
+```bash
+git clone https://github.com/ChanMeng666/typst-claude-skill.git ~/.claude/skills/typst
+```
+
+> Windows PowerShell users: replace `~` with `$env:USERPROFILE`, so the destination is `$env:USERPROFILE\.claude\skills\typst`.
+  </Tab>
+  <Tab title="2. Plugin marketplace">
+Inside Claude Code, run:
+
+```text
+/plugin marketplace add ChanMeng666/typst-claude-skill
+/plugin install typst@chan-typst
+```
+
+This route auto-updates whenever the plugin's `version` field bumps. The marketplace name (`chan-typst`) and plugin name (`typst`) are declared in the repo's `.claude-plugin/marketplace.json` and `.claude-plugin/plugin.json`.
+  </Tab>
+  <Tab title="3. Manual ZIP">
+For users without Git on their machine:
+
+1. Visit [`github.com/ChanMeng666/typst-claude-skill`](https://github.com/ChanMeng666/typst-claude-skill), click **Code → Download ZIP**.
+2. Extract the archive.
+3. Move and rename the extracted folder to `~/.claude/skills/typst` (macOS / Linux) or `%USERPROFILE%\.claude\skills\typst` (Windows).
+4. Confirm `SKILL.md` exists at the top of that folder.
+  </Tab>
+  <Tab title="4. Project-level (per-project)">
+Use this when the skill should be available **only** inside this project (you can commit it alongside the project so anyone who clones gets it):
+
+```bash
+# Run from the project root
+mkdir -p .claude/skills
+git clone https://github.com/ChanMeng666/typst-claude-skill.git .claude/skills/typst
+```
+
+The skill activates whenever Claude Code runs from this directory and is silent everywhere else.
+  </Tab>
+</Tabs>
+
+#### Step 2c — Have Claude Code verify both pieces
 
 <PromptStep n={3} audience="Claude Code">
-Please confirm the Typst skill is installed. List the kinds of prompts it handles. If it's not installed, install it from the official Anthropic skills registry, then confirm Typst CLI (`typst`) is on my PATH by running `typst --version`.
+Run two checks and report the result of each:
+
+1. Run `typst --version`. Expected: `typst 0.14.x` or newer.
+2. Read the skill's `SKILL.md` frontmatter. The path depends on which install method I picked in Step 2b — try `~/.claude/skills/typst/SKILL.md` first; if I picked the per-project method, try `.claude/skills/typst/SKILL.md`; if I picked the plugin marketplace method, run `/plugin list` to see where it lives. Tell me the `name:` field — it should be `typst`.
+3. Run the bundled environment check: `bash ~/.claude/skills/typst/scripts/verify-typst.sh` (adjust the path for whichever install method I picked). Report whether all `[PASS]` lines appear and whether CJK fonts are detected.
 </PromptStep>
 
 <VerifyStep n={4}>
 
-- Claude Code confirms the Typst skill is installed.
-- `typst --version` prints a version number.
+- `typst --version` prints v0.14 or newer.
+- `SKILL.md` frontmatter shows `name: typst`.
+- `verify-typst.sh` reports `[PASS]` for the Typst version and write permissions; it lists at least one CJK font (or warns clearly if not — fixable later).
 
 </VerifyStep>
 
 ### Phase 3 — Generate the CV from the profile data
 
 <PromptStep n={5} audience="Claude Code">
-I want to generate a one-page CV from my Neon profile row. Please:
+I want to generate a one-page CV from my Neon profile row. The Typst skill we installed in Phase 2 gives you the templates and conventions to follow — start by consulting its `references/typst-templates.md` for the resume / CV section before writing any `.typ`. Please:
 
 1. Read my `profile` row from the database (use the `DATABASE_URL` from my `.env.local`).
 2. Use the Typst skill to write a clean single-column CV template at `cv/template.typ` with: name + headline in the header, summary paragraph, then sections for Education, Experience, Projects, Skills. Use a tasteful serif body + sans headings. Match the accent colour I chose in Week 2.
@@ -217,8 +290,8 @@ Notice that this lecture handout you're reading was also compiled with the Typst
 
 | Docs | Videos | Repos |
 |---|---|---|
-| Typst — getting started + language reference | Instructor demo: "Your CV as code in 20 minutes" | `typst/typst` — compiler source |
-| Anthropic Skills — Typst skill | | `anthropics/skills` — Typst skill examples |
+| [Typst — getting started + language reference](https://typst.app/docs/) | Instructor demo: "Your CV as code in 20 minutes" | [`ChanMeng666/typst-claude-skill`](https://github.com/ChanMeng666/typst-claude-skill) — the Typst skill we install in Phase 2 (instructor's own repo) |
+| [Claude Code — Skills reference](https://docs.anthropic.com/en/docs/claude-code/skills) | | `typst/typst` — compiler source |
 | Anthropic Claude API — getting started | | `her-waka/tutorial/professional-pdf` — original tutorial |
 | Vercel serverless functions — binary dependencies | | |
 

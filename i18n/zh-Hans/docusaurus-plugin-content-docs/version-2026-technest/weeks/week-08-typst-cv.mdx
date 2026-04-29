@@ -19,7 +19,7 @@ sidebar_label: "第 8 周：Typst PDF 自动化"
 ## 核心主题
 
 - 一句话说 Typst：像"带超能力的 Markdown，能编译成 PDF"。这堂课的讲义就是用它编出来的。
-- Claude Code 里的 Skills —— Typst skill 是 Anthropic 出的，懂如何从结构化输入生成常见文档。
+- Claude Code 里的 Skills —— Typst skill 是一个**开源 skill**，我们在阶段 2 自己装上（Claude Code **不会** 自动发现 skill）。装好之后，它就会教 Claude Code 如何从结构化输入生成常见文档。
 - 数据驱动的文档：为什么把 CV 字段存在 Neon（而不是 Google Docs）能让它被 AI 编辑一辈子。
 - 求职信是 LLM 的完美任务：结构化输入（你的 profile + JD）+ 结构化输出（格式化的 PDF）。
 - Meta 时刻：学员意识到这节讲义和他们的简历是同一种工具做出来的。
@@ -77,23 +77,96 @@ sidebar_label: "第 8 周：Typst PDF 自动化"
 
 </VerifyStep>
 
-### 阶段 2 —— 在 Claude Code 里装 Typst skill
+### 阶段 2 —— 安装 Typst CLI 和 Typst skill
+
+<Note title="要装两个东西 —— 它们是不同的">
+Typst **CLI** 是把 `.typ` 编译成 PDF 的二进制；Typst **skill** 是一包指令、参考资料和示例，教 Claude Code 怎么 *驱动* 那个 CLI。Claude Code **不会** 从任何"Anthropic registry"里自动发现 skill —— 你要自己装，就像装 VS Code 插件那样。阶段 2 把这两件事都做完。
+</Note>
+
+#### 步骤 2a —— 安装 Typst CLI
+
+挑一条匹配你机器的命令跑一次：
+
+```bash
+# Windows
+winget install --id Typst.Typst
+
+# macOS
+brew install typst
+
+# 任何装了 Rust 工具链的平台
+cargo install --locked typst-cli
+```
+
+跑 `typst --version` 验一下 —— 应该看到 `typst 0.14.x` 或更新。
+
+#### 步骤 2b —— 安装 Typst skill
+
+这个 skill 住在公开 GitHub 仓库：[`ChanMeng666/typst-claude-skill`](https://github.com/ChanMeng666/typst-claude-skill)。下面四种安装方式**任挑一种**——能力上完全等价。
+
+<Tabs>
+  <Tab title="1. Git clone（推荐）">
+直接把 skill 克隆进 Claude Code 的用户级 skills 目录。一条命令，macOS / Linux / Windows（Git Bash 或 WSL）通用：
+
+```bash
+git clone https://github.com/ChanMeng666/typst-claude-skill.git ~/.claude/skills/typst
+```
+
+> Windows PowerShell 用户：把 `~` 替换成 `$env:USERPROFILE`，目标路径就是 `$env:USERPROFILE\.claude\skills\typst`。
+  </Tab>
+  <Tab title="2. Plugin marketplace">
+在 Claude Code 内跑：
+
+```text
+/plugin marketplace add ChanMeng666/typst-claude-skill
+/plugin install typst@chan-typst
+```
+
+这条路径在 plugin `version` 字段升级时会自动更新。marketplace 名字（`chan-typst`）和 plugin 名字（`typst`）声明在仓库的 `.claude-plugin/marketplace.json` 与 `.claude-plugin/plugin.json` 里。
+  </Tab>
+  <Tab title="3. 手动 ZIP">
+机器上没有 Git 的同学：
+
+1. 打开 [`github.com/ChanMeng666/typst-claude-skill`](https://github.com/ChanMeng666/typst-claude-skill)，点 **Code → Download ZIP**。
+2. 解压。
+3. 把解压出来的整个文件夹移动并改名为 `~/.claude/skills/typst`（macOS / Linux）或 `%USERPROFILE%\.claude\skills\typst`（Windows）。
+4. 确认 `SKILL.md` 在该文件夹的根。
+  </Tab>
+  <Tab title="4. 项目级（per-project）">
+当 skill 应该**只**在这个项目内可用时使用（你可以把它和项目一起 commit，让 clone 的人都自动拿到）：
+
+```bash
+# 从项目根目录跑
+mkdir -p .claude/skills
+git clone https://github.com/ChanMeng666/typst-claude-skill.git .claude/skills/typst
+```
+
+skill 只在 Claude Code 从这个项目目录启动时激活，其他项目里完全静默。
+  </Tab>
+</Tabs>
+
+#### 步骤 2c —— 让 Claude Code 验证两个东西都装好了
 
 <PromptStep n={3} audience="Claude Code">
-请确认 Typst skill 已安装。列出它处理的提示词种类。如果没装，从官方 Anthropic skills registry 装上，然后跑 `typst --version` 确认 Typst CLI（`typst`）在我 PATH 里。
+跑两个检查，把每个的结果都告诉我：
+
+1. 跑 `typst --version`。期望：`typst 0.14.x` 或更新。
+2. 读 skill 的 `SKILL.md` frontmatter。路径取决于步骤 2b 我挑了哪一种安装方式 —— 先试 `~/.claude/skills/typst/SKILL.md`；如果挑的是项目级方法，试 `.claude/skills/typst/SKILL.md`；如果挑的是 plugin marketplace，跑 `/plugin list` 看看它住在哪。把 `name:` 字段告诉我 —— 应该是 `typst`。
+3. 跑捆绑的环境检查：`bash ~/.claude/skills/typst/scripts/verify-typst.sh`（按我挑的安装方式调整路径）。报告每行 `[PASS]` 是否都出现，CJK 字体是否被识别到。
 </PromptStep>
 
 <VerifyStep n={4}>
 
-- Claude Code 确认 Typst skill 已安装。
-- `typst --version` 打印版本号。
+- `typst --version` 打印 v0.14 或更新。
+- `SKILL.md` frontmatter 显示 `name: typst`。
+- `verify-typst.sh` 对 typst 版本和写入权限报 `[PASS]`；并列出至少一种 CJK 字体（如果没识别到也没关系，会有清楚的警告，后面修）。
 
 </VerifyStep>
 
 ### 阶段 3 —— 从 profile 生成 CV
 
 <PromptStep n={5} audience="Claude Code">
-我想从 Neon 的 profile 行生成一页 CV。请：
+我想从 Neon 的 profile 行生成一页 CV。我们在阶段 2 装的 Typst skill 给你提供了模板和约定 —— 在动手写 `.typ` 之前，先去查它 `references/typst-templates.md` 里关于 resume / CV 的部分。然后请：
 
 1. 读我的 `profile` 行（用 `.env.local` 里的 `DATABASE_URL`）。
 2. 用 Typst skill 写一个干净的单列 CV 模板，放在 `cv/template.typ`：header 里是姓名 + headline、一段 summary、然后是 Education、Experience、Projects、Skills 区。用得体的 serif 正文 + sans 标题。强调色用我第 2 周挑的那个。
@@ -210,8 +283,8 @@ sidebar_label: "第 8 周：Typst PDF 自动化"
 
 | 文档 | 视频 | 仓库 |
 |---|---|---|
-| Typst —— 入门 + 语言参考 | 讲师 demo："把你的 CV 当作代码，20 分钟" | `typst/typst` —— compiler 源码 |
-| Anthropic Skills —— Typst skill | | `anthropics/skills` —— Typst skill 示例 |
+| [Typst —— 入门 + 语言参考](https://typst.app/docs/) | 讲师 demo："把你的 CV 当作代码，20 分钟" | [`ChanMeng666/typst-claude-skill`](https://github.com/ChanMeng666/typst-claude-skill) —— 阶段 2 安装的 Typst skill（讲师自己的仓库） |
+| [Claude Code —— Skills reference](https://docs.anthropic.com/en/docs/claude-code/skills) | | `typst/typst` —— compiler 源码 |
 | Anthropic Claude API —— getting started | | `her-waka/tutorial/professional-pdf` —— 原始教程 |
 | Vercel serverless function —— 二进制依赖 | | |
 

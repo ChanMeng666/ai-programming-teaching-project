@@ -134,13 +134,13 @@ The deployment failed with a build error. Can you read the Vercel build logs thr
 ### Phase 5 — A second AI for variety
 
 <PromptStep n={12} audience="Claude Code">
-Open a terminal, `cd` into `hello-technest`, and confirm you can see the project. Then install the **Typst skill** from the Anthropic skills registry. When installed, tell me what prompts the skill is now able to handle.
+Open a terminal, `cd` into `hello-technest`, and confirm you can see the project. Then list every Claude Code skill currently active for me — say "I currently have access to the following skills: …" — so I can see what's bundled with my install today. We'll add the **Typst skill** in Week 8 (it lives in a separate GitHub repo and is installed manually — Claude Code does not auto-discover skills).
 </PromptStep>
 
 <VerifyStep n={13}>
 
-- Claude Code confirms the Typst skill is installed.
-- It lists a handful of prompts like "generate a PDF", "compile a typst file". We'll use this in Week 8.
+- Claude Code prints the list of skills it currently has access to (built-ins like the project's slash commands, and any plugin skills you may have already installed).
+- The Typst skill is **not** expected to appear yet — that's intentional, we wire it up in Week 8.
 
 </VerifyStep>
 
@@ -162,7 +162,7 @@ Open a terminal, `cd` into `hello-technest`, and confirm you can see the project
 
 - The repo must exist on your GitHub account.
 - The deploy must have been triggered by AI, not by you running `vercel deploy` by hand. (This is the whole point of the term.)
-- You must have both Cursor and Claude Code installed, and the Typst skill loaded in Claude Code.
+- You must have both Cursor and Claude Code installed and signed in. (The Typst skill comes in Week 8 — not required this week.)
 
 **Submission.** Post the three artifacts (live URL + two screenshots) in the course Slack channel before the start of Week 2.
 
@@ -171,7 +171,8 @@ Open a terminal, `cd` into `hello-technest`, and confirm you can see the project
 | Docs | Videos | Repos |
 |---|---|---|
 | Cursor docs — getting started | The instructor's recorded "first AI deploy" demo | `her-waka/tutorial/vibe-coding` — deeper dive for curious students |
-| Claude Code — quickstart | Fireship — "Cursor in 100 seconds" | `anthropics/skills` — the Skill registry |
+| Claude Code — quickstart | Fireship — "Cursor in 100 seconds" | `ChanMeng666/typst-claude-skill` — the Typst skill we install in Week 8 |
+| [Claude Code — Skills reference](https://docs.anthropic.com/en/docs/claude-code/skills) | | |
 | Vercel MCP server — readme | | |
 | Wispr Flow — setup | | |
 
