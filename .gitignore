@@ -31,3 +31,9 @@ demo-*/
 temp-*/
 /website
 /example
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+!.env.example

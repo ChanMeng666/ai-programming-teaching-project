@@ -5,7 +5,9 @@ export interface Env {
   CORS_ORIGIN: string;
   NOTION_TOKEN: string;
   NOTION_DATABASE_ID: string;
+  NOTION_CAPSTONE_DATABASE_ID?: string;
   MESSAGE_BOARD: KVNamespace;
+  CAPSTONE_VOTES: KVNamespace;
   SETUP_SECRET?: string;
 }
 

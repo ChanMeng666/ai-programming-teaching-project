@@ -24,5 +24,11 @@ binding = "MESSAGE_BOARD"
 id = "4b5e9ccd69394e74b92ea90ba05618ec"
 preview_id = "53ab78ac60834482a3f5eca82389bd28"
 
+# KV namespace for capstone showcase votes (counters + voter dedup + IP rate limit)
+[[kv_namespaces]]
+binding = "CAPSTONE_VOTES"
+id = "e99e0367303240209038a2a16b2f1415"
+preview_id = "71056c091785465ca4e4f0b169ecfdb5"
+
 [vars]
 CORS_ORIGIN = "*"

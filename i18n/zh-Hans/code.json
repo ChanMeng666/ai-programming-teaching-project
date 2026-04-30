@@ -787,6 +787,75 @@
   "messageBoard.loadMore": {
     "message": "加载更多"
   },
+  "capstoneShowcase.pageTitle": {
+    "message": "TECHNEST 2026 毕业设计展示"
+  },
+  "capstoneShowcase.pageDescription": {
+    "message": "TECHNEST 2026 毕业设计实时展示。为你最喜欢的项目点赞——前 3 名高亮，每 30 秒刷新一次。"
+  },
+  "capstoneShowcase.heroTitle": {
+    "message": "TECHNEST 2026 毕业设计展示"
+  },
+  "capstoneShowcase.heroSubtitle": {
+    "message": "TECHNEST 2026 第 9–12 周毕业设计成果。为你喜欢的项目点赞，每 30 秒自动刷新榜单。"
+  },
+  "capstoneShowcase.lastUpdated": {
+    "message": "最近更新"
+  },
+  "capstoneShowcase.spotlight.title": {
+    "message": "🏆 当前榜单 Top 3"
+  },
+  "capstoneShowcase.grid.title": {
+    "message": "全部项目"
+  },
+  "capstoneShowcase.grid.title.more": {
+    "message": "更多项目"
+  },
+  "capstoneShowcase.filterAll": {
+    "message": "全部"
+  },
+  "capstoneShowcase.track.campusLife": {
+    "message": "校园生活"
+  },
+  "capstoneShowcase.track.personalGrowth": {
+    "message": "个人成长"
+  },
+  "capstoneShowcase.track.creativeTools": {
+    "message": "创意工具"
+  },
+  "capstoneShowcase.teamLabel": {
+    "message": "团队"
+  },
+  "capstoneShowcase.link.live": {
+    "message": "访问网站"
+  },
+  "capstoneShowcase.link.postmortem": {
+    "message": "项目复盘"
+  },
+  "capstoneShowcase.video.play": {
+    "message": "播放 demo 视频"
+  },
+  "capstoneShowcase.voteButton.aria.like": {
+    "message": "为该项目点赞"
+  },
+  "capstoneShowcase.voteButton.aria.unlike": {
+    "message": "取消点赞"
+  },
+  "capstoneShowcase.loading": {
+    "message": "加载项目中…"
+  },
+  "capstoneShowcase.empty": {
+    "message": "暂未发布毕业设计，请在 Demo Day 临近时再来。"
+  },
+  "capstoneShowcase.emptyTrack": {
+    "message": "该赛道暂时没有项目。"
+  },
+  "capstoneShowcase.fetchError": {
+    "message": "无法加载毕业设计列表，请稍后刷新。"
+  },
+  "capstoneShowcase.network.error": {
+    "message": "网络错误，请稍后重试。"
+  },
   "theme.Mermaid.viewDiagram": {
     "message": "图表",
     "description": "Mermaid view toggle: diagram"

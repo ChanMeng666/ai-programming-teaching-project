@@ -1,17 +1,12 @@
 import type { Env } from './types';
+import { notionFetch, type NotionRichText } from './notion';
+import { jsonResponse } from './http';
 
-const NOTION_API = 'https://api.notion.com/v1';
-const NOTION_VERSION = '2022-06-28';
 const CACHE_TTL = 300; // 5 minutes
 const RATE_LIMIT_MAX = 5;
 const RATE_LIMIT_WINDOW = 3600; // 1 hour
 
 const CATEGORIES = ['心得体会', '经验分享', '教程讨论', '其他'] as const;
-
-interface NotionRichText {
-  type: 'text';
-  text: { content: string };
-}
 
 interface NotionPage {
   id: string;
@@ -31,23 +26,6 @@ interface MessageResponse {
   content: string;
   category: string;
   submittedAt: string;
-}
-
-/**
- * Helper to call the Notion REST API
- */
-async function notionFetch(
-  env: Env,
-  endpoint: string,
-  options: RequestInit = {}
-): Promise<Response> {
-  const headers = new Headers(options.headers);
-  headers.set('Authorization', `Bearer ${env.NOTION_TOKEN}`);
-  headers.set('Notion-Version', NOTION_VERSION);
-  if (!headers.has('Content-Type')) {
-    headers.set('Content-Type', 'application/json');
-  }
-  return fetch(`${NOTION_API}${endpoint}`, { ...options, headers });
 }
 
 /**
@@ -308,9 +286,3 @@ export async function handlePostMessage(
   }
 }
 
-function jsonResponse(data: unknown, status = 200): Response {
-  return new Response(JSON.stringify(data), {
-    status,
-    headers: { 'Content-Type': 'application/json' },
-  });
-}

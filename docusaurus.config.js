@@ -224,6 +224,7 @@ const config = {
           },
           {to: '/blog', label: 'Blog', position: 'left'},
           {to: '/message-board/', label: 'Message Board', position: 'left'},
+          {to: '/capstone-showcase/', label: 'Capstone 2026', position: 'left'},
           {
             type: 'docsVersionDropdown',
             position: 'left',
