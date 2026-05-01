@@ -3,7 +3,11 @@
  *
  * Usage:
  * 1. Deploy the worker first: npm run deploy
- * 2. Run this script: npm run seed
+ * 2. Set the SEED_TOKEN env var to the value configured via `wrangler secret put SEED_TOKEN`
+ * 3. Run this script: npm run seed
+ *
+ *   PowerShell: $env:SEED_TOKEN="..."; npm run seed
+ *   Bash:       SEED_TOKEN=... npm run seed
  */
 
 import * as fs from 'fs';
@@ -18,14 +22,25 @@ interface DocumentChunk {
   title: string;
   content: string;
   source: string;
+  namespace: string;
+  label: string;
+}
+
+interface DocSource {
+  path: string;
+  namespace: string;
+  label: string;
 }
 
 const WORKER_URL = 'https://ai-chat-worker.chanmeng-dev.workers.dev';
 
-const DOCS_PATHS = [
-  '../../docs',
-  '../../versioned_docs/version-2024-winter',
-  '../../versioned_docs/version-2025-summer',
+const DOCS_SOURCES: DocSource[] = [
+  { path: '../../docs',                                 namespace: 'docs-current',  label: 'Current docs' },
+  { path: '../../versioned_docs/version-2024-winter',   namespace: '2024-winter',   label: '2024 Winter Course' },
+  { path: '../../versioned_docs/version-2025-summer',   namespace: '2025-summer',   label: '2025 Summer Course' },
+  { path: '../../versioned_docs/version-2026-her-waka', namespace: '2026-her-waka', label: 'HER WAKA 2026' },
+  { path: '../../versioned_docs/version-2026-technest', namespace: '2026-technest', label: 'TECHNEST 2026 (default)' },
+  { path: '../../blog',                                 namespace: 'blog',          label: 'Blog' },
 ];
 
 const CHUNK_SIZE = 800; // characters per chunk
@@ -48,12 +63,14 @@ function parseMdx(content: string): { title: string; body: string } {
     body = content.slice(frontmatterMatch[0].length).trim();
   }
 
-  // Remove MDX imports and components
+  // Strip MDX imports, JSX component tags (keeping inner text), code blocks, comments.
   body = body
-    .replace(/import\s+.*?from\s+['"].*?['"]/g, '')
-    .replace(/<[A-Z][a-zA-Z]*[^>]*\/>/g, '')
-    .replace(/<[A-Z][a-zA-Z]*[^>]*>[\s\S]*?<\/[A-Z][a-zA-Z]*>/g, '')
-    .replace(/```[\s\S]*?```/g, '[代码块]')
+    .replace(/^\s*import\s+.*?from\s+['"].*?['"];?\s*$/gm, '') // imports + optional trailing ;
+    .replace(/<[A-Z][a-zA-Z0-9]*[^>]*\/>/g, '')        // Self-closing JSX components: drop entirely
+    .replace(/<\/?[A-Z][a-zA-Z0-9]*[^>]*>/g, '')       // Paired JSX tags: keep inner text, drop tags
+    .replace(/\{\/\*[\s\S]*?\*\/\}/g, '')              // MDX comments {/* ... */}
+    .replace(/<!--[\s\S]*?-->/g, '')                   // HTML/MDX <!-- ... --> comments (e.g. <!--truncate-->)
+    .replace(/```[\s\S]*?```/g, '[code block]')
     .replace(/\n{3,}/g, '\n\n')
     .trim();
 
@@ -90,6 +107,13 @@ function chunkContent(content: string, chunkSize: number, overlap: number): stri
       chunks.push(chunk.trim());
     }
 
+    // We've already consumed the rest of the content this iteration; stop.
+    if (end >= content.length) {
+      break;
+    }
+
+    // Advance by chunk size minus overlap. Floor keeps us from infinite-looping
+    // if a clipped chunk happens to be shorter than the overlap.
     start += Math.max(chunk.length - overlap, 1);
   }
 
@@ -123,15 +147,26 @@ function findMdxFiles(dir: string): string[] {
 }
 
 /**
+ * Build a human-readable fallback title from a filename like
+ * "2026-03-01-her-waka-programme-intro.mdx" -> "her waka programme intro"
+ */
+function fallbackTitleFromPath(filePath: string): string {
+  return path
+    .basename(filePath, path.extname(filePath))
+    .replace(/^\d{4}-\d{2}-\d{2}-/, '')
+    .replace(/-/g, ' ');
+}
+
+/**
  * Process all documents and generate chunks
  */
 function processDocuments(): DocumentChunk[] {
   const chunks: DocumentChunk[] = [];
   let chunkId = 0;
 
-  for (const docsPath of DOCS_PATHS) {
-    const files = findMdxFiles(docsPath);
-    console.log(`Found ${files.length} files in ${docsPath}`);
+  for (const source of DOCS_SOURCES) {
+    const files = findMdxFiles(source.path);
+    console.log(`Found ${files.length} files in ${source.path}`);
 
     for (const filePath of files) {
       try {
@@ -146,12 +181,14 @@ function processDocuments(): DocumentChunk[] {
 
         const contentChunks = chunkContent(body, CHUNK_SIZE, CHUNK_OVERLAP);
 
-        for (const chunkContent of contentChunks) {
+        for (const chunkText of contentChunks) {
           chunks.push({
             id: `doc-${chunkId++}`,
-            title: title || path.basename(filePath, path.extname(filePath)),
-            content: chunkContent,
+            title: title || fallbackTitleFromPath(filePath),
+            content: chunkText,
             source: relativePath,
+            namespace: source.namespace,
+            label: source.label,
           });
         }
 
@@ -168,7 +205,7 @@ function processDocuments(): DocumentChunk[] {
 /**
  * Send documents to the seed endpoint in batches
  */
-async function seedDocuments(chunks: DocumentChunk[]): Promise<void> {
+async function seedDocuments(chunks: DocumentChunk[], seedToken: string): Promise<void> {
   const BATCH_SIZE = 5; // Process 5 documents at a time to avoid timeouts
 
   console.log(`\nSeeding ${chunks.length} chunks to ${WORKER_URL}/api/seed...`);
@@ -182,6 +219,7 @@ async function seedDocuments(chunks: DocumentChunk[]): Promise<void> {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'X-Seed-Token': seedToken,
         },
         body: JSON.stringify({ documents: batch }),
       });
@@ -205,6 +243,14 @@ async function seedDocuments(chunks: DocumentChunk[]): Promise<void> {
  * Main function
  */
 async function main() {
+  const seedToken = process.env.SEED_TOKEN;
+  if (!seedToken) {
+    console.error('Missing SEED_TOKEN env var. Set it with the value you stored via `wrangler secret put SEED_TOKEN`.');
+    console.error('  PowerShell: $env:SEED_TOKEN="..."; npm run seed');
+    console.error('  Bash:       SEED_TOKEN=... npm run seed');
+    process.exit(1);
+  }
+
   console.log('Processing documents...\n');
   const chunks = processDocuments();
   console.log(`\nGenerated ${chunks.length} chunks from documents`);
@@ -214,7 +260,7 @@ async function main() {
     return;
   }
 
-  await seedDocuments(chunks);
+  await seedDocuments(chunks, seedToken);
 }
 
 main().catch(console.error);

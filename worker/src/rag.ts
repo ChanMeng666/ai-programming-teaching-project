@@ -1,13 +1,28 @@
 import type { Env, VectorMatch } from './types';
 
-const SYSTEM_PROMPT = `你是「AI编程教学平台」的智能助手。你的任务是帮助用户学习AI辅助编程。
+const SYSTEM_PROMPT = `You are the AI assistant for the AI Programming Teaching Platform (programming.chanmeng.org).
 
-你可以：
-- 回答关于课程内容的问题
-- 解释编程概念和AI工具使用方法
-- 提供学习建议
+The platform offers the following courses (newest first):
+- TECHNEST 2026 — the current default course; an 8-week bootcamp covering dev tools, Portfolio deploy, AI avatar, full-stack with Neon, Vercel Blob, blog systems, Slack notifications, and Typst CV
+- Her Waka 2026 — themed track with 16 tutorials and 4 monthly workshops
+- 2025 Summer course
+- 2024 Winter course
+There is also a Blog with deep-dive articles, plus a public Capstone 2026 showcase page.
 
-请用简洁、友好的中文回答。如果问题超出课程范围，请礼貌告知并尝试提供一般性的帮助。`;
+Your job:
+- First, write the actual answer for the user
+- Answer based on the "Relevant course content" provided below whenever possible
+- When the user does not specify a course version, prefer TECHNEST 2026; only use older versions when the user explicitly asks
+- If retrieved content is insufficient, say so honestly, point to the closest relevant section, then add general guidance
+- Reply in the language the user used (English by default; if the user writes in Chinese, reply in Chinese)
+- Be concise and friendly
+
+After writing the full answer, append a citation block — but only when you actually drew from the "Relevant course content":
+- Add a blank line, then one or more lines of the exact form:
+  — Reference: <title> (<source path>)
+- Use the title and source path verbatim from the matched content
+- One line per cited document
+- Do not add a citation if you did not use any retrieved content`;
 
 /**
  * Generate embeddings for a query using Workers AI
@@ -28,7 +43,8 @@ export async function generateEmbedding(
 export async function searchRelevantDocs(
   env: Env,
   query: string,
-  topK: number = 3
+  topK: number = 8,
+  minScore: number = 0.4
 ): Promise<VectorMatch[]> {
   if (!env.VECTORIZE) {
     return [];
@@ -40,7 +56,10 @@ export async function searchRelevantDocs(
       topK,
       returnMetadata: 'all',
     });
-    return results.matches as VectorMatch[];
+    const matches = (results.matches as VectorMatch[]).filter(
+      (m) => (m.score ?? 0) >= minScore
+    );
+    return matches;
   } catch (error) {
     console.error('Error searching documents:', error);
     return [];
@@ -58,16 +77,20 @@ export function buildContext(matches: VectorMatch[]): string {
   const contextParts = matches
     .filter((match) => match.metadata?.content)
     .map((match, index) => {
-      const title = match.metadata?.title || `文档 ${index + 1}`;
+      const title = match.metadata?.title || `Document ${index + 1}`;
+      const label = match.metadata?.label || '';
+      const source = match.metadata?.source || '';
       const content = match.metadata?.content || '';
-      return `### ${title}\n${content}`;
+      const heading = label ? `${title} (${label})` : title;
+      const sourceLine = source ? `Source: ${source}\n` : '';
+      return `### ${heading}\n${sourceLine}${content}`;
     });
 
   if (contextParts.length === 0) {
     return '';
   }
 
-  return `\n\n以下是相关的课程内容供你参考：\n\n${contextParts.join('\n\n')}`;
+  return `\n\nRelevant course content for reference:\n\n${contextParts.join('\n\n')}`;
 }
 
 /**

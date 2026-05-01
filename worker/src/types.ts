@@ -9,6 +9,7 @@ export interface Env {
   MESSAGE_BOARD: KVNamespace;
   CAPSTONE_VOTES: KVNamespace;
   SETUP_SECRET?: string;
+  SEED_TOKEN?: string;
 }
 
 export interface ChatMessage {
@@ -40,5 +41,7 @@ export interface VectorMatch {
     title?: string;
     content?: string;
     source?: string;
+    namespace?: string;
+    label?: string;
   };
 }

@@ -10,6 +10,8 @@ interface SeedRequest {
     title: string;
     content: string;
     source: string;
+    namespace?: string;
+    label?: string;
   }>;
 }
 
@@ -98,6 +100,16 @@ async function handleChat(request: Request, env: Env): Promise<Response> {
  * Handle document seeding for RAG
  */
 async function handleSeed(request: Request, env: Env): Promise<Response> {
+  if (!env.SEED_TOKEN || request.headers.get('X-Seed-Token') !== env.SEED_TOKEN) {
+    return new Response(
+      JSON.stringify({ error: 'Unauthorized' }),
+      {
+        status: 401,
+        headers: { 'Content-Type': 'application/json' },
+      }
+    );
+  }
+
   if (!env.VECTORIZE) {
     return new Response(
       JSON.stringify({ error: 'Vectorize not configured' }),
@@ -137,6 +149,8 @@ async function handleSeed(request: Request, env: Env): Promise<Response> {
               title: doc.title,
               content: doc.content.substring(0, 1000), // Limit metadata size
               source: doc.source,
+              ...(doc.namespace ? { namespace: doc.namespace } : {}),
+              ...(doc.label ? { label: doc.label } : {}),
             },
           },
         ]);
