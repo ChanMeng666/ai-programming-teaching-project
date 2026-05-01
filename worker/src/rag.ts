@@ -38,28 +38,56 @@ export async function generateEmbedding(
 }
 
 /**
- * Search for relevant documents using Vectorize
+ * Search for relevant documents using Vectorize.
+ *
+ * When `contextNamespace` is provided (e.g. the user is on /docs/2026-technest/...),
+ * we over-fetch then prefer matches from that namespace + 'blog'. If fewer than
+ * MIN_NAMESPACE_HITS in the preferred namespaces survive the score filter, we
+ * fall back to the full unfiltered top-K so the user still gets a useful answer.
  */
 export async function searchRelevantDocs(
   env: Env,
   query: string,
   topK: number = 8,
-  minScore: number = 0.4
+  minScore: number = 0.4,
+  contextNamespace?: string
 ): Promise<VectorMatch[]> {
   if (!env.VECTORIZE) {
     return [];
   }
 
+  const MIN_NAMESPACE_HITS = 3;
+
   try {
     const queryEmbedding = await generateEmbedding(env, query);
+    // Over-fetch when filtering so we have headroom for the client-side filter.
+    // Cloudflare Vectorize caps topK at 50 when returnMetadata='all', so clamp.
+    const VECTORIZE_TOPK_CAP = 50;
+    const fetchK = Math.min(contextNamespace ? topK * 3 : topK, VECTORIZE_TOPK_CAP);
     const results = await env.VECTORIZE.query(queryEmbedding, {
-      topK,
+      topK: fetchK,
       returnMetadata: 'all',
     });
-    const matches = (results.matches as VectorMatch[]).filter(
+
+    const allMatches = (results.matches as VectorMatch[]).filter(
       (m) => (m.score ?? 0) >= minScore
     );
-    return matches;
+
+    if (!contextNamespace) {
+      return allMatches.slice(0, topK);
+    }
+
+    const allowed = new Set([contextNamespace, 'blog']);
+    const filtered = allMatches.filter((m) =>
+      allowed.has(m.metadata?.namespace || '')
+    );
+
+    if (filtered.length >= MIN_NAMESPACE_HITS) {
+      return filtered.slice(0, topK);
+    }
+
+    // Fallback: not enough namespace-local matches — use the full top-K
+    return allMatches.slice(0, topK);
   } catch (error) {
     console.error('Error searching documents:', error);
     return [];
@@ -98,9 +126,10 @@ export function buildContext(matches: VectorMatch[]): string {
  */
 export async function buildSystemPrompt(
   env: Env,
-  userQuery: string
+  userQuery: string,
+  contextNamespace?: string
 ): Promise<string> {
-  const matches = await searchRelevantDocs(env, userQuery);
+  const matches = await searchRelevantDocs(env, userQuery, 8, 0.4, contextNamespace);
   const context = buildContext(matches);
   return SYSTEM_PROMPT + context;
 }

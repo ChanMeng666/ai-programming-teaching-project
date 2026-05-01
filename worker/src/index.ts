@@ -15,6 +15,19 @@ interface SeedRequest {
   }>;
 }
 
+interface SeedDeleteRequest {
+  ids: string[];
+}
+
+const ALLOWED_NAMESPACES = new Set([
+  'docs-current',
+  '2024-winter',
+  '2025-summer',
+  '2026-her-waka',
+  '2026-technest',
+  'blog',
+]);
+
 /**
  * Handle CORS preflight requests
  */
@@ -69,10 +82,17 @@ async function handleChat(request: Request, env: Env): Promise<Response> {
       );
     }
 
+    // Validate the optional contextNamespace from the client against an allow-list
+    const contextNamespace =
+      body.contextNamespace && ALLOWED_NAMESPACES.has(body.contextNamespace)
+        ? body.contextNamespace
+        : undefined;
+
     const { response, sessionId } = await processChat(
       env,
       body.message.trim(),
-      body.sessionId
+      body.sessionId,
+      contextNamespace
     );
 
     // Return streaming response
@@ -188,6 +208,47 @@ async function handleSeed(request: Request, env: Env): Promise<Response> {
 }
 
 /**
+ * Delete a list of vectors from Vectorize. Used by the seed script for
+ * diff-based cleanup of obsolete chunks. Token-gated.
+ */
+async function handleSeedDelete(request: Request, env: Env): Promise<Response> {
+  if (!env.SEED_TOKEN || request.headers.get('X-Seed-Token') !== env.SEED_TOKEN) {
+    return new Response(JSON.stringify({ error: 'Unauthorized' }), {
+      status: 401,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
+
+  if (!env.VECTORIZE) {
+    return new Response(JSON.stringify({ error: 'Vectorize not configured' }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
+
+  try {
+    const body = (await request.json()) as SeedDeleteRequest;
+    if (!body.ids || !Array.isArray(body.ids) || body.ids.length === 0) {
+      return new Response(JSON.stringify({ deleted: 0 }), {
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+
+    await env.VECTORIZE.deleteByIds(body.ids);
+
+    return new Response(JSON.stringify({ deleted: body.ids.length }), {
+      headers: { 'Content-Type': 'application/json' },
+    });
+  } catch (error) {
+    console.error('Seed delete error:', error);
+    return new Response(
+      JSON.stringify({ error: error instanceof Error ? error.message : 'Unknown error' }),
+      { status: 500, headers: { 'Content-Type': 'application/json' } }
+    );
+  }
+}
+
+/**
  * Handle health check
  */
 function handleHealth(): Response {
@@ -216,6 +277,8 @@ export default {
       response = await handleChat(request, env);
     } else if (pathname === '/api/seed' && request.method === 'POST') {
       response = await handleSeed(request, env);
+    } else if (pathname === '/api/seed/delete' && request.method === 'POST') {
+      response = await handleSeedDelete(request, env);
     } else if (pathname === '/api/messages' && request.method === 'GET') {
       response = await handleGetMessages(request, env);
     } else if (pathname === '/api/messages' && request.method === 'POST') {

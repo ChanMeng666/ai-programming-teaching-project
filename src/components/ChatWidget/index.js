@@ -10,6 +10,24 @@ const API_URL = 'https://ai-chat-worker.chanmeng-dev.workers.dev';
 const STORAGE_KEY = 'ai-chat-messages';
 const SESSION_KEY = 'ai-chat-session';
 
+// Match the namespaces declared in worker/scripts/seed-vectors.ts. Used to bias
+// retrieval toward the version the visitor is currently reading.
+const VERSIONED_DOC_SLUGS = ['2024-winter', '2025-summer', '2026-her-waka', '2026-technest'];
+const DEFAULT_DOC_NAMESPACE = '2026-technest'; // matches lastVersion in docusaurus.config.js
+
+function getContextNamespace() {
+  if (typeof window === 'undefined') return null;
+  const pathname = window.location.pathname || '';
+  if (pathname.startsWith('/blog/')) return 'blog';
+  for (const slug of VERSIONED_DOC_SLUGS) {
+    if (pathname.startsWith(`/docs/${slug}/`) || pathname === `/docs/${slug}`) {
+      return slug;
+    }
+  }
+  if (pathname.startsWith('/docs/')) return DEFAULT_DOC_NAMESPACE;
+  return null;
+}
+
 export default function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([]);
@@ -93,6 +111,7 @@ export default function ChatWidget() {
         body: JSON.stringify({
           message: text.trim(),
           sessionId,
+          contextNamespace: getContextNamespace(),
         }),
       });
 

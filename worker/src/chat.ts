@@ -57,13 +57,14 @@ export async function saveSession(env: Env, session: Session): Promise<void> {
 export async function processChat(
   env: Env,
   userMessage: string,
-  sessionId?: string
+  sessionId?: string,
+  contextNamespace?: string
 ): Promise<{ response: ReadableStream; sessionId: string }> {
   // Get or create session
   const session = await getSession(env, sessionId);
 
-  // Build system prompt with RAG context
-  const systemPrompt = await buildSystemPrompt(env, userMessage);
+  // Build system prompt with RAG context (optionally biased toward a course version)
+  const systemPrompt = await buildSystemPrompt(env, userMessage, contextNamespace);
 
   // Add user message to history
   session.messages.push({

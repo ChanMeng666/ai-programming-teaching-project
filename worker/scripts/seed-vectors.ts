@@ -12,10 +12,16 @@
 
 import * as fs from 'fs';
 import * as path from 'path';
+import * as crypto from 'crypto';
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+// Local state file. Records the IDs of every chunk written by the most recent
+// successful seed. The next seed compares the new ID set to this and deletes
+// any IDs that disappeared (i.e. content was edited or removed).
+const STATE_FILE = path.resolve(__dirname, '.seeded-ids.json');
 
 interface DocumentChunk {
   id: string;
@@ -158,11 +164,27 @@ function fallbackTitleFromPath(filePath: string): string {
 }
 
 /**
+ * Build a content-addressed chunk ID. Stable across seed runs as long as the
+ * source path, position, and chunk text are unchanged — so unchanged docs
+ * upsert in place rather than accumulating duplicates.
+ *
+ * Vectorize allows IDs up to 64 chars. We use 40-hex-char SHA-1 prefixed with
+ * "c-" to make IDs greppable in logs.
+ */
+function chunkId(relativePath: string, chunkIndex: number, chunkText: string): string {
+  const hash = crypto
+    .createHash('sha1')
+    .update(`${relativePath}|${chunkIndex}|${chunkText}`)
+    .digest('hex');
+  return `c-${hash}`;
+}
+
+/**
  * Process all documents and generate chunks
  */
 function processDocuments(): DocumentChunk[] {
   const chunks: DocumentChunk[] = [];
-  let chunkId = 0;
+  const seenIds = new Set<string>();
 
   for (const source of DOCS_SOURCES) {
     const files = findMdxFiles(source.path);
@@ -181,9 +203,15 @@ function processDocuments(): DocumentChunk[] {
 
         const contentChunks = chunkContent(body, CHUNK_SIZE, CHUNK_OVERLAP);
 
-        for (const chunkText of contentChunks) {
+        for (let i = 0; i < contentChunks.length; i++) {
+          const chunkText = contentChunks[i];
+          let id = chunkId(relativePath, i, chunkText);
+          // Extremely unlikely collision guard; bump suffix if so.
+          while (seenIds.has(id)) id = `${id}-dup`;
+          seenIds.add(id);
+
           chunks.push({
-            id: `doc-${chunkId++}`,
+            id,
             title: title || fallbackTitleFromPath(filePath),
             content: chunkText,
             source: relativePath,
@@ -200,6 +228,65 @@ function processDocuments(): DocumentChunk[] {
   }
 
   return chunks;
+}
+
+/**
+ * Read the IDs we wrote on the previous successful seed, if any.
+ */
+function readPreviousIds(): string[] {
+  if (!fs.existsSync(STATE_FILE)) return [];
+  try {
+    const raw = fs.readFileSync(STATE_FILE, 'utf-8');
+    const parsed = JSON.parse(raw);
+    if (Array.isArray(parsed.ids)) return parsed.ids as string[];
+    return [];
+  } catch (error) {
+    console.warn(`Could not read ${STATE_FILE}; treating as empty.`);
+    return [];
+  }
+}
+
+/**
+ * Persist the IDs of the successful seed for future diffs.
+ */
+function writeStateFile(ids: string[]): void {
+  const payload = { writtenAt: new Date().toISOString(), count: ids.length, ids };
+  fs.writeFileSync(STATE_FILE, JSON.stringify(payload, null, 2), 'utf-8');
+  console.log(`Wrote ${ids.length} IDs to ${path.basename(STATE_FILE)}`);
+}
+
+/**
+ * Tell the worker to delete the given vector IDs. Batched to keep request
+ * sizes reasonable.
+ */
+async function deleteObsoleteIds(ids: string[], seedToken: string): Promise<void> {
+  if (ids.length === 0) {
+    console.log('\nNo obsolete IDs to delete.');
+    return;
+  }
+
+  const BATCH = 100;
+  console.log(`\nDeleting ${ids.length} obsolete IDs...`);
+
+  for (let i = 0; i < ids.length; i += BATCH) {
+    const slice = ids.slice(i, i + BATCH);
+    try {
+      const response = await fetch(`${WORKER_URL}/api/seed/delete`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Seed-Token': seedToken,
+        },
+        body: JSON.stringify({ ids: slice }),
+      });
+      const result = await response.json();
+      console.log(
+        `  Delete batch ${Math.floor(i / BATCH) + 1}/${Math.ceil(ids.length / BATCH)}: ${JSON.stringify(result)}`
+      );
+    } catch (error) {
+      console.error(`  Error deleting batch:`, error);
+    }
+  }
 }
 
 /**
@@ -260,7 +347,30 @@ async function main() {
     return;
   }
 
-  await seedDocuments(chunks, seedToken);
+  const previousIds = readPreviousIds();
+  const previousSet = new Set(previousIds);
+  const newIds = chunks.map((c) => c.id);
+  const newIdSet = new Set(newIds);
+  const obsoleteIds = previousIds.filter((id) => !newIdSet.has(id));
+  // Hash IDs are deterministic over (path, chunk index, content). If the ID is
+  // already in the index from a prior seed, the embedding is byte-identical, so
+  // we can skip the embed+upsert entirely for those chunks.
+  const changedChunks = chunks.filter((c) => !previousSet.has(c.id));
+
+  console.log(
+    `Previous seed had ${previousIds.length} IDs; ` +
+      `${changedChunks.length} new/changed will be (re-)embedded, ` +
+      `${chunks.length - changedChunks.length} unchanged will be skipped, ` +
+      `${obsoleteIds.length} obsolete will be deleted.`
+  );
+
+  if (changedChunks.length > 0) {
+    await seedDocuments(changedChunks, seedToken);
+  } else {
+    console.log('\nNothing to (re-)embed.');
+  }
+  await deleteObsoleteIds(obsoleteIds, seedToken);
+  writeStateFile(newIds);
 }
 
 main().catch(console.error);

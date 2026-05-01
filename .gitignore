@@ -37,3 +37,7 @@ temp-*/
 .dev.vars*
 !.dev.vars.example
 !.env.example
+
+# Local state for the AI assistant seed script (tracks chunk IDs for diff-based
+# deletion on next seed run). Tied to the live Vectorize index — do not commit.
+/worker/scripts/.seeded-ids.json
