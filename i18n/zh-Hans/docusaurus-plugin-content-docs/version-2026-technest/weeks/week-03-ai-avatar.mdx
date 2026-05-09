@@ -39,7 +39,7 @@ sidebar_label: "第 3 周：给网站加一个你的 AI 克隆"
 
 | 时间 | 活动 |
 |---|---|
-| 0 – 15 分钟 | **回顾与 Check-in。** 快速一轮：每个人念出自己第 2 周的网站 URL。注意一下谁的站最像"他自己"——今天我们要把这种感觉再放大一些。 |
+| 0 – 15 分钟 | **回顾与 Check-in。** 快速一轮：每个人念出自己第 2 周的网站 URL，并打开第 2 周末尾接通的那个轻量版 AI 克隆。挑出克隆给你的一句"不像你"的回答——今天就来修这个感觉。 |
 | 15 – 40 分钟 | **概念讲解。** system prompt 是什么、为什么重要。流式为什么"活"、批量回复为什么"死"。环境变量在 Next.js server actions 里怎么流。 |
 | 40 – 75 分钟 | **现场演示。** 讲师在自己的站上一气呵成地加上聊天组件——从"没有聊天"到"和我的 AI 克隆流式对话"，12 分钟。 |
 | 75 – 105 分钟 | **动手 Lab。** 学员把这个组件加到第 2 周的站上。最有意思的是写 persona prompt——下课前我们会分享几个最妙的。 |
@@ -50,6 +50,10 @@ sidebar_label: "第 3 周：给网站加一个你的 AI 克隆"
 **任务。** 下课时，你的作品集站右下角会有一个浮动聊天组件。任何人打开都能问 "tell me about yourself" —— 答案以流式到达，用你的口吻，扎根于你真实的背景。
 
 ### 阶段 1 —— 取 API key
+
+<Note title="第 2 周已经有 key 了？">
+如果你在第 2 周末尾已经创建了 Gemini API key，**直接复用** —— 跳到阶段 3（设计 persona）。如果你的第 2 周轻量版克隆本地能跑，那阶段 2 的 `.env.local` 和 Vercel env 接线也已经做完了。
+</Note>
 
 <ManualStep n={1} why="Google 的 API key 创建需要人接受使用条款。任何 CLI 或 MCP 都按不了 'Agree' 这个按钮。">
 打开 [aistudio.google.com/apikey](https://aistudio.google.com/apikey)，用 Google 账号登录，点 **Create API key**，复制下来。这个 tab 别关——下一步要把 key 粘进 Cursor。
@@ -176,6 +180,10 @@ sidebar_label: "第 3 周：给网站加一个你的 AI 克隆"
 
 <Note title="Career">
 访问你作品集的招聘官，现在能在你的站点上和一个用你声音回答 "Why should I hire this person?" 的聊天窗对话——而且是凌晨 2 点他们时区。这不是花活儿——这是非对称优势。
+</Note>
+
+<Note title="预告第 4 周 —— RAG">
+今天的克隆完全是 prompt-based ——`content/persona.md` 就是它的全部知识库。**第 4 周** 我们会接 Neon Postgres + `pgvector`，开始把真正的素材存进去，让 AI 从里面检索。这就是讲师在第 2 周末尾说的那句"*在企业里我们用向量数据库，今天先不上*"对应的 **RAG**（Retrieval-Augmented Generation）那一步。今天是过渡：一个能塞进 system prompt 的 persona。下周：一个能扩展到几千条素材的 persona。
 </Note>
 
 ## 踩坑提醒 & 小贴士

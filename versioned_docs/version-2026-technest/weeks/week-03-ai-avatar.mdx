@@ -46,7 +46,7 @@ By the end of this session, students should be able to:
 
 | Time | Activity |
 |---|---|
-| 0 – 15 min | **Recap & Check-in.** Quick round: everyone reads their Week 2 site URL out loud. Note whose site feels the most "them" — we're going to make that feeling louder today. |
+| 0 – 15 min | **Recap & Check-in.** Quick round: everyone reads their Week 2 site URL out loud and opens the lite AI-clone they wired up at the end of Week 2. Note one off-brand reply from your clone — we're going to fix that feeling today. |
 | 15 – 40 min | **Concept Teaching.** What a system prompt is and why it matters. Why streaming feels alive and batch replies feel dead. How env vars flow through Next.js server actions. |
 | 40 – 75 min | **Live Demo.** Instructor adds the chat widget to her own site in one sitting — from "no chat" to "chat with my AI-clone streaming live" in twelve minutes. |
 | 75 – 105 min | **Hands-On Lab.** Students add the widget to their Week 2 site. The fun part is writing their persona prompt — we'll share favourites at the end. |
@@ -57,6 +57,10 @@ By the end of this session, students should be able to:
 **Task.** By the end of class your portfolio site will have a floating chat widget in the bottom-right corner. Anyone can open it and ask "tell me about yourself" — the answer arrives streaming, in your voice, grounded in your real background.
 
 ### Phase 1 — Get the API key
+
+<Note title="Already have a key from Week 2?">
+If you created a Gemini API key at the end of Week 2, **reuse it** — skip to Phase 3 (persona design). Phases 2's `.env.local` and Vercel-env wiring are also already done if your Week 2 lite-clone runs locally.
+</Note>
 
 <ManualStep n={1} why="Google's API-key creation requires a human to accept their usage terms. No CLI or MCP can press 'Agree' for you.">
 Open [aistudio.google.com/apikey](https://aistudio.google.com/apikey), sign in with your Google account, click **Create API key**, and copy it. Keep the tab open — you'll paste the key into Cursor in the next step.
@@ -183,6 +187,10 @@ Every AI product you'll build in your career has a system prompt somewhere. The 
 
 <Note title="Career">
 Recruiters who visit your portfolio will now have a chat widget that answers "Why should I hire this person?" in your voice, at 2 AM their time. That's not a gimmick — that's an asymmetric advantage.
+</Note>
+
+<Note title="Looking ahead to Week 4 — RAG">
+Today's clone is purely prompt-based — your `content/persona.md` is the entire knowledge base. In **Week 4** we wire up Neon Postgres + `pgvector` and start storing real source material the AI can retrieve from. That's the **RAG** (Retrieval-Augmented Generation) step the instructor flagged at the end of Week 2 with "*in the enterprise world we use vector databases — not today*". Today is the bridge: a persona that fits in a single prompt. Next week: a persona that scales to thousands of documents.
 </Note>
 
 ## Challenges & Tips

@@ -15,6 +15,10 @@ sidebar_label: "Week 1: AI Developer Toolkit Setup"
   size="623 KB"
 />
 
+<Note title="Mentor — Chan Meng">
+Independent instructor for TECHNEST 2026. GitHub: [github.com/ChanMeng666](https://github.com/ChanMeng666) · LinkedIn: [linkedin.com/in/chanmeng666](https://www.linkedin.com/in/chanmeng666/). The full course site lives at [programming.chanmeng.org](https://programming.chanmeng.org). The course's RAG-powered AI assistant (built on the same retrieval pattern we'll meet in Week 4) indexes every weekly handout — feel free to ask it questions when you're stuck between lectures.
+</Note>
+
 ## Learning Objectives
 
 By the end of this session, students should be able to:
@@ -29,6 +33,7 @@ By the end of this session, students should be able to:
 - The three AI environments: Cursor, Claude Code, Gemini CLI — when to use each.
 - What MCP servers and Skills are, and how they turn an AI chat into a tool-using agent.
 - Voice-first prompting with Wispr Flow (optional but strongly recommended).
+- Cursor's **Plan Mode** — review the AI's plan before any file is touched. From Week 2 onwards, this is the default for any non-trivial prompt.
 - GitHub as the source-of-truth layer that every later week's deploy flow depends on.
 
 ## Tools / Stack
@@ -40,6 +45,7 @@ By the end of this session, students should be able to:
 | **Gemini CLI** | Free-tier AI for throwaway scripts and quick explorations |
 | **Wispr Flow** | Voice-to-text; dictate long prompts without typing |
 | **GitHub** | Source of truth; auto-triggers every Vercel deploy |
+| **GitHub CLI (`gh`)** | AI invokes it to create repos, edit Description / Topics, manage releases |
 | **Vercel CLI** | AI invokes it to deploy, read logs, manage env vars |
 | **Neon CLI + Neon MCP** | AI invokes them to provision databases and auth (from W4) |
 | **Typst skill** | AI invokes it to generate pixel-perfect PDFs (used in W8) |
@@ -52,16 +58,16 @@ By the end of this session, students should be able to:
 |---|---|
 | 0 – 15 min | **Recap & Check-in.** First class — no recap. 10-min icebreaker: everyone says what they think "programming" means before and after watching a Cursor demo. |
 | 15 – 40 min | **Concept Teaching.** The Delegation Rules. Why we let AI drive CLIs. What MCP servers are. How voice + AI changes keyboard-heavy work. Live comparison: Cursor vs Claude Code vs Gemini CLI on the same task. |
-| 40 – 75 min | **Live Demo.** Instructor opens Cursor from scratch, installs the Vercel MCP, and tells Cursor to "deploy an empty Next.js site to my Vercel". Class watches the AI call the Vercel CLI, approve, deploy, and return a live URL. |
+| 40 – 75 min | **Live Demo.** Instructor opens Cursor from scratch, installs the Vercel MCP, and tells Cursor to "build and deploy a simple personal site to my Vercel". Class watches the AI pick a starter, push to GitHub, deploy, and return a live URL. |
 | 75 – 105 min | **Hands-On Lab.** Each student repeats the demo on their own laptop and ends with a live `*.vercel.app` URL they can share. |
 | 105 – 120 min | **Q&A + Wrap.** Troubleshooting as a group. Everyone leaves with working tools. |
 
 ## Hands-On Lab
 
-**Task.** Get from "no dev tools installed" to "Cursor just deployed an empty Next.js site to Vercel under my account, and I watched it happen". This is the only lecture with heavier-than-usual manual setup — from Week 2 onwards, almost every step is a single spoken prompt.
+**Task.** Get from "no dev tools installed" to "Cursor just deployed a simple personal site to Vercel under my account, and I watched it happen". This is the only lecture with heavier-than-usual manual setup — from Week 2 onwards, almost every step is a single spoken prompt.
 
 <Note title="Pacing note for students">
-If you fall behind during steps 1–4 (installations), **don't stress**. The goal is to finish Step 7 (your first AI-driven Vercel deploy) before we wrap. Installers can finish while we continue — AI can start working even while Claude Code is still downloading in the background.
+If you fall behind during steps 1–4 (installations), **don't stress**. The goal is to finish **Phase 4** (your first AI-driven Vercel deploy) before we wrap. Installers can finish while we continue — AI can start working even while Claude Code is still downloading in the background.
 </Note>
 
 ### Phase 1 — Install the three AI environments
@@ -78,17 +84,29 @@ Install **Claude Code** by following [the official quickstart](https://docs.anth
 Install **Gemini CLI** by following [Google's readme](https://github.com/google-gemini/gemini-cli). Run `npm install -g @google/gemini-cli` in any terminal (Cursor's built-in terminal works), then `gemini login` and sign in with your Google account.
 </ManualStep>
 
+<PromptStep n={4} audience="Cursor">
+Please install the **GitHub CLI** (`gh`) on my system using whatever package manager is appropriate for my OS (Homebrew on macOS, winget or the official installer on Windows, apt on Debian/Ubuntu). Once it's installed, run `gh auth login` for me — when the OAuth browser tab opens, pause and tell me to confirm the device code in the browser. After auth, run `gh auth status` and confirm it printed my username.
+</PromptStep>
+
 <Tip title="Install Wispr Flow now if you're game">
-Wispr Flow ([wisprflow.ai](https://wisprflow.ai)) lets you dictate prompts instead of typing. Everything from Step 5 onwards is a spoken sentence — Wispr Flow makes the rest of this term significantly faster.
+Wispr Flow ([wisprflow.ai](https://wisprflow.ai)) lets you dictate prompts instead of typing. Almost every prompt from Phase 2 onwards is a spoken sentence — Wispr Flow makes the rest of this term significantly faster.
 </Tip>
 
 ### Phase 2 — Prove the AI can act
 
-<PromptStep n={4} audience="Cursor">
-I just installed you. Can you introduce yourself, tell me what tools you have access to (for example, can you run shell commands in a terminal, edit files on disk, and open URLs?), and create a brand-new empty folder called `technest-week-1` in my home directory? After creating it, open that folder as the Cursor workspace.
+<PromptStep n={5} audience="Cursor">
+**Switch to Plan Mode first.** Then: I just installed you. Can you introduce yourself, tell me what tools you have access to (for example, can you run shell commands in a terminal, edit files on disk, and open URLs?), and create a brand-new empty folder called `technest-week-1` in my home directory? After creating it, open that folder as the Cursor workspace.
 </PromptStep>
 
-<VerifyStep n={5}>
+<Tip title="Default to Plan Mode for any non-trivial prompt">
+Plan Mode lets Cursor write a plan you can review before any file is created or any command is run. You approve the plan, *then* it executes. From this term onwards, **Plan Mode is the default for anything more complex than a one-line edit** — it catches misunderstandings before they hit your filesystem.
+</Tip>
+
+<Tip title="Folder-name hygiene">
+**No spaces, no Chinese characters, lowercase preferred.** Some CLIs and deploy platforms still misbehave with spaces in paths, and a folder you create today will follow you into Vercel build logs for the rest of the term. `technest-week-1` ✅ — `TechNest Week 1` ❌.
+</Tip>
+
+<VerifyStep n={6}>
 
 - Cursor reports its capabilities in its own words — take a moment to read them.
 - A folder `technest-week-1` exists in your home directory.
@@ -98,15 +116,15 @@ I just installed you. Can you introduce yourself, tell me what tools you have ac
 
 ### Phase 3 — Install an MCP server so the AI can drive Vercel
 
-<PromptStep n={6} audience="Cursor">
+<PromptStep n={7} audience="Cursor">
 Please install the **Vercel MCP server** so you can call Vercel's API on my behalf. Add it to my Cursor configuration. Once installed, tell me which tools it gives you — I want to see the list. If the MCP server needs me to paste a Vercel token, pause and tell me exactly where to get the token before continuing.
 </PromptStep>
 
-<ManualStep n={7} why="Vercel never exposes account-creation tokens through any API — only the web dashboard.">
+<ManualStep n={8} why="Vercel never exposes account-creation tokens through any API — only the web dashboard.">
 When Cursor pauses and asks for a Vercel token, open [vercel.com/account/tokens](https://vercel.com/account/tokens) in your browser, sign in, click **Create Token**, name it `cursor-mcp`, copy the token, and paste it back into Cursor's chat.
 </ManualStep>
 
-<VerifyStep n={8}>
+<VerifyStep n={9}>
 
 - Cursor prints the list of Vercel tools it now has (create deployment, read logs, manage env vars, etc.).
 - No error messages.
@@ -115,29 +133,51 @@ When Cursor pauses and asks for a Vercel token, open [vercel.com/account/tokens]
 
 ### Phase 4 — The "wow" moment
 
-<PromptStep n={9} audience="Cursor">
-Now prove to me that the delegation model works. Create a brand-new empty Next.js project inside this folder (call it `hello-technest`), initialise a git repo, push it to a **new** public GitHub repo under my account, and deploy it to Vercel using the Vercel MCP. When the deployment is live, open the production URL in my browser. Commit along the way with sensible messages. I'll just watch.
+<PromptStep n={10} audience="Cursor">
+Now prove to me that the delegation model works. Recommend a starter that fits a simple personal landing page — could be Next.js, Vite + React, or even plain HTML/CSS/JS — and tell me in one short paragraph why you picked it. Then create that project inside this folder (call it `hello-technest`), initialise a git repo, push it to a **new** public GitHub repo under my account (use the `gh` CLI we installed in Phase 1), and deploy it to Vercel using the Vercel MCP. When the deployment is live, open the production URL in my browser. Commit along the way with sensible messages. I'll just watch.
 </PromptStep>
 
-<VerifyStep n={10}>
+<Note title="Don't overspecify the stack on day one">
+Many students will end up on Next.js because Vercel's templates assume it — that's fine, and it matches the Magic Portfolio template we'll fork in Week 2. If your AI suggests a lighter starter (Vite, or even pure HTML/CSS/JS for a single landing page), that's also fine. The lesson today is the **deploy pipeline**, not the framework.
+</Note>
 
-- Your browser opens a live `hello-technest-*.vercel.app` URL showing the default Next.js starter page.
+<VerifyStep n={11}>
+
+- Your browser opens a live `hello-technest-*.vercel.app` URL showing your starter.
 - A new repo appears on your GitHub account.
 - Your local folder has a commit history Cursor wrote for you.
 
 </VerifyStep>
 
-<RecoverStep n={11}>
+<RecoverStep n={12}>
 The deployment failed with a build error. Can you read the Vercel build logs through the MCP, find the root cause, fix it, and redeploy? I want the production URL to load without errors before we move on.
 </RecoverStep>
 
+### Phase 4.5 — Make the repo look like a real project
+
+<PromptStep n={13} audience="Cursor">
+Optimise this project's `README.md`. Include: a clear one-line project description, a screenshot or live URL of the deployed site, a tech-stack table (what you picked + why), a short "how to run locally" section, and **one Mermaid diagram** visualising the deploy pipeline (Local edits → git push → GitHub → Vercel webhook → live URL). Commit and push.
+</PromptStep>
+
+<PromptStep n={14} audience="Cursor">
+Now make the repo discoverable. Use the `gh` CLI to set the GitHub repo's **Description** to a one-sentence summary of what this site is, and add five sensible **Topics** (e.g., `personal-website`, `nextjs`, `vercel`, `ai-coded`, `technest-2026` — adjust to match what you actually built). When done, run `gh repo view --web` so I can confirm the chips and description rendered.
+</PromptStep>
+
+<VerifyStep n={15}>
+
+- Open the repo on GitHub. The README shows a Mermaid diagram that renders inline (GitHub renders Mermaid natively).
+- The repo's About sidebar shows your one-line description and five topic chips.
+- A `gh repo view --web` command opened the repo page in your browser.
+
+</VerifyStep>
+
 ### Phase 5 — A second AI for variety
 
-<PromptStep n={12} audience="Claude Code">
+<PromptStep n={16} audience="Claude Code">
 Open a terminal, `cd` into `hello-technest`, and confirm you can see the project. Then list every Claude Code skill currently active for me — say "I currently have access to the following skills: …" — so I can see what's bundled with my install today. We'll add the **Typst skill** in Week 8 (it lives in a separate GitHub repo and is installed manually — Claude Code does not auto-discover skills).
 </PromptStep>
 
-<VerifyStep n={13}>
+<VerifyStep n={17}>
 
 - Claude Code prints the list of skills it currently has access to (built-ins like the project's slash commands, and any plugin skills you may have already installed).
 - The Typst skill is **not** expected to appear yet — that's intentional, we wire it up in Week 8.
@@ -155,6 +195,7 @@ Open a terminal, `cd` into `hello-technest`, and confirm you can see the project
 **Build / Implement.**
 
 - One live `*.vercel.app` URL deployed entirely through AI-invoked CLIs.
+- A polished `README.md` on the repo with a Mermaid deploy-pipeline diagram, plus the GitHub Description and at least five Topics filled in (see Phase 4.5).
 - A screenshot of your Cursor conversation showing the prompt that kicked off the deploy.
 - A second screenshot showing the Vercel MCP tool-call output.
 
@@ -164,7 +205,7 @@ Open a terminal, `cd` into `hello-technest`, and confirm you can see the project
 - The deploy must have been triggered by AI, not by you running `vercel deploy` by hand. (This is the whole point of the term.)
 - You must have both Cursor and Claude Code installed and signed in. (The Typst skill comes in Week 8 — not required this week.)
 
-**Submission.** Post the three artifacts (live URL + two screenshots) in the course Slack channel before the start of Week 2.
+**Submission.** Post the artifacts (live URL + repo URL + two screenshots) in the course Slack channel before the start of Week 2.
 
 ## Resources
 
@@ -174,6 +215,7 @@ Open a terminal, `cd` into `hello-technest`, and confirm you can see the project
 | Claude Code — quickstart | Fireship — "Cursor in 100 seconds" | `ChanMeng666/typst-claude-skill` — the Typst skill we install in Week 8 |
 | [Claude Code — Skills reference](https://docs.anthropic.com/en/docs/claude-code/skills) | | |
 | Vercel MCP server — readme | | |
+| [GitHub CLI — manual](https://cli.github.com/manual/) | | |
 | Wispr Flow — setup | | |
 
 ## Real-World Application
@@ -188,6 +230,7 @@ LinkedIn bio upgrade for next week: **"Full-stack AI developer · I prompt, I sh
 
 - *"Cursor is asking me to confirm each shell command."* Good — in a classroom setting keep manual approvals on. By Week 3 you can enable auto-approve for low-risk commands if you want faster iteration.
 - *"The MCP server says 'authentication required'."* Your Vercel token is missing or expired. Re-paste a fresh token from `vercel.com/account/tokens`.
+- *"`gh auth login` keeps failing on the device-code step."* Make sure you're pasting the code into the same browser you're already signed into GitHub with. If it still fails, try `gh auth login --web` for the OAuth-flow alternative.
 - *"Gemini CLI says I've hit a rate limit."* Use Cursor or Claude Code for the rest of the class. Gemini's free tier resets hourly.
 - *"I can't tell whether I should do the step myself or ask the AI."* Ask: **"Can you do this through your tools, or do I need to do it?"** The AI will answer honestly.
 - *"My prompts aren't specific enough — the AI keeps asking follow-ups."* Watch the instructor's prompts in this lecture carefully. Good prompts name the **tool** the AI should use, the **inputs** it has, and the **signal that the task is done**.
