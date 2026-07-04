@@ -1,0 +1,168 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg0: #11131c;
+  --bg1: #1a1e2e;
+  --ink: #d8dcef;
+  --dim: #8089a8;
+  --red: #e84a3f;
+  --yellow: #ffc83d;
+}
+
+html, body { height: 100%; }
+
+body {
+  background:
+    radial-gradient(1200px 700px at 50% -10%, #232a44 0%, var(--bg1) 45%, var(--bg0) 100%);
+  color: var(--ink);
+  font-family: -apple-system, "PingFang SC", "Microsoft YaHei", "Segoe UI", sans-serif;
+  display: flex;
+  justify-content: center;
+  min-height: 100%;
+  overflow-x: hidden;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 22px 16px 30px;
+  width: 100%;
+  max-width: 980px;
+}
+
+/* ---------- 标题 ---------- */
+.masthead { text-align: center; margin-bottom: 16px; }
+
+.logo {
+  font-family: "Courier New", ui-monospace, monospace;
+  font-weight: 900;
+  font-size: clamp(26px, 4.4vw, 44px);
+  letter-spacing: 0.18em;
+  line-height: 1;
+}
+.logo-red {
+  color: var(--red);
+  text-shadow: 0 3px 0 #7c1f18, 0 6px 14px rgba(232, 74, 63, .35);
+}
+.logo-yellow {
+  color: var(--yellow);
+  text-shadow: 0 3px 0 #8a6410, 0 6px 14px rgba(255, 200, 61, .3);
+}
+.tagline {
+  margin-top: 10px;
+  color: var(--dim);
+  font-size: 13px;
+  letter-spacing: 0.35em;
+}
+
+/* ---------- 机身 / 屏幕 ---------- */
+.bezel {
+  background: linear-gradient(180deg, #2c3148 0%, #181c2c 100%);
+  border-radius: 18px;
+  padding: 14px;
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, .55),
+    0 2px 0 rgba(255, 255, 255, .07) inset,
+    0 -3px 0 rgba(0, 0, 0, .4) inset;
+}
+
+.screen-wrap {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 0 3px #05060a, 0 0 34px rgba(92, 148, 252, .22);
+  line-height: 0;
+}
+
+#game {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  display: block;
+  background: #5c94fc;
+}
+
+.scanlines {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(0deg,
+      rgba(0, 0, 0, 0) 0px, rgba(0, 0, 0, 0) 2px,
+      rgba(0, 0, 0, .10) 2px, rgba(0, 0, 0, .10) 3px);
+  mix-blend-mode: multiply;
+}
+
+/* ---------- 操作说明 ---------- */
+.panel { margin-top: 18px; max-width: 720px; text-align: center; }
+
+.ctl-note { font-size: 12.5px; color: var(--dim); margin-bottom: 12px; }
+.ctl-note strong { color: var(--ink); }
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px 22px;
+  margin-bottom: 12px;
+}
+.ctl { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--ink); }
+.ctl span { color: var(--dim); }
+
+kbd {
+  display: inline-block;
+  min-width: 26px;
+  padding: 4px 7px;
+  text-align: center;
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 12px;
+  color: #fff;
+  background: linear-gradient(180deg, #3a415e, #262b41);
+  border: 1px solid #4a5274;
+  border-bottom: 3px solid #161a29;
+  border-radius: 6px;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, .12) inset;
+}
+
+.tips { font-size: 12.5px; color: var(--dim); line-height: 1.8; }
+
+.foot {
+  margin-top: 22px;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  color: #565e7c;
+}
+
+/* ---------- 触屏按钮 ---------- */
+.touch.hidden { display: none; }
+.touch {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 18px 22px;
+  pointer-events: none;
+  z-index: 50;
+}
+.t-left, .t-right { display: flex; gap: 12px; align-items: flex-end; pointer-events: auto; }
+.tbtn {
+  width: 58px; height: 58px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, .25);
+  background: rgba(40, 46, 70, .55);
+  color: #fff;
+  font-size: 20px;
+  font-weight: 700;
+  backdrop-filter: blur(4px);
+  touch-action: none;
+}
+.tbtn.a { background: rgba(232, 74, 63, .55); }
+.tbtn.b { background: rgba(255, 200, 61, .45); }
+.tbtn:active { transform: scale(.92); }
+
+@media (max-width: 640px) {
+  .controls { display: none; }
+  .stage { padding-top: 12px; }
+}

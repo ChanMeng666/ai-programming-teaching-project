@@ -44,6 +44,7 @@ const DOCS_SOURCES: DocSource[] = [
   { path: '../../docs',                                 namespace: 'docs-current',  label: 'Current docs' },
   { path: '../../versioned_docs/version-2024-winter',   namespace: '2024-winter',   label: '2024 Winter Course' },
   { path: '../../versioned_docs/version-2025-summer',   namespace: '2025-summer',   label: '2025 Summer Course' },
+  { path: '../../versioned_docs/version-2026-peyvand-academy', namespace: '2026-peyvand-academy', label: 'Peyvand Academy 2026' },
   { path: '../../versioned_docs/version-2026-her-waka', namespace: '2026-her-waka', label: 'HER WAKA 2026' },
   { path: '../../versioned_docs/version-2026-technest', namespace: '2026-technest', label: 'TECHNEST 2026 (default)' },
   { path: '../../blog',                                 namespace: 'blog',          label: 'Blog' },

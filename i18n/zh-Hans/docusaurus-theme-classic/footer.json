@@ -23,6 +23,10 @@
     "message": "TECHNEST 课程大纲",
     "description": "The label of footer link with label=TECHNEST Curriculum Outline linking to /docs/curriculum-outline"
   },
+  "link.item.label.Peyvand Academy 2026": {
+    "message": "2026 Peyvand Academy 活动",
+    "description": "The label of footer link with label=Peyvand Academy 2026 linking to /docs/2026-peyvand-academy/programme/about-workshop"
+  },
   "link.item.label.HER WAKA 2026": {
     "message": "2026 HER WAKA 活动",
     "description": "The label of footer link with label=HER WAKA 2026 linking to /docs/2026-her-waka/programme/about-her-waka"

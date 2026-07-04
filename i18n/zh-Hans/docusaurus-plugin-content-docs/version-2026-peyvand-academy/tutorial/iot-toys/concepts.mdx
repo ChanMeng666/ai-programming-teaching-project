@@ -1,0 +1,90 @@
+---
+title: IoT、Makey Makey 与 Claude
+description: "了解什么是物联网、Makey Makey 如何伪装成键盘，以及 Claude 如何用 plain English 写出应用。"
+sidebar_label: 核心概念
+---
+
+在动手搭建之前，先理解让整场工作坊运转起来的三个概念。
+
+## 什么是物联网（IoT）？
+
+**物联网**（Internet of Things）就是能跟电脑「说话」的日常物品。你其实每天都在用。
+
+<CardGroup cols={2}>
+  <Card title="手机" icon="mobile">
+    知道你何时倾斜或点击。
+  </Card>
+  <Card title="智能手表" icon="watch">
+    数你的步数和心跳。
+  </Card>
+  <Card title="智能灯" icon="light">
+    你走进房间就亮起来。
+  </Card>
+  <Card title="游戏手柄" icon="game">
+    把你的动作变成游戏里的操作。
+  </Card>
+</CardGroup>
+
+每个 IoT 小装置都遵循同一个循环：
+
+```
+现实世界（你触摸 / 移动）
+    → 信号（一条小消息）
+    → 电脑（读取消息）
+    → 做出反应（声音、灯光、游戏）
+```
+
+<Tip>
+保持具体、好懂。你不需要知道什么是「传感器」或「协议」。上面的循环就是全部核心——我们接下来要把这个循环做成最简单版本，做三次。
+</Tip>
+
+---
+
+## 认识 Makey Makey——以及它的秘密
+
+**Makey Makey** 是一块小电路板，能把香蕉、铝箔、橡皮泥，甚至你的手变成按钮。
+
+它的秘密：**它假装是你的键盘。**
+
+所以任何能用键盘操作的应用，已经能用香蕉玩了。这意味着我们可以先只用键盘打造并测试玩具——暂时还不需要板子。
+
+### Makey Makey 键位对照
+
+| 键盘按键 | Makey Makey 接口 |
+|---|---|
+| **Space（空格）** | 正面：Space 垫 |
+| **↑ ↓ ← →** | 正面：方向键垫 |
+| **W A S D F G** | 板子背面 |
+
+<Tip>
+「它就是键盘」这一点是你必须记住的。摸香蕉等于按空格键。因为这个秘密，我们不需要硬件就能开始——之后加上板子，代码也完全不用改。
+</Tip>
+
+---
+
+## 认识 Claude，我们的 AI 搭建师
+
+你不需要会写代码。用 plain English 告诉 **Claude** 你想要什么，它就会写出应用。
+
+<CardGroup cols={2}>
+  <Card title="浏览器免费使用" icon="browser">
+    打开 [claude.ai](https://claude.ai) 免费登录。无需安装——在学校笔记本上也很方便。
+  </Card>
+  <Card title="实时看着它搭建" icon="sparkles">
+    Claude 写代码时，应用会出现在聊天旁边的预览面板里。这个面板叫 **Artifact**——点进去就能马上玩。
+  </Card>
+</CardGroup>
+
+<Steps>
+  <Step title="打开 claude.ai">
+    访问 [claude.ai](https://claude.ai) 并登录。免费版就够用了。
+  </Step>
+  <Step title="输入提示词">
+    用 plain English 描述你想要的玩具——下一节会给你确切用词。
+  </Step>
+  <Step title="在 Artifact 里玩">
+    Claude 完成后，点击 Artifact 预览，用键盘玩起来。
+  </Step>
+</Steps>
+
+准备好了吗？前往 [打造 1：香蕉钢琴](/docs/2026-peyvand-academy/tutorial/iot-toys/banana-piano)。

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Super Mario · Makey Makey Edition</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="stage">
+  <header class="masthead">
+    <h1 class="logo"><span class="logo-red">SUPER</span> <span class="logo-yellow">MARIO</span></h1>
+    <p class="tagline">A 1985 Tribute · Faithful Web Remake · World 1-1</p>
+  </header>
+
+  <div class="bezel">
+    <div class="screen-wrap">
+      <canvas id="game" width="256" height="240"></canvas>
+      <div class="scanlines" id="scanlines"></div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <p class="ctl-note">Plays with a <strong>Makey Makey</strong> or a keyboard &mdash; same controls.</p>
+    <div class="controls">
+      <div class="ctl"><kbd>←</kbd><kbd>→</kbd><span>Move</span></div>
+      <div class="ctl"><kbd>↓</kbd><span>Crouch</span></div>
+      <div class="ctl"><kbd>↑</kbd><span>Jump (hold to jump higher)</span></div>
+      <div class="ctl"><kbd>Space</kbd><span>Run · Fireball</span></div>
+      <div class="ctl"><kbd>Click</kbd><span>Jump (alt) · Start</span></div>
+      <div class="ctl"><kbd>P</kbd><span>Pause</span></div>
+      <div class="ctl"><kbd>M</kbd><span>Music on/off</span></div>
+    </div>
+    <p class="tips">Tip: eat a mushroom to grow big and smash bricks from below; grab a fire flower to throw fireballs; after stomping a turtle, bump its shell to kick it; a 1UP mushroom hides inside a secret brick.</p>
+  </div>
+
+  <footer class="foot">FAN TRIBUTE · For learning and fun only · All pixels and sound effects are drawn and synthesized in code</footer>
+</div>
+
+<!-- Touch controls (shown on touch devices only) -->
+<div id="touch" class="touch hidden">
+  <div class="t-left">
+    <button class="tbtn" data-k="left">◀</button>
+    <button class="tbtn" data-k="right">▶</button>
+    <button class="tbtn" data-k="down">▼</button>
+  </div>
+  <div class="t-right">
+    <button class="tbtn b" data-k="run">B</button>
+    <button class="tbtn a" data-k="jump">A</button>
+  </div>
+</div>
+
+<script src="js/font.js"></script>
+<script src="js/sprites.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/level.js"></script>
+<script src="js/game.js"></script>
+</body>
+</html>

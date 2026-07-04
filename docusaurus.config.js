@@ -119,6 +119,11 @@ const config = {
               path: '/',  // 设置为根路径，这样用户访问网站时默认看到这个版本
               banner: 'none',
             },
+            '2026-peyvand-academy': {
+              label: 'Peyvand Academy 2026',
+              path: '2026-peyvand-academy',
+              banner: 'none',
+            },
             '2026-her-waka': {
               label: 'HER WAKA 2026',
               path: '2026-her-waka',
@@ -287,6 +292,10 @@ const config = {
               {
                 label: 'TECHNEST Curriculum Outline',
                 to: '/docs/curriculum-outline',
+              },
+              {
+                label: 'Peyvand Academy 2026',
+                to: '/docs/2026-peyvand-academy/programme/about-workshop',
               },
               {
                 label: 'HER WAKA 2026',

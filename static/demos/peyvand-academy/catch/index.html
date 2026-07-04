@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Catch &amp; Dodge — Makey Makey Demo</title>
+  <meta name="description" content="A keyboard-playable catch-and-dodge game. Catch the fruit with the arrow keys but dodge the bombs. Works with a Makey Makey too." />
+
+  <link rel="icon" type="image/svg+xml" href="../assets/brand/favicon.svg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" />
+  <link rel="stylesheet" href="../assets/css/tokens.css" />
+
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; height: 100%; }
+    body {
+      font-family: var(--font-body-sans);
+      color: var(--color-ink-primary);
+      background-color: var(--color-canvas-page);
+      background-image: radial-gradient(
+        color-mix(in srgb, var(--color-ink-primary) 13%, transparent) 2px, transparent 2.2px);
+      background-size: 22px 22px;
+      min-height: 100%;
+      padding: clamp(20px, 4vw, 48px);
+    }
+    .wrap { max-width: 940px; margin: 0 auto; }
+
+    .eyebrow {
+      display: flex; align-items: center; gap: 12px;
+      font-size: 14px; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; margin: 0 0 12px;
+    }
+    .eyebrow::before { content: ""; width: 28px; height: 6px; background: var(--color-accent-primary); }
+
+    h1 {
+      font-family: var(--font-display); font-weight: 400; letter-spacing: 0.02em;
+      font-size: clamp(40px, 8vw, 88px); line-height: 0.94; margin: 0 0 16px;
+    }
+
+    .banner {
+      background: var(--color-ink-strong); color: var(--color-canvas-page);
+      border-radius: var(--radius-card); padding: 18px 24px; margin: 0 0 22px;
+      font-size: clamp(15px, 1.9vw, 19px); line-height: 1.5; max-width: 880px;
+    }
+    .banner strong { color: var(--color-surface-glare); }
+
+    .hud {
+      display: flex; flex-wrap: wrap; gap: 12px; align-items: center;
+      margin: 0 0 14px;
+    }
+    .stat {
+      background: var(--color-canvas-surface); border-radius: 100px;
+      padding: 8px 20px; font-family: var(--font-display); font-weight: 400;
+      font-size: clamp(18px, 3vw, 26px); letter-spacing: 0.02em;
+    }
+    .stat b { color: var(--color-accent-primary); }
+    .startbtn {
+      margin-left: auto; border: none; cursor: pointer;
+      background: var(--color-accent-primary); color: var(--color-ink-strong);
+      font-family: var(--font-body-sans); font-weight: 700; font-size: 16px;
+      padding: 12px 26px; border-radius: 100px;
+    }
+    .startbtn:active { transform: translateY(1px); }
+
+    .stage { position: relative; }
+    canvas {
+      display: block; width: 100%; height: auto;
+      background: var(--color-canvas-surface);
+      border-radius: var(--radius-card);
+      touch-action: none;
+    }
+    .overlay {
+      position: absolute; inset: 0; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; text-align: center;
+      background: color-mix(in srgb, var(--color-ink-strong) 78%, transparent);
+      color: var(--color-canvas-page); border-radius: var(--radius-card);
+      padding: 24px;
+    }
+    .overlay h2 {
+      font-family: var(--font-display); font-weight: 400; letter-spacing: 0.02em;
+      font-size: clamp(28px, 6vw, 52px); margin: 0 0 8px;
+    }
+    .overlay p { font-size: clamp(14px, 2vw, 18px); margin: 0; max-width: 30ch; }
+    .overlay.hide { display: none; }
+
+    .footer {
+      margin-top: 24px; font-family: var(--font-mono); font-size: 13px; color: var(--color-ink-muted);
+    }
+    .footer a { color: var(--color-accent-primary); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <p class="eyebrow">Makey Makey Demo · 3 of 3</p>
+    <h1>Catch &amp; Dodge</h1>
+
+    <div class="banner">
+      <strong>No Makey Makey needed yet.</strong> Move the basket with the <strong>Left</strong> and <strong>Right</strong> arrow keys
+      to catch the falling fruit — but dodge the bombs. Clip bananas to the arrow keys later and you can steer with your body.
+    </div>
+
+    <div class="hud">
+      <div class="stat">Score <b id="score">0</b></div>
+      <div class="stat">Lives <b id="lives">3</b></div>
+      <div class="stat">Best <b id="best">0</b></div>
+      <button class="startbtn" id="startBtn" type="button">Start</button>
+    </div>
+
+    <div class="stage">
+      <canvas id="game" width="880" height="520" aria-label="Catch game"></canvas>
+      <div class="overlay" id="overlay">
+        <h2 id="ovTitle">Catch &amp; dodge</h2>
+        <p id="ovText">Catch the fruit, dodge the bombs. Press Space or Start, then move with the Left and Right arrow keys.</p>
+      </div>
+    </div>
+
+    <p class="footer">
+      Built live with Claude &middot; part of
+      <a href="/docs/2026-peyvand-academy/tutorial/iot-toys/overview">Touch the World, Talk to Code</a>
+      &middot; <a href="/demos/peyvand-academy/">all demos</a>
+    </p>
+  </div>
+
+  <script>
+    var canvas = document.getElementById("game");
+    var g = canvas.getContext("2d");
+    var W = canvas.width, H = canvas.height;
+
+    var scoreEl = document.getElementById("score");
+    var livesEl = document.getElementById("lives");
+    var bestEl = document.getElementById("best");
+    var overlay = document.getElementById("overlay");
+    var ovTitle = document.getElementById("ovTitle");
+    var ovText = document.getElementById("ovText");
+    var startBtn = document.getElementById("startBtn");
+
+    var COLORS = ["#FC5000", "#F5C84B", "#6FCF7F", "#4FB0E8", "#524AE9", "#C77DD6", "#FF8FA3"];
+
+    var basket = { w: 130, h: 26, x: W / 2 - 65, y: H - 46, speed: 560 };
+    var fruits = [];
+    var keys = {};
+    var running = false;
+    var score = 0, lives = 3, best = 0;
+    var spawnTimer = 0, lastTs = 0;
+
+    function reset() {
+      fruits = [];
+      score = 0; lives = 3;
+      basket.x = W / 2 - basket.w / 2;
+      spawnTimer = 0.6;
+      scoreEl.textContent = score;
+      livesEl.textContent = lives;
+    }
+
+    function start() {
+      if (running) return;
+      reset();
+      running = true;
+      overlay.classList.add("hide");
+      lastTs = 0;
+      requestAnimationFrame(loop);
+    }
+
+    function gameOver() {
+      running = false;
+      if (score > best) { best = score; bestEl.textContent = best; }
+      ovTitle.textContent = "Game over";
+      ovText.textContent = "You caught " + score + ". Press Space to play again.";
+      overlay.classList.remove("hide");
+    }
+
+    function spawnFruit() {
+      var r = 16 + Math.floor((score % 7));
+      r = Math.min(r, 24);
+      var x = r + (W - 2 * r) * fakeRandom();
+      var fall = 150 + score * 7;
+      if (fall > 520) fall = 520;
+      // Roughly 1-in-5 spawns is a bomb, rising a little as the score climbs.
+      var bombChance = Math.min(0.32, 0.18 + score * 0.004);
+      var isBomb = fakeRandom() < bombChance;
+      fruits.push({
+        x: x, y: -r, r: isBomb ? 17 : r, vy: fall, isBomb: isBomb,
+        color: isBomb ? "#2A2730" : COLORS[fruits.length % COLORS.length]
+      });
+    }
+
+    // Deterministic-enough spread without Math.random seeding issues across frames.
+    var seed = 1;
+    function fakeRandom() {
+      seed = (seed * 9301 + 49297) % 233280;
+      return seed / 233280;
+    }
+
+    function update(dt) {
+      var dir = 0;
+      if (keys["ArrowLeft"] || keys["KeyA"]) dir -= 1;
+      if (keys["ArrowRight"] || keys["KeyD"]) dir += 1;
+      basket.x += dir * basket.speed * dt;
+      if (basket.x < 0) basket.x = 0;
+      if (basket.x + basket.w > W) basket.x = W - basket.w;
+
+      spawnTimer -= dt;
+      if (spawnTimer <= 0) {
+        spawnFruit();
+        spawnTimer = Math.max(0.4, 1.0 - score * 0.015);
+      }
+
+      for (var i = fruits.length - 1; i >= 0; i--) {
+        var f = fruits[i];
+        f.y += f.vy * dt;
+        var caught = (f.y + f.r >= basket.y) &&
+          (f.x >= basket.x - f.r) && (f.x <= basket.x + basket.w + f.r) &&
+          (f.y - f.r <= basket.y + basket.h);
+        if (caught) {
+          fruits.splice(i, 1);
+          if (f.isBomb) {
+            lives -= 1;
+            livesEl.textContent = lives;
+            if (lives <= 0) { gameOver(); return; }
+          } else {
+            score += 1;
+            scoreEl.textContent = score;
+          }
+        } else if (f.y - f.r > H) {
+          // Missed fruit just falls away now — only catching a bomb costs a life.
+          fruits.splice(i, 1);
+        }
+      }
+    }
+
+    function drawFruit(f) {
+      g.fillStyle = f.color;
+      g.beginPath();
+      g.arc(f.x, f.y, f.r, 0, Math.PI * 2);
+      g.fill();
+      if (f.isBomb) {
+        // bomb: dark ball with a short orange fuse, a yellow spark, and a highlight
+        g.strokeStyle = "#FC5000";
+        g.lineWidth = 3;
+        g.beginPath();
+        g.moveTo(f.x, f.y - f.r);
+        g.lineTo(f.x + 6, f.y - f.r - 9);
+        g.stroke();
+        g.fillStyle = "#F5C84B";
+        g.beginPath();
+        g.arc(f.x + 7, f.y - f.r - 10, 3, 0, Math.PI * 2);
+        g.fill();
+        g.fillStyle = "rgba(255,255,255,0.35)";
+        g.beginPath();
+        g.arc(f.x - f.r * 0.35, f.y - f.r * 0.35, f.r * 0.25, 0, Math.PI * 2);
+        g.fill();
+      } else {
+        // little stem so it reads as fruit, no emoji
+        g.fillStyle = "#3a5a2a";
+        g.fillRect(f.x - 2, f.y - f.r - 6, 4, 8);
+      }
+    }
+
+    function draw() {
+      g.clearRect(0, 0, W, H);
+      // fruit
+      for (var i = 0; i < fruits.length; i++) drawFruit(fruits[i]);
+      // basket
+      g.fillStyle = "#FC5000";
+      roundRect(basket.x, basket.y, basket.w, basket.h, 8);
+      g.fill();
+      g.fillStyle = "rgba(7,6,7,0.18)";
+      roundRect(basket.x, basket.y, basket.w, 8, 8);
+      g.fill();
+    }
+
+    function roundRect(x, y, w, h, r) {
+      g.beginPath();
+      g.moveTo(x + r, y);
+      g.arcTo(x + w, y, x + w, y + h, r);
+      g.arcTo(x + w, y + h, x, y + h, r);
+      g.arcTo(x, y + h, x, y, r);
+      g.arcTo(x, y, x + w, y, r);
+      g.closePath();
+    }
+
+    function loop(ts) {
+      if (!running) return;
+      if (!lastTs) lastTs = ts;
+      var dt = (ts - lastTs) / 1000;
+      lastTs = ts;
+      if (dt > 0.05) dt = 0.05; // clamp big gaps (tab switch)
+      update(dt);
+      if (running) { draw(); requestAnimationFrame(loop); }
+    }
+
+    document.addEventListener("keydown", function (e) {
+      if (["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", "Space"].indexOf(e.code) >= 0) {
+        e.preventDefault();
+      }
+      keys[e.code] = true;
+      if (e.code === "Space" && !running) start();
+    });
+    document.addEventListener("keyup", function (e) { keys[e.code] = false; });
+
+    startBtn.addEventListener("click", start);
+
+    // Draw the idle frame once so the stage is not blank behind the overlay.
+    draw();
+  </script>
+</body>
+</html>

@@ -1,0 +1,585 @@
+/* ============================================================
+   Touch the World, Talk to Code — slide deck styles
+   Built on Chan Meng's "Caldera" brand tokens (assets/css/tokens.css)
+   ============================================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-body-sans);
+  font-weight: var(--text-body-weight);
+  color: var(--color-ink-primary);
+  background-color: var(--color-canvas-page);
+  /* Faint printed dot-grid ground — the Caldera "paper" texture */
+  background-image: radial-gradient(
+    color-mix(in srgb, var(--color-ink-primary) 13%, transparent) 2px,
+    transparent 2.2px
+  );
+  background-size: 22px 22px;
+  overflow: hidden;
+}
+
+/* ---------- Deck shell ---------- */
+
+.deck {
+  position: relative;
+  height: 100vh;
+  height: 100dvh;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Progress bar (top) */
+.deck__progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 6px;
+  width: 0%;
+  background: var(--color-accent-primary);
+  z-index: 50;
+  transition: width var(--duration-base) var(--easing-standard);
+}
+
+/* ---------- Slides ---------- */
+
+.slide {
+  position: absolute;
+  inset: 0;
+  display: none;
+  flex-direction: column;
+  /* "safe center" keeps the top of tall content reachable when it overflows
+     and must scroll, instead of clipping it (graceful fallback to center). */
+  justify-content: center;
+  justify-content: safe center;
+  padding: clamp(16px, min(4.5vw, 5vh), 64px);
+  /* Reserve room for the bottom chrome (counter / hint / nav) so content
+     never hides behind it. */
+  padding-bottom: clamp(60px, 11vh, 96px);
+  max-width: var(--container-max);
+  margin: 0 auto;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.slide.is-active {
+  display: flex;
+  animation: slide-in var(--duration-slow) var(--easing-entrance);
+}
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Eyebrow (orange rule + uppercase label) */
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 var(--space-3);
+  font-family: var(--text-eyebrow-family);
+  font-size: var(--text-eyebrow-size);
+  font-weight: var(--text-eyebrow-weight);
+  letter-spacing: var(--text-eyebrow-tracking);
+  text-transform: var(--text-eyebrow-transform);
+  color: var(--color-ink-strong);
+}
+
+.eyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 28px;
+  height: 6px;
+  background: var(--color-accent-editorial);
+  flex: none;
+}
+
+/* Difficulty badge shown in the build-slide eyebrow (Easy / Medium / Challenge) */
+.level {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-left: 2px;
+  padding: 2px 12px;
+  border-radius: 100px;
+  background: color-mix(in srgb, var(--color-ink-strong) 9%, transparent);
+}
+.level .dots {
+  font-size: 0.95em;
+  line-height: 1;
+  letter-spacing: 2px;
+  color: var(--color-accent-editorial);
+}
+
+/* Headings */
+.slide h1,
+.slide h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: var(--text-display-tracking);
+  line-height: 0.94;
+  margin: 0 0 clamp(14px, 2.6vh, 32px);
+  color: var(--color-ink-strong);
+}
+
+/* min(vw, vh) so headings also shrink on short / landscape viewports,
+   not just narrow ones. */
+.slide h1 {
+  font-size: clamp(38px, min(8.5vw, 12vh), 120px);
+}
+
+.slide h2 {
+  font-size: clamp(30px, min(6.2vw, 9vh), 80px);
+}
+
+.slide .lead {
+  font-size: clamp(17px, min(2.4vw, 3.2vh), 28px);
+  line-height: 1.45;
+  font-weight: 500;
+  max-width: 24ch;
+  margin: 0 0 clamp(14px, 2.4vh, 32px);
+}
+
+.slide p {
+  font-size: clamp(16px, min(1.9vw, 2.6vh), 22px);
+  line-height: 1.5;
+  max-width: 60ch;
+  margin: 0 0 clamp(12px, 2vh, 24px);
+}
+
+.slide ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: clamp(8px, 1.6vh, 16px);
+  max-width: 60ch;
+}
+
+.slide li {
+  position: relative;
+  padding-left: 30px;
+  font-size: clamp(16px, min(1.9vw, 2.6vh), 22px);
+  line-height: 1.4;
+}
+
+.slide li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.5em;
+  width: 14px;
+  height: 6px;
+  background: var(--color-accent-primary);
+}
+
+.highlight {
+  color: var(--color-ink-strong);
+  background: var(--color-surface-glare);
+  padding: 0 6px;
+  font-weight: 700;
+}
+
+/* ---------- Title slide ---------- */
+
+.slide--title {
+  justify-content: center;
+}
+
+.slide--title h1 {
+  font-size: clamp(44px, min(10vw, 13vh), 140px);
+  margin-bottom: clamp(12px, 2vh, 24px);
+}
+
+.byline {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: clamp(14px, min(1.8vw, 2.4vh), 20px);
+  font-weight: 500;
+  flex-wrap: wrap;
+}
+
+/* Small event-credit line under the byline */
+.credit {
+  font-family: var(--font-mono);
+  font-size: clamp(12px, min(1.4vw, 1.9vh), 15px);
+  color: var(--color-ink-muted);
+  margin: 0;
+  max-width: 60ch;
+}
+
+.byline img {
+  width: 44px;
+  height: 44px;
+}
+
+/* ---------- Cards / panels ---------- */
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: clamp(10px, 1.4vw, 16px);
+  max-width: 980px;
+}
+
+.card {
+  background: var(--color-canvas-surface);
+  border-radius: var(--radius-card);
+  padding: clamp(14px, min(2.6vw, 2.6vh), 28px);
+}
+
+.card .num {
+  font-family: var(--font-display);
+  font-size: clamp(22px, min(3.4vw, 4vh), 40px);
+  color: var(--color-accent-primary);
+  line-height: 1;
+  display: block;
+  margin-bottom: clamp(2px, 0.8vh, 8px);
+}
+
+.card h3 {
+  font-family: var(--font-body-sans);
+  font-size: clamp(16px, min(1.9vw, 2.4vh), 21px);
+  font-weight: 700;
+  margin: 0 0 4px;
+}
+
+.card p {
+  font-size: clamp(13px, min(1.5vw, 2vh), 16px);
+  margin: 0;
+  line-height: 1.35;
+}
+
+.card a {
+  color: var(--color-accent-primary);
+  text-underline-offset: 2px;
+}
+
+/* Flow strip: real world -> signal -> computer -> action */
+.flow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: clamp(8px, 1.2vw, 16px);
+  max-width: 1000px;
+}
+
+.flow__step {
+  flex: 1 1 150px;
+  background: var(--color-canvas-surface);
+  border-radius: var(--radius-card-sm);
+  padding: clamp(12px, min(2vw, 2vh), 22px);
+  text-align: center;
+  font-weight: 700;
+  font-size: clamp(13px, min(1.6vw, 2vh), 18px);
+}
+
+.flow__step span {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 400;
+  color: var(--color-accent-primary);
+  font-size: clamp(18px, min(2.6vw, 3vh), 30px);
+  margin-bottom: 4px;
+}
+
+.flow__arrow {
+  display: flex;
+  align-items: center;
+  font-family: var(--font-display);
+  font-size: clamp(24px, 3vw, 40px);
+  color: var(--color-ink-strong);
+}
+
+/* ---------- Key map ---------- */
+
+.keymap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(6px, 1vw, 10px);
+  max-width: 720px;
+  margin-top: clamp(12px, 2vh, 24px);
+}
+
+.keycap {
+  min-width: 56px;
+  padding: 12px 16px;
+  text-align: center;
+  background: var(--color-canvas-surface);
+  border: 2px solid var(--color-ink-strong);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: clamp(14px, 1.6vw, 18px);
+}
+
+.keycap--accent {
+  background: var(--color-accent-primary);
+  color: var(--color-on-accent);
+  border-color: var(--color-accent-primary);
+}
+
+/* ---------- Prompt card (type-along) ---------- */
+
+.prompt {
+  background: var(--color-ink-strong);
+  color: var(--color-canvas-page);
+  border-radius: var(--radius-card);
+  padding: clamp(20px, min(3.5vw, 4vh), 48px);
+  max-width: 900px;
+  font-family: var(--font-mono);
+  font-size: clamp(15px, min(2.3vw, 3vh), 28px);
+  line-height: 1.5;
+}
+
+.prompt .prompt__label {
+  display: block;
+  font-family: var(--font-body-sans);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent-primary);
+  margin-bottom: var(--space-2);
+}
+
+/* Compact prompt — used on the three build slides, which also carry a heading,
+   a one-line description, and a demo button, so the prompt has to take less room. */
+.prompt--compact {
+  padding: clamp(16px, min(2.8vw, 3vh), 32px);
+  font-size: clamp(14px, min(1.9vw, 2.5vh), 22px);
+}
+
+/* ---------- Two columns ---------- */
+
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+  max-width: 980px;
+}
+
+@media (max-width: 760px) {
+  .two-col {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- Buttons / links ---------- */
+
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: var(--space-4);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body-sans);
+  font-weight: 700;
+  font-size: clamp(14px, 1.6vw, 18px);
+  text-decoration: none;
+  padding: 12px 24px;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid transparent;
+  transition: background var(--duration-base) var(--easing-standard),
+    color var(--duration-base) var(--easing-standard),
+    border-color var(--duration-base) var(--easing-standard),
+    transform var(--duration-fast) var(--easing-standard);
+}
+
+.btn--primary {
+  background: var(--color-accent-primary);
+  color: var(--color-ink-strong);
+  border-color: var(--color-accent-primary);
+}
+
+.btn--primary:hover {
+  background: color-mix(in srgb, var(--color-accent-primary) 88%, #000);
+}
+
+.btn--ghost {
+  background: transparent;
+  color: var(--color-ink-strong);
+  border-color: var(--color-ink-strong);
+}
+
+.btn--ghost:hover {
+  background: var(--color-ink-strong);
+  color: var(--color-canvas-page);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+/* ---------- Chrome: counter, nav, hint ---------- */
+
+.deck__counter {
+  position: fixed;
+  bottom: 22px;
+  left: 28px;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--color-ink-muted);
+  z-index: 40;
+}
+
+.deck__nav {
+  position: fixed;
+  bottom: 18px;
+  right: 24px;
+  display: flex;
+  gap: 10px;
+  z-index: 40;
+}
+
+.navbtn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: none;
+  background: var(--color-canvas-surface);
+  color: var(--color-ink-strong);
+  font-size: 22px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--duration-base) var(--easing-standard),
+    transform var(--duration-fast) var(--easing-standard);
+}
+
+.navbtn:hover {
+  background: var(--color-accent-primary);
+  color: var(--color-on-accent);
+}
+
+.navbtn:active {
+  transform: translateY(1px);
+}
+
+.deck__hint {
+  position: fixed;
+  bottom: 26px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--color-ink-subtle);
+  opacity: 0.7;
+  z-index: 40;
+}
+
+/* ---------- Speaker notes panel ---------- */
+
+.notes {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  max-height: 42vh;
+  overflow-y: auto;
+  background: var(--color-ink-strong);
+  color: var(--color-canvas-page);
+  padding: 24px 32px 32px;
+  z-index: 60;
+  transform: translateY(100%);
+  transition: transform var(--duration-base) var(--easing-standard);
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+.notes.is-open {
+  transform: translateY(0);
+}
+
+.notes__label {
+  font-family: var(--font-body-sans);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent-primary);
+  margin-bottom: 10px;
+}
+
+.notes__time {
+  font-family: var(--font-mono);
+  color: var(--color-surface-glare);
+}
+
+/* ---------- Focus ring ---------- */
+
+:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus-ring);
+}
+
+/* ---------- Reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* ---------- Small screens ---------- */
+
+@media (max-width: 560px) {
+  .deck__hint {
+    display: none;
+  }
+  .flow__arrow {
+    transform: rotate(90deg);
+  }
+  .deck__counter {
+    left: 16px;
+    bottom: 16px;
+  }
+  .deck__nav {
+    right: 14px;
+    bottom: 14px;
+  }
+  .navbtn {
+    width: 42px;
+    height: 42px;
+    font-size: 19px;
+  }
+}
+
+/* Short viewports (e.g. projector at 4:3, or landscape phones): hide the
+   centre hint so it never collides with content, and tighten the bottom band. */
+@media (max-height: 540px) {
+  .deck__hint {
+    display: none;
+  }
+  .slide {
+    padding-bottom: clamp(64px, 14vh, 84px);
+  }
+}

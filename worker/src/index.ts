@@ -23,6 +23,7 @@ const ALLOWED_NAMESPACES = new Set([
   'docs-current',
   '2024-winter',
   '2025-summer',
+  '2026-peyvand-academy',
   '2026-her-waka',
   '2026-technest',
   'blog',

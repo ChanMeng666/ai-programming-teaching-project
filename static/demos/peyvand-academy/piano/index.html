@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Banana Piano — Makey Makey Demo</title>
+  <meta name="description" content="A keyboard-playable piano. Press the keys to hear notes. Works with a Makey Makey too." />
+
+  <link rel="icon" type="image/svg+xml" href="../assets/brand/favicon.svg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" />
+  <link rel="stylesheet" href="../assets/css/tokens.css" />
+
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; height: 100%; }
+    body {
+      font-family: var(--font-body-sans);
+      color: var(--color-ink-primary);
+      background-color: var(--color-canvas-page);
+      background-image: radial-gradient(
+        color-mix(in srgb, var(--color-ink-primary) 13%, transparent) 2px, transparent 2.2px);
+      background-size: 22px 22px;
+      min-height: 100%;
+      padding: clamp(20px, 4vw, 48px);
+    }
+    .wrap { max-width: 1100px; margin: 0 auto; }
+
+    .eyebrow {
+      display: flex; align-items: center; gap: 12px;
+      font-size: 14px; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; margin: 0 0 12px;
+    }
+    .eyebrow::before { content: ""; width: 28px; height: 6px; background: var(--color-accent-primary); }
+
+    h1 {
+      font-family: var(--font-display); font-weight: 400; letter-spacing: 0.02em;
+      font-size: clamp(40px, 8vw, 88px); line-height: 0.94; margin: 0 0 16px;
+    }
+
+    .banner {
+      background: var(--color-ink-strong); color: var(--color-canvas-page);
+      border-radius: var(--radius-card); padding: 18px 24px; margin: 0 0 28px;
+      font-size: clamp(15px, 1.9vw, 19px); line-height: 1.5; max-width: 880px;
+    }
+    .banner strong { color: var(--color-surface-glare); }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 14px;
+    }
+
+    .key {
+      border: none; cursor: pointer; color: #070607;
+      border-radius: var(--radius-card-sm); padding: 22px 16px 18px;
+      text-align: center; font-family: var(--font-body-sans);
+      transition: transform 90ms ease, filter 90ms ease, box-shadow 90ms ease;
+      box-shadow: inset 0 0 0 3px rgba(7,6,7,0.10);
+      min-height: 150px; display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .key:focus-visible { outline: none; box-shadow: var(--shadow-focus-ring); }
+    .key .cap {
+      font-family: var(--font-display); font-weight: 400; font-size: clamp(28px, 4vw, 44px);
+      line-height: 1;
+    }
+    .key .note { font-size: 13px; font-weight: 700; opacity: 0.75; }
+    .key .makey {
+      font-family: var(--font-mono); font-size: 12px; font-weight: 500;
+      background: rgba(7,6,7,0.14); border-radius: 100px; padding: 4px 10px; display: inline-block;
+    }
+    .key.is-on { transform: translateY(3px) scale(1.03); filter: brightness(1.12); box-shadow: inset 0 0 0 4px #070607; }
+
+    .footer {
+      margin-top: 32px; font-family: var(--font-mono); font-size: 13px; color: var(--color-ink-muted);
+    }
+    .footer a { color: var(--color-accent-primary); }
+
+    @media (prefers-reduced-motion: reduce) {
+      .key { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <p class="eyebrow">Makey Makey Demo · 1 of 3</p>
+    <h1>Banana Piano</h1>
+
+    <div class="banner">
+      <strong>No Makey Makey needed yet.</strong> Press the keys on your keyboard (or click them) to play.
+      Each tile shows the Makey Makey button it becomes — clip on a banana later and these same keys turn into things you can touch.
+    </div>
+
+    <div class="grid" id="grid"></div>
+
+    <p class="footer">
+      Built live with Claude &middot; part of
+      <a href="/docs/2026-peyvand-academy/tutorial/iot-toys/overview">Touch the World, Talk to Code</a>
+      &middot; <a href="/demos/peyvand-academy/">all demos</a>
+    </p>
+  </div>
+
+  <script>
+    // Each key: keyboard code, on-screen label, musical note name, frequency, Makey Makey label, colour.
+    var KEYS = [
+      { code: "Space",      cap: "␣", note: "C",  freq: 261.63, makey: "Space", color: "#FC5000" },
+      { code: "ArrowLeft",  cap: "←", note: "D",  freq: 293.66, makey: "Left",  color: "#F5C84B" },
+      { code: "ArrowDown",  cap: "↓", note: "E",  freq: 329.63, makey: "Down",  color: "#6FCF7F" },
+      { code: "ArrowUp",    cap: "↑", note: "F",  freq: 349.23, makey: "Up",    color: "#4FB0E8" },
+      { code: "ArrowRight", cap: "→", note: "G",  freq: 392.00, makey: "Right", color: "#524AE9" },
+      { code: "KeyW",       cap: "W",      note: "A",  freq: 440.00, makey: "W",     color: "#C77DD6" },
+      { code: "KeyA",       cap: "A",      note: "B",  freq: 493.88, makey: "A",     color: "#FF8FA3" },
+      { code: "KeyS",       cap: "S",      note: "C↑", freq: 523.25, makey: "S", color: "#F5C84B" },
+      { code: "KeyD",       cap: "D",      note: "D↑", freq: 587.33, makey: "D", color: "#6FCF7F" },
+      { code: "KeyF",       cap: "F",      note: "E↑", freq: 659.25, makey: "F", color: "#4FB0E8" },
+      { code: "KeyG",       cap: "G",      note: "F↑", freq: 698.46, makey: "G", color: "#FC5000" }
+    ];
+
+    var grid = document.getElementById("grid");
+    var byCode = {};
+    var audioCtx = null;
+
+    function ctx() {
+      if (!audioCtx) {
+        var AC = window.AudioContext || window.webkitAudioContext;
+        audioCtx = new AC();
+      }
+      if (audioCtx.state === "suspended") { audioCtx.resume(); }
+      return audioCtx;
+    }
+
+    function playNote(freq) {
+      var ac = ctx();
+      var osc = ac.createOscillator();
+      var gain = ac.createGain();
+      osc.type = "triangle";
+      osc.frequency.value = freq;
+      var now = ac.currentTime;
+      gain.gain.setValueAtTime(0.0001, now);
+      gain.gain.exponentialRampToValueAtTime(0.35, now + 0.01);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.9);
+      osc.connect(gain).connect(ac.destination);
+      osc.start(now);
+      osc.stop(now + 0.95);
+    }
+
+    function trigger(k) {
+      playNote(k.freq);
+      k.el.classList.add("is-on");
+      clearTimeout(k._t);
+      k._t = setTimeout(function () { k.el.classList.remove("is-on"); }, 180);
+    }
+
+    KEYS.forEach(function (k) {
+      var btn = document.createElement("button");
+      btn.className = "key";
+      btn.type = "button";
+      btn.style.background = k.color;
+      btn.innerHTML =
+        '<span class="cap">' + k.cap + "</span>" +
+        '<span class="note">note ' + k.note + "</span>" +
+        '<span class="makey">Makey: ' + k.makey + "</span>";
+      btn.addEventListener("mousedown", function () { trigger(k); });
+      btn.addEventListener("touchstart", function (e) { e.preventDefault(); trigger(k); }, { passive: false });
+      k.el = btn;
+      byCode[k.code] = k;
+      grid.appendChild(btn);
+    });
+
+    document.addEventListener("keydown", function (e) {
+      var k = byCode[e.code];
+      if (k && !e.repeat) {
+        if (e.code === "Space" || e.code.indexOf("Arrow") === 0) { e.preventDefault(); }
+        trigger(k);
+      }
+    });
+  </script>
+</body>
+</html>

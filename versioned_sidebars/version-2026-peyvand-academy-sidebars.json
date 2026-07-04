@@ -1,0 +1,43 @@
+{
+  "tutorialSidebar": [
+    {
+      "type": "category",
+      "label": "📋 Programme",
+      "collapsible": true,
+      "collapsed": false,
+      "items": [
+        "programme/about-workshop",
+        "programme/schedule",
+        "programme/about-partners",
+        "programme/gallery"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "📚 Tutorial: Touch the World, Talk to Code",
+      "collapsible": true,
+      "collapsed": false,
+      "link": { "type": "doc", "id": "tutorial/index" },
+      "items": [
+        "tutorial/iot-toys/overview",
+        "tutorial/iot-toys/concepts",
+        "tutorial/iot-toys/banana-piano",
+        "tutorial/iot-toys/memory-game",
+        "tutorial/iot-toys/catch-dodge",
+        "tutorial/iot-toys/makey-makey-hands-on",
+        "tutorial/iot-toys/your-turn"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "📎 Resources",
+      "collapsible": true,
+      "collapsed": false,
+      "items": [
+        "resources/handout",
+        "resources/demo-gallery",
+        "resources/speaker-notes"
+      ]
+    }
+  ]
+}

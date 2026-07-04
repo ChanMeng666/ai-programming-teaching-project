@@ -1,0 +1,42 @@
+{
+  "version.label": {
+    "message": "2026 Peyvand Academy 活动",
+    "description": "The label for version 2026-peyvand-academy"
+  },
+  "sidebar.tutorialSidebar.category.📋 Programme": {
+    "message": "📋 项目介绍",
+    "description": "The label for category '📋 Programme' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.📚 Tutorial: Touch the World, Talk to Code": {
+    "message": "📚 教程：触摸世界，对话编程",
+    "description": "The label for category '📚 Tutorial: Touch the World, Talk to Code' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.📎 Resources": {
+    "message": "📎 资源",
+    "description": "The label for category '📎 Resources' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.doc.Concepts": {
+    "message": "核心概念",
+    "description": "The label for doc 'Concepts' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.doc.Banana Piano": {
+    "message": "香蕉钢琴",
+    "description": "The label for doc 'Banana Piano' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.doc.Memory Game": {
+    "message": "记忆游戏",
+    "description": "The label for doc 'Memory Game' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.doc.Catch & Dodge": {
+    "message": "接水果游戏",
+    "description": "The label for doc 'Catch & Dodge' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.doc.Makey Makey Hands-on": {
+    "message": "Makey Makey 实操",
+    "description": "The label for doc 'Makey Makey Hands-on' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.doc.Your Turn": {
+    "message": "轮到你了",
+    "description": "The label for doc 'Your Turn' in sidebar 'tutorialSidebar'"
+  }
+}

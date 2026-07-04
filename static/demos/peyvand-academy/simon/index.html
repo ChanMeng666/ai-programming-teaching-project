@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Memory Game — Makey Makey Demo</title>
+  <meta name="description" content="A keyboard-playable Simon Says memory game. Watch the sequence, then repeat it with the arrow keys. Works with a Makey Makey too." />
+
+  <link rel="icon" type="image/svg+xml" href="../assets/brand/favicon.svg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" />
+  <link rel="stylesheet" href="../assets/css/tokens.css" />
+
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; height: 100%; }
+    body {
+      font-family: var(--font-body-sans);
+      color: var(--color-ink-primary);
+      background-color: var(--color-canvas-page);
+      background-image: radial-gradient(
+        color-mix(in srgb, var(--color-ink-primary) 13%, transparent) 2px, transparent 2.2px);
+      background-size: 22px 22px;
+      min-height: 100%;
+      padding: clamp(20px, 4vw, 48px);
+    }
+    .wrap { max-width: 720px; margin: 0 auto; }
+
+    .eyebrow {
+      display: flex; align-items: center; gap: 12px;
+      font-size: 14px; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; margin: 0 0 12px;
+    }
+    .eyebrow::before { content: ""; width: 28px; height: 6px; background: var(--color-accent-primary); }
+
+    h1 {
+      font-family: var(--font-display); font-weight: 400; letter-spacing: 0.02em;
+      font-size: clamp(40px, 8vw, 88px); line-height: 0.94; margin: 0 0 16px;
+    }
+
+    .banner {
+      background: var(--color-ink-strong); color: var(--color-canvas-page);
+      border-radius: var(--radius-card); padding: 18px 24px; margin: 0 0 22px;
+      font-size: clamp(15px, 1.9vw, 19px); line-height: 1.5;
+    }
+    .banner strong { color: var(--color-surface-glare); }
+
+    .hud {
+      display: flex; flex-wrap: wrap; gap: 12px; align-items: center;
+      margin: 0 0 18px;
+    }
+    .stat {
+      background: var(--color-canvas-surface); border-radius: 100px;
+      padding: 8px 20px; font-family: var(--font-display); font-weight: 400;
+      font-size: clamp(18px, 3vw, 26px); letter-spacing: 0.02em;
+    }
+    .stat b { color: var(--color-accent-primary); }
+    .startbtn {
+      margin-left: auto; border: none; cursor: pointer;
+      background: var(--color-accent-primary); color: var(--color-ink-strong);
+      font-family: var(--font-body-sans); font-weight: 700; font-size: 16px;
+      padding: 12px 26px; border-radius: 100px;
+    }
+    .startbtn:active { transform: translateY(1px); }
+
+    .status {
+      text-align: center; font-family: var(--font-display); letter-spacing: 0.02em;
+      font-size: clamp(20px, 4vw, 30px); margin: 0 0 16px; min-height: 1.2em;
+    }
+
+    /* Diamond layout: Up on top, Left/Right on the sides, Down at the bottom. */
+    .pads {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+      gap: 14px;
+      aspect-ratio: 1 / 1;
+      max-width: 520px; margin: 0 auto;
+    }
+    .pad {
+      border: none; cursor: pointer; border-radius: var(--radius-card);
+      box-shadow: inset 0 0 0 4px rgba(7,6,7,0.12);
+      transition: transform 90ms ease, filter 90ms ease, box-shadow 90ms ease;
+      filter: brightness(0.62) saturate(0.85);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display); font-weight: 400;
+      font-size: clamp(30px, 7vw, 56px); color: rgba(7,6,7,0.55);
+    }
+    .pad.up    { grid-column: 2; grid-row: 1; }
+    .pad.left  { grid-column: 1; grid-row: 2; }
+    .pad.right { grid-column: 3; grid-row: 2; }
+    .pad.down  { grid-column: 2; grid-row: 3; }
+    .pad.is-lit {
+      filter: brightness(1.12) saturate(1.1);
+      transform: scale(1.04);
+      box-shadow: inset 0 0 0 5px #070607;
+      color: #070607;
+    }
+    .pad:focus-visible { outline: none; box-shadow: var(--shadow-focus-ring); }
+
+    .footer {
+      margin-top: 28px; font-family: var(--font-mono); font-size: 13px; color: var(--color-ink-muted);
+    }
+    .footer a { color: var(--color-accent-primary); }
+
+    @media (prefers-reduced-motion: reduce) { .pad { transition: none; } }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <p class="eyebrow">Makey Makey Demo · 2 of 3</p>
+    <h1>Memory Game</h1>
+
+    <div class="banner">
+      <strong>No Makey Makey needed yet.</strong> Watch the pads flash a sequence, then repeat it with the
+      <strong>Up</strong>, <strong>Down</strong>, <strong>Left</strong> and <strong>Right</strong> arrow keys.
+      It gets one step longer every round. Clip four bananas to the arrow keys later and play it with your hands.
+    </div>
+
+    <div class="hud">
+      <div class="stat">Round <b id="round">0</b></div>
+      <div class="stat">Best <b id="best">0</b></div>
+      <button class="startbtn" id="startBtn" type="button">Start</button>
+    </div>
+
+    <p class="status" id="status">Press Start or Space to begin.</p>
+
+    <div class="pads" id="pads">
+      <button class="pad up"    data-code="ArrowUp"    style="background:#4FB0E8" aria-label="Up pad">&uarr;</button>
+      <button class="pad left"  data-code="ArrowLeft"  style="background:#F5C84B" aria-label="Left pad">&larr;</button>
+      <button class="pad right" data-code="ArrowRight" style="background:#FC5000" aria-label="Right pad">&rarr;</button>
+      <button class="pad down"  data-code="ArrowDown"  style="background:#6FCF7F" aria-label="Down pad">&darr;</button>
+    </div>
+
+    <p class="footer">
+      Built live with Claude &middot; part of
+      <a href="/docs/2026-peyvand-academy/tutorial/iot-toys/overview">Touch the World, Talk to Code</a>
+      &middot; <a href="/demos/peyvand-academy/">all demos</a>
+    </p>
+  </div>
+
+  <script>
+    // Four pads, each tied to one arrow key, a colour, and its own tone.
+    var PADS = [
+      { code: "ArrowUp",    freq: 392.00 }, // G
+      { code: "ArrowLeft",  freq: 329.63 }, // E
+      { code: "ArrowRight", freq: 261.63 }, // C
+      { code: "ArrowDown",  freq: 523.25 }  // C up
+    ];
+
+    var byCode = {};
+    document.querySelectorAll(".pad").forEach(function (el) {
+      var code = el.getAttribute("data-code");
+      var pad = PADS.filter(function (p) { return p.code === code; })[0];
+      pad.el = el;
+      byCode[code] = pad;
+      el.addEventListener("mousedown", function () { pressPad(code); });
+      el.addEventListener("touchstart", function (e) { e.preventDefault(); pressPad(code); }, { passive: false });
+    });
+
+    var roundEl = document.getElementById("round");
+    var bestEl = document.getElementById("best");
+    var statusEl = document.getElementById("status");
+    var startBtn = document.getElementById("startBtn");
+
+    var sequence = [];   // the pattern the player must repeat
+    var step = 0;        // how far through the player is this turn
+    var best = 0;
+    var canPlay = false; // true only while it is the player's turn
+    var showing = false; // true while the sequence is flashing
+
+    // --- sound (same Web Audio pattern as the piano demo) ---
+    var audioCtx = null;
+    function ctx() {
+      if (!audioCtx) {
+        var AC = window.AudioContext || window.webkitAudioContext;
+        audioCtx = new AC();
+      }
+      if (audioCtx.state === "suspended") { audioCtx.resume(); }
+      return audioCtx;
+    }
+    function playNote(freq, dur) {
+      var ac = ctx();
+      var osc = ac.createOscillator();
+      var gain = ac.createGain();
+      osc.type = "triangle";
+      osc.frequency.value = freq;
+      var now = ac.currentTime;
+      gain.gain.setValueAtTime(0.0001, now);
+      gain.gain.exponentialRampToValueAtTime(0.35, now + 0.01);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + dur);
+      osc.connect(gain).connect(ac.destination);
+      osc.start(now);
+      osc.stop(now + dur + 0.05);
+    }
+
+    function lightPad(pad, ms) {
+      playNote(pad.freq, ms / 1000);
+      pad.el.classList.add("is-lit");
+      setTimeout(function () { pad.el.classList.remove("is-lit"); }, ms);
+    }
+
+    // Vary picks without Math.random (kept deterministic-friendly like the catch demo).
+    var seed = 7;
+    function pick4() {
+      seed = (seed * 9301 + 49297) % 233280;
+      return PADS[Math.floor((seed / 233280) * 4) % 4];
+    }
+
+    function start() {
+      sequence = [];
+      best = best; // keep best across rounds
+      ctx(); // unlock audio on the click/keypress
+      nextRound();
+    }
+
+    function nextRound() {
+      sequence.push(pick4());
+      roundEl.textContent = sequence.length;
+      step = 0;
+      canPlay = false;
+      statusEl.textContent = "Watch...";
+      showSequence();
+    }
+
+    function showSequence() {
+      showing = true;
+      var i = 0;
+      var gap = Math.max(280, 620 - sequence.length * 20); // speeds up a little as it grows
+      function tick() {
+        if (i >= sequence.length) {
+          showing = false;
+          canPlay = true;
+          statusEl.textContent = "Your turn";
+          return;
+        }
+        lightPad(sequence[i], gap * 0.6);
+        i++;
+        setTimeout(tick, gap);
+      }
+      setTimeout(tick, 500);
+    }
+
+    function pressPad(code) {
+      var pad = byCode[code];
+      if (!pad) return;
+      if (!canPlay) {
+        // Allow a free tap to hear the pad before the game starts.
+        if (!showing && sequence.length === 0) lightPad(pad, 220);
+        return;
+      }
+      lightPad(pad, 220);
+      if (pad === sequence[step]) {
+        step++;
+        if (step === sequence.length) {
+          canPlay = false;
+          if (sequence.length > best) { best = sequence.length; bestEl.textContent = best; }
+          statusEl.textContent = "Nice!";
+          setTimeout(nextRound, 900);
+        }
+      } else {
+        gameOver();
+      }
+    }
+
+    function gameOver() {
+      canPlay = false;
+      playNote(110, 0.5);
+      statusEl.textContent = "Game over — you reached round " + sequence.length + ". Press Space to try again.";
+    }
+
+    document.addEventListener("keydown", function (e) {
+      if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Space"].indexOf(e.code) >= 0) {
+        e.preventDefault();
+      }
+      if (e.code === "Space" && !showing && !canPlay) { start(); return; }
+      if (e.repeat) return;
+      if (byCode[e.code]) pressPad(e.code);
+    });
+
+    startBtn.addEventListener("click", function () { if (!showing && !canPlay) start(); });
+  </script>
+</body>
+</html>

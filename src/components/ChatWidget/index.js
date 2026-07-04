@@ -12,7 +12,7 @@ const SESSION_KEY = 'ai-chat-session';
 
 // Match the namespaces declared in worker/scripts/seed-vectors.ts. Used to bias
 // retrieval toward the version the visitor is currently reading.
-const VERSIONED_DOC_SLUGS = ['2024-winter', '2025-summer', '2026-her-waka', '2026-technest'];
+const VERSIONED_DOC_SLUGS = ['2024-winter', '2025-summer', '2026-peyvand-academy', '2026-her-waka', '2026-technest'];
 const DEFAULT_DOC_NAMESPACE = '2026-technest'; // matches lastVersion in docusaurus.config.js
 
 function getContextNamespace() {
