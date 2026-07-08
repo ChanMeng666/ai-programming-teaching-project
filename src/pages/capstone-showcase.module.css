@@ -295,9 +295,27 @@
 }
 
 .team {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
   font-size: 0.85rem;
   color: #4b5563;
   margin: 0 0 0.5rem;
+}
+
+.avatar {
+  flex: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #f3f4f6;
+  border: 2px solid rgba(99, 102, 241, 0.35);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+.teamText {
+  min-width: 0;
 }
 
 .teamLabel {
@@ -562,6 +580,10 @@
 [data-theme='dark'] .cardTitle { color: #f3f4f6; }
 [data-theme='dark'] .team { color: #9ca3af; }
 [data-theme='dark'] .teamLabel { color: #6b7280; }
+[data-theme='dark'] .avatar {
+  background: #1f2937;
+  border-color: rgba(129, 140, 248, 0.5);
+}
 [data-theme='dark'] .pitch { color: #d1d5db; }
 
 [data-theme='dark'] .trackCampus {

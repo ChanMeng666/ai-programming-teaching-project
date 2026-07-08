@@ -2,7 +2,7 @@ import type { Env, ChatRequest } from './types';
 import { processChat } from './chat';
 import { generateEmbedding } from './rag';
 import { handleGetMessages, handlePostMessage, handleSetupDatabase } from './messages';
-import { handleListCapstones, handleVote, handleSetupCapstoneDB } from './capstones';
+import { handleListCapstones, handleVote, handleSetupCapstoneDB, handleCreateCapstone } from './capstones';
 
 interface SeedRequest {
   documents: Array<{
@@ -292,6 +292,8 @@ export default {
       response = await handleVote(request, env);
     } else if (pathname === '/api/capstones/setup' && request.method === 'POST') {
       response = await handleSetupCapstoneDB(request, env);
+    } else if (pathname === '/api/capstones/admin' && request.method === 'POST') {
+      response = await handleCreateCapstone(request, env);
     } else if (pathname === '/api/health' || pathname === '/') {
       response = handleHealth();
     } else {

@@ -10,6 +10,7 @@ export interface Env {
   CAPSTONE_VOTES: KVNamespace;
   SETUP_SECRET?: string;
   SEED_TOKEN?: string;
+  CAPSTONE_ADMIN_TOKEN?: string;
 }
 
 export interface ChatMessage {
