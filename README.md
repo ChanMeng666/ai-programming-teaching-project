@@ -6,7 +6,7 @@
 
 A comprehensive educational platform that teaches AI-assisted programming through hands-on tutorials, practical projects, and best practices.<br/>
 Features interactive learning modules, modern development workflows, and real-world project implementations.<br/>
-One-click **FREE** deployment of your personalized learning environment.
+Fork it and host your own learning environment **FREE** on Cloudflare.
 
 [Live Demo][demo-link] · [Documentation][docs-link] · [Blog][blog-link] · [Issues][github-issues-link]
 
@@ -19,7 +19,7 @@ One-click **FREE** deployment of your personalized learning environment.
 <!-- SHIELD GROUP -->
 
 [![][github-release-shield]][github-release-link]
-[![][vercel-shield]][vercel-link]
+[![][pages-shield]][pages-link]
 [![][cloudflare-shield]][cloudflare-link]
 [![][docusaurus-shield]][docusaurus-link]<br/>
 [![][github-contributors-shield]][github-contributors-link]
@@ -138,7 +138,7 @@ https://github.com/user-attachments/assets/7f452170-ee23-44ad-ac87-7ad41161cd3b
  <img src="https://img.shields.io/badge/typescript-5.0-blue?style=for-the-badge&logo=typescript"/>
  <img src="https://img.shields.io/badge/node.js-%3E%3D18.0-green?style=for-the-badge&logo=nodedotjs"/>
  <img src="https://img.shields.io/badge/cloudflare-workers-orange?style=for-the-badge&logo=cloudflare"/>
- <img src="https://img.shields.io/badge/vercel-deployment-black?style=for-the-badge&logo=vercel"/>
+ <img src="https://img.shields.io/badge/cloudflare-pages-orange?style=for-the-badge&logo=cloudflare"/>
 
 </div>
 
@@ -170,9 +170,12 @@ https://github.com/user-attachments/assets/7f452170-ee23-44ad-ac87-7ad41161cd3b
     - [Quick Installation](#quick-installation)
     - [Development Mode](#development-mode)
   - [🛳 Deployment](#-deployment)
-    - [`A` Frontend Deployment (Vercel)](#a-frontend-deployment-vercel)
+    - [`A` Frontend Deployment (Cloudflare Pages)](#a-frontend-deployment-cloudflare-pages)
     - [`B` Backend Deployment (Cloudflare Workers)](#b-backend-deployment-cloudflare-workers)
-    - [`C` Docker Deployment](#c-docker-deployment)
+  - [📡 API Reference](#-api-reference)
+    - [Endpoints](#endpoints)
+    - [Rate Limits](#rate-limits)
+    - [CORS](#cors)
   - [📖 Learning Path](#-learning-path)
     - [Beginner Level](#beginner-level)
     - [Intermediate Level](#intermediate-level)
@@ -281,7 +284,7 @@ Beyond the core learning modules, this platform includes:
 - [x] 🔍 **Search Functionality**: Find content quickly and easily (Algolia)
 - [x] 📊 **Progress Tracking**: Monitor your learning journey
 - [x] 💻 **Code Examples**: Interactive code snippets and demos
-- [x] 🚀 **One-Click Deploy**: Easy deployment to your own instance
+- [x] 🚀 **Push-to-Deploy**: Cloudflare Pages builds and publishes every push to `main`
 - [x] 📱 **Mobile Optimized**: Perfect experience on all devices
 - [x] 🌐 **i18n Support**: Full internationalization (Chinese & English)
 
@@ -319,8 +322,8 @@ Beyond the core learning modules, this platform includes:
         <br>MDX
       </td>
       <td align="center" width="96">
-        <img src="https://cdn.simpleicons.org/vercel" width="48" height="48" alt="Vercel" />
-        <br>Vercel
+        <img src="https://cdn.simpleicons.org/cloudflarepages" width="48" height="48" alt="Cloudflare Pages" />
+        <br>Pages
       </td>
     </tr>
   </table>
@@ -330,24 +333,25 @@ Beyond the core learning modules, this platform includes:
 - **Framework**: Docusaurus 3.8.1 with React 18
 - **Styling**: CSS3 + Custom Design System
 - **Content**: MDX for rich interactive documentation
-- **Analytics**: Vercel Analytics integration
 - **Search**: Algolia DocSearch integration
 - **i18n**: Chinese (zh-Hans) and English support
 - **Components**: Custom React components (ChatWidget, BackToTop, etc.)
 
 **Backend Stack (AI Chat):**
 - **Runtime**: Cloudflare Workers (Edge Computing)
-- **AI Model**: Llama 3.1 8B Instruct via Workers AI
-- **Embeddings**: BGE Base EN v1.5 (768 dimensions)
+- **Public URL**: `https://programming-api.chanmeng.org`
+- **AI Model**: `@cf/meta/llama-3.1-8b-instruct-fp8` via Workers AI
+- **Embeddings**: `@cf/baai/bge-base-en-v1.5` (768 dimensions)
 - **Vector Database**: Cloudflare Vectorize (~4,800 document chunks)
-- **Session Storage**: Cloudflare KV
+- **Storage**: Cloudflare KV (sessions, message board cache, capstone votes)
+- **Content DB**: Notion (message board & capstone showcase)
 - **API**: RESTful with SSE streaming
 
 **Development Tools:**
 - **Build System**: Rspack-based Docusaurus build (@docusaurus/faster)
 - **Development Server**: Hot reload development environment
 - **Content Management**: File-based content system with versioning
-- **Deployment**: Vercel (Frontend) + Cloudflare Workers (Backend)
+- **Deployment**: Cloudflare Pages (Frontend) + Cloudflare Workers (Backend)
 - **Version Control**: Git-based workflow
 
 > [!TIP]
@@ -378,7 +382,7 @@ graph TB
     end
 
     subgraph "Deployment"
-        L[Vercel CDN]
+        L[Cloudflare Pages CDN]
         M[Cloudflare Edge]
     end
 
@@ -416,9 +420,9 @@ flowchart LR
 
 | Component | Technology | Purpose |
 |-----------|------------|---------|
-| Vector DB | Cloudflare Vectorize | Store 4,800+ document embeddings |
-| Embeddings | BGE Base EN v1.5 | Convert text to 768-dim vectors |
-| LLM | Llama 3.1 8B Instruct | Generate conversational responses |
+| Vector DB | Cloudflare Vectorize (`docs-index`) | Store 4,800+ document embeddings |
+| Embeddings | `@cf/baai/bge-base-en-v1.5` | Convert text to 768-dim vectors |
+| LLM | `@cf/meta/llama-3.1-8b-instruct-fp8` | Generate conversational responses |
 | Sessions | Cloudflare KV | Maintain conversation history |
 | Streaming | Server-Sent Events | Real-time response delivery |
 
@@ -448,12 +452,16 @@ ai-programming-teaching-project/
 │   └── css/                     # Global styles
 ├── worker/                      # Cloudflare Worker backend
 │   ├── src/
-│   │   ├── index.ts             # Worker entry point
+│   │   ├── index.ts             # Worker entry point & routing
 │   │   ├── chat.ts              # Chat logic & streaming
 │   │   ├── rag.ts               # RAG & vector search
+│   │   ├── messages.ts          # Message board (Notion-backed)
+│   │   ├── capstones.ts         # Capstone showcase & voting
 │   │   └── types.ts             # TypeScript types
 │   ├── scripts/
-│   │   └── seed-vectors.ts      # Document vectorization
+│   │   ├── seed-vectors.ts      # Document vectorization
+│   │   ├── smoke-test.mjs       # End-to-end RAG check
+│   │   └── namespace-test.mjs   # Namespace-scoped retrieval check
 │   ├── wrangler.toml            # Cloudflare configuration
 │   └── package.json             # Worker dependencies
 ├── static/                      # Static assets
@@ -523,29 +531,35 @@ npm run clear
 ## 🛳 Deployment
 
 > [!IMPORTANT]
-> This project requires deploying both the frontend (Vercel) and backend (Cloudflare Workers) for full functionality.
+> The frontend and the backend ship **independently**. The site auto-deploys from `main`; the Worker only deploys when you run `wrangler deploy` by hand. Pushing a change to `worker/` ships nothing on its own.
 
-### `A` Frontend Deployment (Vercel)
+### `A` Frontend Deployment (Cloudflare Pages)
 
-**One-Click Deploy:**
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FChanMeng666%2Fai-programming-teaching-project)
-
-**Manual Deployment:**
+The site is a Cloudflare Pages project connected to the GitHub repository. **Pushing to `main` is the deploy.**
 
 ```bash
-# Install Vercel CLI
-npm i -g vercel
-
-# Deploy
-vercel --prod
+git push origin main   # Cloudflare Pages builds and publishes automatically
 ```
+
+**Pages project settings:**
+
+| Setting | Value |
+|---------|-------|
+| Production branch | `main` |
+| Build command | `npm run build` |
+| Build output directory | `build` |
+| Domains | `programming.chanmeng.org`, `ai-programming-teaching-project.pages.dev` |
+
+To host your own copy, fork the repo, create a Pages project in the Cloudflare dashboard, connect it to your fork, and enter the settings above.
+
+> [!WARNING]
+> Ignore the `deploy` script in the root `package.json` — it is Docusaurus' built-in `gh-pages` command and is **not** how this site ships.
 
 ### `B` Backend Deployment (Cloudflare Workers)
 
 **Prerequisites:**
-- Cloudflare account with Workers enabled
-- Wrangler CLI installed
+- Cloudflare account with Workers AI, KV and Vectorize enabled
+- Wrangler CLI (`npx wrangler` — no global install needed)
 
 **Step 1: Configure Cloudflare Resources**
 
@@ -555,8 +569,10 @@ cd worker
 # Login to Cloudflare
 npx wrangler login
 
-# Create KV namespace for sessions
+# Create the KV namespaces
 npx wrangler kv namespace create CHAT_SESSIONS
+npx wrangler kv namespace create MESSAGE_BOARD
+npx wrangler kv namespace create CAPSTONE_VOTES
 
 # Create Vectorize index for RAG
 npx wrangler vectorize create docs-index --dimensions=768 --metric=cosine
@@ -564,53 +580,98 @@ npx wrangler vectorize create docs-index --dimensions=768 --metric=cosine
 
 **Step 2: Update wrangler.toml**
 
+Paste the namespace IDs printed by the commands above, and point the route at your own domain.
+
 ```toml
 name = "ai-chat-worker"
 main = "src/index.ts"
 compatibility_date = "2024-12-01"
 compatibility_flags = ["nodejs_compat"]
 
+# WAF rate limiting rules only apply to custom domains, never to *.workers.dev,
+# so the workers.dev entrypoint stays off: leaving it on would let any client
+# reach /api/chat while bypassing every rate limiting rule on the zone.
+workers_dev = false
+
+[[routes]]
+pattern = "programming-api.chanmeng.org"
+custom_domain = true
+
 [ai]
 binding = "AI"
 
 [[kv_namespaces]]
 binding = "CHAT_SESSIONS"
-id = "<YOUR_KV_ID>"
+id = "<YOUR_CHAT_SESSIONS_KV_ID>"
 
 [[vectorize]]
 binding = "VECTORIZE"
 index_name = "docs-index"
 
+[[kv_namespaces]]
+binding = "MESSAGE_BOARD"
+id = "<YOUR_MESSAGE_BOARD_KV_ID>"
+
+[[kv_namespaces]]
+binding = "CAPSTONE_VOTES"
+id = "<YOUR_CAPSTONE_VOTES_KV_ID>"
+
 [vars]
-CORS_ORIGIN = "*"
+# Comma-separated allow-list. Any https://<hash>.ai-programming-teaching-project.pages.dev
+# preview origin is additionally matched by suffix in src/index.ts.
+CORS_ORIGIN = "https://programming.chanmeng.org,https://ai-programming-teaching-project.pages.dev,http://localhost:3000"
 ```
 
-**Step 3: Deploy Worker**
+**Step 3: Set Secrets**
+
+Six secrets live outside the repo. Set each one once; `wrangler deploy` does not clobber them.
 
 ```bash
+npx wrangler secret put NOTION_TOKEN                  # Message board + capstone Notion integration
+npx wrangler secret put NOTION_DATABASE_ID            # Message board database
+npx wrangler secret put NOTION_CAPSTONE_DATABASE_ID   # Capstone showcase database
+npx wrangler secret put CAPSTONE_ADMIN_TOKEN          # Guards POST /api/capstones/admin
+npx wrangler secret put SEED_TOKEN                    # Guards POST /api/seed
+npx wrangler secret put SETUP_SECRET                  # Guards the one-time /setup routes
+```
+
+**Step 4: Deploy Worker**
+
+> [!IMPORTANT]
+> Always `cd worker` first. Running `wrangler deploy` from the repository root makes wrangler infer the Worker name from the directory and publish an empty stub called `ai-programming-teaching-project`.
+
+```bash
+cd worker
+
 # Install dependencies
 npm install
 
-# Deploy to Cloudflare
+# Deploy to Cloudflare — this is a manual step, not part of git push
 npx wrangler deploy
 ```
 
-**Step 4: Seed Vector Database**
+**Step 5: Seed Vector Database**
 
 ```bash
-# Run document vectorization
+# Index the docs into Vectorize
 npm run seed
 ```
 
-### `C` Docker Deployment
+**Step 6: Verify**
 
 ```bash
-# Build Docker image
-docker build -t ai-programming-platform .
+# Sends 6 real RAG questions to /api/chat and prints latency + citations
+node scripts/smoke-test.mjs
 
-# Run container
-docker run -p 3000:3000 ai-programming-platform
+# Namespace-scoped retrieval check
+node scripts/namespace-test.mjs
 ```
+
+**Point the frontend at your Worker.** The API base URL is hardcoded — there is no environment variable. Update all three:
+
+- `src/components/ChatWidget/index.js` (`API_URL`)
+- `src/pages/message-board.js` (`API_BASE`)
+- `src/pages/capstone-showcase.js` (`API_BASE`)
 
 ### Deployment Architecture
 
@@ -620,11 +681,11 @@ graph LR
         A[Browser]
     end
 
-    subgraph "Vercel"
+    subgraph "Cloudflare Pages"
         B[Static Site CDN]
     end
 
-    subgraph "Cloudflare"
+    subgraph "Cloudflare Workers"
         C[Workers Edge]
         D[KV Storage]
         E[Vectorize]
@@ -637,6 +698,59 @@ graph LR
     C --> E
     C --> F
 ```
+
+## 📡 API Reference
+
+The backend is served from a single origin: **`https://programming-api.chanmeng.org`**
+
+### Endpoints
+
+| Method | Path | Auth | Description |
+|--------|------|------|-------------|
+| `POST` | `/api/chat` | — | Streaming SSE chat with RAG over the course docs |
+| `GET` | `/api/messages` | — | List message board entries (Notion-backed, 300s KV cache) |
+| `POST` | `/api/messages` | — | Post a message to the board |
+| `GET` | `/api/capstones` | — | List published capstone projects |
+| `POST` | `/api/capstones/vote` | — | Vote for a capstone project |
+| `POST` | `/api/capstones/admin` | `CAPSTONE_ADMIN_TOKEN` | Publish a capstone project |
+| `POST` | `/api/seed` | `SEED_TOKEN` | Index documents into Vectorize |
+| `POST` | `/api/seed/delete` | `SEED_TOKEN` | Remove documents from Vectorize |
+| `POST` | `/api/messages/setup` | `SETUP_SECRET` | One-time Notion database setup |
+| `POST` | `/api/capstones/setup` | `SETUP_SECRET` | One-time Notion database setup |
+| `GET` | `/api/health`, `/` | — | Health check |
+
+**Example — chat:**
+
+```bash
+curl -N https://programming-api.chanmeng.org/api/chat \
+  -H 'Content-Type: application/json' \
+  -d '{"message": "What is prompt engineering?"}'
+```
+
+`message` is required. Optional `sessionId` continues a conversation, and optional `contextNamespace` scopes retrieval to one course version. The response is a `text/event-stream`; the session id comes back in the `X-Session-Id` header.
+
+### Rate Limits
+
+Two independent layers guard the API. Both are per-IP.
+
+| Layer | Scope | Limit | Response when exceeded |
+|-------|-------|-------|------------------------|
+| Cloudflare WAF (edge) | `POST /api/chat` | **20 requests / 10 seconds** | `error code: 1015`, plain text, **no CORS headers** |
+| Worker | `POST /api/chat` | **30 requests / hour** | `429` + JSON `{"error": "..."}` |
+| Worker | `POST /api/messages` | **5 requests / hour** | `429` + JSON `{"error": "..."}` |
+| Worker | `POST /api/capstones/vote` | **30 requests / hour** | `429` + JSON `{"error": "..."}` |
+
+The WAF layer blocks at the edge, so the request never reaches the Worker and the browser sees an opaque failure rather than a JSON error. `/api/chat` charges its hourly quota *before* invoking the model — a request that times out has still consumed Workers AI, so it still counts.
+
+> [!NOTE]
+> The Worker's `workers.dev` subdomain is disabled (`workers_dev = false`) and returns `404 / error code 1042`. WAF rules are never evaluated on `*.workers.dev`, so leaving it enabled would let anyone bypass the edge rate limit.
+
+### CORS
+
+`CORS_ORIGIN` is a comma-separated allow-list of exact origins. In addition, any `https://<hash>.ai-programming-teaching-project.pages.dev` preview origin is matched by suffix, because Pages mints a new immutable origin on every production build. Responses carry `Vary: Origin`; a disallowed origin simply gets no `Access-Control-Allow-Origin` header.
+
+> [!WARNING]
+> CORS is a **browser** control. It stops other websites from reading the API from a page, but it does nothing against `curl` or scripts — that is what the rate limits are for.
 
 ## 📖 Learning Path
 
@@ -675,10 +789,10 @@ We support integration with leading development and AI platforms:
 | **Session Storage** | Cloudflare KV | ✅ Active | Conversation history management |
 | **Code Editors** | Cursor | ✅ Active | AI-assisted code editing tutorials |
 | **Development** | v0 Platform | ✅ Active | Rapid prototyping guides |
-| **Deployment** | Vercel | ✅ Active | Frontend hosting & CDN |
+| **Deployment** | Cloudflare Pages | ✅ Active | Frontend hosting & CDN |
+| **Content DB** | Notion | ✅ Active | Message board & capstone showcase |
 | **Search** | Algolia DocSearch | ✅ Active | Full-text documentation search |
 | **AI Tools** | Coze | ✅ Active | Chatbot development tutorials |
-| **Analytics** | Vercel Analytics | ✅ Active | Usage tracking & insights |
 
 ### Cloudflare Services Pricing
 
@@ -838,13 +952,13 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 [github-license-link]: https://github.com/ChanMeng666/ai-programming-teaching-project/blob/main/LICENSE
 
 <!-- External Links -->
-[vercel-link]: https://vercel.com
+[pages-link]: https://pages.cloudflare.com
 [cloudflare-link]: https://workers.cloudflare.com
 [docusaurus-link]: https://docusaurus.io
 
 <!-- Shield Badges -->
 [github-release-shield]: https://img.shields.io/github/v/release/ChanMeng666/ai-programming-teaching-project?color=369eff&labelColor=black&logo=github&style=flat-square
-[vercel-shield]: https://img.shields.io/badge/vercel-online-55b467?labelColor=black&logo=vercel&style=flat-square
+[pages-shield]: https://img.shields.io/badge/cloudflare%20pages-online-55b467?labelColor=black&logo=cloudflare&style=flat-square
 [cloudflare-shield]: https://img.shields.io/badge/cloudflare-workers%20AI-f38020?labelColor=black&logo=cloudflare&style=flat-square
 [docusaurus-shield]: https://img.shields.io/badge/docusaurus-3.8.1-blue?labelColor=black&logo=docusaurus&style=flat-square
 [github-contributors-shield]: https://img.shields.io/github/contributors/ChanMeng666/ai-programming-teaching-project?color=c4f042&labelColor=black&style=flat-square
@@ -854,7 +968,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 [github-license-shield]: https://img.shields.io/badge/license-MIT-white?labelColor=black&style=flat-square
 
 <!-- Badge Variants -->
-[demo-badge]: https://img.shields.io/badge/TRY%20DEMO-ONLINE-55b467?labelColor=black&logo=vercel&style=for-the-badge
+[demo-badge]: https://img.shields.io/badge/TRY%20DEMO-ONLINE-55b467?labelColor=black&logo=cloudflare&style=for-the-badge
 
 <!-- Social Share Links -->
 [share-x-link]: https://x.com/intent/tweet?hashtags=AI,Programming,Education&text=Check%20out%20this%20amazing%20AI%20Programming%20Education%20Platform&url=https%3A%2F%2Fgithub.com%2FChanMeng666%2Fai-programming-teaching-project
