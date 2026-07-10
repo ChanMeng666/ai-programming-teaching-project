@@ -3,9 +3,10 @@ main = "src/index.ts"
 compatibility_date = "2024-12-01"
 compatibility_flags = ["nodejs_compat"]
 
-# WAF rate limiting rules only apply to custom domains, never to *.workers.dev.
-# workers_dev stays true until every caller is cut over to the custom domain.
-workers_dev = true
+# WAF rate limiting rules only apply to custom domains, never to *.workers.dev,
+# so the workers.dev entrypoint stays off: leaving it on would let any client
+# reach /api/chat while bypassing every rate limiting rule on the zone.
+workers_dev = false
 
 [[routes]]
 pattern = "programming-api.chanmeng.org"
