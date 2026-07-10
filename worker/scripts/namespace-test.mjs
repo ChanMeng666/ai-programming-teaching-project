@@ -5,7 +5,7 @@
  * each one cites. If filtering works, the references should differ.
  */
 
-const WORKER_URL = 'https://ai-chat-worker.chanmeng-dev.workers.dev';
+const WORKER_URL = 'https://programming-api.chanmeng.org';
 
 const SCENARIOS = [
   {

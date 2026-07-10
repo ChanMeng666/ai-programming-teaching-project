@@ -3,7 +3,7 @@ import Layout from '@theme/Layout';
 import { translate } from '@docusaurus/Translate';
 import styles from './message-board.module.css';
 
-const API_BASE = 'https://ai-chat-worker.chanmeng-dev.workers.dev';
+const API_BASE = 'https://programming-api.chanmeng.org';
 
 const CATEGORIES = ['心得体会', '经验分享', '教程讨论', '其他'];
 

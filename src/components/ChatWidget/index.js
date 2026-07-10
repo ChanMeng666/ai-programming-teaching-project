@@ -5,7 +5,7 @@ import ChatToggle from './ChatToggle';
 import styles from './styles.module.css';
 
 // Worker API URL
-const API_URL = 'https://ai-chat-worker.chanmeng-dev.workers.dev';
+const API_URL = 'https://programming-api.chanmeng.org';
 
 const STORAGE_KEY = 'ai-chat-messages';
 const SESSION_KEY = 'ai-chat-session';

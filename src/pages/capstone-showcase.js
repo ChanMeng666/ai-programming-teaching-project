@@ -4,7 +4,7 @@ import { translate } from '@docusaurus/Translate';
 import BrowserOnly from '@docusaurus/BrowserOnly';
 import styles from './capstone-showcase.module.css';
 
-const API_BASE = 'https://ai-chat-worker.chanmeng-dev.workers.dev';
+const API_BASE = 'https://programming-api.chanmeng.org';
 const POLL_INTERVAL_MS = 30_000;
 const TRACKS = ['Campus Life', 'Personal Growth', 'Creative Tools'];
 

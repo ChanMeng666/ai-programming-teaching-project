@@ -3,6 +3,14 @@ main = "src/index.ts"
 compatibility_date = "2024-12-01"
 compatibility_flags = ["nodejs_compat"]
 
+# WAF rate limiting rules only apply to custom domains, never to *.workers.dev.
+# workers_dev stays true until every caller is cut over to the custom domain.
+workers_dev = true
+
+[[routes]]
+pattern = "programming-api.chanmeng.org"
+custom_domain = true
+
 # Workers AI binding
 [ai]
 binding = "AI"
@@ -31,4 +39,6 @@ id = "e99e0367303240209038a2a16b2f1415"
 preview_id = "71056c091785465ca4e4f0b169ecfdb5"
 
 [vars]
-CORS_ORIGIN = "*"
+# Comma-separated allow-list. Any https://<hash>.ai-programming-teaching-project.pages.dev
+# preview origin is additionally matched by suffix in src/index.ts.
+CORS_ORIGIN = "https://programming.chanmeng.org,https://ai-programming-teaching-project.pages.dev,http://localhost:3000"

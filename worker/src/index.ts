@@ -29,35 +29,71 @@ const ALLOWED_NAMESPACES = new Set([
   'blog',
 ]);
 
+const CHAT_RATE_LIMIT_MAX = 30;
+const CHAT_RATE_LIMIT_WINDOW = 3600;
+
+// Every Pages production build also publishes an immutable <hash>.<project>.pages.dev
+// URL, so preview origins can only be matched by suffix, never by an exact list.
+const PAGES_PREVIEW_SUFFIX = '.ai-programming-teaching-project.pages.dev';
+
+/**
+ * Resolve the Access-Control-Allow-Origin value for a request,
+ * or null when the origin is not allowed to read the response.
+ */
+function resolveAllowedOrigin(request: Request, env: Env): string | null {
+  const origin = request.headers.get('Origin');
+
+  if (env.CORS_ORIGIN === '*') {
+    return origin || '*';
+  }
+  if (!origin) {
+    return null;
+  }
+  const allowList = env.CORS_ORIGIN.split(',')
+    .map((entry) => entry.trim())
+    .filter(Boolean);
+
+  if (allowList.includes(origin)) {
+    return origin;
+  }
+  if (origin.startsWith('https://') && origin.endsWith(PAGES_PREVIEW_SUFFIX)) {
+    return origin;
+  }
+  return null;
+}
+
 /**
  * Handle CORS preflight requests
  */
 function handleOptions(request: Request, env: Env): Response {
-  const origin = request.headers.get('Origin') || '*';
-  const allowedOrigin = env.CORS_ORIGIN === '*' ? origin : env.CORS_ORIGIN;
+  const allowedOrigin = resolveAllowedOrigin(request, env);
 
-  return new Response(null, {
-    status: 204,
-    headers: {
-      'Access-Control-Allow-Origin': allowedOrigin,
-      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type',
-      'Access-Control-Max-Age': '86400',
-    },
+  const headers = new Headers({
+    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Max-Age': '86400',
+    Vary: 'Origin',
   });
+  if (allowedOrigin) {
+    headers.set('Access-Control-Allow-Origin', allowedOrigin);
+  }
+
+  return new Response(null, { status: 204, headers });
 }
 
 /**
  * Add CORS headers to response
  */
 function addCorsHeaders(response: Response, request: Request, env: Env): Response {
-  const origin = request.headers.get('Origin') || '*';
-  const allowedOrigin = env.CORS_ORIGIN === '*' ? origin : env.CORS_ORIGIN;
+  const allowedOrigin = resolveAllowedOrigin(request, env);
 
   const newHeaders = new Headers(response.headers);
-  newHeaders.set('Access-Control-Allow-Origin', allowedOrigin);
   newHeaders.set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   newHeaders.set('Access-Control-Allow-Headers', 'Content-Type');
+  newHeaders.append('Vary', 'Origin');
+  if (allowedOrigin) {
+    newHeaders.set('Access-Control-Allow-Origin', allowedOrigin);
+  }
 
   return new Response(response.body, {
     status: response.status,
@@ -88,6 +124,34 @@ async function handleChat(request: Request, env: Env): Promise<Response> {
       body.contextNamespace && ALLOWED_NAMESPACES.has(body.contextNamespace)
         ? body.contextNamespace
         : undefined;
+
+    const ip =
+      request.headers.get('CF-Connecting-IP') ||
+      request.headers.get('X-Forwarded-For') ||
+      'unknown';
+    const rateKey = `rate:chat:${ip}`;
+    const currentCount = parseInt(
+      (await env.CHAT_SESSIONS.get(rateKey)) || '0',
+      10
+    );
+
+    if (currentCount >= CHAT_RATE_LIMIT_MAX) {
+      return new Response(
+        JSON.stringify({
+          error: `Too many requests. Limit is ${CHAT_RATE_LIMIT_MAX} messages per hour.`,
+        }),
+        {
+          status: 429,
+          headers: { 'Content-Type': 'application/json' },
+        }
+      );
+    }
+
+    // Charge the quota before invoking the model: a request that times out or
+    // throws still consumed Workers AI, so it must still count against the cap.
+    await env.CHAT_SESSIONS.put(rateKey, String(currentCount + 1), {
+      expirationTtl: CHAT_RATE_LIMIT_WINDOW,
+    });
 
     const { response, sessionId } = await processChat(
       env,

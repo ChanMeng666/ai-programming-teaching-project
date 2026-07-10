@@ -4,7 +4,7 @@
  * and prints the full answer so we can manually verify references.
  */
 
-const WORKER_URL = 'https://ai-chat-worker.chanmeng-dev.workers.dev';
+const WORKER_URL = 'https://programming-api.chanmeng.org';
 
 const QUESTIONS = [
   'What dev tools do I need to install for TECHNEST 2026 Week 1?',

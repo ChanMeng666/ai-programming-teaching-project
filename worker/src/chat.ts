@@ -79,7 +79,7 @@ export async function processChat(
   ];
 
   // Call Workers AI with streaming
-  const stream = await env.AI.run('@cf/meta/llama-3.1-8b-instruct', {
+  const stream = await env.AI.run('@cf/meta/llama-3.1-8b-instruct-fp8', {
     messages,
     stream: true,
   });

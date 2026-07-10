@@ -38,7 +38,7 @@ interface DocSource {
   label: string;
 }
 
-const WORKER_URL = 'https://ai-chat-worker.chanmeng-dev.workers.dev';
+const WORKER_URL = 'https://programming-api.chanmeng.org';
 
 const DOCS_SOURCES: DocSource[] = [
   { path: '../../docs',                                 namespace: 'docs-current',  label: 'Current docs' },
