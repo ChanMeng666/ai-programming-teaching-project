@@ -829,6 +829,9 @@
   "capstoneShowcase.link.live": {
     "message": "访问网站"
   },
+  "capstoneShowcase.link.demo": {
+    "message": "观看 demo"
+  },
   "capstoneShowcase.link.postmortem": {
     "message": "项目复盘"
   },

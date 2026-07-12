@@ -287,6 +287,19 @@ function ProjectCard({
               GitHub
             </a>
           )}
+          {!project.youTubeId && project.demoURL && (
+            <a
+              href={project.demoURL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.linkSecondary}
+            >
+              {translate({
+                id: 'capstoneShowcase.link.demo',
+                message: 'Watch demo',
+              })}
+            </a>
+          )}
           {project.postMortemURL && (
             <a
               href={project.postMortemURL}

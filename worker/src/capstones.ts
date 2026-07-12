@@ -43,6 +43,8 @@ interface CapstoneProject {
   liveURL: string;
   repoURL: string;
   youTubeId: string | null;
+  /** Raw demo-video URL. Non-YouTube hosts (Loom, Vimeo…) can't be embedded, so the frontend links out instead. */
+  demoURL: string;
   heroImage: string;
   avatar: string;
   postMortemURL: string | null;
@@ -85,6 +87,7 @@ function mapPageToProject(page: NotionCapstonePage): CapstoneProject {
     liveURL: page.properties.LiveURL?.url ?? '',
     repoURL: page.properties.RepoURL?.url ?? '',
     youTubeId: extractYouTubeId(page.properties.YouTubeURL?.url),
+    demoURL: page.properties.YouTubeURL?.url ?? '',
     heroImage: page.properties.HeroImage?.url ?? '',
     avatar: page.properties.Avatar?.url ?? '',
     postMortemURL: page.properties.PostMortemURL?.url ?? null,
