@@ -26,6 +26,7 @@ interface NotionCapstonePage {
     YouTubeURL: { url: string | null };
     HeroImage: { url: string | null };
     Avatar: { url: string | null };
+    ProfileURL: { url: string | null };
     PostMortemURL: { url: string | null };
     Status: { select: { name: string } | null };
     SubmittedAt: { date: { start: string } | null };
@@ -47,6 +48,8 @@ interface CapstoneProject {
   demoURL: string;
   heroImage: string;
   avatar: string;
+  /** Student's public profile (LinkedIn, GitHub…) — the card links the avatar + team name to it. */
+  profileURL: string;
   postMortemURL: string | null;
   submittedAt: string;
 }
@@ -90,6 +93,7 @@ function mapPageToProject(page: NotionCapstonePage): CapstoneProject {
     demoURL: page.properties.YouTubeURL?.url ?? '',
     heroImage: page.properties.HeroImage?.url ?? '',
     avatar: page.properties.Avatar?.url ?? '',
+    profileURL: page.properties.ProfileURL?.url ?? '',
     postMortemURL: page.properties.PostMortemURL?.url ?? null,
     submittedAt: page.properties.SubmittedAt?.date?.start ?? '',
   };
@@ -392,13 +396,15 @@ function urlProp(value: string | null | undefined): { url: string | null } {
 
 /**
  * POST /api/capstones/admin
- * Creates (publishes) a capstone project row in the Notion database.
+ * Publishes a capstone project row in the Notion database, keyed on `slug`:
+ * creates it the first time, updates it on every later post.
  * Gated by CAPSTONE_ADMIN_TOKEN. Reusable for every student submission.
  * Body: {
  *   adminToken, title, slug, team, track, pitch,
- *   liveURL?, repoURL?, youTubeURL?, heroImage?, avatar?, postMortemURL?,
+ *   liveURL?, repoURL?, youTubeURL?, heroImage?, avatar?, profileURL?, postMortemURL?,
  *   cohort?='TECHNEST 2026', status?='Published', submittedAt?=today
  * }
+ * Omitted url fields are cleared, so always post the full record.
  */
 export async function handleCreateCapstone(
   request: Request,
@@ -435,59 +441,89 @@ export async function handleCreateCapstone(
     const status = (body.status || 'Published').trim();
     const submittedAt = (body.submittedAt || new Date().toISOString().slice(0, 10)).trim();
 
-    // Ensure the Avatar url property exists on the (already-created) DB. Idempotent.
+    // Ensure the url properties added after the DB was first provisioned exist. Idempotent.
     const patchRes = await notionFetch(
       env,
       `/databases/${env.NOTION_CAPSTONE_DATABASE_ID}`,
       {
         method: 'PATCH',
-        body: JSON.stringify({ properties: { Avatar: { url: {} } } }),
+        body: JSON.stringify({
+          properties: { Avatar: { url: {} }, ProfileURL: { url: {} } },
+        }),
       }
     );
     if (!patchRes.ok) {
       const err = await patchRes.text();
-      console.error('Ensure Avatar property error:', err);
+      console.error('Ensure schema error:', err);
       return jsonResponse({ error: 'Failed to ensure schema', details: err }, 502);
     }
 
-    // Create the project page.
-    const createRes = await notionFetch(env, '/pages', {
-      method: 'POST',
-      body: JSON.stringify({
-        parent: { database_id: env.NOTION_CAPSTONE_DATABASE_ID },
-        properties: {
-          Title: { title: richText(title) },
-          Slug: { rich_text: richText(slug) },
-          Team: { rich_text: richText(team) },
-          Track: track ? { select: { name: track } } : { select: null },
-          Cohort: { select: { name: cohort } },
-          Pitch: { rich_text: richText(pitch) },
-          LiveURL: urlProp(body.liveURL),
-          RepoURL: urlProp(body.repoURL),
-          YouTubeURL: urlProp(body.youTubeURL),
-          HeroImage: urlProp(body.heroImage),
-          Avatar: urlProp(body.avatar),
-          PostMortemURL: urlProp(body.postMortemURL),
-          Status: { select: { name: status } },
-          SubmittedAt: { date: { start: submittedAt } },
-        },
-      }),
-    });
+    const properties = {
+      Title: { title: richText(title) },
+      Slug: { rich_text: richText(slug) },
+      Team: { rich_text: richText(team) },
+      Track: track ? { select: { name: track } } : { select: null },
+      Cohort: { select: { name: cohort } },
+      Pitch: { rich_text: richText(pitch) },
+      LiveURL: urlProp(body.liveURL),
+      RepoURL: urlProp(body.repoURL),
+      YouTubeURL: urlProp(body.youTubeURL),
+      HeroImage: urlProp(body.heroImage),
+      Avatar: urlProp(body.avatar),
+      ProfileURL: urlProp(body.profileURL),
+      PostMortemURL: urlProp(body.postMortemURL),
+      Status: { select: { name: status } },
+      SubmittedAt: { date: { start: submittedAt } },
+    };
 
-    if (!createRes.ok) {
-      const err = await createRes.text();
-      console.error('Create capstone error:', err);
+    // Upsert on Slug: re-posting a submission edits the existing row rather than
+    // creating a duplicate card, so fixing a typo or adding an avatar is one call.
+    const findRes = await notionFetch(
+      env,
+      `/databases/${env.NOTION_CAPSTONE_DATABASE_ID}/query`,
+      {
+        method: 'POST',
+        body: JSON.stringify({
+          filter: { property: 'Slug', rich_text: { equals: slug } },
+          page_size: 1,
+        }),
+      }
+    );
+    if (!findRes.ok) {
+      const err = await findRes.text();
+      console.error('Lookup capstone error:', err);
+      return jsonResponse({ error: 'Notion API error', details: err }, 502);
+    }
+    const existing = (await findRes.json()) as { results: { id: string }[] };
+    const existingId = existing.results[0]?.id ?? null;
+
+    const writeRes = existingId
+      ? await notionFetch(env, `/pages/${existingId}`, {
+          method: 'PATCH',
+          body: JSON.stringify({ properties }),
+        })
+      : await notionFetch(env, '/pages', {
+          method: 'POST',
+          body: JSON.stringify({
+            parent: { database_id: env.NOTION_CAPSTONE_DATABASE_ID },
+            properties,
+          }),
+        });
+
+    if (!writeRes.ok) {
+      const err = await writeRes.text();
+      console.error('Write capstone error:', err);
       return jsonResponse({ error: 'Notion API error', details: err }, 502);
     }
 
-    const created = (await createRes.json()) as { id: string };
+    const written = (await writeRes.json()) as { id: string };
 
-    // Bust the 60s list cache so the new project surfaces immediately.
+    // Bust the 60s list cache so the change surfaces immediately.
     await env.CAPSTONE_VOTES.delete(LIST_CACHE_KEY);
 
     return jsonResponse({
-      message: 'Capstone project created',
-      pageId: created.id,
+      message: existingId ? 'Capstone project updated' : 'Capstone project created',
+      pageId: written.id,
       slug,
       status,
       cohort,

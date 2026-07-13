@@ -197,6 +197,49 @@ function VideoPlayer({ youTubeId, heroImage, title }) {
   );
 }
 
+function TeamLine({ project }) {
+  const content = (
+    <>
+      {project.avatar && (
+        <img
+          className={styles.avatar}
+          src={project.avatar}
+          alt={project.team || project.title}
+          loading="lazy"
+          width={36}
+          height={36}
+        />
+      )}
+      {project.team && (
+        <span className={styles.teamText}>
+          <span className={styles.teamLabel}>
+            {translate({
+              id: 'capstoneShowcase.teamLabel',
+              message: 'Team',
+            })}
+            :
+          </span>{' '}
+          {project.team}
+        </span>
+      )}
+    </>
+  );
+
+  if (!project.profileURL) {
+    return <div className={styles.team}>{content}</div>;
+  }
+  return (
+    <a
+      className={`${styles.team} ${styles.teamLink}`}
+      href={project.profileURL}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      {content}
+    </a>
+  );
+}
+
 function ProjectCard({
   project,
   rank,
@@ -236,30 +279,7 @@ function ProjectCard({
           )}
         </header>
         {(project.team || project.avatar) && (
-          <div className={styles.team}>
-            {project.avatar && (
-              <img
-                className={styles.avatar}
-                src={project.avatar}
-                alt={project.team || project.title}
-                loading="lazy"
-                width={36}
-                height={36}
-              />
-            )}
-            {project.team && (
-              <span className={styles.teamText}>
-                <span className={styles.teamLabel}>
-                  {translate({
-                    id: 'capstoneShowcase.teamLabel',
-                    message: 'Team',
-                  })}
-                  :
-                </span>{' '}
-                {project.team}
-              </span>
-            )}
-          </div>
+          <TeamLine project={project} />
         )}
         {project.pitch && <p className={styles.pitch}>{project.pitch}</p>}
         <div className={styles.linkRow}>
