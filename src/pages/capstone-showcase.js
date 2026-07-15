@@ -502,15 +502,16 @@ function ShowcaseInner() {
   });
 
   const top3 = sorted.slice(0, 3);
-  const rest = sorted.slice(3);
 
-  const filtered =
+  // "All Projects" is a complete, filterable list of every project — the Top 3
+  // spotlight above is an additive highlight, not a slice removed from the grid.
+  // So the grid always renders the full sorted list (filtered by track), which
+  // keeps it non-empty whenever there are projects and makes the track filters
+  // behave correctly regardless of how many are in the spotlight.
+  const gridProjects =
     activeTrack === '__all__'
-      ? rest
-      : rest.filter((p) => p.track === activeTrack);
-
-  // When filter is active, also re-filter the spotlight context-wise: keep top3 always
-  // (per plan: filter applies to grid only; spotlight always shows global top 3).
+      ? sorted
+      : sorted.filter((p) => p.track === activeTrack);
 
   const lastUpdatedLabel = updatedAt
     ? new Date(updatedAt).toLocaleTimeString(undefined, {
@@ -668,25 +669,7 @@ function ShowcaseInner() {
                 </div>
               </div>
 
-              {top3.length < 3 ? (
-                <div className={styles.cardGrid}>
-                  {sorted
-                    .filter((p) =>
-                      activeTrack === '__all__' ? true : p.track === activeTrack
-                    )
-                    .map((p, i) => (
-                      <ProjectCard
-                        key={p.id || p.slug}
-                        project={p}
-                        rank={i + 1}
-                        trackLabels={trackLabels}
-                        voted={voted.has(p.slug)}
-                        busy={busySlugs.has(p.slug)}
-                        onToggleVote={handleToggleVote}
-                      />
-                    ))}
-                </div>
-              ) : filtered.length === 0 ? (
+              {gridProjects.length === 0 ? (
                 <div className={styles.emptyState}>
                   <span className={styles.emptyIcon}>🔍</span>
                   <p>
@@ -698,7 +681,7 @@ function ShowcaseInner() {
                 </div>
               ) : (
                 <div className={styles.cardGrid}>
-                  {filtered.map((p) => {
+                  {gridProjects.map((p) => {
                     const idx = sorted.indexOf(p);
                     return (
                       <ProjectCard
