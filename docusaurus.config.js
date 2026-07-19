@@ -11,7 +11,7 @@ import {themes as prismThemes} from 'prism-react-renderer';
 const config = {
   title: 'AI Programming',
   tagline: 'Learn AI-assisted programming through hands-on projects',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/brand/favicon.ico',
 
   // Set the production url of your site here
   url: 'https://programming.chanmeng.org',
@@ -30,6 +30,29 @@ const config = {
 
   // RSS 自动发现 + SEO head tags
   headTags: [
+    // MindMarket 字体：Inter（preconnect + 400/500/700，非阻塞）
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'preconnect',
+        href: 'https://fonts.googleapis.com',
+      },
+    },
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'preconnect',
+        href: 'https://fonts.gstatic.com',
+        crossorigin: 'true',
+      },
+    },
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'stylesheet',
+        href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap',
+      },
+    },
     {
       tagName: 'link',
       attributes: {
@@ -181,7 +204,7 @@ const config = {
         { property: 'og:site_name', content: "AI Programming - Chan Meng's Public AI Coding Course" },
       ],
       // Replace with your project's social card
-      image: 'img/docusaurus-social-card.png',
+      image: 'img/brand/social-card.png',
       // Algolia DocSearch 配置
       algolia: {
         // The application ID provided by Algolia
@@ -206,19 +229,18 @@ const config = {
           autoCollapseCategories: true, // 自动折叠未选中的类别
         },
       },
-      // 颜色模式配置
+      // 颜色模式配置 — MindMarket 仅亮色（奶油纸底），移除暗色切换
       colorMode: {
         defaultMode: 'light',
-        disableSwitch: false,
-        respectPrefersColorScheme: true,
+        disableSwitch: true,
+        respectPrefersColorScheme: false,
       },
       navbar: {
         title: 'AI Programming',
         logo: {
           alt: 'AI Programming Logo',
-          src: 'img/logo.svg',
+          src: 'img/brand/logo.svg',
         },
-        style: 'dark',
         hideOnScroll: true,  // 滚动时隐藏导航栏
         items: [
           {
@@ -273,10 +295,9 @@ const config = {
         ],
       },
       footer: {
-        style: 'dark',
         logo: {
           alt: 'AI Programming Education Logo',
-          src: 'img/logo.svg',
+          src: 'img/brand/logo.svg',
           href: '/',
           width: 80,
           height: 80,
@@ -384,7 +405,6 @@ const config = {
       },
       prism: {
         theme: prismThemes.github,
-        darkTheme: prismThemes.dracula,
       },
     }),
   markdown: {

@@ -1,0 +1,309 @@
+/**
+ * docs.css — documentation chrome on the cream canvas.
+ * Sidebar, TOC, breadcrumbs, pagination, .markdown baseline, code, admonitions.
+ * Sticky offsets derive from --ifm-navbar-height (84px) set in tokens.css.
+ */
+
+/* ============================================================
+   Doc sidebar
+   ============================================================ */
+.theme-doc-sidebar-container {
+  border-right: 1px solid var(--color-hairline-mist);
+  background: transparent;
+}
+
+.menu {
+  padding: 12px !important;
+}
+
+.menu__link,
+.menu__list-item-collapsible {
+  border-radius: 12px;
+  color: var(--color-ink-black);
+  font-size: 15px;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.menu__link {
+  padding: 8px 12px;
+}
+.menu__link:hover,
+.menu__list-item-collapsible:hover {
+  background: var(--color-sandstone);
+  color: var(--color-ink-black);
+}
+
+/* Active item: white surface + 3px green left border (no shadow) */
+.menu__link--active:not(.menu__link--sublist) {
+  background: var(--color-pure-white);
+  color: var(--color-ink-black);
+  font-weight: 600;
+  border-left: 3px solid var(--color-fresh-grass);
+  padding-left: 9px;
+}
+.menu__link--active {
+  color: var(--color-ink-black);
+  font-weight: 600;
+}
+
+/* Collapse carets — ink */
+.menu__caret::before,
+.menu__link--sublist-caret::after {
+  filter: none;
+  opacity: 0.7;
+}
+
+/* ============================================================
+   Table of contents — hairline left rail, green active marker
+   ============================================================ */
+.table-of-contents {
+  padding: 0 0 0 16px;
+  background: transparent;
+  border: none;
+  border-left: 1px solid var(--color-hairline-mist);
+  border-radius: 0;
+  margin-bottom: 1.5rem;
+  font-size: 14px;
+}
+
+/* Keep the localized label from the old CSS */
+.table-of-contents::before {
+  content: '目录';
+  display: block;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  color: var(--color-ink-muted);
+}
+html[lang|='en'] .table-of-contents::before {
+  content: 'On this page';
+  text-transform: none;
+}
+
+.table-of-contents__link {
+  color: var(--color-ink-muted);
+  transition: color 0.15s ease;
+}
+.table-of-contents__link:hover {
+  color: var(--color-ink-black);
+  text-decoration: none;
+}
+.table-of-contents__link--active {
+  color: var(--color-ink-black);
+  font-weight: 500;
+  position: relative;
+}
+.table-of-contents__link--active::before {
+  content: '';
+  position: absolute;
+  left: -17px;
+  top: 0.35em;
+  width: 3px;
+  height: 1em;
+  background: var(--color-fresh-grass);
+  border-radius: 2px;
+}
+
+/* ============================================================
+   Breadcrumbs — 10px chips
+   ============================================================ */
+.breadcrumbs__item {
+  font-size: 14px;
+}
+.breadcrumbs__link {
+  border-radius: 10px;
+  background: transparent;
+  color: var(--color-ink-muted);
+  padding: 4px 10px;
+  box-shadow: none;
+}
+.breadcrumbs__link:hover {
+  background: var(--color-sandstone);
+  color: var(--color-ink-black);
+  text-decoration: none;
+}
+.breadcrumbs__item--active .breadcrumbs__link {
+  background: var(--color-sandstone);
+  color: var(--color-ink-black);
+}
+
+/* ============================================================
+   Pagination nav — white cards, border deepen on hover
+   ============================================================ */
+.pagination-nav__link {
+  border: 1px solid var(--color-hairline-mist);
+  border-radius: 20px;
+  background: var(--color-pure-white);
+  padding: 20px 24px;
+  transition: border-color 0.2s ease;
+}
+.pagination-nav__link:hover {
+  border-color: var(--color-ink-black);
+  background: var(--color-pure-white);
+  transform: none;
+  box-shadow: none;
+}
+.pagination-nav__sublabel {
+  color: var(--color-ink-muted);
+}
+.pagination-nav__label {
+  color: var(--color-ink-black);
+  font-weight: 500;
+}
+
+/* ============================================================
+   .markdown baseline
+   ============================================================ */
+.markdown {
+  --ifm-heading-margin-top: 2.5rem;
+  --ifm-heading-margin-bottom: 1rem;
+}
+.markdown > h1:first-child {
+  margin-top: 0;
+}
+.markdown h1,
+.markdown h2,
+.markdown h3,
+.markdown h4,
+.markdown h5,
+.markdown h6 {
+  color: var(--color-ink-black);
+  font-weight: 500;
+  line-height: 1.2;
+}
+.markdown h1 { font-size: clamp(32px, 4vw, 44px); letter-spacing: -0.02em; }
+.markdown h2 { font-size: clamp(26px, 3vw, 30px); margin-top: 2.5rem; padding-top: 1rem; border-top: 1px solid var(--color-hairline-mist); }
+.markdown h3 { font-size: 22px; margin-top: 2rem; }
+.markdown h4 { font-size: 18px; margin-top: 1.5rem; }
+
+.markdown p,
+.markdown li {
+  line-height: 1.75;
+  color: var(--color-ink-black);
+}
+
+.markdown a {
+  color: var(--color-ink-black);
+  text-decoration: underline;
+  text-decoration-color: var(--color-stone-gray);
+  text-underline-offset: 2px;
+}
+.markdown a:hover {
+  text-decoration-color: var(--color-ink-black);
+}
+
+/* Tables — hairline borders + sandstone header row */
+.markdown table {
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  border: 1px solid var(--color-hairline-mist);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.markdown table thead {
+  background: var(--color-sandstone);
+}
+.markdown table thead tr {
+  border-bottom: 1px solid var(--color-hairline-mist);
+}
+.markdown table th,
+.markdown table td {
+  border: 1px solid var(--color-hairline-mist);
+  padding: 10px 14px;
+}
+.markdown table th {
+  color: var(--color-ink-black);
+  font-weight: 600;
+}
+
+/* Blockquote — 3px green left border */
+.markdown blockquote {
+  border-left: 3px solid var(--color-fresh-grass);
+  background: transparent;
+  padding: 0.25rem 0 0.25rem 1rem;
+  color: var(--color-ink-muted);
+}
+
+/* Horizontal rule */
+.markdown hr {
+  background-color: var(--color-hairline-mist);
+}
+
+/* ============================================================
+   Code
+   ============================================================ */
+.prism-code,
+pre[class*='language-'],
+.theme-code-block {
+  border-radius: 16px;
+  border: 1px solid var(--color-hairline-mist);
+  box-shadow: none;
+}
+.theme-code-block {
+  box-shadow: none !important;
+}
+
+/* Inline code — sandstone-tinted chip */
+:not(pre) > code {
+  background: var(--ifm-code-background);
+  border: 1px solid var(--color-hairline-mist);
+  border-radius: 6px;
+  padding: 0.1rem 0.35rem;
+}
+
+/* Code copy button */
+.clean-btn {
+  color: var(--color-ink-black);
+}
+
+/* ============================================================
+   Admonitions — white bg, 2px colored OUTLINE only, ink text
+   (accents are decorative, never fills — spec)
+   ============================================================ */
+.alert,
+.theme-admonition {
+  background-color: var(--color-pure-white);
+  color: var(--color-ink-black);
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 20px;
+  box-shadow: none;
+}
+.alert a,
+.theme-admonition a {
+  color: var(--color-ink-black);
+}
+.alert--success { border-color: var(--color-fresh-grass); }
+.alert--info { border-color: var(--color-sky-pop); }
+.alert--warning { border-color: var(--color-coral-pop); }
+.alert--danger { border-color: var(--color-coral-pop); }
+.alert--secondary { border-color: var(--color-hairline-mist); }
+
+/* ============================================================
+   Version badge / banner → chip form
+   ============================================================ */
+.badge {
+  display: inline-block;
+  padding: 0.25em 0.7em;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 10px;
+  border: 1px solid var(--color-hairline-mist);
+  background: var(--color-sandstone);
+  color: var(--color-ink-black);
+}
+.theme-doc-version-badge {
+  background: var(--color-sandstone);
+  color: var(--color-ink-black);
+  border: 1px solid var(--color-hairline-mist);
+  border-radius: 10px;
+}
+.theme-doc-version-banner {
+  background: var(--color-pure-white);
+  border: 1px solid var(--color-hairline-mist);
+  border-radius: 20px;
+  box-shadow: none;
+}

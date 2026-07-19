@@ -1,0 +1,246 @@
+/**
+ * pages.css — shared marketing utilities (consumed by pages D–I by exact class
+ * name), plus search page, 404, and back-to-top styling.
+ */
+
+/* ============================================================
+   Display / heading type utilities
+   (fluid; letter-spacing in em so it scales. zh-Hans loosens tracking —
+   Inter has no CJK and -0.06em is harmful for Chinese.)
+   ============================================================ */
+.mm-display {
+  font-family: var(--font-inter);
+  font-size: var(--text-display-fluid);
+  font-weight: var(--font-weight-medium);
+  line-height: 0.95;
+  letter-spacing: var(--tracking-display-fluid);
+  color: var(--color-ink-black);
+  margin: 0;
+}
+:lang(zh-Hans) .mm-display {
+  letter-spacing: -0.01em;
+}
+
+.mm-heading-lg {
+  font-family: var(--font-inter);
+  font-size: var(--text-heading-lg-fluid);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.0;
+  letter-spacing: var(--tracking-heading-lg-fluid);
+  color: var(--color-ink-black);
+  margin: 0;
+}
+:lang(zh-Hans) .mm-heading-lg {
+  letter-spacing: -0.01em;
+}
+
+.mm-heading {
+  font-family: var(--font-inter);
+  font-size: var(--text-heading-fluid);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.1;
+  letter-spacing: var(--tracking-heading-fluid);
+  color: var(--color-ink-black);
+  margin: 0;
+}
+:lang(zh-Hans) .mm-heading {
+  letter-spacing: normal;
+}
+
+/* ============================================================
+   Cards
+   ============================================================ */
+.mm-card {
+  background: var(--color-pure-white);
+  border: 1px solid var(--color-hairline-mist);
+  border-radius: 50px;
+  padding: 36px;
+}
+.mm-card--sm {
+  border-radius: 24px;
+  padding: 24px;
+}
+
+/* ============================================================
+   Buttons — pill base, coral action, ghost with dot accents
+   ============================================================ */
+.mm-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-inter);
+  font-size: 15px;
+  font-weight: var(--font-weight-medium);
+  line-height: 1;
+  padding: 12px 22px;
+  border-radius: 50px;
+  border: 1px solid transparent;
+  color: var(--color-ink-black);
+  background: transparent;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+.mm-btn:hover {
+  text-decoration: none;
+  color: var(--color-ink-black);
+}
+
+/* Coral action — the most prominent chromatic action. Ink text (white fails
+   contrast on coral). White dot at right slides 4px on hover. */
+.mm-btn-coral {
+  background: var(--color-coral-pop);
+  border-color: var(--color-coral-pop);
+  color: var(--color-ink-black);
+}
+.mm-btn-coral::after {
+  content: '';
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--color-pure-white);
+  transition: transform 0.2s ease;
+}
+.mm-btn-coral:hover {
+  background: #ff5c47;
+  border-color: #ff5c47;
+}
+.mm-btn-coral:hover::after {
+  transform: translateX(4px);
+}
+
+/* Ghost — white pill, hairline border, single colored dot accent (child span) */
+.mm-btn-ghost {
+  background: var(--color-pure-white);
+  border-color: var(--color-hairline-mist);
+  color: var(--color-ink-black);
+}
+.mm-btn-ghost:hover {
+  border-color: var(--color-ink-black);
+}
+.mm-btn-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  flex: 0 0 auto;
+  transition: transform 0.2s ease;
+}
+.mm-btn-dot--blue { background: var(--color-sky-pop); }
+.mm-btn-dot--green { background: var(--color-fresh-grass); }
+.mm-btn-dot--coral { background: var(--color-coral-pop); }
+.mm-btn:hover .mm-btn-dot {
+  transform: translateX(4px);
+}
+
+/* ============================================================
+   Chips & labels
+   ============================================================ */
+.mm-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--color-hairline-mist);
+  background: transparent;
+  color: var(--color-ink-black);
+  font-size: 15px;
+}
+
+.mm-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 50px;
+  border: 1px solid var(--color-hairline-mist);
+  background: var(--color-pure-white);
+  color: var(--color-ink-muted);
+  font-size: 13px;
+  font-weight: var(--font-weight-medium);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ============================================================
+   Layout utilities
+   ============================================================ */
+.mm-section {
+  max-width: var(--page-max-width);
+  margin: 0 auto;
+  padding: 100px 20px;
+}
+
+.mm-band {
+  background: var(--color-sandstone);
+  padding: 80px 0;
+}
+
+/* ============================================================
+   Search page — cream canvas, white result cards, green highlight
+   ============================================================ */
+mark {
+  background: var(--color-fresh-grass);
+  color: var(--color-ink-black);
+  padding: 0 2px;
+  border-radius: 3px;
+}
+.search-result-match {
+  color: var(--color-ink-black);
+  background: rgba(142, 212, 98, 0.35);
+  border-radius: 3px;
+  font-weight: 500;
+}
+[class*='searchResultItem'] {
+  background: var(--color-pure-white);
+  border: 1px solid var(--color-hairline-mist);
+  border-radius: 20px;
+  padding: 20px 24px;
+  margin-bottom: 16px;
+  box-shadow: none;
+}
+[class*='searchResultItem']:hover {
+  border-color: var(--color-ink-black);
+}
+
+/* ============================================================
+   404 — utilities for the swizzled NotFound (G) + default fallback
+   ============================================================ */
+.mm-404-code {
+  font-family: var(--font-inter);
+  font-size: var(--text-display-fluid);
+  font-weight: var(--font-weight-medium);
+  line-height: 0.95;
+  letter-spacing: var(--tracking-display-fluid);
+  color: var(--color-ink-black);
+}
+
+/* ============================================================
+   Back-to-top — white circle, hairline; ~100px offset clears ChatWidget
+   ============================================================ */
+.theme-back-to-top-button {
+  background-color: var(--color-pure-white) !important;
+  border: 1px solid var(--color-hairline-mist);
+  box-shadow: none;
+  bottom: 100px !important;
+}
+.theme-back-to-top-button:hover {
+  border-color: var(--color-ink-black);
+}
+
+@media (max-width: 480px) {
+  .theme-back-to-top-button {
+    bottom: 88px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .mm-section {
+    padding: 64px 16px;
+  }
+  .mm-card {
+    border-radius: 32px;
+    padding: 28px;
+  }
+}

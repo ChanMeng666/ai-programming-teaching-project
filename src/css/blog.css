@@ -1,0 +1,101 @@
+/**
+ * blog.css — blog list & post styling on the cream canvas.
+ */
+
+/* ---- List: white cards, hairline border, border-deepen on hover ---- */
+.blog-list-page article {
+  background: var(--color-pure-white);
+  border: 1px solid var(--color-hairline-mist);
+  border-radius: 32px;
+  padding: 28px 32px;
+  margin-bottom: 28px;
+  transition: border-color 0.2s ease;
+}
+.blog-list-page article:hover {
+  border-color: var(--color-ink-black);
+  transform: none;
+  box-shadow: none;
+}
+
+.blog-list-page article h2 {
+  border-top: none;
+  padding-top: 0;
+  margin-top: 0;
+}
+
+/* Post title links — ink, underline on hover */
+.blog-list-page article h2 a {
+  color: var(--color-ink-black);
+  text-decoration: none;
+}
+.blog-list-page article h2 a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ---- Metadata ---- */
+.article__metadata,
+.blog-list-page article time {
+  color: var(--color-ink-muted);
+  font-size: 14px;
+}
+
+/* ---- Tags: 10px chips, coral outline ---- */
+.tags a,
+.tag {
+  display: inline-block;
+  padding: 3px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--color-coral-pop);
+  background: transparent;
+  color: var(--color-ink-black);
+  font-size: 13px;
+  font-weight: 500;
+  transition: background 0.15s ease;
+}
+.tags a:hover,
+.tag:hover {
+  background: var(--color-coral-pop);
+  color: var(--color-ink-black);
+  text-decoration: none;
+}
+
+/* ---- Authors / avatars round ---- */
+.avatar__photo,
+.avatar__photo-link {
+  border-radius: 50%;
+  overflow: hidden;
+}
+.avatar__name {
+  font-weight: 600;
+  color: var(--color-ink-black);
+}
+.avatar:hover {
+  transform: none;
+}
+.avatar__subtitle {
+  color: var(--color-ink-muted);
+}
+
+/* ---- Blog sidebar (Recent posts) ---- */
+.blog-list-page + aside a,
+aside[class*='blogSidebar'] a {
+  color: var(--color-ink-black);
+}
+aside[class*='blogSidebar'] a:hover {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* Read-more button */
+.blog-list-page article a[class*='readMore'] {
+  color: var(--color-ink-black);
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .blog-list-page article {
+    border-radius: 24px;
+    padding: 22px 22px;
+  }
+}

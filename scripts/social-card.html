@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>AI Programming — Social Card</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --grass:#8ed462; --cream:#f5f1e4; --ink:#2c2e2a;
+    --white:#ffffff; --sky:#2ba0ff; --coral:#ff705d; --sun:#f5e211;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:1200px;height:630px}
+  .card{
+    position:relative;width:1200px;height:630px;background:var(--cream);
+    font-family:'Inter',system-ui,-apple-system,sans-serif;color:var(--ink);
+    overflow:hidden;
+  }
+  /* brand row */
+  .brand{
+    position:absolute;top:64px;left:80px;display:flex;align-items:center;gap:20px;
+  }
+  .brand .mark{
+    width:64px;height:64px;border-radius:16px;background:var(--grass);
+    display:flex;align-items:center;justify-content:center;flex:0 0 auto;
+  }
+  .brand .wordmark{font-size:26px;font-weight:500;letter-spacing:-0.02em}
+  /* headline */
+  .headline{
+    position:absolute;left:80px;top:210px;right:80px;
+    font-weight:500;font-size:118px;line-height:0.95;letter-spacing:-0.06em;
+  }
+  .headline .accent-wrap{position:relative;display:inline-block}
+  .bar{
+    position:absolute;left:0;bottom:-14px;height:15px;width:100%;
+    background:var(--grass);border-radius:8px;
+  }
+  .sub{
+    position:absolute;left:82px;bottom:84px;font-size:28px;font-weight:400;
+    color:var(--ink);letter-spacing:-0.01em;
+  }
+  /* decorative flat shapes */
+  .dot-blue{position:absolute;right:120px;top:96px;width:56px;height:56px;border-radius:50%;background:var(--sky)}
+  .dot-coral{position:absolute;right:80px;top:150px;width:30px;height:30px;border-radius:50%;background:var(--coral)}
+  .chip-yellow{position:absolute;right:78px;bottom:96px;width:120px;height:120px;border-radius:34px;background:var(--sun);transform:rotate(12deg)}
+  .chev{position:absolute;right:104px;bottom:126px;transform:rotate(12deg)}
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="brand">
+      <div class="mark">
+        <svg width="42" height="42" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M17 32 L32 19 L47 32" stroke="#2c2e2a" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M23 45 L32 37 L41 45" stroke="#2c2e2a" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="wordmark">AI Programming</div>
+    </div>
+
+    <div class="dot-blue"></div>
+    <div class="dot-coral"></div>
+    <div class="chip-yellow"></div>
+    <svg class="chev" width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M17 32 L32 19 L47 32" stroke="#2c2e2a" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M23 45 L32 37 L41 45" stroke="#2c2e2a" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+
+    <div class="headline">Learn to build<br>with <span class="accent-wrap">AI<span class="bar"></span></span>.</div>
+    <div class="sub">Hands-on programming tutorials, from first line to shipped project.</div>
+  </div>
+</body>
+</html>

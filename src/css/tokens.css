@@ -1,0 +1,288 @@
+/**
+ * tokens.css — MindMarket design tokens + Infima bridge + compat shim.
+ *
+ * Three layers live here:
+ *   1. MindMarket custom properties (verbatim from DESIGN.md Quick Start) plus
+ *      accessibility + fluid-scale additions.
+ *   2. The Infima bridge — remapping Docusaurus' built-in --ifm-* variables to
+ *      the cream/ink/green palette so all stock theme chrome inherits the redesign.
+ *   3. A compat shim — the legacy alias names the old 1588-line custom.css defined,
+ *      remapped to MindMarket values so *.module.css files that haven't been
+ *      rewritten yet keep rendering during the parallel redesign.
+ */
+
+:root {
+  /* ============================================================
+     1. MindMarket tokens (DESIGN.md Quick Start — verbatim)
+     ============================================================ */
+
+  /* Colors */
+  --color-fresh-grass: #8ed462;
+  --color-cream-paper: #f5f1e4;
+  --color-ink-black: #2c2e2a;
+  --color-pure-white: #ffffff;
+  --color-sandstone: #e0dbce;
+  --color-stone-gray: #80827f;
+  --color-hairline-mist: #d5d5d4;
+  --color-pure-ink: #000000;
+  --color-sky-pop: #2ba0ff;
+  --color-coral-pop: #ff705d;
+  --color-sunshine-pop: #f5e211;
+
+  /* Accessible additions (not in spec — required for WCAG on cream) */
+  /* #5d5f5b = 5.4:1 on cream: the ONLY muted text color for sizes < 24px.   */
+  /* #80827f (stone-gray) is 3.2:1 — restricted to >= 24px text or non-text.  */
+  --color-ink-muted: #5d5f5b;
+
+  /* Typography — Font Families */
+  --font-inter: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  /* Typography — Scale (fixed, per spec) */
+  --text-body-sm: 15px;
+  --leading-body-sm: 1.5;
+  --text-body-lg: 18px;
+  --leading-body-lg: 1.5;
+  --text-subheading: 20px;
+  --leading-subheading: 1.25;
+  --text-heading-sm: 30px;
+  --leading-heading-sm: 1.2;
+  --text-heading: 53px;
+  --leading-heading: 1.15;
+  --tracking-heading: -2.12px;
+  --text-heading-lg: 81px;
+  --leading-heading-lg: 1.2;
+  --tracking-heading-lg: -4.86px;
+  --text-display: 140px;
+  --leading-display: 0.95;
+  --tracking-display: -8.4px;
+  --text-display-lg: 144px;
+  --leading-display-lg: 0.95;
+  --tracking-display-lg: -8.64px;
+
+  /* Typography — fluid display scale (responsive; letter-spacing in em so it
+     scales with font-size). Used by marketing-page classes only. */
+  --text-display-fluid: clamp(48px, 10.5vw, 140px);
+  --text-heading-lg-fluid: clamp(38px, 6.5vw, 81px);
+  --text-heading-fluid: clamp(30px, 4vw, 53px);
+  --tracking-display-fluid: -0.06em;
+  --tracking-heading-lg-fluid: -0.06em;
+  --tracking-heading-fluid: -0.04em;
+
+  /* Typography — Weights */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+
+  /* Spacing (spec — 4px base) */
+  --spacing-unit: 4px;
+  --spacing-4: 4px;
+  --spacing-20: 20px;
+  --spacing-60: 60px;
+  --spacing-136: 136px;
+  --spacing-216: 216px;
+
+  /* Layout */
+  --page-max-width: 1200px;
+  --card-padding: 21px;
+  --element-gap: 20px;
+  --section-gap: 100px;
+
+  /* Border Radius (spec) */
+  --radius-lg: 10px;
+  --radius-2xl: 20px;
+  --radius-3xl: 25.5px;
+  --radius-full: 50px;
+  --radius-full-2: 63.75px;
+
+  /* Named Radii (spec) */
+  --radius-nav: 50px;
+  --radius-cards: 50px;
+  --radius-small: 10px;
+  --radius-buttons: 50px;
+  --radius-illustration-containers: 63.75px;
+
+  /* Surfaces (spec) */
+  --surface-cream-paper: #f5f1e4;
+  --surface-pure-white: #ffffff;
+  --surface-sandstone: #e0dbce;
+
+  /* ============================================================
+     2. Infima bridge — remap Docusaurus stock variables
+     ============================================================ */
+
+  /* Primary = ink. Shades are subtle ink variations (Infima needs the full set;
+     modules read primary-dark/lightest for gradients & hovers). */
+  --ifm-color-primary: #2c2e2a;
+  --ifm-color-primary-dark: #282a26;
+  --ifm-color-primary-darker: #212220;
+  --ifm-color-primary-darkest: #1a1b19;
+  --ifm-color-primary-light: #3a3d38;
+  --ifm-color-primary-lighter: #474a44;
+  --ifm-color-primary-lightest: #545850;
+
+  /* Canvas & surfaces */
+  --ifm-background-color: #f5f1e4;
+  --ifm-background-surface-color: #ffffff;
+
+  /* Text */
+  --ifm-font-color-base: #2c2e2a;
+  --ifm-heading-color: #2c2e2a;
+  --ifm-color-content: #2c2e2a;
+  --ifm-color-content-secondary: #5d5f5b;
+
+  /* Typography */
+  --ifm-font-family-base: var(--font-inter);
+  --ifm-font-family-monospace: 'JetBrains Mono', 'Fira Code', ui-monospace, 'Consolas', monospace;
+  --ifm-font-size-base: 16px;
+  --ifm-line-height-base: 1.6;
+  --ifm-heading-font-weight: 500;
+  --ifm-font-weight-bold: 700;
+
+  /* Links — distinguished by underline, not color (spec) */
+  --ifm-link-color: #2c2e2a;
+  --ifm-link-hover-color: #2c2e2a;
+
+  /* Navbar (floating white pill; 84px = pill height + top margin, drives sticky
+     offsets for the doc sidebar & TOC) */
+  --ifm-navbar-background-color: #ffffff;
+  --ifm-navbar-height: 84px;
+  --ifm-navbar-shadow: none;
+
+  /* Footer — sunshine-yellow closing band */
+  --ifm-footer-background-color: #f5e211;
+  --ifm-footer-color: #2c2e2a;
+  --ifm-footer-link-color: #2c2e2a;
+  --ifm-footer-link-hover-color: #2c2e2a;
+  --ifm-footer-title-color: #2c2e2a;
+
+  /* Elevation off — cream/white surface stack handles depth (spec) */
+  --ifm-global-shadow-lw: none;
+  --ifm-global-shadow-md: none;
+  --ifm-global-shadow-tl: none;
+
+  /* Hairlines & emphasis scale */
+  --ifm-toc-border-color: #d5d5d4;
+  --ifm-hr-border-color: #d5d5d4;
+  --ifm-color-emphasis-200: #d5d5d4;
+  --ifm-color-emphasis-300: #d5d5d4;
+
+  /* Radii — pill buttons, soft global radius */
+  --ifm-global-radius: 12px;
+  --ifm-button-border-radius: 50px;
+  --ifm-card-border-radius: 20px;
+
+  /* Code */
+  --ifm-code-background: #eeeadb;
+  --ifm-code-font-size: 0.9375rem;
+  --docusaurus-highlighted-code-line-bg: rgba(142, 212, 98, 0.18);
+
+  /* ---- DocSearch (Algolia modal) ---- */
+  --docsearch-primary-color: #2c2e2a;
+  --docsearch-highlight-color: #8ed462;
+  --docsearch-text-color: #2c2e2a;
+  --docsearch-muted-color: #5d5f5b;
+  --docsearch-modal-background: #f5f1e4;
+  --docsearch-searchbox-background: #ffffff;
+  --docsearch-searchbox-focus-background: #ffffff;
+  --docsearch-hit-background: #ffffff;
+  --docsearch-hit-color: #2c2e2a;
+  --docsearch-hit-active-color: #2c2e2a;
+  --docsearch-hit-shadow: none;
+  --docsearch-modal-shadow: none;
+  --docsearch-footer-background: #ffffff;
+  --docsearch-footer-shadow: none;
+  --docsearch-key-gradient: #e0dbce;
+  --docsearch-key-shadow: none;
+
+  /* ============================================================
+     3. Compat shim — legacy aliases → MindMarket values
+     (kept so not-yet-rewritten *.module.css files don't break)
+     ============================================================ */
+
+  /* Legacy palette names */
+  --color-coral: #ff705d;
+  --color-teal: #2c2e2a;           /* teal retired to ink */
+  --color-light-gray: #e0dbce;     /* sandstone */
+  --color-dark-gray: #2c2e2a;
+  --color-bright-yellow: #f5e211;
+
+  /* Legacy semantic roles */
+  --color-primary: #2c2e2a;
+  --color-secondary: #ff705d;
+  --color-accent: #8ed462;         /* structural green (non-text usage only) */
+  --color-accent-hover: #2c2e2a;
+  --color-success: #8ed462;
+  --color-warning: #ff705d;
+  --color-error: #ff705d;
+
+  /* Legacy backgrounds / surfaces */
+  --color-background: #f5f1e4;
+  --color-background-secondary: #e0dbce;
+  --color-background-tertiary: #eeeadb;
+  --color-surface: #ffffff;
+  --color-surface-hover: #e0dbce;
+
+  /* Legacy text roles */
+  --color-text-primary: #2c2e2a;
+  --color-text-secondary: #5d5f5b;
+  --color-text-tertiary: #5d5f5b;
+  --color-text-muted: #80827f;
+
+  /* Legacy borders */
+  --color-border: #d5d5d4;
+  --color-border-light: #e0dbce;
+  --color-border-dark: #2c2e2a;
+
+  /* Legacy 8px spacing scale (values unchanged — pure spacing, harmless) */
+  --space-1: 0.125rem;
+  --space-2: 0.25rem;
+  --space-3: 0.375rem;
+  --space-4: 0.5rem;
+  --space-6: 0.75rem;
+  --space-8: 1rem;
+  --space-10: 1.25rem;
+  --space-12: 1.5rem;
+  --space-16: 2rem;
+  --space-20: 2.5rem;
+  --space-24: 3rem;
+  --space-32: 4rem;
+  --space-40: 5rem;
+  --space-48: 6rem;
+  --space-64: 8rem;
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+
+  /* Legacy shadows — all flattened to none (spec: no shadow elevation) */
+  --shadow-xs: none;
+  --shadow-sm: none;
+  --shadow-md: none;
+  --shadow-lg: none;
+  --shadow-xl: none;
+  --shadow-2xl: none;
+  --shadow-inner: none;
+
+  /* Legacy radius aliases (DESIGN's lg/2xl/3xl/full/full-2 already defined above) */
+  --radius-none: 0;
+  --radius-sm: 8px;
+  --radius-md: 10px;
+  --radius-xl: 20px;
+
+  /* Legacy animation timing */
+  --animation-duration-fast: 0.15s;
+  --animation-duration-normal: 0.3s;
+  --animation-duration-slow: 0.5s;
+  --animation-timing-ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --animation-timing-ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --animation-timing-ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --animation-timing-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --animation-duration: 0.3s;
+  --animation-timing: cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}

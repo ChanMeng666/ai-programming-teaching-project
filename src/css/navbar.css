@@ -1,0 +1,310 @@
+/**
+ * navbar.css — the floating white pill navigation.
+ *
+ * The pill occupies --ifm-navbar-height (84px = 64px pill + 20px top margin);
+ * doc sidebar / TOC sticky offsets derive from that variable, so keep them in sync.
+ */
+
+.navbar {
+  width: min(1200px, calc(100% - 40px));
+  margin: 20px auto 0;
+  height: 64px;
+  min-height: 64px;
+  padding: 0 20px;
+  border-radius: 50px;
+  background: var(--color-pure-white);
+  border: 1px solid var(--color-hairline-mist);
+  box-shadow: none;
+}
+
+/* Stay 20px off the top while stuck, so the float gap persists on scroll. */
+.navbar--fixed-top {
+  top: 20px;
+}
+
+.navbar__inner {
+  height: 100%;
+}
+
+/* hideOnScroll: fully retract the pill INCLUDING its 20px top margin */
+.navbar--hidden {
+  transform: translate3d(0, calc(-100% - 24px), 0);
+}
+
+/* ---- Brand ---- */
+.navbar__brand {
+  margin-right: 12px;
+}
+.navbar__brand:hover {
+  text-decoration: none;
+}
+.navbar__logo {
+  height: 32px;
+  margin-right: 10px;
+}
+.navbar__logo img {
+  border-radius: 10px;
+}
+.navbar__title {
+  font-weight: 700;
+  font-size: 17px;
+  color: var(--color-ink-black);
+  letter-spacing: -0.01em;
+}
+
+/* ---- Nav links: 15px Inter 500 ink, underline draw-in on hover/active ---- */
+.navbar__link {
+  position: relative;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--color-ink-black);
+  padding: 8px 14px;
+  border-radius: 50px;
+}
+.navbar__link::after {
+  content: '';
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 6px;
+  height: 1.5px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.25s ease;
+}
+.navbar__link:hover,
+.navbar__link--active {
+  color: var(--color-ink-black);
+  text-decoration: none;
+  background: transparent;
+}
+.navbar__link:hover::after,
+.navbar__link--active::after {
+  transform: scaleX(1);
+}
+
+/* ---- Dropdowns (version + locale) as white cards ---- */
+.dropdown__menu {
+  min-width: 200px;
+  padding: 8px;
+  background: var(--color-pure-white);
+  border: 1px solid var(--color-hairline-mist);
+  border-radius: 20px;
+  box-shadow: none;
+}
+.dropdown__link {
+  padding: 8px 12px;
+  border-radius: 10px;
+  color: var(--color-ink-black);
+  font-size: 14px;
+}
+.dropdown__link:hover {
+  background: var(--color-sandstone);
+  color: var(--color-ink-black);
+  text-decoration: none;
+}
+.dropdown__link--active,
+.dropdown__link--active:hover {
+  background: var(--color-sandstone);
+  color: var(--color-ink-black);
+}
+
+/* ---- Icon buttons: 36px circles, hairline → green on hover ---- */
+.header-github-link,
+.header-discord-link,
+.header-rss-link,
+.header-music-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  padding: 0;
+  margin: 0 3px;
+  border: 1px solid var(--color-hairline-mist);
+  border-radius: 50%;
+  background: var(--color-pure-white);
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease, transform 0.15s ease;
+}
+.header-github-link:hover,
+.header-discord-link:hover,
+.header-rss-link:hover,
+.header-music-link:hover {
+  border-color: var(--color-fresh-grass);
+  background: var(--color-pure-white);
+  opacity: 1;
+  transform: none;
+}
+/* the anchor icon buttons are also .navbar__link — suppress the underline pseudo */
+.header-github-link::after,
+.header-discord-link::after,
+.header-rss-link::after {
+  content: none;
+}
+
+/* Icon glyphs via mask (ink fill, so hover keeps ink icon + green border) */
+.header-github-link::before,
+.header-discord-link::before,
+.header-rss-link::before,
+.header-music-link::before {
+  content: '';
+  width: 18px;
+  height: 18px;
+  display: block;
+  background: none;
+  background-color: var(--color-ink-black);
+  transition: background-color 0.2s ease, transform 0.3s ease;
+}
+.header-github-link::before {
+  -webkit-mask: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+.header-discord-link::before {
+  -webkit-mask: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418Z'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418Z'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+.header-rss-link::before {
+  -webkit-mask: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3.429 5.714v2.286c5.229 0 9.428 4.2 9.428 9.429h2.286c0-6.472-5.243-11.715-11.714-11.715zm0 4.572v2.285c1.893 0 3.429 1.536 3.429 3.429h2.285c0-3.143-2.571-5.714-5.714-5.714zM6 15.429a1.714 1.714 0 11-3.428 0 1.714 1.714 0 013.428 0z'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3.429 5.714v2.286c5.229 0 9.428 4.2 9.428 9.429h2.286c0-6.472-5.243-11.715-11.714-11.715zm0 4.572v2.285c1.893 0 3.429 1.536 3.429 3.429h2.285c0-3.143-2.571-5.714-5.714-5.714zM6 15.429a1.714 1.714 0 11-3.428 0 1.714 1.714 0 013.428 0z'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+.header-music-link::before {
+  -webkit-mask: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+/* ---- MusicPlayer state coupling (JS toggles these exact class names) ---- */
+/* Activated = music playing: green fill, ink icon, gentle pulse */
+.header-music-link--activated {
+  background: var(--color-fresh-grass);
+  border-color: var(--color-fresh-grass);
+  animation: mm-music-pulse 2s ease-in-out infinite;
+}
+.header-music-link--activated::before {
+  background-color: var(--color-ink-black);
+}
+/* Expanded = popup open: distinct ink fill, white icon (wins when both apply) */
+.header-music-link--expanded {
+  background: var(--color-ink-black);
+  border-color: var(--color-ink-black);
+  animation: none;
+}
+.header-music-link--expanded::before {
+  background-color: var(--color-pure-white);
+  transform: scale(1.1);
+}
+
+/* ---- DocSearch trigger: sandstone pill ---- */
+.DocSearch-Button {
+  height: 40px;
+  margin: 0 6px;
+  padding: 0 16px;
+  border-radius: 50px;
+  border: 1px solid transparent;
+  background: var(--color-sandstone);
+  color: var(--color-ink-black);
+  box-shadow: none;
+}
+.DocSearch-Button:hover,
+.DocSearch-Button:focus {
+  background: #d8d2c3;
+  border-color: var(--color-hairline-mist);
+  box-shadow: none;
+  color: var(--color-ink-black);
+}
+.DocSearch-Button-Placeholder {
+  font-size: 14px;
+  color: var(--color-ink-muted);
+}
+.DocSearch-Search-Icon {
+  color: var(--color-ink-black);
+}
+.DocSearch-Button-Keys {
+  min-width: auto;
+}
+.DocSearch-Button-Key {
+  background: var(--color-pure-white);
+  border: 1px solid var(--color-hairline-mist);
+  box-shadow: none;
+  color: var(--color-ink-muted);
+}
+
+/* ---- Hamburger toggle ---- */
+.navbar__toggle {
+  color: var(--color-ink-black);
+}
+
+/* ============================================================
+   Mobile (<= 996px): pill shrinks; drawer is a cream panel
+   ============================================================ */
+@media screen and (max-width: 996px) {
+  .navbar {
+    width: calc(100% - 24px);
+    margin: 12px auto 0;
+    padding: 0 14px;
+  }
+  .navbar--fixed-top {
+    top: 12px;
+  }
+  .navbar__title {
+    font-size: 15px;
+  }
+
+  /* Drawer: cream panel, ink links, hairline dividers */
+  .navbar-sidebar {
+    background: var(--color-cream-paper);
+    border: none;
+    border-radius: 0 20px 20px 0;
+    box-shadow: none;
+    width: 84%;
+    max-width: 360px;
+  }
+  .navbar-sidebar__brand {
+    background: var(--color-cream-paper);
+    border-bottom: 1px solid var(--color-hairline-mist);
+    box-shadow: none;
+    padding: 16px 20px;
+  }
+  .navbar-sidebar__items .menu__link,
+  .navbar-sidebar__items .navbar__link {
+    color: var(--color-ink-black);
+    font-weight: 500;
+    padding: 12px 16px;
+    margin: 2px 8px;
+    border-radius: 12px;
+  }
+  .navbar-sidebar__items .menu__link::after,
+  .navbar-sidebar__items .navbar__link::after {
+    content: none;
+  }
+  .navbar-sidebar__items .menu__link:hover,
+  .navbar-sidebar__items .navbar__link:hover {
+    background: var(--color-sandstone);
+    color: var(--color-ink-black);
+    text-decoration: none;
+  }
+  .navbar-sidebar__items .menu__link--active,
+  .navbar-sidebar__items .navbar__link--active {
+    background: var(--color-pure-white);
+    color: var(--color-ink-black);
+    font-weight: 600;
+  }
+  .navbar-sidebar__item {
+    border-top: 1px solid var(--color-hairline-mist);
+  }
+  .navbar-sidebar__back {
+    background: transparent;
+    color: var(--color-ink-black);
+    font-weight: 500;
+    border-radius: 12px;
+  }
+  .navbar-sidebar__back:hover {
+    background: var(--color-sandstone);
+  }
+  /* Backdrop dim */
+  .navbar-sidebar__backdrop {
+    background: rgba(44, 46, 42, 0.35);
+  }
+}

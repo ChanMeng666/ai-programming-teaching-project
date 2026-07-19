@@ -1,0 +1,108 @@
+/**
+ * footer.css — the sunshine-yellow closing band.
+ * Full-width #f5e211, ink text/links/titles, flush at page bottom (no radius).
+ */
+
+.footer {
+  background: var(--color-sunshine-pop);
+  color: var(--color-ink-black);
+  padding: 80px 0 48px;
+  border-top: none;
+}
+/* Remove the old teal gradient hairline that sat above the footer */
+.footer::before {
+  content: none;
+}
+
+.footer__title {
+  color: var(--color-ink-black);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.01em;
+  margin-bottom: 16px;
+}
+
+.footer__item {
+  font-size: 15px;
+}
+
+.footer__link-item {
+  color: var(--color-ink-black);
+  display: inline-block;
+  transition: text-decoration-color 0.2s ease;
+}
+.footer__link-item:hover {
+  color: var(--color-ink-black);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.footer__col {
+  margin-bottom: 24px;
+}
+
+/* Footer brand logo */
+.footer__logo {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  filter: none;
+  margin-bottom: 16px;
+}
+.footer__logo:hover {
+  transform: none;
+}
+
+/* ---- Custom copyright / legal / developer block (re-inked) ---- */
+.footer__copyright {
+  color: var(--color-ink-black);
+  margin-top: 24px;
+}
+
+.footer-copyright {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  text-align: center;
+  padding: 24px 0 0;
+}
+
+.footer-legal {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 14px;
+  color: var(--color-ink-black);
+  opacity: 1;
+}
+
+.footer-link {
+  color: var(--color-ink-black);
+  font-weight: 600;
+  text-decoration: none;
+}
+.footer-link:hover {
+  color: var(--color-ink-black);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.footer-developer-logo {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  vertical-align: middle;
+  margin-right: 6px;
+  filter: none;
+  transition: transform 0.2s ease;
+}
+.footer-link:hover .footer-developer-logo {
+  transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 56px 0 40px;
+  }
+}
