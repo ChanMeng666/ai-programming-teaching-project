@@ -22,5 +22,9 @@
   "item.label.Newsletter": {
     "message": "Newsletter",
     "description": "Navbar item with label Newsletter"
+  },
+  "item.label.Capstone 2026": {
+    "message": "结业作品 2026",
+    "description": "Navbar item with label Capstone 2026"
   }
 }

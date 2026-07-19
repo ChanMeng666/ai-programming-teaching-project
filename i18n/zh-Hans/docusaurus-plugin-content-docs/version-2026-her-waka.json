@@ -110,5 +110,9 @@
   "sidebar.tutorialSidebar.category.Community & Rights": {
     "message": "社区与权益",
     "description": "The label for category 'Community & Rights' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.doc.🎥 Video Tutorials": {
+    "message": "🎥 视频教程",
+    "description": "The label for the doc item '🎥 Video Tutorials' in sidebar 'tutorialSidebar', linking to the doc videos/index"
   }
 }

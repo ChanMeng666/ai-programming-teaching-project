@@ -9,16 +9,16 @@
     "message": "欢迎来到"
   },
   "homepage.hero.platform": {
-    "message": "AI 编程宇宙"
+    "message": "用 AI，学会创造。"
   },
   "homepage.hero.description2": {
-    "message": "在这里，你将踏上一段星际编程之旅。无论你是编程新手还是经验开发者，AI 都将成为你最强大的副驾驶，带你探索代码宇宙的无限可能。"
+    "message": "一条亲手实践、对新手友好的路径，从你的第一行代码一直走到上线的作品——全程都有 AI 为你护航。"
   },
   "homepage.hero.startButton": {
-    "message": "开始探索"
+    "message": "开始学习"
   },
   "homepage.hero.blogButton": {
-    "message": "最新动态"
+    "message": "阅读博客"
   },
   "homepage.hero.codeComment": {
     "message": "构建AI应用"
@@ -978,5 +978,160 @@
   "theme.SearchModal.footer.backToSearchText": {
     "message": "Back to search",
     "description": "The back to search text for footer"
+  },
+  "capstoneShowcase.rank.first": {
+    "message": "冠军"
+  },
+  "capstoneShowcase.rank.second": {
+    "message": "亚军"
+  },
+  "capstoneShowcase.rank.third": {
+    "message": "季军"
+  },
+  "capstoneShowcase.eyebrow": {
+    "message": "作品展示"
+  },
+  "capstoneShowcase.live": {
+    "message": "已上线"
+  },
+  "capstoneShowcase.heroImageAlt": {
+    "message": "获奖者领奖台的剪纸风插画"
+  },
+  "capstoneShowcase.errorLabel": {
+    "message": "出错了"
+  },
+  "feeds.copied": {
+    "message": "已复制！"
+  },
+  "feeds.copy": {
+    "message": "复制链接"
+  },
+  "feeds.open": {
+    "message": "打开"
+  },
+  "feeds.eyebrow": {
+    "message": "订阅"
+  },
+  "feeds.heroImageAlt": {
+    "message": "一个剪纸风小人正用喇叭播报最新动态"
+  },
+  "messageBoard.eyebrow": {
+    "message": "社区"
+  },
+  "messageBoard.heroIllustrationAlt": {
+    "message": "一个剪纸风小人正在寄出一封超大的信"
+  },
+  "homepage.community.eyebrow": {
+    "message": "社区"
+  },
+  "homepage.community.heading": {
+    "message": "学习路上，你并不孤单。"
+  },
+  "homepage.community.body": {
+    "message": "在这里提问、分享你正在做的项目，也为彼此加油打气。"
+  },
+  "homepage.community.discord": {
+    "message": "加入 Discord"
+  },
+  "homepage.community.board": {
+    "message": "留言板"
+  },
+  "homepage.community.github": {
+    "message": "GitHub 仓库"
+  },
+  "homepage.hero.eyebrow": {
+    "message": "AI 编程教育"
+  },
+  "homepage.hero.imageAlt": {
+    "message": "三位伙伴正用超大的代码积木搭建一个网站"
+  },
+  "homepage.how.step1.title": {
+    "message": "配置好你的工具"
+  },
+  "homepage.how.step1.desc": {
+    "message": "搭建一个可用的开发环境，认识将与你并肩开发的 AI 助手——无需任何基础。"
+  },
+  "homepage.how.step2.title": {
+    "message": "动手做真实项目"
+  },
+  "homepage.how.step2.desc": {
+    "message": "跟随以项目为核心的课程，每一个知识点都会落到你亲手做出的成果里，而不只是读一读。"
+  },
+  "homepage.how.step3.title": {
+    "message": "让作品上线"
+  },
+  "homepage.how.step3.desc": {
+    "message": "把你的结业作品部署到网上并分享出去——再向社区展示它。"
+  },
+  "homepage.how.eyebrow": {
+    "message": "学习流程"
+  },
+  "homepage.how.heading": {
+    "message": "三步，作品上线。"
+  },
+  "homepage.programs.eyebrow": {
+    "message": "课程体系"
+  },
+  "homepage.programs.heading": {
+    "message": "选择你的项目。"
+  },
+  "homepage.programs.featuredBadge": {
+    "message": "正在招生"
+  },
+  "homepage.programs.technest.title": {
+    "message": "TECHNEST 2026"
+  },
+  "homepage.programs.technest.desc": {
+    "message": "我们的 2026 旗舰项目——为期八周、以项目为核心，从配置开发工具一路走到部署上线的结业作品。"
+  },
+  "homepage.programs.technest.cta": {
+    "message": "开始学习"
+  },
+  "homepage.programs.peyvand.title": {
+    "message": "Peyvand Academy 2026"
+  },
+  "homepage.programs.peyvand.desc": {
+    "message": "一个专注的工作坊系列，让新手与 AI 工具搭档，快速做出真实的作品。"
+  },
+  "homepage.programs.herwaka.title": {
+    "message": "HER WAKA 2026"
+  },
+  "homepage.programs.herwaka.desc": {
+    "message": "一条温暖的入门之路，陪伴初次写代码的你，从一个想法走到一个能运行的项目。"
+  },
+  "homepage.programs.summer2025.title": {
+    "message": "2025 夏季"
+  },
+  "homepage.programs.summer2025.desc": {
+    "message": "Forward with Her 夏季课程——涵盖基础知识、个人网站与动手实践。"
+  },
+  "homepage.programs.winter2024.title": {
+    "message": "2024 冬季"
+  },
+  "homepage.programs.winter2024.desc": {
+    "message": "最初的 Forward with Her 存档——从环境配置到部署上线的完整新手课程。"
+  },
+  "homepage.programs.explore": {
+    "message": "查看详情"
+  },
+  "theme.NotFound.headline": {
+    "message": "这个页面走丢了。",
+    "description": "Playful headline on the MindMarket 404 page"
+  },
+  "theme.NotFound.subline": {
+    "message": "链接可能失效了，或者页面已经搬家。让我们带你回到正轨。",
+    "description": "Sub-line under the 404 headline"
+  },
+  "theme.NotFound.imageAlt": {
+    "message": "一个剪纸风小人正拿着放大镜四处寻找",
+    "description": "Alt text for the 404 illustration"
+  },
+  "theme.NotFound.cta.home": {
+    "message": "带我回首页",
+    "description": "Primary CTA on the 404 page"
+  },
+  "theme.NotFound.cta.tutorials": {
+    "message": "浏览教程",
+    "description": "Secondary CTA on the 404 page"
   }
 }

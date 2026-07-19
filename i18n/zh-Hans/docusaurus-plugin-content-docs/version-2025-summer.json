@@ -58,5 +58,9 @@
   "sidebar.tutorialSidebar.doc.Practical Projects": {
     "message": "实战项目",
     "description": "The label for the doc item 'Practical Projects' in sidebar 'tutorialSidebar', linking to the doc diagrams/projects"
+  },
+  "sidebar.tutorialSidebar.doc.🎥 Video Tutorials": {
+    "message": "🎥 视频教程",
+    "description": "The label for the doc item '🎥 Video Tutorials' in sidebar 'tutorialSidebar', linking to the doc videos/index"
   }
 }

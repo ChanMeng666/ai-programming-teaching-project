@@ -38,5 +38,9 @@
   "sidebar.tutorialSidebar.category.Outstanding Examples": {
     "message": "优秀案例",
     "description": "The label for category 'Outstanding Examples' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.doc.🎥 Video Tutorials": {
+    "message": "🎥 视频教程",
+    "description": "The label for the doc item '🎥 Video Tutorials' in sidebar 'tutorialSidebar', linking to the doc videos/index"
   }
 }
