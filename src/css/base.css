@@ -52,7 +52,13 @@ p {
   line-height: 1.6;
 }
 
-/* ---- Links: ink text + underline affordance (spec: not a color change) ---- */
+/* ---- Links: ink text; hover affordance is context-specific ----
+   No GLOBAL hover-underline: many component links carry their own border-bottom
+   affordance (.explore, .teamLink, feeds .prose a), and a blanket a:hover
+   underline stacked a SECOND line on top of them. Content contexts that want a
+   text underline declare it themselves — .markdown a (docs.css, always
+   underlined), .footer__link-item / .footer-link (footer.css), blog links
+   (blog.css). Plain links elsewhere use the border-bottom affordance instead. */
 a {
   color: var(--color-ink-black);
   text-decoration: none;
@@ -61,8 +67,6 @@ a {
 
 a:hover {
   color: var(--color-ink-black);
-  text-decoration: underline;
-  text-underline-offset: 2px;
 }
 
 strong, b {

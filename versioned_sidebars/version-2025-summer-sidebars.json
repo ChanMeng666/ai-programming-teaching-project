@@ -3,16 +3,16 @@
     {
       "type": "doc",
       "id": "intro",
-      "label": "🌟 Course Introduction"
+      "label": "Course Introduction"
     },
     {
       "type": "doc",
       "id": "videos/index",
-      "label": "🎥 Video Tutorials"
+      "label": "Video Tutorials"
     },
     {
       "type": "category",
-      "label": "📚 Course 1: Gemini CLI Environment",
+      "label": "Course 1: Gemini CLI Environment",
       "collapsible": true,
       "collapsed": false,
       "items": [
@@ -30,7 +30,7 @@
     },
     {
       "type": "category",
-      "label": "🌐 Course 2: Build & Deploy Personal Website",
+      "label": "Course 2: Build & Deploy Personal Website",
       "collapsible": true,
       "collapsed": false,
       "items": [
@@ -43,7 +43,7 @@
     },
     {
       "type": "category",
-      "label": "📊 Course 3: Create Professional Diagrams",
+      "label": "Course 3: Create Professional Diagrams",
       "collapsible": true,
       "collapsed": false,
       "items": [

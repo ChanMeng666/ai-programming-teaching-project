@@ -399,7 +399,7 @@ const config = {
         copyright: `<div class="footer-copyright">
             <div class="footer-legal">
               <div>Copyright © ${new Date().getFullYear()} AI Programming Education.</div>
-              <div>Crafted with 💛 by <a class="footer-link" href="https://github.com/ChanMeng666"><img src="/img/chan_logo.svg" alt="Chan Meng" class="footer-developer-logo" />Chan Meng</a></div>
+              <div>Crafted by <a class="footer-link" href="https://github.com/ChanMeng666"><img src="/img/chan_logo_without_brand_black.svg" alt="Chan Meng" class="footer-developer-logo" />Chan Meng</a></div>
             </div>
           </div>`,
       },

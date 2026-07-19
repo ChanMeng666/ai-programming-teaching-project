@@ -18,11 +18,11 @@ const sidebars = {
     {
       type: 'doc',
       id: 'intro',
-      label: '🌟 Course Introduction',
+      label: 'Course Introduction',
     },
     {
       type: 'category',
-      label: '📚 Course 1: Gemini CLI Environment',
+      label: 'Course 1: Gemini CLI Environment',
       collapsible: true,
       collapsed: false,
       items: [
@@ -40,7 +40,7 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: '🌐 Course 2: Build & Deploy Personal Website',
+      label: 'Course 2: Build & Deploy Personal Website',
       collapsible: true,
       collapsed: false,
       items: [

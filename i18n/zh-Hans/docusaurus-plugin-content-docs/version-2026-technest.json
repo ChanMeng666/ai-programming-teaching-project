@@ -3,24 +3,24 @@
     "message": "2026 TECHNEST 项目",
     "description": "The label for version 2026-technest"
   },
-  "sidebar.tutorialSidebar.category.📋 Programme": {
-    "message": "📋 项目介绍",
-    "description": "The label for category '📋 Programme' in sidebar 'tutorialSidebar'"
+  "sidebar.tutorialSidebar.category.Programme": {
+    "message": "项目介绍",
+    "description": "The label for category 'Programme' in sidebar 'tutorialSidebar'"
   },
-  "sidebar.tutorialSidebar.category.🎓 Teaching Phase (Weeks 1–8)": {
-    "message": "🎓 教学阶段（第 1–8 周）",
-    "description": "The label for category '🎓 Teaching Phase (Weeks 1–8)' in sidebar 'tutorialSidebar'"
+  "sidebar.tutorialSidebar.category.Teaching Phase (Weeks 1–8)": {
+    "message": "教学阶段（第 1–8 周）",
+    "description": "The label for category 'Teaching Phase (Weeks 1–8)' in sidebar 'tutorialSidebar'"
   },
-  "sidebar.tutorialSidebar.category.🚀 Capstone (Weeks 9–12)": {
-    "message": "🚀 毕业项目（第 9–12 周）",
-    "description": "The label for category '🚀 Capstone (Weeks 9–12)' in sidebar 'tutorialSidebar'"
+  "sidebar.tutorialSidebar.category.Capstone (Weeks 9–12)": {
+    "message": "毕业项目（第 9–12 周）",
+    "description": "The label for category 'Capstone (Weeks 9–12)' in sidebar 'tutorialSidebar'"
   },
-  "sidebar.tutorialSidebar.doc.📖 Curriculum Outline": {
-    "message": "📖 课程大纲",
-    "description": "The label for the doc item '📖 Curriculum Outline' in sidebar 'tutorialSidebar', linking to the doc curriculum-outline"
+  "sidebar.tutorialSidebar.doc.Curriculum Outline": {
+    "message": "课程大纲",
+    "description": "The label for the doc item 'Curriculum Outline' in sidebar 'tutorialSidebar', linking to the doc curriculum-outline"
   },
-  "sidebar.tutorialSidebar.doc.🎥 Video Tutorials": {
-    "message": "🎥 视频教程",
-    "description": "The label for the doc item '🎥 Video Tutorials' in sidebar 'tutorialSidebar', linking to the doc videos/index"
+  "sidebar.tutorialSidebar.doc.Video Tutorials": {
+    "message": "视频教程",
+    "description": "The label for the doc item 'Video Tutorials' in sidebar 'tutorialSidebar', linking to the doc videos/index"
   }
 }

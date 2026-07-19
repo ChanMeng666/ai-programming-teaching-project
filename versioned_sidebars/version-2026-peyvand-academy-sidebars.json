@@ -2,7 +2,7 @@
   "tutorialSidebar": [
     {
       "type": "category",
-      "label": "📋 Programme",
+      "label": "Programme",
       "collapsible": true,
       "collapsed": false,
       "items": [
@@ -14,7 +14,7 @@
     },
     {
       "type": "category",
-      "label": "📚 Tutorial: Touch the World, Talk to Code",
+      "label": "Tutorial: Touch the World, Talk to Code",
       "collapsible": true,
       "collapsed": false,
       "link": { "type": "doc", "id": "tutorial/index" },
@@ -30,7 +30,7 @@
     },
     {
       "type": "category",
-      "label": "📎 Resources",
+      "label": "Resources",
       "collapsible": true,
       "collapsed": false,
       "items": [

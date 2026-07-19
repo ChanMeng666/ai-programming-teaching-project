@@ -4,11 +4,11 @@
     {
       "type": "doc",
       "id": "videos/index",
-      "label": "🎥 Video Tutorials"
+      "label": "Video Tutorials"
     },
     {
       "type": "category",
-      "label": "🚀 Quick Start",
+      "label": "Quick Start",
       "link": {
         "type": "doc",
         "id": "setup/index"
@@ -23,7 +23,7 @@
     },
     {
       "type": "category",
-      "label": "📚 Fundamentals",
+      "label": "Fundamentals",
       "link": {
         "type": "doc",
         "id": "basics/index"
@@ -37,7 +37,7 @@
     },
     {
       "type": "category",
-      "label": "🛠️ Development Tools",
+      "label": "Development Tools",
       "link": {
         "type": "doc",
         "id": "tools/index"
@@ -53,7 +53,7 @@
     },
     {
       "type": "category",
-      "label": "📖 Tutorials & Practice",
+      "label": "Tutorials & Practice",
       "collapsed": true,
       "items": [
         {
@@ -86,7 +86,7 @@
     },
     {
       "type": "category",
-      "label": "🎯 Advanced Applications",
+      "label": "Advanced Applications",
       "link": {
         "type": "doc",
         "id": "advanced/index"

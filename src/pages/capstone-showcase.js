@@ -696,7 +696,7 @@ function ShowcaseInner() {
                 >
                   {translate({
                     id: 'capstoneShowcase.spotlight.title',
-                    message: '🏆 Current Top 3',
+                    message: 'Current Top 3',
                   })}
                 </h2>
                 <div

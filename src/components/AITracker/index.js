@@ -99,7 +99,7 @@ export default function AITracker() {
 
         // 在开发环境下显示调试信息
         if (process.env.NODE_ENV === 'development') {
-          console.log('🤖 AI流量检测:', trackingData);
+          console.log('AI流量检测:', trackingData);
         }
       }
     };

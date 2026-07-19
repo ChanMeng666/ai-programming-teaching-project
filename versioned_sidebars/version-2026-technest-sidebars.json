@@ -2,7 +2,7 @@
   "tutorialSidebar": [
     {
       "type": "category",
-      "label": "📋 Programme",
+      "label": "Programme",
       "collapsible": true,
       "collapsed": false,
       "items": [
@@ -14,16 +14,16 @@
     {
       "type": "doc",
       "id": "curriculum-outline",
-      "label": "📖 Curriculum Outline"
+      "label": "Curriculum Outline"
     },
     {
       "type": "doc",
       "id": "videos/index",
-      "label": "🎥 Video Tutorials"
+      "label": "Video Tutorials"
     },
     {
       "type": "category",
-      "label": "🎓 Teaching Phase (Weeks 1–8)",
+      "label": "Teaching Phase (Weeks 1–8)",
       "collapsible": true,
       "collapsed": false,
       "items": [
@@ -39,7 +39,7 @@
     },
     {
       "type": "category",
-      "label": "🚀 Capstone (Weeks 9–12)",
+      "label": "Capstone (Weeks 9–12)",
       "collapsible": true,
       "collapsed": false,
       "items": [

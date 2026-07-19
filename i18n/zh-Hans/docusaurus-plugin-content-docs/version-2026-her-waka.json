@@ -3,13 +3,13 @@
     "message": "2026 HER WAKA 活动",
     "description": "The label for version 2026-her-waka"
   },
-  "sidebar.tutorialSidebar.category.📋 Programme": {
-    "message": "📋 项目介绍",
-    "description": "The label for category '📋 Programme' in sidebar 'tutorialSidebar'"
+  "sidebar.tutorialSidebar.category.Programme": {
+    "message": "项目介绍",
+    "description": "The label for category 'Programme' in sidebar 'tutorialSidebar'"
   },
-  "sidebar.tutorialSidebar.category.🎓 Workshops": {
-    "message": "🎓 工作坊",
-    "description": "The label for category '🎓 Workshops' in sidebar 'tutorialSidebar'"
+  "sidebar.tutorialSidebar.category.Workshops": {
+    "message": "工作坊",
+    "description": "The label for category 'Workshops' in sidebar 'tutorialSidebar'"
   },
   "sidebar.tutorialSidebar.category.Session 1: AI & The Future of Work (March)": {
     "message": "Session 1：AI 与未来工作（3 月）",
@@ -27,9 +27,9 @@
     "message": "Session 4：人脉与职业连接（6 月）",
     "description": "The label for category 'Session 4: Networking & Career Connections (June)' in sidebar 'tutorialSidebar'"
   },
-  "sidebar.tutorialSidebar.category.📚 Tutorials": {
-    "message": "📚 自学教程",
-    "description": "The label for category '📚 Tutorials' in sidebar 'tutorialSidebar'"
+  "sidebar.tutorialSidebar.category.Tutorials": {
+    "message": "自学教程",
+    "description": "The label for category 'Tutorials' in sidebar 'tutorialSidebar'"
   },
   "sidebar.tutorialSidebar.category.★ Getting Started": {
     "message": "★ 入门",
@@ -99,9 +99,9 @@
     "message": "Vibe Coding：Daily Report Bot",
     "description": "The label for category 'Vibe Coding: Daily Report Bot' in sidebar 'tutorialSidebar'"
   },
-  "sidebar.tutorialSidebar.category.💼 Resources": {
-    "message": "💼 求职资源",
-    "description": "The label for category '💼 Resources' in sidebar 'tutorialSidebar'"
+  "sidebar.tutorialSidebar.category.Resources": {
+    "message": "求职资源",
+    "description": "The label for category 'Resources' in sidebar 'tutorialSidebar'"
   },
   "sidebar.tutorialSidebar.category.Job Search": {
     "message": "求职",
@@ -111,8 +111,8 @@
     "message": "社区与权益",
     "description": "The label for category 'Community & Rights' in sidebar 'tutorialSidebar'"
   },
-  "sidebar.tutorialSidebar.doc.🎥 Video Tutorials": {
-    "message": "🎥 视频教程",
-    "description": "The label for the doc item '🎥 Video Tutorials' in sidebar 'tutorialSidebar', linking to the doc videos/index"
+  "sidebar.tutorialSidebar.doc.Video Tutorials": {
+    "message": "视频教程",
+    "description": "The label for the doc item 'Video Tutorials' in sidebar 'tutorialSidebar', linking to the doc videos/index"
   }
 }

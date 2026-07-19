@@ -120,6 +120,31 @@
   color: var(--color-ink-black);
 }
 
+/* ---- Dropdown caret: clean ink chevron ----
+   Infima renders the caret as a border-triangle; our .navbar__link::after
+   underline rule (background: currentColor) was filling the triangle's box into
+   a solid ink rectangle. Replace it outright with a masked chevron (higher
+   specificity than both Infima's caret and our underline ::after), rotating
+   180deg when the dropdown is open. */
+.navbar .dropdown > .navbar__link::after {
+  content: '';
+  display: inline-block;
+  position: static;
+  width: 11px;
+  height: 11px;
+  margin-left: 5px;
+  vertical-align: middle;
+  border: none;
+  background: var(--color-ink-black);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") center / contain no-repeat;
+  transform: none;
+  transition: transform 0.2s ease;
+}
+.navbar .dropdown--show > .navbar__link::after {
+  transform: rotate(180deg);
+}
+
 /* ---- Icon buttons: 36px circles, hairline → green on hover ---- */
 .header-github-link,
 .header-discord-link,
@@ -321,14 +346,16 @@
     font-size: 15px;
   }
 
-  /* Drawer: cream panel, ink links, hairline dividers */
+  /* Drawer: cream panel, ink links, hairline dividers.
+     Size via --ifm-navbar-sidebar-width (NOT a raw width/max-width): Docusaurus'
+     inner sliding panels read this same variable, so clamping width directly
+     desynced them and shifted the menu ~43px off the left edge (clipped text). */
   .navbar-sidebar {
+    --ifm-navbar-sidebar-width: min(84vw, 360px);
     background: var(--color-cream-paper);
     border: none;
     border-radius: 0 20px 20px 0;
     box-shadow: none;
-    width: 84%;
-    max-width: 360px;
   }
   .navbar-sidebar__brand {
     background: var(--color-cream-paper);
@@ -344,7 +371,8 @@
     margin: 2px 8px;
     border-radius: 12px;
   }
-  .navbar-sidebar__items .menu__link::after,
+  /* Kill only the cloned top-level nav-link underline bar in the drawer —
+     NOT .menu__link::after, which carries the collapsible sublist caret. */
   .navbar-sidebar__items .navbar__link::after {
     content: none;
   }

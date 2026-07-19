@@ -138,9 +138,16 @@
   --ifm-heading-font-weight: 500;
   --ifm-font-weight-bold: 700;
 
-  /* Links — distinguished by underline, not color (spec) */
+  /* Links — distinguished by underline, not color (spec).
+     Infima's default a:hover underline stacked a second line on top of
+     component border-bottom affordances (.explore, .teamLink, feeds .prose a),
+     so turn the global hover underline OFF here. Content contexts that want a
+     text underline declare it explicitly: .markdown a (always underlined),
+     .footer__link-item / .footer-link, and blog links. */
   --ifm-link-color: #2c2e2a;
   --ifm-link-hover-color: #2c2e2a;
+  --ifm-link-decoration: none;
+  --ifm-link-hover-decoration: none;
 
   /* Navbar (floating white pill; 84px = pill height + top margin, drives sticky
      offsets for the doc sidebar & TOC) */

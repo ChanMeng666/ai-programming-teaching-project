@@ -89,9 +89,9 @@
 }
 
 .footer-developer-logo {
-  width: 18px;
+  width: auto;
   height: 18px;
-  border-radius: 4px;
+  border-radius: 0; /* transparent-bg mark — no plate to round */
   vertical-align: middle;
   margin-right: 6px;
   filter: none;

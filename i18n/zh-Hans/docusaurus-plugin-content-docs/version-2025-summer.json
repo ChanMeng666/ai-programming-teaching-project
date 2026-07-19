@@ -3,21 +3,21 @@
     "message": "2025年夏季她行活动",
     "description": "The label for version 2025-summer"
   },
-  "sidebar.tutorialSidebar.category.📚 Course 1: Gemini CLI Environment": {
-    "message": "📚 课程一：Gemini CLI 环境管理",
-    "description": "The label for category '📚 Course 1: Gemini CLI Environment' in sidebar 'tutorialSidebar'"
+  "sidebar.tutorialSidebar.category.Course 1: Gemini CLI Environment": {
+    "message": "课程一：Gemini CLI 环境管理",
+    "description": "The label for category 'Course 1: Gemini CLI Environment' in sidebar 'tutorialSidebar'"
   },
-  "sidebar.tutorialSidebar.category.🌐 Course 2: Build & Deploy Personal Website": {
-    "message": "🌐 课程二：开发并部署个人网站",
-    "description": "The label for category '🌐 Course 2: Build & Deploy Personal Website' in sidebar 'tutorialSidebar'"
+  "sidebar.tutorialSidebar.category.Course 2: Build & Deploy Personal Website": {
+    "message": "课程二：开发并部署个人网站",
+    "description": "The label for category 'Course 2: Build & Deploy Personal Website' in sidebar 'tutorialSidebar'"
   },
-  "sidebar.tutorialSidebar.category.📊 Course 3: Create Professional Diagrams": {
-    "message": "📊 课程三：绘制专业图表",
-    "description": "The label for category '📊 Course 3: Create Professional Diagrams' in sidebar 'tutorialSidebar'"
+  "sidebar.tutorialSidebar.category.Course 3: Create Professional Diagrams": {
+    "message": "课程三：绘制专业图表",
+    "description": "The label for category 'Course 3: Create Professional Diagrams' in sidebar 'tutorialSidebar'"
   },
-  "sidebar.tutorialSidebar.doc.🌟 Course Introduction": {
-    "message": "🌟 课程介绍",
-    "description": "The label for the doc item '🌟 Course Introduction' in sidebar 'tutorialSidebar', linking to the doc intro"
+  "sidebar.tutorialSidebar.doc.Course Introduction": {
+    "message": "课程介绍",
+    "description": "The label for the doc item 'Course Introduction' in sidebar 'tutorialSidebar', linking to the doc intro"
   },
   "sidebar.tutorialSidebar.doc.Basic Tutorial": {
     "message": "基础教程",
@@ -59,8 +59,8 @@
     "message": "实战项目",
     "description": "The label for the doc item 'Practical Projects' in sidebar 'tutorialSidebar', linking to the doc diagrams/projects"
   },
-  "sidebar.tutorialSidebar.doc.🎥 Video Tutorials": {
-    "message": "🎥 视频教程",
-    "description": "The label for the doc item '🎥 Video Tutorials' in sidebar 'tutorialSidebar', linking to the doc videos/index"
+  "sidebar.tutorialSidebar.doc.Video Tutorials": {
+    "message": "视频教程",
+    "description": "The label for the doc item 'Video Tutorials' in sidebar 'tutorialSidebar', linking to the doc videos/index"
   }
 }

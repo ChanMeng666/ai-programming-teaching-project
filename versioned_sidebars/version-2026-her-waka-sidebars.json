@@ -2,7 +2,7 @@
   "tutorialSidebar": [
     {
       "type": "category",
-      "label": "📋 Programme",
+      "label": "Programme",
       "collapsible": true,
       "collapsed": false,
       "items": [
@@ -14,11 +14,11 @@
     {
       "type": "doc",
       "id": "videos/index",
-      "label": "🎥 Video Tutorials"
+      "label": "Video Tutorials"
     },
     {
       "type": "category",
-      "label": "🎓 Workshops",
+      "label": "Workshops",
       "collapsible": true,
       "collapsed": false,
       "link": { "type": "doc", "id": "workshop/index" },
@@ -55,7 +55,7 @@
     },
     {
       "type": "category",
-      "label": "📚 Tutorials",
+      "label": "Tutorials",
       "collapsible": true,
       "collapsed": false,
       "link": { "type": "doc", "id": "tutorial/index" },
@@ -223,7 +223,7 @@
     },
     {
       "type": "category",
-      "label": "💼 Resources",
+      "label": "Resources",
       "collapsible": true,
       "collapsed": false,
       "items": [

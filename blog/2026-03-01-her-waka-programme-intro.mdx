@@ -31,13 +31,13 @@ HER WAKA was originally a standalone Mintlify site. Merging it here gives us:
 
 ## Quick links
 
-- 👉 [Programme overview](/docs/2026-her-waka/programme/about-her-waka)
-- 👉 [Four-workshop schedule](/docs/2026-her-waka/programme/schedule)
-- 👉 [10 self-paced tutorials](/docs/2026-her-waka/tutorial/)
-- 👉 [Job-search resource library](/docs/2026-her-waka/resources/job-readiness)
+- [Programme overview](/docs/2026-her-waka/programme/about-her-waka)
+- [Four-workshop schedule](/docs/2026-her-waka/programme/schedule)
+- [10 self-paced tutorials](/docs/2026-her-waka/tutorial/)
+- [Job-search resource library](/docs/2026-her-waka/resources/job-readiness)
 
 ## Technical note (for the curious)
 
 The original site used Mintlify-specific components (`<Card>`/`<Tabs>`/`<Steps>`/`<Accordion>` etc.). To avoid 1000+ MDX manual rewrites, this migration introduces a lightweight **MintlifyShim compatibility layer** that maps these components to native Docusaurus features (`@theme/Tabs`, `@theme/Admonition`, native `<details>`, etc.) and globally injects them via a swizzled `MDXComponents.js` — leaving the MDX files almost untouched. The shim layer can also be reused for any future Mintlify-to-Docusaurus migration.
 
-Happy learning 🌸
+Happy learning
