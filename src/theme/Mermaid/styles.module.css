@@ -1,8 +1,8 @@
 .container {
   margin: 1.25rem 0;
-  border: 1px solid var(--ifm-color-emphasis-200);
-  border-radius: var(--ifm-global-radius);
-  background: var(--ifm-background-surface-color);
+  border: 1px solid var(--color-hairline-mist);
+  border-radius: 16px;
+  background: var(--color-pure-white);
   overflow: hidden;
 }
 
@@ -10,60 +10,60 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.25rem 0.5rem;
-  background: var(--ifm-color-emphasis-100);
-  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid var(--color-hairline-mist);
 }
 
 .tabs {
   display: inline-flex;
-  gap: 0.25rem;
+  gap: 2px;
+  padding: 3px;
+  background: var(--color-sandstone);
+  border-radius: 50px;
 }
 
 .tab {
   appearance: none;
   background: transparent;
-  border: 0;
-  padding: 0.25rem 0.75rem;
+  border: 1px solid transparent;
+  padding: 0.25rem 0.85rem;
   font: inherit;
   font-size: 0.8rem;
-  color: var(--ifm-color-emphasis-700);
+  color: var(--color-ink-muted);
   cursor: pointer;
-  border-radius: 4px;
-  transition: background-color 120ms ease, color 120ms ease;
+  border-radius: 50px;
+  transition: background-color 120ms ease, color 120ms ease, border-color 120ms ease;
 }
 
 .tab:hover {
-  background: var(--ifm-color-emphasis-200);
-  color: var(--ifm-color-emphasis-900);
+  color: var(--color-ink-black);
 }
 
 .tab[aria-selected='true'] {
-  background: var(--ifm-background-surface-color);
-  color: var(--ifm-color-primary);
-  box-shadow: inset 0 0 0 1px var(--ifm-color-emphasis-200);
+  background: var(--color-pure-white);
+  color: var(--color-ink-black);
+  border-color: var(--color-hairline-mist);
 }
 
 .copyBtn {
   appearance: none;
   background: transparent;
-  border: 0;
-  padding: 0.25rem 0.75rem;
+  border: 1px solid var(--color-hairline-mist);
+  padding: 0.25rem 0.85rem;
   font: inherit;
   font-size: 0.8rem;
-  color: var(--ifm-color-emphasis-700);
+  color: var(--color-ink-black);
   cursor: pointer;
-  border-radius: 4px;
-  transition: background-color 120ms ease, color 120ms ease;
+  border-radius: 50px;
+  transition: border-color 120ms ease;
 }
 
 .copyBtn:hover {
-  background: var(--ifm-color-emphasis-200);
-  color: var(--ifm-color-emphasis-900);
+  border-color: var(--color-fresh-grass);
 }
 
 .body {
-  padding: 0.75rem;
+  padding: 0.9rem;
 }
 
 .body > :global(.docusaurus-mermaid-container) {

@@ -1,0 +1,57 @@
+/**
+ * styles.module.css — MindMarket 404 content.
+ * Layout only; the giant "404" (.mm-404-code) and buttons (.mm-btn*) come from
+ * src/css/pages.css.
+ */
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 640px;
+  gap: 8px;
+}
+
+.headline {
+  font-family: var(--font-inter);
+  font-size: var(--text-heading-sm);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--leading-heading-sm);
+  color: var(--color-ink-black);
+  margin: 16px 0 0;
+}
+
+.subline {
+  font-size: var(--text-body-lg);
+  line-height: var(--leading-body-lg);
+  color: var(--color-ink-muted);
+  margin: 0;
+  max-width: 44ch;
+}
+
+.art {
+  width: 100%;
+  max-width: 320px;
+  height: auto;
+  margin: 28px 0;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+}
+
+@media (max-width: 480px) {
+  .art {
+    max-width: 240px;
+    margin: 20px 0;
+  }
+}

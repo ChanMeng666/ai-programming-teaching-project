@@ -1,15 +1,16 @@
 import React from 'react';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
-import SpaceBackground from '@site/src/components/SpaceBackground';
-import SpaceHero from '@site/src/components/SpaceHero';
 import GEOHead from '@site/src/components/GEOHead';
-import AITracker from '@site/src/components/AITracker';
 import { translate } from '@docusaurus/Translate';
-import styles from './index.module.css';
+import useScrollReveal from '@site/src/hooks/useScrollReveal';
+import Hero from '@site/src/components/Home/Hero';
+import Programs from '@site/src/components/Home/Programs';
+import HowItWorks from '@site/src/components/Home/HowItWorks';
+import Community from '@site/src/components/Home/Community';
 
 export default function Home() {
-  const { siteConfig } = useDocusaurusContext();
+  useScrollReveal();
+
   return (
     <Layout
       title={translate({ id: 'homepage.title', message: 'AI Programming Learning Platform' })}
@@ -17,7 +18,6 @@ export default function Home() {
         id: 'homepage.description',
         message: 'Learn AI programming through practical examples and master modern AI development skills',
       })}
-      wrapperClassName="homepage-wrapper"
     >
       <GEOHead
         pageType="homepage"
@@ -68,15 +68,12 @@ export default function Home() {
         })}
       />
 
-      {/* 太空背景 */}
-      <SpaceBackground />
-
-      <main className={styles.spaceMain} data-page="homepage">
-        {/* 太空主题Hero区域 */}
-        <SpaceHero />
+      <main>
+        <Hero />
+        <Programs />
+        <HowItWorks />
+        <Community />
       </main>
-
-      <AITracker />
     </Layout>
   );
 }

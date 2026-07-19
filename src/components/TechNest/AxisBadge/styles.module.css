@@ -6,28 +6,40 @@
 }
 
 .badge {
-  display: inline-block;
-  padding: 2px 8px;
-  border-radius: 3px;
-  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 9px;
+  border-radius: 10px;
+  border: 1px solid var(--color-hairline-mist);
+  background: var(--color-pure-white);
+  color: var(--color-ink-black);
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   line-height: 1.4;
 }
 
-.job {
-  background: #b78a2a;
+.badge::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-stone-gray);
 }
 
-.life {
-  background: #1f7ab8;
+.job::before {
+  background: var(--color-sunshine-pop);
 }
 
-.fun {
-  background: #1fae6a;
+.life::before {
+  background: var(--color-sky-pop);
 }
 
-.cool {
-  background: #9b2e83;
+.fun::before {
+  background: var(--color-fresh-grass);
+}
+
+.cool::before {
+  background: var(--color-coral-pop);
 }

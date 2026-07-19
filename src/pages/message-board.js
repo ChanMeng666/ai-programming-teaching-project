@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import Layout from '@theme/Layout';
 import { translate } from '@docusaurus/Translate';
+import useScrollReveal from '@site/src/hooks/useScrollReveal';
 import styles from './message-board.module.css';
 
 const API_BASE = 'https://programming-api.chanmeng.org';
@@ -28,7 +29,8 @@ function Toast({ message, type, onClose }) {
         type === 'success' ? styles.toastSuccess : styles.toastError
       }`}
     >
-      {message}
+      <span className={styles.toastDot} />
+      <span className={styles.toastText}>{message}</span>
     </div>
   );
 }
@@ -170,14 +172,16 @@ function MessageCard({ message }) {
   const initial = (message.nickname || '?')[0];
 
   return (
-    <div className={styles.messageCard}>
+    <div className={`${styles.messageCard} mm-reveal`}>
       <div className={styles.messageHeader}>
         <span className={styles.avatar}>{initial}</span>
-        <span className={styles.nickname}>{message.nickname}</span>
+        <div className={styles.messageMeta}>
+          <span className={styles.nickname}>{message.nickname}</span>
+          {date && <span className={styles.messageDate}>{date}</span>}
+        </div>
         <span className={styles.categoryBadge}>
           {categoryLabels[message.category] || message.category}
         </span>
-        {date && <span className={styles.messageDate}>{date}</span>}
       </div>
       <div className={styles.messageContent}>{message.content}</div>
     </div>
@@ -246,13 +250,16 @@ export default function MessageBoardPage() {
       ? messages
       : messages.filter((m) => m.category === activeFilter);
 
+  // Re-scan .mm-reveal cards whenever the visible message set changes so newly
+  // loaded pages animate in too.
+  useScrollReveal([messages]);
+
   return (
     <Layout
       title={translate({ id: 'messageBoard.pageTitle', message: 'Message Board' })}
       description={translate({ id: 'messageBoard.pageDescription', message: 'Share your AI programming learning experiences' })}
     >
       <div className={styles.pageWrapper}>
-        <div className={styles.bgImage} />
         <div className={styles.container}>
           {toast && (
             <Toast
@@ -263,12 +270,25 @@ export default function MessageBoardPage() {
           )}
 
           <div className={styles.heroSection}>
-            <h1 className={styles.title}>
-              {translate({ id: 'messageBoard.heroTitle', message: 'Message Board' })}
-            </h1>
-            <p className={styles.subtitle}>
-              {translate({ id: 'messageBoard.heroSubtitle', message: 'Share your AI programming experiences, insights and ideas here, and grow together with the community' })}
-            </p>
+            <div className={styles.heroText}>
+              <span className={`mm-eyebrow ${styles.heroEyebrow}`}>
+                {translate({ id: 'messageBoard.eyebrow', message: 'Community' })}
+              </span>
+              <h1 className={`mm-heading-lg ${styles.title}`}>
+                {translate({ id: 'messageBoard.heroTitle', message: 'Message Board' })}
+              </h1>
+              <p className={styles.subtitle}>
+                {translate({ id: 'messageBoard.heroSubtitle', message: 'Share your AI programming experiences, insights and ideas here, and grow together with the community' })}
+              </p>
+            </div>
+            <img
+              className={styles.heroIllustration}
+              src="/img/illustrations/message-board.webp"
+              width={480}
+              height={480}
+              loading="lazy"
+              alt={translate({ id: 'messageBoard.heroIllustrationAlt', message: 'A paper-cut character mailing an oversized letter' })}
+            />
           </div>
 
           <MessageForm onSubmitted={showToast} />
@@ -306,9 +326,14 @@ export default function MessageBoardPage() {
             </div>
           ) : filteredMessages.length === 0 ? (
             <div className={styles.emptyState}>
-              <span className={styles.emptyIcon}>
-                {activeFilter !== '__all__' ? '\u{1F50D}' : '\u{1F4AD}'}
-              </span>
+              <img
+                className={styles.emptyIllustration}
+                src="/img/illustrations/message-board.webp"
+                width={280}
+                height={280}
+                loading="lazy"
+                alt=""
+              />
               <p>
                 {activeFilter !== '__all__'
                   ? translate(

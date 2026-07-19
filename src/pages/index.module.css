@@ -1,8 +1,2 @@
-/* 太空主题首页样式 */
-
-.spaceMain {
-  position: relative;
-  z-index: 1;
-  overflow-x: hidden;
-  max-width: 100vw;
-}
+/* The homepage is composed from src/components/Home/* sections, each carrying
+   its own *.module.css. No page-level module styles are needed here. */

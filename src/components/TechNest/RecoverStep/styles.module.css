@@ -1,28 +1,24 @@
 .recoverStep {
   margin: 1rem 0;
-  background: rgba(31, 122, 184, 0.08);
-  border-left: 3px solid #1f7ab8;
-  border-radius: 0 4px 4px 0;
-  padding: 12px 16px;
-}
-
-[data-theme='dark'] .recoverStep {
-  background: rgba(31, 122, 184, 0.14);
+  background: var(--color-pure-white);
+  border: 2px solid var(--color-coral-pop);
+  border-radius: 16px;
+  padding: 14px 16px;
 }
 
 .header {
   display: flex;
   align-items: center;
   gap: 0.6rem;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.6rem;
 }
 
 .chip {
   display: inline-block;
-  padding: 2px 8px;
-  border-radius: 3px;
-  background: #1f7ab8;
-  color: #fff;
+  padding: 2px 9px;
+  border-radius: 10px;
+  background: var(--color-coral-pop);
+  color: var(--color-pure-white);
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -31,21 +27,20 @@
 
 .title {
   font-size: 0.95rem;
-  font-weight: 700;
-  color: #1f7ab8;
-}
-
-[data-theme='dark'] .title {
-  color: #6cabd9;
+  font-weight: 500;
+  color: var(--color-ink-black);
 }
 
 .body {
   margin: 0;
-  padding: 0;
+  padding: 12px 14px;
   border: 0;
-  font-style: italic;
-  font-family: var(--ifm-font-family-base);
-  color: var(--ifm-color-content);
+  border-radius: 12px;
+  background: var(--color-sandstone);
+  font-style: normal;
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.9rem;
+  color: var(--color-ink-black);
 }
 
 .body > *:first-child {

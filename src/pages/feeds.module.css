@@ -1,112 +1,321 @@
+/**
+ * feeds.module.css — layout + local styling for the RSS Feeds page.
+ * Shared visual language (cards, chips, buttons, headings, reveal) comes from
+ * src/css/pages.css via the .mm-* utility classes; this file only handles
+ * page-specific layout and the feed-card internals.
+ */
+
 .container {
-  max-width: 760px;
+  max-width: 960px;
   margin: 0 auto;
-  padding: 3rem 1.5rem 4rem;
+  padding: 40px 20px 100px;
 }
 
+/* ============================================================
+   Hero
+   ============================================================ */
 .hero {
-  margin-bottom: 2.5rem;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 40px;
+  padding: 40px 0 24px;
 }
 
-.hero h1 {
-  font-size: 2rem;
-  font-weight: 700;
-  margin: 0 0 0.75rem;
-  color: var(--ifm-heading-color);
+.heroText {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
 }
 
-.hero p {
-  font-size: 1.05rem;
-  color: var(--ifm-color-emphasis-700);
+.heroTitle {
   margin: 0;
-  line-height: 1.7;
 }
 
-.container section {
-  margin-top: 2.5rem;
+.heroSubtitle {
+  font-size: var(--text-body-lg);
+  line-height: var(--leading-body-lg);
+  color: var(--color-ink-muted);
+  margin: 0;
+  max-width: 46ch;
 }
 
-.container h2 {
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin: 0 0 1rem;
-  padding-top: 1rem;
-  border-top: 1px solid var(--ifm-color-emphasis-200);
-}
-
-.container section:first-of-type h2 {
-  padding-top: 0;
-  border-top: 0;
-}
-
-.container h3 {
-  font-size: 1.15rem;
-  font-weight: 600;
-  margin: 1.75rem 0 0.75rem;
-}
-
-.container h4 {
-  font-size: 1rem;
-  font-weight: 600;
-  margin: 1.25rem 0 0.5rem;
-  color: var(--ifm-color-emphasis-800);
-}
-
-.container p,
-.container li {
-  line-height: 1.7;
-}
-
-.container ul,
-.container ol {
-  padding-left: 1.5rem;
-  margin: 0.5rem 0;
-}
-
-.container li {
-  margin: 0.25rem 0;
-}
-
-.tableWrapper {
-  overflow-x: auto;
-  margin: 1rem 0 0;
-}
-
-.tableWrapper table {
+.heroArt {
   width: 100%;
-  border-collapse: collapse;
+  max-width: 340px;
+  height: auto;
+  justify-self: end;
+}
+
+/* ============================================================
+   Section rhythm
+   ============================================================ */
+.section {
+  margin-top: 80px;
+}
+
+.sectionTitle {
+  margin: 0 0 12px;
+}
+
+.lead {
+  font-size: var(--text-body-lg);
+  line-height: var(--leading-body-lg);
+  color: var(--color-ink-muted);
+  margin: 0 0 28px;
+  max-width: 60ch;
+}
+
+/* ============================================================
+   Feed source cards
+   ============================================================ */
+.feedGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.feedCard {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.feedContent {
+  font-size: var(--text-body-sm);
+  color: var(--color-ink-muted);
+}
+
+.feedUrl {
+  width: 100%;
+  box-sizing: border-box;
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 13px;
+  color: var(--color-ink-black);
+  background: var(--color-sandstone);
+  border: none;
+  border-radius: var(--radius-small);
+  padding: 10px 12px;
+  overflow-wrap: anywhere;
+  word-break: break-all;
+}
+
+.feedActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 2px;
+}
+
+/* Compact pill for the copy / open actions inside a small card. */
+.smallBtn {
+  padding: 9px 16px;
+  font-size: 14px;
+}
+
+/* ============================================================
+   Prose cards (What is RSS, readers, tips, other, FAQ)
+   ============================================================ */
+.prose {
+  color: var(--color-ink-black);
+}
+
+.cardTitle {
+  font-size: var(--text-heading-sm);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--leading-heading-sm);
+  margin: 0 0 16px;
+}
+
+.cardSubtitle {
+  font-size: var(--text-subheading);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--leading-subheading);
+  margin: 0 0 20px;
+}
+
+.prose p {
+  font-size: var(--text-body-lg);
+  line-height: var(--leading-body-lg);
+  margin: 0 0 12px;
+}
+
+.prose a {
+  color: var(--color-ink-black);
+  text-decoration: none;
+  border-bottom: 1px solid var(--color-stone-gray);
+}
+
+.prose a:hover {
+  border-bottom-color: var(--color-ink-black);
+}
+
+/* Bulleted lists — green square marker instead of default disc */
+.checkList,
+.linkList {
+  list-style: none;
   margin: 0;
+  padding: 0;
 }
 
-.tableWrapper th,
-.tableWrapper td {
-  text-align: left;
-  padding: 0.625rem 0.75rem;
-  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+.checkList li,
+.linkList li {
+  position: relative;
+  padding-left: 22px;
+  font-size: var(--text-body-lg);
+  line-height: var(--leading-body-lg);
+  margin: 8px 0;
 }
 
-.tableWrapper th {
-  font-weight: 600;
-  background: var(--ifm-color-emphasis-100);
+.checkList li::before,
+.linkList li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  background: var(--color-fresh-grass);
 }
 
+/* ============================================================
+   Readers — three columns of links
+   ============================================================ */
+.readerGroups {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.readerHeading {
+  font-size: var(--text-body-sm);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-ink-muted);
+  margin: 0 0 12px;
+}
+
+/* ============================================================
+   Steps — green circle numerals
+   ============================================================ */
+.stepsCard {
+  margin-top: 24px;
+}
+
+.steps {
+  list-style: none;
+  counter-reset: step;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.steps li {
+  position: relative;
+  padding-left: 48px;
+  font-size: var(--text-body-lg);
+  line-height: var(--leading-body-lg);
+  min-height: 32px;
+  display: flex;
+  align-items: center;
+}
+
+.steps li::before {
+  counter-increment: step;
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--color-fresh-grass);
+  color: var(--color-ink-black);
+  font-size: 15px;
+  font-weight: var(--font-weight-medium);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ============================================================
+   FAQ — stacked blocks divided by hairlines
+   ============================================================ */
+.faqItem {
+  padding: 20px 0;
+  border-top: 1px solid var(--color-hairline-mist);
+}
+
+.faqItem:first-child {
+  padding-top: 0;
+  border-top: none;
+}
+
+.faqItem:last-child {
+  padding-bottom: 0;
+}
+
+.faqQuestion {
+  font-size: var(--text-subheading);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--leading-subheading);
+  margin: 0 0 8px;
+}
+
+/* ============================================================
+   Footer note
+   ============================================================ */
 .footer {
-  margin-top: 3rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--ifm-color-emphasis-200);
-  color: var(--ifm-color-emphasis-700);
+  margin-top: 64px;
+  padding: 28px 0 0;
+  border-top: 1px solid var(--color-hairline-mist);
+  color: var(--color-ink-muted);
 }
 
 .footer p {
   margin: 0;
+  font-size: var(--text-body-lg);
+  line-height: var(--leading-body-lg);
 }
 
-@media (max-width: 640px) {
-  .container {
-    padding: 2rem 1rem 3rem;
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 900px) {
+  .feedGrid {
+    grid-template-columns: 1fr;
   }
+  .readerGroups {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
 
-  .hero h1 {
-    font-size: 1.625rem;
+@media (max-width: 768px) {
+  .hero {
+    grid-template-columns: 1fr;
+    text-align: left;
+    gap: 24px;
+    padding: 24px 0 8px;
+  }
+  .heroArt {
+    max-width: 240px;
+    justify-self: start;
+    order: -1;
+  }
+  .section {
+    margin-top: 56px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 24px 16px 72px;
   }
 }

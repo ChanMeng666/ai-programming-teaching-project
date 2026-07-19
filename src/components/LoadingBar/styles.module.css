@@ -9,6 +9,6 @@
 
 .loadingBar {
   height: 100%;
-  background: linear-gradient(90deg, var(--color-accent), var(--ifm-color-primary));
+  background: var(--color-fresh-grass);
   transition: width 0.2s ease;
 } 

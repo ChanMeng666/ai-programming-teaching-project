@@ -283,6 +283,43 @@ pre[class*='language-'],
 .alert--secondary { border-color: var(--color-hairline-mist); }
 
 /* ============================================================
+   Tabs — segmented control (sandstone track, white active pill)
+   Docs render @theme/Tabs (MintlifyShim delegates to it). Kill Infima's
+   colored active underline; render as a pill segmented control instead.
+   ============================================================ */
+.tabs {
+  --ifm-tabs-color-active-border: transparent;
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 4px;
+  background: var(--color-sandstone);
+  border-radius: 50px;
+  border-bottom: none;
+  margin-bottom: 20px;
+}
+.tabs__item {
+  border: 1px solid transparent;
+  border-bottom: none;
+  border-radius: 50px;
+  color: var(--color-ink-black);
+  padding: 6px 16px;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.4;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+.tabs__item:hover {
+  background: rgba(255, 255, 255, 0.5);
+  border-bottom: none;
+}
+.tabs__item--active {
+  background: var(--color-pure-white);
+  border: 1px solid var(--color-hairline-mist);
+  color: var(--color-ink-black);
+}
+
+/* ============================================================
    Version badge / banner → chip form
    ============================================================ */
 .badge {

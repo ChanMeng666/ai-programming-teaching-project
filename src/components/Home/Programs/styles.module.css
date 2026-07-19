@@ -1,0 +1,115 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+}
+
+.head {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  max-width: 20ch;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.cardTitle {
+  font-family: var(--font-inter);
+  font-size: var(--text-heading-sm);
+  line-height: var(--leading-heading-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-ink-black);
+  margin: 0;
+}
+
+.cardDesc {
+  margin: 0;
+  font-size: var(--text-body-lg);
+  line-height: 1.5;
+  color: var(--color-ink-muted);
+}
+
+/* Inline text link — hairline underline affordance, not a color change (spec) */
+.explore {
+  margin-top: auto;
+  align-self: flex-start;
+  font-size: var(--text-body-lg);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-ink-black);
+  text-decoration: none;
+  border-bottom: 1px solid var(--color-ink-black);
+  padding-bottom: 2px;
+  transition: gap 0.2s ease;
+}
+.explore:hover {
+  color: var(--color-ink-black);
+  border-bottom-color: var(--color-coral-pop);
+}
+
+/* Featured TECHNEST card spans the full grid width */
+.featured {
+  grid-column: 1 / -1;
+  flex-direction: row;
+  align-items: center;
+  gap: 40px;
+  padding: 48px;
+}
+
+.featuredBody {
+  flex: 1 1 55%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.badge {
+  border-color: var(--color-fresh-grass);
+}
+
+.featuredCta {
+  margin-top: 4px;
+  font-size: 16px;
+  padding: 14px 26px;
+}
+
+.featuredArt {
+  flex: 1 1 45%;
+  display: flex;
+  justify-content: center;
+}
+.featuredArtImg {
+  display: block;
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+}
+
+@media (max-width: 900px) {
+  .featured {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 36px;
+  }
+  .featuredArt {
+    order: -1;
+    width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

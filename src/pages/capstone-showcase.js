@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import Layout from '@theme/Layout';
 import { translate } from '@docusaurus/Translate';
 import BrowserOnly from '@docusaurus/BrowserOnly';
+import useScrollReveal from '@site/src/hooks/useScrollReveal';
 import styles from './capstone-showcase.module.css';
 
 const API_BASE = 'https://programming-api.chanmeng.org';
@@ -85,6 +86,14 @@ function trackClassName(track) {
   return styles.trackOther;
 }
 
+function rankLabel(rank) {
+  if (rank === 1)
+    return translate({ id: 'capstoneShowcase.rank.first', message: '1st' });
+  if (rank === 2)
+    return translate({ id: 'capstoneShowcase.rank.second', message: '2nd' });
+  return translate({ id: 'capstoneShowcase.rank.third', message: '3rd' });
+}
+
 function Toast({ message, type, onClose }) {
   useEffect(() => {
     const timer = setTimeout(onClose, 3500);
@@ -111,7 +120,11 @@ function VoteButton({ slug, votes, voted, onToggle, busy }) {
   return (
     <button
       type="button"
-      className={`${styles.voteButton} ${voted ? styles.voteButtonActive : ''}`}
+      className={`mm-btn ${styles.voteButton} ${
+        voted
+          ? `mm-btn-ghost ${styles.voteButtonActive}`
+          : 'mm-btn-coral'
+      }`}
       onClick={handleClick}
       disabled={busy}
       aria-pressed={voted}
@@ -130,7 +143,9 @@ function VoteButton({ slug, votes, voted, onToggle, busy }) {
       <span className={styles.voteHeart} aria-hidden="true">
         {voted ? '❤' : '♡'}
       </span>
-      <span className={styles.voteCount}>{votes}</span>
+      <span className={styles.voteCountCircle}>
+        <span className={styles.voteCount}>{votes}</span>
+      </span>
     </button>
   );
 }
@@ -249,17 +264,26 @@ function ProjectCard({
   busy,
   spotlight,
 }) {
+  const isTop = spotlight && rank && rank <= 3;
   return (
     <article
       className={`${styles.card} ${
-        spotlight ? styles.cardSpotlight : ''
-      } ${rank === 1 ? styles.rankGold : ''} ${
-        rank === 2 ? styles.rankSilver : ''
-      } ${rank === 3 ? styles.rankBronze : ''}`}
+        spotlight ? `mm-card ${styles.cardSpotlight}` : 'mm-card mm-card--sm'
+      } ${spotlight && rank === 1 ? styles.rank1 : ''} ${
+        spotlight && rank === 2 ? styles.rank2 : ''
+      } ${spotlight && rank === 3 ? styles.rank3 : ''}`}
     >
-      {spotlight && rank && rank <= 3 && (
-        <div className={styles.rankBadge} aria-hidden="true">
-          {rank === 1 ? '🥇' : rank === 2 ? '🥈' : '🥉'}
+      {isTop && (
+        <div className={styles.spotlightRank}>
+          <span
+            className={`mm-heading-lg ${styles.rankNumeral}`}
+            aria-hidden="true"
+          >
+            {rank}
+          </span>
+          <span className={`mm-chip ${styles.rankChip}`}>
+            {rankLabel(rank)}
+          </span>
         </div>
       )}
       <VideoPlayer
@@ -272,7 +296,9 @@ function ProjectCard({
           <h3 className={styles.cardTitle}>{project.title}</h3>
           {project.track && (
             <span
-              className={`${styles.trackPill} ${trackClassName(project.track)}`}
+              className={`mm-chip ${styles.trackPill} ${trackClassName(
+                project.track
+              )}`}
             >
               {trackLabels[project.track] || project.track}
             </span>
@@ -288,13 +314,16 @@ function ProjectCard({
               href={project.liveURL}
               target="_blank"
               rel="noopener noreferrer"
-              className={styles.linkPrimary}
+              className={`mm-chip ${styles.linkChip}`}
             >
+              <span
+                className={`${styles.linkDot} ${styles.linkDotGreen}`}
+                aria-hidden="true"
+              />
               {translate({
                 id: 'capstoneShowcase.link.live',
                 message: 'Visit site',
-              })}{' '}
-              →
+              })}
             </a>
           )}
           {project.repoURL && (
@@ -302,8 +331,12 @@ function ProjectCard({
               href={project.repoURL}
               target="_blank"
               rel="noopener noreferrer"
-              className={styles.linkSecondary}
+              className={`mm-chip ${styles.linkChip}`}
             >
+              <span
+                className={`${styles.linkDot} ${styles.linkDotBlue}`}
+                aria-hidden="true"
+              />
               GitHub
             </a>
           )}
@@ -312,8 +345,12 @@ function ProjectCard({
               href={project.demoURL}
               target="_blank"
               rel="noopener noreferrer"
-              className={styles.linkSecondary}
+              className={`mm-chip ${styles.linkChip}`}
             >
+              <span
+                className={`${styles.linkDot} ${styles.linkDotCoral}`}
+                aria-hidden="true"
+              />
               {translate({
                 id: 'capstoneShowcase.link.demo',
                 message: 'Watch demo',
@@ -325,8 +362,12 @@ function ProjectCard({
               href={project.postMortemURL}
               target="_blank"
               rel="noopener noreferrer"
-              className={styles.linkSecondary}
+              className={`mm-chip ${styles.linkChip}`}
             >
+              <span
+                className={`${styles.linkDot} ${styles.linkDotBlue}`}
+                aria-hidden="true"
+              />
               {translate({
                 id: 'capstoneShowcase.link.postmortem',
                 message: 'Post-mortem',
@@ -360,6 +401,10 @@ function ShowcaseInner() {
   const clientIdRef = useRef('');
   const abortRef = useRef(null);
   const trackLabels = useTrackLabels();
+
+  // Re-scan .mm-reveal elements whenever the project list changes (the grids
+  // only mount once data arrives). Presentation only — no data dependency.
+  useScrollReveal([projects]);
 
   const filterAllLabel = translate({
     id: 'capstoneShowcase.filterAll',
@@ -532,30 +577,58 @@ function ShowcaseInner() {
           />
         )}
 
-        <div className={styles.heroSection}>
-          <h1 className={styles.title}>
-            {translate({
-              id: 'capstoneShowcase.heroTitle',
-              message: 'TECHNEST 2026 Capstone Showcase',
-            })}
-          </h1>
-          <p className={styles.subtitle}>
-            {translate({
-              id: 'capstoneShowcase.heroSubtitle',
-              message:
-                'Capstone projects from TECHNEST 2026 Weeks 9–12. Vote for your favorites — leaderboard refreshes every 30 seconds.',
-            })}
-          </p>
-          {updatedAt && (
-            <p className={styles.updatedAt}>
+        <header className={styles.heroSection}>
+          <div className={styles.heroCopy}>
+            <span className={`mm-eyebrow ${styles.heroEyebrow}`}>
               {translate({
-                id: 'capstoneShowcase.lastUpdated',
-                message: 'Last updated',
+                id: 'capstoneShowcase.eyebrow',
+                message: 'Live Showcase',
               })}
-              : {lastUpdatedLabel}
+            </span>
+            <h1 className={styles.title}>
+              {translate({
+                id: 'capstoneShowcase.heroTitle',
+                message: 'TECHNEST 2026 Capstone Showcase',
+              })}
+            </h1>
+            <p className={styles.subtitle}>
+              {translate({
+                id: 'capstoneShowcase.heroSubtitle',
+                message:
+                  'Capstone projects from TECHNEST 2026 Weeks 9–12. Vote for your favorites — leaderboard refreshes every 30 seconds.',
+              })}
             </p>
-          )}
-        </div>
+            {updatedAt && (
+              <p className={styles.updatedAt}>
+                <span className={styles.pollDot} aria-hidden="true" />
+                <span className={styles.liveLabel}>
+                  {translate({
+                    id: 'capstoneShowcase.live',
+                    message: 'Live',
+                  })}
+                </span>
+                <span className={styles.updatedText}>
+                  {translate({
+                    id: 'capstoneShowcase.lastUpdated',
+                    message: 'Last updated',
+                  })}
+                  : {lastUpdatedLabel}
+                </span>
+              </p>
+            )}
+          </div>
+          <img
+            className={styles.heroArt}
+            src="/img/illustrations/capstone.webp"
+            alt={translate({
+              id: 'capstoneShowcase.heroImageAlt',
+              message: 'Paper-cut illustration of a winners’ podium',
+            })}
+            width={480}
+            height={480}
+            loading="lazy"
+          />
+        </header>
 
         {loading ? (
           <div className={styles.loadingState}>
@@ -572,9 +645,18 @@ function ShowcaseInner() {
             </p>
           </div>
         ) : error && projects.length === 0 ? (
-          <div className={styles.emptyState}>
-            <span className={styles.emptyIcon}>⚠️</span>
-            <p>
+          <div className={`mm-card ${styles.stateCard}`}>
+            <span className={`mm-chip ${styles.errorChip}`}>
+              <span
+                className={`${styles.linkDot} ${styles.linkDotCoral}`}
+                aria-hidden="true"
+              />
+              {translate({
+                id: 'capstoneShowcase.errorLabel',
+                message: 'Error',
+              })}
+            </span>
+            <p className={styles.stateText}>
               {translate({
                 id: 'capstoneShowcase.fetchError',
                 message:
@@ -583,9 +665,17 @@ function ShowcaseInner() {
             </p>
           </div>
         ) : projects.length === 0 ? (
-          <div className={styles.emptyState}>
-            <span className={styles.emptyIcon}>🎓</span>
-            <p>
+          <div className={`mm-card ${styles.stateCard}`}>
+            <img
+              className={styles.stateArt}
+              src="/img/illustrations/capstone.webp"
+              alt=""
+              aria-hidden="true"
+              width={200}
+              height={200}
+              loading="lazy"
+            />
+            <p className={styles.stateText}>
               {translate({
                 id: 'capstoneShowcase.empty',
                 message:
@@ -609,7 +699,9 @@ function ShowcaseInner() {
                     message: '🏆 Current Top 3',
                   })}
                 </h2>
-                <div className={styles.spotlightGrid}>
+                <div
+                  className={`mm-reveal mm-reveal-stagger ${styles.spotlightGrid}`}
+                >
                   {top3.map((p, i) => (
                     <ProjectCard
                       key={p.id || p.slug}
@@ -670,9 +762,17 @@ function ShowcaseInner() {
               </div>
 
               {gridProjects.length === 0 ? (
-                <div className={styles.emptyState}>
-                  <span className={styles.emptyIcon}>🔍</span>
-                  <p>
+                <div className={`mm-card ${styles.stateCard}`}>
+                  <img
+                    className={styles.stateArt}
+                    src="/img/illustrations/capstone.webp"
+                    alt=""
+                    aria-hidden="true"
+                    width={200}
+                    height={200}
+                    loading="lazy"
+                  />
+                  <p className={styles.stateText}>
                     {translate({
                       id: 'capstoneShowcase.emptyTrack',
                       message: 'No projects in this track yet.',
@@ -680,7 +780,9 @@ function ShowcaseInner() {
                   </p>
                 </div>
               ) : (
-                <div className={styles.cardGrid}>
+                <div
+                  className={`mm-reveal mm-reveal-stagger ${styles.cardGrid}`}
+                >
                   {gridProjects.map((p) => {
                     const idx = sorted.indexOf(p);
                     return (

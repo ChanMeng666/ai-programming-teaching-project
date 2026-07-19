@@ -1,19 +1,23 @@
 /* ============================================
-   音乐播放器样式
+   音乐播放器样式 — MindMarket reskin
 
    架构说明：
    - 头部和底部是独立的固定定位元素
    - iframe 由 iframeManager 独立管理，位于头部和底部之间
    - 三者通过 CSS 定位对齐，形成视觉上的完整弹窗
 
-   桌面端布局：
+   桌面端布局（几何关键，勿动 top/height 对齐）：
    - 头部: top: 70px, height: 47px
    - iframe: top: 117px, height: 240px (由 iframeManager 管理)
    - 底部: top: 357px, height: 37px
+
+   MindMarket: 白色卡面 + 奶油画布, 墨黑文字/图标, 沙石凹陷,
+   发丝描边, 绿色结构强调, 无阴影, 无渐变。
+   头部/底部加了 1px 描边, 垂直内边距各减 1px 以保持 47px 头部高度。
    ============================================ */
 
 .musicPlayerWrapper {
-  font-family: var(--ifm-font-family-base);
+  font-family: var(--font-inter);
 }
 
 /* ============================================
@@ -35,7 +39,7 @@
 }
 
 /* ============================================
-   弹窗头部 - 独立固定定位
+   弹窗头部 - 独立固定定位 (白色卡面 + 发丝描边)
    ============================================ */
 .popupHeader {
   position: fixed;
@@ -46,13 +50,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 16px;
-  background: linear-gradient(135deg, var(--ifm-color-primary) 0%, var(--ifm-color-primary-dark) 100%);
-  color: white;
-  border-radius: 16px 16px 0 0;
-  box-shadow:
-    0 -4px 12px rgba(0, 0, 0, 0.1),
-    0 0 0 1px rgba(0, 0, 0, 0.05);
+  padding: 13px 16px; /* 14px - 1px 补偿描边, 保持 47px 头部高度 */
+  background: var(--color-pure-white);
+  color: var(--color-ink-black);
+  border: 1px solid var(--color-hairline-mist);
+  border-radius: 20px 20px 0 0;
   animation: headerEnter 0.3s ease;
 }
 
@@ -74,9 +76,10 @@
 }
 
 .title {
-  font-weight: 600;
+  font-weight: var(--font-weight-medium);
   font-size: 15px;
   letter-spacing: 0.3px;
+  color: var(--color-ink-black);
 }
 
 .headerActions {
@@ -91,11 +94,11 @@
   right: 10px;
   left: 10px;
   width: auto;
-  border-radius: 12px 12px 0 0;
+  border-radius: 20px 20px 0 0;
 }
 
 /* ============================================
-   弹窗底部 - 独立固定定位
+   弹窗底部 - 独立固定定位 (白色卡面 + 发丝描边)
    ============================================ */
 .popupFooter {
   position: fixed;
@@ -103,12 +106,11 @@
   right: 20px;
   width: 520px;
   z-index: 999;
-  padding: 10px 16px;
-  background: #f8f9fa;
-  border-radius: 0 0 16px 16px;
-  box-shadow:
-    0 4px 12px rgba(0, 0, 0, 0.1),
-    0 0 0 1px rgba(0, 0, 0, 0.05);
+  padding: 9px 16px; /* 10px - 1px 补偿描边 */
+  background: var(--color-pure-white);
+  border: 1px solid var(--color-hairline-mist);
+  border-top: none; /* 与 iframe 无缝衔接 */
+  border-radius: 0 0 20px 20px;
   animation: footerEnter 0.3s ease;
 }
 
@@ -125,7 +127,7 @@
 
 .footerTip {
   font-size: 12px;
-  color: #666;
+  color: var(--color-ink-muted);
   display: flex;
   align-items: center;
   gap: 6px;
@@ -142,11 +144,11 @@
   right: 10px;
   left: 10px;
   width: auto;
-  border-radius: 0 0 12px 12px;
+  border-radius: 0 0 20px 20px;
 }
 
 /* ============================================
-   波形动画
+   波形动画 (绿色结构强调 — "正在播放"指示)
    ============================================ */
 .waveform {
   display: flex;
@@ -157,7 +159,7 @@
 
 .waveform span {
   width: 3px;
-  background: rgba(255, 255, 255, 0.9);
+  background: var(--color-fresh-grass);
   border-radius: 2px;
   animation: waveform 1.2s ease-in-out infinite;
 }
@@ -192,16 +194,18 @@
 }
 
 /* ============================================
-   按钮样式
+   按钮样式 - 28px 幽灵圆钮 (透明底, 墨黑图标)
    ============================================ */
 .minimizeButton,
 .closeButton {
-  background: rgba(255, 255, 255, 0.1);
+  width: 28px;
+  height: 28px;
+  background: transparent;
   border: none;
-  color: white;
+  color: var(--color-ink-black);
   cursor: pointer;
-  padding: 6px;
-  border-radius: 6px;
+  padding: 5px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -210,7 +214,7 @@
 
 .minimizeButton:hover,
 .closeButton:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: var(--color-sandstone);
 }
 
 .minimizeButton:active,
@@ -219,7 +223,7 @@
 }
 
 /* ============================================
-   迷你播放器
+   迷你播放器 - 白色胶囊卡片 + 发丝描边
    ============================================ */
 .miniPlayer {
   position: fixed;
@@ -229,14 +233,12 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  background: linear-gradient(135deg, var(--ifm-color-primary) 0%, var(--ifm-color-primary-dark) 100%);
+  background: var(--color-pure-white);
+  border: 1px solid var(--color-hairline-mist);
   padding: 10px 12px 10px 14px;
   border-radius: 50px;
-  box-shadow:
-    0 4px 12px rgba(0, 0, 0, 0.15),
-    0 0 0 1px rgba(255, 255, 255, 0.1) inset;
   animation: miniPlayerEnter 0.3s ease;
-  color: white;
+  color: var(--color-ink-black);
 }
 
 @keyframes miniPlayerEnter {
@@ -250,7 +252,7 @@
   }
 }
 
-/* 迷你波形动画 */
+/* 迷你波形动画 (绿色) */
 .miniWaveform {
   display: flex;
   align-items: flex-end;
@@ -260,7 +262,7 @@
 
 .miniWaveform span {
   width: 2.5px;
-  background: rgba(255, 255, 255, 0.9);
+  background: var(--color-fresh-grass);
   border-radius: 1px;
   animation: waveform 1.2s ease-in-out infinite;
 }
@@ -292,7 +294,7 @@
   gap: 6px;
   background: none;
   border: none;
-  color: white;
+  color: var(--color-ink-black);
   cursor: pointer;
   padding: 0;
   font-family: inherit;
@@ -304,12 +306,14 @@
 
 .miniTitle {
   font-size: 13px;
-  font-weight: 500;
+  font-weight: var(--font-weight-medium);
   white-space: nowrap;
+  color: var(--color-ink-black);
 }
 
 .miniExpandIcon {
-  opacity: 0.8;
+  opacity: 0.7;
+  color: var(--color-ink-black);
   transition: transform 0.2s;
 }
 
@@ -317,11 +321,13 @@
   transform: translateY(-2px);
 }
 
-/* 迷你关闭按钮 */
+/* 迷你关闭按钮 - 28px 幽灵圆钮 */
 .miniCloseButton {
-  background: rgba(255, 255, 255, 0.15);
+  width: 28px;
+  height: 28px;
+  background: transparent;
   border: none;
-  color: white;
+  color: var(--color-ink-black);
   cursor: pointer;
   padding: 5px;
   border-radius: 50%;
@@ -333,7 +339,7 @@
 }
 
 .miniCloseButton:hover {
-  background: rgba(255, 255, 255, 0.25);
+  background: var(--color-sandstone);
 }
 
 .miniCloseButton:active {
@@ -349,30 +355,10 @@
     right: 16px;
     left: 16px;
     justify-content: center;
-    border-radius: 16px;
+    border-radius: 20px;
   }
 
   .miniTitle {
     font-size: 14px;
   }
-}
-
-/* ============================================
-   深色模式
-   ============================================ */
-[data-theme='dark'] .popupFooter {
-  background: #242424;
-  box-shadow:
-    0 4px 12px rgba(0, 0, 0, 0.3),
-    0 0 0 1px rgba(255, 255, 255, 0.05);
-}
-
-[data-theme='dark'] .footerTip {
-  color: #999;
-}
-
-[data-theme='dark'] .miniPlayer {
-  box-shadow:
-    0 4px 12px rgba(0, 0, 0, 0.3),
-    0 0 0 1px rgba(255, 255, 255, 0.05) inset;
 }

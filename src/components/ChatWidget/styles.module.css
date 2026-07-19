@@ -1,56 +1,61 @@
+/* ============================================================
+   ChatWidget — MindMarket reskin
+   Cream canvas + white elevated panel, ink text/icons, sandstone
+   recessed fills, hairline borders, green structural accent, coral
+   action fill (with ink text). No shadows, no gradients.
+   ============================================================ */
+
 /* Chat Widget Container */
 .chatWidget {
   position: fixed;
   bottom: 24px;
   right: 24px;
   z-index: 1000;
-  font-family: var(--ifm-font-family-base);
+  font-family: var(--font-inter);
 }
 
-/* Toggle Button */
+/* Toggle Button — 56px green circle, ink icon, hairline border */
 .toggleButton {
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  border: none;
-  background: linear-gradient(135deg, var(--ifm-color-primary) 0%, var(--ifm-color-primary-dark) 100%);
-  color: white;
+  border: 1px solid var(--color-hairline-mist);
+  background: var(--color-fresh-grass);
+  color: var(--color-ink-black);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  transition: all 0.3s ease;
+  transition: transform 0.2s ease;
 }
 
 .toggleButton:hover {
   transform: scale(1.05);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
 }
 
 .toggleButton:active {
   transform: scale(0.95);
 }
 
+/* Open state — flips to a white surface (still ink icon + hairline) */
 .toggleButtonOpen {
-  background: var(--ifm-color-emphasis-600);
+  background: var(--color-pure-white);
 }
 
-/* Chat Box */
+/* Chat Box — white panel, 24px radius, hairline border, no shadow */
 .chatBox {
   position: absolute;
   bottom: 72px;
   right: 0;
   width: 380px;
   height: 500px;
-  background: #ffffff;
-  border-radius: 16px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  background: var(--color-pure-white);
+  border-radius: 24px;
+  border: 1px solid var(--color-hairline-mist);
   display: flex;
   flex-direction: column;
   overflow: hidden;
   animation: slideUp 0.3s ease;
-  border: 1px solid var(--ifm-color-emphasis-200);
 }
 
 @keyframes slideUp {
@@ -64,27 +69,40 @@
   }
 }
 
-/* Header */
+/* Header — white with hairline bottom divider, ink title + green status dot */
 .chatHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 16px 20px;
-  background: linear-gradient(135deg, var(--ifm-color-primary) 0%, var(--ifm-color-primary-dark) 100%);
-  color: white;
+  background: var(--color-pure-white);
+  color: var(--color-ink-black);
+  border-bottom: 1px solid var(--color-hairline-mist);
 }
 
 .headerTitle {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-weight: 600;
+  font-weight: var(--font-weight-medium);
   font-size: 16px;
+  color: var(--color-ink-black);
+}
+
+/* Small green "online" status dot after the title text */
+.headerTitle::after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-fresh-grass);
+  flex-shrink: 0;
 }
 
 .headerIcon {
   display: flex;
   align-items: center;
+  color: var(--color-ink-black);
 }
 
 .headerActions {
@@ -97,24 +115,24 @@
 .closeButton {
   background: transparent;
   border: none;
-  color: white;
+  color: var(--color-ink-black);
   cursor: pointer;
   padding: 4px;
-  border-radius: 4px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 0.8;
+  opacity: 0.7;
   transition: opacity 0.2s, background 0.2s;
 }
 
 .clearButton:hover,
 .closeButton:hover {
   opacity: 1;
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--color-sandstone);
 }
 
-/* Messages Container */
+/* Messages Container — cream canvas inside the white panel */
 .messagesContainer {
   flex: 1;
   overflow-y: auto;
@@ -122,7 +140,7 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
-  background: #ffffff;
+  background: var(--color-cream-paper);
 }
 
 .messagesContainer::-webkit-scrollbar {
@@ -134,12 +152,12 @@
 }
 
 .messagesContainer::-webkit-scrollbar-thumb {
-  background: var(--ifm-color-emphasis-300);
+  background: var(--color-hairline-mist);
   border-radius: 3px;
 }
 
 .messagesContainer::-webkit-scrollbar-thumb:hover {
-  background: var(--ifm-color-emphasis-400);
+  background: var(--color-stone-gray);
 }
 
 /* Welcome Message */
@@ -150,24 +168,26 @@
   justify-content: center;
   height: 100%;
   text-align: center;
-  color: var(--ifm-color-emphasis-600);
+  color: var(--color-ink-muted);
   padding: 20px;
 }
 
 .welcomeIcon {
-  color: var(--ifm-color-primary);
+  color: var(--color-fresh-grass);
   margin-bottom: 16px;
 }
 
 .welcomeMessage h3 {
   margin: 0 0 8px 0;
   font-size: 18px;
-  color: var(--ifm-font-color-base);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-ink-black);
 }
 
 .welcomeMessage p {
   margin: 0;
   font-size: 14px;
+  color: var(--color-ink-muted);
 }
 
 /* Message */
@@ -186,11 +206,13 @@
   align-self: flex-start;
 }
 
+/* Avatar — light sandstone circle so the black chan logo reads */
 .messageAvatar {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: var(--ifm-color-primary-lightest);
+  background: var(--color-sandstone);
+  border: 1px solid var(--color-hairline-mist);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -212,21 +234,25 @@
   position: relative;
 }
 
+/* User bubble — sandstone recessed fill, ink text */
 .userMessage .messageBubble {
-  background: var(--ifm-color-primary);
-  color: white;
+  background: var(--color-sandstone);
+  color: var(--color-ink-black);
   border-bottom-right-radius: 4px;
 }
 
+/* Assistant bubble — white with hairline border, ink text */
 .assistantMessage .messageBubble {
-  background: var(--ifm-color-emphasis-100);
-  color: var(--ifm-font-color-base);
+  background: var(--color-pure-white);
+  color: var(--color-ink-black);
+  border: 1px solid var(--color-hairline-mist);
   border-bottom-left-radius: 4px;
 }
 
 .errorBubble {
-  background: var(--ifm-color-danger-lightest) !important;
-  color: var(--ifm-color-danger-darkest) !important;
+  background: var(--color-cream-paper) !important;
+  color: var(--color-ink-black) !important;
+  border: 1px solid var(--color-coral-pop) !important;
 }
 
 .messageContent {
@@ -256,7 +282,7 @@
 
 .mdHeading {
   font-size: 1em;
-  font-weight: 600;
+  font-weight: var(--font-weight-medium);
   margin: 12px 0 6px 0;
 }
 
@@ -264,21 +290,25 @@
   margin-top: 0;
 }
 
+/* Inline code — sandstone chip */
 .mdInlineCode {
-  background: rgba(0, 0, 0, 0.08);
+  background: var(--color-sandstone);
+  color: var(--color-ink-black);
   padding: 2px 6px;
-  border-radius: 4px;
-  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  border-radius: 6px;
+  font-family: var(--ifm-font-family-monospace);
   font-size: 0.9em;
 }
 
+/* Code block — white surface with hairline border */
 .mdCodeBlock {
-  background: rgba(0, 0, 0, 0.06);
+  background: var(--color-pure-white);
+  border: 1px solid var(--color-hairline-mist);
   padding: 10px 12px;
-  border-radius: 8px;
+  border-radius: 10px;
   overflow-x: auto;
   margin: 8px 0;
-  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  font-family: var(--ifm-font-family-monospace);
   font-size: 0.85em;
   line-height: 1.5;
 }
@@ -297,21 +327,25 @@
   margin: 4px 0;
 }
 
+/* Links — ink, underline is the affordance (not colour) */
 .mdLink {
-  color: var(--ifm-color-primary);
-  text-decoration: none;
+  color: var(--color-ink-black);
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
 .mdLink:hover {
   text-decoration: underline;
+  opacity: 0.7;
 }
 
+/* Blockquote — green structural left rule on a sandstone tint */
 .mdBlockquote {
-  border-left: 3px solid var(--ifm-color-primary);
+  border-left: 3px solid var(--color-fresh-grass);
   margin: 8px 0;
   padding: 4px 12px;
-  background: rgba(0, 0, 0, 0.03);
-  border-radius: 0 4px 4px 0;
+  background: var(--color-sandstone);
+  border-radius: 0 8px 8px 0;
 }
 
 .mdBlockquote p {
@@ -319,14 +353,14 @@
 }
 
 .mdStrong {
-  font-weight: 600;
+  font-weight: var(--font-weight-bold);
 }
 
 .mdEmphasis {
   font-style: italic;
 }
 
-/* Typing Indicator */
+/* Typing Indicator — green dots */
 .typingIndicator {
   display: inline-flex;
   gap: 4px;
@@ -338,7 +372,7 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--ifm-color-emphasis-400);
+  background: var(--color-fresh-grass);
   animation: typing 1.4s infinite ease-in-out;
 }
 
@@ -359,10 +393,11 @@
   }
 }
 
-/* Streaming Cursor */
+/* Streaming Cursor — ink */
 .streamingCursor {
   animation: blink 1s infinite;
   margin-left: 2px;
+  color: var(--color-ink-black);
 }
 
 @keyframes blink {
@@ -374,75 +409,80 @@
   }
 }
 
-/* Input Container */
+/* Input Container — white with hairline top divider */
 .inputContainer {
   display: flex;
   align-items: flex-end;
   gap: 8px;
   padding: 12px 16px;
-  border-top: 1px solid var(--ifm-color-emphasis-200);
-  background: #ffffff;
+  border-top: 1px solid var(--color-hairline-mist);
+  background: var(--color-pure-white);
 }
 
+/* Input — sandstone pill, 2px green focus ring (no shadow) */
 .input {
   flex: 1;
-  border: 1px solid var(--ifm-color-emphasis-300);
-  border-radius: 12px;
+  border: 1px solid var(--color-hairline-mist);
+  border-radius: 20px;
   padding: 10px 14px;
   font-size: 14px;
   font-family: inherit;
   resize: none;
   outline: none;
-  background: #f8f9fa;
-  color: var(--ifm-font-color-base);
-  transition: border-color 0.2s;
+  background: var(--color-sandstone);
+  color: var(--color-ink-black);
+  transition: border-color 0.2s, outline-color 0.2s;
   max-height: 120px;
   line-height: 1.5;
 }
 
 .input:focus {
-  border-color: var(--ifm-color-primary);
+  border-color: var(--color-fresh-grass);
+  outline: 2px solid var(--color-fresh-grass);
+  outline-offset: -1px;
 }
 
 .input::placeholder {
-  color: var(--ifm-color-emphasis-500);
+  color: var(--color-ink-muted);
 }
 
 .input:disabled {
-  background: var(--ifm-color-emphasis-100);
+  background: var(--color-cream-paper);
   cursor: not-allowed;
 }
 
+/* Send Button — coral fill with ink icon */
 .sendButton {
   width: 40px;
   height: 40px;
   border-radius: 50%;
   border: none;
-  background: var(--ifm-color-primary);
-  color: white;
+  background: var(--color-coral-pop);
+  color: var(--color-ink-black);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s;
+  transition: transform 0.2s;
   flex-shrink: 0;
 }
 
 .sendButton:hover:not(:disabled) {
-  background: var(--ifm-color-primary-dark);
+  transform: scale(1.05);
 }
 
 .sendButton:disabled {
-  background: var(--ifm-color-emphasis-300);
+  background: var(--color-sandstone);
+  color: var(--color-ink-muted);
   cursor: not-allowed;
 }
 
-/* Loading Spinner */
+/* Loading Spinner — ink arc (sits on coral send button) */
 .loadingSpinner {
   width: 20px;
   height: 20px;
   border: 2px solid transparent;
-  border-top-color: white;
+  border-top-color: var(--color-ink-black);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
@@ -469,62 +509,11 @@
     width: 100%;
     height: 100%;
     border-radius: 0;
+    border: none;
   }
 
   .toggleButton {
     width: 52px;
     height: 52px;
   }
-}
-
-/* Dark Mode Adjustments */
-[data-theme='dark'] .chatBox {
-  background: #1e1e1e;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-  border-color: #3a3a3a;
-}
-
-[data-theme='dark'] .messagesContainer {
-  background: #1e1e1e;
-}
-
-[data-theme='dark'] .inputContainer {
-  background: #1e1e1e;
-  border-top-color: #3a3a3a;
-}
-
-[data-theme='dark'] .input {
-  background: #2d2d2d;
-  border-color: #3a3a3a;
-  color: #e0e0e0;
-}
-
-[data-theme='dark'] .messageAvatar {
-  background: var(--ifm-color-primary-darker);
-}
-
-/* Dark mode markdown styles */
-[data-theme='dark'] .mdInlineCode {
-  background: rgba(255, 255, 255, 0.12);
-}
-
-[data-theme='dark'] .mdCodeBlock {
-  background: rgba(255, 255, 255, 0.08);
-}
-
-[data-theme='dark'] .mdBlockquote {
-  background: rgba(255, 255, 255, 0.05);
-}
-
-[data-theme='dark'] .assistantMessage .messageBubble {
-  background: #2d2d2d;
-  color: #e0e0e0;
-}
-
-[data-theme='dark'] .welcomeMessage {
-  color: #a0a0a0;
-}
-
-[data-theme='dark'] .welcomeMessage h3 {
-  color: #e0e0e0;
 }
