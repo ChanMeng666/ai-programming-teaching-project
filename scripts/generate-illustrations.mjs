@@ -37,6 +37,9 @@ const ASSETS = [
       'suggest code and building a website together, one climbing a ladder',
     size: '1536x1024',
     finalWidth: 1200,
+    // hero is the largest asset; its file size is dominated by the alpha channel.
+    // A lower alphaQuality shrinks it from ~240KB to ~85KB with no visible edge loss.
+    webp: { quality: 70, alphaQuality: 70 },
   },
   {
     id: 'home-learn',
@@ -216,7 +219,7 @@ async function withRetry(fn, label) {
 
 // ---- post-processing ------------------------------------------------------
 
-async function postProcess(pngBuffer, id, finalWidth) {
+async function postProcess(pngBuffer, id, finalWidth, webpOpts) {
   const base = sharp(pngBuffer).trim();
   const webpPath = join(OUT_DIR, `${id}.webp`);
   const pngPath = join(OUT_DIR, `${id}.png`);
@@ -224,7 +227,7 @@ async function postProcess(pngBuffer, id, finalWidth) {
   await base
     .clone()
     .resize({ width: finalWidth, withoutEnlargement: false })
-    .webp({ quality: 80 })
+    .webp({ quality: 80, effort: 6, ...(webpOpts || {}) })
     .toFile(webpPath);
 
   await base
@@ -313,7 +316,7 @@ async function main() {
           }),
         asset.id
       );
-      const info = await postProcess(pngBuffer, asset.id, asset.finalWidth);
+      const info = await postProcess(pngBuffer, asset.id, asset.finalWidth, asset.webp);
       console.log(
         `  OK  ${info.width}x${info.height}  webp ${fmtBytes(info.webpBytes)}  png ${fmtBytes(
           info.pngBytes
