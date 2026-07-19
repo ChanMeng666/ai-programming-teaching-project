@@ -1,14 +1,14 @@
 /**
  * tokens.css — MindMarket design tokens + Infima bridge + compat shim.
  *
- * Three layers live here:
+ * Two layers live here:
  *   1. MindMarket custom properties (verbatim from DESIGN.md Quick Start) plus
  *      accessibility + fluid-scale additions.
  *   2. The Infima bridge — remapping Docusaurus' built-in --ifm-* variables to
  *      the cream/ink/green palette so all stock theme chrome inherits the redesign.
- *   3. A compat shim — the legacy alias names the old 1588-line custom.css defined,
- *      remapped to MindMarket values so *.module.css files that haven't been
- *      rewritten yet keep rendering during the parallel redesign.
+ *
+ * The legacy-alias compat shim that bridged the old custom.css during the parallel
+ * redesign was removed in Phase 4 once every module migrated to MindMarket tokens.
  */
 
 :root {
@@ -193,96 +193,4 @@
   --docsearch-footer-shadow: none;
   --docsearch-key-gradient: #e0dbce;
   --docsearch-key-shadow: none;
-
-  /* ============================================================
-     3. Compat shim — legacy aliases → MindMarket values
-     (kept so not-yet-rewritten *.module.css files don't break)
-     ============================================================ */
-
-  /* Legacy palette names */
-  --color-coral: #ff705d;
-  --color-teal: #2c2e2a;           /* teal retired to ink */
-  --color-light-gray: #e0dbce;     /* sandstone */
-  --color-dark-gray: #2c2e2a;
-  --color-bright-yellow: #f5e211;
-
-  /* Legacy semantic roles */
-  --color-primary: #2c2e2a;
-  --color-secondary: #ff705d;
-  --color-accent: #8ed462;         /* structural green (non-text usage only) */
-  --color-accent-hover: #2c2e2a;
-  --color-success: #8ed462;
-  --color-warning: #ff705d;
-  --color-error: #ff705d;
-
-  /* Legacy backgrounds / surfaces */
-  --color-background: #f5f1e4;
-  --color-background-secondary: #e0dbce;
-  --color-background-tertiary: #eeeadb;
-  --color-surface: #ffffff;
-  --color-surface-hover: #e0dbce;
-
-  /* Legacy text roles */
-  --color-text-primary: #2c2e2a;
-  --color-text-secondary: #5d5f5b;
-  --color-text-tertiary: #5d5f5b;
-  --color-text-muted: #80827f;
-
-  /* Legacy borders */
-  --color-border: #d5d5d4;
-  --color-border-light: #e0dbce;
-  --color-border-dark: #2c2e2a;
-
-  /* Legacy 8px spacing scale (values unchanged — pure spacing, harmless) */
-  --space-1: 0.125rem;
-  --space-2: 0.25rem;
-  --space-3: 0.375rem;
-  --space-4: 0.5rem;
-  --space-6: 0.75rem;
-  --space-8: 1rem;
-  --space-10: 1.25rem;
-  --space-12: 1.5rem;
-  --space-16: 2rem;
-  --space-20: 2.5rem;
-  --space-24: 3rem;
-  --space-32: 4rem;
-  --space-40: 5rem;
-  --space-48: 6rem;
-  --space-64: 8rem;
-  --space-xs: 0.25rem;
-  --space-sm: 0.5rem;
-  --space-md: 1rem;
-  --space-lg: 1.5rem;
-  --space-xl: 2rem;
-  --space-2xl: 3rem;
-  --space-3xl: 4rem;
-
-  /* Legacy shadows — all flattened to none (spec: no shadow elevation) */
-  --shadow-xs: none;
-  --shadow-sm: none;
-  --shadow-md: none;
-  --shadow-lg: none;
-  --shadow-xl: none;
-  --shadow-2xl: none;
-  --shadow-inner: none;
-
-  /* Legacy radius aliases (DESIGN's lg/2xl/3xl/full/full-2 already defined above) */
-  --radius-none: 0;
-  --radius-sm: 8px;
-  --radius-md: 10px;
-  --radius-xl: 20px;
-
-  /* Legacy animation timing */
-  --animation-duration-fast: 0.15s;
-  --animation-duration-normal: 0.3s;
-  --animation-duration-slow: 0.5s;
-  --animation-timing-ease: cubic-bezier(0.4, 0, 0.2, 1);
-  --animation-timing-ease-in: cubic-bezier(0.4, 0, 1, 1);
-  --animation-timing-ease-out: cubic-bezier(0, 0, 0.2, 1);
-  --animation-timing-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
-  --animation-duration: 0.3s;
-  --animation-timing: cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-base: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }

@@ -61,7 +61,7 @@ export default function ContentWrapper(props) {
               "name": "AI Programming Education",
               "logo": {
                 "@type": "ImageObject",
-                "url": "https://programming.chanmeng.org/img/logo.svg"
+                "url": "https://programming.chanmeng.org/img/brand/logo.svg"
               }
             },
             "mainEntityOfPage": {

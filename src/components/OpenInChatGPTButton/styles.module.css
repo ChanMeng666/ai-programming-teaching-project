@@ -19,16 +19,6 @@
   border-color: var(--color-fresh-grass);
 }
 
-[data-theme='dark'] .openButton {
-  color: var(--color-ink-black);
-  border-color: transparent;
-}
-
-[data-theme='dark'] .openButton:hover {
-  background: var(--color-cream-paper);
-  border-color: var(--color-fresh-grass);
-}
-
 .icon {
   width: 16px;
   height: 16px;

@@ -1,6 +1,6 @@
 <div align="center"><a name="readme-top"></a>
 
-[![Project Banner](./static/img/logo.svg)](#)
+[![Project Banner](./static/img/brand/logo.svg)](#)
 
 # 🚀 AI Programming Education Platform<br/><h3>Master AI-Assisted Development Through Interactive Learning</h3>
 
