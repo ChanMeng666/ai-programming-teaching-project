@@ -21,6 +21,7 @@
   font-size: clamp(36px, 7.5vw, 96px);
   letter-spacing: -0.01em;
   text-wrap: balance;
+  word-break: keep-all; /* forbid breaks between CJK chars — break only at punctuation */
 }
 
 .mm-heading-lg {
@@ -36,6 +37,7 @@
   font-size: clamp(32px, 6vw, 72px);
   letter-spacing: -0.01em;
   text-wrap: balance;
+  word-break: keep-all; /* forbid breaks between CJK chars — break only at punctuation */
 }
 
 .mm-heading {
