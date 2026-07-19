@@ -152,8 +152,12 @@ card renders: image, track pill, avatar, buttons, vote count.
 ## How the page behaves
 
 - Sorted by votes desc, then `submittedAt` asc.
-- The 🏆 **Top 3** spotlight section only appears once there are **≥3 published
-  projects**. Below that, everything renders in the plain grid.
+- The **Top 3** spotlight section only appears once there are **≥3 published
+  projects**. It is typographic, not medals: huge ink rank numerals, with a 3px
+  green border on the #1 card (no gold/silver/bronze, no metallic styling). Below
+  that, everything renders in the plain grid.
+- The vote control is a coral pill with the count in a white dot; once you've
+  voted, the card switches to a green-border ghost state.
 - The page polls `/api/capstones` every 30s.
 - A visitor's votes live in `localStorage` (`capstoneShowcase.voted`), the
   authoritative count in KV. Votes are rate limited to 30/hour per IP.

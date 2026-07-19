@@ -2,6 +2,8 @@
 
 > A comprehensive guide for Docusaurus developers on navbar and sidebar styling, based on real debugging experience.
 
+> **Update (July 2026):** This is a historical case study. The core techniques below — especially the `backdrop-filter` / stacking-context lesson — are still generally applicable to any Docusaurus site. However, the **this-site-specific** examples (a `dark` navbar, dark-mode overrides, box-shadows, glass blur, and the `--color-*` variables) no longer reflect this project. Since the 2026-07 "MindMarket" redesign the site uses a **light-only floating white pill navbar** with no dark mode, no box-shadows, and no `backdrop-filter`. The authoritative, current implementation lives in [`src/css/navbar.css`](../../src/css/navbar.css) — read that for how the navbar is actually styled today; treat the dark-mode / glass snippets in this document as illustrative of the general technique, not as current site code.
+
 ## Table of Contents
 
 - [Background](#background)
@@ -18,13 +20,15 @@
 
 This document records the debugging process and lessons learned from fixing a mobile sidebar navigation issue in a Docusaurus 3.8.1 project. The issue was caused by a single CSS property that broke the entire mobile navigation experience.
 
-### Project Configuration
+### Project Configuration (at the time of this debugging session)
 
 - **Docusaurus Version**: 3.8.1
 - **Navbar Style**: `dark` (configured in `docusaurus.config.js`)
 - **Features Enabled**: 
   - `useCssCascadeLayers: false` (v4 future flag)
   - Rspack bundler (experimental)
+
+> These values describe the site *when this issue was debugged*. The site no longer sets `style: 'dark'` on the navbar, and dark mode has been removed entirely (`colorMode: { defaultMode: 'light', disableSwitch: true }`). See the July 2026 note above and `src/css/navbar.css` for the current setup.
 
 ---
 

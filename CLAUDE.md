@@ -15,11 +15,48 @@ The site is *not* purely static. Three frontend surfaces call the Worker at runt
 
 - **Framework**: Docusaurus 3.8.1 with React 18
 - **Content**: MDX-based documentation with versioning support (2024-winter, 2025-summer)
+- **Design system**: **MindMarket** — a warm, storybook-cream, illustration-led editorial look shipped 2026-07-20. See **`DESIGN.md`** (repo root) for the canonical reference. It replaced the old space/galaxy homepage + teal/coral Infima theme, which is fully retired.
+- **Theme**: **light only.** Dark mode was removed site-wide and intentionally (`colorMode` locked in `docusaurus.config.js`). `[data-theme='dark']` CSS must not come back — it is a maintained grep-zero baseline.
 - **Frontend deployment**: Cloudflare Pages project `ai-programming-teaching-project`, auto-deploys on push to `main`. Domains: `programming.chanmeng.org`, `ai-programming-teaching-project.pages.dev`
 - **Backend deployment**: Cloudflare Worker `ai-chat-worker`, **manual deploy only** (see below)
 - **Localization**: Chinese (zh-Hans) language support
 - **Search**: Algolia integration
 - **Analytics**: Custom `AITracker` component in `src/components/AITracker/` — detects AI-platform referrers (claude.ai, chat.openai.com, gemini.google.com, etc.) and is wired to send events to `window.va` / `window.gtag` / a custom `/api/analytics/ai-traffic` endpoint **if any of those are present at runtime**. None are currently configured, so the tracker is effectively dormant in production.
+
+## Design system (MindMarket)
+
+Full reference: **`DESIGN.md`**. The essentials an agent needs before touching any frontend file:
+
+- **Palette + roles.** Cream paper `#f5f1e4` (page canvas); white `#ffffff` (elevated surfaces); sandstone `#e0dbce` (recessed fills/inputs); ink `#2c2e2a` (text/icons/borders); hairline mist `#d5d5d4` (borders); fresh grass `#8ed462` (**structural accent only** — borders, focus rings, active edges; never text, never large fills); coral `#ff705d` (action button fills, **always with ink text** — white-on-coral fails WCAG); sunshine yellow `#f5e211` (footer band); sky blue `#2ba0ff` (decorative dots only). **Accent colors are decorative, never semantic states.**
+- **No shadows, no gradients.** Elevation = white-on-cream + a hairline border. The *only* box-shadow allowed in `src/` is the decorative green music-pulse ring keyframe in `animations.css`. No gradients anywhere.
+- **Contrast rules (baked into tokens).** Muted text under 24px uses `--color-ink-muted: #5d5f5b` (5.4:1 on cream). Stone gray `#80827f` is 3.2:1 — only for text ≥24px or non-text. Coral buttons use ink text. Green is never a text color. Focus = 2px `#8ed462` outline.
+- **Typography.** Inter only (400/500/700, loaded via `headTags` preconnect — never a CSS `@import`). Fluid display scale `clamp(48px,10.5vw,140px)`, tracking `-0.06em`, headings weight 500. `--ifm-navbar-height: 84px` drives doc sidebar/TOC sticky offsets.
+- **Shape.** 50px radius on pills/marketing cards/nav; 20–24px on dense cards/panels; 10px on chips.
+- **CSS architecture.** `src/css/custom.css` is a pure `@import` manifest — import order *is* cascade order — over 8 files:
+  - `tokens.css` — MindMarket custom props + Infima bridge (`--ifm-color-primary:#2c2e2a`, cream bg, white surface, `--ifm-global-shadow-*: none`, `--ifm-navbar-height: 84px`), DocSearch vars, fluid clamps.
+  - `base.css` — body/headings/links, selection, scrollbar, `:focus-visible`.
+  - `animations.css` — keyframes + `.mm-reveal`/`.mm-reveal-stagger` (hidden state gated inside `@media (prefers-reduced-motion: no-preference)`) + global reduced-motion kill-switch.
+  - `navbar.css` — floating white pill navbar (pure CSS on the **stock** navbar, no swizzle); icon-only DocSearch + icon-circle buttons; mobile cream drawer.
+  - `footer.css` — full-width sunshine-yellow band, ink text.
+  - `docs.css` — sidebar (active = white + 3px green left edge), TOC rail, breadcrumb chips, pagination cards, `.alert` admonitions as white + colored **outline** (not fill), sandstone segmented `.tabs`.
+  - `blog.css` — list cards white/50px, coral-outline tag chips.
+  - `pages.css` — the shared `.mm-*` marketing utilities (below) + search page, 404, back-to-top.
+- **`.mm-*` utility vocabulary** (defined in `pages.css`, consumed by page components by exact class name): `.mm-display .mm-heading-lg .mm-heading .mm-card .mm-card--sm .mm-btn .mm-btn-coral .mm-btn-ghost .mm-btn-dot--blue/green/coral .mm-chip .mm-eyebrow .mm-section .mm-band .mm-reveal .mm-reveal-stagger`.
+- **`useScrollReveal` contract** (`src/hooks/useScrollReveal.js`): default export `useScrollReveal(deps=[])`; reveals `.mm-reveal`/`.mm-reveal-stagger` via IntersectionObserver (threshold .15, rootMargin `0px 0px -10% 0px`), SSR-safe, reduced-motion reveals immediately, re-scans on `deps` change (pass async data deps, e.g. `useScrollReveal([messages])`), 4s failsafe force-reveals anything missed. Used by homepage, message-board, capstone, feeds.
+
+### Design traps (do not relearn these the hard way)
+
+- **Algolia CSS order.** The DocSearch stylesheet loads *after* `custom.css` and wins equal-specificity battles. DocSearch theming must out-specify it: `:root:root { --docsearch-muted-color: #5d5f5b }` and `.navbar .DocSearch-Button …`. Plain `.DocSearch-Button` rules silently lose.
+- **Search result selector.** Use `[class*='searchResultItem_']` — the **trailing underscore is required**; a plain substring over-matches CSS-module child classes.
+- **`.header-music-link` coupling.** MusicPlayer JS (`src/components/MusicPlayer/index.js`) does event delegation on `.header-music-link` and toggles `--activated`/`--expanded` modifiers. Those class names *and* the raw-HTML navbar item in `docusaurus.config.js` are load-bearing.
+- **MusicPlayer geometry.** `iframeManager` pins the YouTube iframe at fixed offsets (popup header 47px tall → iframe top 117px). Any CSS change to popup header/footer heights breaks iframe alignment; paddings were tuned to preserve those exact heights.
+- **zh-Hans display type.** Inter has no CJK. `:lang(zh-Hans) .mm-display/.mm-heading-lg` get a smaller clamp, `letter-spacing: -0.01em`, `text-wrap: balance`, and `word-break: keep-all` (CJK otherwise breaks mid-word at display scale).
+
+## Assets
+
+- **Brand** — `static/img/brand/`: `logo.svg` (green rounded square + ink double-chevron "sprout" mark), `logo-footer.svg` (white-container variant), `favicon.ico` (16/32/48), `favicon-32.png`, `apple-touch-icon.png` (180, cream bg), `social-card.png` (1200×630). The social card regenerates from `scripts/social-card.html` — screenshot at exactly 1200×630. Config references `img/brand/favicon.ico`, `img/brand/social-card.png`, and `img/brand/logo.svg` (navbar + footer). **Kept legacy asset:** `chan_logo*.svg` (footer copyright + ChatWidget avatar).
+- **Illustrations** — `static/img/illustrations/`: 10 flat paper-cut character illustrations on transparent background, each as `.webp` (used in pages) + `.png`: `hero` (1200w), `home-learn`/`home-build`/`home-community` (640w), `message-board` (560w), `capstone` (560w), `feeds` (480w), `blog-header` (900w), `not-found` (560w), `footer-accent` (320w).
+- **Illustration pipeline** — `scripts/generate-illustrations.mjs`: OpenAI `gpt-image-1`, `background:"transparent"`, quality high; sharp post-process (trim → resize → webp q80 + png). Flags: `--only <id>`, `--force`, `--env-file <path>`. Reads `OPENAI_API_KEY` from env or the `--env-file`; **keys must never be hardcoded or committed.** Per-asset webp overrides exist (`hero` uses `alphaQuality:70` — its alpha channel dominates file size). `sharp` is a **devDependency**.
 
 ## Deployment model — read this before shipping anything
 
@@ -158,9 +195,10 @@ npx tsx scripts/seed-vectors.ts   # (Re)index docs into Vectorize
   - `version-2024-winter/` - Complete winter 2024 curriculum
   - `version-2025-summer/` - Summer 2025 curriculum
 - `/blog/` - Blog posts with MDX support
-- `/src/components/` - React components (ChatWidget, AITracker, MintlifyShim, Home/* sections, MusicPlayer, …)
-- `/src/pages/` - Custom pages: `index.js`, `message-board.js`, `capstone-showcase.js`, `feeds.js`
-- `/src/theme/` - Theme customizations
+- `/src/components/` - React components: `Home/{Hero,Programs,HowItWorks,Community}` (homepage sections, each with its own `styles.module.css`), `ChatWidget`, `AITracker`, `GEOHead`, `MintlifyShim`, `TechNest`, `MusicPlayer`, `Mermaid`, … The old space/galaxy components (`SpaceBackground`, `SpaceHero`, `StarField`, `OrbitingPlanet`, `GlassPanel`) were **deleted** in the redesign.
+- `/src/hooks/` - `useScrollReveal.js` (scroll-reveal contract — see Design system section)
+- `/src/pages/` - Custom pages: `index.js` (composes the `Home/*` sections), `message-board.js`, `capstone-showcase.js`, `feeds.js`
+- `/src/theme/` - Theme customizations (swizzles): `Layout` (injects MusicPlayer/ChatWidget/AITracker — the single AITracker mount point), `NotFound/Content` (**new** — display-scale 404 with illustration + coral home CTA; wraps at Content level so Layout/PageMetadata still render), `DocItem/Content`, `BlogPostItem/Content`, `MDXComponents`, `Mermaid`
 - `/worker/` - Cloudflare Worker backend (`src/`, `scripts/`, `wrangler.toml`)
 
 ### Key Configuration Files
@@ -206,13 +244,44 @@ New or edited docs are not searchable by the chat widget until they are re-index
 ### Component Development
 
 - Components use standard React patterns
-- No component library - custom CSS in `/src/css/custom.css`
+- No component library — custom CSS via the `custom.css` `@import` manifest (see Design system) plus per-component `styles.module.css`
 - Responsive design is critical for educational content
-- Dark/light theme support via Docusaurus theming
+- **Light theme only** — do not add `[data-theme='dark']` rules (maintained grep-zero baseline)
+- Reuse the `.mm-*` utilities and MindMarket tokens; never introduce shadows, gradients, or accent-as-semantic colors
+
+### Internationalization (i18n)
+
+Locales: English (default) and Chinese (`zh-Hans`). UI strings are wrapped in `translate()` / `<Translate>` with stable IDs; translations live in `i18n/zh-Hans/`.
+
+Workflow for a **new** UI string:
+
+1. Add `translate({ id: '<new.id>', message: '<English>' })` in the component.
+2. `npm run write-translations -- --locale zh-Hans` to extract it into the JSON.
+3. Hand-translate the new entry in `i18n/zh-Hans/` (there is no MT step).
+
+Conventions: brand/program names stay English; capstone ranks are 冠军/亚军/季军. **Do not delete intentionally-orphaned IDs** kept in the JSON (e.g. `homepage.hero.welcome`, `feeds.table.content`, `theme.NotFound.p1`/`p2`) — `write-translations` will flag them as unused, but they are retained deliberately.
 
 ## Verification
 
-There is **no test framework**, but there are real runnable checks. Run them against the deployed Worker after any `worker/` change:
+There is **no test framework**. Verification is split by surface.
+
+### Frontend (any change outside `worker/`)
+
+The gate is a clean production build **for both locales**:
+
+```bash
+npm run build   # builds en + zh-Hans; this is the frontend gate
+```
+
+- **Build race:** a transient `ENOENT ... __server/server.bundle.js` is an SSG worker/filesystem race, not a code error. Run `npm run clear`, then build again.
+- **Never run two builds concurrently** — `build/` is wiped at the start of each build, so a second run corrupts the first.
+- After merge, Cloudflare Pages rebuilds and serves; Lighthouse baseline (desktop homepage, production build) is Performance 94 / Accessibility 96 / Best Practices 100 / SEO 100.
+
+**Grep-zero baselines** (must stay zero in `src/` after any frontend change): `data-theme='dark'`, `--space-`, `#0f7173`, `#1ab0b2`, `#f05d5e`, `#25c2a0`, `homepage-wrapper`, and any non-`none` `box-shadow` **except** the green music-pulse ring keyframe in `animations.css`.
+
+### Backend (`worker/` changes)
+
+Real runnable checks — run them against the deployed Worker after any `worker/` change:
 
 ```bash
 cd worker
