@@ -18,7 +18,9 @@
   margin: 0;
 }
 :lang(zh-Hans) .mm-display {
+  font-size: clamp(36px, 7.5vw, 96px);
   letter-spacing: -0.01em;
+  text-wrap: balance;
 }
 
 .mm-heading-lg {
@@ -31,7 +33,9 @@
   margin: 0;
 }
 :lang(zh-Hans) .mm-heading-lg {
+  font-size: clamp(32px, 6vw, 72px);
   letter-spacing: -0.01em;
+  text-wrap: balance;
 }
 
 .mm-heading {

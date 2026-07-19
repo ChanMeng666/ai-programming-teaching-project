@@ -56,7 +56,23 @@ export default function useScrollReveal(deps = []) {
 
     elements.forEach((el) => observer.observe(el));
 
-    return () => observer.disconnect();
+    // Failsafe: if an element is jumped over programmatically (anchor links,
+    // teleport scrolls) it may never produce a clean observer crossing and would
+    // stay stuck at opacity 0. After a grace period, reveal any still-hidden
+    // observed element so content is never permanently invisible.
+    const failsafe = window.setTimeout(() => {
+      elements.forEach((el) => {
+        if (!el.classList.contains('is-visible')) {
+          el.classList.add('is-visible');
+          observer.unobserve(el);
+        }
+      });
+    }, 4000);
+
+    return () => {
+      window.clearTimeout(failsafe);
+      observer.disconnect();
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps);
 }

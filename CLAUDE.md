@@ -158,7 +158,7 @@ npx tsx scripts/seed-vectors.ts   # (Re)index docs into Vectorize
   - `version-2024-winter/` - Complete winter 2024 curriculum
   - `version-2025-summer/` - Summer 2025 curriculum
 - `/blog/` - Blog posts with MDX support
-- `/src/components/` - React components (ChatWidget, AITracker, MintlifyShim, SpaceHero, MusicPlayer, …)
+- `/src/components/` - React components (ChatWidget, AITracker, MintlifyShim, Home/* sections, MusicPlayer, …)
 - `/src/pages/` - Custom pages: `index.js`, `message-board.js`, `capstone-showcase.js`, `feeds.js`
 - `/src/theme/` - Theme customizations
 - `/worker/` - Cloudflare Worker backend (`src/`, `scripts/`, `wrangler.toml`)

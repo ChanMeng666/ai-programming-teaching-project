@@ -6,15 +6,23 @@
  */
 
 .navbar {
-  width: min(1200px, calc(100% - 40px));
+  width: min(1320px, calc(100% - 24px));
   margin: 20px auto 0;
   height: 64px;
   min-height: 64px;
-  padding: 0 20px;
+  padding: 0 14px;
   border-radius: 50px;
   background: var(--color-pure-white);
   border: 1px solid var(--color-hairline-mist);
   box-shadow: none;
+}
+
+/* Never let nav labels wrap — CJK breaks per-character without this, and long
+   English labels ("Message Board") otherwise stack onto two lines. */
+.navbar__item,
+.navbar__link,
+.navbar__title {
+  white-space: nowrap;
 }
 
 /* Stay 20px off the top while stuck, so the float gap persists on scroll. */
@@ -33,7 +41,8 @@
 
 /* ---- Brand ---- */
 .navbar__brand {
-  margin-right: 12px;
+  margin-right: 10px;
+  flex-shrink: 0; /* never let the logo/title get crushed to 0 and overlap links */
 }
 .navbar__brand:hover {
   text-decoration: none;
@@ -47,9 +56,10 @@
 }
 .navbar__title {
   font-weight: 700;
-  font-size: 17px;
+  font-size: 16px;
   color: var(--color-ink-black);
   letter-spacing: -0.01em;
+  flex-shrink: 0;
 }
 
 /* ---- Nav links: 15px Inter 500 ink, underline draw-in on hover/active ---- */
@@ -58,14 +68,14 @@
   font-size: 15px;
   font-weight: 500;
   color: var(--color-ink-black);
-  padding: 8px 14px;
+  padding: 8px 10px;
   border-radius: 50px;
 }
 .navbar__link::after {
   content: '';
   position: absolute;
-  left: 14px;
-  right: 14px;
+  left: 10px;
+  right: 10px;
   bottom: 6px;
   height: 1.5px;
   background: currentColor;
@@ -196,8 +206,17 @@
   transform: scale(1.1);
 }
 
-/* ---- DocSearch trigger: sandstone pill ---- */
-.DocSearch-Button {
+/* ---- DocSearch trigger: sandstone pill ----
+   Algolia's DocSearch stylesheet loads AFTER custom.css and wins every
+   equal-specificity battle (background, border-radius, and the muted color var
+   default to #9698c3 — which fails WCAG contrast on the sandstone pill). So:
+   override the muted var at :root:root (0,2,0 beats Algolia's :root), and scope
+   the trigger rules under .navbar (0,2,0) so the sandstone theming actually wins.
+   The DocSearch button trigger always lives inside .navbar (incl. the drawer). */
+:root:root {
+  --docsearch-muted-color: #5d5f5b; /* placeholder / keys / search icon — ink-muted */
+}
+.navbar .DocSearch-Button {
   height: 40px;
   margin: 0 6px;
   padding: 0 16px;
@@ -207,24 +226,24 @@
   color: var(--color-ink-black);
   box-shadow: none;
 }
-.DocSearch-Button:hover,
-.DocSearch-Button:focus {
+.navbar .DocSearch-Button:hover,
+.navbar .DocSearch-Button:focus {
   background: #d8d2c3;
   border-color: var(--color-hairline-mist);
   box-shadow: none;
   color: var(--color-ink-black);
 }
-.DocSearch-Button-Placeholder {
+.navbar .DocSearch-Button-Placeholder {
   font-size: 14px;
   color: var(--color-ink-muted);
 }
-.DocSearch-Search-Icon {
+.navbar .DocSearch-Search-Icon {
   color: var(--color-ink-black);
 }
-.DocSearch-Button-Keys {
+.navbar .DocSearch-Button-Keys {
   min-width: auto;
 }
-.DocSearch-Button-Key {
+.navbar .DocSearch-Button-Key {
   background: var(--color-pure-white);
   border: 1px solid var(--color-hairline-mist);
   box-shadow: none;
@@ -234,6 +253,56 @@
 /* ---- Hamburger toggle ---- */
 .navbar__toggle {
   color: var(--color-ink-black);
+}
+
+/* ============================================================
+   Desktop crowding control (>= 997px)
+   This navbar carries a lot: 4 links + version + locale dropdowns + Newsletter
+   + 4 icon buttons + search. To fit the pill without wrapping (and without the
+   CJK per-character stacking), hide the wordmark (logo stays), drop nav-link
+   font to 14px, shrink icon buttons to 32px, and collapse DocSearch to an icon.
+   NOTE: below ~1280px the item count still exceeds the available width; a full
+   fix needs Docusaurus' mobile-collapse breakpoint raised above 996px (a Navbar
+   swizzle — JS, outside this CSS layer).
+   ============================================================ */
+@media (min-width: 997px) {
+  .navbar__title {
+    display: none;
+  }
+  .navbar__link {
+    font-size: 14px;
+    padding: 8px 9px;
+  }
+  .navbar__link::after {
+    left: 9px;
+    right: 9px;
+  }
+  .header-github-link,
+  .header-discord-link,
+  .header-rss-link,
+  .header-music-link {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    margin: 0 2px;
+  }
+  .header-github-link::before,
+  .header-discord-link::before,
+  .header-rss-link::before,
+  .header-music-link::before {
+    width: 16px;
+    height: 16px;
+  }
+  .navbar .DocSearch-Button {
+    width: 40px;
+    min-width: 40px;
+    padding: 0;
+    justify-content: center;
+  }
+  .navbar .DocSearch-Button-Placeholder,
+  .navbar .DocSearch-Button-Keys {
+    display: none;
+  }
 }
 
 /* ============================================================
@@ -278,6 +347,33 @@
   .navbar-sidebar__items .menu__link::after,
   .navbar-sidebar__items .navbar__link::after {
     content: none;
+  }
+  /* Docusaurus clones the icon anchors into the drawer as .menu__link; its
+     12px/16px padding crushes the 36px circle and shrinks the flex ::before
+     icon to a 2px sliver (empty white square). Re-assert the circle + icon size
+     here (this rule follows the .menu__link padding rule, so it wins). */
+  .navbar-sidebar__items .header-github-link,
+  .navbar-sidebar__items .header-discord-link,
+  .navbar-sidebar__items .header-rss-link,
+  .navbar-sidebar__items .header-music-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    padding: 0;
+    margin: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .navbar-sidebar__items .header-github-link::before,
+  .navbar-sidebar__items .header-discord-link::before,
+  .navbar-sidebar__items .header-rss-link::before,
+  .navbar-sidebar__items .header-music-link::before {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
   }
   .navbar-sidebar__items .menu__link:hover,
   .navbar-sidebar__items .navbar__link:hover {

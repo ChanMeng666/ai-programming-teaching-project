@@ -12,6 +12,14 @@
   background: transparent;
 }
 
+/* hideOnScroll makes Docusaurus render a duplicate logo at the top of the doc
+   sidebar; on the floating-pill layout it pokes out awkwardly at top-left.
+   Hide it — the navbar pill (with logo) reappears on scroll-up, so branding
+   continuity is preserved. */
+[class*='sidebarLogo'] {
+  display: none;
+}
+
 .menu {
   padding: 12px !important;
 }
