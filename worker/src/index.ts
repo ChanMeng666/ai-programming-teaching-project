@@ -3,6 +3,7 @@ import { processChat } from './chat';
 import { generateEmbedding } from './rag';
 import { handleGetMessages, handlePostMessage, handleSetupDatabase } from './messages';
 import { handleListCapstones, handleVote, handleSetupCapstoneDB, handleCreateCapstone } from './capstones';
+import { cacheKey, readCounter, writeCounter } from './cache';
 
 interface SeedRequest {
   documents: Array<{
@@ -105,7 +106,11 @@ function addCorsHeaders(response: Response, request: Request, env: Env): Respons
 /**
  * Handle chat API request
  */
-async function handleChat(request: Request, env: Env): Promise<Response> {
+async function handleChat(
+  request: Request,
+  env: Env,
+  ctx: ExecutionContext | null = null
+): Promise<Response> {
   try {
     const body = (await request.json()) as ChatRequest;
 
@@ -129,11 +134,9 @@ async function handleChat(request: Request, env: Env): Promise<Response> {
       request.headers.get('CF-Connecting-IP') ||
       request.headers.get('X-Forwarded-For') ||
       'unknown';
-    const rateKey = `rate:chat:${ip}`;
-    const currentCount = parseInt(
-      (await env.CHAT_SESSIONS.get(rateKey)) || '0',
-      10
-    );
+    // Throttling counter lives in the edge cache, not KV — see src/cache.ts.
+    const rateKey = cacheKey(request, `chat/rate/${encodeURIComponent(ip)}`);
+    const currentCount = await readCounter(rateKey);
 
     if (currentCount >= CHAT_RATE_LIMIT_MAX) {
       return new Response(
@@ -149,9 +152,7 @@ async function handleChat(request: Request, env: Env): Promise<Response> {
 
     // Charge the quota before invoking the model: a request that times out or
     // throws still consumed Workers AI, so it must still count against the cap.
-    await env.CHAT_SESSIONS.put(rateKey, String(currentCount + 1), {
-      expirationTtl: CHAT_RATE_LIMIT_WINDOW,
-    });
+    await writeCounter(rateKey, currentCount + 1, CHAT_RATE_LIMIT_WINDOW);
 
     const { response, sessionId } = await processChat(
       env,
@@ -339,15 +340,15 @@ export default {
 
     // Route handling
     if (pathname === '/api/chat' && request.method === 'POST') {
-      response = await handleChat(request, env);
+      response = await handleChat(request, env, ctx);
     } else if (pathname === '/api/seed' && request.method === 'POST') {
       response = await handleSeed(request, env);
     } else if (pathname === '/api/seed/delete' && request.method === 'POST') {
       response = await handleSeedDelete(request, env);
     } else if (pathname === '/api/messages' && request.method === 'GET') {
-      response = await handleGetMessages(request, env);
+      response = await handleGetMessages(request, env, ctx);
     } else if (pathname === '/api/messages' && request.method === 'POST') {
-      response = await handlePostMessage(request, env);
+      response = await handlePostMessage(request, env, ctx);
     } else if (pathname === '/api/messages/setup' && request.method === 'POST') {
       response = await handleSetupDatabase(request, env);
     } else if (pathname === '/api/capstones' && request.method === 'GET') {

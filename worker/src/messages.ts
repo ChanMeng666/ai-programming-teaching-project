@@ -1,6 +1,13 @@
 import type { Env } from './types';
 import { notionFetch, type NotionRichText } from './notion';
 import { jsonResponse } from './http';
+import {
+  cacheKey,
+  cacheGetJson,
+  cacheJson,
+  readCounter,
+  writeCounter,
+} from './cache';
 
 const CACHE_TTL = 300; // 5 minutes
 const RATE_LIMIT_MAX = 5;
@@ -112,11 +119,12 @@ export async function handleSetupDatabase(
 
 /**
  * GET /api/messages
- * Returns approved messages with KV caching.
+ * Returns approved messages, cached at the edge for CACHE_TTL.
  */
 export async function handleGetMessages(
   request: Request,
-  env: Env
+  env: Env,
+  ctx: ExecutionContext | null = null
 ): Promise<Response> {
   try {
     const url = new URL(request.url);
@@ -126,12 +134,17 @@ export async function handleGetMessages(
       50
     );
 
-    const cacheKey = `messages:${pageSize}:${cursor || 'first'}`;
+    // Cached at the edge rather than in KV — see src/cache.ts. This page does
+    // not poll, but a KV write per cache refill is the same pattern that
+    // exhausted the daily write quota on the capstone endpoint.
+    const key = cacheKey(
+      request,
+      `messages/${pageSize}/${encodeURIComponent(cursor || 'first')}`
+    );
 
-    // Check KV cache
-    const cached = await env.MESSAGE_BOARD.get(cacheKey);
+    const cached = await cacheGetJson<unknown>(key);
     if (cached) {
-      return jsonResponse(JSON.parse(cached));
+      return jsonResponse(cached);
     }
 
     // Query Notion for approved messages
@@ -171,10 +184,7 @@ export async function handleGetMessages(
       nextCursor: data.next_cursor,
     };
 
-    // Cache the result
-    await env.MESSAGE_BOARD.put(cacheKey, JSON.stringify(result), {
-      expirationTtl: CACHE_TTL,
-    });
+    await cacheJson(key, result, CACHE_TTL, ctx);
 
     return jsonResponse(result);
   } catch (error) {
@@ -189,7 +199,8 @@ export async function handleGetMessages(
  */
 export async function handlePostMessage(
   request: Request,
-  env: Env
+  env: Env,
+  ctx: ExecutionContext | null = null
 ): Promise<Response> {
   try {
     const body = (await request.json()) as {
@@ -224,11 +235,9 @@ export async function handlePostMessage(
       request.headers.get('CF-Connecting-IP') ||
       request.headers.get('X-Forwarded-For') ||
       'unknown';
-    const rateKey = `rate:msg:${ip}`;
-    const currentCount = parseInt(
-      (await env.MESSAGE_BOARD.get(rateKey)) || '0',
-      10
-    );
+    // Throttling counter lives in the edge cache, not KV — see src/cache.ts.
+    const rateKey = cacheKey(request, `messages/rate/${encodeURIComponent(ip)}`);
+    const currentCount = await readCounter(rateKey);
 
     if (currentCount >= RATE_LIMIT_MAX) {
       return jsonResponse(
@@ -272,10 +281,7 @@ export async function handlePostMessage(
       return jsonResponse({ error: 'Failed to submit message' }, 502);
     }
 
-    // Increment rate limit counter
-    await env.MESSAGE_BOARD.put(rateKey, String(currentCount + 1), {
-      expirationTtl: RATE_LIMIT_WINDOW,
-    });
+    await writeCounter(rateKey, currentCount + 1, RATE_LIMIT_WINDOW);
 
     return jsonResponse({
       message: '留言已提交，等待审核后将会显示',

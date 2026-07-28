@@ -1,6 +1,7 @@
 import type { Env } from './types';
 import { notionFetch, type NotionRichText, richText, readRichText, readTitle } from './notion';
 import { jsonResponse } from './http';
+import { cacheKey, cachePut, readCounter, writeCounter } from './cache';
 
 const LIST_CACHE_TTL = 60; // 1 minute — newly published rows surface within ~60s
 const RESPONSE_CACHE_TTL = 20; // full /api/capstones payload, incl. vote counts
@@ -12,45 +13,12 @@ const COHORT = 'TECHNEST 2026';
 const TRACKS = ['Campus Life', 'Personal Growth', 'Creative Tools'] as const;
 type Track = (typeof TRACKS)[number];
 
-/**
- * Cache keys for the Workers Cache API. These paths are never routed and never
- * fetched — they exist only to give `caches.default` a stable key. They are
- * built from the incoming request's own origin because the Cache API shares the
- * zone's cache namespace, and keys are only reliable within the Worker's own zone.
- *
- * Caching here instead of in KV is deliberate. The showcase page polls
- * /api/capstones on a timer for as long as a tab is open, and the previous
- * design wrote the project list back to KV on every cache miss. A single
- * backgrounded tab polling overnight was enough to spend ~700 of the 1,000
- * writes/day free-tier KV quota on nothing but cache refills. The Cache API
- * has no per-operation quota, so a cache hit now costs zero KV operations.
- *
- * Note: the Cache API is a no-op on *.workers.dev and in Playground previews.
- * This Worker is served from the programming-api.chanmeng.org custom domain,
- * where it is fully active; on workers.dev it degrades to the uncached path.
- */
+/** See src/cache.ts for why these live in the edge cache rather than KV. */
 function cacheKeys(request: Request): { list: Request; response: Request } {
-  const { origin } = new URL(request.url);
   return {
-    list: new Request(`${origin}/__cache/capstones/notion-list`),
-    response: new Request(`${origin}/__cache/capstones/list-response`),
+    list: cacheKey(request, 'capstones/notion-list'),
+    response: cacheKey(request, 'capstones/list-response'),
   };
-}
-
-/**
- * Store `response` under `key` in the edge cache, without blocking the reply.
- */
-function cachePut(
-  key: Request,
-  response: Response,
-  ctx: ExecutionContext | null
-): Promise<void> {
-  const put = caches.default.put(key, response);
-  if (ctx) {
-    ctx.waitUntil(put);
-    return Promise.resolve();
-  }
-  return put;
 }
 
 interface NotionCapstonePage {
@@ -334,12 +302,11 @@ export async function handleVote(
     const ip = clientIp(request);
     const ua = request.headers.get('User-Agent') || 'unknown';
 
-    // IP rate limit
-    const rateKey = `cap:rate:${ip}`;
-    const rateCount = parseInt(
-      (await env.CAPSTONE_VOTES.get(rateKey)) || '0',
-      10
-    );
+    // IP rate limit. Kept in the edge cache, not KV: spending a KV write per
+    // vote attempt is precisely what an abuser would target, and the daily
+    // write quota is the scarcest resource this Worker has.
+    const rateKey = cacheKey(request, `capstones/rate/${await sha256Hex(ip)}`);
+    const rateCount = await readCounter(rateKey);
     if (rateCount >= RATE_LIMIT_MAX) {
       return jsonResponse(
         { error: 'Too many votes from your IP, please try again later.' },
@@ -368,13 +335,9 @@ export async function handleVote(
     }
 
     if (changed) {
-      // Only real state changes cost KV writes. Charging no-ops (re-voting,
-      // un-voting something never voted for) a rate-limit write let anyone burn
-      // the daily KV write quota with a replayed request, and there is nothing
-      // to rate limit when nothing changed.
-      await env.CAPSTONE_VOTES.put(rateKey, String(rateCount + 1), {
-        expirationTtl: RATE_LIMIT_WINDOW,
-      });
+      // Only real state changes count against the rate limit — there is nothing
+      // to throttle when a replayed request changes nothing.
+      await writeCounter(rateKey, rateCount + 1, RATE_LIMIT_WINDOW);
 
       // Drop the cached list response so the new tally surfaces immediately in
       // this colo instead of after RESPONSE_CACHE_TTL.
