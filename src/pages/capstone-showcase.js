@@ -668,7 +668,7 @@ function ShowcaseInner() {
               {translate({
                 id: 'capstoneShowcase.heroSubtitle',
                 message:
-                  'Capstone projects from TECHNEST 2026 Weeks 9–12. Vote for your favorites — leaderboard refreshes every 30 seconds.',
+                  'Capstone projects from TECHNEST 2026 Weeks 9–12. Vote for your favorites — leaderboard refreshes every minute.',
               })}
             </p>
             {updatedAt && (
@@ -890,7 +890,7 @@ export default function CapstoneShowcasePage() {
       description={translate({
         id: 'capstoneShowcase.pageDescription',
         message:
-          'Live showcase of TECHNEST 2026 capstone projects. Vote for your favorites — top 3 highlighted, refreshed every 30 seconds.',
+          'Live showcase of TECHNEST 2026 capstone projects. Vote for your favorites — top 3 highlighted, refreshed every minute.',
       })}
     >
       <BrowserOnly fallback={<div className={styles.pageWrapper} />}>

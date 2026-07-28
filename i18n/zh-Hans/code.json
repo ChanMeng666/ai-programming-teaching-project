@@ -791,13 +791,13 @@
     "message": "TECHNEST 2026 毕业设计展示"
   },
   "capstoneShowcase.pageDescription": {
-    "message": "TECHNEST 2026 毕业设计实时展示。为你最喜欢的项目点赞——前 3 名高亮，每 30 秒刷新一次。"
+    "message": "TECHNEST 2026 毕业设计实时展示。为你最喜欢的项目点赞——前 3 名高亮，每分钟刷新一次。"
   },
   "capstoneShowcase.heroTitle": {
     "message": "TECHNEST 2026 毕业设计展示"
   },
   "capstoneShowcase.heroSubtitle": {
-    "message": "TECHNEST 2026 第 9–12 周毕业设计成果。为你喜欢的项目点赞，每 30 秒自动刷新榜单。"
+    "message": "TECHNEST 2026 第 9–12 周毕业设计成果。为你喜欢的项目点赞，每分钟自动刷新榜单。"
   },
   "capstoneShowcase.lastUpdated": {
     "message": "最近更新"
