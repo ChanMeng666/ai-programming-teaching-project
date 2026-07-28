@@ -6,7 +6,12 @@ import useScrollReveal from '@site/src/hooks/useScrollReveal';
 import styles from './capstone-showcase.module.css';
 
 const API_BASE = 'https://programming-api.chanmeng.org';
-const POLL_INTERVAL_MS = 30_000;
+const POLL_INTERVAL_MS = 60_000;
+// A tab left open on this page used to poll forever, including while hidden.
+// Backgrounded overnight that was enough to exhaust the Worker's daily KV write
+// quota on its own, so polling now stops once the page has been sitting
+// untouched this long. Any interaction — or switching back to the tab — resumes it.
+const IDLE_TIMEOUT_MS = 10 * 60_000;
 const TRACKS = ['Campus Life', 'Personal Growth', 'Creative Tools'];
 
 const CLIENT_ID_KEY = 'capstoneShowcase.clientId';
@@ -400,7 +405,25 @@ function ShowcaseInner() {
   const [updatedAt, setUpdatedAt] = useState(null);
   const clientIdRef = useRef('');
   const abortRef = useRef(null);
+  const lastActivityRef = useRef(Date.now());
+  // Set by the polling effect so an interaction can restart a poll that the
+  // idle timeout already stopped — otherwise a viewer who sits still for
+  // IDLE_TIMEOUT_MS and then votes would never see live counts again without
+  // leaving and re-entering the tab.
+  const resumePollRef = useRef(null);
   const trackLabels = useTrackLabels();
+
+  const markActive = useCallback(() => {
+    lastActivityRef.current = Date.now();
+    if (resumePollRef.current) resumePollRef.current();
+  }, []);
+
+  // Filtering is the main "I'm still here" signal from a passive viewer, so it
+  // keeps the live poll alive alongside voting.
+  const selectTrack = (track) => {
+    markActive();
+    setActiveTrack(track);
+  };
 
   // Re-scan .mm-reveal elements whenever the project list changes (the grids
   // only mount once data arrives). Presentation only — no data dependency.
@@ -416,9 +439,15 @@ function ShowcaseInner() {
     clientIdRef.current = getOrCreateClientId();
   }, []);
 
-  const fetchList = useCallback(async ({ signal } = {}) => {
+  // The endpoint now sends Cache-Control: max-age=20, which is what we want for
+  // routine polling. `fresh` bypasses that browser cache for the one case that
+  // needs an authoritative answer: resyncing counts after a failed vote.
+  const fetchList = useCallback(async ({ signal, fresh = false } = {}) => {
     try {
-      const res = await fetch(`${API_BASE}/api/capstones`, { signal });
+      const res = await fetch(`${API_BASE}/api/capstones`, {
+        signal,
+        cache: fresh ? 'no-store' : 'default',
+      });
       if (!res.ok) throw new Error('Failed to fetch');
       return await res.json();
     } catch (err) {
@@ -427,10 +456,24 @@ function ShowcaseInner() {
     }
   }, []);
 
-  // Initial load + 30s polling
+  // Initial load + polling. Deliberately conservative: we only poll while the
+  // tab is actually visible, and give up entirely once the page has been idle,
+  // because every poll costs the Worker KV operations against a daily quota.
   useEffect(() => {
     let cancelled = false;
-    const tick = async () => {
+    let interval = null;
+
+    const stop = () => {
+      if (interval) {
+        clearInterval(interval);
+        interval = null;
+      }
+    };
+    const start = () => {
+      if (!interval) interval = setInterval(tick, POLL_INTERVAL_MS);
+    };
+
+    const fetchNow = async () => {
       if (abortRef.current) abortRef.current.abort();
       const ctrl = new AbortController();
       abortRef.current = ctrl;
@@ -446,14 +489,43 @@ function ShowcaseInner() {
       setUpdatedAt(data.updatedAt || null);
       setLoading(false);
     };
-    tick();
-    const interval = setInterval(tick, POLL_INTERVAL_MS);
+
+    function tick() {
+      if (cancelled) return;
+      if (document.visibilityState !== 'visible') return;
+      if (Date.now() - lastActivityRef.current > IDLE_TIMEOUT_MS) {
+        stop();
+        return;
+      }
+      fetchNow();
+    }
+
+    const onVisibilityChange = () => {
+      if (document.visibilityState === 'visible') {
+        // Coming back to the tab counts as activity: refresh at once, then resume.
+        markActive();
+        tick();
+        start();
+      } else {
+        stop();
+      }
+    };
+
+    // The very first load must run even if the tab is hidden (e.g. restored
+    // session), otherwise the page would render empty until it is focused.
+    fetchNow();
+    start();
+    resumePollRef.current = start;
+    document.addEventListener('visibilitychange', onVisibilityChange);
+
     return () => {
       cancelled = true;
-      clearInterval(interval);
+      stop();
+      resumePollRef.current = null;
+      document.removeEventListener('visibilitychange', onVisibilityChange);
       if (abortRef.current) abortRef.current.abort();
     };
-  }, [fetchList]);
+  }, [fetchList, markActive]);
 
   const showToast = (type, message) => setToast({ type, message });
 
@@ -468,6 +540,7 @@ function ShowcaseInner() {
 
   const handleToggleVote = async (slug, wantVoted) => {
     if (!clientIdRef.current) return;
+    markActive();
     setBusy(slug, true);
 
     // Optimistic update
@@ -505,7 +578,7 @@ function ShowcaseInner() {
           return prevVoted;
         });
         // Refetch authoritative count
-        const fresh = await fetchList();
+        const fresh = await fetchList({ fresh: true });
         if (fresh && Array.isArray(fresh.projects)) setProjects(fresh.projects);
         showToast(
           'error',
@@ -741,7 +814,7 @@ function ShowcaseInner() {
                     className={`${styles.filterTab} ${
                       activeTrack === '__all__' ? styles.filterTabActive : ''
                     }`}
-                    onClick={() => setActiveTrack('__all__')}
+                    onClick={() => selectTrack('__all__')}
                   >
                     {filterAllLabel}
                   </button>
@@ -753,7 +826,7 @@ function ShowcaseInner() {
                       className={`${styles.filterTab} ${
                         activeTrack === track ? styles.filterTabActive : ''
                       }`}
-                      onClick={() => setActiveTrack(track)}
+                      onClick={() => selectTrack(track)}
                     >
                       {trackLabels[track]}
                     </button>

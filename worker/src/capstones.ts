@@ -2,8 +2,8 @@ import type { Env } from './types';
 import { notionFetch, type NotionRichText, richText, readRichText, readTitle } from './notion';
 import { jsonResponse } from './http';
 
-const LIST_CACHE_KEY = 'cap:list:published';
 const LIST_CACHE_TTL = 60; // 1 minute — newly published rows surface within ~60s
+const RESPONSE_CACHE_TTL = 20; // full /api/capstones payload, incl. vote counts
 const VOTE_TTL = 60 * 60 * 24 * 90; // 90 days — covers full Demo Day window + buffer
 const RATE_LIMIT_MAX = 30;
 const RATE_LIMIT_WINDOW = 3600;
@@ -11,6 +11,47 @@ const COHORT = 'TECHNEST 2026';
 
 const TRACKS = ['Campus Life', 'Personal Growth', 'Creative Tools'] as const;
 type Track = (typeof TRACKS)[number];
+
+/**
+ * Cache keys for the Workers Cache API. These paths are never routed and never
+ * fetched — they exist only to give `caches.default` a stable key. They are
+ * built from the incoming request's own origin because the Cache API shares the
+ * zone's cache namespace, and keys are only reliable within the Worker's own zone.
+ *
+ * Caching here instead of in KV is deliberate. The showcase page polls
+ * /api/capstones on a timer for as long as a tab is open, and the previous
+ * design wrote the project list back to KV on every cache miss. A single
+ * backgrounded tab polling overnight was enough to spend ~700 of the 1,000
+ * writes/day free-tier KV quota on nothing but cache refills. The Cache API
+ * has no per-operation quota, so a cache hit now costs zero KV operations.
+ *
+ * Note: the Cache API is a no-op on *.workers.dev and in Playground previews.
+ * This Worker is served from the programming-api.chanmeng.org custom domain,
+ * where it is fully active; on workers.dev it degrades to the uncached path.
+ */
+function cacheKeys(request: Request): { list: Request; response: Request } {
+  const { origin } = new URL(request.url);
+  return {
+    list: new Request(`${origin}/__cache/capstones/notion-list`),
+    response: new Request(`${origin}/__cache/capstones/list-response`),
+  };
+}
+
+/**
+ * Store `response` under `key` in the edge cache, without blocking the reply.
+ */
+function cachePut(
+  key: Request,
+  response: Response,
+  ctx: ExecutionContext | null
+): Promise<void> {
+  const put = caches.default.put(key, response);
+  if (ctx) {
+    ctx.waitUntil(put);
+    return Promise.resolve();
+  }
+  return put;
+}
 
 interface NotionCapstonePage {
   id: string;
@@ -127,13 +168,81 @@ function clientIp(request: Request): string {
 }
 
 /**
+ * Published projects for the current cohort, served from the edge cache when
+ * possible and refetched from Notion on a miss. Shared by the list endpoint and
+ * the vote endpoint's slug validation, so neither path ever writes to KV.
+ * Returns null when Notion is unreachable.
+ */
+async function getPublishedProjects(
+  request: Request,
+  env: Env,
+  ctx: ExecutionContext | null
+): Promise<CapstoneProject[] | null> {
+  const listKey = cacheKeys(request).list;
+
+  const cached = await caches.default.match(listKey);
+  if (cached) {
+    try {
+      return (await cached.json()) as CapstoneProject[];
+    } catch {
+      // Corrupt entry — fall through and refetch.
+    }
+  }
+
+  const res = await notionFetch(
+    env,
+    `/databases/${env.NOTION_CAPSTONE_DATABASE_ID}/query`,
+    {
+      method: 'POST',
+      body: JSON.stringify({
+        filter: {
+          and: [
+            { property: 'Status', select: { equals: 'Published' } },
+            { property: 'Cohort', select: { equals: COHORT } },
+          ],
+        },
+        sorts: [{ property: 'SubmittedAt', direction: 'ascending' }],
+        page_size: 100,
+      }),
+    }
+  );
+
+  if (!res.ok) {
+    const err = await res.text();
+    console.error('Notion capstones query error:', err);
+    return null;
+  }
+
+  const data = (await res.json()) as { results: NotionCapstonePage[] };
+  const projects = data.results
+    .map(mapPageToProject)
+    .filter((p) => p.slug && p.title);
+
+  await cachePut(
+    listKey,
+    jsonResponse(projects, 200, {
+      'Cache-Control': `public, max-age=${LIST_CACHE_TTL}`,
+    }),
+    ctx
+  );
+
+  return projects;
+}
+
+/**
  * GET /api/capstones
  * Returns published capstone projects with live vote counts.
- * Project metadata is cached in KV for 60s; vote counts always read live.
+ *
+ * The whole payload — project metadata *and* vote counts — is cached at the
+ * edge for RESPONSE_CACHE_TTL seconds, so a poll that hits the cache costs zero
+ * KV operations. Counts can therefore lag by up to 20s for passive viewers; a
+ * voter never sees stale data because POST /api/capstones/vote returns the
+ * authoritative count and busts this entry.
  */
 export async function handleListCapstones(
   request: Request,
-  env: Env
+  env: Env,
+  ctx: ExecutionContext | null = null
 ): Promise<Response> {
   try {
     if (!env.NOTION_CAPSTONE_DATABASE_ID) {
@@ -143,55 +252,18 @@ export async function handleListCapstones(
       );
     }
 
-    let projects: CapstoneProject[] | null = null;
+    const responseKey = cacheKeys(request).response;
 
-    // Try cache first
-    const cached = await env.CAPSTONE_VOTES.get(LIST_CACHE_KEY);
-    if (cached) {
-      try {
-        projects = JSON.parse(cached) as CapstoneProject[];
-      } catch {
-        projects = null;
-      }
-    }
+    const hit = await caches.default.match(responseKey);
+    if (hit) return hit;
 
-    // Cache miss — fetch from Notion
+    const projects = await getPublishedProjects(request, env, ctx);
     if (!projects) {
-      const res = await notionFetch(
-        env,
-        `/databases/${env.NOTION_CAPSTONE_DATABASE_ID}/query`,
-        {
-          method: 'POST',
-          body: JSON.stringify({
-            filter: {
-              and: [
-                { property: 'Status', select: { equals: 'Published' } },
-                { property: 'Cohort', select: { equals: COHORT } },
-              ],
-            },
-            sorts: [{ property: 'SubmittedAt', direction: 'ascending' }],
-            page_size: 100,
-          }),
-        }
-      );
-
-      if (!res.ok) {
-        const err = await res.text();
-        console.error('Notion capstones query error:', err);
-        return jsonResponse({ error: 'Failed to fetch capstones' }, 502);
-      }
-
-      const data = (await res.json()) as { results: NotionCapstonePage[] };
-      projects = data.results
-        .map(mapPageToProject)
-        .filter((p) => p.slug && p.title);
-
-      await env.CAPSTONE_VOTES.put(LIST_CACHE_KEY, JSON.stringify(projects), {
-        expirationTtl: LIST_CACHE_TTL,
-      });
+      return jsonResponse({ error: 'Failed to fetch capstones' }, 502);
     }
 
-    // Merge live vote counts (always read live, never cached)
+    // Vote counts are read live here; the response cache above is what keeps
+    // this from running on every poll.
     const withVotes = await Promise.all(
       projects.map(async (p) => ({
         ...p,
@@ -202,10 +274,15 @@ export async function handleListCapstones(
       }))
     );
 
-    return jsonResponse({
-      projects: withVotes,
-      updatedAt: new Date().toISOString(),
-    });
+    const response = jsonResponse(
+      { projects: withVotes, updatedAt: new Date().toISOString() },
+      200,
+      { 'Cache-Control': `public, max-age=${RESPONSE_CACHE_TTL}` }
+    );
+
+    await cachePut(responseKey, response.clone(), ctx);
+
+    return response;
   } catch (error) {
     console.error('ListCapstones error:', error);
     return jsonResponse({ error: 'Internal server error' }, 500);
@@ -219,7 +296,8 @@ export async function handleListCapstones(
  */
 export async function handleVote(
   request: Request,
-  env: Env
+  env: Env,
+  ctx: ExecutionContext | null = null
 ): Promise<Response> {
   try {
     const body = (await request.json()) as {
@@ -243,21 +321,14 @@ export async function handleVote(
       return jsonResponse({ error: 'Capstone showcase is not configured.' }, 503);
     }
 
-    // Validate slug against the current published list. Refresh cache from Notion
-    // if needed so cold-start vote attempts can't hit unknown slugs.
-    let cached = await env.CAPSTONE_VOTES.get(LIST_CACHE_KEY);
-    if (!cached) {
-      // Trigger a list fetch + cache populate by reusing the GET handler's path.
-      await handleListCapstones(request, env);
-      cached = await env.CAPSTONE_VOTES.get(LIST_CACHE_KEY);
-    }
-    if (cached) {
-      const list = JSON.parse(cached) as CapstoneProject[];
-      if (!list.some((p) => p.slug === slug)) {
-        return jsonResponse({ error: 'Unknown project' }, 404);
-      }
-    } else {
+    // Validate slug against the current published list. Served from the edge
+    // cache, falling back to Notion, so cold-start vote attempts still resolve.
+    const list = await getPublishedProjects(request, env, ctx);
+    if (!list) {
       return jsonResponse({ error: 'Unable to validate project right now.' }, 503);
+    }
+    if (!list.some((p) => p.slug === slug)) {
+      return jsonResponse({ error: 'Unknown project' }, 404);
     }
 
     const ip = clientIp(request);
@@ -283,20 +354,34 @@ export async function handleVote(
     const alreadyVoted = !!(await env.CAPSTONE_VOTES.get(votedKey));
     let count = parseInt((await env.CAPSTONE_VOTES.get(countKey)) || '0', 10);
 
+    let changed = false;
     if (action === 'add' && !alreadyVoted) {
       count += 1;
       await env.CAPSTONE_VOTES.put(countKey, String(count));
       await env.CAPSTONE_VOTES.put(votedKey, '1', { expirationTtl: VOTE_TTL });
+      changed = true;
     } else if (action === 'remove' && alreadyVoted) {
       count = Math.max(0, count - 1);
       await env.CAPSTONE_VOTES.put(countKey, String(count));
       await env.CAPSTONE_VOTES.delete(votedKey);
+      changed = true;
     }
 
-    // Increment IP rate limit counter even on no-op to discourage probing
-    await env.CAPSTONE_VOTES.put(rateKey, String(rateCount + 1), {
-      expirationTtl: RATE_LIMIT_WINDOW,
-    });
+    if (changed) {
+      // Only real state changes cost KV writes. Charging no-ops (re-voting,
+      // un-voting something never voted for) a rate-limit write let anyone burn
+      // the daily KV write quota with a replayed request, and there is nothing
+      // to rate limit when nothing changed.
+      await env.CAPSTONE_VOTES.put(rateKey, String(rateCount + 1), {
+        expirationTtl: RATE_LIMIT_WINDOW,
+      });
+
+      // Drop the cached list response so the new tally surfaces immediately in
+      // this colo instead of after RESPONSE_CACHE_TTL.
+      const bust = caches.default.delete(cacheKeys(request).response);
+      if (ctx) ctx.waitUntil(bust);
+      else await bust;
+    }
 
     return jsonResponse({
       slug,
@@ -518,8 +603,14 @@ export async function handleCreateCapstone(
 
     const written = (await writeRes.json()) as { id: string };
 
-    // Bust the 60s list cache so the change surfaces immediately.
-    await env.CAPSTONE_VOTES.delete(LIST_CACHE_KEY);
+    // Bust both cache layers so the change surfaces immediately. Cache API
+    // deletes are per-colo, so a colo that never saw this admin call still
+    // serves its own copy — bounded by LIST_CACHE_TTL (60s), same as before.
+    const keys = cacheKeys(request);
+    await Promise.all([
+      caches.default.delete(keys.list),
+      caches.default.delete(keys.response),
+    ]);
 
     return jsonResponse({
       message: existingId ? 'Capstone project updated' : 'Capstone project created',

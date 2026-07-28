@@ -326,7 +326,7 @@ function handleHealth(): Response {
 }
 
 export default {
-  async fetch(request: Request, env: Env): Promise<Response> {
+  async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
     const url = new URL(request.url);
     const { pathname } = url;
 
@@ -351,9 +351,9 @@ export default {
     } else if (pathname === '/api/messages/setup' && request.method === 'POST') {
       response = await handleSetupDatabase(request, env);
     } else if (pathname === '/api/capstones' && request.method === 'GET') {
-      response = await handleListCapstones(request, env);
+      response = await handleListCapstones(request, env, ctx);
     } else if (pathname === '/api/capstones/vote' && request.method === 'POST') {
-      response = await handleVote(request, env);
+      response = await handleVote(request, env, ctx);
     } else if (pathname === '/api/capstones/setup' && request.method === 'POST') {
       response = await handleSetupCapstoneDB(request, env);
     } else if (pathname === '/api/capstones/admin' && request.method === 'POST') {
