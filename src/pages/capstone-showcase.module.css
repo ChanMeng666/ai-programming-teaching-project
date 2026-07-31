@@ -115,6 +115,7 @@
 .spotlightGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  align-items: start;
   gap: 24px;
 }
 
@@ -138,6 +139,7 @@
 .cardGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  align-items: start;
   gap: 24px;
 }
 
@@ -390,10 +392,6 @@
   line-height: var(--leading-body-sm);
   color: var(--color-ink-black);
   margin: 0;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
 }
 
 /* ===== Link row + vote ===== */
