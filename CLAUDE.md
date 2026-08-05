@@ -57,6 +57,24 @@ Full reference: **`DESIGN.md`**. The essentials an agent needs before touching a
 - **Brand** — `static/img/brand/`: `logo.svg` (green rounded square + ink double-chevron "sprout" mark), `logo-footer.svg` (white-container variant), `favicon.ico` (16/32/48), `favicon-32.png`, `apple-touch-icon.png` (180, cream bg), `social-card.png` (1200×630). The social card regenerates from `scripts/social-card.html` — screenshot at exactly 1200×630. Config references `img/brand/favicon.ico`, `img/brand/social-card.png`, and `img/brand/logo.svg` (navbar + footer). **Kept legacy asset:** `chan_logo*.svg` (footer copyright + ChatWidget avatar).
 - **Illustrations** — `static/img/illustrations/`: 10 flat paper-cut character illustrations on transparent background, each as `.webp` (used in pages) + `.png`: `hero` (1200w), `home-learn`/`home-build`/`home-community` (640w), `message-board` (560w), `capstone` (560w), `feeds` (480w), `blog-header` (900w), `not-found` (560w), `footer-accent` (320w).
 - **Illustration pipeline** — `scripts/generate-illustrations.mjs`: OpenAI `gpt-image-1`, `background:"transparent"`, quality high; sharp post-process (trim → resize → webp q80 + png). Flags: `--only <id>`, `--force`, `--env-file <path>`. Reads `OPENAI_API_KEY` from env or the `--env-file`; **keys must never be hardcoded or committed.** Per-asset webp overrides exist (`hero` uses `alphaQuality:70` — its alpha channel dominates file size). `sharp` is a **devDependency**.
+- **Certificates** — `static/img/certificates/`: per-award `<slug>.png` (3168×2240 print master), `<slug>.webp` (1584w, what the page shows), `<slug>-social.png` (1200×630 og:image), plus `plates/` (the generated border art). See the certificate pipeline below.
+
+## Capstone certificates
+
+Full runbook: **`CAPSTONE_SHOWCASE.md`**. What an agent must know before touching any of it:
+
+- **The TECHNEST 2026 awards are frozen.** `src/data/awards.json` is a deliberate snapshot of `GET /api/capstones` taken 2026-08-06, and `src/data/awards.js` is the accessor the site imports. `/capstone-showcase` orders cards by that frozen rank, **not** by the live vote count — likes keep counting but no longer reorder anything. Never re-derive rank from the API, and never edit `rank`/`tier`/`votes`/`certId` after issue: each one backs a public credential page that students link from LinkedIn.
+- **Data lives in JSON, not the .js module**, so webpack and plain Node read the identical source of truth (`.mjs` scripts cannot import a `.js` ES module in this CommonJS package). Add fields to `awards.json`; re-export them from `awards.js`.
+- **`gpt-image-2` produces only the decorative plate.** Every fact — names, logo, credential ID, QR — is real DOM composited on top by a headless-Chrome screenshot of `scripts/certificate-template.html`. No image model is trusted to spell a person's name. `gpt-image-2` also has **no transparent-background support**, so the plate is opaque and the template layers over it. The template renders fine with no plate at all (`body[data-plate="off"]` CSS ornament) — that is the shipping fallback if the model keeps drawing text inside the frame.
+- **Playwright is intentionally NOT in `package.json`.** `npm i playwright` downloads ~150 MB of browsers that Cloudflare Pages would re-fetch on every production build. `scripts/render-certificates.mjs` resolves it from the global npm root instead (`npm i -g playwright`) and reuses installed Chrome via `channel: 'chrome'`. `qrcode` *is* a devDependency (pure JS, no binaries). Rendered PNGs are committed, so no one else needs the toolchain.
+- **`/certificate/*` pages are English-only and do not use `translate()`** — a deliberate exception to the house i18n rule. The credentials are issued in English; translating the chrome around them would imply a Chinese credential exists. The showcase additions *are* translated, and the issue date is localised via `issuedOnFor(locale)` from stored labels rather than `Intl` (a UTC-parsed `new Date('2026-08-06')` renders as the 5th west of Greenwich and would be a hydration mismatch).
+- **Never delete `/certificate/*`, `src/data/awards.*` or `static/img/certificates/`** when retiring the showcase — those are live links on real people's profiles.
+
+```bash
+npm run certificates:plates -- --env-file <path>   # gpt-image-2 border art (rare)
+npm run certificates:render -- --force             # all 6 certificates + og cards
+npm run certificates:render -- --only <slug> --force
+```
 
 ## Deployment model — read this before shipping anything
 
@@ -178,6 +196,9 @@ npm run clear      # Clear Docusaurus cache (first thing to try on weird build e
 npm run write-translations  # Extract translatable strings
 npm run write-heading-ids   # Generate heading IDs for documentation
 
+# Capstone certificates (see "Capstone certificates" above)
+npm run certificates:render -- --force   # needs a GLOBAL playwright install
+
 # Worker (must run from worker/)
 cd worker
 npx wrangler dev      # Local Worker
@@ -197,7 +218,8 @@ npx tsx scripts/seed-vectors.ts   # (Re)index docs into Vectorize
 - `/blog/` - Blog posts with MDX support
 - `/src/components/` - React components: `Home/{Hero,Programs,HowItWorks,Community}` (homepage sections, each with its own `styles.module.css`), `ChatWidget`, `AITracker`, `GEOHead`, `MintlifyShim`, `TechNest`, `MusicPlayer`, `Mermaid`, … The old space/galaxy components (`SpaceBackground`, `SpaceHero`, `StarField`, `OrbitingPlanet`, `GlassPanel`) were **deleted** in the redesign.
 - `/src/hooks/` - `useScrollReveal.js` (scroll-reveal contract — see Design system section)
-- `/src/pages/` - Custom pages: `index.js` (composes the `Home/*` sections), `message-board.js`, `capstone-showcase.js`, `feeds.js`
+- `/src/data/` - `awards.json` (frozen TECHNEST 2026 capstone results — the source of truth for ranks, tiers and credential IDs) + `awards.js` (accessor + LinkedIn deep-link builder)
+- `/src/pages/` - Custom pages: `index.js` (composes the `Home/*` sections), `message-board.js`, `capstone-showcase.js`, `feeds.js`, `certificate/` (one thin page per credential + an index; all render `src/components/Certificate/`)
 - `/src/theme/` - Theme customizations (swizzles): `Layout` (injects MusicPlayer/ChatWidget/AITracker — the single AITracker mount point), `NotFound/Content` (**new** — display-scale 404 with illustration + coral home CTA; wraps at Content level so Layout/PageMetadata still render), `DocItem/Content`, `BlogPostItem/Content`, `MDXComponents`, `Mermaid`
 - `/worker/` - Cloudflare Worker backend (`src/`, `scripts/`, `wrangler.toml`)
 

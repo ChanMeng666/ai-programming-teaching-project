@@ -1,8 +1,16 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import Layout from '@theme/Layout';
+import Link from '@docusaurus/Link';
 import { translate } from '@docusaurus/Translate';
 import BrowserOnly from '@docusaurus/BrowserOnly';
 import useScrollReveal from '@site/src/hooks/useScrollReveal';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import {
+  TIERS,
+  awardBySlug,
+  certificatePath,
+  issuedOnFor,
+} from '@site/src/data/awards';
 import styles from './capstone-showcase.module.css';
 
 const API_BASE = 'https://programming-api.chanmeng.org';
@@ -91,12 +99,43 @@ function trackClassName(track) {
   return styles.trackOther;
 }
 
-function rankLabel(rank) {
-  if (rank === 1)
+// Award tier label. Covers all four tiers, not just the podium — every awarded
+// project carries a badge now, so 4th onward needs a name too.
+function tierLabel(tier) {
+  if (tier === 'first')
     return translate({ id: 'capstoneShowcase.rank.first', message: '1st' });
-  if (rank === 2)
+  if (tier === 'second')
     return translate({ id: 'capstoneShowcase.rank.second', message: '2nd' });
-  return translate({ id: 'capstoneShowcase.rank.third', message: '3rd' });
+  if (tier === 'third')
+    return translate({ id: 'capstoneShowcase.rank.third', message: '3rd' });
+  return translate({
+    id: 'capstoneShowcase.rank.excellence',
+    message: 'Excellence',
+  });
+}
+
+// Flat paper-cut laurel, matching the one on the certificates. Deliberately an
+// inline SVG and not an emoji: emoji medals render as someone else's artwork at
+// someone else's whim, and they undercut the formality of a credential.
+function Laurel({ className }) {
+  return (
+    <svg className={className} viewBox="0 0 110 150" fill="none" aria-hidden="true">
+      <path
+        d="M92 142 C 62 124, 40 94, 33 40"
+        stroke="currentColor"
+        strokeWidth="7"
+        strokeLinecap="round"
+        fill="none"
+      />
+      <g fill="currentColor">
+        <ellipse cx="-18" cy="0" rx="18" ry="7.5" transform="translate(72,124) rotate(-30)" />
+        <ellipse cx="-18" cy="0" rx="18" ry="7.5" transform="translate(58,104) rotate(-42)" />
+        <ellipse cx="-18" cy="0" rx="18" ry="7.5" transform="translate(47,82) rotate(-54)" />
+        <ellipse cx="-18" cy="0" rx="18" ry="7.5" transform="translate(39,60) rotate(-66)" />
+        <ellipse cx="-16" cy="0" rx="16" ry="6.5" transform="translate(34,38) rotate(-80)" />
+      </g>
+    </svg>
+  );
 }
 
 function Toast({ message, type, onClose }) {
@@ -269,7 +308,11 @@ function ProjectCard({
   busy,
   spotlight,
 }) {
-  const isTop = spotlight && rank && rank <= 3;
+  // Rank and tier come from the frozen award record, never from the live vote
+  // order — a card must never contradict the certificate it links to.
+  const award = awardBySlug(project.slug);
+  const tier = award ? TIERS[award.tier] : null;
+  const isTop = spotlight && award && award.rank <= 3;
   return (
     <article
       className={`${styles.card} ${
@@ -284,11 +327,19 @@ function ProjectCard({
             className={`mm-heading-lg ${styles.rankNumeral}`}
             aria-hidden="true"
           >
-            {rank}
+            {award.rank}
           </span>
           <span className={`mm-chip ${styles.rankChip}`}>
-            {rankLabel(rank)}
+            {tierLabel(award.tier)}
           </span>
+        </div>
+      )}
+      {award && !isTop && (
+        // Accent tints the laurel only; the tier is always named in the chip
+        // beside it, so colour never carries the meaning on its own.
+        <div className={styles.awardBadge} style={{ color: tier.accent }}>
+          <Laurel className={styles.awardLaurel} />
+          <span className={`mm-chip ${styles.awardChip}`}>{tierLabel(award.tier)}</span>
         </div>
       )}
       <VideoPlayer
@@ -379,6 +430,21 @@ function ProjectCard({
               })}
             </a>
           )}
+          {award && (
+            <Link
+              to={certificatePath(award)}
+              className={`mm-chip ${styles.linkChip} ${styles.certChip}`}
+            >
+              <span
+                className={`${styles.linkDot} ${styles.linkDotGreen}`}
+                aria-hidden="true"
+              />
+              {translate({
+                id: 'capstoneShowcase.link.certificate',
+                message: 'Certificate',
+              })}
+            </Link>
+          )}
           <div className={styles.voteSlot}>
             <VoteButton
               slug={project.slug}
@@ -395,6 +461,9 @@ function ProjectCard({
 }
 
 function ShowcaseInner() {
+  const {
+    i18n: { currentLocale },
+  } = useDocusaurusContext();
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -611,15 +680,27 @@ function ShowcaseInner() {
     }
   };
 
-  // Sort by votes desc, then submittedAt asc (stable tiebreak)
+  // Order by frozen award rank. Award voting closed on FROZEN_AT and the
+  // certificates are permanent, so ordering by the still-climbing live vote
+  // count would eventually show a non-medalist above a medalist and quietly
+  // contradict the credentials. Likes keep counting; they just no longer
+  // reorder anything.
+  //
+  // Any project without an award record (i.e. published after the freeze) falls
+  // below every awarded one, ordered by the original votes-desc / submittedAt-asc
+  // rule so the page still behaves sensibly.
   const sorted = [...projects].sort((a, b) => {
+    const ra = awardBySlug(a.slug)?.rank ?? Infinity;
+    const rb = awardBySlug(b.slug)?.rank ?? Infinity;
+    if (ra !== rb) return ra - rb;
     const va = a.votes ?? 0;
     const vb = b.votes ?? 0;
     if (vb !== va) return vb - va;
     return (a.submittedAt || '').localeCompare(b.submittedAt || '');
   });
 
-  const top3 = sorted.slice(0, 3);
+  // The podium, from the frozen results — not "whoever is on top right now".
+  const top3 = sorted.filter((p) => (awardBySlug(p.slug)?.rank ?? Infinity) <= 3);
 
   // "All Projects" is a complete, filterable list of every project — the Top 3
   // spotlight above is an additive highlight, not a slice removed from the grid.
@@ -668,8 +749,25 @@ function ShowcaseInner() {
               {translate({
                 id: 'capstoneShowcase.heroSubtitle',
                 message:
-                  'Capstone projects from TECHNEST 2026 Weeks 9–12. Vote for your favorites — leaderboard refreshes every minute.',
+                  'Capstone projects from TECHNEST 2026 Weeks 9–12. Awards are final — likes stay open, so keep showing these builders some support.',
               })}
+            </p>
+            <p className={styles.awardsNote}>
+              {translate(
+                {
+                  id: 'capstoneShowcase.awardsClosed',
+                  message:
+                    'Award voting closed {date}. Every project earned a credential —',
+                },
+                { date: issuedOnFor(currentLocale) }
+              )}{' '}
+              <Link to="/certificate">
+                {translate({
+                  id: 'capstoneShowcase.awardsLink',
+                  message: 'view all certificates',
+                })}
+              </Link>
+              .
             </p>
             {updatedAt && (
               <p className={styles.updatedAt}>
@@ -769,7 +867,7 @@ function ShowcaseInner() {
                 >
                   {translate({
                     id: 'capstoneShowcase.spotlight.title',
-                    message: 'Current Top 3',
+                    message: 'Award Winners',
                   })}
                 </h2>
                 <div

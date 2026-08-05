@@ -797,13 +797,19 @@
     "message": "TECHNEST 2026 毕业设计展示"
   },
   "capstoneShowcase.heroSubtitle": {
-    "message": "TECHNEST 2026 第 9–12 周毕业设计成果。为你喜欢的项目点赞，每分钟自动刷新榜单。"
+    "message": "TECHNEST 2026 第 9–12 周毕业设计成果。奖项已揭晓，点赞通道仍然开放，欢迎继续为这些开发者加油。"
+  },
+  "capstoneShowcase.awardsClosed": {
+    "message": "评奖投票已于 {date} 截止。每位学员都获得了证书 —"
+  },
+  "capstoneShowcase.awardsLink": {
+    "message": "查看全部奖状"
   },
   "capstoneShowcase.lastUpdated": {
     "message": "最近更新"
   },
   "capstoneShowcase.spotlight.title": {
-    "message": "当前榜单 Top 3"
+    "message": "获奖项目"
   },
   "capstoneShowcase.grid.title": {
     "message": "全部项目"
@@ -834,6 +840,9 @@
   },
   "capstoneShowcase.link.postmortem": {
     "message": "项目复盘"
+  },
+  "capstoneShowcase.link.certificate": {
+    "message": "奖状"
   },
   "capstoneShowcase.video.play": {
     "message": "播放 demo 视频"
@@ -987,6 +996,9 @@
   },
   "capstoneShowcase.rank.third": {
     "message": "季军"
+  },
+  "capstoneShowcase.rank.excellence": {
+    "message": "优秀奖"
   },
   "capstoneShowcase.eyebrow": {
     "message": "作品展示"

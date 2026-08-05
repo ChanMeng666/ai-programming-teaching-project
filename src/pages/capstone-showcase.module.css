@@ -64,6 +64,26 @@
   margin: 0;
 }
 
+/* States that award voting is closed, so a visitor never reads the still-live
+   like counts as an open contest. */
+.awardsNote {
+  margin: 0;
+  max-width: 620px;
+  font-size: var(--text-body-sm);
+  line-height: 1.6;
+  color: var(--color-ink-muted);
+  padding-left: 14px;
+  border-left: 3px solid var(--color-fresh-grass);
+}
+
+/* Underlined because site links are ink (#2c2e2a) and this paragraph is muted
+   (#5d5f5b) — only 2.12:1 between them, so colour alone cannot mark the link
+   (WCAG 1.4.1). */
+.awardsNote a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 .updatedAt {
   display: inline-flex;
   align-items: center;
@@ -221,6 +241,37 @@
 .rankChip {
   align-self: center;
   color: var(--color-ink-black);
+}
+
+/* ===== Award badge (every awarded card outside the spotlight) =====
+   Laurel + named tier, no emoji. The laurel inherits `color` from an inline
+   tier accent set in JS; the chip always spells the tier out, so the colour is
+   decorative reinforcement and never the only carrier of meaning. */
+.awardBadge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.awardLaurel {
+  width: 22px;
+  height: 29px;
+  flex: 0 0 auto;
+}
+
+.awardChip {
+  color: var(--color-ink-black);
+}
+
+/* Certificate link chip — the one link on a card that leaves the showcase for
+   a permanent credential page, so it gets the green structural accent. */
+.certChip {
+  border-color: var(--color-fresh-grass);
+}
+
+.certChip:hover {
+  border-color: var(--color-ink-black);
+  text-decoration: none;
 }
 
 /* ===== Media (hero image / YouTube thumb / iframe) ===== */

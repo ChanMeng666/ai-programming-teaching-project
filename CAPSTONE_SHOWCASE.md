@@ -151,16 +151,78 @@ card renders: image, track pill, avatar, buttons, vote count.
 
 ## How the page behaves
 
-- Sorted by votes desc, then `submittedAt` asc.
-- The **Top 3** spotlight section only appears once there are **≥3 published
-  projects**. It is typographic, not medals: huge ink rank numerals, with a 3px
-  green border on the #1 card (no gold/silver/bronze, no metallic styling). Below
-  that, everything renders in the plain grid.
+- **Ordered by frozen award rank** (`src/data/awards.json`), not by the live vote
+  count — see “Awards are frozen” below. Projects with no award record fall below
+  every awarded one, ordered by votes desc then `submittedAt` asc.
+- The **Award Winners** spotlight section only appears once there are **≥3
+  awarded projects**. It is typographic, not medals: huge ink rank numerals, with
+  a 3px green border on the #1 card (no gold/silver/bronze, no metallic styling).
+  Below that, everything renders in the plain grid, where each awarded card gets
+  a laurel + tier chip and a **Certificate** link.
 - The vote control is a coral pill with the count in a white dot; once you've
   voted, the card switches to a green-border ghost state.
-- The page polls `/api/capstones` every 30s.
+- The page polls `/api/capstones` every 60s, and stops polling after 10 minutes
+  idle (a backgrounded tab used to exhaust the Worker's daily KV write quota).
 - A visitor's votes live in `localStorage` (`capstoneShowcase.voted`), the
   authoritative count in KV. Votes are rate limited to 30/hour per IP.
+- The published list and the vote-bearing response are cached in the **Cloudflare
+  edge cache** (`capstones/notion-list`, 60s; `capstones/list-response`, 20s) —
+  not in KV. A successful vote purges the response key.
+
+## Awards are frozen
+
+Award voting closed **2026-08-06**. The results live in
+**`src/data/awards.json`** as a deliberate snapshot of `GET /api/capstones`, and
+`src/data/awards.js` is the accessor the site imports.
+
+Why frozen: each award has a permanent public credential page that students link
+from LinkedIn. If rank were still derived from the live count, someone's “First
+Place” page could silently demote itself weeks later. **Likes stay open and keep
+counting; they simply no longer reorder anything or affect any award.**
+
+Do not edit `rank`, `tier`, `votes` or `certId` after issue.
+
+## Certificates
+
+Each awarded project has a credential page at `/certificate/<slug>` plus an index
+at `/certificate`. That page is the verification: it is what LinkedIn's
+“Credential URL” points at, and its `og:image` is what renders in the feed when a
+student shares the link.
+
+| Piece | Where |
+|---|---|
+| Frozen results | `src/data/awards.json` (+ `awards.js` accessor) |
+| Page component | `src/components/Certificate/` |
+| Routes | `src/pages/certificate/<slug>.js` × 6, `index.js` |
+| Certificate layout | `scripts/certificate-template.html` (1584×1120 CSS) |
+| og:image layout | `scripts/certificate-social.html` (1200×630) |
+| Decorative plates | `scripts/generate-certificate-plates.mjs` (gpt-image-2) |
+| Renderer | `scripts/render-certificates.mjs` (Playwright → PNG) |
+| Output | `static/img/certificates/<slug>.{png,webp}`, `<slug>-social.png` |
+
+Nothing that must be correct — a name, the logo, a credential ID, the QR — is
+ever produced by an image model. `gpt-image-2` generates only the ornamental
+border plate; everything else is real DOM composited on top.
+
+### Regenerating
+
+```bash
+# Decorative plates (needs an OpenAI key; only when the border art should change)
+npm run certificates:plates -- --env-file <path-to-env>
+
+# Certificates + og:image cards. Playwright must be installed GLOBALLY
+# (npm i -g playwright) — it is deliberately not a package.json dependency,
+# because its ~150 MB browser download would run on every Pages build.
+npm run certificates:render -- --force
+npm run certificates:render -- --only linguapath --force   # just one
+```
+
+The renderer works without any plate: the template falls back to a CSS paper-cut
+ornament (`body[data-plate="off"]`). If `gpt-image-2` keeps drawing text inside
+the frame despite the prompt, that fallback is the shipping option.
+
+**Always eyeball every regenerated PNG** — name spelling, tier, credential ID,
+QR — before pushing. These go on real people's professional profiles.
 
 ## Pulling a card down
 
@@ -175,6 +237,11 @@ When the cohort is done and the page should go away:
    the navbar/footer links to `/capstone-showcase` in `docusaurus.config.js`,
    the `capstoneShowcase.*` keys in `i18n/zh-Hans/code.json`, and
    `static/img/capstone/`.
+   **Keep the certificates.** `/certificate/*`, `src/data/awards.*` and
+   `static/img/certificates/` are permanent credential records that students
+   link from LinkedIn — deleting them breaks live links on real profiles. If the
+   showcase goes, drop the `<Link to="/capstone-showcase">` references from
+   `src/components/Certificate/index.js` and leave the rest standing.
 2. Delete `worker/src/capstones.ts` and its four routes in `worker/src/index.ts`,
    then `cd worker && npx wrangler deploy`.
 3. Optionally delete the `CAPSTONE_VOTES` KV namespace, the

@@ -1,0 +1,134 @@
+{
+  "_comment": [
+    "TECHNEST 2026 capstone awards — FROZEN RESULTS. Award voting closed 2026-08-06.",
+    "These vote counts are a deliberate snapshot of GET /api/capstones at",
+    "updatedAt 2026-08-05T13:06:06.568Z, not a live read. Certificates are permanent",
+    "and linked from students' LinkedIn profiles, so rank must never be able to change",
+    "underneath them. Likes on /capstone-showcase remain open but no longer reorder",
+    "anything and do not affect any award.",
+    "Plain JSON rather than a .js module so both webpack (the site) and plain Node",
+    "(scripts/render-certificates.mjs) read exactly the same source of truth.",
+    "Do not edit rank, tier, votes or certId after issue.",
+    "ranks 1..6 by frozen votes, ties broken by submittedAt ascending — the same rule",
+    "/capstone-showcase already used. CreditHero and Data Dungeon both hold 9 votes;",
+    "the tie is cosmetic because both sit in the same tier.",
+    "citation is hand-written and capped at ~120 chars. It is NOT the Notion pitch —",
+    "several pitches run past 300 characters and would overflow a fixed-size certificate."
+  ],
+
+  "cohort": "TECHNEST 2026",
+  "issuer": "TechNest",
+  "instructor": "Chan Meng",
+  "instructorTitle": "Instructor, TECHNEST 2026",
+
+  "frozenAt": "2026-08-06",
+  "issuedOn": "2026-08-06",
+  "issuedOnLabel": "6 August 2026",
+  "_issuedOnLabelNote": "Localised labels live here beside the default rather than being formatted with Intl at render time: `new Date('2026-08-06')` is UTC midnight and renders as the 5th west of Greenwich, and any server/client disagreement would be a hydration mismatch. Keeping them next to issuedOn also means a change to the date cannot silently leave a translation behind.",
+  "issuedOnLabelByLocale": {
+    "zh-Hans": "2026年8月6日"
+  },
+  "issueYear": 2026,
+  "issueMonth": 8,
+
+  "siteUrl": "https://programming.chanmeng.org",
+
+  "tiers": {
+    "first": { "label": "First Place", "accent": "#8ed462", "short": "1st" },
+    "second": { "label": "Second Place", "accent": "#2ba0ff", "short": "2nd" },
+    "third": { "label": "Third Place", "accent": "#ff705d", "short": "3rd" },
+    "excellence": {
+      "label": "Award of Excellence",
+      "_accentNote": "Stone gray, not sandstone. Sandstone #e0dbce is a recessed fill for white surfaces; on the cream certificate it is invisible, so the laurels and accent edge read as a rendering fault rather than as restraint. Stone gray is 3.2:1 on cream — fine here because the accent is only ever a non-text shape (DESIGN.md).",
+      "accent": "#80827f",
+      "short": "Excellence"
+    }
+  },
+
+  "awards": [
+    {
+      "slug": "linguapath",
+      "rank": 1,
+      "tier": "first",
+      "certId": "TN2026-CAP-001",
+      "title": "LinguaPath",
+      "team": "Fatema Alasbahi",
+      "track": "Personal Growth",
+      "votes": 66,
+      "citation": "An AI-powered exam prep platform for the Duolingo English Test and HSK Chinese, with instant writing feedback.",
+      "liveURL": "https://linguapath-jet.vercel.app",
+      "repoURL": "https://github.com/fatemaalasbahi/linguapath",
+      "profileURL": "https://github.com/fatemaalasbahi"
+    },
+    {
+      "slug": "joborg-ai",
+      "rank": 2,
+      "tier": "second",
+      "certId": "TN2026-CAP-002",
+      "title": "Joborg AI",
+      "team": "Abiodun Magret Oyedele",
+      "track": "Personal Growth",
+      "votes": 31,
+      "citation": "Turns any job description into a personalized AI mock interview with instant feedback and a readiness report.",
+      "liveURL": "https://joborg-ai-web.vercel.app",
+      "repoURL": "https://github.com/Magret1730/joborg-ai",
+      "profileURL": "https://www.linkedin.com/in/oyedele-abiodun/"
+    },
+    {
+      "slug": "icare",
+      "rank": 3,
+      "tier": "third",
+      "certId": "TN2026-CAP-003",
+      "title": "iCare",
+      "team": "Ikenna Anasieze",
+      "track": "Personal Growth",
+      "votes": 21,
+      "citation": "A healthcare records platform that turns complex medical documents into clear, actionable plain English.",
+      "liveURL": "https://technest-project-psi.vercel.app/",
+      "repoURL": "https://github.com/Donaldnaz/technest-project",
+      "profileURL": "https://www.linkedin.com/in/ikenna-anasieze/"
+    },
+    {
+      "slug": "credithero",
+      "rank": 4,
+      "tier": "excellence",
+      "certId": "TN2026-CAP-004",
+      "title": "CreditHero",
+      "team": "Kwame Essuman",
+      "track": "Personal Growth",
+      "votes": 9,
+      "citation": "Turns a confusing credit report into a clear score, a trend line, and plain-English factors you can act on.",
+      "liveURL": "https://credithero-brown.vercel.app",
+      "repoURL": "https://github.com/kaybee77/credithero",
+      "profileURL": "https://www.linkedin.com/in/kwameessuman/"
+    },
+    {
+      "slug": "data-dungeon",
+      "rank": 5,
+      "tier": "excellence",
+      "certId": "TN2026-CAP-005",
+      "title": "Data Dungeon",
+      "team": "Cameron Boyer",
+      "track": "Personal Growth",
+      "votes": 9,
+      "citation": "Teaches SQL through a dungeon RPG, with an AI Warden that verifies every real query before a chamber clears.",
+      "liveURL": "https://data-dungeon-phi.vercel.app",
+      "repoURL": "https://github.com/CamB7/data-dungeon",
+      "profileURL": "https://www.linkedin.com/in/cameron-boyer-934527265/"
+    },
+    {
+      "slug": "campus-event-radar",
+      "rank": 6,
+      "tier": "excellence",
+      "certId": "TN2026-CAP-006",
+      "title": "Campus Event Radar",
+      "team": "Chidiebere Metu",
+      "track": "Campus Life",
+      "votes": 2,
+      "citation": "Reads every event happening on campus each week and uses AI to surface the handful that match your interests.",
+      "liveURL": "https://campus-event-radar.vercel.app",
+      "repoURL": "https://github.com/Chidimetu/campus-event-radar",
+      "profileURL": "https://www.linkedin.com/in/metu-chidiebere-858a9540/"
+    }
+  ]
+}

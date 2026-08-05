@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>TECHNEST 2026 Capstone — Certificate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  /* MindMarket tokens (mirrored from src/css/tokens.css — this file renders
+     outside the Docusaurus bundle, so it cannot import them). */
+  :root{
+    --grass:#8ed462; --cream:#f5f1e4; --ink:#2c2e2a; --white:#ffffff;
+    --sandstone:#e0dbce; --hairline:#d5d5d4; --ink-muted:#5d5f5b;
+    --sky:#2ba0ff; --coral:#ff705d; --sun:#f5e211;
+    --accent:#8ed462;               /* overwritten per tier */
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:1584px;height:1120px}
+  body{
+    font-family:'Inter',system-ui,-apple-system,sans-serif;
+    color:var(--ink);background:var(--cream);
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .sheet{position:relative;width:1584px;height:1120px;background:var(--cream);overflow:hidden}
+
+  /* ---- layer 1: generated paper-cut plate (gpt-image-2) ---------------- */
+  .plate{position:absolute;inset:0;background-size:cover;background-position:center;display:none}
+  body[data-plate="on"] .plate{display:block}
+
+  /* ---- layer 1b: CSS paper-cut ornament (fallback when no plate) -------
+     Not a stub: if gpt-image-2 keeps smuggling lettering into the plate we
+     ship this instead, and it still reads as MindMarket. Flat shapes only —
+     no shadows, no gradients. Every shape sits in the gutter *inside* the
+     frame; nothing straddles the frame border or drifts into the text column. */
+  .ornament{position:absolute;inset:0;display:none}
+  body[data-plate="off"] .ornament{display:block}
+  .ornament i{position:absolute;display:block}
+  .o-sq{border-radius:14px}
+  .o-dot{border-radius:50%}
+
+  /* Three-dot divider fills the band between the citation and the footer.
+     Only needed without a plate — the illustrated plate carries that area. */
+  .divider{
+    position:absolute;left:0;right:0;bottom:342px;display:none;
+    justify-content:center;align-items:center;gap:18px;
+  }
+  body[data-plate="off"] .divider{display:flex}
+  .divider span{width:12px;height:12px;border-radius:50%;display:block}
+
+  /* ---- layer 2: the frame -------------------------------------------- */
+  /* Drawn only in the fallback. With a plate the illustrated border IS the
+     frame, and a second geometric rule on top of it would read as a mistake. */
+  .frame{
+    position:absolute;inset:54px;border:2px solid var(--ink);border-radius:28px;
+    background:transparent;display:none;
+  }
+  body[data-plate="off"] .frame{display:block}
+  .frame::before{ /* tier accent edge along the top inside of the frame */
+    content:'';position:absolute;left:96px;right:96px;top:-2px;height:9px;
+    background:var(--accent);border-radius:0 0 9px 9px;
+  }
+
+  /* Tier accent for plate mode, where there is no frame edge to carry it. */
+  .accentPill{
+    width:104px;height:9px;border-radius:5px;background:var(--accent);
+    margin-top:30px;display:none;
+  }
+  body[data-plate="on"] .accentPill{display:block}
+
+  /* ---- layer 3: content ---------------------------------------------- */
+  .content{
+    position:absolute;inset:54px;padding:64px 104px 58px;
+    display:flex;flex-direction:column;align-items:center;text-align:center;
+  }
+  /* Wider gutters with a plate, so text never sits on the illustrated border. */
+  body[data-plate="on"] .content{padding:70px 150px 62px}
+
+  .brand{display:flex;align-items:center;gap:18px;align-self:flex-start}
+  .brand .mark{width:64px;height:64px;flex:0 0 auto}
+  .brand .lines{text-align:left;line-height:1.25}
+  .brand .wordmark{font-size:25px;font-weight:500;letter-spacing:-0.02em}
+  .brand .tagline{font-size:16px;font-weight:400;color:var(--ink-muted);letter-spacing:0.01em}
+
+  .eyebrow{
+    margin-top:44px;font-size:21px;font-weight:500;letter-spacing:0.34em;
+    text-transform:uppercase;color:var(--ink);
+  }
+
+  .tierRow{
+    margin-top:24px;display:flex;align-items:center;justify-content:center;gap:34px;
+  }
+  .laurel{width:86px;height:112px;color:var(--accent);flex:0 0 auto}
+  .laurel.right{transform:scaleX(-1)}
+  .tier{
+    font-size:74px;font-weight:500;letter-spacing:-0.03em;line-height:1;
+    white-space:nowrap;
+  }
+
+  .awardedTo{
+    margin-top:38px;font-size:19px;font-weight:400;letter-spacing:0.2em;
+    text-transform:uppercase;color:var(--ink-muted);
+  }
+  .name{
+    margin-top:14px;font-size:96px;font-weight:500;letter-spacing:-0.05em;
+    line-height:1.04;white-space:nowrap;
+  }
+  .rule{margin-top:26px;width:340px;height:2px;background:var(--hairline)}
+
+  .project{margin-top:26px;font-size:33px;font-weight:500;letter-spacing:-0.02em}
+  .project .lead{font-weight:400;color:var(--ink-muted)}
+  .citation{
+    margin-top:14px;max-width:1020px;font-size:24px;font-weight:400;line-height:1.5;
+    color:var(--ink-muted);letter-spacing:-0.005em;
+  }
+
+  /* ---- footer -------------------------------------------------------- */
+  .footer{
+    margin-top:auto;width:100%;display:flex;align-items:flex-end;
+    justify-content:space-between;gap:40px;text-align:left;
+  }
+  .sig{min-width:300px}
+  .sig .line{width:300px;height:2px;background:var(--ink);margin-bottom:12px}
+  .sig .who{font-size:22px;font-weight:500;letter-spacing:-0.01em}
+  .sig .role{font-size:16px;font-weight:400;color:var(--ink-muted);margin-top:3px}
+
+  .verify{display:flex;align-items:flex-end;gap:18px}
+  .verify .qr{width:118px;height:118px;flex:0 0 auto;background:var(--white);
+              border:1px solid var(--hairline);border-radius:10px;padding:7px}
+  .verify .qr svg{display:block;width:100%;height:100%}
+  .verify .vtext{padding-bottom:2px}
+  .verify .vlabel{font-size:14px;font-weight:500;letter-spacing:0.16em;
+                  text-transform:uppercase;color:var(--ink-muted)}
+  .verify .vurl{font-size:17px;font-weight:500;margin-top:5px;letter-spacing:-0.01em}
+  .verify .vid{font-size:15px;font-weight:400;color:var(--ink-muted);margin-top:4px}
+
+  .issued{text-align:right;min-width:220px}
+  .issued .line{width:220px;height:2px;background:var(--ink);margin:0 0 12px auto}
+  .issued .who{font-size:22px;font-weight:500;letter-spacing:-0.01em}
+  .issued .role{font-size:16px;font-weight:400;color:var(--ink-muted);margin-top:3px}
+</style>
+</head>
+<body data-plate="off">
+  <div class="sheet">
+    <div class="plate" id="plate"></div>
+
+    <!-- Flat paper-cut confetti, confined to the gutters between the frame
+         (inset 54px) and the text column (starts at 158px / ends at 1426px). -->
+    <div class="ornament">
+      <i class="o-sq"  style="left:74px;top:300px;width:52px;height:52px;background:var(--sun);transform:rotate(-14deg)"></i>
+      <i class="o-dot" style="left:92px;top:472px;width:24px;height:24px;background:var(--sky)"></i>
+      <i class="o-dot" style="left:76px;top:648px;width:16px;height:16px;background:var(--grass)"></i>
+      <i class="o-sq"  style="left:80px;bottom:300px;width:36px;height:36px;background:var(--coral);transform:rotate(18deg)"></i>
+      <i class="o-sq"  style="right:70px;top:268px;width:44px;height:44px;background:var(--grass);transform:rotate(12deg)"></i>
+      <i class="o-dot" style="right:76px;top:452px;width:28px;height:28px;background:var(--coral)"></i>
+      <i class="o-dot" style="right:84px;bottom:470px;width:18px;height:18px;background:var(--sky)"></i>
+      <i class="o-sq"  style="right:68px;bottom:290px;width:56px;height:56px;background:var(--sun);transform:rotate(-9deg)"></i>
+    </div>
+
+    <div class="divider">
+      <span style="background:var(--grass)"></span>
+      <span style="background:var(--sky)"></span>
+      <span style="background:var(--coral)"></span>
+    </div>
+
+    <div class="frame"></div>
+
+    <div class="content">
+      <div class="brand">
+        <svg class="mark" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect width="64" height="64" rx="14" fill="#8ed462"/>
+          <path d="M17 32 L32 19 L47 32" stroke="#2c2e2a" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M23 45 L32 37 L41 45" stroke="#2c2e2a" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="lines">
+          <div class="wordmark" id="cohort">TECHNEST 2026</div>
+          <div class="tagline">AI Programming Education Platform</div>
+        </div>
+      </div>
+
+      <div class="accentPill"></div>
+      <div class="eyebrow">Certificate of Achievement</div>
+
+      <div class="tierRow">
+        <svg class="laurel left" viewBox="0 0 110 150" fill="none" aria-hidden="true">
+          <path d="M92 142 C 62 124, 40 94, 33 40" stroke="currentColor" stroke-width="7"
+                stroke-linecap="round" fill="none"/>
+          <g fill="currentColor">
+            <ellipse cx="-18" cy="0" rx="18" ry="7.5" transform="translate(72,124) rotate(-30)"/>
+            <ellipse cx="-18" cy="0" rx="18" ry="7.5" transform="translate(58,104) rotate(-42)"/>
+            <ellipse cx="-18" cy="0" rx="18" ry="7.5" transform="translate(47,82)  rotate(-54)"/>
+            <ellipse cx="-18" cy="0" rx="18" ry="7.5" transform="translate(39,60)  rotate(-66)"/>
+            <ellipse cx="-16" cy="0" rx="16" ry="6.5" transform="translate(34,38)  rotate(-80)"/>
+          </g>
+        </svg>
+        <div class="tier" id="tier">First Place</div>
+        <svg class="laurel right" viewBox="0 0 110 150" fill="none" aria-hidden="true">
+          <path d="M92 142 C 62 124, 40 94, 33 40" stroke="currentColor" stroke-width="7"
+                stroke-linecap="round" fill="none"/>
+          <g fill="currentColor">
+            <ellipse cx="-18" cy="0" rx="18" ry="7.5" transform="translate(72,124) rotate(-30)"/>
+            <ellipse cx="-18" cy="0" rx="18" ry="7.5" transform="translate(58,104) rotate(-42)"/>
+            <ellipse cx="-18" cy="0" rx="18" ry="7.5" transform="translate(47,82)  rotate(-54)"/>
+            <ellipse cx="-18" cy="0" rx="18" ry="7.5" transform="translate(39,60)  rotate(-66)"/>
+            <ellipse cx="-16" cy="0" rx="16" ry="6.5" transform="translate(34,38)  rotate(-80)"/>
+          </g>
+        </svg>
+      </div>
+
+      <div class="awardedTo">Awarded to</div>
+      <div class="name" id="name">Fatema Alasbahi</div>
+      <div class="rule"></div>
+
+      <div class="project"><span class="lead">for</span> <span id="project">LinguaPath</span></div>
+      <div class="citation" id="citation">An AI-powered exam prep platform.</div>
+
+      <div class="footer">
+        <div class="sig">
+          <div class="line"></div>
+          <div class="who" id="instructor">Chan Meng</div>
+          <div class="role" id="instructorTitle">Instructor, TECHNEST 2026</div>
+        </div>
+
+        <div class="verify">
+          <div class="qr" id="qr"></div>
+          <div class="vtext">
+            <div class="vlabel">Verify this credential</div>
+            <div class="vurl" id="verifyUrl">programming.chanmeng.org/certificate/linguapath</div>
+            <div class="vid" id="certId">Credential TN2026-CAP-001</div>
+          </div>
+        </div>
+
+        <div class="issued">
+          <div class="line"></div>
+          <div class="who" id="issuedOn">6 August 2026</div>
+          <div class="role">Date of issue</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+// Populated by scripts/render-certificates.mjs via page.addInitScript.
+// The defaults above are only so the file is legible when opened by hand.
+(function () {
+  var a = window.__AWARD__;
+  if (!a) return;
+
+  document.body.dataset.plate = a.plateUrl ? 'on' : 'off';
+  if (a.plateUrl) {
+    document.getElementById('plate').style.backgroundImage = 'url("' + a.plateUrl + '")';
+  }
+  document.documentElement.style.setProperty('--accent', a.accent);
+
+  var set = function (id, text) { document.getElementById(id).textContent = text; };
+  set('cohort', a.cohort);
+  set('tier', a.tierLabel);
+  set('name', a.team);
+  set('project', a.title);
+  set('citation', a.citation);
+  set('instructor', a.instructor);
+  set('instructorTitle', a.instructorTitle);
+  set('verifyUrl', a.verifyUrl);
+  set('certId', 'Credential ' + a.certId);
+  set('issuedOn', a.issuedOn);
+  if (a.qrSvg) document.getElementById('qr').innerHTML = a.qrSvg;
+
+  // Long names must not clip. "Abiodun Magret Oyedele" is the widest in this
+  // cohort; shrink to fit rather than wrap, so every certificate keeps the
+  // same vertical rhythm.
+  //
+  // Measure the rendered box, not scrollWidth: .name is a nowrap child of a
+  // centred flex column, so it is sized to its own content and scrollWidth
+  // never exceeds clientWidth however far it overflows the page.
+  var nameEl = document.getElementById('name');
+  var content = document.querySelector('.content');
+  var cs = getComputedStyle(content);
+  var avail =
+    content.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+  for (var px = 96; px > 40 && nameEl.getBoundingClientRect().width > avail; px -= 2) {
+    nameEl.style.fontSize = px + 'px';
+  }
+})();
+</script>
+</body>
+</html>

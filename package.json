@@ -13,7 +13,9 @@
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
     "geo:test": "node scripts/geo-test.js",
-    "geo:verify": "npm run build && node scripts/geo-test.js"
+    "geo:verify": "npm run build && node scripts/geo-test.js",
+    "certificates:plates": "node scripts/generate-certificate-plates.mjs",
+    "certificates:render": "node scripts/render-certificates.mjs"
   },
   "dependencies": {
     "@docusaurus/core": "^3.8.1",
@@ -32,6 +34,7 @@
   "devDependencies": {
     "@docusaurus/module-type-aliases": "^3.8.1",
     "@docusaurus/types": "^3.8.1",
+    "qrcode": "^1.5.4",
     "sharp": "^0.35.3"
   },
   "browserslist": {

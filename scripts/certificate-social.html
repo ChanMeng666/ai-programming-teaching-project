@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>TECHNEST 2026 Capstone — Credential Card</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  /* 1200x630 og:image. A 1.414 certificate letterboxed into 1.91:1 would waste
+     half the frame, so this is a purpose-built card that shows the certificate
+     as a thumbnail next to the facts a reader actually scans in a feed. */
+  :root{
+    --grass:#8ed462; --cream:#f5f1e4; --ink:#2c2e2a; --white:#ffffff;
+    --sandstone:#e0dbce; --hairline:#d5d5d4; --ink-muted:#5d5f5b;
+    --sky:#2ba0ff; --coral:#ff705d; --sun:#f5e211;
+    --accent:#8ed462;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:1200px;height:630px}
+  body{
+    font-family:'Inter',system-ui,-apple-system,sans-serif;color:var(--ink);
+    background:var(--cream);-webkit-font-smoothing:antialiased;
+  }
+  .card{position:relative;width:1200px;height:630px;background:var(--cream);
+        overflow:hidden;padding:52px 56px;display:flex;flex-direction:column}
+
+  .brand{display:flex;align-items:center;gap:15px}
+  .brand .mark{width:50px;height:50px;flex:0 0 auto}
+  .brand .wordmark{font-size:22px;font-weight:500;letter-spacing:-0.02em}
+  .brand .sep{width:5px;height:5px;border-radius:50%;background:var(--hairline)}
+  .brand .kicker{font-size:19px;font-weight:400;color:var(--ink-muted)}
+
+  .body{margin-top:38px;display:flex;align-items:center;gap:46px;flex:1}
+
+  .thumb{
+    width:500px;height:354px;flex:0 0 auto;border:1px solid var(--hairline);
+    border-radius:18px;overflow:hidden;background:var(--white);
+  }
+  .thumb img{display:block;width:100%;height:100%;object-fit:cover}
+
+  .facts{flex:1;min-width:0}
+  .eyebrow{font-size:15px;font-weight:500;letter-spacing:0.26em;text-transform:uppercase;
+           color:var(--ink-muted)}
+  .tier{margin-top:12px;font-size:60px;font-weight:500;letter-spacing:-0.045em;line-height:1}
+  .accentBar{margin-top:16px;width:104px;height:9px;border-radius:5px;background:var(--accent)}
+  .name{margin-top:24px;font-size:38px;font-weight:500;letter-spacing:-0.035em;
+        line-height:1.1;white-space:nowrap}
+  .project{margin-top:9px;font-size:25px;font-weight:400;color:var(--ink-muted);
+           letter-spacing:-0.01em}
+  .verify{margin-top:24px;font-size:16px;font-weight:500;color:var(--ink-muted);
+          letter-spacing:-0.005em}
+
+  /* decorative flat shapes, no shadows or gradients */
+  .dot{position:absolute;border-radius:50%}
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="dot" style="right:-40px;top:-40px;width:150px;height:150px;background:var(--sun)"></div>
+    <div class="dot" style="right:120px;bottom:-30px;width:60px;height:60px;background:var(--sky)"></div>
+
+    <div class="brand">
+      <svg class="mark" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect width="64" height="64" rx="14" fill="#8ed462"/>
+        <path d="M17 32 L32 19 L47 32" stroke="#2c2e2a" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M23 45 L32 37 L41 45" stroke="#2c2e2a" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <div class="wordmark" id="cohort">TECHNEST 2026</div>
+      <div class="sep"></div>
+      <div class="kicker">Capstone Credential</div>
+    </div>
+
+    <div class="body">
+      <div class="thumb"><img id="cert" alt=""></div>
+      <div class="facts">
+        <div class="eyebrow">Certificate of Achievement</div>
+        <div class="tier" id="tier">First Place</div>
+        <div class="accentBar"></div>
+        <div class="name" id="name">Fatema Alasbahi</div>
+        <div class="project" id="project">LinguaPath</div>
+        <div class="verify" id="verifyUrl">programming.chanmeng.org/certificate/linguapath</div>
+      </div>
+    </div>
+  </div>
+
+<script>
+(function () {
+  var a = window.__AWARD__;
+  if (!a) return;
+  document.documentElement.style.setProperty('--accent', a.accent);
+  var set = function (id, t) { document.getElementById(id).textContent = t; };
+  set('cohort', a.cohort);
+  set('tier', a.tierLabel);
+  set('name', a.team);
+  set('project', a.title);
+  set('verifyUrl', a.verifyUrl);
+  if (a.certImageUrl) document.getElementById('cert').src = a.certImageUrl;
+
+  // Same shrink-to-fit guard as the certificate: never clip a student's name.
+  // Measured off the rendered box for the same reason — see the note there.
+  var nameEl = document.getElementById('name');
+  var avail = nameEl.parentElement.clientWidth;
+  for (var px = 38; px > 22 && nameEl.getBoundingClientRect().width > avail; px -= 1) {
+    nameEl.style.fontSize = px + 'px';
+  }
+})();
+</script>
+</body>
+</html>
