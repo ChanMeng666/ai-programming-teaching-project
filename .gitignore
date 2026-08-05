@@ -41,3 +41,11 @@ temp-*/
 # Local state for the AI assistant seed script (tracks chunk IDs for diff-based
 # deletion on next seed run). Tied to the live Vectorize index — do not commit.
 /worker/scripts/.seeded-ids.json
+
+# Certificate plate PNG masters (~5.4 MB) are large intermediates that nothing
+# links to — scripts/render-certificates.mjs composites the committed .webp,
+# and shipping the PNGs would push 5.4 MB of dead weight to the CDN on every
+# Pages deploy. Regenerate with `npm run certificates:plates`.
+# The rendered certificates themselves (static/img/certificates/*.png) ARE
+# committed: those are the print masters students download.
+/static/img/certificates/plates/*.png

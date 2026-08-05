@@ -46,9 +46,17 @@ const STYLE_PREFIX =
 // --force; if it keeps happening, the HTML template's CSS ornament fallback
 // (body[data-plate="off"]) ships instead.
 const EMPTY_CENTRE =
-  'CRITICAL: the entire middle 70 percent of the image must be a completely ' +
+  'CRITICAL: the entire middle 80 percent of the image must be a completely ' +
   'empty, flat, unbroken cream #f5f1e4 panel with absolutely nothing drawn in it. ' +
   'The artwork exists only in the outer margin as a border. ' +
+  // The first podium plate sprawled ~21% inward at the bottom corners and ran
+  // straight through the signature and date lines. The band width has to be
+  // stated as a hard limit, and stated for the corners separately — that is
+  // where a "celebratory" instruction makes the model pile artwork up.
+  'The decorative band must be THIN and EVEN: no thicker than 10 percent of the ' +
+  'image width on the left and right edges, and no thicker than 10 percent of the ' +
+  'image height on the top and bottom edges. This limit applies at the four ' +
+  'corners too — corner decoration must not reach further inward than the edges do. ' +
   'There must be NO text, NO letters, NO numbers, NO words, NO calligraphy, ' +
   'NO signatures, NO seals, NO ribbons, NO logos and NO symbols anywhere in the image.';
 
@@ -57,12 +65,12 @@ const PLATES = [
   {
     id: 'plate-podium',
     scene:
-      'An ornamental certificate border framing an empty cream centre. The border is built ' +
-      'from flat paper-cut laurel leaves in fresh grass green sweeping along the left and ' +
-      'right edges, with small scattered confetti shapes — circles, rounded squares and thin ' +
-      'triangles in sky blue, coral red and sunshine yellow — drifting across the top and ' +
-      'bottom margins. Denser and more celebratory at the four corners, sparse along the middle ' +
-      'of each edge',
+      'A slim ornamental certificate border framing an empty cream centre. The border is a ' +
+      'single narrow ribbon of flat paper-cut laurel leaves in fresh grass green running along ' +
+      'all four edges, with a few small confetti shapes — circles, rounded squares and thin ' +
+      'triangles in sky blue, coral red and sunshine yellow — scattered sparingly along it. ' +
+      'Keep the band uniformly narrow the whole way round; do not thicken or pile up at the ' +
+      'corners',
   },
   {
     id: 'plate-excellence',
