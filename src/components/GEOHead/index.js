@@ -194,7 +194,15 @@ export default function GEOHead({
         "@type": "Person",
         "name": "Chan Meng",
         "description": "AI Agent & Full-Stack Developer",
-        "url": "https://github.com/ChanMeng666"
+        // Canonical author URL is her own site, not a profile on someone
+        // else's platform — this is emitted on every page, so it is the main
+        // signal tying this site to her identity. GitHub/LinkedIn stay as
+        // sameAs entity links rather than being dropped.
+        "url": "https://chanmeng.org",
+        "sameAs": [
+          "https://github.com/ChanMeng666",
+          "https://www.linkedin.com/in/chanmeng666"
+        ]
       },
       "publisher": {
         "@type": "Organization",

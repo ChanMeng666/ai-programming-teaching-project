@@ -1,0 +1,107 @@
+/* Instructor — mirrors the Community grid, but contained (mm-section) rather
+   than a full-bleed band. No shadows, no gradients; elevation is white-on-cream
+   plus a hairline border, per DESIGN.md. */
+
+.section {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 420px);
+  align-items: center;
+  gap: 56px;
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.heading {
+  margin: 0;
+  max-width: 16ch;
+}
+
+.body {
+  margin: 0;
+  font-size: var(--text-subheading);
+  line-height: 1.45;
+  color: var(--color-ink-black);
+  max-width: 42ch;
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.link {
+  font-size: 16px;
+  padding: 14px 24px;
+}
+
+.art {
+  display: flex;
+  justify-content: center;
+}
+
+/* Identity card — the one structural use of fresh grass on this section:
+   a left edge, never text and never a large fill. */
+.idCard {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  width: 100%;
+  max-width: 400px;
+  border-left: 3px solid var(--color-fresh-grass);
+}
+
+.mark {
+  display: block;
+  width: 72px;
+  height: 72px;
+  margin-bottom: 4px;
+}
+
+.name {
+  margin: 0;
+  font-size: 28px;
+  font-weight: var(--font-weight-medium);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--color-ink-black);
+}
+
+.role {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--color-ink-muted);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+@media (max-width: 900px) {
+  .inner {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .art {
+    order: -1;
+    justify-content: flex-start;
+  }
+  .idCard {
+    max-width: 340px;
+  }
+}

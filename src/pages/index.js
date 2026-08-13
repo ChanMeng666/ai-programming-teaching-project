@@ -6,6 +6,7 @@ import useScrollReveal from '@site/src/hooks/useScrollReveal';
 import Hero from '@site/src/components/Home/Hero';
 import Programs from '@site/src/components/Home/Programs';
 import HowItWorks from '@site/src/components/Home/HowItWorks';
+import Instructor from '@site/src/components/Home/Instructor';
 import Community from '@site/src/components/Home/Community';
 
 export default function Home() {
@@ -72,6 +73,7 @@ export default function Home() {
         <Hero />
         <Programs />
         <HowItWorks />
+        <Instructor />
         <Community />
       </main>
     </Layout>

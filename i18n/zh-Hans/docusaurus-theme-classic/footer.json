@@ -81,7 +81,15 @@
   },
   "link.item.label.Chan Meng's Profile": {
     "message": "Chan Meng 主页",
-    "description": "The label of footer link with label=Chan Meng's Profile linking to https://github.com/ChanMeng666"
+    "description": "The label of footer link with label=Chan Meng's Profile linking to https://chanmeng.org"
+  },
+  "link.item.label.Why This Course Is Free": {
+    "message": "为什么这门课程免费",
+    "description": "The label of footer link with label=Why This Course Is Free linking to https://chanmeng.org/teaching"
+  },
+  "link.item.label.GitHub Profile": {
+    "message": "GitHub 个人主页",
+    "description": "The label of footer link with label=GitHub Profile linking to https://github.com/ChanMeng666"
   },
   "link.item.label.Contact Developer": {
     "message": "联系开发者",
@@ -92,7 +100,7 @@
     "description": "The alt text of footer logo"
   },
   "copyright": {
-    "message": "<div class=\"footer-copyright\">\n            <div class=\"footer-legal\">\n              <div>版权所有 © 2026 AI 编程教育。</div>\n              <div>由 <a class=\"footer-link\" href=\"https://github.com/ChanMeng666\"><img src=\"/img/chan_logo.svg\" alt=\"Chan Meng\" class=\"footer-developer-logo\" />Chan Meng</a> 精心打造</div>\n            </div>\n          </div>",
+    "message": "<div class=\"footer-copyright\">\n            <div class=\"footer-legal\">\n              <div>版权所有 © 2026 AI 编程教育。</div>\n              <div>由 <a class=\"footer-link\" href=\"https://chanmeng.org\"><img src=\"/img/chan_logo.svg\" alt=\"Chan Meng\" class=\"footer-developer-logo\" />Chan Meng</a> 精心打造</div>\n            </div>\n          </div>",
     "description": "The footer copyright"
   }
 }

@@ -263,6 +263,18 @@ const config = {
             dropdownItemsAfter: [],
           },
           {
+            // Cross-link to the instructor's own site. The label is deliberately
+            // her name, not "Portfolio" — visitors look for the person, and the
+            // label doubles as the zh-Hans translation key (item.label.Chan Meng
+            // in i18n/zh-Hans/docusaurus-theme-classic/navbar.json). Renaming it
+            // silently drops the translation.
+            href: 'https://chanmeng.org/',
+            label: 'Chan Meng',
+            position: 'right',
+            target: '_blank',
+            rel: 'noopener noreferrer',
+          },
+          {
             href: 'https://chanmeng.org/#newsletter',
             label: 'Newsletter',
             position: 'right',
@@ -386,7 +398,19 @@ const config = {
                 href: 'https://github.com/ChanMeng666/ai-programming-teaching-project/blob/main/CONTRIBUTING.md',
               },
               {
+                // Repointed from github.com/ChanMeng666 to her actual site.
+                // The label is the zh-Hans translation key
+                // (link.item.label.Chan Meng's Profile) — do NOT rename it, or
+                // the Chinese footer silently falls back to English.
                 label: "Chan Meng's Profile",
+                href: 'https://chanmeng.org',
+              },
+              {
+                label: 'Why This Course Is Free',
+                href: 'https://chanmeng.org/teaching',
+              },
+              {
+                label: 'GitHub Profile',
                 href: 'https://github.com/ChanMeng666',
               },
               {
@@ -399,7 +423,7 @@ const config = {
         copyright: `<div class="footer-copyright">
             <div class="footer-legal">
               <div>Copyright © ${new Date().getFullYear()} AI Programming Education.</div>
-              <div>Crafted by <a class="footer-link" href="https://github.com/ChanMeng666"><img src="/img/chan_logo_without_brand_black.svg" alt="Chan Meng" class="footer-developer-logo" />Chan Meng</a></div>
+              <div>Crafted by <a class="footer-link" href="https://chanmeng.org"><img src="/img/chan_logo_without_brand_black.svg" alt="Chan Meng" class="footer-developer-logo" />Chan Meng</a></div>
             </div>
           </div>`,
       },

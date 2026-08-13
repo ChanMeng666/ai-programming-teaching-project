@@ -1033,6 +1033,33 @@
   "messageBoard.heroIllustrationAlt": {
     "message": "一个剪纸风小人正在寄出一封超大的信"
   },
+  "homepage.instructor.eyebrow": {
+    "message": "你的讲师"
+  },
+  "homepage.instructor.heading": {
+    "message": "教你的人，自己也还在写代码。"
+  },
+  "homepage.instructor.body": {
+    "message": "Chan Meng 为付费客户构建生产级 AI 系统，再把同样的方法带到这里。自 2024 年以来她已带过五期课程，并坚持把每一课都免费公开、中英双语——因为当年让她入门的资料，也是免费的。"
+  },
+  "homepage.instructor.why": {
+    "message": "为什么免费"
+  },
+  "homepage.instructor.portfolio": {
+    "message": "她的作品与文章"
+  },
+  "homepage.instructor.role": {
+    "message": "AI Agent 架构师 & 全栈工程师 · 新西兰奥克兰"
+  },
+  "homepage.instructor.chip.cohorts": {
+    "message": "自 2024 年起五期课程"
+  },
+  "homepage.instructor.chip.bilingual": {
+    "message": "153 课 × 双语"
+  },
+  "homepage.instructor.chip.license": {
+    "message": "Apache-2.0 开源"
+  },
   "homepage.community.eyebrow": {
     "message": "社区"
   },

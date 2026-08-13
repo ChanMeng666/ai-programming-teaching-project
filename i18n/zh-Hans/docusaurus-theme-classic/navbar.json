@@ -19,6 +19,10 @@
     "message": "留言板",
     "description": "Navbar item with label Message Board"
   },
+  "item.label.Chan Meng": {
+    "message": "Chan Meng",
+    "description": "Navbar item with label Chan Meng"
+  },
   "item.label.Newsletter": {
     "message": "Newsletter",
     "description": "Navbar item with label Newsletter"
