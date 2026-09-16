@@ -29,7 +29,7 @@ export default function Programs() {
           <div className={styles.featuredBody}>
             <span className={`mm-chip ${styles.badge}`}>
               <Translate id="homepage.programs.featuredBadge">
-                Now enrolling
+                Cohort complete
               </Translate>
             </span>
             <h3 className={`mm-heading ${styles.cardTitle}`}>
