@@ -17,6 +17,10 @@ Only what the code cannot tell you is written here. Routes, bindings, scripts, c
 - **Grep-zero in `src/`:** `data-theme='dark'`, `--space-`, `#0f7173`, `#1ab0b2`, `#f05d5e`, `#25c2a0`, `homepage-wrapper`, and any non-`none` `box-shadow` except the music-pulse ring keyframe in `src/css/animations.css`.
 - **Worker:** see `worker/CLAUDE.md`.
 
+## Edge configuration outside the repo
+
+The `chanmeng.org` zone has Cloudflare Speed Brain on, which answers any `Sec-Purpose: prefetch` request for an uncached file with a 503. Docusaurus prefetches route chunks that way, so every deploy produced a burst of console 503s. A request header transform rule on the zone removes `Sec-Purpose` for `programming.chanmeng.org` only. If prefetch 503s come back, check that rule still exists before looking at the site.
+
 ## Single sources of truth
 
 | Fact | Lives in |
