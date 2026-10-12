@@ -2,9 +2,8 @@ import React, { useState, useEffect, useCallback } from 'react';
 import Layout from '@theme/Layout';
 import { translate } from '@docusaurus/Translate';
 import useScrollReveal from '@site/src/hooks/useScrollReveal';
+import { API_BASE } from '@site/src/config/api';
 import styles from './message-board.module.css';
-
-const API_BASE = 'https://programming-api.chanmeng.org';
 
 const CATEGORIES = ['心得体会', '经验分享', '教程讨论', '其他'];
 

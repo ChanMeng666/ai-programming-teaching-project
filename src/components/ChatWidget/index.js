@@ -1,18 +1,18 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { translate } from '@docusaurus/Translate';
+import { API_BASE } from '@site/src/config/api';
+import versions from '@site/versions.json';
 import ChatBox from './ChatBox';
 import ChatToggle from './ChatToggle';
 import styles from './styles.module.css';
 
-// Worker API URL
-const API_URL = 'https://programming-api.chanmeng.org';
-
 const STORAGE_KEY = 'ai-chat-messages';
 const SESSION_KEY = 'ai-chat-session';
 
-// Match the namespaces declared in worker/scripts/seed-vectors.ts. Used to bias
-// retrieval toward the version the visitor is currently reading.
-const VERSIONED_DOC_SLUGS = ['2024-winter', '2025-summer', '2026-peyvand-academy', '2026-her-waka', '2026-technest'];
+// Each docs version is its own retrieval namespace (worker/src/index.ts derives
+// its allow-list from the same versions.json). Used to bias retrieval toward the
+// version the visitor is currently reading.
+const VERSIONED_DOC_SLUGS = versions;
 const DEFAULT_DOC_NAMESPACE = '2026-technest'; // matches lastVersion in docusaurus.config.js
 
 function getContextNamespace() {
@@ -103,7 +103,7 @@ export default function ChatWidget() {
     ]);
 
     try {
-      const response = await fetch(`${API_URL}/api/chat`, {
+      const response = await fetch(`${API_BASE}/api/chat`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
