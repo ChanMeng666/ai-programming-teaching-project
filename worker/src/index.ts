@@ -4,6 +4,8 @@ import { generateEmbedding } from './rag';
 import { handleGetMessages, handlePostMessage, handleSetupDatabase } from './messages';
 import { handleListCapstones, handleVote, handleSetupCapstoneDB, handleCreateCapstone } from './capstones';
 import { cacheKey, readCounter, writeCounter } from './cache';
+import { jsonResponse, clientIp } from './http';
+import docsVersions from '../../versions.json';
 
 interface SeedRequest {
   documents: Array<{
@@ -20,15 +22,9 @@ interface SeedDeleteRequest {
   ids: string[];
 }
 
-const ALLOWED_NAMESPACES = new Set([
-  'docs-current',
-  '2024-winter',
-  '2025-summer',
-  '2026-peyvand-academy',
-  '2026-her-waka',
-  '2026-technest',
-  'blog',
-]);
+// One retrieval namespace per docs version (the site's versions.json), plus the
+// blog. scripts/seed-vectors.ts writes the same names.
+const ALLOWED_NAMESPACES = new Set(['blog', ...docsVersions]);
 
 const CHAT_RATE_LIMIT_MAX = 30;
 const CHAT_RATE_LIMIT_WINDOW = 3600;
@@ -91,6 +87,9 @@ function addCorsHeaders(response: Response, request: Request, env: Env): Respons
   const newHeaders = new Headers(response.headers);
   newHeaders.set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   newHeaders.set('Access-Control-Allow-Headers', 'Content-Type');
+  // Not a CORS-safelisted header: without this the browser hides it from the
+  // chat widget, which then starts a fresh session on every turn.
+  newHeaders.set('Access-Control-Expose-Headers', 'X-Session-Id');
   newHeaders.append('Vary', 'Origin');
   if (allowedOrigin) {
     newHeaders.set('Access-Control-Allow-Origin', allowedOrigin);
@@ -115,13 +114,7 @@ async function handleChat(
     const body = (await request.json()) as ChatRequest;
 
     if (!body.message || typeof body.message !== 'string') {
-      return new Response(
-        JSON.stringify({ error: 'Message is required' }),
-        {
-          status: 400,
-          headers: { 'Content-Type': 'application/json' },
-        }
-      );
+      return jsonResponse({ error: 'Message is required' }, 400);
     }
 
     // Validate the optional contextNamespace from the client against an allow-list
@@ -130,23 +123,15 @@ async function handleChat(
         ? body.contextNamespace
         : undefined;
 
-    const ip =
-      request.headers.get('CF-Connecting-IP') ||
-      request.headers.get('X-Forwarded-For') ||
-      'unknown';
+    const ip = clientIp(request);
     // Throttling counter lives in the edge cache, not KV — see src/cache.ts.
     const rateKey = cacheKey(request, `chat/rate/${encodeURIComponent(ip)}`);
     const currentCount = await readCounter(rateKey);
 
     if (currentCount >= CHAT_RATE_LIMIT_MAX) {
-      return new Response(
-        JSON.stringify({
-          error: `Too many requests. Limit is ${CHAT_RATE_LIMIT_MAX} messages per hour.`,
-        }),
-        {
-          status: 429,
-          headers: { 'Content-Type': 'application/json' },
-        }
+      return jsonResponse(
+        { error: `Too many requests. Limit is ${CHAT_RATE_LIMIT_MAX} messages per hour.` },
+        429
       );
     }
 
@@ -172,13 +157,7 @@ async function handleChat(
     });
   } catch (error) {
     console.error('Chat error:', error);
-    return new Response(
-      JSON.stringify({ error: 'Internal server error' }),
-      {
-        status: 500,
-        headers: { 'Content-Type': 'application/json' },
-      }
-    );
+    return jsonResponse({ error: 'Internal server error' }, 500);
   }
 }
 
@@ -187,36 +166,18 @@ async function handleChat(
  */
 async function handleSeed(request: Request, env: Env): Promise<Response> {
   if (!env.SEED_TOKEN || request.headers.get('X-Seed-Token') !== env.SEED_TOKEN) {
-    return new Response(
-      JSON.stringify({ error: 'Unauthorized' }),
-      {
-        status: 401,
-        headers: { 'Content-Type': 'application/json' },
-      }
-    );
+    return jsonResponse({ error: 'Unauthorized' }, 401);
   }
 
   if (!env.VECTORIZE) {
-    return new Response(
-      JSON.stringify({ error: 'Vectorize not configured' }),
-      {
-        status: 500,
-        headers: { 'Content-Type': 'application/json' },
-      }
-    );
+    return jsonResponse({ error: 'Vectorize not configured' }, 500);
   }
 
   try {
     const body = (await request.json()) as SeedRequest;
 
     if (!body.documents || !Array.isArray(body.documents)) {
-      return new Response(
-        JSON.stringify({ error: 'Documents array is required' }),
-        {
-          status: 400,
-          headers: { 'Content-Type': 'application/json' },
-        }
-      );
+      return jsonResponse({ error: 'Documents array is required' }, 400);
     }
 
     const results: Array<{ id: string; success: boolean; error?: string }> = [];
@@ -252,24 +213,13 @@ async function handleSeed(request: Request, env: Env): Promise<Response> {
     }
 
     const successCount = results.filter((r) => r.success).length;
-    return new Response(
-      JSON.stringify({
-        message: `Seeded ${successCount}/${body.documents.length} documents`,
-        results,
-      }),
-      {
-        headers: { 'Content-Type': 'application/json' },
-      }
-    );
+    return jsonResponse({
+      message: `Seeded ${successCount}/${body.documents.length} documents`,
+      results,
+    });
   } catch (error) {
     console.error('Seed error:', error);
-    return new Response(
-      JSON.stringify({ error: 'Failed to seed documents' }),
-      {
-        status: 500,
-        headers: { 'Content-Type': 'application/json' },
-      }
-    );
+    return jsonResponse({ error: 'Failed to seed documents' }, 500);
   }
 }
 
@@ -279,38 +229,25 @@ async function handleSeed(request: Request, env: Env): Promise<Response> {
  */
 async function handleSeedDelete(request: Request, env: Env): Promise<Response> {
   if (!env.SEED_TOKEN || request.headers.get('X-Seed-Token') !== env.SEED_TOKEN) {
-    return new Response(JSON.stringify({ error: 'Unauthorized' }), {
-      status: 401,
-      headers: { 'Content-Type': 'application/json' },
-    });
+    return jsonResponse({ error: 'Unauthorized' }, 401);
   }
 
   if (!env.VECTORIZE) {
-    return new Response(JSON.stringify({ error: 'Vectorize not configured' }), {
-      status: 500,
-      headers: { 'Content-Type': 'application/json' },
-    });
+    return jsonResponse({ error: 'Vectorize not configured' }, 500);
   }
 
   try {
     const body = (await request.json()) as SeedDeleteRequest;
     if (!body.ids || !Array.isArray(body.ids) || body.ids.length === 0) {
-      return new Response(JSON.stringify({ deleted: 0 }), {
-        headers: { 'Content-Type': 'application/json' },
-      });
+      return jsonResponse({ deleted: 0 });
     }
 
     await env.VECTORIZE.deleteByIds(body.ids);
 
-    return new Response(JSON.stringify({ deleted: body.ids.length }), {
-      headers: { 'Content-Type': 'application/json' },
-    });
+    return jsonResponse({ deleted: body.ids.length });
   } catch (error) {
     console.error('Seed delete error:', error);
-    return new Response(
-      JSON.stringify({ error: error instanceof Error ? error.message : 'Unknown error' }),
-      { status: 500, headers: { 'Content-Type': 'application/json' } }
-    );
+    return jsonResponse({ error: error instanceof Error ? error.message : 'Unknown error' }, 500);
   }
 }
 
@@ -318,12 +255,7 @@ async function handleSeedDelete(request: Request, env: Env): Promise<Response> {
  * Handle health check
  */
 function handleHealth(): Response {
-  return new Response(
-    JSON.stringify({ status: 'ok', timestamp: new Date().toISOString() }),
-    {
-      headers: { 'Content-Type': 'application/json' },
-    }
-  );
+  return jsonResponse({ status: 'ok', timestamp: new Date().toISOString() });
 }
 
 export default {
@@ -362,13 +294,7 @@ export default {
     } else if (pathname === '/api/health' || pathname === '/') {
       response = handleHealth();
     } else {
-      response = new Response(
-        JSON.stringify({ error: 'Not found' }),
-        {
-          status: 404,
-          headers: { 'Content-Type': 'application/json' },
-        }
-      );
+      response = jsonResponse({ error: 'Not found' }, 404);
     }
 
     // Add CORS headers

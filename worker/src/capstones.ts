@@ -1,6 +1,6 @@
 import type { Env } from './types';
 import { notionFetch, type NotionRichText, richText, readRichText, readTitle } from './notion';
-import { jsonResponse } from './http';
+import { jsonResponse, clientIp } from './http';
 import { cacheKey, cachePut, readCounter, writeCounter } from './cache';
 
 const LIST_CACHE_TTL = 60; // 1 minute — newly published rows surface within ~60s
@@ -125,14 +125,6 @@ async function voterHash(
   clientId: string
 ): Promise<string> {
   return sha256Hex(`${ip}|${ua}|${clientId}`);
-}
-
-function clientIp(request: Request): string {
-  return (
-    request.headers.get('CF-Connecting-IP') ||
-    request.headers.get('X-Forwarded-For') ||
-    'unknown'
-  );
 }
 
 /**

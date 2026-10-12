@@ -5,7 +5,7 @@
  * each one cites. If filtering works, the references should differ.
  */
 
-const WORKER_URL = 'https://programming-api.chanmeng.org';
+import { WORKER_URL } from './config.mjs';
 
 const SCENARIOS = [
   {

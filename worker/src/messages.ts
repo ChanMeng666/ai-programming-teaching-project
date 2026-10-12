@@ -1,6 +1,6 @@
 import type { Env } from './types';
 import { notionFetch, type NotionRichText } from './notion';
-import { jsonResponse } from './http';
+import { jsonResponse, clientIp } from './http';
 import {
   cacheKey,
   cacheGetJson,
@@ -231,10 +231,7 @@ export async function handlePostMessage(
     }
 
     // Rate limiting by IP
-    const ip =
-      request.headers.get('CF-Connecting-IP') ||
-      request.headers.get('X-Forwarded-For') ||
-      'unknown';
+    const ip = clientIp(request);
     // Throttling counter lives in the edge cache, not KV — see src/cache.ts.
     const rateKey = cacheKey(request, `messages/rate/${encodeURIComponent(ip)}`);
     const currentCount = await readCounter(rateKey);

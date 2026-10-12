@@ -14,6 +14,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as crypto from 'crypto';
 import { fileURLToPath } from 'url';
+import { WORKER_URL } from './config.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -38,10 +39,7 @@ interface DocSource {
   label: string;
 }
 
-const WORKER_URL = 'https://programming-api.chanmeng.org';
-
 const DOCS_SOURCES: DocSource[] = [
-  { path: '../../docs',                                 namespace: 'docs-current',  label: 'Current docs' },
   { path: '../../versioned_docs/version-2024-winter',   namespace: '2024-winter',   label: '2024 Winter Course' },
   { path: '../../versioned_docs/version-2025-summer',   namespace: '2025-summer',   label: '2025 Summer Course' },
   { path: '../../versioned_docs/version-2026-peyvand-academy', namespace: '2026-peyvand-academy', label: 'Peyvand Academy 2026' },
