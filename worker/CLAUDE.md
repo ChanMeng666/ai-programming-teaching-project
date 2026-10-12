@@ -21,7 +21,7 @@ node scripts/namespace-test.mjs   # same query across namespaces; citations shou
 
 Both hit production and spend the `/api/chat` budget (30 per hour per IP), so run them after a deploy, not before.
 
-`npx tsc --noEmit` reports **8 known errors** that do not affect runtime: 1 in `src/rag.ts` (embedding output union) and 7 in `scripts/seed-vectors.ts` (no `@types/node`). Compare against that baseline rather than fixing them in passing.
+`npx tsc --noEmit` reports **10 known errors** that do not affect runtime: 1 in `src/rag.ts` (embedding output union) and 9 in `scripts/seed-vectors.ts` (no `@types/node`). Compare against that baseline rather than fixing them in passing.
 
 ## Rate limiting
 
@@ -47,7 +47,8 @@ CORS is a browser control, not abuse protection. `curl` ignores it; the rate lim
 
 - Embeddings are 768-dimensional (`@cf/baai/bge-base-en-v1.5`) and must match the `docs-index` Vectorize index.
 - Namespaces are `blog` and one per entry in the repo's `versions.json`. `scripts/seed-vectors.ts` writes them from its own `DOCS_SOURCES` table, so a new course version needs a row there too.
-- Seeding is incremental: chunk IDs are content hashes, tracked in `scripts/.seeded-ids.json`. Delete that file to force a full re-embed.
+- Seeding is incremental: chunk IDs are content hashes, tracked in `scripts/.seeded-ids.json` (gitignored, so it exists only on the machine that last seeded). Without it the script re-embeds everything and cannot delete what it no longer produces; clear leftovers with `wrangler vectorize list-vectors` / `delete-vectors docs-index`.
+- `npx tsx scripts/seed-vectors.ts --dry-run` prints chunk counts per namespace and sends nothing. `SEED_TOKEN` is read from the environment; the local copy is in `.dev.vars`.
 
 ## When it breaks
 

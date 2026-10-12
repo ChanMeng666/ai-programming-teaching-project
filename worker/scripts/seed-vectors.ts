@@ -109,7 +109,13 @@ function chunkContent(content: string, chunkSize: number, overlap: number): stri
     }
 
     if (chunk.trim().length > 50) {
-      chunks.push(chunk.trim());
+      // Slicing by UTF-16 index can cut an emoji in half. A lone surrogate is
+      // not valid text and the embedding model rejects the whole chunk.
+      chunks.push(
+        chunk
+          .replace(/[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?<![\uD800-\uDBFF])[\uDC00-\uDFFF]/g, '')
+          .trim()
+      );
     }
 
     // We've already consumed the rest of the content this iteration; stop.
@@ -191,9 +197,15 @@ function processDocuments(): DocumentChunk[] {
 
     for (const filePath of files) {
       try {
-        const content = fs.readFileSync(filePath, 'utf-8');
+        // Normalise line endings and separators so chunk IDs and citations are
+        // the same on every OS. A CRLF checkout otherwise defeats the frontmatter
+        // regex (losing the title) and bakes backslashes into the cited path.
+        const content = fs.readFileSync(filePath, 'utf-8').replace(/\r\n/g, '\n');
         const { title, body } = parseMdx(content);
-        const relativePath = path.relative(path.resolve(__dirname, '../..'), filePath);
+        const relativePath = path
+          .relative(path.resolve(__dirname, '../..'), filePath)
+          .split(path.sep)
+          .join('/');
 
         if (body.length < 50) {
           console.log(`Skipping ${relativePath} (too short)`);
@@ -291,15 +303,25 @@ async function deleteObsoleteIds(ids: string[], seedToken: string): Promise<void
 /**
  * Send documents to the seed endpoint in batches
  */
-async function seedDocuments(chunks: DocumentChunk[], seedToken: string): Promise<void> {
+async function seedDocuments(chunks: DocumentChunk[], seedToken: string): Promise<Set<string>> {
+  const seeded = new Set<string>();
   const BATCH_SIZE = 5; // Process 5 documents at a time to avoid timeouts
 
   console.log(`\nSeeding ${chunks.length} chunks to ${WORKER_URL}/api/seed...`);
 
+  const batches: DocumentChunk[][] = [];
   for (let i = 0; i < chunks.length; i += BATCH_SIZE) {
-    const batch = chunks.slice(i, i + BATCH_SIZE);
-    console.log(`Processing batch ${Math.floor(i / BATCH_SIZE) + 1}/${Math.ceil(chunks.length / BATCH_SIZE)}...`);
+    batches.push(chunks.slice(i, i + BATCH_SIZE));
+  }
 
+  // The Worker embeds a batch serially (~2s per chunk), so two requests in
+  // flight at once is what makes a full re-seed take minutes instead of half
+  // an hour. /api/seed is outside the WAF rate limit rule.
+  const CONCURRENCY = 2;
+  let next = 0;
+
+  const sendBatch = async (index: number): Promise<void> => {
+    const batch = batches[index];
     try {
       const response = await fetch(`${WORKER_URL}/api/seed`, {
         method: 'POST',
@@ -310,27 +332,43 @@ async function seedDocuments(chunks: DocumentChunk[], seedToken: string): Promis
         body: JSON.stringify({ documents: batch }),
       });
 
-      const result = await response.json();
-      console.log(`  Result: ${JSON.stringify(result)}`);
-
-      // Add a small delay between batches
-      if (i + BATCH_SIZE < chunks.length) {
-        await new Promise((resolve) => setTimeout(resolve, 1000));
+      const result = (await response.json()) as {
+        message?: string;
+        error?: string;
+        results?: Array<{ id: string; success: boolean; error?: string }>;
+      };
+      for (const r of result.results ?? []) {
+        if (r.success) seeded.add(r.id);
+        else {
+          const chunk = batch.find((c) => c.id === r.id);
+          console.error(`  Failed ${r.id} (${chunk?.source}, ${chunk?.content.length} chars): ${r.error}`);
+        }
       }
+      console.log(
+        `  Batch ${index + 1}/${batches.length}: ${result.message ?? result.error ?? response.status}`
+      );
     } catch (error) {
-      console.error(`  Error seeding batch:`, error);
+      console.error(`  Error seeding batch ${index + 1}:`, error);
     }
-  }
+  };
+
+  await Promise.all(
+    Array.from({ length: CONCURRENCY }, async () => {
+      while (next < batches.length) await sendBatch(next++);
+    })
+  );
 
   console.log('\nSeeding complete!');
+  return seeded;
 }
 
 /**
  * Main function
  */
 async function main() {
-  const seedToken = process.env.SEED_TOKEN;
-  if (!seedToken) {
+  const dryRun = process.argv.includes('--dry-run');
+  const seedToken = process.env.SEED_TOKEN ?? '';
+  if (!seedToken && !dryRun) {
     console.error('Missing SEED_TOKEN env var. Set it with the value you stored via `wrangler secret put SEED_TOKEN`.');
     console.error('  PowerShell: $env:SEED_TOKEN="..."; npm run seed');
     console.error('  Bash:       SEED_TOKEN=... npm run seed');
@@ -363,13 +401,29 @@ async function main() {
       `${obsoleteIds.length} obsolete will be deleted.`
   );
 
+  if (dryRun) {
+    const perNamespace: Record<string, number> = {};
+    for (const c of chunks) perNamespace[c.namespace] = (perNamespace[c.namespace] ?? 0) + 1;
+    console.log('Dry run, nothing sent. Chunks per namespace:', perNamespace);
+    return;
+  }
+
+  let seeded = new Set<string>();
   if (changedChunks.length > 0) {
-    await seedDocuments(changedChunks, seedToken);
+    seeded = await seedDocuments(changedChunks, seedToken);
   } else {
     console.log('\nNothing to (re-)embed.');
   }
   await deleteObsoleteIds(obsoleteIds, seedToken);
-  writeStateFile(newIds);
+
+  // Record only what is really in the index, so a chunk that failed is retried
+  // by the next run instead of being skipped as "unchanged" forever.
+  const failed = changedChunks.filter((c) => !seeded.has(c.id));
+  writeStateFile(newIds.filter((id) => previousSet.has(id) || seeded.has(id)));
+  if (failed.length > 0) {
+    console.error(`\n${failed.length} chunks failed to seed. Run again to retry them.`);
+    process.exit(1);
+  }
 }
 
 main().catch(console.error);
