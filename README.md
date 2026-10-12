@@ -18,13 +18,14 @@ A public course site for beginners. Follow the lessons, ask the AI tutor when yo
 
 <br>
 
-
-
 https://github.com/user-attachments/assets/33c14478-a4a4-458b-a176-6a7c7079bc1a
 
-
+<details>
+<summary><sub>The earlier platform walkthrough</sub></summary>
 
 https://github.com/user-attachments/assets/7f452170-ee23-44ad-ac87-7ad41161cd3b
+
+</details>
 
 <br>
 
