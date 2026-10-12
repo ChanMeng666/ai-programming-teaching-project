@@ -6,7 +6,8 @@ the whole thing down when the cohort is over.
 **This page is temporary.** It exists for the TECHNEST 2026 Demo Day window.
 Nothing else on the site depends on it, so when it stops being useful, delete it
 (see [Retiring the showcase](#retiring-the-showcase)). This document is kept out
-of `CLAUDE.md` for that reason.
+of `CLAUDE.md` for that reason; `CLAUDE.md` keeps only the rules about the
+permanent certificates.
 
 ---
 
@@ -20,10 +21,10 @@ There is **no project data in the repo**. A card is assembled from three places:
 | Vote counts | KV namespace `CAPSTONE_VOTES` | `cap:count:<slug>`; one vote per (ip, ua, clientId) |
 | Images | **This repo**, `static/img/capstone/` | Served by Cloudflare Pages, referenced as absolute `https://programming.chanmeng.org/...` URLs |
 
-Code: `worker/src/capstones.ts` (backend), `src/pages/capstone-showcase.js` +
-`.module.css` (frontend).
+Code: `worker/src/capstones.ts` (backend), `src/components/CapstoneShowcase/`
+(frontend; `src/pages/capstone-showcase.js` is only the route).
 
-The list endpoint caches the Notion query in KV for 60s (`cap:list:published`).
+The list endpoint caches the Notion query in the Cloudflare edge cache for 60s.
 The admin endpoint busts that cache, so a publish shows up immediately.
 
 ## The admin token
@@ -233,7 +234,7 @@ the votes stay in KV, so re-publishing later restores everything.
 
 When the cohort is done and the page should go away:
 
-1. Delete `src/pages/capstone-showcase.js` and `capstone-showcase.module.css`,
+1. Delete `src/pages/capstone-showcase.js` and `src/components/CapstoneShowcase/`,
    the navbar/footer links to `/capstone-showcase` in `docusaurus.config.js`,
    the `capstoneShowcase.*` keys in `i18n/zh-Hans/code.json`, and
    `static/img/capstone/`.

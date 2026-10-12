@@ -196,7 +196,7 @@ green circle numerals; Accordion/Card/Frame = white + hairline), TechNest
 (PromptStep blue / VerifyStep green / ManualStep ink / RecoverStep coral
 outlines; AxisBadge dot chips; PdfDownload coral pill), Mermaid (white card +
 segmented tabs), CopyMarkdown / OpenInChatGPT buttons (ghost buttons in a white
-pill toolbar), LoadingBar (solid green).
+pill toolbar).
 
 **Capstone Top-3** — typographic, not medals: huge ink rank numerals, no
 metallics; `#1` gets a 3px green border; the vote control is a coral pill with the

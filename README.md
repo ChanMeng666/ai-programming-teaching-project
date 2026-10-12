@@ -58,6 +58,6 @@ git clone https://github.com/ChanMeng666/ai-programming-teaching-project
 cd ai-programming-teaching-project && npm install && npm start
 ```
 
-<sub>[Full overview](.github/OVERVIEW.md) · [Design system](DESIGN.md) · [Capstone runbook](CAPSTONE_SHOWCASE.md) · [Changelog](CHANGELOG.md) · [Contributing](CONTRIBUTING.md) · [MIT](LICENSE)</sub>
+<sub>[Design system](DESIGN.md) · [Capstone runbook](CAPSTONE_SHOWCASE.md) · [Changelog](CHANGELOG.md) · [Contributing](CONTRIBUTING.md) · [MIT](LICENSE)</sub>
 
 <sub>Built by [Chan Meng](https://github.com/ChanMeng666).</sub>

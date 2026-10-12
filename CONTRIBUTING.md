@@ -49,5 +49,5 @@ npm run build
 
 ## Code of Conduct
 
-By participating, you agree to abide by our [Code of Conduct](CODE_OF_CONDUCT.md). For questions or
-support, see [SUPPORT.md](SUPPORT.md). For security issues, see [SECURITY.md](SECURITY.md).
+By participating, you agree to abide by our [Code of Conduct](CODE_OF_CONDUCT.md). For security
+issues, see [SECURITY.md](SECURITY.md).

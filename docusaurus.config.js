@@ -129,7 +129,6 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
-          sidebarPath: require.resolve('./sidebars.js'),
           // Edit this page links to your repository
           editUrl:
             'https://github.com/ChanMeng666/ai-programming-teaching-project/tree/main/',

@@ -11,6 +11,8 @@
 
 # Misc
 .DS_Store
+.idea/
+.claude/settings.local.json
 .env.local
 .env.development.local
 .env.test.local

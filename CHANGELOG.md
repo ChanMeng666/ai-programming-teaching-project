@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- Standard community-health documentation (`CONTRIBUTING.md`, `SECURITY.md`, `SUPPORT.md`, `GOVERNANCE.md`, this changelog).
+- Standard community-health documentation (`CONTRIBUTING.md`, `SECURITY.md`, this changelog).
 - Served the Worker API from the custom domain `programming-api.chanmeng.org`.
 - Added per-IP rate limiting to `POST /api/chat` (30 requests per hour); the counter is charged before the model runs, so timed-out requests still count against the cap.
 
@@ -16,10 +16,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Restricted `CORS_ORIGIN` from `*` to an explicit allow-list, with suffix matching for Cloudflare Pages preview origins; responses now send `Vary: Origin`.
 
 ### Removed
+- The unpublished `docs/` lessons and their `docs-current` vectors, which the chat assistant could cite although the site never served them.
+- The dormant `AITracker`, stale troubleshooting guides under `static/`, and the old long-form overview.
 - Retired the `*.workers.dev` entrypoint, because Cloudflare WAF rules are never evaluated for `*.workers.dev` traffic and it let callers bypass every rate limiting rule.
 - Deleted an empty placeholder Worker script named `ai-programming-teaching-project`, created accidentally by running wrangler from the repository root.
 
 ### Fixed
+- The chat assistant now remembers the conversation: the Worker exposes `X-Session-Id` to the browser, which previously could not read it and started a new session on every turn.
 - Restored the AI chat assistant, which returned HTTP 500 from 2026-05-30 to 2026-07-10 after Cloudflare deprecated the `@cf/meta/llama-3.1-8b-instruct` model; swapped to `@cf/meta/llama-3.1-8b-instruct-fp8`.
 
 ### Security
