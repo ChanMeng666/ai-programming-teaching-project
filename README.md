@@ -18,12 +18,11 @@ A public course site for beginners. Follow the lessons, ask the AI tutor when yo
 
 <br>
 
-<!-- FILM PLACEHOLDER
-     Chan: the video below is the old platform walkthrough, not the product film. Edit this file on
-     github.com, drag the AI programming school product film (60 s, 16:9) (.mp4) into the editor, and let the new
-     link replace the one below. Then delete this whole comment. Leave one
-     blank line above and below the link.
--->
+
+
+https://github.com/user-attachments/assets/33c14478-a4a4-458b-a176-6a7c7079bc1a
+
+
 
 https://github.com/user-attachments/assets/7f452170-ee23-44ad-ac87-7ad41161cd3b
 
