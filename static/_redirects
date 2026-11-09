@@ -1,2 +1,14 @@
 # www 域名规范化重定向
 https://www.programming.chanmeng.org/* https://programming.chanmeng.org/:splat 301
+
+# English is the default locale and has no /en/ prefix. Google still holds
+# /en/... URLs from an earlier config and reports them as 404 (Search Console,
+# 2026-11). Every one of them exists at the same path without the prefix.
+/en /  301
+/en/* /:splat 301
+
+# Docusaurus copies static/ into every locale build, so /zh-Hans/demos/ and
+# /zh-Hans/pdfs/ are byte-identical copies that Search Console flags as
+# "Duplicate without user-selected canonical". The files are not translated.
+/zh-Hans/demos/* /demos/:splat 301
+/zh-Hans/pdfs/* /pdfs/:splat 301
