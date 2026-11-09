@@ -9,6 +9,8 @@ A course site with a small API behind it. The two halves deploy separately:
 
 There is no CI and no test framework. A push to `main` is a production deploy of the site, and ships nothing in `worker/`.
 
+The site build runs on Cloudflare (Pages project `ai-programming-teaching-project`, Git integration through the "Cloudflare Workers and Pages" GitHub App, build `npm run build` → `build/`). There are no GitHub Actions in this repo. A push builds only if GitHub's webhook reaches Cloudflare: on 2026-11-09 a push landed during a GitHub "Webhooks and Actions" incident and nothing deployed. If a pushed commit gets no "Cloudflare Pages" check on GitHub, check githubstatus.com, then retry from the Pages dashboard (or `POST /accounts/<id>/pages/projects/ai-programming-teaching-project/deployments` with form field `branch=main`), which builds `main` from GitHub. `wrangler pages deploy build` works too, but only from a clean tree at the pushed commit.
+
 Only what the code cannot tell you is written here. Routes, bindings, scripts, components and tokens are in the files that define them.
 
 ## Verify
@@ -39,6 +41,9 @@ Adding a course version also needs: a label in `docusaurus.config.js`, a `DOCS_S
 - `versioned_docs/version-<slug>/` is what the site publishes. `2026-technest` is served at `/docs/`, the others at `/docs/<slug>/`.
 - There is no unversioned course content (`includeCurrentVersion: false`). `docs/` holds only showcase media.
 - English is the default locale. Chinese lives in `i18n/zh-Hans/`.
+- English has no `/en/` prefix. Google still knew `/en/...` URLs from an earlier config; `static/_redirects` 301s them, and also the `/zh-Hans/demos/*` and `/zh-Hans/pdfs/*` copies Docusaurus makes of `static/` (untranslated duplicates). New untranslated static folders need the same redirect.
+- The TechNest videos page plays its recording from `media.chanmeng.org`, the R2 bucket `chanmeng-media` owned by the portfolio repo (`2d-portfolio`). That domain must stay up for it.
+- Search Console: the `chanmeng.org` Domain property covers this site; its review history is in `2d-portfolio/docs/infrastructure.md` §8.
 - The chat assistant only knows what has been seeded. After editing course content: `cd worker && npx tsx scripts/seed-vectors.ts`.
 
 ## Frontend rules
