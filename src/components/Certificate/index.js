@@ -107,7 +107,7 @@ export default function Certificate({ slug }) {
   const post = suggestedPost(award, tier);
 
   return (
-    <Layout title={`${award.team} — ${tier.label}, ${COHORT} Capstone`} description={description}>
+    <Layout title={`${award.team} — ${tier.label}, ${COHORT}`} description={description}>
       <Head>
         <meta property="og:type" content="article" />
         <meta property="og:title" content={`${award.team} — ${tier.label}, ${COHORT} Capstone`} />

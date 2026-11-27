@@ -55,3 +55,5 @@ Allow: /blog/
 # Algolia-Crawler-Verif: A2AE254F59B4E42C
 
 Sitemap: https://programming.chanmeng.org/sitemap.xml
+# Docusaurus writes one sitemap per locale
+Sitemap: https://programming.chanmeng.org/zh-Hans/sitemap.xml

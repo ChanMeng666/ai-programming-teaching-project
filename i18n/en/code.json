@@ -1,0 +1,6 @@
+{
+  "theme.blog.archive.description": {
+    "message": "Every post on the AI Programming blog, by date: Gemini CLI and Cursor tutorials, an AI programming beginner's guide, HER WAKA news and mentor Q&A notes.",
+    "description": "The page & hero description of the blog archive page"
+  }
+}

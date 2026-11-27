@@ -27,7 +27,7 @@
     "message": "AI编程学习平台"
   },
   "homepage.description": {
-    "message": "通过实践案例学习AI编程，掌握现代人工智能开发技能"
+    "message": "Chan Meng 的免费中英双语 AI 编程课程：自 2024 年起五期课程，从写下第一行代码到上线自己的作品，全程在 AI 辅助下动手实践，对零基础新手友好。"
   },
   "homepage.geo.title": {
     "message": "AI编程学习平台 - 掌握AI编程"
@@ -81,7 +81,7 @@
     "description": "The page & hero title of the blog archive page"
   },
   "theme.blog.archive.description": {
-    "message": "历史博文",
+    "message": "AI Programming 教学博客全部历史文章，按发布时间排列：Gemini CLI 与 Cursor 教程、AI 编程入门指南、HER WAKA 项目与导师答疑。",
     "description": "The page & hero description of the blog archive page"
   },
   "theme.blog.paginator.navAriaLabel": {
@@ -566,7 +566,7 @@
     "message": "RSS 订阅"
   },
   "feeds.pageDescription": {
-    "message": "订阅 AI Programming 教学博客，获取最新的教程和文章更新"
+    "message": "通过 RSS、Atom 或 JSON Feed 订阅 AI Programming 教学博客，在你常用的阅读器里第一时间收到新的 AI 编程教程、课程动态和项目案例分享。"
   },
   "feeds.heroTitle": {
     "message": "RSS 订阅"
@@ -764,7 +764,7 @@
     "message": "留言板"
   },
   "messageBoard.pageDescription": {
-    "message": "分享你的 AI 编程学习心得和经验"
+    "message": "AI Programming 学习社区留言板：分享你的学习心得、经验技巧和教程讨论，也可以向大家提问交流。留言提交后经过审核即会公开显示在这里。"
   },
   "messageBoard.heroTitle": {
     "message": "留言板"
@@ -791,7 +791,7 @@
     "message": "TECHNEST 2026 毕业设计展示"
   },
   "capstoneShowcase.pageDescription": {
-    "message": "TECHNEST 2026 毕业设计实时展示。为你最喜欢的项目点赞——前 3 名高亮，每分钟刷新一次。"
+    "message": "TECHNEST 2026 第 9–12 周毕业设计成果展示：浏览全部学员项目和获奖作品，奖项已揭晓，点赞通道仍然开放，欢迎继续为这些开发者加油；页面每分钟自动刷新。"
   },
   "capstoneShowcase.heroTitle": {
     "message": "TECHNEST 2026 毕业设计展示"
@@ -1172,5 +1172,9 @@
   "theme.NotFound.cta.tutorials": {
     "message": "浏览教程",
     "description": "Secondary CTA on the 404 page"
+  },
+  "site.description.fallback": {
+    "message": "AI Programming 是 Chan Meng 的免费中英双语 AI 编程课程，自 2024 年起已开设五期，提供 AI 辅助编程教程、各期项目页面和教学博客文章。",
+    "description": "Meta description for theme pages that set none (blog authors, tags index, search)"
   }
 }

@@ -82,7 +82,7 @@ export default function FeedsPage() {
   return (
     <Layout
       title={translate({ id: 'feeds.pageTitle', message: 'RSS Feeds' })}
-      description={translate({ id: 'feeds.pageDescription', message: 'Subscribe to the AI Programming blog for the latest tutorials and articles' })}
+      description={translate({ id: 'feeds.pageDescription', message: 'Subscribe to the AI Programming blog by RSS, Atom or JSON Feed, and get new tutorials, course updates and project write-ups in the reader of your choice.' })}
     >
       <main className={styles.container}>
         {/* Hero */}

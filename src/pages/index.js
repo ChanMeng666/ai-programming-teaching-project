@@ -17,7 +17,7 @@ export default function Home() {
       title={translate({ id: 'homepage.title', message: 'AI Programming Learning Platform' })}
       description={translate({
         id: 'homepage.description',
-        message: 'Learn AI programming through practical examples and master modern AI development skills',
+        message: "Free, bilingual AI-assisted programming lessons by Chan Meng: five cohorts since 2024, from your first line of code to a deployed project, with AI alongside.",
       })}
     >
       <GEOHead
