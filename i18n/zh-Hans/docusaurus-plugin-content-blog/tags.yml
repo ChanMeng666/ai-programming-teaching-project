@@ -1,104 +1,104 @@
 design:
   label: 设计
   permalink: /design
-  description: 用户界面和用户体验设计相关的文章
+  description: "设计类文章：目前收录 AI 编程教育平台的设计系统指南，涵盖极简几何风格的设计理念、色彩与字体系统、布局网格、组件设计和在 Docusaurus 中的实现方法。"
 
 UI-UX:
   label: UI/UX
   permalink: /ui-ux
-  description: 用户界面和用户体验设计的最佳实践和指南
+  description: "用户界面与用户体验设计相关文章，包括色彩对比、字体层级、网格布局、导航与卡片等组件设计，以及动画、响应式和无障碍设计方面的实践指南。"
 
 documentation:
   label: 文档
   permalink: /documentation
-  description: 技术文档、设计规范和指南文档
+  description: "技术文档与设计规范类文章，例如本站 AI 编程教育平台的设计系统文档：把色彩、字体、布局和组件规则写成可执行的规范，并说明如何在代码中落地。"
 
 tutorial:
   label: 教程
   permalink: /tutorial
-  description: 各类实用教程和指南
+  description: "本站博客的实用教程：腾讯会议录屏下载、Gemini CLI 安装与使用、零基础 AI 编程学习路线、教程视频资源汇总，以及 HER WAKA 项目介绍等指南。"
 
 tencent-meeting:
   label: 腾讯会议
   permalink: /tencent-meeting
-  description: 关于腾讯会议的使用技巧和教程
+  description: "腾讯会议相关教程：不懂编程也能用 Chrome 开发者工具找到录屏视频地址，再在 Git Bash 中运行 curl 命令把录屏下载到本地，附常见问题解答。"
 
 video-download:
   label: 视频下载
   permalink: /video-download
-  description: 视频下载相关的教程和工具使用指南
+  description: "视频下载教程：以腾讯会议录屏为例，讲解如何在浏览器开发者工具中定位视频请求，修改并运行 curl 命令保存视频，以及下载路径设置和常见问题处理。"
 
 study-abroad:
   label: 留学
   permalink: /study-abroad
-  description: 留学相关的教程和指南
+  description: "留学规划相关文章：申请海外研究生项目时工作经验的作用，如何结合就业市场、移民政策和个人目标选择专业，以及申请前需要做的调研和准备。"
 
 career-planning:
   label: 职业规划
   permalink: /career-planning
-  description: 职业规划相关的教程和指南
+  description: "职业规划相关文章：结合海外深造与就业，讨论如何按市场需求、移民政策和个人兴趣选择方向，设定目标和时间表，并制定从信息收集到长期规划的行动计划。"
 
 overseas-development:
   label: 海外发展
   permalink: /overseas-development
-  description: 海外发展相关的教程和指南
+  description: "海外发展相关文章：从出国读研到海外就业，分析目标国家的人才需求、移民政策与专业选择的关系，并给出语言、资金和多套备选方案等实际准备建议。"
 
 video-resources:
   label: 视频资源
   permalink: /video-resources
-  description: 各类教学和演讲视频资源
+  description: "教学视频资源相关文章：汇总本站各课程的教程视频，包括 Coze 工作流开发、Docusaurus 网站开发系列、AI LOGO 设计和 AI 对话系统等内容。"
 
 Forward with Her-activity:
   label: 她行活动
   permalink: /Forward with Her-activity
-  description: 她行活动相关内容和分享
+  description: "Forward with Her 等女性赋能项目的内容：导师答疑会上关于身份认知的演讲，以及 SheSharp 主办的 HER WAKA 2026 项目介绍。"
 
 mentor-qa:
   label: 导师答疑
   permalink: /mentor-qa
-  description: 导师答疑会议内容和总结
+  description: "导师答疑会内容整理：2025 年夏季 Forward with Her 导师小组答疑会的演讲视频与文字稿，主题为多棱镜下的身份认知，涉及社会认同和交叉性等理论。"
 
 identity-recognition:
   label: 身份认知
   permalink: /identity-recognition
-  description: 关于身份认同和社会认知的讨论
+  description: "关于身份认知的文章：探讨「我们、你们、他们」等社会范畴如何被建构，涉及民族、性别、宗教与地域中的权力关系，以及数字时代身份的流动与固化。"
 
 social-identity-theory:
   label: 社会认同理论
   permalink: /social-identity-theory
-  description: 社会认同理论相关的学术内容
+  description: "社会认同理论相关内容：解释人们如何通过群体归属来定义自我、区分内群体与外群体，并结合想象的共同体等视角，分析群体边界和偏见形成的心理机制。"
 
 intersectionality:
   label: 交叉性
   permalink: /intersectionality
-  description: 交叉性理论和多重身份研究
+  description: "交叉性理论相关文章：讨论性别、族裔、阶层等多重身份如何交织并共同影响个人处境，以及这一视角对理解身份认知和超越二元对立的启示。"
 
 gemini-cli:
   label: Gemini CLI
   permalink: /gemini-cli
-  description: Google Gemini CLI 工具使用教程和技巧
+  description: "Gemini CLI 相关文章：在 Windows、macOS 和 Linux 上安装配置并实战使用的完全指南，以及它与 Cursor IDE 的深度对比。"
 
 ai-programming:
   label: AI编程
   permalink: /ai-programming
-  description: AI辅助编程相关的教程和实践经验
+  description: "AI 辅助编程相关文章：零基础学习路线、Gemini CLI 完全指南、Cursor 与 Gemini CLI 对比，以及 HER WAKA 2026 项目介绍。"
 
 ai-tools:
   label: AI工具
   permalink: /ai-tools
-  description: 各类AI开发工具的使用和比较
+  description: "AI 开发工具相关文章：零基础入门指南中的主流 AI 编程工具对比，以及 Cursor IDE 与 Gemini CLI 在功能、适用场景和性价比上的深度分析。"
 
 beginners-guide:
   label: 入门指南
   permalink: /beginners-guide
-  description: 面向初学者的入门教程和指南
+  description: "面向零基础学习者的入门文章：为什么要学习 AI 辅助编程、主流工具怎么选、从零开始的学习路线图，以及 Gemini CLI 从安装到上手的完整步骤。"
 
 cursor-ide:
   label: Cursor IDE
   permalink: /cursor-ide
-  description: Cursor IDE 使用教程和技巧
+  description: "Cursor IDE 相关文章：这款集成 AI 功能的代码编辑器与终端工具 Gemini CLI 在优势、适用场景、上手难度和性价比上的对比与选择建议。"
 
 tool-comparison:
   label: 工具对比
   permalink: /tool-comparison
-  description: 开发工具的功能对比和选型建议
+  description: "开发工具对比类文章：从优势、适用场景、上手难度和性价比等维度比较 AI 编程工具，如 Cursor IDE 与 Gemini CLI，帮你选出合适的工具。"

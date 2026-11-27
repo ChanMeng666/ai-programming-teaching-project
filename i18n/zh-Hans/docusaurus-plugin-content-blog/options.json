@@ -4,7 +4,7 @@
     "description": "The title for the blog used in SEO"
   },
   "description": {
-    "message": "AI Programming 教学博客 - 通过实践案例学习人工智能开发",
+    "message": "AI Programming 教学博客：Gemini CLI 与 Cursor 使用指南、零基础 AI 编程学习路线、HER WAKA 项目介绍、导师答疑与留学职业规划分享。",
     "description": "The description for the blog used in SEO"
   },
   "sidebar.title": {

@@ -44,6 +44,8 @@ Adding a course version also needs: a label in `docusaurus.config.js`, a `DOCS_S
 - English has no `/en/` prefix. Google still knew `/en/...` URLs from an earlier config; `static/_redirects` 301s them, and also the `/zh-Hans/demos/*` and `/zh-Hans/pdfs/*` copies Docusaurus makes of `static/` (untranslated duplicates). New untranslated static folders need the same redirect.
 - The TechNest videos page plays its recording from `media.chanmeng.org`, the R2 bucket `chanmeng-media` owned by the portfolio repo (`2d-portfolio`). That domain must stay up for it.
 - Search Console: the `chanmeng.org` Domain property covers this site; its review history is in `2d-portfolio/docs/infrastructure.md` §8.
+- After a deploy that adds or changes pages: `npm run indexnow` (both locales' sitemaps; the key is `static/<32-hex>.txt`).
+- Search snippets: a blog post's `<title>` is `title_meta` (or `title`) + " | AI Programming", kept under 70 characters (Bing flags 70+); every doc and post carries a `description` of 110–155 characters (zh-Hans: 60–80 Chinese characters). Bing flags shorter ones. Theme pages without one get `site.description.fallback` from `src/theme/Layout/index.js`.
 - The chat assistant only knows what has been seeded. After editing course content: `cd worker && npx tsx scripts/seed-vectors.ts`.
 
 ## Frontend rules

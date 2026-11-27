@@ -164,6 +164,9 @@ const config = {
           },
         },
         blog: {
+          // The /blog/ meta description (Docusaurus defaults it to "Blog").
+          blogDescription:
+            "Tutorials and notes from the AI Programming course: Gemini CLI and Cursor guides, a beginner's learning path, HER WAKA programme news and mentor Q&A.",
           showReadingTime: true,
           feedOptions: {
             type: 'all', // 生成所有格式：RSS, Atom, JSON

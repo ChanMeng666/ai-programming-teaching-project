@@ -257,7 +257,7 @@ export default function MessageBoardPage() {
   return (
     <Layout
       title={translate({ id: 'messageBoard.pageTitle', message: 'Message Board' })}
-      description={translate({ id: 'messageBoard.pageDescription', message: 'Share your AI programming learning experiences' })}
+      description={translate({ id: 'messageBoard.pageDescription', message: 'Leave a message for the AI Programming community: share reflections, tips and questions about the tutorials. Messages appear after a quick review.' })}
     >
       <div className={styles.pageWrapper}>
         <div className={styles.container}>

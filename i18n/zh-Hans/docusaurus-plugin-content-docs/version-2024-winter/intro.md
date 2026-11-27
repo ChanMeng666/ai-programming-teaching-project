@@ -1,5 +1,6 @@
 ---
 sidebar_position: 1
+description: "2024 冬季 AI 辅助开发课程介绍：环境配置、提示词基础、Cursor 与 v0 等开发工具、Docusaurus 教程、博客实战项目和进阶应用。"
 ---
 
 # 课程介绍
