@@ -43,10 +43,18 @@ Adding a course version also needs: a label in `docusaurus.config.js`, a `DOCS_S
 - English is the default locale. Chinese lives in `i18n/zh-Hans/`.
 - English has no `/en/` prefix. Google still knew `/en/...` URLs from an earlier config; `static/_redirects` 301s them, and also the `/zh-Hans/demos/*` and `/zh-Hans/pdfs/*` copies Docusaurus makes of `static/` (untranslated duplicates). New untranslated static folders need the same redirect.
 - The TechNest videos page plays its recording from `media.chanmeng.org`, the R2 bucket `chanmeng-media` owned by the portfolio repo (`2d-portfolio`). That domain must stay up for it.
-- Search Console: the `chanmeng.org` Domain property covers this site; its review history is in `2d-portfolio/docs/infrastructure.md` §8.
-- After a deploy that adds or changes pages: `npm run indexnow` (both locales' sitemaps; the key is `static/<32-hex>.txt`).
-- Search snippets: a blog post's `<title>` is `title_meta` (or `title`) + " | AI Programming", kept under 70 characters (Bing flags 70+); every doc and post carries a `description` of 110–155 characters (zh-Hans: 60–80 Chinese characters). Bing flags shorter ones. Theme pages without one get `site.description.fallback` from `src/theme/Layout/index.js`.
 - The chat assistant only knows what has been seeded. After editing course content: `cd worker && npx tsx scripts/seed-vectors.ts`.
+
+## Search
+
+- Google Search Console and Bing Webmaster each hold the `chanmeng.org` property, which covers this site. Their reviews (Google 2026-11-10, Bing 2026-11-28) and dashboard state are in `2d-portfolio/docs/infrastructure.md` §8.
+- **Snippet rules Bing enforces:** a `<title>` under 70 characters (70 itself is flagged) and a meta description of at least ~100 characters. A blog post's `<title>` is `title_meta` (or `title`) + " | AI Programming"; `title_meta` changes only the `<title>`, never the H1 or URL. Every new doc or post needs a `description` written from its content: English 110–155 characters, zh-Hans 60–85 Chinese characters. Without one, Docusaurus uses the page's first line ("Gantt Chart", "Video"). Bing may still call the zh-Hans lengths short; a re-read is due around 2026-12-12.
+- **Tag descriptions** in `blog/tags.yml` and `i18n/zh-Hans/docusaurus-plugin-content-blog/tags.yml` name the posts under each tag. Update them when a post gains or loses a tag.
+- Theme pages that set no description (blog authors, tags index, search) get `site.description.fallback` from `src/theme/Layout/index.js`. `i18n/en/code.json` exists only to override the English archive description (`theme.blog.archive.description`, which is also the archive's visible subtitle).
+- No `<meta name="keywords">` (removed 2026-11-28: Google ignores it, Bing reads stuffing there as spam), and no FAQPage or HowTo structured data (Google retired both rich results in 2026-05). The BlogPosting JSON-LD `keywords` stays.
+- The instructor mark on `/` (`chan_logo_without_brand_black.svg`, `aria-hidden`) keeps `alt=""` on purpose, though Bing reports it as missing.
+- `static/robots.txt` lists both locales' sitemaps and allows every crawler, AI crawlers included.
+- After a deploy that adds or changes pages: `npm run indexnow`, which pings both sitemaps (key `static/<32-hex>.txt`). Bing has no rescan button; this is how changed pages get re-read.
 
 ## Frontend rules
 
