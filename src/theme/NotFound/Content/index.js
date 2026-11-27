@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import Link from '@docusaurus/Link';
 import Translate, { translate } from '@docusaurus/Translate';
 import styles from './styles.module.css';
+import PaperCut from '@site/src/components/PaperCut';
 
 /**
  * Swizzled NotFound/Content — MindMarket 404.
@@ -33,9 +34,9 @@ export default function NotFoundContent({ className }) {
           </Translate>
         </p>
 
-        <img
+        <PaperCut
+          name="not-found"
           className={styles.art}
-          src="/img/illustrations/not-found.webp"
           alt={translate({
             id: 'theme.NotFound.imageAlt',
             message: 'A paper-cut character searching with a magnifying glass',

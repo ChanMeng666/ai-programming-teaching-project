@@ -2,6 +2,7 @@ import React from 'react';
 import Link from '@docusaurus/Link';
 import Translate, { translate } from '@docusaurus/Translate';
 import styles from './styles.module.css';
+import PaperCut from '@site/src/components/PaperCut';
 
 /**
  * Programs — the five curriculum versions as white cards on the cream canvas.
@@ -53,8 +54,8 @@ export default function Programs() {
             </Link>
           </div>
           <div className={styles.featuredArt} aria-hidden="true">
-            <img
-              src="/img/illustrations/home-build.webp"
+            <PaperCut
+              name="home-build"
               alt=""
               width={520}
               height={420}

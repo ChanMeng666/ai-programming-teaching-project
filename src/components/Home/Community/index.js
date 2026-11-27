@@ -2,6 +2,7 @@ import React from 'react';
 import Link from '@docusaurus/Link';
 import Translate from '@docusaurus/Translate';
 import styles from './styles.module.css';
+import PaperCut from '@site/src/components/PaperCut';
 
 /**
  * Community — a full-bleed sandstone band with a heading, three ghost-pill
@@ -52,8 +53,8 @@ export default function Community() {
         </div>
 
         <div className={`${styles.art} mm-reveal`} aria-hidden="true">
-          <img
-            src="/img/illustrations/home-community.webp"
+          <PaperCut
+            name="home-community"
             alt=""
             width={480}
             height={480}

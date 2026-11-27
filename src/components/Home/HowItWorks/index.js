@@ -1,6 +1,7 @@
 import React from 'react';
 import Translate from '@docusaurus/Translate';
 import styles from './styles.module.css';
+import PaperCut from '@site/src/components/PaperCut';
 
 const STEPS = [
   {
@@ -68,8 +69,8 @@ export default function HowItWorks() {
         </div>
 
         <div className={`${styles.art} mm-reveal`} aria-hidden="true">
-          <img
-            src="/img/illustrations/home-learn.webp"
+          <PaperCut
+            name="home-learn"
             alt=""
             width={520}
             height={520}

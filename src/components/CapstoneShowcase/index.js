@@ -8,6 +8,7 @@ import ProjectCard from './ProjectCard';
 import useCapstoneProjects from './useCapstoneProjects';
 import { TRACKS, useTrackLabels } from './tracks';
 import styles from './styles.module.css';
+import PaperCut from '@site/src/components/PaperCut';
 
 function Toast({ message, type, onClose }) {
   useEffect(() => {
@@ -170,9 +171,9 @@ export default function CapstoneShowcase() {
               </p>
             )}
           </div>
-          <img
+          <PaperCut
+            name="capstone"
             className={styles.heroArt}
-            src="/img/illustrations/capstone.webp"
             alt={translate({
               id: 'capstoneShowcase.heroImageAlt',
               message: 'Paper-cut illustration of a winners’ podium',
@@ -219,11 +220,10 @@ export default function CapstoneShowcase() {
           </div>
         ) : projects.length === 0 ? (
           <div className={`mm-card ${styles.stateCard}`}>
-            <img
+            <PaperCut
+              name="capstone"
               className={styles.stateArt}
-              src="/img/illustrations/capstone.webp"
               alt=""
-              aria-hidden="true"
               width={200}
               height={200}
               loading="lazy"
@@ -316,11 +316,10 @@ export default function CapstoneShowcase() {
 
               {gridProjects.length === 0 ? (
                 <div className={`mm-card ${styles.stateCard}`}>
-                  <img
+                  <PaperCut
+                    name="capstone"
                     className={styles.stateArt}
-                    src="/img/illustrations/capstone.webp"
                     alt=""
-                    aria-hidden="true"
                     width={200}
                     height={200}
                     loading="lazy"

@@ -4,6 +4,7 @@ import { translate } from '@docusaurus/Translate';
 import useScrollReveal from '@site/src/hooks/useScrollReveal';
 import { API_BASE } from '@site/src/config/api';
 import styles from './message-board.module.css';
+import PaperCut from '@site/src/components/PaperCut';
 
 const CATEGORIES = ['心得体会', '经验分享', '教程讨论', '其他'];
 
@@ -280,9 +281,9 @@ export default function MessageBoardPage() {
                 {translate({ id: 'messageBoard.heroSubtitle', message: 'Share your AI programming experiences, insights and ideas here, and grow together with the community' })}
               </p>
             </div>
-            <img
+            <PaperCut
+              name="message-board"
               className={styles.heroIllustration}
-              src="/img/illustrations/message-board.webp"
               width={480}
               height={480}
               loading="lazy"
@@ -325,9 +326,9 @@ export default function MessageBoardPage() {
             </div>
           ) : filteredMessages.length === 0 ? (
             <div className={styles.emptyState}>
-              <img
+              <PaperCut
+                name="message-board"
                 className={styles.emptyIllustration}
-                src="/img/illustrations/message-board.webp"
                 width={280}
                 height={280}
                 loading="lazy"

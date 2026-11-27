@@ -206,19 +206,47 @@ count in a white dot; a voted card becomes a green-border ghost.
 
 ## Imagery
 
-Flat **paper-cut character illustrations** on transparent background, sitting
-directly on the cream canvas (no frames, no clipping). No photography, no 3D.
+Flat **paper-cut character illustrations** sitting directly on the page (no frames, no
+clipping). No photography, no 3D.
 
-- **Source:** `static/img/illustrations/` — 10 assets, each `.webp` (used in
-  pages) + `.png`: `hero` (1200w), `home-learn` / `home-build` / `home-community`
-  (640w), `message-board` (560w), `capstone` (560w), `feeds` (480w),
-  `blog-header` (900w), `not-found` (560w), `footer-accent` (320w).
+### Animated scenes (what the pages show)
+
+The eight illustrations on pages are **drawn as code** and animated: `<PaperCut name="…">`
+(`src/components/PaperCut/`). Each is an SVG string built by
+`scenes/<name>.mjs` with the kit in `scenes/draw.mjs`, on the artboard of the PNG it
+replaced, and moved by `rigs/<name>.js` on one shared animation loop (`engine.js`).
+
+- **Style rules for scenes:** flat fills from the scene's own palette; no gradients, no
+  outlines around shapes; the only lines are dark detail strokes (folds, glyphs) with round
+  caps. Limbs are thick round-capped strokes, so every joint is a clean circle and an arm
+  turns at shoulder and elbow without a seam.
+- **Moving pieces** are `part(id, …)` → `<g class="pt-<id>">`, nested the way they hang
+  (shoulder → elbow → hand); a choreography takes them with `api.part(id, { pivot })`
+  (artboard px) and adds to `x / y / r / sx / sy / o` each frame. Hover is by declared
+  zones (`api.zone`), most specific first.
+- **Motion manners:** runs only while on screen and the tab is visible; nothing moves under
+  `prefers-reduced-motion`. Faces blink at random and do a small idle action every few
+  seconds; hover answers with a reaction and brand-colour confetti.
+- **Never trace the old PNGs** to make scenes (vtracer was tried 2026-11-27): the AI
+  rasters have soft edges that trace into jagged slivers, and their skin is one shape, so
+  nothing can bend. Draw instead.
+- Preview a scene beside its old PNG artboard:
+  `node scripts/illustrations/render-scene.mjs <name> <outDir>` (needs `resvg`).
+- A `<PaperCut>` name without a scene falls back to its `.webp` here.
+
+### Raster assets
+
+- **Source:** `static/img/illustrations/` — 10 assets, each `.webp` + `.png`: `hero`
+  (1200w), `home-learn` / `home-build` / `home-community` (640w), `message-board` (560w),
+  `capstone` (560w), `feeds` (480w), `blog-header` (900w), `not-found` (560w),
+  `footer-accent` (320w). The eight with scenes are kept as each scene's reference
+  artboard; `blog-header` and `footer-accent` are not used on any page.
 - **Brand:** `static/img/brand/` — `logo.svg` (green rounded square + ink
   double-chevron "sprout" mark), `logo-footer.svg`, `favicon.ico`, `favicon-32.png`,
   `apple-touch-icon.png`, `social-card.png` (1200×630, regenerated from
   `scripts/social-card.html`).
 
-### Regenerating illustrations
+### Regenerating the raster illustrations
 
 `scripts/generate-illustrations.mjs` — OpenAI `gpt-image-1`,
 `background:"transparent"`, quality high, then sharp post-process (trim → resize →

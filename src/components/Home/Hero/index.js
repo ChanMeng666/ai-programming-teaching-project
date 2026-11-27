@@ -2,6 +2,7 @@ import React from 'react';
 import Link from '@docusaurus/Link';
 import Translate, { translate } from '@docusaurus/Translate';
 import styles from './styles.module.css';
+import PaperCut from '@site/src/components/PaperCut';
 
 /**
  * Hero — centered display headline on the cream canvas, twin CTAs, and a
@@ -42,8 +43,8 @@ export default function Hero() {
       </div>
 
       <div className={styles.illustration}>
-        <img
-          src="/img/illustrations/hero.webp"
+        <PaperCut
+          name="hero"
           alt={translate({
             id: 'homepage.hero.imageAlt',
             message:
@@ -52,7 +53,7 @@ export default function Hero() {
           width={1200}
           height={800}
           loading="eager"
-          fetchpriority="high"
+          fetchPriority="high"
           className={styles.illustrationImg}
         />
       </div>

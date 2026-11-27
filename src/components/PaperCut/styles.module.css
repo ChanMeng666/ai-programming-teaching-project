@@ -1,0 +1,16 @@
+/* The holder takes the caller's className (the same class the <img> had), so the caller's
+   width / max-width / margin rules size it. :where() keeps these defaults at zero
+   specificity: any caller rule wins. */
+:where(.holder) {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 0;
+}
+
+
+.svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible; /* confetti may fly past the frame */
+}

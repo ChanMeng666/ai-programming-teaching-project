@@ -3,6 +3,7 @@ import Layout from '@theme/Layout';
 import Translate, { translate } from '@docusaurus/Translate';
 import useScrollReveal from '@site/src/hooks/useScrollReveal';
 import styles from './feeds.module.css';
+import PaperCut from '@site/src/components/PaperCut';
 
 // Blog feeds — URLs are contract-stable (do not change).
 const FEEDS = [
@@ -97,9 +98,9 @@ export default function FeedsPage() {
               {translate({ id: 'feeds.heroSubtitle', message: 'Subscribe to our blog to get the latest AI programming tutorials, project examples and tech insights' })}
             </p>
           </div>
-          <img
+          <PaperCut
+            name="feeds"
             className={styles.heroArt}
-            src="/img/illustrations/feeds.webp"
             alt={translate({ id: 'feeds.heroImageAlt', message: 'A paper-cut character broadcasting updates through a megaphone' })}
             width="440"
             height="440"
