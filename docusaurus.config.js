@@ -201,7 +201,7 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       metadata: [
-        { name: 'keywords', content: 'AI programming, Gemini CLI, AI-assisted coding, beginner coding, personal website, Vercel deploy, coding tutorial, AI编程, AI辅助编程' },
+        // No keywords meta: Google ignores it and Bing reads stuffing there as spam.
         { name: 'author', content: 'Chan Meng' },
         { property: 'og:site_name', content: "AI Programming - Chan Meng's Public AI Coding Course" },
       ],
